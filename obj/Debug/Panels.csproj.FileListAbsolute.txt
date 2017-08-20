@@ -30,3 +30,35 @@ C:\Users\Frederik\Dropbox (Personlig)\Projects\Panels\Panels\bin\System.Web.WebP
 C:\Users\Frederik\Dropbox (Personlig)\Projects\Panels\Panels\bin\ru-ru\BundleTransformer.Core.resources.dll
 C:\Users\Frederik\Dropbox (Personlig)\Projects\Panels\Panels\bin\ru-ru\JavaScriptEngineSwitcher.Core.resources.dll
 C:\Users\Frederik\Dropbox (Personlig)\Projects\Panels\Panels\obj\Debug\Panels.csproj.CoreCompileInputs.cache
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Panels.dll.config
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Panels.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Panels.pdb
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Antlr3.Runtime.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\BundleTransformer.Core.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\JavaScriptEngineSwitcher.Core.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Newtonsoft.Json.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.Helpers.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.Optimization.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.Razor.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.Razor.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\WebGrease.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Antlr3.Runtime.pdb
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\JavaScriptEngineSwitcher.Core.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\Newtonsoft.Json.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.Helpers.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.Optimization.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.Razor.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.Razor.xml
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\ru-ru\BundleTransformer.Core.resources.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\ru-ru\JavaScriptEngineSwitcher.Core.resources.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.csprojResolveAssemblyReference.cache
+C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.csproj.CoreCompileInputs.cache
+C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.dll
+C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.pdb
