@@ -1,4 +1,4 @@
-﻿if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('serviceWorker.min.js').then(function (registration) {
             // Registration was successful
@@ -10,11 +10,11 @@
     });
 }
 
-var CACHE_NAME = 'panel-cache-' + 2;
+var CACHE_NAME = 'panel-cache-' + 1;
 var urlsToCache = [
-    '',
-    'dist/css/app.css',
-    'dist/js/app.js',
+    '/',
+    'dist/css/app.min.css',
+    'dist/js/app.min.js',
 ];
 
 self.addEventListener('install', function (event) {

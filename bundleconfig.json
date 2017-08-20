@@ -1,16 +1,16 @@
 [
   // there is a weird freezing bug with loadCSS then it is added to bundleconfig
 
-  //{
-  //  "outputFileName": "dist/js/loadCSS.min.js",
-  //  "inputFiles": [
-  //    "js/vendors/loadCSS/loadCSS.js",
-  //    "js/vendors/loadCSS/script.js"
-  //  ],
-  //  "minify": { "enabled": true }
-  //},
   {
-    "outputFileName": "dist/js/app.min.js",
+    "outputFileName": "dist/js/loadCSS.js",
+    "inputFiles": [
+      "js/vendors/loadCSS/loadCSS.js",
+      "js/vendors/loadCSS/script.js"
+    ],
+    //"minify": { "enabled": true }
+  },
+  {
+    "outputFileName": "dist/js/app.js",
     "inputFiles": [
       "js/vendors/jquery/jquery-3.1.1.min.js",
       "js/vendors/jquery/jquery-3.1.1.min.map.js",
@@ -18,13 +18,13 @@
       "js/vendors/bootstrap/bootstrap.min.js",
       "js/app/app.js"
     ],
-    "minify": { "enabled": true }
+    //"minify": { "enabled": true }
   },
-  {
-    "outputFileName": "serviceWorker.min.js",
-    "inputFiles": [
-      "js/app/serviceWorker.js"
-    ],
-    "minify": { "enabled": true }
-  }
+  //{
+  //  "outputFileName": "serviceWorker.js",
+  //  "inputFiles": [
+  //    "js/app/serviceWorker.js"
+  //  ],
+  //  //"minify": { "enabled": true }
+  //}
 ]
