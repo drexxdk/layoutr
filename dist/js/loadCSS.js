@@ -78,4 +78,4 @@
 	}
 }( typeof global !== "undefined" ? global : this ));
 
-loadCSS("dist/css/app.min.css");
+loadCSS("dist/css/app.css");
