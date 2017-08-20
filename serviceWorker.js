@@ -10,11 +10,11 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-var CACHE_NAME = 'panel-cache-' + 2;
+var CACHE_NAME = 'panel-cache-' + 3;
 var urlsToCache = [
     '',
-    'dist/css/app.css',
-    'dist/js/app.js',
+    'dist/css/app.min.css',
+    'dist/js/app.min.js',
 ];
 
 self.addEventListener('install', function (event) {
