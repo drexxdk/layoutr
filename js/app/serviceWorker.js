@@ -13,8 +13,8 @@
 var CACHE_NAME = 'panel-cache-' + 1;
 var urlsToCache = [
   '/',
-  '/dist/css/app.min.css',
-  '/dist/js/app.min.js',
+  'dist/css/app.min.css',
+  'dist/js/app.min.js',
 ];
 
 self.addEventListener('install', function (event) {

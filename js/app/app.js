@@ -5,7 +5,7 @@
         footer = $('footer'),
         $html = $('html'),
         $body = $('body');
-
+    
     $body.removeAttr('style');
 
     footer.html('\u00A9 ' + new Date().getFullYear() + ' Aliea');

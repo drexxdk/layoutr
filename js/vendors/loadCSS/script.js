@@ -1,1 +1,1 @@
-﻿loadCSS("/dist/css/app.min.css");
+﻿loadCSS("dist/css/app.min.css");

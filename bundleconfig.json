@@ -1,12 +1,14 @@
 [
-  {
-    "outputFileName": "dist/js/loadCSS.min.js",
-    "inputFiles": [
-      "js/vendors/loadCSS/loadCSS.js",
-      "js/vendors/loadCSS/script.js"
-    ],
-    "minify": { "enabled": true }
-  },
+  // there is a weird freezing bug with loadCSS then it is added to bundleconfig
+
+  //{
+  //  "outputFileName": "dist/js/loadCSS.min.js",
+  //  "inputFiles": [
+  //    "js/vendors/loadCSS/loadCSS.js",
+  //    "js/vendors/loadCSS/script.js"
+  //  ],
+  //  "minify": { "enabled": true }
+  //},
   {
     "outputFileName": "dist/js/app.min.js",
     "inputFiles": [
