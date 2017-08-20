@@ -14,8 +14,9 @@ $content-max-width: rem(1280);
 $layout-border-width: rem(1);
 $layout-border-color-light: #f1f1f1;
 
-$breakpoint-one-column: $aside-width + $content-min-width + $spacer;
-$breakpoint-two-column: calc(#{$aside-width} + (#{$content-min-width} * 2) + #{$spacer});
+// find a way to use rem values instead of hardcoded numbers
+$breakpoint-one-column: (230 + 500 + 16) + px;
+$breakpoint-two-column: (230 + 500 + 500 + 16) + px;
 
 // components
 $tree-highlight-background-color: #f1f1f1;

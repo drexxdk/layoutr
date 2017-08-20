@@ -115,6 +115,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dist\css\app.min.css" />
     <Content Include="dist\img\content-header-1024.jpg" />
     <Content Include="dist\img\content-header-1280.jpg" />
     <Content Include="dist\img\content-header-1366.jpg" />
@@ -263,7 +264,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dist\css\" />
     <Folder Include="scss\plugins\bootstrap\mixins\" />
     <Folder Include="scss\plugins\bootstrap\utilities\" />
   </ItemGroup>
