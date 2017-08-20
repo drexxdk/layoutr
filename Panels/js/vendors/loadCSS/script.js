@@ -1,0 +1,1 @@
+﻿loadCSS("/dist/css/app.min.css");

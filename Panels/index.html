@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Panels</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="theme-color" content="#0072ed">
+    <link rel="apple-touch-icon" sizes="180x180" href="/dist/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/dist/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/dist/img/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="/dist/img/favicon/safari-pinned-tab.svg" color="#0072ed">
+    <link rel="shortcut icon" href="/dist/img/favicon/favicon.ico">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body style="display: none;">
+    <div id="loading">
+        <span>
+            <i class="fa fa-circle-o-notch fa-spin fa-5x"></i>
+            <span class="sr-only">Loading...</span>
+        </span>
+    </div>
+    <div id="main" class="transition two-column footer-fixed">
+        <header>
+            <button class="aside left">
+                <i class="fa fa-bars" aria-label="Toggle left panel"></i>
+
+            </button>
+            <span class="title">Panels</span>
+            <button class="aside right">
+                <i class="fa fa-bars" aria-label="Togggle right panel"></i>
+            </button>
+        </header>
+        <div id="container">
+            <div>
+                <aside id="left">
+                    <div class="header">
+                        <span>Menu</span>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <ul class="tree">
+                                <li>
+                                    <input type="checkbox" checked="checked" id="c1" />
+                                    <label class="label" for="c1">
+                                        <span class="btn btn-primary">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </span>
+                                        Level 0
+                                    </label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" checked="checked" id="c2" />
+                                            <label for="c2" class="label">
+                                                <span class="btn btn-primary">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </span>
+                                                Level 1
+                                            </label>
+
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                                <li><span class="label">Level 2</span></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c3" />
+                                            <label for="c3" class="label">
+                                                <span class="btn btn-primary">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </span>
+                                                Looong level 1 <br />label text <br />with line-breaks
+                                            </label>
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                                <li>
+                                                    <input type="checkbox" id="c4" />
+                                                    <label for="c4" class="label">
+                                                        <span class="btn btn-primary">
+                                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span class="highlight">Specified tree item view</span>
+                                                    </label>
+                                                    <ul>
+                                                        <li><span class="label">Level 3</span></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <input type="checkbox" id="c5" />
+                                    <label class="label" for="c5">
+                                        <span class="btn btn-primary">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </span>
+                                        Level 0
+                                    </label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" id="c6" />
+                                            <label for="c6" class="label">
+                                                <span class="btn btn-primary">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </span>
+                                                Level 1
+                                            </label>
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c7" />
+                                            <label for="c7" class="label">
+                                                <span class="btn btn-primary">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </span>
+                                                Level 1
+                                            </label>
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                                <li>
+                                                    <input type="checkbox" id="c8" />
+                                                    <label for="c8" class="label">
+                                                        <span class="btn btn-primary">
+                                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                                        </span>
+                                                        Level 2
+                                                    </label>
+                                                    <ul>
+                                                        <li><span class="label">Level 3</span></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <div id="content">
+                    <div class="header dark">
+                        <img src="dist/img/content-header-0800.jpg" sizes="100vw"
+                             srcset="dist/img/content-header-1024.jpg 1024w,
+                             dist/img/content-header-1280.jpg 1280w,
+                             dist/img/content-header-1366.jpg 1366w,
+                             dist/img/content-header-1920.jpg 1920w" alt="Pretty landscape">
+                        <div>
+                            <span class="title">Pretty landscape</span>
+                            <span class="author">Frederik Nielsen</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <section class="flex-items wrap column small">
+                                <!-- layout -->
+                                <button type="button" class="btn btn-primary" id="toggle-loading">Loading</button>
+                                <button type="button" class="btn btn-primary" id="toggle-footer-position">Footer position</button>
+                                <button type="button" class="btn btn-primary" id="toggle-column">Column</button>
+                                <button type="button" class="btn btn-primary" id="toggle-transition">Transition</button>
+                            </section>
+                            <section class="flex-items wrap column small">
+                                <!-- buttons -->
+                                <button type="button" class="btn btn-primary">Primary</button>
+                                <button type="button" class="btn btn-secondary">Secondary</button>
+                                <button type="button" class="btn btn-success">Success</button>
+                                <button type="button" class="btn btn-danger">Danger</button>
+                                <button type="button" class="btn btn-warning">Warning</button>
+                                <button type="button" class="btn btn-info">Info</button>
+                                <button type="button" class="btn btn-light">Light</button>
+                                <button type="button" class="btn btn-dark">Dark</button>
+
+                                <button type="button" class="btn btn-link">Link</button>
+                            </section>
+                            <section class="flex-items">
+                                <!-- headlines -->
+                                <h1>Example heading <span class="badge badge-secondary">New</span></h1>
+                                <h2>Example heading <span class="badge badge-secondary">New</span></h2>
+                                <h3>Example heading <span class="badge badge-secondary">New</span></h3>
+                                <h4>Example heading <span class="badge badge-secondary">New</span></h4>
+                                <h5>Example heading <span class="badge badge-secondary">New</span></h5>
+                                <h6>Example heading <span class="badge badge-secondary">New</span></h6>
+                            </section>
+                            <section class="flex-items">
+                                <!-- alerts -->
+                                <div class="alert alert-primary" role="alert">
+                                    This is a primary alert—check it out!
+                                </div>
+                                <div class="alert alert-secondary" role="alert">
+                                    This is a secondary alert—check it out!
+                                </div>
+                                <div class="alert alert-success" role="alert">
+                                    This is a success alert—check it out!
+                                </div>
+                                <div class="alert alert-danger" role="alert">
+                                    This is a danger alert—check it out!
+                                </div>
+                                <div class="alert alert-warning" role="alert">
+                                    This is a warning alert—check it out!
+                                </div>
+                                <div class="alert alert-info" role="alert">
+                                    This is a info alert—check it out!
+                                </div>
+                                <div class="alert alert-light" role="alert">
+                                    This is a light alert—check it out!
+                                </div>
+                                <div class="alert alert-dark" role="alert">
+                                    This is a dark alert—check it out!
+                                </div>
+                            </section>
+                            <section>
+                                <!-- form -->
+                                <div class="flex-items wrap column">
+                                    <div class="btn-group">
+                                        <a class="btn btn-secondary" href="path/to/settings" aria-label="Settings">
+                                            <i class="fa fa-cog" aria-hidden="true"></i>
+                                        </a>
+
+                                        <a class="btn btn-danger" href="path/to/settings" aria-label="Delete">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </a>
+
+                                        <a class="btn btn-primary" href="#navigation-main" aria-label="Skip to main navigation">
+                                            <i class="fa fa-bars" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <a class="btn btn-secondary" href="path/to/settings" aria-label="Settings">
+                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a class="btn btn-danger" href="path/to/settings" aria-label="Delete">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a class="btn btn-primary" href="#navigation-main" aria-label="Skip to main navigation">
+                                        <i class="fa fa-bars" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="btn btn-danger" href="#">
+                                        <i class="fa fa-trash-o fa-lg"></i> Delete
+                                    </a>
+                                    <a class="btn btn-secondary btn-sm" href="#">
+                                        <i class="fa fa-cog"></i> Settings
+                                    </a>
+
+                                    <a class="btn btn-lg btn-success" href="#">
+                                        <i class="fa fa-flag fa-2x pull-left"></i> Font Awesome<br>Version 4.7.0
+                                    </a>
+                                </div>
+
+                                <div class="flex-items">
+                                    <div class="btn-group">
+                                        <a class="btn btn-secondary" href="#">
+                                            <i class="fa fa-align-left" title="Align Left"></i>
+                                        </a>
+                                        <a class="btn btn-secondary" href="#">
+                                            <i class="fa fa-align-center" title="Align Center"></i>
+                                        </a>
+                                        <a class="btn btn-secondary" href="#">
+                                            <i class="fa fa-align-right" title="Align Right"></i>
+                                        </a>
+                                        <a class="btn btn-secondary" href="#">
+                                            <i class="fa fa-align-justify" title="Align Justify"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="flex-items">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                        <input class="form-control" type="text" placeholder="Email address">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                        <input class="form-control" type="password" placeholder="Password">
+                                    </div>
+                                </div>
+
+                                <div class="flex-items column">
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-user fa-fw"></i>
+                                            Dropdown button
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-items column">
+                                    <!-- Default dropup button -->
+                                    <div class="btn-group dropup">
+                                        <button type="button" class="btn btn-secondary">Dropup</button>
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Split dropup button -->
+                                    <div class="btn-group dropup">
+                                        <button type="button" class="btn btn-secondary">
+                                            Split dropup
+                                        </button>
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <aside id="right">
+                    <div class="header">
+                        <span>right</span>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <p>
+                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />b
+                            </p>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <p>footer</p>
+                    </div>
+                </aside>
+            </div>
+            <footer></footer>
+        </div>
+    </div>
+    <script src="dist/js/loadCSS.min.js"></script>
+    <script src="dist/js/app.min.js"></script>
+    <script src="serviceWorker.min.js"></script>
+</body>
+</html>

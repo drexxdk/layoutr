@@ -1,0 +1,43 @@
+﻿/// <reference path="../references" />
+
+header {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: $header-height;
+    border-bottom: $layout-border-width solid $layout-border-color-light;
+    background-color: $body-bg;
+
+    @include flex-display();
+
+    > .title {
+        overflow: hidden;
+        padding: 0 10px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 1em;
+        font-weight: bold;
+        line-height: $header-height;
+        flex-grow: 1;
+    }
+
+    > .aside {
+        position: relative;
+        width: $header-height;
+        height: $header-height;
+        padding: 10px;
+        color: #808080;
+        background-color: transparent;
+
+        @include noselect;
+
+        @include button-transition(font-size);
+
+        &:hover {
+            color: black;
+            font-size: 1.25em;
+        }
+    }
+}

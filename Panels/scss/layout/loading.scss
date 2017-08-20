@@ -1,0 +1,29 @@
+﻿/// <reference path="../references" />
+
+body {
+    > #loading {
+        position: fixed;
+        display: none;
+        z-index: 9999;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.6);
+
+        > span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: theme-color("primary");
+
+            @include translate(-50%, -50%);
+        }
+    }
+
+    &.loading {
+        > #loading {
+            display: block;
+        }
+    }
+}

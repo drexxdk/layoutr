@@ -1,0 +1,110 @@
+﻿/// <reference path="../references" />
+
+@import "aside";
+@import "breakpoints";
+@import "content";
+@import "flex-items.scss";
+@import "footer";
+@import "header";
+@import "loading";
+
+* {
+    margin: 0;
+    padding: 0;
+    @include box-sizing();
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: block!important;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+#main {
+    min-width: calc(#{$aside-width} * 2);
+    height: 100%;
+
+    @include flex-display();
+
+    @include flex-direction(column);
+
+    &.transition {
+        #left {
+
+            @include transition(left 0.4s ease-in-out);
+        }
+
+        #right {
+
+            @include transition(right 0.4s ease-in-out);
+        }
+
+        #content,
+        footer {
+
+            @include transition(margin 0.4s ease-in-out);
+        }
+
+        &.two-column {
+            #content .header {
+
+                @include transition(width 0.4s ease-in-out, left 0.4s ease-in-out);
+            }
+        }
+    }
+
+    &.left-open {
+        #left {
+            left: 0;
+
+            @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+        }
+    }
+
+    &.right-open {
+        #right {
+            right: 0;
+
+            @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+        }
+    }
+
+    &.footer-fixed {
+        #container > div {
+            margin-bottom: $footer-height;
+
+            #left,
+            #right {
+                bottom: $footer-height;
+            }
+        }
+
+        footer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    #container {
+        margin-top: $header-height;
+        flex-grow: 1;
+
+        @include flex-display();
+
+        @include flex-direction(column);
+
+        > div {
+            flex-grow: 1;
+        }
+    }
+}

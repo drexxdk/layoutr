@@ -1,0 +1,28 @@
+﻿/// <reference path="references" />
+
+// layout
+$aside-width: rem(230);
+$aside-header-background-color: #f1f1f1;
+
+$header-height: rem(50);
+
+$footer-height: rem(50);
+
+$content-min-width: rem(500);
+$content-max-width: rem(1280);
+
+$layout-border-width: rem(1);
+$layout-border-color-light: #f1f1f1;
+
+$breakpoint-one-column: $aside-width + $content-min-width + $spacer;
+$breakpoint-two-column: calc(#{$aside-width} + (#{$content-min-width} * 2) + #{$spacer});
+
+// components
+$tree-highlight-background-color: #f1f1f1;
+$tree-border-color: #ccc;
+
+// maybe the below colors can be replaced with bootstrap variables
+$font-color-dark: black;
+$font-color-light: white;
+$primary-color-dark: #262626;
+$secondary-color-dark: black;

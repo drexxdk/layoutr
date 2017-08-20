@@ -1,0 +1,171 @@
+// The dropdown wrapper (`<div>`)
+.dropup,
+.dropdown
+{
+	position: relative;
+}
+
+.dropdown-toggle
+{
+	// Generate the caret automatically
+	&::after
+	{
+		display: inline-block;
+
+		width: 0;
+		height: 0;
+		margin-left: $caret-width * 0.85;
+
+		content: "";
+		vertical-align: $caret-width * 0.85;
+
+		border-top: $caret-width solid;
+		border-right: $caret-width solid transparent;
+		border-left: $caret-width solid transparent;
+	}
+
+	&:empty::after
+	{
+		margin-left: 0;
+	}
+}
+
+// Allow for dropdowns to go bottom up (aka, dropup-menu)
+// Just add .dropup after the standard .dropdown class and you're set.
+.dropup
+{
+	.dropdown-menu
+	{
+		top: inherit;		bottom: 100%;
+		margin-top: 0;
+		margin-bottom: $dropdown-spacer;
+	}
+
+	.dropdown-toggle
+	{
+		&::after
+		{
+			border-top: 0;
+			border-bottom: $caret-width solid;
+		}
+	}
+}
+
+// The dropdown menu
+.dropdown-menu
+{
+	position: absolute;
+	display: none; // none by default, but block on "open" of the menu
+	z-index: $zindex-dropdown;
+	float: left;
+
+	top: 100%;
+	left: 0;
+	min-width: $dropdown-min-width;
+	margin: $dropdown-spacer 0 0; // override default ul
+	padding: $dropdown-padding-y 0;
+
+	list-style: none;
+
+	text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+
+	color: $body-color;
+	border: $dropdown-border-width solid $dropdown-border-color;
+	background-color: $dropdown-bg;
+	background-clip: padding-box;
+
+	font-size: $font-size-base; // Redeclare because nesting can cause inheritance issues
+
+	@include border-radius($border-radius);
+
+	@include box-shadow($dropdown-box-shadow);
+}
+
+// Dividers (basically an `<hr>`) within the dropdown
+.dropdown-divider
+{
+
+	@include nav-divider($dropdown-divider-bg);
+}
+
+// Links, buttons, and more within the dropdown menu
+//
+// `<button>`-specific styles are denoted with `// For <button>s`
+.dropdown-item
+{
+	display: block;
+	clear: both;
+
+	width: 100%; // For `<button>`s
+	padding: $dropdown-item-padding-y $dropdown-item-padding-x;
+
+	text-align: inherit; // For `<button>`s
+	white-space: nowrap; // prevent links from randomly breaking onto new lines
+
+	color: $dropdown-link-color;
+	border: 0; // For `<button>`s
+	background: none; // For `<button>`s
+
+	font-weight: $font-weight-normal;
+
+	@include hover-focus
+	{
+		text-decoration: none;
+
+		color: $dropdown-link-hover-color;
+		background-color: $dropdown-link-hover-bg;
+	}
+
+	&.active,
+	&:active
+	{
+		text-decoration: none;
+
+		color: $dropdown-link-active-color;
+		background-color: $dropdown-link-active-bg;
+	}
+
+	&.disabled,
+	&:disabled
+	{
+		color: $dropdown-link-disabled-color;
+		background-color: transparent;
+		// Remove CSS gradients if they're enabled
+
+		@if $enable-gradients
+		{
+			background-image: none;
+		}
+	}
+}
+
+// Open state for the dropdown
+.show
+{
+	// Remove the outline when :focus is triggered
+	> a
+	{
+		outline: 0;
+	}
+}
+
+.dropup.show .dropdown-menu,
+.dropdown.show .dropdown-menu
+{
+	display: block;
+}
+
+// Dropdown section headers
+.dropdown-header
+{
+	display: block;
+
+	margin-bottom: 0; // for use with heading elements
+	padding: $dropdown-padding-y $dropdown-item-padding-x;
+
+	white-space: nowrap; // as with > li > a
+
+	color: $dropdown-header-color;
+
+	font-size: $font-size-sm;
+}

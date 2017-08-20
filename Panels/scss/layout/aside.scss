@@ -1,0 +1,77 @@
+﻿/// <reference path="../references" />
+
+aside {
+    position: fixed;
+    z-index: 49;
+    top: $header-height;
+    bottom: 0;
+    width: 100%;
+    max-width: $aside-width;
+    background-color: $body-bg;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    @include flex-direction(column);
+
+    @include flex-display();
+
+    > .header {
+        span {
+            display: block;
+            padding: 5px 10px;
+            text-align: center;
+            background-color: $aside-header-background-color;
+        }
+    }
+
+    &:hover > .content {
+        visibility: visible;
+    }
+
+    > .header,
+    > .footer {
+        padding: $spacer;
+    }
+
+    > .content {
+        overflow: auto;
+        height: 100%; /*IE 10 */
+        visibility: hidden;
+
+        & > div,
+        &:hover,
+        &:focus {
+            visibility: visible;
+        }
+
+        > div {
+            padding: 0 $spacer;
+        }
+
+        &:first-child > div {
+            padding-top: $spacer;
+        }
+
+        &:last-child > div {
+            padding-bottom: $spacer;
+        }
+    }
+
+    &#left {
+        left: -$aside-width;
+        border-right: $layout-border-width solid $layout-border-color-light;
+    }
+
+    &#right {
+        right: -$aside-width;
+        border-left: $layout-border-width solid $layout-border-color-light;
+
+        > .content {
+            direction: rtl;
+
+            > div {
+                direction: ltr;
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+﻿/// <reference path="../references" />
+
+@mixin breakpoint-small-one-column {
+
+    @media (max-width: $breakpoint-one-column) {
+        @content;
+    }
+}
+
+@mixin breakpoint-medium-one-column {
+
+    @media (min-width: $breakpoint-one-column) {
+        @content;
+    }
+}
+
+@mixin breakpoint-two-column {
+
+    @media (min-width: $breakpoint-two-column) {
+        @content;
+    }
+}
+
+#main {
+
+    @include breakpoint-medium-one-column {
+        &.left-open {
+            #content {
+                margin-left: $aside-width;
+            }
+
+            &:not(.footer-fixed) {
+                footer {
+                    margin-left: $aside-width;
+                }
+            }
+        }
+
+        &.right-open {
+            #content {
+                margin-right: $aside-width;
+            }
+
+            &:not(.footer-fixed) {
+                footer {
+                    margin-right: $aside-width;
+                }
+            }
+        }
+
+        aside > div {
+            @include transition(visibility 0.2s);
+
+            &:hover {
+                @include transition(right 0.4s ease-in-out, visibility 0s 0.2s);
+            }
+        }
+    }
+
+    &.two-column {
+
+        @include breakpoint-two-column {
+            &.left-open,
+            &.right-open {
+                #content .header {
+                    width: calc(50% - #{$aside-width / 2}) !important;
+                }
+            }
+
+            &.left-open {
+                #content > .header {
+                    left: $aside-width !important;
+                }
+            }
+
+            &.two-column #content {
+
+                @include flex-display();
+
+                > .header {
+                    position: fixed;
+                    top: $header-height;
+                    bottom: 0;
+                    left: 0;
+                    width: 50%;
+                    height: initial;
+
+                    > div {
+                        bottom: 0;
+                    }
+
+                    & + .content {
+                        width: 50%;
+                        margin: 0 0 0 auto;
+
+                        > div {
+                            margin-top: 20px;
+                        }
+                    }
+                }
+
+                > .content {
+                    width: 100%;
+                    max-width: initial;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+﻿/// <reference path="../references" />
+
+footer {
+    z-index: 99;
+    height: $footer-height;
+    padding: 0 $spacer;
+    color: #abb2b2;
+    border-top: $layout-border-width solid $secondary-color-dark;
+    background-color: $primary-color-dark;
+    line-height: $footer-height;
+}

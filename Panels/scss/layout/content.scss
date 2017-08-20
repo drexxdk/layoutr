@@ -1,0 +1,99 @@
+﻿/// <reference path="../references" />
+
+#content {
+    > .header {
+        position: relative;
+        height: 40vh;
+
+        &:before {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            content: '';
+        }
+
+        &.dark {
+            &:before {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            > div {
+                color: white;
+            }
+        }
+
+        &.light {
+            &:before {
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+
+            > div {
+                color: #202020;
+            }
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        > div {
+            position: absolute;
+            display: flex;
+            z-index: 2;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            right: $spacer;
+            bottom: 60px;
+            left: $spacer;
+            max-width: $content-max-width - ($spacer * 2);
+            margin: 0 auto;
+            text-align: center;
+
+            .title {
+                display: block;
+                font-size: 3em;
+            }
+
+            .author {
+                display: block;
+                margin-top: 10px;
+                font-size: 1.5em;
+                font-weight: normal;
+            }
+        }
+
+        & + .content > div {
+            margin-top: -60px;
+        }
+    }
+
+    > .content {
+        position: relative;
+        z-index: 2;
+        max-width: $content-max-width;
+        margin: 0 auto;
+
+        > div {
+            margin: $spacer;
+            padding: $spacer;
+            border-color: $layout-border-width solid $layout-border-color-light;
+            background-color: $body-bg;
+
+            > section + section {
+                margin-top: $spacer;
+            }
+        }
+    }
+}

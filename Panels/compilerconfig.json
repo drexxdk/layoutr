@@ -1,0 +1,13 @@
+﻿[
+  {
+    "outputFile": "dist/css/app.css",
+    "inputFile": "scss/app.scss",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
+  }
+]

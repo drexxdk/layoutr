@@ -1,0 +1,39 @@
+﻿/// <reference path="../references" />
+
+.flex-items {
+    margin-right: -($spacer / 2);
+    margin-bottom: -($spacer / 2);
+
+    @include flex-display();
+
+    > * {
+        margin-right: ($spacer / 2);
+        margin-bottom: ($spacer / 2);
+    }
+
+    &:not(.column) {
+        @include flex-direction(column);
+    }
+
+    &.column {
+        @include align-items(flex-start);
+    }
+
+    &.wrap {
+        @include flex-wrap(wrap);
+    }
+
+    &.small {
+        margin-right: -($spacer / 4);
+        margin-bottom: -($spacer / 4);
+
+        > * {
+            margin-right: ($spacer / 4);
+            margin-bottom: ($spacer / 4);
+        }
+    }
+
+    & + .flex-items {
+        margin-top: $spacer / 2;
+    }
+}

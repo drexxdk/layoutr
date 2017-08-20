@@ -1,0 +1,136 @@
+﻿/// <reference path="../references" />
+
+.tree {
+    margin-left: 1em;
+    @include noselect;
+    list-style-type: none;
+
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        line-height: 1em;
+        position: relative;
+        padding-left: 1em;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -.5em;
+            display: block;
+            width: 0;
+            border-left: 1px solid $tree-border-color;
+            z-index: 1;
+        }
+
+        &:last-child:before {
+            height: 1em;
+            bottom: auto;
+        }
+    }
+
+    .label {
+        position: relative;
+        display: inline-block;
+        margin-left: -2.5em;
+        padding: .5em .5em .5em 2.5em;
+        width: calc(100% + 2.5em);
+
+        &:hover {
+            background-color: $primary-color-dark;
+            color: $font-color-light;
+
+            > .btn-primary {
+                background-color: $font-color-light;
+
+                > i:before {
+                    color: $font-color-dark;
+                }
+            }
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 1em;
+            left: 1em;
+            margin-left: 0;
+            display: block;
+            height: 1px;
+            width: 1em;
+            border-bottom: 1px solid $tree-border-color;
+            border-left: 1px solid $tree-border-color;
+        }
+    }
+
+    label.label {
+        cursor: pointer;
+    }
+
+    input[type=checkbox] {
+        display: none;
+
+        &:checked {
+            & ~ ul {
+                display: block;
+            }
+
+            & ~ label.label:after {
+                border-top: 1px solid $tree-border-color;
+                border-right: 1px solid $tree-border-color;
+                border-bottom: 0;
+                border-left: 0;
+                bottom: 0;
+                /* top: 1em; */
+                height: auto;
+                left: calc(1em + 1px);
+            }
+
+            & ~ .label > .btn > .fa-plus {
+                display: none;
+            }
+        }
+
+        &:not(:checked) {
+            & ~ ul {
+                display: none;
+            }
+
+            & ~ .label > .btn > .fa-minus {
+                display: none;
+            }
+        }
+
+        & ~ .label > .btn {
+            position: absolute;
+            z-index: 1;
+            @include border-radius(50%);
+            text-align: center;
+            color: $font-color-light;
+            margin-top: 0;
+            left: .5em;
+            width: 1em;
+            height: 1em;
+            padding: 0;
+            @include button-transition(all);
+
+            > i {
+                display: block;
+                line-height: 0;
+                margin-top: 50%;
+                @include translate(0, -50%);
+                font-size: .6em;
+            }
+        }
+    }
+
+    .highlight {
+        display: block;
+        background-color: $tree-highlight-background-color;
+        padding: 1em;
+        color:$font-color-dark;
+    }
+}
