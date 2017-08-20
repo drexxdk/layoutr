@@ -10,7 +10,7 @@
     });
 }
 
-var CACHE_NAME = 'panel-cache-' + 3;
+var CACHE_NAME = 'panel-cache-' + 4;
 var urlsToCache = [
     '',
     'dist/css/app.min.css',
