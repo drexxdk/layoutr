@@ -25,6 +25,6 @@
     "inputFiles": [
       "js/app/serviceWorker.js"
     ],
-    //"minify": { "enabled": true }
+    "minify": { "enabled": true }
   }
 ]

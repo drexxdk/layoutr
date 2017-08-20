@@ -115,10 +115,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dist\css\app.css" />
-    <Content Include="dist\css\app.min.css">
-      <DependentUpon>app.css</DependentUpon>
-    </Content>
     <Content Include="dist\img\content-header-1024.jpg" />
     <Content Include="dist\img\content-header-1280.jpg" />
     <Content Include="dist\img\content-header-1366.jpg" />
@@ -134,8 +130,14 @@
     <Content Include="dist\img\favicon\favicon.ico" />
     <Content Include="dist\img\favicon\mstile-150x150.png" />
     <Content Include="dist\img\favicon\safari-pinned-tab.svg" />
-    <Content Include="dist\js\app.min.js" />
-    <Content Include="dist\js\loadCSS.min.js" />
+    <Content Include="dist\js\app.js" />
+    <Content Include="dist\js\app.min.js">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
+    <Content Include="dist\js\loadCSS.js" />
+    <Content Include="dist\js\loadCSS.min.js">
+      <DependentUpon>loadCSS.js</DependentUpon>
+    </Content>
     <Content Include="index.html" />
     <Content Include="js\app\app.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
@@ -249,7 +251,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\app\serviceWorker.js" />
-    <Content Include="serviceWorker.min.js" />
+    <Content Include="serviceWorker.js" />
+    <Content Include="serviceWorker.min.js">
+      <DependentUpon>serviceWorker.js</DependentUpon>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -258,6 +263,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="dist\css\" />
     <Folder Include="scss\plugins\bootstrap\mixins\" />
     <Folder Include="scss\plugins\bootstrap\utilities\" />
   </ItemGroup>

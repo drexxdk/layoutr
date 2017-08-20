@@ -1,6 +1,6 @@
 ﻿[
   {
-    "outputFile": "dist/css/app.css",
+    "outputFile": "dist/css/app.min.css",
     "inputFile": "scss/app.scss",
     "minify": {
       "enabled": true
