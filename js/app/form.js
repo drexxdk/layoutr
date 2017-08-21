@@ -4,7 +4,7 @@
     }
 });
 
-$(document).ready(function () {
+$(function () {
     $("#signupForm").validate({
         rules: {
             firstname: "required",
