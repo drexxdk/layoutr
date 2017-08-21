@@ -16,10 +16,27 @@ var CURRENT_CACHES = {
 
 self.addEventListener('install', function (event) {
     var urlsToPrefetch = [
-        'dist/css/',
-        'dist/js/',
-        'fonts/',
-        'dist/img/favicon/'
+        'dist/css/app.min.css',
+
+        'dist/js/app.min.js',
+        'dist/js/loadCSS.min.js',
+        'serviceWorker.min.js',
+
+        'fonts/fontawesome-webfont.eot',
+        'fonts/fontawesome-webfont.svg',
+        'fonts/fontawesome-webfont.ttf',
+        'fonts/fontawesome-webfont.woff',
+        'fonts/fontawesome-webfont.woff2',
+        'fonts/fontAwesome.otf',
+
+        'dist/img/favicon/android-chrome-192x192.png',
+        'dist/img/favicon/android-chrome-512x512.png',
+        'dist/img/favicon/apple-touch-icon.png',
+        'dist/img/favicon/favicon-16x16.png',
+        'dist/img/favicon/favicon-32x32.png',
+        'dist/img/favicon/favicon.ico',
+        'dist/img/favicon/mstile-150x150.png',
+        'dist/img/favicon/safari-pinned-tab.svg'
     ];
 
     console.log('Handling install event. Resources to pre-fetch: ', urlsToPrefetch);
