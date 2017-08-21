@@ -26,7 +26,7 @@ $footer-border-color: $gray-900;
 
 $aside-header-background-color: $gray-400;
 
-$breakpoint-one-column: ($number-aside-width + $content-min-width) + px;
+$breakpoint-one-column: ($number-aside-width + $number-content-min-width) + px;
 $breakpoint-two-column: ($number-aside-width + ($number-content-min-width * 2)) + px;
 
 // components

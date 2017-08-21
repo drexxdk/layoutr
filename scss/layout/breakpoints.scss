@@ -58,8 +58,8 @@
     }
 
     &.two-column {
-
         @include breakpoint-two-column {
+
             &.left-open,
             &.right-open {
                 #content .header {
@@ -67,18 +67,8 @@
                 }
             }
 
-            &.left-open {
-                #content {
-                    margin-left: $aside-width;
-
-                    > .header {
-                        left: $aside-width !important;
-                    }
-                }
-            }
-
-            &.right-open #content {
-                margin-right: $aside-width;
+            &.left-open #content > .header {
+                left: $aside-width !important;
             }
 
             &:not(.footer-fixed) #content > .header {
