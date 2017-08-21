@@ -5,3 +5,7 @@
 @import "mixins/mixins";
 @import "layout/layout";
 @import "components/components";
+
+body {
+    display: block !important;
+}
