@@ -4,8 +4,7 @@ footer {
     z-index: 99;
     height: $footer-height;
     padding: 0 $spacer;
-    color: #abb2b2;
-    border-top: $layout-border-width solid $secondary-color-dark;
-    background-color: $primary-color-dark;
+    border-top: $layout-border-width solid $layout-border-color-light;
+    background-color: $footer-background-color;
     line-height: $footer-height;
 }

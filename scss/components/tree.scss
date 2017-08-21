@@ -40,16 +40,7 @@
         width: calc(100% + 2.5em);
 
         &:hover {
-            background-color: $primary-color-dark;
-            color: $font-color-light;
-
-            > .btn-primary {
-                background-color: $font-color-light;
-
-                > i:before {
-                    color: $font-color-dark;
-                }
-            }
+            background-color: $tree-hover-background-color;
         }
 
         &:after {
@@ -131,6 +122,5 @@
         display: block;
         background-color: $tree-highlight-background-color;
         padding: 1em;
-        color:$font-color-dark;
     }
 }
