@@ -68,7 +68,6 @@
 
             .author {
                 display: block;
-                margin-top: 10px;
                 font-size: 1.5em;
                 font-weight: normal;
             }
@@ -88,7 +87,7 @@
         > div {
             margin: $spacer;
             padding: $spacer;
-            border-color: $layout-border-width solid $layout-border-color-light;
+            border-color: $layout-border-width solid $layout-border-color;
             background-color: $body-bg;
 
             > section + section {

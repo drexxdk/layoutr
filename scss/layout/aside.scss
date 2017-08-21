@@ -59,12 +59,12 @@ aside {
 
     &#left {
         left: -$aside-width;
-        border-right: $layout-border-width solid $layout-border-color-light;
+        border-right: $layout-border-width solid $layout-border-color;
     }
 
     &#right {
         right: -$aside-width;
-        border-left: $layout-border-width solid $layout-border-color-light;
+        border-left: $layout-border-width solid $layout-border-color;
 
         > .content {
             direction: rtl;
