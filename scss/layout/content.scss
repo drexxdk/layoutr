@@ -53,9 +53,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            top: 0;
+            top: $spacer;
             right: $spacer;
-            bottom: calc(#{$spacer * 4});
+            bottom: calc(#{$spacer * 5});
             left: $spacer;
             max-width: calc(#{$content-max-width} - #{$spacer * 2});
             margin: 0 auto;

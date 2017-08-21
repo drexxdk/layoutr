@@ -170,6 +170,9 @@
                                 <button type="button" class="btn btn-primary" id="toggle-column">Column</button>
                                 <button type="button" class="btn btn-primary" id="toggle-transition">Transition</button>
                             </section>
+                            <section>
+                                <div id="map" class="google-maps"></div>
+                            </section>
                             <section class="flex-items wrap column small">
                                 <!-- buttons -->
                                 <button type="button" class="btn btn-primary">Primary</button>
@@ -409,8 +412,9 @@
             <footer></footer>
         </div>
     </div>
-    <script src="dist/js/loadCSS.min.js" async></script>
-    <script src="dist/js/app.min.js" async></script>
-    <script src="serviceWorker.min.js" async></script>
+    <script async src="dist/js/loadCSS.min.js"></script>
+    <script async src="serviceWorker.min.js"></script>
+    <script async defer src="dist/js/app.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>
 </body>
 </html>

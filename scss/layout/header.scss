@@ -9,7 +9,6 @@ header {
     height: $header-height;
     border-bottom: $layout-border-width solid $layout-border-color;
     background-color: $body-bg;
-
     @include flex-display();
 
     > .title {

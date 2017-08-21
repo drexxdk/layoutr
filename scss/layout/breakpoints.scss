@@ -90,7 +90,7 @@
                     height: initial;
 
                     > div {
-                        bottom: 0;
+                        bottom: $spacer;
                     }
 
                     & + .content {
