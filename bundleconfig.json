@@ -14,9 +14,11 @@
     "inputFiles": [
       "js/vendors/jquery/jquery-3.1.1.min.js",
       "js/vendors/jquery/jquery-3.1.1.min.map.js",
+      "js/vendors/jquery/jquery.validate.min.js",
       "js/vendors/bootstrap/tether.min.js",
       "js/vendors/bootstrap/bootstrap.min.js",
-      "js/app/app.js"
+      "js/app/app.js",
+      "js/app/form.js"
     ],
     "minify": { "enabled": true }
   },

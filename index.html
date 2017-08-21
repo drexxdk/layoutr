@@ -163,6 +163,18 @@
                     </div>
                     <div class="content">
                         <div>
+                            <section>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Uses <b>Bootstrap 4 beta</b>, which is a very incomplete version.
+                                        It is missing parts like form validation styling, that is in <b>Bootstrap 4 alpha</b>.
+                                        I will upgrade to a complete version of <b>Bootstrap 4</b>, when it gets released.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Uses <b>Font-Awesome 4</b>, untill <b>Font-Awesome 5</b> gets released
+                                    </li>
+                                </ul>
+                            </section>
                             <section class="flex-items wrap column small">
                                 <!-- layout -->
                                 <button type="button" class="btn btn-primary" id="toggle-loading">Loading</button>
@@ -383,6 +395,45 @@
                                         </div>
                                     </div>
                                 </div>
+                            </section>
+                            <section>
+                                <!-- validation -->
+                                <form id="signupForm" method="post" class="form-horizontal" action="">
+                                    <div class="form-group">
+                                        <label class="control-label" for="firstname">First name</label>
+                                        <input type="text" class="form-control form-control-success" id="firstname" name="firstname" placeholder="First name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="lastname">Last name</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="username">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="email">Email</label>
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="password">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="confirm_password">Confirm password</label>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="agree" name="agree" value="agree" />Please agree to our policy
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Sign up</button>
+                                    </div>
+                                </form>
                             </section>
                         </div>
                     </div>
