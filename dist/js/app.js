@@ -46,7 +46,7 @@ $(function () {
             $body.removeClass('loading');
             unlockScroll();
         }, 2000);
-    }
+    };
 
     $('#toggle-loading').click(function () {
         showLoading();

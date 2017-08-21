@@ -10,24 +10,32 @@
     });
 }
 
-var CACHE_NAME = 'panel-cache-' + 5;
-var urlsToCache = [
-    '',
-    'dist/css/app.min.css',
-    'dist/js/app.min.js',
-];
+var CURRENT_CACHES = {
+    prefetch: 'prefetch-cache'
+};
 
 self.addEventListener('install', function (event) {
-    // Perform install steps
+    var urlsToPrefetch = [
+        'dist/css/',
+        'dist/js/',
+        'fonts/',
+        'dist/img/favicon/'
+    ];
+
+    console.log('Handling install event. Resources to pre-fetch: ', urlsToPrefetch);
+
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(function (cache) {
-                console.log('Opened cache');
-                return cache.addAll(urlsToCache);
-            })
+        caches.open(CURRENT_CACHES['prefetch']).then(function (cache) {
+            cache.addAll(urlsToPrefetch.map(function (urlToPrefetch) {
+                return new Request(urlToPrefetch, { mode: 'no-cors' });
+            })).then(function () {
+                console.log('All resources have been fetched and cached.');
+            });
+        }).catch(function (error) {
+            console.error('Pre-fetching failed:', error);
+        })
     );
 });
-
 
 self.addEventListener('fetch', function (event) {
     event.respondWith(
@@ -57,7 +65,7 @@ self.addEventListener('fetch', function (event) {
                         // to clone it so we have two streams.
                         var responseToCache = response.clone();
 
-                        caches.open(CACHE_NAME)
+                        caches.open(CURRENT_CACHES['prefetch'])
                             .then(function (cache) {
                                 cache.put(event.request, responseToCache);
                             });
@@ -70,14 +78,13 @@ self.addEventListener('fetch', function (event) {
 });
 
 self.addEventListener('activate', function (event) {
-
-    var cacheWhitelist = ['pages-cache-v1', 'blog-posts-cache-v1'];
-
+    var cacheWhitelist = ['prefetch-cache'];
     event.waitUntil(
         caches.keys().then(function (cacheNames) {
             return Promise.all(
                 cacheNames.map(function (cacheName) {
                     if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        console.log('removed cache: ' + cacheName);
                         return caches.delete(cacheName);
                     }
                 })
