@@ -55,9 +55,9 @@
             justify-content: center;
             top: 0;
             right: $spacer;
-            bottom: 60px;
+            bottom: calc(#{$spacer * 4});
             left: $spacer;
-            max-width: $content-max-width - ($spacer * 2);
+            max-width: calc(#{$content-max-width} - #{$spacer * 2});
             margin: 0 auto;
             text-align: center;
 
@@ -74,7 +74,7 @@
         }
 
         & + .content > div {
-            margin-top: -60px;
+            margin-top: calc(-#{$spacer * 4});
         }
     }
 
@@ -87,7 +87,6 @@
         > div {
             margin: $spacer;
             padding: $spacer;
-            border-color: $layout-border-width solid $layout-border-color;
             background-color: $body-bg;
 
             > section + section {
