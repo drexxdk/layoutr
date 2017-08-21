@@ -6,7 +6,7 @@
         $html = $('html'),
         $body = $('body');
 
-    footer.html('\u00A9 ' + new Date().getFullYear() + ' Aliea');
+    footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 
     $('.aside').click(function () {
         var $this = $(this);
