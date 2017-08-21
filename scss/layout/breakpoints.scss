@@ -68,19 +68,33 @@
             }
 
             &.left-open {
-                #content > .header {
-                    left: $aside-width !important;
+                #content {
+                    margin-left: $aside-width;
+
+                    > .header {
+                        left: $aside-width !important;
+                    }
                 }
             }
 
-            &.two-column #content {
+            &.right-open #content {
+                margin-right: $aside-width;
+            }
 
+            &:not(.footer-fixed) #content > .header {
+                bottom: 0;
+            }
+
+            &.footer-fixed #content > .header {
+                bottom: $footer-height;
+            }
+
+            #content {
                 @include flex-display();
 
                 > .header {
                     position: fixed;
                     top: $header-height;
-                    bottom: 0;
                     left: 0;
                     width: 50%;
                     height: initial;

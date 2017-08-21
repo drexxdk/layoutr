@@ -39,13 +39,10 @@ button {
         }
 
         #right {
-
             @include transition(right 0.4s ease-in-out);
         }
-
         #content,
         footer {
-
             @include transition(margin 0.4s ease-in-out);
         }
 
