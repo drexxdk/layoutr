@@ -3,17 +3,17 @@
   "name": "Panels",
   "icons": [
     {
-      "src": "/dist/img/favicon/android-chrome-192x192.png",
+      "src": "https://drexxdk.github.io/Panels/dist/img/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/dist/img/favicon/android-chrome-512x512.png",
+      "src": "https://drexxdk.github.io/Panels/dist/img/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "https://drexxdk.github.io/Panels/",
   "theme_color": "#0072ed",
   "background_color": "#0072ed",
   "display": "standalone"
