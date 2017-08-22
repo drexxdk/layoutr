@@ -117,7 +117,9 @@
                 font-size: .6em;
 
                 &:before {
-                    background-color: green;
+                    width:10px;
+                    height:10px;
+                    background-color: pink;
                 }
             }
         }
