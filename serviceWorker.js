@@ -10,12 +10,15 @@ if ('serviceWorker' in navigator) {
         });
     });
 
+}
     var CURRENT_CACHES = {
         prefetch: 'prefetch-cache'
     };
 
     self.addEventListener('install', function (event) {
         var urlsToPrefetch = [
+            '/',
+
             'dist/css/app.min.css',
 
             'dist/js/app.min.js',
@@ -109,4 +112,3 @@ if ('serviceWorker' in navigator) {
             })
         );
     });
-}
