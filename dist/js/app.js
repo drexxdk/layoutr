@@ -625,10 +625,12 @@ $(function () {
         $body = $('body');
 
     $body.removeAttr('style');
+    
+    if (bowser.msedge) {
+        main.addClass('msedge');
+    } else if (bowser.msie) {
 
-    console.log(bowser);
-    if (bowser.msedge || bowser.msie) {
-        main.addClass('ie');
+        main.addClass('msie');
     }
 
     footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
