@@ -9,6 +9,7 @@ if ('serviceWorker' in navigator) {
             console.log('ServiceWorker registration failed: ', err);
         });
     });
+}
 
     var CURRENT_CACHES = {
         prefetch: 'prefetch-cache'
@@ -109,4 +110,3 @@ if ('serviceWorker' in navigator) {
             })
         );
     });
-}
