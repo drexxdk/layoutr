@@ -114,6 +114,10 @@
                 margin-top: 50%;
                 @include translate(0, -50%);
                 font-size: .6em;
+
+                &:before {
+                    background-color:orange;
+                }
             }
         }
     }

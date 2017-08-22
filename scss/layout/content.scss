@@ -4,6 +4,7 @@
     > .header {
         position: relative;
         height: 40vh;
+        min-height: rem(250);
 
         &:before {
             position: absolute;
