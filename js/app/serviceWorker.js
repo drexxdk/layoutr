@@ -10,6 +10,7 @@ if ('serviceWorker' in navigator) {
         });
     });
 
+}
     var CURRENT_CACHES = {
         prefetch: 'prefetch-cache'
     };
@@ -109,4 +110,3 @@ if ('serviceWorker' in navigator) {
             })
         );
     });
-}

@@ -17,8 +17,6 @@ if ('serviceWorker' in navigator) {
 
     self.addEventListener('install', function (event) {
         var urlsToPrefetch = [
-            '/',
-
             'dist/css/app.min.css',
 
             'dist/js/app.min.js',
