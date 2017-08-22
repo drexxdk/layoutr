@@ -83,16 +83,31 @@
 
         $body.css({ 'margin-right': 0, 'margin-bottom': 0 });
     }
+
+    //$("#map").googleMap({
+    //    zoom: 10, // Initial zoom level (optional)
+    //    coords: [48.895651, 2.290569], // Map center (optional)
+    //    type: "ROADMAP" // Map type (optional)
+    //});
 });
 
 function initMap() {
-    var uluru = { lat: -25.363, lng: 131.044 };
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: uluru
-    });
-    var marker = new google.maps.Marker({
-        position: uluru,
-        map: map
-    });
+    var map = document.getElementById('map');
+    if (map !== null) {
+        var uluru = { lat: -25.363, lng: 131.044 };
+        var map1 = new google.maps.Map(map, {
+            zoom: 4,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map1
+        });
+        $(window).resize(function () {
+            google.maps.event.trigger(map, 'resize');
+        });
+    } else {
+        console.log('map not found');
+    }
+    
 }
