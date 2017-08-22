@@ -89,12 +89,16 @@
                     width: 50%;
                     height: auto;
 
+                    > div {
+                        bottom: 0;
+                    }
+
                     & + .content {
                         width: 50%;
                         margin: 0 0 0 auto;
 
                         > div {
-                            margin-top: 20px;
+                            margin-top: 0;
                         }
                     }
                 }
