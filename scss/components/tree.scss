@@ -109,14 +109,15 @@
             @include button-transition(all);
 
             > i {
-                display: block;
-                line-height: 0;
-                margin-top: 50%;
-                @include translate(0, -50%);
+                width:100%;
+                height:100%;
+                @include flex-display();
+                @include justify-content(center);
+                @include align-items(center);
                 font-size: .6em;
 
                 &:before {
-                    background-color:orange;
+                    background-color: orange;
                 }
             }
         }
