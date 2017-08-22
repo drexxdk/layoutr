@@ -8,6 +8,11 @@
 
     $body.removeAttr('style');
 
+    console.log(bowser);
+    if (bowser.msedge || bowser.msie) {
+        main.addClass('ie');
+    }
+
     footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 
     $('.aside').click(function () {

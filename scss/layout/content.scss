@@ -55,12 +55,13 @@
             align-items: center;
             justify-content: center;
             top: $spacer;
-            right: $spacer;
-            bottom: calc(#{$spacer * 5});
-            left: $spacer;
+            bottom: $spacer;
+            left: 50%;
+            @include translate(-50%, 0);
             max-width: calc(#{$content-max-width} - #{$spacer * 2});
             margin: 0 auto;
             text-align: center;
+            width: 100%;
 
             .title {
                 display: block;
@@ -82,13 +83,13 @@
     > .content {
         position: relative;
         z-index: 2;
-        max-width: $content-max-width;
-        margin: 0 auto;
+        margin: $spacer;
 
         > div {
-            margin: $spacer;
+            margin: 0 auto;
             padding: $spacer;
             background-color: $body-bg;
+            max-width: calc(#{$content-max-width} - #{$spacer * 2});
 
             > section + section {
                 margin-top: $spacer;

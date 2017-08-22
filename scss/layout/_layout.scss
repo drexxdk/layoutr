@@ -32,7 +32,8 @@ button {
 
     @include flex-direction(column);
 
-    &.transition {
+    &:not(.ie).transition {
+        // ie/edge doesn't support transition for values that uses calc()
         #left {
 
             @include transition(left 0.4s ease-in-out);

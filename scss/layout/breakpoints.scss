@@ -87,11 +87,7 @@
                     top: $header-height;
                     left: 0;
                     width: 50%;
-                    height: initial;
-
-                    > div {
-                        bottom: $spacer;
-                    }
+                    height: auto;
 
                     & + .content {
                         width: 50%;
@@ -105,7 +101,7 @@
 
                 > .content {
                     width: 100%;
-                    max-width: initial;
+                    /*max-width: 100%;*/
                 }
             }
         }
