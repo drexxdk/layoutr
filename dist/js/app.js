@@ -718,20 +718,31 @@ $(function () {
         }
     });
 
-    // chrome mobile fixed position fix
     var winHeight = $(window).height();
 
-    $(window).scroll(function () {
-        $("header").css({
-            "position": "absolute",
-            "top": $(window).scrollTop()
-        });
+    var winHeight = $(window).height();
 
-        $("footer").css({
-            "position": "absolute",
-            "top": $(window).scrollTop() + (winHeight - 50) + "px"
+    var aside = $('aside');
+    aside.css('position', 'absolute');
+    $(window).scroll(function () {
+        aside.css({
+            'top': $(window).scrollTop(),
+            'bottom': -$(window).scrollTop()
         });
     });
+
+
+    //$(window).scroll(function () {
+    //    $("aside").css({
+    //        "position": "absolute",
+    //        "top": $(window).scrollTop()
+    //    });
+
+    //    $("footer").css({
+    //        "position": "absolute",
+    //        "top": $(window).scrollTop() + (winHeight - 50) + "px"
+    //    });
+    //});
 
 });
 $.validator.setDefaults({
