@@ -3,9 +3,10 @@
 aside {
     position: fixed;
     z-index: 49;
-    top: 0;
-    height: 100%;
-    padding-top:$header-height;
+    top: -100px;
+    padding-top: calc(100px + #{$header-height});
+    padding-bottom:100px;
+    height: calc(100% + 200px);
     width: 100%;
     max-width: $aside-width;
     background-color: $layout-background-color;

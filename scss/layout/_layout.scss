@@ -78,7 +78,7 @@ button {
 
             #left,
             #right {
-                padding-bottom: $footer-height;
+                padding-bottom: calc(100px + #{$footer-height});
             }
         }
 
