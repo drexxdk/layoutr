@@ -4,7 +4,7 @@ aside {
     position: fixed;
     z-index: 49;
     top: $header-height;
-    bottom: 0;
+    height: calc(100% - #{$header-height});
     width: 100%;
     max-width: $aside-width;
     background-color: $layout-background-color;
