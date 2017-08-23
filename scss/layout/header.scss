@@ -2,7 +2,7 @@
 
 header {
     position: fixed;
-    z-index: 99;
+    z-index: 1030;
     top: 0;
     right: 0;
     left: 0;
@@ -10,8 +10,6 @@ header {
     border-bottom: $layout-border-width solid $layout-border-color;
     background-color: $layout-background-color;
     @include flex-display();
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
 
     > .title {
         overflow: hidden;
