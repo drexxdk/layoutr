@@ -2,16 +2,15 @@
 
 aside {
     position: fixed;
-    -webkit-backface-visibility: hidden;
     z-index: 49;
-    top: $header-height;
+    top: 0;
     bottom: 0;
     width: 100%;
     max-width: $aside-width;
     background-color: $layout-background-color;
     flex-shrink: 0;
     flex-grow: 1;
-    background-color: green;
+    padding-top: $header-height;
 
     @include flex-direction(column);
 
