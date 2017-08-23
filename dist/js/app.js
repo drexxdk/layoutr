@@ -717,33 +717,6 @@ $(function () {
             googleMapsInitialized = true;
         }
     });
-
-    var winHeight = $(window).height();
-
-    var winHeight = $(window).height();
-
-    var aside = $('aside');
-    aside.css('position', 'absolute');
-    $(window).scroll(function () {
-        aside.css({
-            'top': $(window).scrollTop(),
-            'bottom': -$(window).scrollTop()
-        });
-    });
-
-
-    //$(window).scroll(function () {
-    //    $("aside").css({
-    //        "position": "absolute",
-    //        "top": $(window).scrollTop()
-    //    });
-
-    //    $("footer").css({
-    //        "position": "absolute",
-    //        "top": $(window).scrollTop() + (winHeight - 50) + "px"
-    //    });
-    //});
-
 });
 $.validator.setDefaults({
     submitHandler: function () {

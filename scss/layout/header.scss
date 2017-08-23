@@ -11,6 +11,16 @@ header {
     background-color: $layout-background-color;
     @include flex-display();
 
+    &:before {
+        display: table;
+        content: " ";
+    }
+
+    &:after {
+        display: table;
+        content: " ";
+    }
+
     > .title {
         overflow: hidden;
         padding: 0 10px;
