@@ -717,6 +717,22 @@ $(function () {
             googleMapsInitialized = true;
         }
     });
+
+
+    var winHeight = $(window).height();
+
+    $(window).scroll(function () {
+        $("header").css({
+            "position": "absolute",
+            "top": $(window).scrollTop()
+        });
+
+        $("footer").css({
+            "position": "absolute",
+            "top": $(window).scrollTop() + (winHeight - 50) + "px"
+        });
+    });
+
 });
 $.validator.setDefaults({
     submitHandler: function () {
