@@ -2,6 +2,7 @@
 
 aside {
     position: fixed;
+    -webkit-backface-visibility: hidden;
     z-index: 49;
     top: $header-height;
     bottom: 0;
@@ -10,6 +11,7 @@ aside {
     background-color: $layout-background-color;
     flex-shrink: 0;
     flex-grow: 1;
+    background-color: green;
 
     @include flex-direction(column);
 
