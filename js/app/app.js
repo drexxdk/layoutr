@@ -100,7 +100,7 @@
         }
     });
 
-
+    // chrome mobile fixed position fix
     var winHeight = $(window).height();
 
     $(window).scroll(function () {
