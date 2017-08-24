@@ -25,5 +25,12 @@ body {
         > #loading {
             display: block;
         }
+
+        overflow: hidden;
+        @include flex-display();
+
+        > #main {
+            flex-grow: 1;
+        }
     }
 }

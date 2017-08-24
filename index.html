@@ -43,7 +43,7 @@
             </button>
             <span class="title">Panels</span>
             <button class="aside right">
-                <i class="fa fa-bars" aria-label="Togggle right panel"></i>
+                <i class="fa fa-cog" aria-label="Togggle right panel"></i>
             </button>
         </header>
         <div id="container">
@@ -164,24 +164,32 @@
                         </div>
                     </div>
                 </aside>
-                <div id="content">
-                    
-                </div>
+                <div id="content"></div>
                 <aside id="right">
                     <div class="header">
                         <span>Menu</span>
                     </div>
                     <div class="content">
                         <div>
-                            <p>
-                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />b
-                            </p>
+
+                            <section class="flex-items wrap">
+                                <!-- layout -->
+                                <button type="button" class="btn btn-primary" id="toggle-loading">Loading</button>
+                                <button type="button" class="btn btn-primary" id="toggle-footer-position">Footer position</button>
+                                <button type="button" class="btn btn-primary" id="toggle-column">Column</button>
+                                <button type="button" class="btn btn-primary" id="toggle-transition">Transition</button>
+                            </section>
+                            <section class="flex-items">
+                                <p>
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />b
+                                </p>
+                            </section>
                         </div>
                     </div>
                     <div class="footer">
@@ -194,7 +202,7 @@
     </div>
     <script async src="dist/js/loadCSS.min.js"></script>
     <script async src="serviceWorker.min.js"></script>
-    <script src="dist/js/app.min.js"></script>
+    <script src="dist/js/app.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>
 </body>
 </html>

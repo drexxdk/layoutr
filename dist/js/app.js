@@ -617,64 +617,70 @@ if(n||(n=new h(this,o),t(this).data(a,n)),"string"==typeof e){if(void 0===n[e])t
     return bowser
 });
 $(function () {
-    var main = $('#main'),
-        content = $('#content'),
-        footer = $('footer'),
+    var $main = $('#main'),
+        $content = $('#content'),
+        $header = $('header'),
+        $footer = $('footer'),
+        $left = $('#left'),
+        $right = $('#right'),
         $html = $('html'),
         $body = $('body'),
-        googleMapsInitialized = false,
-        googleMaps;
+        googleMaps,
+        transitionTime = 400;
 
     if (bowser.msedge) {
-        main.addClass('msedge');
+        $main.addClass('msedge');
     } else if (bowser.msie) {
-        main.addClass('msie');
+        $main.addClass('msie');
     }
 
-    footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
+    $footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 
     $('.aside').click(function () {
         var $this = $(this);
         if ($this.hasClass('left')) {
-            main.toggleClass('left-open').removeClass('right-open');
+            $main.toggleClass('left-open').removeClass('right-open');
         } else if ($this.hasClass('right')) {
-            main.toggleClass('right-open').removeClass('left-open');
+            $main.toggleClass('right-open').removeClass('left-open');
         }
+        checkGoogleMaps();
     });
 
-    $(document).click(function (e) {
-        var target = $(e.target);
-        if (!target.closest("aside").length && !target.closest(".aside").length) {
-            main.removeClass('right-open'); /* left-open */
-        }
-    });
-
-    var showLoading = function () {
-        $body.addClass('loading');
-        lockScroll();
-        setTimeout(function () {
-            $body.removeClass('loading');
-            unlockScroll();
-        }, 2000);
-    };
-
+    if ($main.hasClass('close-left-click-outside') || $main.hasClass('close-right-click-outside')) {
+        $(document).click(function (e) {
+            var target = $(e.target);
+            if (!target.closest("#loading").length && !target.closest(".aside").length) {
+                if ($main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    $main.removeClass('left-open');
+                } else if ($main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                    $main.removeClass('right-open');
+                }
+                checkGoogleMaps();
+            }
+        });
+    }
+    
     $body.on('click', '#toggle-loading', function () {
         showLoading();
+        setTimeout(function () {
+            hideLoading();
+        }, 2000);
     });
 
     $body.on('click', '#toggle-footer-position', function () {
-        main.toggleClass('footer-fixed');
+        $main.toggleClass('footer-fixed');
     });
 
     $body.on('click', '#toggle-column', function () {
-        main.toggleClass('one-column two-column');
+        $main.toggleClass('one-column two-column');
+        checkGoogleMaps();
     });
 
     $body.on('click', '#toggle-transition', function () {
-        main.toggleClass('transition');
+        $main.toggleClass('transition');
     });
 
-    function lockScroll() {
+    var showLoading = function() {
         var initWidth = $body.outerWidth();
         var initHeight = $body.outerHeight();
 
@@ -689,23 +695,54 @@ $(function () {
 
         var marginR = $body.outerWidth() - initWidth;
         var marginB = $body.outerHeight() - initHeight;
+
         $body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
+        $header.css({ 'padding-right': marginR });
+        if ($main.hasClass('right-open')) {
+            $right.css({
+                'max-width': $right.width() + marginR,
+                'padding-right': marginR
+            });
+        }
+        if ($main.hasClass('footer-fixed')) {
+            $footer.css({ 'padding-right': marginR });
+        }
+        $body.addClass('loading');
     }
 
-    function unlockScroll() {
+    var hideLoading = function() {
         $html.css('overflow', $html.data('previous-overflow'));
         var scrollPosition = $html.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
-        $body.css({ 'margin-right': 0, 'margin-bottom': 0 });
+        $body.removeAttr('style');
+        $header.removeAttr('style');
+        $right.removeAttr('style');
+        $footer.removeAttr('style');
+        $body.removeClass('loading');
+    }
+
+    var checkGoogleMaps = function () {
+        if (googleMaps !== undefined) {
+            if ($main.hasClass('transition')) {
+                setTimeout(function () {
+                    google.maps.event.trigger(googleMaps, 'resize');
+                }, transitionTime);
+            } else {
+                google.maps.event.trigger(googleMaps, 'resize');
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     $body.on('click', '#toggle-google-maps', function () {
-        if (!googleMapsInitialized) {
-            content.find('> .content > div').prepend('<section><div id="google-map" class="embed-responsive embed-responsive-16by9"></div></section>');
-            var element = document.getElementById('google-map');
+        if (!checkGoogleMaps()) {
+            $content.find('> .content > div').prepend('<section><div id="google-maps" class="embed-responsive embed-responsive-16by9"></div></section>');
+            googleMaps = document.getElementById('google-maps');
             var uluru = { lat: -25.363, lng: 131.044 };
-            var map = new google.maps.Map(element, {
+            var map = new google.maps.Map(googleMaps, {
                 zoom: 4,
                 center: uluru
             });
@@ -714,16 +751,14 @@ $(function () {
                 map: map
             });
             $(window).resize(function () {
-                google.maps.event.trigger(element, 'resize');
+                google.maps.event.trigger(googleMaps, 'resize');
             });
-            googleMapsInitialized = true;
-            googleMaps = $('#google-map');
         } else {
-            googleMaps.toggle();
+            $(googleMaps).toggle();
         }
     });
 
-    content.load("ajax/content/page1.html");
+    $content.load("ajax/content/page1.html");
 });
 $.validator.setDefaults({
     submitHandler: function () {
