@@ -80,7 +80,7 @@
                 left: calc(1em + 1px);
             }
 
-            & ~ .label > .btn > .svg-plus {
+            & ~ .label > .btn > svg:first-child {
                 display: none;
             }
         }
@@ -90,7 +90,7 @@
                 display: none;
             }
 
-            & ~ .label > .btn > .svg-minus {
+            & ~ .label > .btn > svg:last-child {
                 display: none;
             }
         }
@@ -106,16 +106,14 @@
             width: 1em;
             height: 1em;
             padding: 0;
+            @include flex-display();
+            @include justify-content(center);
+            @include align-items(center);
             @include button-transition(all);
 
             > svg {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                @include translate(-50%, -50%);
-                width: 50%;
-                height: 50%;
-                fill: white;
+                width:75%;
+                height:75%;
             }
         }
     }
