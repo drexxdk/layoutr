@@ -29,11 +29,11 @@
                 margin-left: $aside-width;
             }
 
-            &:not(.footer-fixed) {
+            /*&:not(.footer-fixed) {
                 footer {
                     margin-left: $aside-width;
                 }
-            }
+            }*/
         }
 
         &.right-open {
@@ -41,11 +41,11 @@
                 margin-right: $aside-width;
             }
 
-            &:not(.footer-fixed) {
+            /*&:not(.footer-fixed) {
                 footer {
                     margin-right: $aside-width;
                 }
-            }
+            }*/
         }
 
         aside > div {

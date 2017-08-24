@@ -43,8 +43,7 @@ button {
             @include transition(right 0.4s ease-in-out);
         }
 
-        #content,
-        footer {
+        #content {
             @include transition(margin 0.4s ease-in-out);
         }
 
@@ -75,11 +74,6 @@ button {
     &.footer-fixed {
         #container > div {
             margin-bottom: $footer-height;
-
-            #left,
-            #right {
-                padding-bottom: calc(100px + #{$footer-height});
-            }
         }
 
         footer {
