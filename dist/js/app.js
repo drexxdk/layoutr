@@ -618,9 +618,12 @@ if(n||(n=new h(this,o),t(this).data(a,n)),"string"==typeof e){if(void 0===n[e])t
 });
 $(function () {
     var main = $('#main'),
+        content = $('#content'),
         footer = $('footer'),
         $html = $('html'),
-        $body = $('body');
+        $body = $('body'),
+        googleMapsInitialized = false,
+        googleMaps;
 
     if (bowser.msedge) {
         main.addClass('msedge');
@@ -655,19 +658,19 @@ $(function () {
         }, 2000);
     };
 
-    $('#toggle-loading').click(function () {
+    $body.on('click', '#toggle-loading', function () {
         showLoading();
     });
 
-    $('#toggle-footer-position').click(function () {
+    $body.on('click', '#toggle-footer-position', function () {
         main.toggleClass('footer-fixed');
     });
 
-    $('#toggle-column').click(function () {
+    $body.on('click', '#toggle-column', function () {
         main.toggleClass('one-column two-column');
     });
 
-    $('#toggle-transition').click(function () {
+    $body.on('click', '#toggle-transition', function () {
         main.toggleClass('transition');
     });
 
@@ -697,10 +700,9 @@ $(function () {
         $body.css({ 'margin-right': 0, 'margin-bottom': 0 });
     }
 
-    var googleMapsInitialized = false;
-    $('#initialize-google-maps').click(function () {
+    $body.on('click', '#toggle-google-maps', function () {
         if (!googleMapsInitialized) {
-            $('#content > .content > div').prepend('<section><div id="google-map" class="embed-responsive embed-responsive-16by9"></div></section>');
+            content.find('> .content > div').prepend('<section><div id="google-map" class="embed-responsive embed-responsive-16by9"></div></section>');
             var element = document.getElementById('google-map');
             var uluru = { lat: -25.363, lng: 131.044 };
             var map = new google.maps.Map(element, {
@@ -715,8 +717,13 @@ $(function () {
                 google.maps.event.trigger(element, 'resize');
             });
             googleMapsInitialized = true;
+            googleMaps = $('#google-map');
+        } else {
+            googleMaps.toggle();
         }
     });
+
+    content.load("ajax/content/page1.html");
 });
 $.validator.setDefaults({
     submitHandler: function () {

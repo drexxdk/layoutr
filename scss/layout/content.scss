@@ -67,9 +67,11 @@
             .title {
                 display: block;
                 font-size: 3em;
+                line-height: 1em;
             }
 
             .author {
+                margin-top: $spacer;
                 display: block;
                 font-size: 1.5em;
                 font-weight: normal;
@@ -84,13 +86,14 @@
     > .content {
         position: relative;
         z-index: 2;
-        padding:#{$spacer * 2};
+        padding: #{$spacer * 2};
 
         > div {
             margin: 0 auto;
             padding: $spacer;
             background-color: $layout-background-color;
             max-width: calc(#{$content-max-width} - #{$spacer * 2});
+            min-height: 8em;
 
             > section + section {
                 margin-top: $spacer;
