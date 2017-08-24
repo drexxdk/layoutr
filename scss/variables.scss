@@ -5,8 +5,11 @@ $number-header-height: 50;
 $number-footer-height: 50;
 $number-content-min-width: 500;
 $number-content-max-width: 1280;
+$number-main-min-width: $number-aside-width + $number-aside-width;
 
 // layout
+$main-min-width: rem($number-main-min-width);
+
 $aside-width: rem($number-aside-width);
 $layout-background-color: $white;
 

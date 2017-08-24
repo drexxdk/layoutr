@@ -680,7 +680,7 @@ $(function () {
         $main.toggleClass('transition');
     });
 
-    var showLoading = function() {
+    var showLoading = function () {
         var initWidth = $body.outerWidth();
         var initHeight = $body.outerHeight();
 
@@ -695,7 +695,7 @@ $(function () {
 
         var marginR = $body.outerWidth() - initWidth;
         var marginB = $body.outerHeight() - initHeight;
-
+        $body.addClass('loading');
         $body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
         $header.css({ 'padding-right': marginR });
         if ($main.hasClass('right-open')) {
@@ -707,7 +707,6 @@ $(function () {
         if ($main.hasClass('footer-fixed')) {
             $footer.css({ 'padding-right': marginR });
         }
-        $body.addClass('loading');
     }
 
     var hideLoading = function() {

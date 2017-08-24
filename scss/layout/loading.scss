@@ -21,16 +21,7 @@ body {
         }
     }
 
-    &.loading {
-        > #loading {
-            display: block;
-        }
-
-        overflow: hidden;
-        @include flex-display();
-
-        > #main {
-            flex-grow: 1;
-        }
+    &.loading > #loading {
+        display: block;
     }
 }
