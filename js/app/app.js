@@ -20,9 +20,9 @@
 
     $('.aside').click(function () {
         var $this = $(this);
-        if ($this.hasClass('left')) {
+        if ($this.is('#toggle-menu')) {
             $main.toggleClass('left-open').removeClass('right-open');
-        } else if ($this.hasClass('right')) {
+        } else if ($this.is('#toggle-settings')) {
             $main.toggleClass('right-open').removeClass('left-open');
         }
         checkGoogleMaps();

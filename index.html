@@ -65,178 +65,179 @@
 			c-24.718,0-44.824-20.106-44.824-44.824c0-24.717,20.106-44.824,44.824-44.824c24.717,0,44.823,20.107,44.823,44.824
 			C179.418,159.385,159.312,179.491,134.595,179.491z" />
         </symbol>
-        <div id="loading">
-            <span>
-                <i class="fa fa-circle-o-notch fa-spin fa-5x"></i>
-                <span class="sr-only">Loading...</span>
-            </span>
-        </div>
-        <div id="main" class="transition two-column footer-fixed">
-            <header>
-                <button class="aside left svg">
-                    <svg><use xlink:href="#svg-menu"></use></svg>
-                </button>
-                <span class="title">Panels</span>
-                <button class="aside right svg">
-                    <svg><use xlink:href="#svg-settings"></use></svg>
-                </button>
-            </header>
-            <div id="container">
-                <div>
-                    <aside id="left">
-                        <div class="header">
-                            <span>Menu</span>
-                        </div>
-                        <div class="content">
-                            <div>
-                                <ul class="tree">
-                                    <li>
-                                        <input type="checkbox" checked="checked" id="c1" />
-                                        <label class="label" for="c1">
-                                            <span class="btn btn-primary svg light">
-                                                <svg><use xlink:href="#svg-plus"></use></svg>
-                                                <svg><use xlink:href="#svg-minus"></use></svg>
-                                            </span>
-                                            Level 0
-                                        </label>
-                                        <ul>
-                                            <li>
-                                                <input type="checkbox" checked="checked" id="c2" />
-                                                <label for="c2" class="label">
-                                                    <span class="btn btn-primary svg light">
-                                                        <svg><use xlink:href="#svg-plus"></use></svg>
-                                                        <svg><use xlink:href="#svg-minus"></use></svg>
-                                                    </span>
-                                                    Level 1
-                                                </label>
+    </svg>
+    <div id="loading">
+        <span>
+            <i class="fa fa-circle-o-notch fa-spin fa-5x"></i>
+            <span class="sr-only">Loading...</span>
+        </span>
+    </div>
+    <div id="main" class="transition two-column footer-fixed">
+        <header>
+            <button id="toggle-menu" class="aside left svg">
+                <svg><use xlink:href="#svg-menu"></use></svg>
+            </button>
+            <span class="title">Panels</span>
+            <button id="toggle-settings" class="aside right svg">
+                <svg><use xlink:href="#svg-settings"></use></svg>
+            </button>
+        </header>
+        <div id="container">
+            <div>
+                <aside id="left">
+                    <div class="header">
+                        <span>Menu</span>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <ul class="tree">
+                                <li>
+                                    <input type="checkbox" checked="checked" id="c1" />
+                                    <label class="label" for="c1">
+                                        <span class="btn btn-primary svg light">
+                                            <svg><use xlink:href="#svg-plus"></use></svg>
+                                            <svg><use xlink:href="#svg-minus"></use></svg>
+                                        </span>
+                                        Level 0
+                                    </label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" checked="checked" id="c2" />
+                                            <label for="c2" class="label">
+                                                <span class="btn btn-primary svg light">
+                                                    <svg><use xlink:href="#svg-plus"></use></svg>
+                                                    <svg><use xlink:href="#svg-minus"></use></svg>
+                                                </span>
+                                                Level 1
+                                            </label>
 
-                                                <ul>
-                                                    <li><span class="label">Level 2</span></li>
-                                                    <li><span class="label">Level 2</span></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="c3" />
-                                                <label for="c3" class="label">
-                                                    <span class="btn btn-primary svg light">
-                                                        <svg><use xlink:href="#svg-plus"></use></svg>
-                                                        <svg><use xlink:href="#svg-minus"></use></svg>
-                                                    </span>
-                                                    Looong level 1 <br />label text <br />with line-breaks
-                                                </label>
-                                                <ul>
-                                                    <li><span class="label">Level 2</span></li>
-                                                    <li>
-                                                        <input type="checkbox" id="c4" />
-                                                        <label for="c4" class="label">
-                                                            <span class="btn btn-primary svg light">
-                                                                <svg><use xlink:href="#svg-plus"></use></svg>
-                                                                <svg><use xlink:href="#svg-minus"></use></svg>
-                                                            </span>
-                                                            <span class="highlight">Specified tree item view</span>
-                                                        </label>
-                                                        <ul>
-                                                            <li><span class="label">Level 3</span></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                                <li><span class="label">Level 2</span></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c3" />
+                                            <label for="c3" class="label">
+                                                <span class="btn btn-primary svg light">
+                                                    <svg><use xlink:href="#svg-plus"></use></svg>
+                                                    <svg><use xlink:href="#svg-minus"></use></svg>
+                                                </span>
+                                                Looong level 1 <br />label text <br />with line-breaks
+                                            </label>
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                                <li>
+                                                    <input type="checkbox" id="c4" />
+                                                    <label for="c4" class="label">
+                                                        <span class="btn btn-primary svg light">
+                                                            <svg><use xlink:href="#svg-plus"></use></svg>
+                                                            <svg><use xlink:href="#svg-minus"></use></svg>
+                                                        </span>
+                                                        <span class="highlight">Specified tree item view</span>
+                                                    </label>
+                                                    <ul>
+                                                        <li><span class="label">Level 3</span></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                                    <li>
-                                        <input type="checkbox" id="c5" />
-                                        <label class="label" for="c5">
-                                            <span class="btn btn-primary svg light">
-                                                <svg><use xlink:href="#svg-plus"></use></svg>
-                                                <svg><use xlink:href="#svg-minus"></use></svg>
-                                            </span>
-                                            Level 0
-                                        </label>
-                                        <ul>
-                                            <li>
-                                                <input type="checkbox" id="c6" />
-                                                <label for="c6" class="label">
-                                                    <span class="btn btn-primary svg light">
-                                                        <svg><use xlink:href="#svg-plus"></use></svg>
-                                                        <svg><use xlink:href="#svg-minus"></use></svg>
-                                                    </span>
-                                                    Level 1
-                                                </label>
-                                                <ul>
-                                                    <li><span class="label">Level 2</span></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="c7" />
-                                                <label for="c7" class="label">
-                                                    <span class="btn btn-primary svg light">
-                                                        <svg><use xlink:href="#svg-plus"></use></svg>
-                                                        <svg><use xlink:href="#svg-minus"></use></svg>
-                                                    </span>
-                                                    Level 1
-                                                </label>
-                                                <ul>
-                                                    <li><span class="label">Level 2</span></li>
-                                                    <li>
-                                                        <input type="checkbox" id="c8" />
-                                                        <label for="c8" class="label">
-                                                            <span class="btn btn-primary svg light">
-                                                                <svg><use xlink:href="#svg-plus"></use></svg>
-                                                                <svg><use xlink:href="#svg-minus"></use></svg>
-                                                            </span>
-                                                            Level 2
-                                                        </label>
-                                                        <ul>
-                                                            <li><span class="label">Level 3</span></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                                <li>
+                                    <input type="checkbox" id="c5" />
+                                    <label class="label" for="c5">
+                                        <span class="btn btn-primary svg light">
+                                            <svg><use xlink:href="#svg-plus"></use></svg>
+                                            <svg><use xlink:href="#svg-minus"></use></svg>
+                                        </span>
+                                        Level 0
+                                    </label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" id="c6" />
+                                            <label for="c6" class="label">
+                                                <span class="btn btn-primary svg light">
+                                                    <svg><use xlink:href="#svg-plus"></use></svg>
+                                                    <svg><use xlink:href="#svg-minus"></use></svg>
+                                                </span>
+                                                Level 1
+                                            </label>
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c7" />
+                                            <label for="c7" class="label">
+                                                <span class="btn btn-primary svg light">
+                                                    <svg><use xlink:href="#svg-plus"></use></svg>
+                                                    <svg><use xlink:href="#svg-minus"></use></svg>
+                                                </span>
+                                                Level 1
+                                            </label>
+                                            <ul>
+                                                <li><span class="label">Level 2</span></li>
+                                                <li>
+                                                    <input type="checkbox" id="c8" />
+                                                    <label for="c8" class="label">
+                                                        <span class="btn btn-primary svg light">
+                                                            <svg><use xlink:href="#svg-plus"></use></svg>
+                                                            <svg><use xlink:href="#svg-minus"></use></svg>
+                                                        </span>
+                                                        Level 2
+                                                    </label>
+                                                    <ul>
+                                                        <li><span class="label">Level 3</span></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
-                    </aside>
-                    <div id="content"></div>
-                    <aside id="right">
-                        <div class="header">
-                            <span>Menu</span>
+                    </div>
+                </aside>
+                <div id="content"></div>
+                <aside id="right">
+                    <div class="header">
+                        <span>Menu</span>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <section class="flex-items wrap">
+                                <!-- layout -->
+                                <button type="button" class="btn btn-primary" id="toggle-loading">Loading</button>
+                                <button type="button" class="btn btn-primary" id="toggle-footer-position">Footer position</button>
+                                <button type="button" class="btn btn-primary" id="toggle-column">Column</button>
+                                <button type="button" class="btn btn-primary" id="toggle-transition">Transition</button>
+                            </section>
+                            <section class="flex-items">
+                                <p>
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+                                    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />b
+                                </p>
+                            </section>
                         </div>
-                        <div class="content">
-                            <div>
-                                <section class="flex-items wrap">
-                                    <!-- layout -->
-                                    <button type="button" class="btn btn-primary" id="toggle-loading">Loading</button>
-                                    <button type="button" class="btn btn-primary" id="toggle-footer-position">Footer position</button>
-                                    <button type="button" class="btn btn-primary" id="toggle-column">Column</button>
-                                    <button type="button" class="btn btn-primary" id="toggle-transition">Transition</button>
-                                </section>
-                                <section class="flex-items">
-                                    <p>
-                                        a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                        a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                        a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                        a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                        a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                        a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
-                                        a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />b
-                                    </p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="footer">
-                            <p>footer</p>
-                        </div>
-                    </aside>
-                </div>
-                <footer></footer>
+                    </div>
+                    <div class="footer">
+                        <p>footer</p>
+                    </div>
+                </aside>
             </div>
+            <footer></footer>
         </div>
-        <script type="text/javascript" async src="dist/js/loadCSS.min.js"></script>
-        <script type="text/javascript" async src="serviceWorker.min.js"></script>
-        <script type="text/javascript" src="dist/js/app.min.js"></script>
-        <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>
+    </div>
+    <script type="text/javascript" async src="dist/js/loadCSS.min.js"></script>
+    <script type="text/javascript" async src="serviceWorker.min.js"></script>
+    <script type="text/javascript" src="dist/js/app.min.js"></script>
+    <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>
 </body>
 </html>
