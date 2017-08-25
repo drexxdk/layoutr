@@ -616,117 +616,121 @@ if(n||(n=new h(this,o),t(this).data(a,n)),"string"==typeof e){if(void 0===n[e])t
 
     return bowser
 });
+var app = app || {};
+
 $(function () {
-    var $main = $('#main'),
-        $content = $('#content'),
-        $header = $('header'),
-        $footer = $('footer'),
-        $left = $('#left'),
-        $right = $('#right'),
-        $html = $('html'),
-        $body = $('body'),
-        googleMaps,
-        transitionTime = 400;
+    app.main = $('#main'),
+        app.content = $('#content'),
+        app.header = $('header'),
+        app.footer = $('footer'),
+        app.left = $('#left'),
+        app.right = $('#right'),
+        app.html = $('html'),
+        app.body = $('body'),
+        app.transitionTime = 400;
+
+    var googleMaps,
+        youtube;
 
     if (bowser.msedge) {
-        $main.addClass('msedge');
+        app.main.addClass('msedge');
     } else if (bowser.msie) {
-        $main.addClass('msie');
+        app.main.addClass('msie');
     }
 
-    $footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
-    
+    app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
+
     $('.aside').click(function () {
         var $this = $(this);
         if ($this.is('#toggle-menu')) {
-            $main.toggleClass('left-open').removeClass('right-open');
+            app.main.toggleClass('left-open').removeClass('right-open');
         } else if ($this.is('#toggle-settings')) {
-            $main.toggleClass('right-open').removeClass('left-open');
+            app.main.toggleClass('right-open').removeClass('left-open');
         }
         checkGoogleMaps();
     });
 
-    if ($main.hasClass('close-left-click-outside') || $main.hasClass('close-right-click-outside')) {
+    if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
         $(document).click(function (e) {
             var target = $(e.target);
             if (!target.closest("#loading").length && !target.closest(".aside").length) {
-                if ($main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
-                    $main.removeClass('left-open');
-                } else if ($main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
-                    $main.removeClass('right-open');
+                if (app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    app.main.removeClass('left-open');
+                } else if (app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                    app.main.removeClass('right-open');
                 }
                 checkGoogleMaps();
             }
         });
     }
-    
-    $body.on('click', '#toggle-loading', function () {
+
+    app.body.on('click', '#toggle-loading', function () {
         showLoading();
         setTimeout(function () {
             hideLoading();
         }, 2000);
     });
 
-    $body.on('click', '#toggle-footer-position', function () {
-        $main.toggleClass('footer-fixed');
+    app.body.on('click', '#toggle-footer-position', function () {
+        app.main.toggleClass('footer-fixed');
     });
 
-    $body.on('click', '#toggle-column', function () {
-        $main.toggleClass('one-column two-column');
+    app.body.on('click', '#toggle-column', function () {
+        app.main.toggleClass('one-column two-column');
         checkGoogleMaps();
     });
 
-    $body.on('click', '#toggle-transition', function () {
-        $main.toggleClass('transition');
+    app.body.on('click', '#toggle-transition', function () {
+        app.main.toggleClass('transition');
     });
 
     var showLoading = function () {
-        var initWidth = $body.outerWidth();
-        var initHeight = $body.outerHeight();
+        var initWidth = app.body.outerWidth();
+        var initHeight = app.body.outerHeight();
 
         var scrollPosition = [
             self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
             self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         ];
-        $html.data('scroll-position', scrollPosition);
-        $html.data('previous-overflow', $html.css('overflow'));
-        $html.css('overflow', 'hidden');
+        app.html.data('scroll-position', scrollPosition);
+        app.html.data('previous-overflow', app.html.css('overflow'));
+        app.html.css('overflow', 'hidden');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
-        var marginR = $body.outerWidth() - initWidth;
-        var marginB = $body.outerHeight() - initHeight;
-        $body.addClass('loading');
-        $body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
-        $header.css({ 'padding-right': marginR });
-        if ($main.hasClass('right-open')) {
-            $right.css({
-                'max-width': $right.width() + marginR,
+        var marginR = app.body.outerWidth() - initWidth;
+        var marginB = app.body.outerHeight() - initHeight;
+        app.body.addClass('loading');
+        app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
+        app.header.css({ 'padding-right': marginR });
+        if (app.main.hasClass('right-open')) {
+            app.right.css({
+                'max-width': app.right.width() + marginR,
                 'padding-right': marginR
             });
         }
-        if ($main.hasClass('footer-fixed')) {
-            $footer.css({ 'padding-right': marginR });
+        if (app.main.hasClass('footer-fixed')) {
+            app.footer.css({ 'padding-right': marginR });
         }
     };
 
     var hideLoading = function () {
-        $html.css('overflow', $html.data('previous-overflow'));
-        var scrollPosition = $html.data('scroll-position');
+        app.html.css('overflow', app.html.data('previous-overflow'));
+        var scrollPosition = app.html.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
-        $body.removeAttr('style');
-        $header.removeAttr('style');
-        $right.removeAttr('style');
-        $footer.removeAttr('style');
-        $body.removeClass('loading');
+        app.body.removeAttr('style');
+        app.header.removeAttr('style');
+        app.right.removeAttr('style');
+        app.footer.removeAttr('style');
+        app.body.removeClass('loading');
     };
 
     function checkGoogleMaps() {
         if (googleMaps !== undefined) {
-            if ($main.hasClass('transition')) {
+            if (app.main.hasClass('transition')) {
                 setTimeout(function () {
                     google.maps.event.trigger(googleMaps, 'resize');
-                }, transitionTime);
+                }, app.transitionTime);
             } else {
                 google.maps.event.trigger(googleMaps, 'resize');
             }
@@ -736,11 +740,20 @@ $(function () {
         }
     }
 
-    $body.on('click', '#toggle-google-maps', function () {
+    app.body.on('click', '#toggle-youtube', function () {
+        if (youtube === undefined) {
+            app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/HZ5m_nlfZe4?ecver=2" allowfullscreen></iframe></div></section>');
+            youtube = app.content.find('#youtube');
+        } else {
+            youtube.toggle();
+        }
+    });
+
+    app.body.on('click', '#toggle-google-maps', function () {
         if (!checkGoogleMaps()) {
             $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
-                $content.find('> .content > div').prepend('<section><div id="google-maps" class="embed-responsive embed-responsive-16by9"></div></section>');
-                googleMaps = document.getElementById('google-maps');
+                app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
+                googleMaps = document.getElementById('google-maps').children[0];
                 var uluru = { lat: -25.363, lng: 131.044 };
                 var map = new google.maps.Map(googleMaps, {
                     zoom: 4,
@@ -760,16 +773,21 @@ $(function () {
         }
     });
 
-    $content.load("ajax/content/page1.html");
+    app.content.load("ajax/content/page1.html", function () {
+        app.addValidation(app.content.find('#form'));
+    });
 });
+var app = app || {};
+
 $.validator.setDefaults({
     submitHandler: function () {
         alert("submitted!");
     }
 });
 
-$(function () {
-    $("#signupForm").validate({
+
+app.addValidation = function (form) {
+    form.validate({
         rules: {
             firstname: "required",
             lastname: "required",
@@ -829,82 +847,4 @@ $(function () {
             $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
         }
     });
-
-    $("#signupForm1").validate({
-        rules: {
-            firstname1: "required",
-            lastname1: "required",
-            username1: {
-                required: true,
-                minlength: 2
-            },
-            password1: {
-                required: true,
-                minlength: 5
-            },
-            confirm_password1: {
-                required: true,
-                minlength: 5,
-                equalTo: "#password1"
-            },
-            email1: {
-                required: true,
-                email: true
-            },
-            agree1: "required"
-        },
-        messages: {
-            firstname1: "Please enter your firstname",
-            lastname1: "Please enter your lastname",
-            username1: {
-                required: "Please enter a username",
-                minlength: "Your username must consist of at least 2 characters"
-            },
-            password1: {
-                required: "Please provide a password",
-                minlength: "Your password must be at least 5 characters long"
-            },
-            confirm_password1: {
-                required: "Please provide a password",
-                minlength: "Your password must be at least 5 characters long",
-                equalTo: "Please enter the same password as above"
-            },
-            email1: "Please enter a valid email address",
-            agree1: "Please accept our policy"
-        },
-        errorElement: "em",
-        errorPlacement: function (error, element) {
-            // Add the `help-block` class to the error element
-            error.addClass("help-block");
-
-            // Add `has-feedback` class to the parent div.form-group
-            // in order to add icons to inputs
-            element.parents(".col-sm-5").addClass("has-feedback");
-
-            if (element.prop("type") === "checkbox") {
-                error.insertAfter(element.parent("label"));
-            } else {
-                error.insertAfter(element);
-            }
-
-            // Add the span element, if doesn't exists, and apply the icon classes to it.
-            if (!element.next("span")[0]) {
-                $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(element);
-            }
-        },
-        success: function (label, element) {
-            // Add the span element, if doesn't exists, and apply the icon classes to it.
-            if (!$(element).next("span")[0]) {
-                $("<span class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($(element));
-            }
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
-            $(element).next("span").addClass("glyphicon-remove").removeClass("glyphicon-ok");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
-            $(element).next("span").addClass("glyphicon-ok").removeClass("glyphicon-remove");
-        }
-    });
-});
+};
