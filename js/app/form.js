@@ -6,7 +6,6 @@ $.validator.setDefaults({
     }
 });
 
-
 app.addValidation = function (form) {
     form.validate({
         rules: {

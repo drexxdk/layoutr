@@ -18,8 +18,9 @@
       "js/vendors/bootstrap/tether.min.js",
       "js/vendors/bootstrap/bootstrap.min.js",
       "js/vendors/bowser.js",
-      "js/app/app.js",
-      "js/app/form.js"
+      "js/app/form.js",
+      "js/app/loading.js",
+      "js/app/app.js"
     ],
     "minify": { "enabled": true }
   },
