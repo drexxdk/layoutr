@@ -18,6 +18,11 @@ body {
             color: theme-color("primary");
 
             @include translate(-50%, -50%);
+
+            > svg {
+                width: $loading-width;
+                height: $loading-width;
+            }
         }
     }
 

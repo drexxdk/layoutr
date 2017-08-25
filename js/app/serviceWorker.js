@@ -22,14 +22,7 @@ if ('serviceWorker' in navigator) {
             'dist/js/app.min.js',
             'dist/js/loadCSS.min.js',
             'serviceWorker.min.js',
-
-            'fonts/fontawesome-webfont.eot',
-            'fonts/fontawesome-webfont.svg',
-            'fonts/fontawesome-webfont.ttf',
-            'fonts/fontawesome-webfont.woff',
-            'fonts/fontawesome-webfont.woff2',
-            'fonts/FontAwesome.otf',
-
+            
             'dist/img/favicon/android-chrome-192x192.png',
             'dist/img/favicon/android-chrome-512x512.png',
             'dist/img/favicon/apple-touch-icon.png',

@@ -103,7 +103,7 @@
         $body.removeClass('loading');
     }
 
-    var checkGoogleMaps = function () {
+    function checkGoogleMaps() {
         if (googleMaps !== undefined) {
             if ($main.hasClass('transition')) {
                 setTimeout(function () {
@@ -120,20 +120,23 @@
 
     $body.on('click', '#toggle-google-maps', function () {
         if (!checkGoogleMaps()) {
-            $content.find('> .content > div').prepend('<section><div id="google-maps" class="embed-responsive embed-responsive-16by9"></div></section>');
-            googleMaps = document.getElementById('google-maps');
-            var uluru = { lat: -25.363, lng: 131.044 };
-            var map = new google.maps.Map(googleMaps, {
-                zoom: 4,
-                center: uluru
+            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
+                $content.find('> .content > div').prepend('<section><div id="google-maps" class="embed-responsive embed-responsive-16by9"></div></section>');
+                googleMaps = document.getElementById('google-maps');
+                var uluru = { lat: -25.363, lng: 131.044 };
+                var map = new google.maps.Map(googleMaps, {
+                    zoom: 4,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+                $(window).resize(function () {
+                    google.maps.event.trigger(googleMaps, 'resize');
+                });
             });
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map
-            });
-            $(window).resize(function () {
-                google.maps.event.trigger(googleMaps, 'resize');
-            });
+
         } else {
             $(googleMaps).toggle();
         }

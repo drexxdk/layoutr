@@ -65,11 +65,48 @@
 			c-24.718,0-44.824-20.106-44.824-44.824c0-24.717,20.106-44.824,44.824-44.824c24.717,0,44.823,20.107,44.823,44.824
 			C179.418,159.385,159.312,179.491,134.595,179.491z" />
         </symbol>
+        <symbol id="svg-loading" viewBox="0 0 100 100">
+            <circle cx="11" cy="63.6722" ng-attr-r="{{config.radius}}" fill="#8cd0e5" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="0s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="18" cy="68.9524" ng-attr-r="{{config.radius}}" fill="#376888" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="25" cy="69.9395" ng-attr-r="{{config.radius}}" fill="#826b88" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="32" cy="67.4793" ng-attr-r="{{config.radius}}" fill="#de786a" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.25s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="39" cy="59.9064" ng-attr-r="{{config.radius}}" fill="#8cd0e5" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="46" cy="47.3462" ng-attr-r="{{config.radius}}" fill="#376888" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="53" cy="36.3278" ng-attr-r="{{config.radius}}" fill="#826b88" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.5s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="60" cy="31.0476" ng-attr-r="{{config.radius}}" fill="#de786a" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.5833333333333334s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="67" cy="30.0605" ng-attr-r="{{config.radius}}" fill="#8cd0e5" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="74" cy="32.5207" ng-attr-r="{{config.radius}}" fill="#376888" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.75s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="81" cy="40.0936" ng-attr-r="{{config.radius}}" fill="#826b88" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="88" cy="52.6538" ng-attr-r="{{config.radius}}" fill="#de786a" r="3">
+                <animate attributeName="cy" values="30;70;30" times="0;0.5;1" dur="1s" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.9166666666666666s" repeatCount="indefinite"></animate>
+            </circle>
+        </symbol>
     </svg>
     <div id="loading">
         <span>
-            <i class="fa fa-circle-o-notch fa-spin fa-5x"></i>
-            <span class="sr-only">Loading...</span>
+            <svg><use xlink:href="#svg-loading"></use></svg>
         </span>
     </div>
     <div id="main" class="transition two-column footer-fixed">
@@ -238,6 +275,5 @@
     <script type="text/javascript" async src="dist/js/loadCSS.min.js"></script>
     <script type="text/javascript" async src="serviceWorker.min.js"></script>
     <script type="text/javascript" src="dist/js/app.min.js"></script>
-    <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>
 </body>
 </html>
