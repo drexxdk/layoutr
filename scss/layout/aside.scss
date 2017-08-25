@@ -5,7 +5,7 @@ aside {
     z-index: 49;
     top: -100px;
     padding-top: calc(100px + #{$header-height});
-    padding-bottom:100px;
+    padding-bottom: 100px;
     height: calc(100% + 200px);
     width: 100%;
     max-width: $aside-width;
@@ -61,12 +61,12 @@ aside {
 
     &#left {
         left: -$aside-width;
-        border-right: $layout-border-width solid $layout-border-color;
+        border-right: $layout-border;
     }
 
     &#right {
         right: -$aside-width;
-        border-left: $layout-border-width solid $layout-border-color;
+        border-left: $layout-border;
 
         > .content {
             direction: rtl;

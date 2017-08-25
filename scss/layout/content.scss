@@ -94,10 +94,6 @@
             background-color: $layout-background-color;
             max-width: calc(#{$content-max-width} - #{$spacer * 2});
             min-height: 8em;
-
-            > section + section {
-                margin-top: $spacer;
-            }
         }
     }
 }

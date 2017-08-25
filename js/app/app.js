@@ -17,7 +17,7 @@
     }
 
     $footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
-
+    
     $('.aside').click(function () {
         var $this = $(this);
         if ($this.is('#toggle-menu')) {
@@ -89,9 +89,9 @@
         if ($main.hasClass('footer-fixed')) {
             $footer.css({ 'padding-right': marginR });
         }
-    }
+    };
 
-    var hideLoading = function() {
+    var hideLoading = function () {
         $html.css('overflow', $html.data('previous-overflow'));
         var scrollPosition = $html.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
@@ -101,7 +101,7 @@
         $right.removeAttr('style');
         $footer.removeAttr('style');
         $body.removeClass('loading');
-    }
+    };
 
     function checkGoogleMaps() {
         if (googleMaps !== undefined) {

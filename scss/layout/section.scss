@@ -1,0 +1,5 @@
+﻿/// <reference path="../references" />
+
+section + section {
+    padding-top: $spacer; /* using padding since flex-items uses margin*/
+}

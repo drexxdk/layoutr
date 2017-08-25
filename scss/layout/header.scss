@@ -7,7 +7,7 @@ header {
     right: 0;
     left: 0;
     height: $header-height;
-    border-bottom: $layout-border-width solid $layout-border-color;
+    border-bottom: $layout-border;
     background-color: $layout-background-color;
     @include flex-display();
 
