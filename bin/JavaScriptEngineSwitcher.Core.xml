@@ -24,6 +24,101 @@
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
         </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.EmptyValueException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.EmptyValueException"/> class with serialized data
+            </summary>
+            <param name="info">The object that holds the serialized data</param>
+            <param name="context">The contextual information about the source or destination</param>
+        </member>
+        <member name="T:JavaScriptEngineSwitcher.Core.Helpers.JsErrorHelpers">
+            <summary>
+            JS error helpers
+            </summary>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.JsErrorHelpers.Format(JavaScriptEngineSwitcher.Core.JsEngineLoadException)">
+            <summary>
+            Generates a detailed error message
+            </summary>
+            <param name="jsEngineLoadException">JS engine load exception</param>
+            <returns>Detailed error message</returns>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.JsErrorHelpers.Format(JavaScriptEngineSwitcher.Core.JsRuntimeException)">
+            <summary>
+            Generates a detailed error message
+            </summary>
+            <param name="jsRuntimeException">JS runtime exception</param>
+            <returns>Detailed error message</returns>
+        </member>
+        <member name="T:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers">
+            <summary>
+            Path helpers
+            </summary>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers.ProcessBackSlashes(System.String)">
+            <summary>
+            Converts a back slashes to forward slashes
+            </summary>
+            <param name="path">Path with back slashes</param>
+            <returns>Path with forward slashes</returns>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers.ContainsDirectory(System.String,System.String)">
+            <summary>
+            Determines whether the path contains the specified directory
+            </summary>
+            <param name="path">Path</param>
+            <param name="directoryName">Name of directory</param>
+            <returns>true if the path contains an directory with the specified name; otherwise, false</returns>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers.RemoveDirectoryFromPath(System.String,System.String)">
+            <summary>
+            Removes a directory from path
+            </summary>
+            <param name="path">Path</param>
+            <param name="directoryName">Name of directory</param>
+            <returns>Path without specified directory</returns>
+        </member>
+        <member name="T:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers">
+            <summary>
+            Validation helpers
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers._supportedTypes">
+            <summary>
+            List of supported types
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers._primitiveTypeCodes">
+            <summary>
+            List of primitive type codes
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers._jsNameRegex">
+            <summary>
+            Regular expression for working with JS names
+            </summary>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers.IsSupportedType(System.Type)">
+            <summary>
+            Checks whether supports a .NET type
+            </summary>
+            <param name="type">.NET type</param>
+            <returns>Result of check (true - is supported; false - is not supported)</returns>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers.IsPrimitiveType(System.Type)">
+            <summary>
+            Checks whether .NET type is primitive
+            </summary>
+            <param name="type">.NET type</param>
+            <returns>Result of check (true - is primitive; false - is not primitive)</returns>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers.CheckNameFormat(System.String)">
+            <summary>
+            Checks a format of the name
+            </summary>
+            <param name="name">The name</param>
+            <returns>Result of check (true - correct format; false - wrong format)</returns>
+        </member>
         <member name="T:JavaScriptEngineSwitcher.Core.IJsEngine">
             <summary>
             Defines a interface of JS engine
@@ -51,6 +146,14 @@
             <param name="expression">JS-expression</param>
             <returns>Result of the expression</returns>
         </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.Evaluate(System.String,System.String)">
+            <summary>
+            Evaluates an expression
+            </summary>
+            <param name="expression">JS-expression</param>
+            <param name="documentName">Document name</param>
+            <returns>Result of the expression</returns>
+        </member>
         <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.Evaluate``1(System.String)">
             <summary>
             Evaluates an expression
@@ -59,11 +162,27 @@
             <param name="expression">JS-expression</param>
             <returns>Result of the expression</returns>
         </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.Evaluate``1(System.String,System.String)">
+            <summary>
+            Evaluates an expression
+            </summary>
+            <typeparam name="T">Type of result</typeparam>
+            <param name="expression">JS-expression</param>
+            <param name="documentName">Document name</param>
+            <returns>Result of the expression</returns>
+        </member>
         <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.Execute(System.String)">
             <summary>
             Executes a code
             </summary>
-            <param name="code">Code</param>
+            <param name="code">JS-code</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.Execute(System.String,System.String)">
+            <summary>
+            Executes a code
+            </summary>
+            <param name="code">JS-code</param>
+            <param name="documentName">Document name</param>
         </member>
         <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.ExecuteFile(System.String,System.Text.Encoding)">
             <summary>
@@ -76,15 +195,16 @@
             <summary>
             Executes a code from embedded JS-resource
             </summary>
-            <param name="resourceName">JS-resource name</param>
-            <param name="type">Type from assembly that containing an embedded resource</param>
+            <param name="resourceName">The case-sensitive resource name without the namespace of the specified type</param>
+            <param name="type">The type, that determines the assembly and whose namespace is used to scope
+            the resource name</param>
         </member>
         <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.ExecuteResource(System.String,System.Reflection.Assembly)">
             <summary>
             Executes a code from embedded JS-resource
             </summary>
-            <param name="resourceName">JS-resource name</param>
-            <param name="assembly">Assembly that containing an embedded resource</param>
+            <param name="resourceName">The case-sensitive resource name</param>
+            <param name="assembly">The assembly, which contains the embedded resource</param>
         </member>
         <member name="M:JavaScriptEngineSwitcher.Core.IJsEngine.CallFunction(System.String,System.Object[])">
             <summary>
@@ -183,6 +303,11 @@
             Base class of JS engine
             </summary>
         </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsEngineBase.DefaultDocumentName">
+            <summary>
+            Default document name
+            </summary>
+        </member>
         <member name="F:JavaScriptEngineSwitcher.Core.JsEngineBase._disposedFlag">
             <summary>
             Flag that object is destroyed
@@ -251,7 +376,8 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsEngineLoadException.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsEngineLoadException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
+            with a specified error message and a reference to the inner exception
+            that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
@@ -259,7 +385,6 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsEngineLoadException.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsEngineLoadException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="engineName">Name of JS engine</param>
@@ -268,12 +393,18 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsEngineLoadException.#ctor(System.String,System.String,System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsEngineLoadException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="engineName">Name of JS engine</param>
             <param name="engineVersion">Version of original JS engine</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.JsEngineLoadException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsEngineLoadException"/> class with serialized data
+            </summary>
+            <param name="info">The object that holds the serialized data</param>
+            <param name="context">The contextual information about the source or destination</param>
         </member>
         <member name="T:JavaScriptEngineSwitcher.Core.JsEngineNotFoundException">
             <summary>
@@ -290,10 +421,18 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsEngineNotFoundException.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsEngineNotFoundException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
+            with a specified error message and a reference to the inner exception
+            that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.JsEngineNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsEngineNotFoundException"/> class with serialized data
+            </summary>
+            <param name="info">The object that holds the serialized data</param>
+            <param name="context">The contextual information about the source or destination</param>
         </member>
         <member name="T:JavaScriptEngineSwitcher.Core.JsEngineSwitcher">
             <summary>
@@ -343,6 +482,16 @@
             The exception that is thrown during the work of JS engine
             </summary>
         </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsException._engineName">
+            <summary>
+            Name of JS engine
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsException._engineVersion">
+            <summary>
+            Version of original JS engine
+            </summary>
+        </member>
         <member name="P:JavaScriptEngineSwitcher.Core.JsException.EngineName">
             <summary>
             Gets a name of JS engine
@@ -363,7 +512,8 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsException.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
+            with a specified error message and a reference to the inner exception
+            that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
@@ -371,25 +521,62 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsException.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
-            <param name="engineName">Name of JavaScript engine</param>
-            <param name="engineVersion">Version of original JavaScript engine</param>
+            <param name="engineName">Name of JS engine</param>
+            <param name="engineVersion">Version of original JS engine</param>
         </member>
         <member name="M:JavaScriptEngineSwitcher.Core.JsException.#ctor(System.String,System.String,System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
-            <param name="engineName">Name of JavaScript engine</param>
-            <param name="engineVersion">Version of original JavaScript engine</param>
+            <param name="engineName">Name of JS engine</param>
+            <param name="engineVersion">Version of original JS engine</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.JsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsException"/> class with serialized data
+            </summary>
+            <param name="info">The object that holds the serialized data</param>
+            <param name="context">The contextual information about the source or destination</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.JsException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data needed to serialize the target object
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data</param>
+            <param name="context">The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext"/>) for this serialization</param>
         </member>
         <member name="T:JavaScriptEngineSwitcher.Core.JsRuntimeException">
             <summary>
             The exception that is thrown during a execution of code by JS engine
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsRuntimeException._errorCode">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsRuntimeException._category">
+            <summary>
+            Error category
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsRuntimeException._lineNumber">
+            <summary>
+            Line number
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsRuntimeException._columnNumber">
+            <summary>
+            Column number
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.JsRuntimeException._sourceFragment">
+            <summary>
+            Source fragment
             </summary>
         </member>
         <member name="P:JavaScriptEngineSwitcher.Core.JsRuntimeException.ErrorCode">
@@ -427,7 +614,8 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsRuntimeException.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsRuntimeException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
+            with a specified error message and a reference to the inner exception
+            that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
@@ -435,7 +623,6 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsRuntimeException.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsRuntimeException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="engineName">Name of JS engine</param>
@@ -444,12 +631,25 @@
         <member name="M:JavaScriptEngineSwitcher.Core.JsRuntimeException.#ctor(System.String,System.String,System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsRuntimeException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="engineName">Name of JS engine</param>
             <param name="engineVersion">Version of original JS engine</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.JsRuntimeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.JsRuntimeException"/> class with serialized data
+            </summary>
+            <param name="info">The object that holds the serialized data</param>
+            <param name="context">The contextual information about the source or destination</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.JsRuntimeException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data needed to serialize the target object
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data</param>
+            <param name="context">The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext"/>) for this serialization</param>
         </member>
         <member name="T:JavaScriptEngineSwitcher.Core.NotSupportedTypeException">
             <summary>
@@ -466,114 +666,18 @@
         <member name="M:JavaScriptEngineSwitcher.Core.NotSupportedTypeException.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.NotSupportedTypeException"/> class
-            with a specified error message and a reference to the inner exception that is the cause of this exception
+            with a specified error message and a reference to the inner exception
+            that is the cause of this exception
             </summary>
             <param name="message">The error message that explains the reason for the exception</param>
             <param name="innerException">The exception that is the cause of the current exception</param>
         </member>
-        <member name="T:JavaScriptEngineSwitcher.Core.Undefined">
+        <member name="M:JavaScriptEngineSwitcher.Core.NotSupportedTypeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Represents an JS <code>undefined</code> type
+            Initializes a new instance of the <see cref="T:JavaScriptEngineSwitcher.Core.NotSupportedTypeException"/> class with serialized data
             </summary>
-        </member>
-        <member name="F:JavaScriptEngineSwitcher.Core.Undefined.Value">
-            <summary>
-            Gets a one and only <code>undefined</code> instance
-            </summary>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Undefined.ToString">
-            <summary>
-            Returns a string that represents the current object
-            </summary>
-            <returns>A string that represents the current object</returns>
-        </member>
-        <member name="T:JavaScriptEngineSwitcher.Core.Helpers.JsErrorHelpers">
-            <summary>
-            JS error helpers
-            </summary>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.JsErrorHelpers.Format(JavaScriptEngineSwitcher.Core.JsEngineLoadException)">
-            <summary>
-            Generates a detailed error message
-            </summary>
-            <param name="jsEngineLoadException">JS engine load exception</param>
-            <returns>Detailed error message</returns>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.JsErrorHelpers.Format(JavaScriptEngineSwitcher.Core.JsRuntimeException)">
-            <summary>
-            Generates a detailed error message
-            </summary>
-            <param name="jsRuntimeException">JS runtime exception</param>
-            <returns>Detailed error message</returns>
-        </member>
-        <member name="T:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers">
-            <summary>
-            Path helpers
-            </summary>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers.ProcessBackSlashes(System.String)">
-            <summary>
-            Converts a back slashes to forward slashes
-            </summary>
-            <param name="path">Path with back slashes</param>
-            <returns>Path with forward slashes</returns>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers.ContainsDirectory(System.String,System.String)">
-            <summary>
-            Determines whether the path contains the specified directory
-            </summary>
-            <param name="path">Path</param>
-            <param name="directoryName">Name of directory</param>
-            <returns>true if the path contains an directory with the specified name; otherwise, false</returns>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.PathHelpers.RemoveDirectoryFromPath(System.String,System.String)">
-            <summary>
-            Removes a directory from path
-            </summary>
-            <param name="path">Path</param>
-            <param name="directoryName">Name of directory</param>
-            <returns>Path without specified directory</returns>
-        </member>
-        <member name="T:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers">
-            <summary>
-            Validation helpers
-            </summary>
-        </member>
-        <member name="F:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers._supportedTypes">
-            <summary>
-            List of supported types
-            </summary>
-        </member>
-        <member name="F:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers._primitiveTypeCodes">
-            <summary>
-            List of primitive type codes
-            </summary>
-        </member>
-        <member name="F:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers._jsNameRegex">
-            <summary>
-            Regular expression for working with JS-names
-            </summary>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers.IsSupportedType(System.Type)">
-            <summary>
-            Checks whether supports a .NET type
-            </summary>
-            <param name="type">.NET type</param>
-            <returns>Result of check (true - is supported; false - is not supported)</returns>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers.IsPrimitiveType(System.Type)">
-            <summary>
-            Checks whether .NET type is primitive
-            </summary>
-            <param name="type">.NET type</param>
-            <returns>Result of check (true - is primitive; false - is not primitive)</returns>
-        </member>
-        <member name="M:JavaScriptEngineSwitcher.Core.Helpers.ValidationHelpers.CheckNameFormat(System.String)">
-            <summary>
-            Checks a format of the name
-            </summary>
-            <param name="name">The name</param>
-            <returns>Result of check (true - correct format; false - wrong format)</returns>
+            <param name="info">The object that holds the serialized data</param>
+            <param name="context">The contextual information about the source or destination</param>
         </member>
         <member name="T:JavaScriptEngineSwitcher.Core.Resources.Strings">
             <summary>
@@ -736,6 +840,22 @@
             Looks up a localized string similar to "The variable '{0}' has a type `{1}`, which is not supported."
             </summary>
         </member>
+        <member name="T:JavaScriptEngineSwitcher.Core.Undefined">
+            <summary>
+            Represents an JS <code>undefined</code> type
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Undefined.Value">
+            <summary>
+            Gets a one and only <code>undefined</code> instance
+            </summary>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Undefined.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns>A string that represents the current object</returns>
+        </member>
         <member name="T:JavaScriptEngineSwitcher.Core.Utilities.StringBuilderExtensions">
             <summary>
             Extensions for StringBuilder
@@ -818,6 +938,55 @@
             <param name="source">The type whose underlying type code to get</param>
             <returns>The code of the underlying type</returns>
         </member>
+        <member name="T:JavaScriptEngineSwitcher.Core.Utilities.UniqueDocumentNameManager">
+            <summary>
+            Unique document name manager
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Utilities.UniqueDocumentNameManager._defaultName">
+            <summary>
+            Default document name
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Utilities.UniqueDocumentNameManager._storage">
+            <summary>
+            Storage of unique names
+            </summary>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Utilities.UniqueDocumentNameManager._storageSynchronizer">
+            <summary>
+            Synchronizer of unique name storage
+            </summary>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Utilities.UniqueDocumentNameManager.#ctor(System.String)">
+            <summary>
+            Constructs an instance of the unique document name manager
+            </summary>
+            <param name="defaultName">Default document name</param>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Utilities.UniqueDocumentNameManager.GetUniqueName(System.String)">
+            <summary>
+            Gets a unique document name
+            </summary>
+            <param name="name">Document name</param>
+            <returns>Unique document name</returns>
+        </member>
+        <member name="F:JavaScriptEngineSwitcher.Core.Utilities.Utils._isWindows">
+            <summary>
+            Flag indicating whether the current operating system is Windows
+            </summary>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Utilities.Utils.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="M:JavaScriptEngineSwitcher.Core.Utilities.Utils.IsWindows">
+            <summary>
+            Determines whether the current operating system is Windows
+            </summary>
+            <returns>true if the operating system is Windows; otherwise, false</returns>
+        </member>
         <member name="M:JavaScriptEngineSwitcher.Core.Utilities.Utils.Is64BitProcess">
             <summary>
             Determines whether the current process is a 64-bit process
@@ -828,16 +997,17 @@
             <summary>
             Gets a content of the embedded resource as string
             </summary>
-            <param name="resourceName">Resource name</param>
-            <param name="type">Type from assembly that containing an embedded resource</param>
+            <param name="resourceName">The case-sensitive resource name without the namespace of the specified type</param>
+            <param name="type">The type, that determines the assembly and whose namespace is used to scope
+            the resource name</param>
             <returns>Сontent of the embedded resource as string</returns>
         </member>
         <member name="M:JavaScriptEngineSwitcher.Core.Utilities.Utils.GetResourceAsString(System.String,System.Reflection.Assembly)">
             <summary>
             Gets a content of the embedded resource as string
             </summary>
-            <param name="resourceName">Resource name</param>
-            <param name="assembly">Assembly that containing an embedded resource</param>
+            <param name="resourceName">The case-sensitive resource name</param>
+            <param name="assembly">The assembly, which contains the embedded resource</param>
             <returns>Сontent of the embedded resource as string</returns>
         </member>
         <member name="M:JavaScriptEngineSwitcher.Core.Utilities.Utils.GetFileTextContent(System.String,System.Text.Encoding)">
