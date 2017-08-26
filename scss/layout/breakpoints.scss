@@ -48,8 +48,6 @@
         }
 
         aside {
-            padding-bottom: 100px;
-
             > div {
                 @include transition(visibility 0.2s);
 
