@@ -33,7 +33,7 @@ button {
 
     @include flex-direction(column);
 
-    &:not(.msedge):not(.msie).transition {
+    &:not(.msedge):not(.msie).transitions {
         // ie/edge doesn't support transition for values that uses calc()
         #left {
 
@@ -49,9 +49,8 @@ button {
             @include transition(margin 0.4s ease-in-out);
         }
 
-        &.two-column {
+        &.two-columns {
             #content .header {
-
                 @include transition(width 0.4s ease-in-out, left 0.4s ease-in-out);
             }
         }
@@ -60,7 +59,6 @@ button {
     &.left-open {
         #left {
             left: 0;
-
             @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
         }
     }
@@ -68,7 +66,6 @@ button {
     &.right-open {
         #right {
             right: 0;
-
             @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
         }
     }
@@ -76,11 +73,6 @@ button {
     &.footer-fixed {
         #container > div {
             margin-bottom: $footer-height;
-
-            #left,
-            #right {
-                padding-bottom: calc(100px + #{$footer-height});
-            }
         }
 
         footer {

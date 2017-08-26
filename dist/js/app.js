@@ -618,6 +618,107 @@ if(n||(n=new h(this,o),t(this).data(a,n)),"string"==typeof e){if(void 0===n[e])t
 });
 var app = app || {};
 
+$(function () {
+    app.main = $('#main');
+    app.content = $('#content');
+    app.header = $('header');
+    app.footer = $('footer');
+    app.left = $('#left');
+    app.right = $('#right');
+    app.html = $('html');
+    app.body = $('body');
+    app.transitionTime = 400;
+
+    var youtube;
+
+    if (bowser.msedge) {
+        app.main.addClass('msedge');
+    } else if (bowser.msie) {
+        app.main.addClass('msie');
+    }
+
+    app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
+
+    $('.aside').click(function () {
+        var $this = $(this);
+        if ($this.is('#toggle-menu')) {
+            app.main.toggleClass('left-open').removeClass('right-open');
+        } else if ($this.is('#toggle-settings')) {
+            app.main.toggleClass('right-open').removeClass('left-open');
+        }
+        app.checkGoogleMaps();
+    });
+
+    if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
+        $(document).click(function (e) {
+            var target = $(e.target);
+            if (!target.closest("#loading").length && !target.closest(".aside").length) {
+                if (app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    app.main.removeClass('left-open');
+                } else if (app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                    app.main.removeClass('right-open');
+                }
+                app.checkGoogleMaps();
+            }
+        });
+    }
+
+    app.body.on('click', '#toggle-youtube', function () {
+        if (youtube === undefined) {
+            app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/HZ5m_nlfZe4?ecver=2" allowfullscreen></iframe></div></section>');
+            youtube = app.content.find('#youtube');
+        } else {
+            youtube.toggle();
+        }
+    });
+
+    app.body.on('click', '#toggle-google-maps', function () {
+        if (!app.checkGoogleMaps()) {
+            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
+                app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
+                googleMaps = document.getElementById('google-maps').children[0];
+                var uluru = { lat: -25.363, lng: 131.044 };
+                var map = new google.maps.Map(googleMaps, {
+                    zoom: 4,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+                $(window).resize(function () {
+                    google.maps.event.trigger(googleMaps, 'resize');
+                });
+            });
+
+        } else {
+            $(googleMaps).toggle();
+        }
+    });
+
+    app.content.load("ajax/content/page1.html", function () {
+        app.addValidation(app.content.find('#form'));
+    });
+});
+var app = app || {};
+
+var googleMaps;
+app.checkGoogleMaps = function () {
+    if (googleMaps !== undefined) {
+        if (app.main.hasClass(app.transition)) {
+            setTimeout(function () {
+                google.maps.event.trigger(googleMaps, 'resize');
+            }, app.transitionTime);
+        } else {
+            google.maps.event.trigger(googleMaps, 'resize');
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+var app = app || {};
+
 $.validator.setDefaults({
     submitHandler: function () {
         alert("submitted!");
@@ -728,123 +829,65 @@ app.hideLoading = function () {
     app.footer.removeAttr('style');
     app.body.removeClass('loading');
 };
-var app = app || {};
 
 $(function () {
-    app.main = $('#main'),
-        app.content = $('#content'),
-        app.header = $('header'),
-        app.footer = $('footer'),
-        app.left = $('#left'),
-        app.right = $('#right'),
-        app.html = $('html'),
-        app.body = $('body'),
-        app.transitionTime = 400;
-
-    var googleMaps,
-        youtube;
-
-    if (bowser.msedge) {
-        app.main.addClass('msedge');
-    } else if (bowser.msie) {
-        app.main.addClass('msie');
-    }
-
-    app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
-
-    $('.aside').click(function () {
-        var $this = $(this);
-        if ($this.is('#toggle-menu')) {
-            app.main.toggleClass('left-open').removeClass('right-open');
-        } else if ($this.is('#toggle-settings')) {
-            app.main.toggleClass('right-open').removeClass('left-open');
-        }
-        checkGoogleMaps();
-    });
-
-    if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
-        $(document).click(function (e) {
-            var target = $(e.target);
-            if (!target.closest("#loading").length && !target.closest(".aside").length) {
-                if (app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
-                    app.main.removeClass('left-open');
-                } else if (app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
-                    app.main.removeClass('right-open');
-                }
-                checkGoogleMaps();
-            }
-        });
-    }
-
     app.body.on('click', '#toggle-loading', function () {
         app.showLoading();
         setTimeout(function () {
             app.hideLoading();
         }, 2000);
     });
+});
+var app = app || {};
 
-    app.body.on('click', '#toggle-footer-position', function () {
-        app.main.toggleClass('footer-fixed');
-    });
+app.localStorage = typeof (Storage) !== "undefined";
+if (app.localStorage) {
+    app.settings = JSON.parse(localStorage.getItem("settings"));
+    if (app.settings == null) app.settings = [];
+}
 
-    app.body.on('click', '#toggle-column', function () {
-        app.main.toggleClass('one-column two-column');
-        checkGoogleMaps();
-    });
-
-    app.body.on('click', '#toggle-transition', function () {
-        app.main.toggleClass('transition');
-    });
-
-    function checkGoogleMaps() {
-        if (googleMaps !== undefined) {
-            if (app.main.hasClass('transition')) {
-                setTimeout(function () {
-                    google.maps.event.trigger(googleMaps, 'resize');
-                }, app.transitionTime);
-            } else {
-                google.maps.event.trigger(googleMaps, 'resize');
-            }
-            return true;
+app.applySettings = function (id, value, set = false) {
+    if (app.localStorage && set) {
+        var entry = {
+            "id": id,
+            "value": value
+        };
+        var exists = $.grep(app.settings, function (e) { return e.id == id; });
+        if (exists.length === 0) {
+            // not found
+            app.settings.push(entry);
+        } else if (exists.length === 1) {
+            // 1 found
+            exists[0].value = value;
         } else {
-            return false;
+            // multiple found
+            debugger;
         }
+        localStorage.setItem('settings', JSON.stringify(app.settings));
+    } else {
+        $('#settings').find('[data-id=' + id + ']').prop('checked', value);
+    }
+    if (value) {
+        app.main.addClass(id);
+    } else {
+        app.main.removeClass(id);
+    }
+}
+
+$(function () {
+    if (app.localStorage) {
+        $.each(app.settings, function (i, entry) {
+            app.applySettings(entry.id, entry.value);
+        });
     }
 
-    app.body.on('click', '#toggle-youtube', function () {
-        if (youtube === undefined) {
-            app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/HZ5m_nlfZe4?ecver=2" allowfullscreen></iframe></div></section>');
-            youtube = app.content.find('#youtube');
-        } else {
-            youtube.toggle();
+    $('#settings').on('click', 'input[type=checkbox]', function () {
+        var $this = $(this);
+        var id = $this.data('id');
+        var value = $this.is(':checked');
+        app.applySettings(id, value, true);
+        if (id === 'two-columns') {
+            app.checkGoogleMaps();
         }
-    });
-
-    app.body.on('click', '#toggle-google-maps', function () {
-        if (!checkGoogleMaps()) {
-            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
-                app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
-                googleMaps = document.getElementById('google-maps').children[0];
-                var uluru = { lat: -25.363, lng: 131.044 };
-                var map = new google.maps.Map(googleMaps, {
-                    zoom: 4,
-                    center: uluru
-                });
-                var marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map
-                });
-                $(window).resize(function () {
-                    google.maps.event.trigger(googleMaps, 'resize');
-                });
-            });
-
-        } else {
-            $(googleMaps).toggle();
-        }
-    });
-
-    app.content.load("ajax/content/page1.html", function () {
-        app.addValidation(app.content.find('#form'));
     });
 });

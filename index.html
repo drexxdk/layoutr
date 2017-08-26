@@ -109,7 +109,7 @@
             <svg><use xlink:href="#svg-loading"></use></svg>
         </span>
     </div>
-    <div id="main" class="transition two-column footer-fixed">
+    <div id="main" class="transitions two-columns footer-fixed">
         <header>
             <button id="toggle-menu" data-id="left" class="aside left svg" aria-label="Toggle menu">
                 <svg><use xlink:href="#svg-menu"></use></svg>
@@ -123,7 +123,7 @@
             <div>
                 <aside id="left">
                     <div class="header">
-                        <span>Menu</span>
+                        <span>Navigation</span>
                     </div>
                     <div class="content">
                         <div>
@@ -240,26 +240,36 @@
                 <div id="content"></div>
                 <aside id="right">
                     <div class="header">
-                        <span>Menu</span>
+                        <span>Settings</span>
                     </div>
                     <div class="content">
                         <div>
-                            <section class="flex-items wrap">
+                            <section id="settings" class="flex-items wrap">
                                 <!-- layout -->
 
-                                <div class="radio">
+                                <!--<div class="radio">
                                     <input type="radio">
                                     <label><i class="default"></i> Loading</label>
+                                </div>-->
+                                
+                                <button class="btn btn-primary" id="toggle-loading">Loading</button>
+                                <div class="checkbox">
+                                    <input type="checkbox" data-id="footer-fixed" checked>
+                                    <label><i></i> Fixed footer</label>
                                 </div>
                                 <div class="checkbox">
-                                    <input type="checkbox">
-                                    <label><i></i> Primary</label>
+                                    <input type="checkbox" data-id="two-columns" checked>
+                                    <label><i></i> Two columns</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" data-id="transitions" checked>
+                                    <label><i></i> Transitions</label>
                                 </div>
 
-                                <button class="btn btn-primary" id="toggle-loading">Loading</button>
-                                <button class="btn btn-primary" id="toggle-footer-position">Footer position</button>
+                                <!--<button class="btn btn-primary" id="toggle-loading">Loading</button>
+                                <button class="btn btn-primary" id="toggle-fixed-footer">Footer position</button>
                                 <button class="btn btn-primary" id="toggle-column">Column</button>
-                                <button class="btn btn-primary" id="toggle-transition">Transition</button>
+                                <button class="btn btn-primary" id="toggle-transition">Transition</button>-->
                             </section>
                             <section class="flex-items">
                                 <p>

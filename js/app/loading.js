@@ -40,3 +40,12 @@ app.hideLoading = function () {
     app.footer.removeAttr('style');
     app.body.removeClass('loading');
 };
+
+$(function () {
+    app.body.on('click', '#toggle-loading', function () {
+        app.showLoading();
+        setTimeout(function () {
+            app.hideLoading();
+        }, 2000);
+    });
+});

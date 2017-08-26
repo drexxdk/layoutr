@@ -35,7 +35,7 @@ $aside-width: rem($number-aside-width);
 $aside-header-background-color: $gray-400;
 
 $breakpoint-one-column: ($number-aside-width + $number-content-min-width) + px;
-$breakpoint-two-column: ($number-aside-width + ($number-content-min-width * 2)) + px;
+$breakpoint-two-columns: ($number-aside-width + ($number-content-min-width * 2)) + px;
 
 // components
 $tree-hover-background-color: $gray-300;

@@ -143,6 +143,7 @@
     <Content Include="js\app\app.js" />
     <Content Include="js\app\form.js" />
     <Content Include="js\app\loading.js" />
+    <Content Include="js\app\settings.js" />
     <Content Include="js\vendors\bowser.js" />
     <Content Include="js\vendors\jquery\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
