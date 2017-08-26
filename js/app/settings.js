@@ -1,9 +1,9 @@
 ﻿var app = app || {};
 
-app.localStorage = typeof (Storage) !== "undefined";
+app.localStorage = typeof Storage !== "undefined";
 if (app.localStorage) {
     app.settings = JSON.parse(localStorage.getItem("settings"));
-    if (app.settings == null) app.settings = [];
+    if (app.settings === null) app.settings = [];
 }
 
 app.applySettings = function (id, value, set = false) {
@@ -12,16 +12,13 @@ app.applySettings = function (id, value, set = false) {
             "id": id,
             "value": value
         };
-        var exists = $.grep(app.settings, function (e) { return e.id == id; });
+        var exists = $.grep(app.settings, function (e) { return e.id === id; });
         if (exists.length === 0) {
             // not found
             app.settings.push(entry);
         } else if (exists.length === 1) {
             // 1 found
             exists[0].value = value;
-        } else {
-            // multiple found
-            debugger;
         }
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
@@ -32,7 +29,7 @@ app.applySettings = function (id, value, set = false) {
     } else {
         app.main.removeClass(id);
     }
-}
+};
 
 $(function () {
     if (app.localStorage) {

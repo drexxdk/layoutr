@@ -13,10 +13,10 @@ header {
 
     > .title {
         overflow: hidden;
-        padding: 0 10px;
+        padding: 0 rem(10px);
         white-space: nowrap;
         text-overflow: ellipsis;
-        font-size: 1em;
+        font-size: 1rem;
         font-weight: bold;
         line-height: $header-height;
         flex-grow: 1;
@@ -26,12 +26,13 @@ header {
         position: relative;
         width: $header-height;
         height: $header-height;
-        padding: 10px;
         background-color: transparent;
-
         @include noselect;
 
         > svg {
+            margin-top: 50%;
+            margin-left: 50%;
+            @include translate(-50%, -50%);
             width: 50%;
             height: 50%;
             fill: #808080;
