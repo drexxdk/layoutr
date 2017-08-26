@@ -140,9 +140,11 @@
     <Content Include="dist\js\loadCSS.min.js">
       <DependentUpon>loadCSS.js</DependentUpon>
     </Content>
+    <Content Include="ajax\content\page1.html" />
     <Content Include="index.html" />
     <Content Include="js\app\app.js" />
     <Content Include="js\app\form.js" />
+    <Content Include="js\app\loading.js" />
     <Content Include="js\vendors\bowser.js" />
     <Content Include="js\vendors\jquery\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
@@ -173,7 +175,6 @@
     <Content Include="scss\mixins\animation.scss" />
     <Content Include="scss\mixins\perspective.scss" />
     <Content Include="scss\mixins\flexbox.scss" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="scss\mixins\noselect.scss" />
     <Content Include="scss\mixins\background-cover.scss" />
     <Content Include="scss\mixins\fluid-font.scss" />
@@ -199,11 +200,6 @@
     <Content Include="scss\plugins\font-awesome\_screen-reader.scss" />
     <Content Include="scss\plugins\font-awesome\_stacked.scss" />
     <Content Include="scss\plugins\font-awesome\_variables.scss" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="scss\layout\loading.scss" />
     <Content Include="scss\plugins\bootstrap\bootstrap-grid.scss" />
     <Content Include="scss\plugins\bootstrap\bootstrap-reboot.scss" />
@@ -247,6 +243,9 @@
     <Content Include="scss\functions.scss" />
     <Content Include="scss\references.scss" />
     <Content Include="scss\components\_components.scss" />
+    <Content Include="scss\components\svg.scss" />
+    <Content Include="scss\layout\section.scss" />
+    <Content Include="scss\components\inputs.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -268,6 +267,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="fonts\" />
     <Folder Include="scss\plugins\bootstrap\mixins\" />
     <Folder Include="scss\plugins\bootstrap\utilities\" />
   </ItemGroup>

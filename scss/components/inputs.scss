@@ -1,0 +1,59 @@
+﻿.radio {
+    position: relative;
+}
+/// <reference path="../references" />
+
+.radio,
+.checkbox {
+    position: relative;
+
+    > input {
+        position: absolute;
+        z-index: 99999999;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        cursor: pointer;
+        opacity: 0;
+
+        &:checked + label > i:before {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 75%;
+            height: 75%;
+            background-color: map-get($theme-colors, primary);
+            margin-top: 50%;
+            margin-left: 50%;
+            @include translate(-50%, -50%);
+        }
+    }
+
+    > label {
+        @include flex-display();
+        @include align-items(center);
+        font-size: 1em;
+        @include flex-display();
+
+        > i {
+            display: block;
+            width: 1em;
+            height: 1em;
+            border: $layout-border;
+            margin-right: ($spacer / 2);
+            position: relative;
+            overflow: hidden;
+            background-color: white;
+        }
+    }
+}
+
+.radio {
+    > label > i,
+    > label > i:before {
+        @include border-radius(50%);
+    }
+}
