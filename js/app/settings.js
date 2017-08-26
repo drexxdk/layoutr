@@ -25,7 +25,7 @@ app.applySettings = function (id, value, set = false) {
         }
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
-        $('#settings').find('[data-id=' + id + ']').prop('checked', value);
+        $('#settings').find('#' + id).prop('checked', value);
     }
     if (value) {
         app.main.addClass(id);
@@ -43,7 +43,7 @@ $(function () {
 
     $('#settings').on('click', 'input[type=checkbox]', function () {
         var $this = $(this);
-        var id = $this.data('id');
+        var id = $this.attr('id');
         var value = $this.is(':checked');
         app.applySettings(id, value, true);
         if (id === 'two-columns') {
