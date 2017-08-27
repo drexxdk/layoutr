@@ -9,6 +9,7 @@ $(function () {
     app.right = $('#right');
     app.html = $('html');
     app.body = $('body');
+    app.html = $('html');
     app.transitionTime = 400;
 
     var youtube;

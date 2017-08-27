@@ -14,4 +14,4 @@ app.checkGoogleMaps = function () {
     } else {
         return false;
     }
-}
+};
