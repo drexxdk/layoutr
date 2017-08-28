@@ -54,7 +54,7 @@ $(function () {
     $('#settings').find('#font-size').slider({
         min: 12,
         max: 32,
-        step: 1,
+        step: 2,
         value: 16,
         tooltip: "hide"
     }).on('change', function () {
