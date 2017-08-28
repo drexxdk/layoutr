@@ -1,6 +1,7 @@
 {
-  "short_name": "Panels",
+  "start_url": "https://drexxdk.github.io/Panels/",
   "name": "Panels",
+  "short_name": "Panels",
   "icons": [
     {
       "src": "https://drexxdk.github.io/Panels/dist/img/favicon/android-chrome-192x192.png",
@@ -13,8 +14,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "https://drexxdk.github.io/Panels/",
-  "theme_color": "#0072ed",
-  "background_color": "#0072ed",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone"
 }
