@@ -142,8 +142,10 @@
     <Content Include="index.html" />
     <Content Include="js\app\app.js" />
     <Content Include="js\app\form.js" />
+    <Content Include="js\app\googleMaps.js" />
     <Content Include="js\app\loading.js" />
     <Content Include="js\app\settings.js" />
+    <Content Include="js\vendors\bootstrap\bootstrap-slider.min.js" />
     <Content Include="js\vendors\bowser.js" />
     <Content Include="js\vendors\jquery\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
@@ -182,23 +184,9 @@
     <Content Include="scss\layout\content.scss" />
     <Content Include="scss\layout\aside.scss" />
     <Content Include="scss\layout\_layout.scss" />
-    <Content Include="scss\variables.scss" />
+    <Content Include="scss\variables\_variables.scss" />
     <Content Include="scss\components\tree.scss" />
     <Content Include="scss\layout\breakpoints.scss" />
-    <Content Include="scss\plugins\font-awesome\font-awesome.scss" />
-    <Content Include="scss\plugins\font-awesome\_animated.scss" />
-    <Content Include="scss\plugins\font-awesome\_bordered-pulled.scss" />
-    <Content Include="scss\plugins\font-awesome\_core.scss" />
-    <Content Include="scss\plugins\font-awesome\_fixed-width.scss" />
-    <Content Include="scss\plugins\font-awesome\_icons.scss" />
-    <Content Include="scss\plugins\font-awesome\_larger.scss" />
-    <Content Include="scss\plugins\font-awesome\_list.scss" />
-    <Content Include="scss\plugins\font-awesome\_mixins.scss" />
-    <Content Include="scss\plugins\font-awesome\_path.scss" />
-    <Content Include="scss\plugins\font-awesome\_rotated-flipped.scss" />
-    <Content Include="scss\plugins\font-awesome\_screen-reader.scss" />
-    <Content Include="scss\plugins\font-awesome\_stacked.scss" />
-    <Content Include="scss\plugins\font-awesome\_variables.scss" />
     <Content Include="scss\layout\loading.scss" />
     <Content Include="scss\plugins\bootstrap\bootstrap-grid.scss" />
     <Content Include="scss\plugins\bootstrap\bootstrap-reboot.scss" />
@@ -245,6 +233,40 @@
     <Content Include="scss\components\svg.scss" />
     <Content Include="scss\layout\section.scss" />
     <Content Include="scss\components\inputs.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_alert.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_badge.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_buttons.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_float.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_forms.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_gradients.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_grid.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_hover.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_image.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_list-group.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_lists.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_navbar-align.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_pagination.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_resize.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_size.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_table-row.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_transition.scss" />
+    <Content Include="scss\plugins\bootstrap\mixins\_visibility.scss" />
+    <Content Include="scss\plugins\bootstrap-slider\bootstrap-slider.scss" />
+    <Content Include="scss\plugins\bootstrap-slider\_mixins.scss" />
+    <Content Include="scss\plugins\bootstrap-slider\_rules.scss" />
+    <Content Include="scss\plugins\bootstrap-slider\_variables.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -267,7 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="fonts\" />
-    <Folder Include="scss\plugins\bootstrap\mixins\" />
     <Folder Include="scss\plugins\bootstrap\utilities\" />
   </ItemGroup>
   <PropertyGroup>
