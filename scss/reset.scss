@@ -1,0 +1,26 @@
+﻿/// <reference path="references" />
+
+* {
+    margin: 0;
+    padding: 0;
+    @include box-sizing();
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: $font-family-base;
+    background-color: $body-bg;
+    color: $body-color;
+    font-size: $font-size-base;
+    font-weight: $font-weight-base;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}

@@ -1,0 +1,63 @@
+﻿/// <reference path="../../references" />
+
+@mixin button-variant($background, $border, $active-background: darken($background, 7.5%)) {
+    @include color-yiq($background);
+    background-color: $background;
+
+    &:hover {
+        @include color-yiq($background);
+        background-color: $active-background;
+    }
+}
+
+.btn-group {
+    @include flex-display();
+    @include flex-wrap(wrap);
+    @include border-radius(.5rem);
+    overflow: hidden;
+
+    > .btn {
+        flex-grow: 1;
+        @include border-radius(0);
+    }
+}
+
+.btn {
+    @include flex-display();
+    @include justify-content(center);
+    @include align-items(center);
+    line-height: 1.5rem;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    min-height: 2.5rem;
+    background-color: white;
+    @include border-radius(.5rem);
+    text-decoration: none;
+
+    > svg + label,
+    > label + svg {
+        margin-left: .5rem;
+    }
+
+    > svg {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+
+@each $color, $value in $theme-colors {
+    .btn-#{$color} {
+        @include button-variant($value, $value);
+    }
+}
+
+.btn-link {
+    color: $link-color;
+    text-decoration: $link-decoration;
+
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+    }
+}

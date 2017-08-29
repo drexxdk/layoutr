@@ -9,22 +9,6 @@
 @import "loading";
 @import "section";
 
-* {
-    margin: 0;
-    padding: 0;
-    @include box-sizing();
-}
-
-html,
-body {
-    height: 100%;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-}
-
 #main {
     min-width: $main-min-width;
     height: 100%;
@@ -36,7 +20,6 @@ button {
     &:not(.msedge):not(.msie).transitions {
         // ie/edge doesn't support transition for values that uses calc()
         #left {
-
             @include transition(left 0.4s ease-in-out);
         }
 

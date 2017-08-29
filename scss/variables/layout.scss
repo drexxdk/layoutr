@@ -1,0 +1,37 @@
+﻿/// <reference path="../references" />
+
+// number
+$number-layout-border-width: 1;
+$number-aside-width: 230 + $number-layout-border-width;
+$number-header-height: 50 + $number-layout-border-width;
+$number-footer-height: 50 + $number-layout-border-width;
+$number-content-min-width: 500;
+$number-content-max-width: 1280;
+$number-loading-width: 200;
+$number-main-min-width: $number-aside-width + $number-aside-width;
+
+// layout
+$aside-extra-spacing: 10rem;
+
+$spacer: 1rem;
+
+$layout-border-width: rem($number-layout-border-width);
+$layout-border: $layout-border-width solid $layout-border-color;
+
+$main-min-width: rem($number-main-min-width);
+
+$loading-width: rem($number-loading-width);
+
+$header-height: rem($number-header-height);
+
+$footer-height: rem($number-footer-height);
+
+$content-min-width: rem($number-content-min-width);
+$content-max-width: rem($number-content-max-width);
+$content-header-height: 40vh;
+$content-header-min-height: rem(250);
+
+$aside-width: rem($number-aside-width);
+
+$breakpoint-one-column: ($number-aside-width + $number-content-min-width) + px;
+$breakpoint-two-columns: ($number-aside-width + ($number-content-min-width * 2)) + px;

@@ -3,8 +3,8 @@
 #content {
     > .header {
         position: relative;
-        height: 40vh;
-        min-height: rem(250);
+        height: $content-header-height;
+        min-height: $content-header-min-height;
 
         &:before {
             position: absolute;
@@ -55,7 +55,7 @@
             align-items: center;
             justify-content: center;
             top: 0;
-            bottom: calc(#{$spacer * 4});
+            bottom: #{$spacer * 4};
             left: 50%;
             @include translate(-50%, 0);
             max-width: calc(#{$content-max-width} - #{$spacer * 2});
@@ -93,7 +93,7 @@
             padding: $spacer;
             background-color: $layout-background-color;
             max-width: calc(#{$content-max-width} - #{$spacer * 2});
-            min-height: 8em;
+            min-height: 7rem;
         }
     }
 }

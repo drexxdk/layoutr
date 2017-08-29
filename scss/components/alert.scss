@@ -1,0 +1,30 @@
+﻿/// <reference path="../references" />
+
+@mixin alert-variant($background, $border, $color) {
+    color: $color;
+    background-color: $background;
+    border-color: $border;
+
+    hr {
+        border-top-color: darken($border, 5%);
+    }
+
+    .alert-link {
+        color: darken($color, 10%);
+    }
+}
+
+.alert {
+    line-height: 1.5rem;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    min-height: 2.5rem;
+    background-color: white;
+    @include border-radius(.5rem);
+}
+
+@each $color, $value in $theme-colors {
+    .alert-#{$color} {
+        @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 8));
+    }
+}

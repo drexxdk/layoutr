@@ -11,18 +11,13 @@ body {
         left: 0;
         background-color: rgba(255, 255, 255, 0.6);
 
-        > span {
+        > svg {
             position: absolute;
             top: 50%;
             left: 50%;
-            color: theme-color("primary");
-
             @include translate(-50%, -50%);
-
-            > svg {
-                width: $loading-width;
-                height: $loading-width;
-            }
+            width: $loading-width;
+            height: $loading-width;
         }
     }
 

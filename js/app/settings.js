@@ -1,10 +1,6 @@
 ﻿var app = app || {};
-
 app.localStorage = typeof Storage !== "undefined";
-if (app.localStorage) {
-    app.settings = JSON.parse(localStorage.getItem("settings"));
-    if (app.settings === null) app.settings = [];
-}
+app.settings = [];
 
 app.applySettings = function (id, type, value, set = false) {
     if (app.localStorage && set) {
@@ -43,7 +39,7 @@ app.applySettings = function (id, type, value, set = false) {
             setTimeout(function () {
                 app.main.addClass('transitions');
             }, 500);
-            
+
         } else {
             app.html.css('font-size', value + 'px');
         }
@@ -51,34 +47,58 @@ app.applySettings = function (id, type, value, set = false) {
 };
 
 $(function () {
-    $('#settings').find('#font-size').slider({
-        min: 12,
-        max: 32,
-        step: 2,
-        value: 16,
-        tooltip: "hide"
-    }).on('change', function () {
+    app.right.load('ajax/layout/settings.html', function () {
         var $this = $(this);
-        var id = $this.attr('id');
-        var type = "slider";
-        var value = $this.slider('getValue');
-        app.applySettings(id, type, value, true);
-    });
-
-    $('#settings').on('click', 'input[type=checkbox]', function () {
-        var $this = $(this);
-        var id = $this.attr('id');
-        var type = "checkbox";
-        var value = $this.is(':checked');
-        app.applySettings(id, type, value, true);
-        if (id === 'two-columns') {
-            app.checkGoogleMaps();
+        if (app.localStorage) {
+            app.settings = JSON.parse(localStorage.getItem("settings"));
+            if (app.settings === null) app.settings = [];
         }
-    });
 
-    if (app.localStorage) {
-        $.each(app.settings, function (i, entry) {
-            app.applySettings(entry.id, entry.type, entry.value);
+        $this.find('#font-size').slider({
+            min: 12,
+            max: 32,
+            step: 2,
+            value: 16,
+            tooltip: "hide"
+        }).on('change', function () {
+            var $this = $(this);
+            var id = $this.attr('id');
+            var type = "slider";
+            var value = $this.slider('getValue');
+            app.applySettings(id, type, value, true);
         });
-    }
+
+        $this.on('click', 'input[type=checkbox]', function () {
+            var $this = $(this);
+            var id = $this.attr('id');
+            var type = "checkbox";
+            var value = $this.is(':checked');
+            app.applySettings(id, type, value, true);
+            if (id === 'two-columns') {
+                app.checkGoogleMaps();
+            }
+        });
+
+        if (app.localStorage) {
+            $.each(app.settings, function (i, entry) {
+                app.applySettings(entry.id, entry.type, entry.value);
+            });
+        }
+
+
+
+        $(document).click(function (e) {
+            if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
+                var target = $(e.target);
+                if (!target.closest("#loading").length && !target.closest(".aside").length) {
+                    if (app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                        app.main.removeClass('left-open');
+                    } else if (app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                        app.main.removeClass('right-open');
+                    }
+                    app.checkGoogleMaps();
+                }
+            }
+        });
+    });
 });

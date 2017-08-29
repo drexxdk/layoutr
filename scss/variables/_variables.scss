@@ -1,49 +1,11 @@
 ﻿/// <reference path="../references" />
 
-// number
-$number-layout-border-width: 1;
-$number-aside-width: 230 + $number-layout-border-width;
-$number-header-height: 50 + $number-layout-border-width;
-$number-footer-height: 50 + $number-layout-border-width;
-$number-content-min-width: 500;
-$number-content-max-width: 1280;
-$number-loading-width: 200;
-$number-main-min-width: $number-aside-width + $number-aside-width;
+@import "colors";
+@import "fonts";
+@import "layout";
 
-// layout
-$layout-border-width: rem($number-layout-border-width);
-$layout-border-color: $gray-400;
-$layout-border: $layout-border-width solid $layout-border-color;
-$layout-background-color: $white;
-
-$main-min-width: rem($number-main-min-width);
-
-$loading-width: rem($number-loading-width);
-
-$header-height: rem($number-header-height);
-
-$footer-height: rem($number-footer-height);
-
-$content-min-width: rem($number-content-min-width);
-$content-max-width: rem($number-content-max-width);
-
-$footer-color: $gray-400;
-$footer-background-color: $gray-800;
-$footer-border-color: $gray-900;
-
-$aside-width: rem($number-aside-width);
-$aside-header-background-color: $gray-400;
-
-$breakpoint-one-column: ($number-aside-width + $number-content-min-width) + px;
-$breakpoint-two-columns: ($number-aside-width + ($number-content-min-width * 2)) + px;
-
-// components
-$tree-hover-background-color: $gray-300;
-$tree-highlight-background-color: $gray-200;
-$tree-border-color: $gray-400;
-
-// maybe the below colors can be replaced with bootstrap variables
-$font-color-dark: black;
-$font-color-light: white;
-/*$primary-color-dark: #262626;
-$secondary-color-dark: black;*/
+// links
+$link-color: theme-color("primary");
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-decoration: underline !default;

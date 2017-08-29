@@ -1,4 +1,23 @@
-﻿@function rem($size) {
+﻿/// <reference path="references" />
+
+@function rem($size) {
 	$remSize: $size / 16;
 	@return #{$remSize}rem;
+}
+
+@function theme-color($key: "primary") {
+    @return map-get($theme-colors, $key);
+}
+
+@function theme-color-level($color-name: "primary", $level: 0) {
+    $color: theme-color($color-name);
+    $color-base: if($level > 0, #000, #fff);
+
+    @if $level < 0 {
+        // Lighter values need a quick double negative for the Sass math to work
+        @return mix($color-base, $color, $level * -1 * $theme-color-interval);
+    }
+    @else {
+        @return mix($color-base, $color, $level * $theme-color-interval);
+    }
 }
