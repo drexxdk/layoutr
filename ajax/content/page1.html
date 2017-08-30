@@ -166,45 +166,10 @@
                     </div>
                 </div>
             </div>
-
-
-            <!--<div id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="card">
-                    <h6 class="card-header" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Collapsible Group Item #1
-                    </h6>
-                    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h6 class="card-header collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Collapsible Group Item #2
-                    </h6>
-                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h6 class="card-header collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Collapsible Group Item #3
-                    </h6>
-                    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-            </div>-->
         </section>
         <section>
             <!-- validation -->
-            <form id="form" method="post" class="form-horizontal" action="">
+            <form id="form" method="post" class="flex-items small">
                 <div class="form-group">
                     <label class="control-label" for="firstname">First name</label>
                     <input type="text" class="form-control form-control-success" id="firstname" name="firstname" placeholder="First name" />
@@ -218,16 +183,16 @@
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
                 </div>
                 <div class="form-group">
+                    <label for="email" class="sr-only">Email</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                        <label for="email" class="sr-only">Email</label>
                         <input id="email" name="email" class="form-control" type="text" placeholder="Email address">
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                        <label for="password" class="sr-only">Password</label>
                         <input id="password" name="password" class="form-control" type="password" placeholder="Password">
                     </div>
                 </div>
@@ -237,9 +202,8 @@
                 </div>
                 <div class="form-group">
                     <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="agree" name="agree" value="agree" />Please agree to our policy
-                        </label>
+                        <input id="agree" type="checkbox">
+                        <label for="agree"><i></i> Please agree to our policy</label>
                     </div>
                 </div>
                 <div class="form-group">

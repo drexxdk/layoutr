@@ -13,7 +13,7 @@
     /*min-width: $main-min-width;*/
     height: 100%;
 
-    @include flex-display();
+    @include flex-display;
 
     @include flex-direction(column);
 
@@ -70,7 +70,7 @@
         margin-top: $header-height;
         flex-grow: 1;
 
-        @include flex-display();
+        @include flex-display;
 
         @include flex-direction(column);
 

@@ -9,7 +9,7 @@ header {
     height: $header-height;
     border-bottom: $layout-border;
     background-color: $layout-background-color;
-    @include flex-display();
+    @include flex-display;
 
     > .title {
         overflow: hidden;

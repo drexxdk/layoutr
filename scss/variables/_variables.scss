@@ -15,6 +15,12 @@ $border-radius-base: .5rem;
 $padding-x-base: 1rem;
 $padding-y-base: .5rem;
 
-$accordion-border-color: $gray-400;
-$accordion-border-width: rem(1);
-$accordion-border: $accordion-border-width solid $accordion-border-color;
+$component-border-color: $gray-400;
+$component-border-width: rem(1);
+$component-border: $component-border-width solid $component-border-color;
+
+// components
+$tree-hover-background-color: $gray-300;
+$tree-highlight-background-color: $gray-200;
+
+$form-label-width:rem(150);

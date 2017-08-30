@@ -29,10 +29,10 @@
     }
 
     > label {
-        @include flex-display();
+        @include flex-display;
         @include align-items(center);
         font-size: $font-size-base;
-        @include flex-display();
+        @include flex-display;
 
         > i {
             display: block;

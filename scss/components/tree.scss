@@ -22,7 +22,7 @@
             left: -($spacer / 2);
             display: block;
             width: 0;
-            border-left: 1px solid $tree-border-color;
+            border-left: 1px solid $component-border-color;
             z-index: 1;
         }
 
@@ -38,6 +38,7 @@
         margin-left: -($spacer * 2.5);
         padding: ($spacer / 2) ($spacer / 2) ($spacer / 2) ($spacer * 2.5);
         width: calc(100% + ($spacer * 2.5));
+        cursor: pointer;
 
         &:hover {
             background-color: $tree-hover-background-color;
@@ -52,13 +53,9 @@
             display: block;
             height: 1px;
             width: $spacer;
-            border-bottom: 1px solid $tree-border-color;
-            border-left: 1px solid $tree-border-color;
+            border-bottom: 1px solid $component-border-color;
+            border-left: 1px solid $component-border-color;
         }
-    }
-
-    label.label {
-        cursor: pointer;
     }
 
     input[type=checkbox] {
@@ -70,8 +67,8 @@
             }
 
             & ~ label.label:after {
-                border-top: 1px solid $tree-border-color;
-                border-right: 1px solid $tree-border-color;
+                border-top: 1px solid $component-border-color;
+                border-right: 1px solid $component-border-color;
                 border-bottom: 0;
                 border-left: 0;
                 bottom: 0;
@@ -106,7 +103,7 @@
             height: $spacer;
             min-height: initial;
             padding: 0;
-            @include flex-display();
+            @include flex-display;
             @include justify-content(center);
             @include align-items(center);
             @include button-transition(all);

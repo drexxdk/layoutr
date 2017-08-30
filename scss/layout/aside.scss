@@ -4,7 +4,7 @@ aside {
     position: fixed;
     z-index: 98;
     top: -$aside-extra-spacing;
-    padding-top: calc(#{$aside-extra-spacing} + #{$header-height});
+    padding-top: $aside-extra-spacing + $header-height;
     padding-bottom: $aside-extra-spacing;
     height: calc(100% + #{$aside-extra-spacing * 2});
     width: 100%;
@@ -15,12 +15,12 @@ aside {
 
     @include flex-direction(column);
 
-    @include flex-display();
+    @include flex-display;
 
     > .header {
         span {
             display: block;
-            padding: #{$spacer / 2} $spacer;
+            padding: $padding-y-base $padding-x-base;
             text-align: center;
             background-color: $aside-header-background-color;
         }

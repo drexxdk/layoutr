@@ -11,7 +11,7 @@
 }
 
 .btn-group {
-    @include flex-display();
+    @include flex-display;
     @include flex-wrap(wrap);
     @include border-radius(.5rem);
     overflow: hidden;
@@ -23,7 +23,7 @@
 }
 
 .btn {
-    @include flex-display();
+    @include flex-display;
     @include align-items(center);
     @include noselect;
     font-size: $font-size-base;

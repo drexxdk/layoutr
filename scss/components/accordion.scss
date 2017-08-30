@@ -3,11 +3,11 @@
 .accordion {
     @include border-radius(.5rem);
     overflow: hidden;
-    border: $accordion-border;
+    border: $component-border;
 
     > div {
         > .headline {
-           @include border-radius(0);
+            @include border-radius(0);
         }
 
         > .content {
@@ -16,7 +16,7 @@
         }
 
         & + div {
-            border-top: $accordion-border;
+            border-top: $component-border;
         }
     }
 }

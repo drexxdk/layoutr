@@ -1,0 +1,60 @@
+﻿/// <reference path="../../references" />
+
+
+@mixin input-variant($background, $border, $color) {
+
+    input[type=text],
+    input[type=password],
+    input[type=email] {
+        color: $color;
+        background-color: $background;
+        border-color: $border;
+    }
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+    padding: $padding-y-base $padding-x-base;
+    @include border-radius($border-radius-base);
+    border: $component-border;
+}
+
+.form-group,
+.input-group {
+    @include flex-display;
+    @include flex-wrap(wrap);
+    @include align-items(flex-start);
+    flex-grow: 1;
+
+    > label {
+        padding-right: $spacer;
+        width: $form-label-width;
+    }
+}
+
+.form-group {
+    > .input-group,
+    > input {
+        width: calc(100% - #{$form-label-width});
+    }
+
+    > .input-group {
+        > input {
+            flex-grow: 1;
+        }
+    }
+
+    &.danger {
+        > em {
+            color: theme-color("danger");
+            margin: ($spacer / 2) 0 $spacer $form-label-width;
+        }
+    }
+
+    @each $color, $value in $theme-colors {
+        &.#{$color} {
+            @include input-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 8));
+        }
+    }
+}

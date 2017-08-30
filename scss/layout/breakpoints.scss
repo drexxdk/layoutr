@@ -105,7 +105,7 @@
             }
 
             #content {
-                @include flex-display();
+                @include flex-display;
 
                 > .header {
                     position: fixed;

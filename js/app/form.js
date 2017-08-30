@@ -51,14 +51,13 @@ app.addValidation = function (form) {
         },
         errorElement: "em",
         errorPlacement: function (error, element) {
-            error.addClass("help-block");
             element.parents('.form-group').append(error);
         },
         highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("has-error").removeClass("has-success");
+            $(element).parents(".form-group").addClass("danger").removeClass("success");
         },
         unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("has-success").removeClass("has-error");
+            $(element).parents(".form-group").addClass("success").removeClass("danger");
         }
     });
 };

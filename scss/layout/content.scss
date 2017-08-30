@@ -87,7 +87,7 @@
             margin: 0 auto;
             padding: $spacer;
             background-color: $layout-background-color;
-            max-width: calc(#{$content-max-width} - #{$spacer * 2});
+            max-width: $content-max-width - ($spacer * 2);
         }
     }
 }
