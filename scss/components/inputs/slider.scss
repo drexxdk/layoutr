@@ -1,12 +1,6 @@
 /// <reference path="../../references" />
 
-
-// slider
-$slider-line-height: 1.5rem !default;
-$slider-border-radius: .5rem !default;
-/*$slider-horizontal-width: calc(100% - #{$slider-line-height}) !default;*/
-/*$slider-vertical-height: 100% !default;*/
-
+$slider-line-height: 1.5rem;
 
 .slider {
     display: block;
@@ -18,9 +12,9 @@ $slider-border-radius: .5rem !default;
         height: $slider-line-height;
 
         .slider-track {
-            height: $slider-line-height/2;
+            height: $slider-line-height /2;
             width: 100%;
-            margin-top: -$slider-line-height/4;
+            margin-top: -$slider-line-height / 4;
             top: 50%;
             left: 0;
         }
@@ -39,7 +33,7 @@ $slider-border-radius: .5rem !default;
                 position: relative;
                 top: 50%;
                 transform: translateY(-50%);
-                border-width: 0 $slider-line-height/2 $slider-line-height/2 $slider-line-height/2;
+                border-width: 0 ($slider-line-height / 2) ($slider-line-height / 2) ($slider-line-height / 2);
                 width: 0;
                 height: 0;
                 border-bottom-color: #0480BE;
@@ -54,42 +48,13 @@ $slider-border-radius: .5rem !default;
             left: 0;
             width: 100%;
         }
-
-        .slider-tick-label-container {
-            white-space: nowrap;
-            margin-top: $slider-line-height;
-
-            .slider-tick-label {
-                display: inline-block;
-                padding-top: $slider-line-height * 1.2;
-                text-align: center;
-            }
-        }
-
-        &.slider-rtl {
-            .slider-track {
-                left: initial;
-                right: 0;
-            }
-
-            .slider-tick,
-            .slider-handle {
-                margin-left: initial;
-                margin-right: -$slider-line-height/2;
-            }
-
-            .slider-tick-container {
-                left: initial;
-                right: 0;
-            }
-        }
     }
 
     &.slider-vertical {
         width: $slider-line-height;
 
         .slider-track {
-            width: $slider-line-height/2;
+            width: $slider-line-height / 2;
             height: 100%;
             left: 25%;
             top: 0;
@@ -113,45 +78,11 @@ $slider-border-radius: .5rem !default;
             margin-top: -$slider-line-height/2;
 
             &.triangle {
-                border-width: $slider-line-height/2 0 $slider-line-height/2 $slider-line-height/2;
+                border-width: ($slider-line-height / 2) 0 ($slider-line-height / 2) ($slider-line-height / 2);
                 width: 1px;
                 height: 1px;
                 border-left-color: #0480BE;
                 margin-left: 0;
-            }
-        }
-
-        .slider-tick-label-container {
-            white-space: nowrap;
-
-            .slider-tick-label {
-                padding-left: $slider-line-height * .2;
-            }
-        }
-
-        &.slider-rtl {
-            .slider-track {
-                left: initial;
-                right: 25%;
-            }
-
-            .slider-selection {
-                left: initial;
-                right: 0;
-            }
-
-            .slider-tick,
-            .slider-handle {
-                &.triangle {
-                    border-width: $slider-line-height/2 $slider-line-height/2 $slider-line-height/2 0;
-                }
-            }
-
-            .slider-tick-label-container {
-                .slider-tick-label {
-                    padding-left: initial;
-                    padding-right: $slider-line-height * .2;
-                }
             }
         }
     }
@@ -194,14 +125,14 @@ $slider-border-radius: .5rem !default;
 
 .slider-track {
     background-color: #F7F7F7;
-    @include border-radius($slider-border-radius);
+    @include border-radius($border-radius-base);
     position: absolute;
     cursor: pointer;
 }
 
 .slider-selection {
     background-color: #F7F7F7;
-    @include border-radius($slider-border-radius);
+    @include border-radius($border-radius-base);
     position: absolute;
 }
 
@@ -212,7 +143,7 @@ $slider-border-radius: .5rem !default;
 .slider-track-low, .slider-track-high {
     position: absolute;
     background: transparent;
-    border-radius: slider_border-radius($slider-border-radius);
+    border-radius: slider_border-radius($border-radius-base);
 }
 
 .slider-handle {

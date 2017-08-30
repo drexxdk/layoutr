@@ -1,37 +1,25 @@
 ﻿/// <reference path="../references" />
 
-// number
-$number-layout-border-width: 1;
-$number-aside-width: 230 + $number-layout-border-width;
-$number-header-height: 50 + $number-layout-border-width;
-$number-footer-height: 50 + $number-layout-border-width;
-$number-content-min-width: 500;
-$number-content-max-width: 1280;
-$number-loading-width: 200;
-$number-main-min-width: $number-aside-width + $number-aside-width;
-
-// layout
-$aside-extra-spacing: 10rem;
+$aside-extra-spacing: 10rem; // Google Chrome Android fix
 
 $spacer: 1rem;
 
-$layout-border-width: rem($number-layout-border-width);
+$layout-border-width: rem(1);
+$aside-width: rem(230) + $layout-border-width;
 $layout-border: $layout-border-width solid $layout-border-color;
 
-$main-min-width: rem($number-main-min-width);
+$main-min-width: $aside-width + $aside-width;
 
-$loading-width: rem($number-loading-width);
+$loading-width: rem(200);
 
-$header-height: rem($number-header-height);
+$header-height: rem(50) + $layout-border-width;
 
-$footer-height: rem($number-footer-height);
+$footer-height: rem(50) + $layout-border-width;
 
-$content-min-width: rem($number-content-min-width);
-$content-max-width: rem($number-content-max-width);
+$content-min-width: rem(500);
+$content-max-width: rem(1280);
 $content-header-height: 40vh;
 $content-header-min-height: rem(250);
 
-$aside-width: rem($number-aside-width);
-
-$breakpoint-one-column: ($number-aside-width + $number-content-min-width) + px;
-$breakpoint-two-columns: ($number-aside-width + ($number-content-min-width * 2)) + px;
+$breakpoint-one-column: $aside-width + $content-min-width;
+$breakpoint-two-columns: $aside-width + $content-min-width + $content-min-width;

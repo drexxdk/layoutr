@@ -17,10 +17,15 @@ body {
     color: $body-color;
     font-size: $font-size-base;
     font-weight: $font-weight-base;
+    line-height:$line-height-base;
 }
 
 button {
     cursor: pointer;
     border: none;
+    outline: none;
+}
+
+summary {
     outline: none;
 }

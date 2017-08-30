@@ -1,0 +1,22 @@
+﻿/// <reference path="../references" />
+
+.accordion {
+    @include border-radius(.5rem);
+    overflow: hidden;
+    border: $accordion-border;
+
+    > div {
+        > .headline {
+           @include border-radius(0);
+        }
+
+        > .content {
+            padding: $spacer;
+            display: none;
+        }
+
+        & + div {
+            border-top: $accordion-border;
+        }
+    }
+}

@@ -15,12 +15,11 @@
 }
 
 .alert {
-    line-height: 1.5rem;
-    font-size: 1rem;
-    padding: .5rem 1rem;
-    min-height: 2.5rem;
-    background-color: white;
-    @include border-radius(.5rem);
+    font-size: $font-size-base;
+    padding: $padding-y-base $padding-x-base;
+    min-height: $line-height-base + ($padding-y-base * 2);
+    background-color: transparent;
+    @include border-radius($border-radius-base);
 }
 
 @each $color, $value in $theme-colors {

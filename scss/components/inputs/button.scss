@@ -24,24 +24,36 @@
 
 .btn {
     @include flex-display();
-    @include justify-content(center);
     @include align-items(center);
-    line-height: 1.5rem;
-    font-size: 1rem;
-    padding: .5rem 1rem;
-    min-height: 2.5rem;
-    background-color: white;
-    @include border-radius(.5rem);
+    @include noselect;
+    font-size: $font-size-base;
+    padding: $padding-y-base $padding-x-base;
+    min-height: $line-height-base + ($padding-y-base * 2);
+    @include border-radius($border-radius-base);
     text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:not(.align-left):not(.align-right) {
+        @include justify-content(center);
+    }
+
+    &.align-right {
+        @include justify-content(flex-end);
+    }
+
+    > * {
+        cursor: pointer;
+    }
 
     > svg + label,
     > label + svg {
-        margin-left: .5rem;
+        margin-left: $spacer / 2;
     }
 
     > svg {
-        width: 1rem;
-        height: 1rem;
+        width: $font-size-base;
+        height: $font-size-base;
     }
 }
 

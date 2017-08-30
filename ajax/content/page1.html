@@ -17,9 +17,20 @@
         </section>
         <section>
             <div class="alert alert-danger" role="alert">
-                Uses <b>Bootstrap 4 beta</b>, which is a very incomplete version.
-                It is missing parts like form validation styling, that is in <b>Bootstrap 4 alpha</b>.
-                I will upgrade to a complete version of <b>Bootstrap 4</b>, when it gets released.
+                <div class="flex-items">
+                    <p>
+                        The goal of this site is to get a good score at <b>Google Lighthouse</b>,
+                        but still have all the features you would expect a modern site to have.
+                    </p>
+                    <p>
+                        Originally the site used <b>Bootstrap 4.0.0-alpha.6</b> and <b>FontAwesome 4.7.0</b>, but it bloated the site and the performance took a big hit,<br />
+                        therefore I removed them after copying the parts from bootstrap I needed and added it to my own SCSS files.
+                    </p>
+                    <p>
+                        FontAwesome made it easy to add icons for everything, but it was the biggest resource that had to be downloaded at page load,
+                        therefore i replaced it with svg icons I needed, that got added directly to the DOM.
+                    </p>
+                </div>
             </div>
         </section>
         <section class="flex-items wrap column small">
@@ -70,7 +81,7 @@
                 This is a dark alert—check it out!
             </div>
         </section>
-        <section class="flex-items wrap column">
+        <section class="flex-items wrap column small">
             <!-- form -->
             <div class="btn-group">
                 <a class="btn btn-secondary" href="path/to/settings" aria-label="Settings">
@@ -121,7 +132,43 @@
         </section>
         <section>
             <!-- accordion -->
-            <div id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="accordion">
+                <div>
+                    <div class="headline btn btn-light align-left">
+                        left headline
+                    </div>
+                    <div class="content">
+                        content
+                    </div>
+                </div>
+                <div>
+                    <div class="headline btn btn-light align-right">
+                        right headline
+                    </div>
+                    <div class="content">
+                        content
+                    </div>
+                </div>
+                <div>
+                    <div class="headline btn btn-light">
+                        headline
+                    </div>
+                    <div class="content">
+                        content
+                    </div>
+                </div>
+                <div>
+                    <div class="headline btn btn-light">
+                        headline
+                    </div>
+                    <div class="content">
+                        content
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card">
                     <h6 class="card-header" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Collapsible Group Item #1
@@ -153,7 +200,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </section>
         <section>
             <!-- validation -->

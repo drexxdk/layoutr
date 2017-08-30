@@ -6,7 +6,7 @@
 
     > input {
         position: absolute;
-        z-index: 99999999;
+        z-index: 1;
         top: 0;
         left: 0;
         display: block;
@@ -24,20 +24,20 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: map-get($theme-colors, primary);
+            background-color: theme-color("primary");
         }
     }
 
     > label {
         @include flex-display();
         @include align-items(center);
-        font-size: 1em;
+        font-size: $font-size-base;
         @include flex-display();
 
         > i {
             display: block;
-            width: 1em;
-            height: 1em;
+            width: $font-size-base;
+            height: $font-size-base;
             border: $layout-border;
             margin-right: ($spacer / 2);
             position: relative;

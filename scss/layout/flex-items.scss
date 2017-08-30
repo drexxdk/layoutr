@@ -1,14 +1,14 @@
 ﻿/// <reference path="../references" />
 
 .flex-items {
-    margin-top: -($spacer / 2);
-    margin-left: -($spacer / 2);
+    margin-top: -$spacer;
+    margin-left: -$spacer;
 
     @include flex-display();
 
     > * {
-        margin-top: ($spacer / 2);
-        margin-left: ($spacer / 2);
+        margin-top: $spacer;
+        margin-left: $spacer;
     }
 
     &:not(.column) {
@@ -24,6 +24,16 @@
     }
 
     &.small {
+        margin-top: -($spacer / 2);
+        margin-left: -($spacer / 2);
+
+        > * {
+            margin-top: ($spacer / 2);
+            margin-left: ($spacer / 2);
+        }
+    }
+
+    &.smallest {
         margin-top: -($spacer / 4);
         margin-left: -($spacer / 4);
 
@@ -33,6 +43,25 @@
         }
     }
 
+    &.large {
+        margin-top: -($spacer * 2);
+        margin-left: -($spacer * 2);
+
+        > * {
+            margin-top: ($spacer * 2);
+            margin-left: ($spacer * 2);
+        }
+    }
+
+    &.largest {
+        margin-top: -($spacer * 4);
+        margin-left: -($spacer * 4);
+
+        > * {
+            margin-top: ($spacer * 4);
+            margin-left: ($spacer * 4);
+        }
+    }
     /*& + .flex-items {
         margin-top: $spacer / 2;
     }*/

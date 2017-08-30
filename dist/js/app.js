@@ -662,6 +662,22 @@ $(function () {
     app.left.load('ajax/layout/menu.html');
     app.content.load('ajax/content/page1.html', function () {
         app.addValidation(app.content.find('#form'));
+        //app.content.find('.accordion').on('click', '.headline', function () {
+        //    var $this = $(this);
+        //    $this.toggleClass('open');
+        //});
+
+        app.content.find('.accordion').on("click", ".headline", function () {
+            var content = $(this).next();
+            if (content.hasClass('open')) {
+                content.removeClass('open').slideUp("800");
+            } else {
+                content.parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
+                content.slideToggle("800", function () {
+                    content.addClass("open");
+                });
+            }
+        });
     });
 });
 var app = app || {};

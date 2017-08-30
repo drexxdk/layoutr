@@ -9,3 +9,12 @@ $link-color: theme-color("primary");
 $link-decoration: none !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-hover-decoration: underline !default;
+
+$border-radius-base: .5rem;
+
+$padding-x-base: 1rem;
+$padding-y-base: .5rem;
+
+$accordion-border-color: $gray-400;
+$accordion-border-width: rem(1);
+$accordion-border: $accordion-border-width solid $accordion-border-color;

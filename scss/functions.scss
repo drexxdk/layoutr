@@ -2,7 +2,7 @@
 
 @function rem($size) {
 	$remSize: $size / 16;
-	@return #{$remSize}rem;
+    @return $remSize * 1rem;
 }
 
 @function theme-color($key: "primary") {
