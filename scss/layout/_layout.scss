@@ -10,7 +10,7 @@
 @import "section";
 
 #main {
-    min-width: $main-min-width;
+    /*min-width: $main-min-width;*/
     height: 100%;
 
     @include flex-display();
