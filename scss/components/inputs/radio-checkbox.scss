@@ -33,6 +33,7 @@
         @include align-items(center);
         font-size: $font-size-base;
         @include flex-display;
+        width: 100%;
 
         > i {
             display: block;

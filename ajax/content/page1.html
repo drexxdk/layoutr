@@ -172,41 +172,47 @@
             <form id="form" method="post" class="flex-items small">
                 <div class="form-group">
                     <label class="control-label" for="firstname">First name</label>
-                    <input type="text" class="form-control form-control-success" id="firstname" name="firstname" placeholder="First name" />
+                    <div>
+                        <input type="text" class="form-control form-control-success" id="firstname" name="firstname" placeholder="First name" />
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="lastname">Last name</label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" />
+                    <div>
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" />
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+                    <div>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="sr-only">Email</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                    <div>
                         <input id="email" name="email" class="form-control" type="text" placeholder="Email address">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="sr-only">Password</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                    <div>
                         <input id="password" name="password" class="form-control" type="password" placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="confirm_password">Confirm password</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" />
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <input id="agree" type="checkbox">
-                        <label for="agree"><i></i> Please agree to our policy</label>
+                    <div>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" />
                     </div>
                 </div>
                 <div class="form-group">
+                    <div class="checkbox">
+                        <input id="agree" name="agree" type="checkbox">
+                        <label for="agree"><i></i> Please agree to our policy</label>
+                    </div>
+                </div>
+                <div>
                     <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Sign up</button>
                 </div>
             </form>

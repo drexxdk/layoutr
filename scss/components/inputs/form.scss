@@ -1,8 +1,6 @@
 ﻿/// <reference path="../../references" />
 
-
 @mixin input-variant($background, $border, $color) {
-
     input[type=text],
     input[type=password],
     input[type=email] {
@@ -16,39 +14,42 @@ input[type=text],
 input[type=password],
 input[type=email] {
     padding: $padding-y-base $padding-x-base;
+    min-height: $line-height-base + ($padding-y-base * 2);
     @include border-radius($border-radius-base);
     border: $component-border;
 }
 
 .form-group,
-.input-group {
+.form-group > div {
     @include flex-display;
     @include flex-wrap(wrap);
     @include align-items(flex-start);
     flex-grow: 1;
+}
+
+.form-group {
 
     > label {
         padding-right: $spacer;
         width: $form-label-width;
+        line-height: $line-height-base + ($padding-y-base * 2);
     }
-}
 
-.form-group {
-    > .input-group,
-    > input {
+    input[type=text],
+    input[type=password],
+    input[type=email] {
+        width: 100%;
+    }
+
+    > div {
+        min-width: $form-input-min-width;
         width: calc(100% - #{$form-label-width});
     }
 
-    > .input-group {
-        > input {
-            flex-grow: 1;
-        }
-    }
-
     &.danger {
-        > em {
+        em {
             color: theme-color("danger");
-            margin: ($spacer / 2) 0 $spacer $form-label-width;
+            margin: ($spacer / 2) 0 $spacer 0;
         }
     }
 

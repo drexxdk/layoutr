@@ -771,7 +771,7 @@ app.addValidation = function (form) {
         },
         errorElement: "em",
         errorPlacement: function (error, element) {
-            element.parents('.form-group').append(error);
+            element.parent().append(error);
         },
         highlight: function (element, errorClass, validClass) {
             $(element).parents(".form-group").addClass("danger").removeClass("success");
