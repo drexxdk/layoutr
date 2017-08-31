@@ -91,9 +91,9 @@ $(function () {
             if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
                 var target = $(e.target);
                 if (!target.closest("#loading").length && !target.closest(".aside").length) {
-                    if (app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    if (app.main.hasClass('left-open') && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
                         app.main.removeClass('left-open');
-                    } else if (app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                    } else if (app.main.hasClass('right-open') && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
                         app.main.removeClass('right-open');
                     }
                     app.checkGoogleMaps();
