@@ -890,7 +890,7 @@ $(function () {
 
         $this.find('#font-size').slider({
             min: 12,
-            max: 32,
+            max: 20,
             step: 2,
             value: 16,
             tooltip: "hide"

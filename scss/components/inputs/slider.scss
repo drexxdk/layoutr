@@ -1,7 +1,5 @@
 /// <reference path="../../references" />
 
-$slider-line-height: 1.5rem;
-
 .slider {
     display: block;
     vertical-align: middle;
@@ -12,14 +10,14 @@ $slider-line-height: 1.5rem;
         height: $slider-line-height;
 
         .slider-track {
-            height: $slider-line-height /2;
+            height: $slider-line-height / 2;
             width: 100%;
             margin-top: -$slider-line-height / 4;
             top: 50%;
             left: 0;
         }
 
-        .slider-selection, .slider-track-low, .slider-track-high {
+        .slider-selection {
             height: 100%;
             top: 0;
             bottom: 0;
@@ -28,17 +26,6 @@ $slider-line-height: 1.5rem;
         .slider-tick,
         .slider-handle {
             margin-left: -$slider-line-height/2;
-
-            &.triangle {
-                position: relative;
-                top: 50%;
-                transform: translateY(-50%);
-                border-width: 0 ($slider-line-height / 2) ($slider-line-height / 2) ($slider-line-height / 2);
-                width: 0;
-                height: 0;
-                border-bottom-color: #0480BE;
-                margin-top: 0;
-            }
         }
 
         .slider-tick-container {
@@ -67,32 +54,13 @@ $slider-line-height: 1.5rem;
             bottom: 0;
         }
 
-        .slider-track-low, .slider-track-high {
-            width: 100%;
-            left: 0;
-            right: 0;
-        }
-
         .slider-tick,
         .slider-handle {
-            margin-top: -$slider-line-height/2;
-
-            &.triangle {
-                border-width: ($slider-line-height / 2) 0 ($slider-line-height / 2) ($slider-line-height / 2);
-                width: 1px;
-                height: 1px;
-                border-left-color: #0480BE;
-                margin-left: 0;
-            }
+            margin-top: -$slider-line-height / 2;
         }
     }
 
     &.slider-disabled {
-        .slider-handle,
-        .slider-track {
-            background-color: #F7F7F7;
-        }
-
         .slider-track {
             cursor: not-allowed;
         }
@@ -122,91 +90,52 @@ $slider-line-height: 1.5rem;
         display: none;
     }
 }
+.slider-track,
+.slider-selection,
+.slider-tick,
+.slider-selection.tick-slider-selection {
+    background-color: $slider-background-color-1;
+}
 
 .slider-track {
-    background-color: #F7F7F7;
     @include border-radius($border-radius-base);
     position: absolute;
     cursor: pointer;
 }
 
 .slider-selection {
-    background-color: #F7F7F7;
     @include border-radius($border-radius-base);
     position: absolute;
 }
 
-.slider-selection.tick-slider-selection {
-    background-color: #F7F7F7;
-}
-
-.slider-track-low, .slider-track-high {
-    position: absolute;
-    background: transparent;
-    border-radius: slider_border-radius($border-radius-base);
-}
-
 .slider-handle {
-    background-color: #0E90D2;
     position: absolute;
     top: 0;
     width: $slider-line-height;
     height: $slider-line-height;
-    background-color: #337AB7;
-    border: 0px solid transparent;
+    background-color: $slider-background-color-2;
+    border: none;
     cursor: pointer;
 
     &.round {
         @include border-radius($slider-line-height);
     }
-
-    &.triangle {
-        background: transparent none;
-    }
-
-    &.custom {
-        background: transparent none;
-
-        &::before {
-            line-height: $slider-line-height;
-            font-size: 20px;
-            content: '\2605'; //unicode star character
-            color: #726204;
-        }
-    }
 }
 
 .slider-tick {
-    background-color: #F7F7F7;
     @include box-sizing(border-box);
     position: absolute;
     width: $slider-line-height;
     height: $slider-line-height;
     filter: none;
     opacity: 0.8;
-    border: 0px solid transparent;
+    border: none;
 
     &.round {
-        border-radius: 50%;
-    }
-
-    &.triangle {
-        background: transparent none;
-    }
-
-    &.custom {
-        background: transparent none;
-
-        &::before {
-            line-height: $slider-line-height;
-            font-size: 20px;
-            content: '\2605'; //unicode star character
-            color: #726204;
-        }
+        @include border-radius(50%);
     }
 
     &.in-selection {
-        background-color: #F7F7F7;
         opacity: 1;
     }
 }

@@ -12,6 +12,20 @@
     -o-transform: $string;
 }
 
+@mixin translateX($string) {
+    -webkit-transform: translateX($string);
+    -moz-transform: translateX($string);
+    -ms-transform: translateX($string);
+    -o-transform: translateX($string);
+}
+
+@mixin translateY($string) {
+    -webkit-transform: translateY($string);
+    -moz-transform: translateY($string);
+    -ms-transform: translateY($string);
+    -o-transform: translateY($string);
+}
+
 @mixin scale ($factor) {
     -webkit-transform: scale($factor);
     -moz-transform: scale($factor);
