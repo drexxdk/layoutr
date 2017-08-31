@@ -7,6 +7,18 @@
         color: $color;
         background-color: $background;
         border-color: $border;
+
+        &:focus {
+            @include box-shadow($input-box-shadow, 0 0 6px lighten($color, 20%));
+        }
+    }
+
+    input[type=checkbox],
+    input[type=radio] {
+        & + label > i {
+            border-color: $border;
+            background-color: $background;
+        }
     }
 }
 
@@ -39,6 +51,11 @@ input[type=email] {
     input[type=password],
     input[type=email] {
         width: 100%;
+        @include box-shadow($input-box-shadow);
+
+        &:focus {
+            @include box-shadow($input-focus-box-shadow);
+        }
     }
 
     > div {

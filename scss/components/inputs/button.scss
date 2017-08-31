@@ -3,10 +3,16 @@
 @mixin button-variant($background, $border, $active-background: darken($background, 7.5%)) {
     @include color-yiq($background);
     background-color: $background;
+    @include box-shadow($btn-box-shadow);
 
     &:hover {
         @include color-yiq($background);
         background-color: $active-background;
+    }
+
+    &:focus,
+    &.focus {
+        box-shadow: $btn-box-shadow, 0 0 0 3px rgba($border, .5);
     }
 }
 

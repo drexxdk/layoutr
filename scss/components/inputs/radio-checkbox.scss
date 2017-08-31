@@ -55,3 +55,22 @@
         @include border-radius(50%);
     }
 }
+
+.checkbox {
+    > label > i > svg {
+        display: none;
+    }
+
+    > input:checked + label > i {
+        padding: rem(2px);
+
+        > svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            position: relative;
+            fill: $white;
+        }
+    }
+}
