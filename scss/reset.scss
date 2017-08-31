@@ -11,13 +11,17 @@ body {
     height: 100%;
 }
 
+html {
+    font-size: rem($rem-difference);
+}
+
 body {
     font-family: $font-family-base;
     background-color: $body-bg;
     color: $body-color;
     font-size: $font-size-base;
     font-weight: $font-weight-base;
-    line-height:$line-height-base;
+    line-height: $line-height-base;
 }
 
 button {

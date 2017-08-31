@@ -4,22 +4,25 @@ $aside-extra-spacing: 10rem; // Google Chrome Android fix
 
 $spacer: 1rem;
 
-$layout-border-width: rem(1);
-$aside-width: rem(230) + $layout-border-width;
+$layout-border-width: rem(1px);
+$aside-width: rem(230px) + $layout-border-width;
 $layout-border: $layout-border-width solid $layout-border-color;
 
 $main-min-width: $aside-width + $aside-width;
 
-$loading-width: rem(200);
+$loading-width: rem(200px);
 
-$header-height: rem(50) + $layout-border-width;
+$header-height: rem(50px) + $layout-border-width;
 
-$footer-height: rem(50) + $layout-border-width;
+$footer-height: rem(50px) + $layout-border-width;
 
-$content-min-width: rem(500);
-$content-max-width: rem(1280);
+$content-min-width: rem(500px);
+$content-max-width: rem(1280px);
 $content-header-height: 40vh;
-$content-header-min-height: rem(250);
+$content-header-min-height: rem(250px);
 
-$breakpoint-one-column: $aside-width + $content-min-width;
-$breakpoint-two-columns: $aside-width + $content-min-width + $content-min-width;
+// em and rem should not be used in media queries, since they are based on browser font size, instead of website font size
+// there is currently no workaround for this browser limitations
+$breakpoint-main-min-width: px($main-min-width);
+$breakpoint-one-column: px($aside-width + $content-min-width);
+$breakpoint-two-columns: px($aside-width + $content-min-width + $content-min-width);

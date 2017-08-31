@@ -16,12 +16,12 @@ $padding-x-base: 1rem;
 $padding-y-base: .5rem;
 
 $component-border-color: $gray-400;
-$component-border-width: rem(1);
+$component-border-width: rem(1px);
 $component-border: $component-border-width solid $component-border-color;
 
 // components
 $tree-hover-background-color: $gray-300;
 $tree-highlight-background-color: $gray-200;
 
-$form-label-width:rem(150);
-$form-input-min-width:rem(200);
+$form-label-width:rem(150px);
+$form-input-min-width:rem(200px);

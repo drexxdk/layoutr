@@ -1,27 +1,24 @@
 ﻿/// <reference path="../references" />
 
 @mixin breakpoint-main-min-width {
-    @media (min-width: $main-min-width) {
+    @media (min-width: $breakpoint-main-min-width) {
         @content;
     }
 }
 
 @mixin breakpoint-small-one-column {
-
     @media (max-width: $breakpoint-one-column) {
         @content;
     }
 }
 
 @mixin breakpoint-medium-one-column {
-
     @media (min-width: $breakpoint-one-column) {
         @content;
     }
 }
 
 @mixin breakpoint-two-columns {
-
     @media (min-width: $breakpoint-two-columns) {
         @content;
     }
