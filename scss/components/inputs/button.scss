@@ -12,19 +12,26 @@
 
     &:focus,
     &.focus {
-        box-shadow: $btn-box-shadow, 0 0 0 3px rgba($border, .5);
+        box-shadow: $btn-box-shadow, 0 0 0 3px lighten($border, 20%);
+        z-index: 1;
     }
 }
 
 .btn-group {
     @include flex-display;
     @include flex-wrap(wrap);
-    @include border-radius(.5rem);
-    overflow: hidden;
 
     > .btn {
         flex-grow: 1;
         @include border-radius(0);
+
+        &:first-of-type {
+            @include border-radiuses-ignore-0(.5rem, 0, 0, .5rem);
+        }
+
+        &:last-of-type {
+            @include border-radiuses-ignore-0(0, .5rem, .5rem, 0);
+        }
     }
 }
 
