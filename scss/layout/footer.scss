@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 footer {
-    z-index: 97;
+    z-index: $footer-z-index;
     height: $footer-height;
     padding: 0 $spacer;
     border-top: $layout-border-width solid $footer-border-color;

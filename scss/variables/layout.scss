@@ -26,3 +26,9 @@ $content-header-min-height: rem(250px);
 $breakpoint-main-min-width: px($main-min-width);
 $breakpoint-one-column: px($aside-width + $content-min-width);
 $breakpoint-two-columns: px($aside-width + $content-min-width + $content-min-width);
+
+$loading-z-index: 9999;
+$header-z-index: 99;
+$aside-z-index: 98;
+$footer-z-index: 97;
+$overlay-z-index: 96;

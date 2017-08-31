@@ -17,6 +17,18 @@
 
     @include flex-direction(column);
 
+    &.left-overlay.left-open #content:before,
+    &.right-overlay.right-open #content:before {
+        content: '';
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: $overlay-z-index;
+        background-color: $overlay-background-color;
+    }
+
     &:not(.msedge):not(.msie).transitions {
         // ie/edge doesn't support transition for values that uses calc()
         #left {
