@@ -51,12 +51,14 @@ $(function () {
         app.content.find('.accordion').on("click", ".headline", function () {
             var content = $(this).next();
             if (content.hasClass('open')) {
-                content.removeClass('open').slideUp("800");
+                content
+                    .removeClass('open')
+                    .slideUp("800");
             } else {
-                content.parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
-                content.slideToggle("800", function () {
-                    content.addClass("open");
-                });
+                content
+                    .addClass("open")
+                    .slideToggle("800")
+                    .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
             }
         });
     });
