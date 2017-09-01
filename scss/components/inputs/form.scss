@@ -67,6 +67,7 @@ input[type=email] {
         em {
             color: theme-color("danger");
             margin: ($spacer / 2) 0 $spacer 0;
+            width:100%;
         }
     }
 
