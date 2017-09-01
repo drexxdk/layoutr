@@ -21,17 +21,13 @@
     @include flex-display;
     @include flex-wrap(wrap);
 
-    > .btn {
+
+    &.expand > .btn {
         flex-grow: 1;
+    }
+
+    > .btn {
         @include border-radius(0);
-
-        &:first-of-type {
-            @include border-radiuses-ignore-0(.5rem, 0, 0, .5rem);
-        }
-
-        &:last-of-type {
-            @include border-radiuses-ignore-0(0, .5rem, .5rem, 0);
-        }
     }
 }
 
