@@ -38,19 +38,24 @@ $(function () {
         app.addValidation(
             app.content.find('#form'),
             {
-                firstname: "required",
-                lastname: "required",
+                firstname: {
+                    required: true,
+                    minlength: 2
+                },
+                lastname: {
+                    required: true,
+                    minlength: 2
+                },
                 username: {
                     required: true,
                     minlength: 2
                 },
                 password: {
                     required: true,
-                    minlength: 5
+                    password: true
                 },
                 confirm_password: {
                     required: true,
-                    minlength: 5,
                     equalTo: "#password"
                 },
                 email: {
@@ -60,19 +65,23 @@ $(function () {
                 agree: "required"
             },
             {
-                firstname: "Please enter your firstname",
-                lastname: "Please enter your lastname",
+                firstname: {
+                    required: "Please enter your firstname",
+                    minlength: "Your lastname must consist of at least 2 characters"
+                },
+                lastname: {
+                    required: "Please enter your lastname",
+                    minlength: "Your lastname must consist of at least 2 characters"
+                },
                 username: {
                     required: "Please enter a username",
                     minlength: "Your username must consist of at least 2 characters"
                 },
                 password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
+                    required: "Please provide a password"
                 },
                 confirm_password: {
                     required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long",
                     equalTo: "Please enter the same password as above"
                 },
                 email: "Please enter a valid email address",
