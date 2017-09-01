@@ -30,9 +30,6 @@ $(function () {
         app.checkGoogleMaps();
     });
 
-    if (!app.isLocalhost) {
-        $.cachedScript('serviceWorker.min.js');
-    }
     $.get('ajax/layout/svg.html', function (data) {
         $(data).prependTo(app.body);
     });
