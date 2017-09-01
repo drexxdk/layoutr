@@ -662,22 +662,26 @@ $(function () {
     app.left.load('ajax/layout/menu.html');
     app.content.load('ajax/content/page1.html', function () {
         app.addValidation(app.content.find('#form'));
-        
-        app.content.find('.accordion').on("click", ".headline", function () {
-            var content = $(this).next();
-            if (content.hasClass('open')) {
-                content
-                    .removeClass('open')
-                    .slideUp("800");
-            } else {
-                content
-                    .addClass("open")
-                    .slideToggle("800")
-                    .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
-            }
-        });
+        app.accordion(app.content.find('.accordion'));
     });
 });
+var app = app || {};
+
+app.accordion = function (élement) {
+    élement.on("click", ".headline", function () {
+        var content = $(this).next();
+        if (content.hasClass('open')) {
+            content
+                .removeClass('open')
+                .slideUp("800");
+        } else {
+            content
+                .addClass("open")
+                .slideToggle("800")
+                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
+        }
+    });
+};
 var app = app || {};
 var googleMaps;
 
