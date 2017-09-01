@@ -18,9 +18,9 @@ app.checkGoogleMaps = function () {
 $(function () {
     app.body.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
+            app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
+            googleMaps = document.getElementById('google-maps').children[0];
             $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
-                app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
-                googleMaps = document.getElementById('google-maps').children[0];
                 var uluru = { lat: -25.363, lng: 131.044 };
                 var map = new google.maps.Map(googleMaps, {
                     zoom: 4,
@@ -34,7 +34,6 @@ $(function () {
                     google.maps.event.trigger(googleMaps, 'resize');
                 });
             });
-
         } else {
             $(googleMaps).toggle();
         }
