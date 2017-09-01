@@ -683,7 +683,7 @@ var googleMaps;
 
 app.checkGoogleMaps = function () {
     if (googleMaps !== undefined) {
-        if (app.main.hasClass(app.transition)) {
+        if (app.main.hasClass('transitions')) {
             setTimeout(function () {
                 google.maps.event.trigger(googleMaps, 'resize');
             }, app.transitionTime);
