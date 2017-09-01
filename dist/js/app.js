@@ -718,16 +718,6 @@ $(function () {
         );
 
         app.accordion(app.content.find('.accordion'));
-        
-        var youtube;
-        app.content.on('click', '#toggle-youtube', function () {
-            if (youtube === undefined) {
-                app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/HZ5m_nlfZe4?ecver=2" allowfullscreen></iframe></div></section>');
-                youtube = app.content.find('#youtube');
-            } else {
-                youtube.toggle();
-            }
-        });
     });
 });
 var app = app || {};
@@ -765,7 +755,7 @@ app.checkGoogleMaps = function () {
     }
 };
 $(function () {
-    app.body.on('click', '#toggle-google-maps', function () {
+    app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
             app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
             googleMaps = document.getElementById('google-maps').children[0];
@@ -785,6 +775,18 @@ $(function () {
             });
         } else {
             $(googleMaps).toggle();
+        }
+    });
+});
+var app = app || {};
+var youtube;
+$(function () {
+    app.content.on('click', '#toggle-youtube', function () {
+        if (youtube === undefined) {
+            app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/HZ5m_nlfZe4?ecver=2" allowfullscreen></iframe></div></section>');
+            youtube = app.content.find('#youtube');
+        } else {
+            youtube.toggle();
         }
     });
 });

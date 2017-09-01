@@ -16,7 +16,7 @@ app.checkGoogleMaps = function () {
     }
 };
 $(function () {
-    app.body.on('click', '#toggle-google-maps', function () {
+    app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
             app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
             googleMaps = document.getElementById('google-maps').children[0];

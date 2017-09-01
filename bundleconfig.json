@@ -21,6 +21,7 @@
       "js/app/app.js",
       "js/app/accordion.js",
       "js/app/googleMaps.js",
+      "js/app/youtube.js",
       "js/app/form.js",
       "js/app/loading.js",
       "js/app/settings.js"
