@@ -6,13 +6,13 @@
     @include box-shadow($btn-box-shadow);
 
     &:hover {
-        @include color-yiq($background);
+        @include color-yiq($active-background);
         background-color: $active-background;
     }
 
     &:focus,
     &.focus {
-        box-shadow: $btn-box-shadow, 0 0 0 3px lighten($border, 20%);
+        box-shadow: $btn-box-shadow, 0 0 0 3px $border;
         z-index: 1;
     }
 }
@@ -69,7 +69,7 @@
 
 @each $color, $value in $theme-colors {
     .btn-#{$color} {
-        @include button-variant($value, $value);
+        @include button-variant($value, theme-color-level($color, -9));
     }
 }
 
