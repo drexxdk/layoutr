@@ -1,5 +1,16 @@
 ﻿[
   {
+    "outputFile": "dist/css/app.css",
+    "inputFile": "scss/app.scss",
+    "minify": {
+      "enabled": false
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
+  },
+  {
     "outputFile": "dist/css/app.min.css",
     "inputFile": "scss/app.scss",
     "minify": {
@@ -7,7 +18,7 @@
     },
     "includeInProject": true,
     "options": {
-      "sourceMap": true
+      "sourceMap": false
     }
   }
 ]

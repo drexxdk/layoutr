@@ -113,6 +113,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ajax\layout\menu.html" />
+    <Content Include="ajax\layout\settings.html" />
+    <Content Include="ajax\layout\svg.html" />
     <Content Include="dist\css\app.min.css" />
     <Content Include="dist\img\content-header-1024.jpg" />
     <Content Include="dist\img\content-header-1280.jpg" />
@@ -128,8 +131,6 @@
     <Content Include="dist\img\favicon\favicon.ico" />
     <Content Include="dist\img\favicon\mstile-150x150.png" />
     <Content Include="dist\img\favicon\safari-pinned-tab.svg" />
-    <Content Include="dist\img\svg\add-plus-button.svg" />
-    <Content Include="dist\img\svg\horizontal-line-remove-button.svg" />
     <Content Include="dist\js\app.js" />
     <Content Include="dist\js\app.min.js">
       <DependentUpon>app.js</DependentUpon>
@@ -140,12 +141,13 @@
     </Content>
     <Content Include="ajax\content\page1.html" />
     <Content Include="index.html" />
+    <Content Include="js\app\accordion.js" />
     <Content Include="js\app\app.js" />
     <Content Include="js\app\form.js" />
     <Content Include="js\app\googleMaps.js" />
     <Content Include="js\app\loading.js" />
     <Content Include="js\app\settings.js" />
-    <Content Include="js\vendors\bootstrap\bootstrap-slider.min.js" />
+    <Content Include="js\vendors\bootstrap-slider.min.js" />
     <Content Include="js\vendors\bowser.js" />
     <Content Include="js\vendors\jquery\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
@@ -230,9 +232,7 @@
     <Content Include="scss\functions.scss" />
     <Content Include="scss\references.scss" />
     <Content Include="scss\components\_components.scss" />
-    <Content Include="scss\components\svg.scss" />
     <Content Include="scss\layout\section.scss" />
-    <Content Include="scss\components\inputs.scss" />
     <Content Include="scss\plugins\bootstrap\mixins\_alert.scss" />
     <Content Include="scss\plugins\bootstrap\mixins\_background-variant.scss" />
     <Content Include="scss\plugins\bootstrap\mixins\_badge.scss" />
@@ -263,10 +263,20 @@
     <Content Include="scss\plugins\bootstrap\mixins\_text-truncate.scss" />
     <Content Include="scss\plugins\bootstrap\mixins\_transition.scss" />
     <Content Include="scss\plugins\bootstrap\mixins\_visibility.scss" />
-    <Content Include="scss\plugins\bootstrap-slider\bootstrap-slider.scss" />
-    <Content Include="scss\plugins\bootstrap-slider\_mixins.scss" />
-    <Content Include="scss\plugins\bootstrap-slider\_rules.scss" />
-    <Content Include="scss\plugins\bootstrap-slider\_variables.scss" />
+    <Content Include="scss\components\inputs\slider.scss" />
+    <Content Include="scss\variables\colors.scss" />
+    <Content Include="scss\mixins\color-yiq.scss" />
+    <Content Include="scss\components\inputs\button.scss" />
+    <Content Include="scss\components\inputs\_inputs.scss" />
+    <Content Include="scss\components\inputs\radio-checkbox.scss" />
+    <Content Include="scss\variables\fonts.scss" />
+    <Content Include="scss\components\headlines.scss" />
+    <Content Include="scss\components\alert.scss" />
+    <Content Include="scss\reset.scss" />
+    <Content Include="scss\variables\layout.scss" />
+    <Content Include="scss\components\accordion.scss" />
+    <Content Include="scss\components\inputs\form.scss" />
+    <Content Include="scss\components\embed-responsive.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -321,7 +331,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\source\repos\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\source\repos\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets'))" />
   </Target>
+  <Import Project="..\..\..\source\repos\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets" Condition="Exists('..\..\..\source\repos\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
