@@ -652,8 +652,18 @@ $(function () {
         var $this = $(this);
         if ($this.is('#toggle-menu')) {
             app.main.toggleClass('left-open').removeClass('right-open');
+            if (app.main.hasClass('left-open')) {
+                $(app.left.children('content')).focus();
+            } else {
+                app.html.focus();
+            }
         } else if ($this.is('#toggle-settings')) {
             app.main.toggleClass('right-open').removeClass('left-open');
+            if (app.main.hasClass('left-open')) {
+                $(app.right.children('content')).focus();
+            } else {
+                app.html.focus();
+            }
         }
         app.checkGoogleMaps();
     });

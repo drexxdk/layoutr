@@ -16,14 +16,7 @@
         cursor: pointer;
         opacity: 0;
 
-        &:checked + label > i:before {
-            position: absolute;
-            content: '';
-            display: block;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
+        &:checked + label > i {
             background-color: theme-color("primary");
         }
     }
