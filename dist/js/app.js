@@ -659,7 +659,7 @@ $(function () {
             }
         } else if ($this.is('#toggle-settings')) {
             app.main.toggleClass('right-open').removeClass('left-open');
-            if (app.main.hasClass('left-open')) {
+            if (app.main.hasClass('right-open')) {
                 $(app.right.children('content')).focus();
             } else {
                 app.html.focus();
