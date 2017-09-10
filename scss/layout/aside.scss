@@ -46,12 +46,9 @@ aside {
             visibility: visible;
         }
 
-        &:focus {
-            background-color: red;
-        }
-
         > div {
             padding: 0 $spacer;
+            background-color: red;
         }
 
         &:first-child > div {
