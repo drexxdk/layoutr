@@ -1,15 +1,19 @@
 ﻿/// <reference path="../references" />
 
-header {
+#main:not(.mobile) header {
     position: fixed;
-    z-index: $header-z-index;
     top: 0;
     right: 0;
     left: 0;
+}
+
+header {
     height: $header-height;
     border-bottom: $layout-border;
     background-color: $layout-background-color;
     @include flex-display;
+    flex-shrink:0;
+    z-index: $header-z-index;
 
     > .title {
         overflow: hidden;

@@ -4,7 +4,7 @@ aside {
     position: fixed;
     z-index: $aside-z-index;
     top: -$aside-extra-spacing;
-    padding-top: $aside-extra-spacing + $header-height;
+    padding-top: $aside-extra-spacing;
     padding-bottom: $aside-extra-spacing;
     height: calc(100% + #{$aside-extra-spacing * 2});
     width: 100%;

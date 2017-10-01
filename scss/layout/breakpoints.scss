@@ -49,20 +49,16 @@
 
     @include breakpoint-medium-one-column {
         &.left-open {
-            #content {
-                margin-left: $aside-width;
-            }
-
+            header,
+            #content,
             footer {
                 margin-left: $aside-width;
             }
         }
 
         &.right-open {
-            #content {
-                margin-right: $aside-width;
-            }
-
+            header,
+            #content,
             footer {
                 margin-right: $aside-width;
             }
@@ -93,12 +89,21 @@
                 left: $aside-width !important;
             }
 
+            &.footer-fixed.mobile #content > .header,
             &:not(.footer-fixed) #content > .header {
                 bottom: 0;
             }
 
-            &.footer-fixed #content > .header {
+            &.footer-fixed:not(.mobile) #content > .header {
                 bottom: $footer-height;
+            }
+
+            &.mobile #content > .header {
+                top: 0;
+            }
+
+            &:not(.mobile) #content > .header {
+                top: $header-height;
             }
 
             #content {
@@ -106,7 +111,6 @@
 
                 > .header {
                     position: fixed;
-                    top: $header-height;
                     left: 0;
                     width: 50%;
                     height: auto;

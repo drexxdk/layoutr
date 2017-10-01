@@ -56,7 +56,6 @@ C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.Deploym
 C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\System.Web.WebPages.Razor.xml
 C:\Users\Frederik\Documents\GitHub\panels\Panels\bin\ru-ru\BundleTransformer.Core.resources.dll
 C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.csprojResolveAssemblyReference.cache
-C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.csproj.CoreCompileInputs.cache
 C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.dll
 C:\Users\Frederik\Documents\GitHub\panels\Panels\obj\Debug\Panels.pdb
 C:\Users\Irene\Documents\GitHub\Panels\obj\Debug\Panels.dll

@@ -39,6 +39,7 @@
             @include transition(right 0.4s ease-in-out);
         }
 
+        header,
         #content,
         footer {
             @include transition(margin 0.4s ease-in-out);
@@ -65,7 +66,7 @@
         }
     }
 
-    &.footer-fixed {
+    &.footer-fixed:not(.mobile) {
         #container > div {
             margin-bottom: $footer-height;
         }
@@ -78,8 +79,11 @@
         }
     }
 
-    #container {
+    &:not(.mobile) #container {
         margin-top: $header-height;
+    }
+
+    #container {
         flex-grow: 1;
 
         @include flex-display;
