@@ -796,10 +796,10 @@ app.dropdown = function (dropdowns) {
 
 };
 var app = app || {};
-var googleMaps;
+var googleMaps, google;
 
 app.checkGoogleMaps = function () {
-    if (googleMaps !== undefined) {
+    if (googleMaps !== undefined && google !== undefined) {
         if (app.main.hasClass('transitions')) {
             setTimeout(function () {
                 google.maps.event.trigger(googleMaps, 'resize');

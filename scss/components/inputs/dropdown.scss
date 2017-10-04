@@ -6,8 +6,6 @@ select {
 
 $dropdown-height: rem(30px);
 $dropdown-border-width: rem(1px);
-$dropdown-border-color: red;
-$dropdown-border: $dropdown-border-width solid $dropdown-border-color;
 $dropdown-padding: $dropdown-height / 3;
 $dropdown-border-radius: rem(5);
 
@@ -36,7 +34,7 @@ $dropdown-border-radius: rem(5);
     > div {
         @include flex-display();
         @include border-radius($dropdown-border-radius);
-        border: $dropdown-border;
+        border: $component-border;
 
         > label {
             flex-grow: 1;
@@ -52,7 +50,7 @@ $dropdown-border-radius: rem(5);
         display: none;
         list-style-type: none;
         background-color: orange;
-        border: $dropdown-border;
+        border: $component-border;
         position: absolute;
         top: calc(100% - #{$dropdown-border-width});
         left: 0;
@@ -69,8 +67,8 @@ $dropdown-border-radius: rem(5);
             }
 
             & + li {
-                height: $dropdown-height + $dropdown-border-width;
-                border-top: $dropdown-border;
+                height: $dropdown-height + $component-border-width;
+                border-top: $component-border;
             }
         }
     }
