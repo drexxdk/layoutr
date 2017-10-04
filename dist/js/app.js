@@ -762,11 +762,11 @@ app.dropdown = function (dropdowns) {
         }
         var html = [];
         html.push('<div class="dropdown">')
-        html.push('<div class="btn btn-light"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-plus"></use></svg></div>');
+        html.push('<div><div class="btn btn-light"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-plus"></use></svg></div></div>');
         html.push('<ul>');
         $this.children().each(function (index) {
             var $that = $(this);
-            html.push('<li data-id="' + index + '" class="btn btn-light' + ($that.is(':selected') ? ' selected' : '') + '">' + $that.text() + '</li>');
+            html.push('<li data-id="' + index + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn btn-light">' + $that.text() + '</div></li>');
         });
         html.push('</ul>');
         html.push('</div>');
@@ -779,12 +779,10 @@ app.dropdown = function (dropdowns) {
         });
         dropdown.on('click', 'li', function () {
             var $that = $(this);
-            if ($that.is(':selected')) {
-
-            } else {
+            if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
-                dropdown.children('div').children('label').text($that.text());
+                dropdown.children('div').children('div').children('label').text($that.text());
             }
             dropdown.removeClass('open');
         });

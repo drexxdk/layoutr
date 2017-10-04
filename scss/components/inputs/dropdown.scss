@@ -4,9 +4,6 @@ select {
     display: none;
 }
 
-$dropdown-height: rem(30px);
-$dropdown-border-width: rem(1px);
-$dropdown-padding: $dropdown-height / 3;
 $dropdown-border-radius: rem(5);
 
 .dropdown {
@@ -14,7 +11,7 @@ $dropdown-border-radius: rem(5);
     cursor: pointer;
     position: relative;
 
-    > div > label,
+    > div > div > label,
     > ul > li {
         white-space: nowrap;
         overflow: hidden;
@@ -32,13 +29,18 @@ $dropdown-border-radius: rem(5);
     }
 
     > div {
-        @include flex-display();
         @include border-radius($dropdown-border-radius);
         border: $component-border;
+        overflow:hidden;
 
-        > label {
-            flex-grow: 1;
-            cursor: pointer;
+        > div {
+            @include flex-display();
+                @include border-radius(0);
+
+            > label {
+                flex-grow: 1;
+                cursor: pointer;
+            }
         }
     }
 
@@ -49,25 +51,30 @@ $dropdown-border-radius: rem(5);
     > ul {
         display: none;
         list-style-type: none;
-        background-color: orange;
+        background-color: $gray-100;
         border: $component-border;
         position: absolute;
-        top: calc(100% - #{$dropdown-border-width});
+        top: calc(100% - #{$component-border-width});
         left: 0;
         right: 0;
         z-index: $dropdown-z-index;
         @include border-radiuses(0, 0, $dropdown-border-radius, $dropdown-border-radius);
+        overflow: auto;
+        max-height: ($btn-height * 4) + ($component-border-width * 4);
 
         > li {
-            height: $dropdown-height;
-            @include border-radius(0);
+
+            > div {
+                @include border-radius(0);
+            }
 
             &.selected {
-                background-color: yellow;
+                > div {
+                    background-color: yellow;
+                }
             }
 
             & + li {
-                height: $dropdown-height + $component-border-width;
                 border-top: $component-border;
             }
         }
