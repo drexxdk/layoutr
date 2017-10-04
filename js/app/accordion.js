@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
-app.accordion = function (élement) {
-    élement.on("click", ".headline", function () {
+app.accordion = function (elements) {
+    elements.on("click", ".headline", function () {
         var content = $(this).next();
         if (content.hasClass('open')) {
             content

@@ -103,5 +103,6 @@ $(function () {
         );
 
         app.accordion(app.content.find('.accordion'));
+        app.dropdown(app.content.find('select'));
     });
 });
