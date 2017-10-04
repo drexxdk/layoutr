@@ -12,6 +12,7 @@ aside {
     background-color: $layout-background-color;
     flex-shrink: 0;
     flex-grow: 1;
+    margin-top: $header-height;
 
     @include flex-direction(column);
 

@@ -65,6 +65,8 @@
         }
 
         aside {
+            margin-top: 0;
+
             > div {
                 @include transition(visibility 0.2s);
 
