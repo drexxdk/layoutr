@@ -15,6 +15,7 @@
       "js/vendors/jquery/jquery-3.1.1.min.js",
       "js/vendors/jquery/jquery-3.1.1.min.map.js",
       "js/vendors/jquery/jquery.validate.min.js",
+      //"js/vendors/jquery/additional-methods.min.js",
       "js/app/jquery-extensions.js",
       "js/vendors/bootstrap-slider.min.js",
       "js/vendors/bowser.js",

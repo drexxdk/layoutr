@@ -75,6 +75,7 @@ $(function () {
                     required: true,
                     email: true
                 },
+                dropdown_1: "required",
                 agree: "required"
             },
             {
@@ -98,6 +99,9 @@ $(function () {
                     equalTo: "Please enter the same password as above"
                 },
                 email: "Please enter a valid email address",
+                dropdown_1: {
+                    required: "Please select an option"
+                },
                 agree: "Please accept our policy"
             }
         );

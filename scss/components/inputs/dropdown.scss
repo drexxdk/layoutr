@@ -1,13 +1,20 @@
 ﻿/// <reference path="../../references" />
 
 select {
-    display: none;
+    /*display: none;*/
+    font-size: 0;
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    width: 0;
+    height: 0;
 }
 
 $dropdown-border-radius: rem(5);
 
 .dropdown {
     position: relative;
+    width: 100%;
 
     &.ellipsis {
 
@@ -33,15 +40,39 @@ $dropdown-border-radius: rem(5);
         }
     }
 
+    &.direction-up {
+        &.open {
+            > div {
+                @include border-radiuses(0, 0, $dropdown-border-radius, $dropdown-border-radius);
+
+                > div > svg {
+                    @include rotate(90);
+                }
+            }
+        }
+
+        > div > div > svg {
+            @include rotate(270);
+        }
+
+        > ul {
+            top: auto;
+            bottom: calc(100% - #{$component-border-width});
+            @include border-radiuses($dropdown-border-radius, $dropdown-border-radius, 0, 0);
+        }
+    }
+
     &.open {
         > div {
             @include border-radiuses($dropdown-border-radius, $dropdown-border-radius, 0, 0);
 
-            > div {
-                > svg {
-                    @include rotate(270);
-                }
+            > div > svg {
+                @include rotate(270);
             }
+        }
+
+        > ul {
+            display: block;
         }
     }
 
@@ -49,6 +80,7 @@ $dropdown-border-radius: rem(5);
         @include border-radius($dropdown-border-radius);
         border: $component-border;
         overflow: hidden;
+        width: 100%;
 
         > div {
             @include flex-display();
@@ -63,10 +95,6 @@ $dropdown-border-radius: rem(5);
                 @include rotate(90);
             }
         }
-    }
-
-    &.open ul {
-        display: block;
     }
 
     > ul {
@@ -88,7 +116,7 @@ $dropdown-border-radius: rem(5);
             > div {
                 @include border-radius(0);
                 display: block;
-                text-align:center;
+                text-align: center;
             }
 
             &.selected {

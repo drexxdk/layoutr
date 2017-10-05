@@ -3,8 +3,10 @@
 @mixin input-variant($background, $border, $color) {
     input[type=text],
     input[type=password],
-    input[type=email] {
+    input[type=email],
+    .dropdown > div > div {
         color: $color;
+        fill: $color;
         background-color: $background;
         border-color: $border;
 
