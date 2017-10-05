@@ -85,6 +85,13 @@ $dropdown-border-radius: rem(5);
         > div {
             @include flex-display();
             @include border-radius(0);
+            @extend .btn;
+
+            @each $color, $value in $theme-colors {
+                &.btn-#{$color} {
+                    @extend .btn-#{$color};
+                }
+            }
 
             > label {
                 flex-grow: 1;

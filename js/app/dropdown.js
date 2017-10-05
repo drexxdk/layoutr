@@ -13,8 +13,20 @@ app.dropdown = function (dropdowns) {
             ($this.hasClass('align-left') ? ' align-left' : '') +
             ($this.hasClass('align-right') ? ' align-right' : '') +
             ($this.hasClass('direction-up') ? ' direction-up' : '') +
-            '">')
-        html.push('<div><div class="btn btn-secondary"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div></div>');
+            '">');
+
+        //var xd = $this.is('[class^="btn"]');
+        //debugger;
+
+        var attr = $this.attr('class');
+        var btn = '';
+        if (typeof attr !== typeof undefined && attr !== false) {
+            var temp = $this.attr("class").match(/btn-[\w-]*\b/);
+            if (temp !== null && temp !== undefined) {
+                btn = temp;
+            }
+        }
+        html.push('<div><div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div></div>');
         html.push('<ul>');
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this);
