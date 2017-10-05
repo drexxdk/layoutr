@@ -19,7 +19,7 @@ app.dropdown = function (dropdowns) {
         //debugger;
 
         var attr = $this.attr('class');
-        var btn = '';
+        var btn = 'btn-primary';
         if (typeof attr !== typeof undefined && attr !== false) {
             var temp = $this.attr("class").match(/btn-[\w-]*\b/);
             if (temp !== null && temp !== undefined) {
