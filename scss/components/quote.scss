@@ -14,34 +14,35 @@
         }
 
         > .author {
-            font-size: $font-size-base;
+            font-size: $font-size;
         }
     }
 
     > .img {
         width: $quote-img-width;
         height: $quote-img-width;
-        background-size: cover;
         flex-shrink: 0;
-        @include border-radius($border-radius-base);
+        @include border-radius($component-border-radius);
+        position: relative;
+        overflow: hidden;
     }
 
     > .text {
         padding: $spacer;
 
         > p {
-            font-size: $font-size-base;
+            font-size: $font-size;
 
             > svg {
-                width: $font-size-base;
-                height: $font-size-base;
+                width: $font-size;
+                height: $font-size;
             }
         }
 
         > .author {
             display: block;
             margin-top: $spacer / 2;
-            opacity: .6;
+            opacity: $font-light-opacity;
             font-size: $font-size-sm;
         }
     }

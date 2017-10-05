@@ -1,15 +1,15 @@
 ﻿
-$white: #fff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #6F7780 !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
-$black: #000 !default;
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6F7780;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
 
 $grays: ( 
     100: $gray-100, 
@@ -21,18 +21,18 @@ $grays: (
     700: $gray-700, 
     800: $gray-800, 
     900: $gray-900 
-) !default;
+);
 
-$blue: #0072ED !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$pink: #e83e8c !default;
-$red: #dc3545 !default;
-$orange: #fd7e14 !default;
-$yellow: #ffc107 !default;
-$green: #218838 !default;
-$teal: #20c997 !default;
-$cyan: #138294 !default;
+$blue: #0072ED;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #218838;
+$teal: #20c997;
+$cyan: #138294;
 
 $colors: ( 
     blue: $blue, 
@@ -48,7 +48,7 @@ $colors: (
     white: $white, 
     gray: $gray-600, 
     gray-dark: $gray-800 
-) !default;
+);
 
 $theme-colors: ( 
     primary: $blue, 
@@ -59,13 +59,13 @@ $theme-colors: (
     danger: $red, 
     light: $gray-100, 
     dark: $gray-800 
-) !default;
+);
 
 // Set a specific jump point for requesting color jumps
-$theme-color-interval: 8% !default;
+$theme-color-interval: 8%;
 
-$body-bg: #f1f1f1 !default;
-$body-color: $gray-900 !default;
+$body-bg: #f1f1f1;
+$body-color: $gray-900;
 
 // layout
 $layout-border-color: $gray-400;
@@ -75,3 +75,5 @@ $footer-color: $gray-400;
 $footer-background-color: $gray-800;
 $footer-border-color: $gray-900;
 $overlay-background-color: rgba(0,0,0,.5);
+
+$font-light-opacity:.6; 

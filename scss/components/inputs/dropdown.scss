@@ -17,7 +17,7 @@ select {
     &.ellipsis {
 
         > div > div > label,
-        > ul > li > div {
+        > ul > li > div > label {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -26,22 +26,31 @@ select {
 
     &.align-left {
         > div > div > label,
-        > ul > li > div {
+        > ul > li > div > label {
             text-align: left;
         }
     }
 
     &.align-right {
-        > div > div > label,
-        > ul > li > div {
+        > div > div > label {
             text-align: right;
+        }
+        > ul > li > div  {
+            > label {
+                text-align: right;
+                order:2;
+            }
+
+            > svg {
+                order:1;
+            }
         }
     }
 
     &.direction-up {
         &.open {
             > div {
-                @include border-radiuses(0, 0, $border-radius-base, $border-radius-base);
+                @include border-radiuses(0, 0, $component-border-radius, $component-border-radius);
 
                 > div > svg {
                     @include rotate(90);
@@ -56,13 +65,13 @@ select {
         > ul {
             top: auto;
             bottom: calc(100% - #{$component-border-width});
-            @include border-radiuses($border-radius-base, $border-radius-base, 0, 0);
+            @include border-radiuses($component-border-radius, $component-border-radius, 0, 0);
         }
     }
 
     &.open {
         > div {
-            @include border-radiuses($border-radius-base, $border-radius-base, 0, 0);
+            @include border-radiuses($component-border-radius, $component-border-radius, 0, 0);
 
             > div > svg {
                 @include rotate(270);
@@ -75,7 +84,7 @@ select {
     }
 
     > div {
-        @include border-radius($border-radius-base);
+        @include border-radius($component-border-radius);
         border: $component-border;
         overflow: hidden;
         width: 100%;
@@ -112,7 +121,7 @@ select {
         left: 0;
         right: 0;
         z-index: $dropdown-z-index;
-        @include border-radiuses(0, 0, $border-radius-base, $border-radius-base);
+        @include border-radiuses(0, 0, $component-border-radius, $component-border-radius);
         overflow: auto;
         max-height: ($btn-height * 4) + ($component-border-width * 4);
 
@@ -121,13 +130,31 @@ select {
             > div {
                 @include border-radius(0);
                 display: block;
-                text-align: center;
+                @include flex-display();
+
+                > label {
+                    flex-grow: 1;
+                    text-align: center;
+                }
+
+                > svg {
+                    opacity: 0;
+                }
+
+                &:hover > svg {
+                    opacity: .4;
+                }
             }
 
             &.selected {
                 > div {
                     background-color: white;
                     cursor: default;
+
+                    > svg {
+                        fill: theme-color("success");
+                        opacity: 1;
+                    }
                 }
             }
 

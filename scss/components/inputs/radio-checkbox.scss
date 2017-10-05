@@ -3,7 +3,7 @@
 .radio,
 .checkbox {
     position: relative;
-    line-height:$line-height-base + ($padding-y-base * 2);
+    line-height:$line-height + ($padding-y * 2);
 
     > input {
         position: absolute;
@@ -25,14 +25,14 @@
     > label {
         @include flex-display;
         @include align-items(center);
-        font-size: $font-size-base;
+        font-size: $font-size;
         @include flex-display;
         width: 100%;
 
         > i {
             display: block;
-            width: $font-size-base;
-            height: $font-size-base;
+            width: $font-size;
+            height: $font-size;
             border: $layout-border;
             margin-right: ($spacer / 2);
             position: relative;

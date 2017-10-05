@@ -30,7 +30,7 @@ app.dropdown = function (dropdowns) {
         html.push('<ul>');
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this);
-            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn btn-light">' + $that.text() + '</div></li>');
+            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn btn-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
         });
         html.push('</ul>');
         html.push('</div>');

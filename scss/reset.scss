@@ -16,12 +16,12 @@ html {
 }
 
 body {
-    font-family: $font-family-base;
+    font-family: $font-family;
     background-color: $body-bg;
     color: $body-color;
-    font-size: $font-size-base;
-    font-weight: $font-weight-base;
-    line-height: $line-height-base;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
 }
 
 button {

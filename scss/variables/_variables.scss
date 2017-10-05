@@ -6,18 +6,17 @@
 
 // links
 $link-color: theme-color("primary");
-$link-decoration: none !default;
-$link-hover-color: darken($link-color, 15%) !default;
-$link-hover-decoration: underline !default;
+$link-decoration: none;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: underline;
 
-$border-radius-base: .5rem;
-
-$padding-x-base: 1rem;
-$padding-y-base: .5rem;
+$padding-x: 1rem;
+$padding-y: .5rem;
 
 $component-border-color: $gray-400;
 $component-border-width: rem(1px);
 $component-border: $component-border-width solid $component-border-color;
+$component-border-radius: .5rem;
 
 // components
 $tree-hover-background-color: $gray-300;
@@ -28,12 +27,12 @@ $form-input-min-width:rem(200px);
 
 $enable-shadows: true;
 
-$btn-height: $line-height-base + ($padding-y-base * 2);
-$btn-box-shadow: inset 0 1px 0 rgba($white,.15), 0 1px 1px rgba($black,.075) !default;
-$btn-focus-box-shadow: 0 0 0 3px rgba(theme-color("primary"), .25) !default;
+$btn-height: $line-height + ($padding-y * 2);
+$btn-box-shadow: inset 0 1px 0 rgba($white,.15), 0 1px 1px rgba($black,.075);
+$btn-focus-box-shadow: 0 0 0 3px rgba(theme-color("primary"), .25);
 
-$input-box-shadow: inset 0 1px 1px rgba($black,.075) !default;
-$input-focus-box-shadow: $input-box-shadow, $btn-focus-box-shadow !default;
+$input-box-shadow: inset 0 1px 1px rgba($black,.075);
+$input-focus-box-shadow: $input-box-shadow, $btn-focus-box-shadow;
 
 $slider-line-height: 1.5rem;
 $slider-background-color-1: $gray-200;
