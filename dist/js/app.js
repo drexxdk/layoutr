@@ -762,7 +762,7 @@ app.dropdown = function (dropdowns) {
         }
         var html = [];
         html.push('<div class="dropdown">')
-        html.push('<div><div class="btn btn-light"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-plus"></use></svg></div></div>');
+        html.push('<div><div class="btn btn-secondary"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-plus"></use></svg></div></div>');
         html.push('<ul>');
         $this.children().each(function (index) {
             var $that = $(this);

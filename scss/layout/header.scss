@@ -1,13 +1,10 @@
 ﻿/// <reference path="../references" />
 
-#main:not(.mobile) header {
+header {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-}
-
-header {
     height: $header-height;
     border-bottom: $layout-border;
     background-color: $layout-background-color;
