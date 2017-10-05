@@ -10,8 +10,6 @@ select {
     height: 0;
 }
 
-$dropdown-border-radius: rem(5);
-
 .dropdown {
     position: relative;
     width: 100%;
@@ -43,7 +41,7 @@ $dropdown-border-radius: rem(5);
     &.direction-up {
         &.open {
             > div {
-                @include border-radiuses(0, 0, $dropdown-border-radius, $dropdown-border-radius);
+                @include border-radiuses(0, 0, $border-radius-base, $border-radius-base);
 
                 > div > svg {
                     @include rotate(90);
@@ -58,13 +56,13 @@ $dropdown-border-radius: rem(5);
         > ul {
             top: auto;
             bottom: calc(100% - #{$component-border-width});
-            @include border-radiuses($dropdown-border-radius, $dropdown-border-radius, 0, 0);
+            @include border-radiuses($border-radius-base, $border-radius-base, 0, 0);
         }
     }
 
     &.open {
         > div {
-            @include border-radiuses($dropdown-border-radius, $dropdown-border-radius, 0, 0);
+            @include border-radiuses($border-radius-base, $border-radius-base, 0, 0);
 
             > div > svg {
                 @include rotate(270);
@@ -77,7 +75,7 @@ $dropdown-border-radius: rem(5);
     }
 
     > div {
-        @include border-radius($dropdown-border-radius);
+        @include border-radius($border-radius-base);
         border: $component-border;
         overflow: hidden;
         width: 100%;
@@ -114,7 +112,7 @@ $dropdown-border-radius: rem(5);
         left: 0;
         right: 0;
         z-index: $dropdown-z-index;
-        @include border-radiuses(0, 0, $dropdown-border-radius, $dropdown-border-radius);
+        @include border-radiuses(0, 0, $border-radius-base, $border-radius-base);
         overflow: auto;
         max-height: ($btn-height * 4) + ($component-border-width * 4);
 

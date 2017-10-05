@@ -1,0 +1,48 @@
+﻿/// <reference path="../references" />
+
+.quote {
+    @include flex-display();
+
+    &.large > .text {
+        > p {
+            font-size: $font-size-lg;
+
+            > svg {
+                width: $font-size-lg;
+                height: $font-size-lg;
+            }
+        }
+
+        > .author {
+            font-size: $font-size-base;
+        }
+    }
+
+    > .img {
+        width: $quote-img-width;
+        height: $quote-img-width;
+        background-size: cover;
+        flex-shrink: 0;
+        @include border-radius($border-radius-base);
+    }
+
+    > .text {
+        padding: $spacer;
+
+        > p {
+            font-size: $font-size-base;
+
+            > svg {
+                width: $font-size-base;
+                height: $font-size-base;
+            }
+        }
+
+        > .author {
+            display: block;
+            margin-top: $spacer / 2;
+            opacity: .6;
+            font-size: $font-size-sm;
+        }
+    }
+}
