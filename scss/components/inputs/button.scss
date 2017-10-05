@@ -63,6 +63,7 @@
     > svg {
         width: $font-size-base;
         height: $font-size-base;
+        flex-shrink: 0;
     }
 }
 

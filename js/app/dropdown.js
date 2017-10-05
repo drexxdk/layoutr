@@ -8,8 +8,8 @@ app.dropdown = function (dropdowns) {
             selected = $this.children().first();
         }
         var html = [];
-        html.push('<div class="dropdown">')
-        html.push('<div><div class="btn btn-secondary"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-plus"></use></svg></div></div>');
+        html.push('<div class="dropdown' + ($this.hasClass('ellipsis') ? ' ellipsis' : '') + ($this.hasClass('align-left') ? ' align-left' : '') + ($this.hasClass('align-right') ? ' align-right' : '') + '">')
+        html.push('<div><div class="btn btn-secondary"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div></div>');
         html.push('<ul>');
         $this.children().each(function (index) {
             var $that = $(this);
@@ -34,9 +34,15 @@ app.dropdown = function (dropdowns) {
             dropdown.removeClass('open');
         });
     });
-
-
-
-
-
 };
+
+$(document).click(function (e) {
+    var target = $(e.target);
+    if (target.closest(".dropdown").length) {
+        $('.dropdown').not(target.closest(".dropdown")).removeClass('open');
+    }
+
+    if (!target.closest(".dropdown").length) {
+        $('.dropdown').removeClass('open');
+    }
+});

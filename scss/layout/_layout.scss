@@ -21,10 +21,10 @@
     &.right-overlay.right-open #content:before {
         content: '';
         position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        top: -$extra-spacing;
+        bottom: -$extra-spacing;
+        left: -$extra-spacing;
+        right: -$extra-spacing;
         z-index: $overlay-z-index;
         background-color: $overlay-background-color;
     }

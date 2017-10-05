@@ -7,23 +7,40 @@ select {
 $dropdown-border-radius: rem(5);
 
 .dropdown {
-    width: 100%;
-    cursor: pointer;
     position: relative;
 
-    > div > div > label,
-    > ul > li {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        min-width: 0;
+    &.ellipsis {
+
+        > div > div > label,
+        > ul > li > div {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &.align-left {
+        > div > div > label,
+        > ul > li > div {
+            text-align: left;
+        }
+    }
+
+    &.align-right {
+        > div > div > label,
+        > ul > li > div {
+            text-align: right;
+        }
     }
 
     &.open {
         > div {
             @include border-radiuses($dropdown-border-radius, $dropdown-border-radius, 0, 0);
 
-            & label {
+            > div {
+                > svg {
+                    @include rotate(270);
+                }
             }
         }
     }
@@ -31,15 +48,19 @@ $dropdown-border-radius: rem(5);
     > div {
         @include border-radius($dropdown-border-radius);
         border: $component-border;
-        overflow:hidden;
+        overflow: hidden;
 
         > div {
             @include flex-display();
-                @include border-radius(0);
+            @include border-radius(0);
 
             > label {
                 flex-grow: 1;
-                cursor: pointer;
+                text-align: center;
+            }
+
+            > svg {
+                @include rotate(90);
             }
         }
     }
@@ -66,11 +87,14 @@ $dropdown-border-radius: rem(5);
 
             > div {
                 @include border-radius(0);
+                display: block;
+                text-align:center;
             }
 
             &.selected {
                 > div {
-                    background-color: yellow;
+                    background-color: white;
+                    cursor: default;
                 }
             }
 

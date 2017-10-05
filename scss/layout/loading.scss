@@ -5,10 +5,10 @@ body {
         position: fixed;
         display: none;
         z-index: $loading-z-index;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        top: -$extra-spacing;
+        right: -$extra-spacing;
+        bottom: -$extra-spacing;
+        left: -$extra-spacing;
         background-color: rgba(255, 255, 255, 0.6);
 
         > svg {

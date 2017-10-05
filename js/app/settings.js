@@ -85,8 +85,6 @@ $(function () {
             });
         }
 
-
-
         $(document).click(function (e) {
             if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
                 var target = $(e.target);
