@@ -704,6 +704,11 @@ $(function () {
                     email: true
                 },
                 dropdown_1: "required",
+                dropdown_2: "required",
+                dropdown_3: "required",
+                dropdown_4: "required",
+                dropdown_5: "required",
+                dropdown_6: "required",
                 agree: "required"
             },
             {
@@ -727,9 +732,12 @@ $(function () {
                     equalTo: "Please enter the same password as above"
                 },
                 email: "Please enter a valid email address",
-                dropdown_1: {
-                    required: "Please select an option"
-                },
+                dropdown_1: "Please select an option",
+                dropdown_2: "Please select an option",
+                dropdown_3: "Please select an option",
+                dropdown_4: "Please select an option",
+                dropdown_5: "Please select an option",
+                dropdown_6: "Please select an option",
                 agree: "Please accept our policy"
             }
         );
