@@ -5,6 +5,7 @@
         position: relative;
         height: $content-header-height;
         min-height: $content-header-min-height;
+        margin-top:$header-height;
 
         &:before {
             position: absolute;
