@@ -1,0 +1,73 @@
+﻿/// <reference path="../references" />
+
+.table {
+    overflow: auto;
+
+    table {
+        vertical-align: top;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        border-collapse: collapse;
+        border-spacing: 0;
+        -webkit-overflow-scrolling: touch;
+
+        thead th {
+            background: $table-th-background-color;
+            color: $table-th-color;
+        }
+
+        tbody tr:nth-child(even) th,
+        tbody tr:nth-child(even) td {
+            background-color: $table-td-background-color;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: $padding-y $padding-y;
+            border: $component-border;
+        }
+    }
+
+    &.flipped table {
+        @include flex-display();
+        overflow: hidden;
+
+        thead {
+            @include flex-display();
+            flex-shrink: 0;
+        }
+
+        tbody {
+            -webkit-overflow-scrolling: touch;
+            @include flex-display();
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        tr {
+            @include flex-display();
+            @include flex-direction(column);
+            flex-shrink: 0;
+
+            th,
+            td {
+                display: block;
+            }
+
+            th:not(:last-child),
+            td:not(:last-child) {
+                border-bottom: 0;
+            }
+
+            td {
+                border-left: 0;
+            }
+        }
+    }
+}
