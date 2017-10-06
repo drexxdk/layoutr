@@ -81,12 +81,6 @@
         &.theme-#{$color} {
             $background: theme-color-level($value, -10);
             @include validation-variant($background, theme-color-level($value, -9), theme-color-level($value, 8));
-
-
-            @at-root .desktop .form-group.theme-#{$color} .dropdown > .btn:hover {
-                background-color: darken($background, 7.5%);
-                @include color-yiq(darken($background, 7.5%));
-            }
         }
     }
 }

@@ -39,11 +39,5 @@ header {
             fill: #808080;
             @include button-transition(all);
         }
-
-        @at-root .desktop header > .aside:hover svg {
-            fill: black;
-            width: 75%;
-            height: 75%;
-        }
     }
 }

@@ -38,7 +38,7 @@
     background-color: transparent;
     cursor: pointer;
     line-height: $component-line-height;
-    z-index:$component-z-index;
+    z-index: $component-z-index;
 
     &:not(.align-left):not(.align-right) {
         @include justify-content(center);
@@ -67,32 +67,22 @@
     $active-background: darken($value, 7.5%);
     @include button-variant($value, theme-color-level($value, -9));
 
-    @at-root .desktop .btn:hover {
 
-        @include color-yiq($active-background);
-        background-color: $active-background;
-    }
 
     @each $color, $value in $theme-colors {
         &.theme-#{$color} {
             @include button-variant($value, theme-color-level($value, -9));
-
-            $active-background: darken($value, 7.5%);
-
-            @at-root .desktop .btn.theme-#{$color}:hover {
-                @include color-yiq($active-background);
-                background-color: $active-background;
-            }
         }
     }
 }
 
-.link {
+.theme-link {
     color: $link-color;
     text-decoration: $link-decoration;
+    background-color: transparent !important;
 
-    @at-root .desktop .link:hover {
-        color: $link-hover-color;
-        text-decoration: $link-hover-decoration;
+    &:focus,
+    &.focus {
+        @include box-shadow(none);
     }
 }

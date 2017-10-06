@@ -1,0 +1,67 @@
+﻿/// <reference path="references" />
+
+// hover effects should only be applied on desktop browsers
+.desktop {
+    header > .aside:hover svg {
+        fill: black;
+        width: 75%;
+        height: 75%;
+    }
+
+    aside:hover > .content,
+    aside > .content > div,
+    aside > .content:hover,
+    aside > .content:focus {
+        visibility: visible;
+    }
+
+    aside > .content {
+        visibility: hidden;
+
+        & > div,
+        &:hover,
+        &:focus {
+            visibility: visible;
+        }
+    }
+
+    .tree .label:hover {
+        background-color: $tree-hover-background-color;
+
+        > .btn {
+            @extend .btn:hover;
+        }
+    }
+
+    @each $color, $value in $theme-validation-colors {
+        .form-group.theme-#{$color} .dropdown > .btn:hover {
+            $background: theme-color-level($value, -10);
+            background-color: darken($background, 7.5%);
+            @include color-yiq(darken($background, 7.5%));
+        }
+    }
+
+    .dropdown > ul > li > div:hover > svg {
+        opacity: .4;
+    }
+
+    .theme-link:hover {
+        color: $link-hover-color!important;
+        text-decoration: $link-hover-decoration;
+    }
+
+    @each $color, $value in $theme-colors {
+        .btn.theme-#{$color}:hover {
+            $active-background: darken($value, 7.5%);
+            @include color-yiq($active-background);
+            background-color: $active-background;
+        }
+    }
+
+    .btn:hover {
+        $value: theme-color("primary");
+        $active-background: darken($value, 7.5%);
+        @include color-yiq($active-background);
+        background-color: $active-background;
+    }
+}

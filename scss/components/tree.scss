@@ -41,10 +41,6 @@
         width: calc(100% + (#{$spacer} * 2.5));
         cursor: pointer;
 
-        @at-root .desktop .tree .label:hover {
-            background-color: $tree-hover-background-color;
-        }
-
         &:after {
             content: '';
             position: absolute;

@@ -27,25 +27,6 @@ aside {
         }
     }
 
-    @at-root .desktop {
-        aside:hover > .content,
-        aside > .content > div,
-        aside > .content:hover,
-        aside > .content:focus {
-            visibility: visible;
-        }
-
-        aside > .content {
-            visibility: hidden;
-
-            & > div,
-            &:hover,
-            &:focus {
-                visibility: visible;
-            }
-        }
-    }
-
     > .header,
     > .footer {
         padding: $spacer;
