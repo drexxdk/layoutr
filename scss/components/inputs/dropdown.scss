@@ -150,6 +150,7 @@ select {
                 > div {
                     background-color: white;
                     cursor: default;
+                    pointer-events:none;
 
                     > svg {
                         fill: theme-color("success");

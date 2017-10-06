@@ -100,11 +100,7 @@
                 bottom: $footer-height;
             }
 
-            &.mobile #content > .header {
-                top: 0;
-            }
-
-            &:not(.mobile) #content > .header {
+            #content > .header {
                 top: $header-height;
             }
 
