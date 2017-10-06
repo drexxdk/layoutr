@@ -4,6 +4,7 @@
     display: block;
     vertical-align: middle;
     position: relative;
+    z-index:$component-z-index;
 
     &.slider-horizontal {
         margin: 0 ($slider-line-height / 2);

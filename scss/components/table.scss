@@ -8,8 +8,6 @@
 .table {
     overflow: auto;
 
-
-
     @each $color, $value in $theme-colors {
         &.#{$color} table thead th {
             @include table-variant($value);

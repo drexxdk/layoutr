@@ -4,6 +4,7 @@
     margin-left: $spacer;
     @include noselect;
     list-style-type: none;
+    z-index:$component-z-index;
 
     ul {
         list-style-type: none;

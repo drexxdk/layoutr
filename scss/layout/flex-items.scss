@@ -3,13 +3,11 @@
 .flex-items {
     margin-top: -$spacer;
     margin-left: -$spacer;
-
     @include flex-display;
 
     > * {
         margin-top: $spacer;
         margin-left: $spacer;
-        z-index: $flex-items-z-index;
     }
 
     &:not(.column) {

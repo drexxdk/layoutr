@@ -1,7 +1,6 @@
 ﻿/// <reference path="../../references" />
 
 select {
-    /*display: none;*/
     font-size: 0;
     visibility: hidden;
     opacity: 0;
@@ -13,6 +12,7 @@ select {
 .dropdown {
     position: relative;
     width: 100%;
+    z-index:$component-z-index;
 
     &.ellipsis {
 

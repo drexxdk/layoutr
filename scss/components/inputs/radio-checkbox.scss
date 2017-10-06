@@ -5,6 +5,7 @@
     position: relative;
     padding: $padding-y $padding-x;
     line-height: $line-height;
+    z-index:$component-z-index;
 
     > input {
         position: absolute;

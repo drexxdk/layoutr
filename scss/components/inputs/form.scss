@@ -31,6 +31,7 @@ input[type=email] {
     min-height: $line-height + ($padding-y * 2);
     @include border-radius($component-border-radius);
     border: $component-border;
+    z-index: $component-z-index;
 }
 
 .form-group,
@@ -69,7 +70,7 @@ input[type=email] {
         em {
             color: theme-color("danger");
             margin: ($spacer / 2) 0 $spacer 0;
-            width:100%;
+            width: 100%;
         }
     }
 

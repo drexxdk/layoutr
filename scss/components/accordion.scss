@@ -4,6 +4,7 @@
     @include border-radius(.5rem);
     overflow: hidden;
     border: $component-border;
+    z-index:$component-z-index;
 
     > div {
         > .headline {
