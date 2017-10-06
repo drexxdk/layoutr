@@ -16,7 +16,7 @@ select {
 
     &.ellipsis {
 
-        > div > div > label,
+        > div > label,
         > ul > li > div > label {
             white-space: nowrap;
             overflow: hidden;
@@ -25,14 +25,14 @@ select {
     }
 
     &.align-left {
-        > div > div > label,
+        > div > label,
         > ul > li > div > label {
             text-align: left;
         }
     }
 
     &.align-right {
-        > div > div > label {
+        > div > label {
             text-align: right;
         }
 
@@ -53,13 +53,13 @@ select {
             > div {
                 @include border-radiuses(0, 0, $component-border-radius, $component-border-radius);
 
-                > div > svg {
+                > svg {
                     @include rotate(90);
                 }
             }
         }
 
-        > div > div > svg {
+        > div > svg {
             @include rotate(270);
         }
 
@@ -74,7 +74,7 @@ select {
         > div {
             @include border-radiuses($component-border-radius, $component-border-radius, 0, 0);
 
-            > div > svg {
+            > svg {
                 @include rotate(270);
             }
         }
@@ -85,30 +85,25 @@ select {
     }
 
     > div {
-        @include border-radius($component-border-radius);
+        @include flex-display();
         border: $component-border;
-        overflow: hidden;
-        width: 100%;
+        /*@include border-radius(0);*/
+        @extend .btn;
 
-        > div {
-            @include flex-display();
-            @include border-radius(0);
-            @extend .btn;
-
-            @each $color, $value in $theme-colors {
-                &.btn-#{$color} {
-                    @extend .btn-#{$color};
-                }
+        @each $color, $value in $theme-colors {
+            &.btn-#{$color} {
+                @extend .btn-#{$color};
             }
+        }
 
-            > label {
-                flex-grow: 1;
-                text-align: center;
-            }
+        > label {
+            flex-grow: 1;
+            text-align: center;
+            line-height: $component-line-height;
+        }
 
-            > svg {
-                @include rotate(90);
-            }
+        > svg {
+            @include rotate(90);
         }
     }
 

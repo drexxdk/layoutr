@@ -795,7 +795,7 @@ app.dropdown = function (dropdowns) {
                 btn = temp;
             }
         }
-        html.push('<div><div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div></div>');
+        html.push('<div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul>');
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this);

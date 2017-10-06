@@ -37,6 +37,7 @@
     text-decoration: none;
     background-color: transparent;
     cursor: pointer;
+    line-height: $component-line-height;
 
     &:not(.align-left):not(.align-right) {
         @include justify-content(center);
