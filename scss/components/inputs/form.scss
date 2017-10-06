@@ -11,7 +11,7 @@
         border-color: $border;
 
         &:focus {
-            @include box-shadow($btn-box-shadow, 0 0 0 3px $border);
+            @include box-shadow($box-shadow, 0 0 0 3px $border);
         }
     }
 
@@ -75,7 +75,7 @@ input[type=email] {
 
     @each $color, $value in $theme-colors {
         &.#{$color} {
-            @include input-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 8));
+            @include input-variant(theme-color-level($value, -10), theme-color-level($value, -9), theme-color-level($value, 8));
         }
     }
 }

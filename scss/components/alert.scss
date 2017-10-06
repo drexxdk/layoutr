@@ -20,10 +20,10 @@
     min-height: $line-height + ($padding-y * 2);
     background-color: transparent;
     @include border-radius($component-border-radius);
-}
 
-@each $color, $value in $theme-colors {
-    .alert-#{$color} {
-        @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 8));
+    @each $color, $value in $theme-colors {
+        &.theme-#{$color} {
+            @include alert-variant(theme-color-level($value, -10), theme-color-level($value, -9), theme-color-level($value, 8));
+        }
     }
 }

@@ -40,7 +40,7 @@ header {
             @include button-transition(all);
         }
 
-        @at-root .desktop header:hover svg {
+        @at-root .desktop header > .aside:hover svg {
             fill: black;
             width: 75%;
             height: 75%;

@@ -3,16 +3,16 @@
 @mixin button-variant($background, $border) {
     @include color-yiq($background);
     background-color: $background;
-    @include box-shadow($btn-box-shadow);
+    @include box-shadow($box-shadow);
 
     &:focus,
     &.focus {
-        box-shadow: $btn-box-shadow, 0 0 0 3px $border;
+        box-shadow: $box-shadow, 0 0 0 3px $border;
         z-index: 1;
     }
 }
 
-.btn-group {
+.group {
     @include flex-display;
     @include flex-wrap(wrap);
 
@@ -61,27 +61,36 @@
         height: $font-size;
         flex-shrink: 0;
     }
-}
 
+    $value: theme-color("primary");
+    $active-background: darken($value, 7.5%);
+    @include button-variant($value, theme-color-level($value, -9));
 
-@each $color, $value in $theme-colors {
-    .btn-#{$color} {
-        @include button-variant($value, theme-color-level($color, -9));
+    @at-root .desktop .btn:hover {
 
-        $active-background: darken($value, 7.5%);
+        @include color-yiq($active-background);
+        background-color: $active-background;
+    }
+    /*@include table-variant(theme-color("primary"));*/
+    @each $color, $value in $theme-colors {
+        &.theme-#{$color} {
+            @include button-variant($value, theme-color-level($value, -9));
 
-        @at-root .desktop .btn-#{$color}:hover {
-            @include color-yiq($active-background);
-            background-color: $active-background;
+            $active-background: darken($value, 7.5%);
+
+            @at-root .desktop .btn.theme-#{$color}:hover {
+                @include color-yiq($active-background);
+                background-color: $active-background;
+            }
         }
     }
 }
 
-.btn-link {
+.link {
     color: $link-color;
     text-decoration: $link-decoration;
 
-    @at-root .desktop .btn-link:hover {
+    @at-root .desktop .link:hover {
         color: $link-hover-color;
         text-decoration: $link-hover-decoration;
     }

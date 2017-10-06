@@ -9,6 +9,7 @@
     > * {
         margin-top: $spacer;
         margin-left: $spacer;
+        z-index: $flex-items-z-index;
     }
 
     &:not(.column) {

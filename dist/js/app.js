@@ -788,9 +788,9 @@ app.dropdown = function (dropdowns) {
         //debugger;
 
         var attr = $this.attr('class');
-        var btn = 'btn-primary';
+        var btn = '';
         if (typeof attr !== typeof undefined && attr !== false) {
-            var temp = $this.attr("class").match(/btn-[\w-]*\b/);
+            var temp = $this.attr("class").match(/[\w-]*\b/);
             if (temp !== null && temp !== undefined) {
                 btn = temp;
             }
@@ -799,7 +799,7 @@ app.dropdown = function (dropdowns) {
         html.push('<ul>');
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this);
-            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn btn-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
         });
         html.push('</ul>');
         html.push('</div>');

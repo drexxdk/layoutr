@@ -11,9 +11,27 @@
 </div>
 <div class="content">
     <div>
+        <section>
+            <div class="alert theme-info">
+                <div class="flex-items">
+                    <p>
+                        The goal of this site is to get a good score at <b>Google Lighthouse</b>,
+                        but still have the features I want.
+                    </p>
+                    <p>
+                        Originally the site used <b>Bootstrap 4.0.0-alpha.6</b> and <b>FontAwesome 4.7.0</b>, but it bloated the site and the performance took a big hit,<br />
+                        therefore I removed them after copying the parts from <b>Bootstrap</b> I needed and added it to my own SCSS files.
+                    </p>
+                    <p>
+                        <b>FontAwesome</b> made it easy to add icons for everything, but it was the biggest resource that had to be downloaded at page load,
+                        therefore i replaced it with svg icons, that got added directly to the DOM.
+                    </p>
+                </div>
+            </div>
+        </section>
         <section class="flex-items wrap small">
-            <button type="button" class="btn btn-primary" id="toggle-google-maps">Google Maps</button>
-            <button type="button" class="btn btn-primary" id="toggle-youtube">YouTube</button>
+            <button type="button" class="btn" id="toggle-google-maps">Google Maps</button>
+            <button type="button" class="btn theme-secondary" id="toggle-youtube">YouTube</button>
         </section>
         <section class="flex-items">
             <div class="table">
@@ -87,7 +105,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="table flipped">
+            <div class="table flipped secondary">
                 <table>
                     <thead>
                         <tr>
@@ -179,35 +197,17 @@
                 </div>
             </div>
         </section>
-        <section>
-            <div class="alert alert-info" role="alert">
-                <div class="flex-items">
-                    <p>
-                        The goal of this site is to get a good score at <b>Google Lighthouse</b>,
-                        but still have the features I want.
-                    </p>
-                    <p>
-                        Originally the site used <b>Bootstrap 4.0.0-alpha.6</b> and <b>FontAwesome 4.7.0</b>, but it bloated the site and the performance took a big hit,<br />
-                        therefore I removed them after copying the parts from <b>Bootstrap</b> I needed and added it to my own SCSS files.
-                    </p>
-                    <p>
-                        <b>FontAwesome</b> made it easy to add icons for everything, but it was the biggest resource that had to be downloaded at page load,
-                        therefore i replaced it with svg icons, that got added directly to the DOM.
-                    </p>
-                </div>
-            </div>
-        </section>
         <section class="flex-items wrap column small">
             <!-- buttons -->
-            <button type="button" class="btn btn-primary">Primary</button>
-            <button type="button" class="btn btn-secondary">Secondary</button>
-            <button type="button" class="btn btn-success">Success</button>
-            <button type="button" class="btn btn-danger">Danger</button>
-            <button type="button" class="btn btn-warning">Warning</button>
-            <button type="button" class="btn btn-info">Info</button>
-            <button type="button" class="btn btn-light">Light</button>
-            <button type="button" class="btn btn-dark">Dark</button>
-            <button type="button" class="btn btn-link">Link</button>
+            <button type="button" class="btn">Primary</button>
+            <button type="button" class="btn theme-secondary">Secondary</button>
+            <button type="button" class="btn theme-success">Success</button>
+            <button type="button" class="btn theme-danger">Danger</button>
+            <button type="button" class="btn theme-warning">Warning</button>
+            <button type="button" class="btn theme-info">Info</button>
+            <button type="button" class="btn theme-light">Light</button>
+            <button type="button" class="btn theme-dark">Dark</button>
+            <button type="button" class="btn theme-link">Link</button>
         </section>
         <section class="flex-items">
             <!-- headlines -->
@@ -220,83 +220,83 @@
         </section>
         <section class="flex-items">
             <!-- alerts -->
-            <div class="alert alert-primary" role="alert">
+            <div class="alert theme-primary">
                 This is a primary alert—check it out!
             </div>
-            <div class="alert alert-secondary" role="alert">
+            <div class="alert theme-secondary">
                 This is a secondary alert—check it out!
             </div>
-            <div class="alert alert-success" role="alert">
+            <div class="alert theme-success">
                 This is a success alert—check it out!
             </div>
-            <div class="alert alert-danger" role="alert">
+            <div class="alert theme-danger">
                 This is a danger alert—check it out!
             </div>
-            <div class="alert alert-warning" role="alert">
+            <div class="alert theme-warning">
                 This is a warning alert—check it out!
             </div>
-            <div class="alert alert-info" role="alert">
+            <div class="alert theme-info">
                 This is a info alert—check it out!
             </div>
-            <div class="alert alert-light" role="alert">
+            <div class="alert theme-light">
                 This is a light alert—check it out!
             </div>
-            <div class="alert alert-dark" role="alert">
+            <div class="alert theme-dark">
                 This is a dark alert—check it out!
             </div>
         </section>
         <section class="flex-items wrap column small">
             <!-- form -->
-            <div class="btn-group">
-                <a class="btn btn-secondary" href="#" aria-label="Settings">
+            <div class="group">
+                <a class="btn theme-secondary" href="#" aria-label="Settings">
                     <svg><use xlink:href="#svg-settings"></use></svg>
                 </a>
-                <a class="btn btn-danger" href="#" aria-label="Delete">
+                <a class="btn theme-danger" href="#" aria-label="Delete">
                     <svg><use xlink:href="#svg-delete"></use></svg>
                 </a>
-                <a class="btn btn-primary" href="#" aria-label="Navigation">
+                <a class="btn" href="#" aria-label="Navigation">
                     <svg><use xlink:href="#svg-menu"></use></svg>
                 </a>
             </div>
-            <a class="btn btn-secondary" href="#" aria-label="Settings">
+            <a class="btn theme-secondary" href="#" aria-label="Settings">
                 <svg><use xlink:href="#svg-settings"></use></svg>
             </a>
-            <a class="btn btn-danger" href="#" aria-label="Delete">
+            <a class="btn theme-danger" href="#" aria-label="Delete">
                 <svg><use xlink:href="#svg-delete"></use></svg>
             </a>
-            <a class="btn btn-primary" href="#" aria-label="Navigation">
+            <a class="btn" href="#" aria-label="Navigation">
                 <svg><use xlink:href="#svg-menu"></use></svg>
             </a>
-            <a class="btn btn-danger" href="#">
+            <a class="btn theme-danger" href="#">
                 <svg><use xlink:href="#svg-delete"></use></svg>
                 <label>Delete</label>
             </a>
-            <a class="btn btn-secondary btn-sm" href="#">
+            <a class="btn theme-secondary sm" href="#">
                 <svg><use xlink:href="#svg-settings"></use></svg>
                 <label>Settings</label>
             </a>
-            <div class="btn-group expand">
-                <a class="btn btn-secondary" href="#">
+            <div class="group expand">
+                <a class="btn theme-secondary" href="#">
                     <svg><use xlink:href="#svg-settings"></use></svg>
                     <label>Settings</label>
                 </a>
-                <a class="btn btn-danger" href="#" aria-label="Delete">
+                <a class="btn theme-danger" href="#" aria-label="Delete">
                     <svg><use xlink:href="#svg-delete"></use></svg>
                     <label>Delete</label>
                 </a>
-                <a class="btn btn-primary" href="#" aria-label="Navigation">
+                <a class="btn" href="#" aria-label="Navigation">
                     <svg><use xlink:href="#svg-menu"></use></svg>
                     <label>Navigation</label>
                 </a>
-                <a class="btn btn-secondary" href="#">
+                <a class="btn theme-secondary" href="#">
                     <svg><use xlink:href="#svg-settings"></use></svg>
                     <label>Settings</label>
                 </a>
-                <a class="btn btn-danger" href="#" aria-label="Delete">
+                <a class="btn theme-danger" href="#" aria-label="Delete">
                     <svg><use xlink:href="#svg-delete"></use></svg>
                     <label>Delete</label>
                 </a>
-                <a class="btn btn-primary" href="#" aria-label="Navigation">
+                <a class="btn" href="#" aria-label="Navigation">
                     <svg><use xlink:href="#svg-menu"></use></svg>
                     <label>Navigation</label>
                 </a>
@@ -306,7 +306,7 @@
             <!-- accordion -->
             <div class="accordion">
                 <div>
-                    <div class="headline btn btn-light align-left">
+                    <div class="headline btn theme-light align-left">
                         left headline
                     </div>
                     <div class="content">
@@ -314,7 +314,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="headline btn btn-light align-right">
+                    <div class="headline btn theme-light align-right">
                         right headline
                     </div>
                     <div class="content">
@@ -322,7 +322,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="headline btn btn-light">
+                    <div class="headline btn theme-light">
                         headline
                     </div>
                     <div class="content">
@@ -330,7 +330,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="headline btn btn-light">
+                    <div class="headline btn theme-light">
                         headline
                     </div>
                     <div class="content">
@@ -394,7 +394,7 @@
                 <div class="form-group">
                     <label class="control-label" for="dropdown_2">Dropdown 2</label>
                     <div>
-                        <select id="dropdown_2" name="dropdown_2" class="btn-secondary align-left">
+                        <select id="dropdown_2" name="dropdown_2" class="theme-secondary align-left">
                             <option value="1">option 1</option>
                             <option value="2">option 2</option>
                             <option value="3" selected="selected">option 3</option>
@@ -406,7 +406,7 @@
                 <div class="form-group">
                     <label class="control-label" for="dropdown_3">Dropdown 3</label>
                     <div>
-                        <select id="dropdown_3" name="dropdown_3" class="btn-warning align-right">
+                        <select id="dropdown_3" name="dropdown_3" class="theme-warning align-right">
                             <option value="1">option 1</option>
                             <option value="2">option 2</option>
                             <option value="3" selected="selected">option 3</option>
@@ -418,7 +418,7 @@
                 <div class="form-group">
                     <label class="control-label" for="dropdown_4">Dropdown 4</label>
                     <div>
-                        <select id="dropdown_4" name="dropdown_4" class="btn-info ellipsis">
+                        <select id="dropdown_4" name="dropdown_4" class="theme-info ellipsis">
                             <option value="1" selected="selected">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in ornare lorem. Aenean id dignissim libero.</option>
                             <option value="2">Ut lobortis rutrum nulla non bibendum.</option>
                             <option value="3">Cras ex nibh, rhoncus id tincidunt id, pretium vitae metus.</option>
@@ -430,7 +430,7 @@
                 <div class="form-group">
                     <label class="control-label" for="dropdown_5">Dropdown 5</label>
                     <div>
-                        <select id="dropdown_5" name="dropdown_5" class="btn-light align-left">
+                        <select id="dropdown_5" name="dropdown_5" class="theme-light align-left">
                             <option value="1" selected="selected">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in ornare lorem. Aenean id dignissim libero.</option>
                             <option value="2">Ut lobortis rutrum nulla non bibendum.</option>
                             <option value="3">Cras ex nibh, rhoncus id tincidunt id, pretium vitae metus.</option>
@@ -442,7 +442,7 @@
                 <div class="form-group">
                     <label class="control-label" for="dropdown_6">Dropdown 6</label>
                     <div>
-                        <select id="dropdown_6" name="dropdown_6" class="btn-dark direction-up">
+                        <select id="dropdown_6" name="dropdown_6" class="theme-dark direction-up">
                             <option value="1">option 1</option>
                             <option value="2">option 2</option>
                             <option value="3" selected="selected">option 3</option>
@@ -496,7 +496,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Sign up</button>
+                    <button type="submit" class="btn" name="signup" value="Sign up">Sign up</button>
                 </div>
             </form>
         </section>
