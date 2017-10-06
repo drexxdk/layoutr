@@ -12,7 +12,6 @@ select {
 .dropdown {
     position: relative;
     width: 100%;
-    z-index:$component-z-index;
 
     &.ellipsis {
 
