@@ -35,14 +35,15 @@ select {
         > div > div > label {
             text-align: right;
         }
-        > ul > li > div  {
+
+        > ul > li > div {
             > label {
                 text-align: right;
-                order:2;
+                order: 2;
             }
 
             > svg {
-                order:1;
+                order: 1;
             }
         }
     }
@@ -150,7 +151,7 @@ select {
                 > div {
                     background-color: white;
                     cursor: default;
-                    pointer-events:none;
+                    pointer-events: none;
 
                     > svg {
                         fill: theme-color("success");
