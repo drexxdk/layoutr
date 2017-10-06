@@ -40,7 +40,7 @@
         width: calc(100% + (#{$spacer} * 2.5));
         cursor: pointer;
 
-        &:hover {
+        @at-root .desktop .tree .label:hover {
             background-color: $tree-hover-background-color;
         }
 

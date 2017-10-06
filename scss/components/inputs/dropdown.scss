@@ -142,7 +142,7 @@ select {
                     opacity: 0;
                 }
 
-                &:hover > svg {
+                @at-root .desktop .dropdown > ul > li > div:hover > svg {
                     opacity: .4;
                 }
             }

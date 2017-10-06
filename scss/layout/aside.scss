@@ -27,8 +27,23 @@ aside {
         }
     }
 
-    &:hover > .content {
-        visibility: visible;
+    @at-root .desktop {
+        aside:hover > .content,
+        aside > .content > div,
+        aside > .content:hover,
+        aside > .content:focus {
+            visibility: visible;
+        }
+
+        aside > .content {
+            visibility: hidden;
+
+            & > div,
+            &:hover,
+            &:focus {
+                visibility: visible;
+            }
+        }
     }
 
     > .header,
@@ -39,14 +54,6 @@ aside {
     > .content {
         overflow: auto;
         height: 100%; /*IE 10 */
-        visibility: hidden;
-
-        & > div,
-        &:hover,
-        &:focus {
-            visibility: visible;
-        }
-
         > div {
             padding: 0 $spacer;
         }

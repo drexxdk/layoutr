@@ -19,8 +19,11 @@ $(function () {
     }
     if (bowser.mobile) {
         app.main.addClass('mobile');
+    } else if (bowser.tablet) {
+        app.main.addClass('tablet');
+    } else {
+        app.main.addClass('desktop');
     }
-    app.main.addClass('mobile');
 
     app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 

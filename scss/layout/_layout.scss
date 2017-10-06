@@ -79,11 +79,8 @@
         }
     }
 
-    &:not(.mobile) #container {
-        margin-top: $header-height;
-    }
-
     #container {
+        margin-top: $header-height;
         flex-grow: 1;
 
         @include flex-display;

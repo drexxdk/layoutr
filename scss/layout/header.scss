@@ -9,7 +9,7 @@ header {
     border-bottom: $layout-border;
     background-color: $layout-background-color;
     @include flex-display;
-    flex-shrink:0;
+    flex-shrink: 0;
     z-index: $header-z-index;
 
     > .title {
@@ -40,7 +40,7 @@ header {
             @include button-transition(all);
         }
 
-        &:hover > svg {
+        @at-root .desktop header:hover svg {
             fill: black;
             width: 75%;
             height: 75%;
