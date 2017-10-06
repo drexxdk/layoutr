@@ -15,9 +15,6 @@ app.dropdown = function (dropdowns) {
             ($this.hasClass('direction-up') ? ' direction-up' : '') +
             '">');
 
-        //var xd = $this.is('[class^="btn"]');
-        //debugger;
-
         var attr = $this.attr('class');
         var btn = '';
         if (typeof attr !== typeof undefined && attr !== false) {
@@ -37,7 +34,7 @@ app.dropdown = function (dropdowns) {
         var dropdown = html.join("");
         $this.after(dropdown);
         dropdown = $this.next();
-        dropdown.on('click', 'div', function () {
+        dropdown.on('click', '> .btn', function () {
             var $that = $(this);
             $that.parent().toggleClass('open');
         });
@@ -46,7 +43,7 @@ app.dropdown = function (dropdowns) {
             if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
-                dropdown.children('div').children('div').children('label').text($that.text());
+                dropdown.children('div').children('label').text($that.text());
                 $this.children(':selected').removeAttr('selected');
                 $this.children('[value="' + $that.attr('data-id') + '"]').attr('selected', 'selected');
                 $this.valid();
