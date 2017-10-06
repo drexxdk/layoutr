@@ -19,10 +19,10 @@ app.addValidation = function (form, rules, messages) {
             element.parent().append(error);
         },
         highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("danger").removeClass("success");
+            $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
         },
         unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("success").removeClass("danger");
+            $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
         }
     });
 };

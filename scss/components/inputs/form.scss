@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../references" />
 
-@mixin input-variant($background, $border, $color) {
+@mixin validation-variant($background, $border, $color) {
     input[type=text],
     input[type=password],
     input[type=email],
-    .dropdown > div > div {
+    .dropdown > div {
         color: $color;
         fill: $color;
         background-color: $background;
@@ -23,16 +23,13 @@
             background-color: $background;
         }
     }
-}
 
-input[type=text],
-input[type=password],
-input[type=email] {
-    padding: $padding-y $padding-x;
-    min-height: $line-height + ($padding-y * 2);
-    @include border-radius($component-border-radius);
-    border: $component-border;
-    z-index: $component-z-index;
+    .dropdown.open {
+        > div,
+        > ul {
+            @include box-shadow($box-shadow, 0 0 0 $btn-focus-box-shadow-width $border);
+        }
+    }
 }
 
 .form-group,
@@ -54,6 +51,11 @@ input[type=email] {
     input[type=text],
     input[type=password],
     input[type=email] {
+    padding: $padding-y $padding-x;
+    min-height: $line-height + ($padding-y * 2);
+    @include border-radius($component-border-radius);
+    border: $component-border;
+    z-index: $component-z-index;
         width: 100%;
         @include box-shadow($input-box-shadow);
 
@@ -67,7 +69,7 @@ input[type=email] {
         width: calc(100% - #{$form-label-width});
     }
 
-    &.danger {
+    &.theme-danger {
         em {
             color: theme-color("danger");
             margin: ($spacer / 2) 0 $spacer 0;
@@ -75,9 +77,16 @@ input[type=email] {
         }
     }
 
-    @each $color, $value in $theme-colors {
-        &.#{$color} {
-            @include input-variant(theme-color-level($value, -10), theme-color-level($value, -9), theme-color-level($value, 8));
+    @each $color, $value in $theme-validation-colors {
+        &.theme-#{$color} {
+            $background: theme-color-level($value, -10);
+            @include validation-variant($background, theme-color-level($value, -9), theme-color-level($value, 8));
+
+
+            @at-root .desktop .form-group.theme-#{$color} .dropdown > .btn:hover {
+                background-color: darken($background, 7.5%);
+                @include color-yiq(darken($background, 7.5%));
+            }
         }
     }
 }

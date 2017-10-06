@@ -61,6 +61,11 @@ $theme-colors: (
     dark: $gray-800 
 );
 
+$theme-validation-colors: ( 
+    success: $green, 
+    danger: $red
+);
+
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8%;
 
