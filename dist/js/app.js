@@ -796,7 +796,7 @@ app.dropdown = function (dropdowns) {
             }
         }
         html.push('<div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
-        html.push('<ul>');
+        html.push('<ul class="' + btn + '">');
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this);
             html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn theme-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');

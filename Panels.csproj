@@ -128,6 +128,7 @@
     <Content Include="dist\img\favicon\favicon.ico" />
     <Content Include="dist\img\favicon\mstile-150x150.png" />
     <Content Include="dist\img\favicon\safari-pinned-tab.svg" />
+    <Content Include="dist\img\mahatma-gandhi.jpg" />
     <Content Include="dist\js\app.js" />
     <Content Include="dist\js\app.min.js">
       <DependentUpon>app.js</DependentUpon>
@@ -140,6 +141,7 @@
     <Content Include="index.html" />
     <Content Include="js\app\accordion.js" />
     <Content Include="js\app\app.js" />
+    <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
     <Content Include="js\app\googleMaps.js" />
     <Content Include="js\app\jquery-extensions.js" />
@@ -147,9 +149,8 @@
     <Content Include="js\app\settings.js" />
     <Content Include="js\app\youtube.js" />
     <Content Include="js\vendors\bootstrap-slider.min.js" />
-    <Content Include="js\vendors\bootstrap\bootstrap.min.js" />
-    <Content Include="js\vendors\bootstrap\tether.min.js" />
     <Content Include="js\vendors\bowser.js" />
+    <Content Include="js\vendors\jquery\additional-methods.min.js" />
     <Content Include="js\vendors\jquery\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
     <Content Include="js\vendors\loadCSS\loadCSS.js" />
@@ -189,79 +190,12 @@
     <Content Include="scss\components\tree.scss" />
     <Content Include="scss\layout\breakpoints.scss" />
     <Content Include="scss\layout\loading.scss" />
-    <Content Include="scss\plugins\bootstrap\bootstrap-grid.scss" />
-    <Content Include="scss\plugins\bootstrap\bootstrap-reboot.scss" />
-    <Content Include="scss\plugins\bootstrap\bootstrap.scss" />
-    <Content Include="scss\plugins\bootstrap\_alert.scss" />
-    <Content Include="scss\plugins\bootstrap\_badge.scss" />
-    <Content Include="scss\plugins\bootstrap\_breadcrumb.scss" />
-    <Content Include="scss\plugins\bootstrap\_button-group.scss" />
-    <Content Include="scss\plugins\bootstrap\_buttons.scss" />
-    <Content Include="scss\plugins\bootstrap\_card.scss" />
-    <Content Include="scss\plugins\bootstrap\_carousel.scss" />
-    <Content Include="scss\plugins\bootstrap\_close.scss" />
-    <Content Include="scss\plugins\bootstrap\_code.scss" />
-    <Content Include="scss\plugins\bootstrap\_custom-forms.scss" />
-    <Content Include="scss\plugins\bootstrap\_dropdown.scss" />
-    <Content Include="scss\plugins\bootstrap\_forms.scss" />
-    <Content Include="scss\plugins\bootstrap\_functions.scss" />
-    <Content Include="scss\plugins\bootstrap\_grid.scss" />
-    <Content Include="scss\plugins\bootstrap\_images.scss" />
-    <Content Include="scss\plugins\bootstrap\_input-group.scss" />
-    <Content Include="scss\plugins\bootstrap\_jumbotron.scss" />
-    <Content Include="scss\plugins\bootstrap\_list-group.scss" />
-    <Content Include="scss\plugins\bootstrap\_media.scss" />
-    <Content Include="scss\plugins\bootstrap\_mixins.scss" />
-    <Content Include="scss\plugins\bootstrap\_modal.scss" />
-    <Content Include="scss\plugins\bootstrap\_nav.scss" />
-    <Content Include="scss\plugins\bootstrap\_navbar.scss" />
-    <Content Include="scss\plugins\bootstrap\_pagination.scss" />
-    <Content Include="scss\plugins\bootstrap\_popover.scss" />
-    <Content Include="scss\plugins\bootstrap\_print.scss" />
-    <Content Include="scss\plugins\bootstrap\_progress.scss" />
-    <Content Include="scss\plugins\bootstrap\_reboot.scss" />
-    <Content Include="scss\plugins\bootstrap\_tables.scss" />
-    <Content Include="scss\plugins\bootstrap\_tooltip.scss" />
-    <Content Include="scss\plugins\bootstrap\_transitions.scss" />
-    <Content Include="scss\plugins\bootstrap\_type.scss" />
-    <Content Include="scss\plugins\bootstrap\_utilities.scss" />
-    <Content Include="scss\plugins\bootstrap\_variables.scss" />
     <Content Include="manifest.json" />
     <Content Include="scss\layout\flex-items.scss" />
     <Content Include="scss\functions.scss" />
     <Content Include="scss\references.scss" />
     <Content Include="scss\components\_components.scss" />
     <Content Include="scss\layout\section.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_alert.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_background-variant.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_badge.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_border-radius.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_box-shadow.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_breakpoints.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_buttons.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_clearfix.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_float.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_forms.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_gradients.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_grid-framework.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_grid.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_hover.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_image.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_list-group.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_lists.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_nav-divider.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_navbar-align.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_pagination.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_reset-text.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_resize.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_screen-reader.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_size.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_table-row.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_text-emphasis.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_text-hide.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_text-truncate.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_transition.scss" />
-    <Content Include="scss\plugins\bootstrap\mixins\_visibility.scss" />
     <Content Include="scss\components\inputs\slider.scss" />
     <Content Include="scss\variables\colors.scss" />
     <Content Include="scss\mixins\color-yiq.scss" />
@@ -276,6 +210,10 @@
     <Content Include="scss\components\accordion.scss" />
     <Content Include="scss\components\inputs\form.scss" />
     <Content Include="scss\components\embed-responsive.scss" />
+    <Content Include="scss\components\inputs\dropdown.scss" />
+    <Content Include="scss\components\quote.scss" />
+    <Content Include="scss\components\img.scss" />
+    <Content Include="scss\components\table.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -298,7 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="fonts\" />
-    <Folder Include="scss\plugins\bootstrap\utilities\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

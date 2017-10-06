@@ -27,7 +27,13 @@
 
     @if $level < 0 {
         // Lighter values need a quick double negative for the Sass math to work
-        @return mix($color-base, $color, $level * -1 * $theme-color-interval);
+        $mix: mix($color-base, $color, $level * -1 * $theme-color-interval);
+
+        @if lightness($mix) > 95% {
+            @return #efefef;
+        }
+
+        @return $mix;
     }
     @else {
         @return mix($color-base, $color, $level * $theme-color-interval);

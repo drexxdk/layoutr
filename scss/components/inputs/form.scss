@@ -10,8 +10,9 @@
         background-color: $background;
         border-color: $border;
 
+        .focus,
         &:focus {
-            @include box-shadow($box-shadow, 0 0 0 3px $border);
+            @include box-shadow($box-shadow, 0 0 0 $btn-focus-box-shadow-width $border);
         }
     }
 

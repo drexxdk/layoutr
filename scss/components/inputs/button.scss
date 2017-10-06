@@ -7,8 +7,8 @@
 
     &:focus,
     &.focus {
-        box-shadow: $box-shadow, 0 0 0 3px $border;
-        z-index: 1;
+        @include box-shadow($box-shadow, 0 0 0 $btn-focus-box-shadow-width $border);
+        z-index: $component-focus-z-index;
     }
 }
 
