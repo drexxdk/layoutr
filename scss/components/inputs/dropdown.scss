@@ -65,7 +65,7 @@ select {
             margin-top: 0;
             margin-bottom: $btn-focus-box-shadow-width;
             top: auto;
-            bottom: calc(100% - #{$component-border-width});
+            bottom: 100%;
             @include border-radiuses($component-border-radius, $component-border-radius, 0, 0);
         }
     }
@@ -118,7 +118,7 @@ select {
         background-color: $gray-100;
         border: $component-border;
         position: absolute;
-        top: calc(100% - #{$component-border-width});
+        top: 100%;
         margin-top: $btn-focus-box-shadow-width;
         left: 0;
         right: 0;
