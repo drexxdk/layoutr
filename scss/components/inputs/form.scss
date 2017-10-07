@@ -1,13 +1,15 @@
 ﻿/// <reference path="../../references" />
 
 @mixin validation-variant($background, $border, $color) {
+    $background-light: theme-color-level($background, -10);
+    $background-dark: theme-color-level($background, -4);
     input[type=text],
     input[type=password],
     input[type=email],
     .dropdown > div {
         color: $color;
         fill: $color;
-        background-color: $background;
+        background-color: $background-light;
         border-color: $border;
 
         .focus,
@@ -18,9 +20,14 @@
 
     input[type=checkbox],
     input[type=radio] {
+
         & + label > i {
             border-color: $border;
-            background-color: $background;
+            background-color: $background-light;
+        }
+
+        &:checked + label > i {
+            background-color: $background-dark;
         }
     }
 
@@ -33,7 +40,8 @@
 }
 
 .form-group,
-.form-group > div {
+.form-group > div,
+.form-group > div > .input-group {
     @include flex-display;
     @include flex-wrap(wrap);
     @include align-items(flex-start);
@@ -79,8 +87,7 @@
 
     @each $color, $value in $theme-validation-colors {
         &.theme-#{$color} {
-            $background: theme-color-level($value, -10);
-            @include validation-variant($background, theme-color-level($value, -9), theme-color-level($value, 8));
+            @include validation-variant($value, theme-color-level($value, -9), theme-color-level($value, 8));
         }
     }
 }

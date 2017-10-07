@@ -656,8 +656,7 @@ $(function () {
     app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 
     $(document).on('click', '.alert .close', function () {
-        var $this = $(this);
-        $this.parent().fadeOut(500); //.hide();
+        $(this).parent().fadeOut(500);
     });
 
     $('.aside').click(function () {
@@ -718,6 +717,8 @@ $(function () {
                 dropdown_4: "required",
                 dropdown_5: "required",
                 dropdown_6: "required",
+                gender: "required",
+                interests: "required",
                 agree: "required"
             },
             {
@@ -747,6 +748,8 @@ $(function () {
                 dropdown_4: "Please select an option",
                 dropdown_5: "Please select an option",
                 dropdown_6: "Please select an option",
+                gender: "Please select your gender",
+                interests: "Please select at least one interest",
                 agree: "Please accept our policy"
             }
         );
@@ -820,7 +823,7 @@ app.dropdown = function (dropdowns) {
                 dropdown.children('div').children('label').text($that.text());
                 $this.children(':selected').removeAttr('selected');
                 $this.children('[value="' + $that.attr('data-id') + '"]').attr('selected', 'selected');
-                $this.valid();
+                $this.change();
             }
             dropdown.removeClass('open');
         });
@@ -908,7 +911,11 @@ app.addValidation = function (form, rules, messages) {
         messages: messages,
         errorElement: "em",
         errorPlacement: function (error, element) {
-            element.parent().append(error);
+            element = element.parent();
+            if(element.hasClass('checkbox') || element.hasClass('radio')) {
+                element = element.parent();
+            }
+            element.append(error);
         },
         highlight: function (element, errorClass, validClass) {
             $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
@@ -916,6 +923,9 @@ app.addValidation = function (form, rules, messages) {
         unhighlight: function (element, errorClass, validClass) {
             $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
         }
+    });
+    form.on('change', 'input, textarea, select', function () {
+        $(this).valid();
     });
 };
 var app = app || {};

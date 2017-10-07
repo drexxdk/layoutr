@@ -28,8 +28,7 @@ $(function () {
     app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 
     $(document).on('click', '.alert .close', function () {
-        var $this = $(this);
-        $this.parent().fadeOut(500); //.hide();
+        $(this).parent().fadeOut(500);
     });
 
     $('.aside').click(function () {
@@ -90,6 +89,8 @@ $(function () {
                 dropdown_4: "required",
                 dropdown_5: "required",
                 dropdown_6: "required",
+                gender: "required",
+                interests: "required",
                 agree: "required"
             },
             {
@@ -119,6 +120,8 @@ $(function () {
                 dropdown_4: "Please select an option",
                 dropdown_5: "Please select an option",
                 dropdown_6: "Please select an option",
+                gender: "Please select your gender",
+                interests: "Please select at least one interest",
                 agree: "Please accept our policy"
             }
         );

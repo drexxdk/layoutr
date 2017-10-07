@@ -16,7 +16,11 @@ app.addValidation = function (form, rules, messages) {
         messages: messages,
         errorElement: "em",
         errorPlacement: function (error, element) {
-            element.parent().append(error);
+            element = element.parent();
+            if(element.hasClass('checkbox') || element.hasClass('radio')) {
+                element = element.parent();
+            }
+            element.append(error);
         },
         highlight: function (element, errorClass, validClass) {
             $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
@@ -24,5 +28,8 @@ app.addValidation = function (form, rules, messages) {
         unhighlight: function (element, errorClass, validClass) {
             $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
         }
+    });
+    form.on('change', 'input, textarea, select', function () {
+        $(this).valid();
     });
 };

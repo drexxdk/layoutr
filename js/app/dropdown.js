@@ -46,7 +46,7 @@ app.dropdown = function (dropdowns) {
                 dropdown.children('div').children('label').text($that.text());
                 $this.children(':selected').removeAttr('selected');
                 $this.children('[value="' + $that.attr('data-id') + '"]').attr('selected', 'selected');
-                $this.valid();
+                $this.change();
             }
             dropdown.removeClass('open');
         });
