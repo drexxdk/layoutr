@@ -24,9 +24,13 @@ $(function () {
     } else {
         app.main.addClass('desktop');
     }
-    //app.main.addClass('mobile');
 
     app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
+
+    $(document).on('click', '.alert .close', function () {
+        var $this = $(this);
+        $this.parent().fadeOut(500); //.hide();
+    });
 
     $('.aside').click(function () {
         var $this = $(this);

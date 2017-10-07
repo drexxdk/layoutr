@@ -46,7 +46,7 @@
     }
 
     .theme-link:hover {
-        color: $link-hover-color!important;
+        color: $link-hover-color !important;
         text-decoration: $link-hover-decoration;
     }
 
@@ -63,5 +63,15 @@
         $active-background: darken($value, 7.5%);
         @include color-yiq($active-background);
         background-color: $active-background;
+    }
+
+
+    @each $color, $value in $theme-colors {
+        .alert.theme-#{$color} .close:hover {
+
+            $active-background: darken(theme-color-level($value, -10), 7.5%);
+            @include color-yiq($active-background);
+            background-color: $active-background;
+        }
     }
 }
