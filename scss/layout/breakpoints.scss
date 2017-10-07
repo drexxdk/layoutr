@@ -45,7 +45,7 @@
     }
 
     @include breakpoint-small-one-column {
-        &.mobile {
+        &:not(.desktop) {
             &.left-open,
             &.right-open {
                 overflow: hidden;
