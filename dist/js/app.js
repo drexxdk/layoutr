@@ -652,7 +652,7 @@ $(function () {
     } else {
         app.main.addClass('desktop');
     }
-    app.main.addClass('mobile');
+    //app.main.addClass('mobile');
 
     app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 

@@ -45,6 +45,20 @@
     }
 
     @include breakpoint-small-one-column {
+        &.mobile {
+            &.left-open,
+            &.right-open {
+                overflow: hidden;
+            }
+
+            aside#right > .content {
+                direction: ltr;
+
+                > div {
+                    direction: ltr;
+                }
+            }
+        }
     }
 
     @include breakpoint-medium-one-column {
