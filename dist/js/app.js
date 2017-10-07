@@ -930,10 +930,9 @@ app.addValidation = function (form, rules, messages) {
 };
 var app = app || {};
 
-app.showLoading = function () {
+app.disableHtmlScroll = function () {
     var initWidth = app.body.outerWidth();
     var initHeight = app.body.outerHeight();
-
     var scrollPosition = [
         self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
         self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -942,10 +941,8 @@ app.showLoading = function () {
     app.html.data('previous-overflow', app.html.css('overflow'));
     app.html.css('overflow', 'hidden');
     window.scrollTo(scrollPosition[0], scrollPosition[1]);
-
     var marginR = app.body.outerWidth() - initWidth;
     var marginB = app.body.outerHeight() - initHeight;
-    app.body.addClass('loading');
     app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
     app.header.css({ 'padding-right': marginR });
     if (app.main.hasClass('right-open')) {
@@ -959,7 +956,7 @@ app.showLoading = function () {
     }
 };
 
-app.hideLoading = function () {
+app.enableHtmlScroll = function () {
     app.html.css('overflow', app.html.data('previous-overflow'));
     var scrollPosition = app.html.data('scroll-position');
     window.scrollTo(scrollPosition[0], scrollPosition[1]);
@@ -968,6 +965,15 @@ app.hideLoading = function () {
     app.header.removeAttr('style');
     app.right.removeAttr('style');
     app.footer.removeAttr('style');
+};
+
+app.showLoading = function () {
+    app.disableHtmlScroll();
+    app.body.addClass('loading');
+};
+
+app.hideLoading = function () {
+    app.enableHtmlScroll();
     app.body.removeClass('loading');
 };
 
