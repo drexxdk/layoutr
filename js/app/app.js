@@ -25,7 +25,7 @@ $(function () {
         app.main.addClass('desktop');
     }
 
-    app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
+    app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     $(document).on('click', '.alert .close', function () {
         var $this = $(this).parent();

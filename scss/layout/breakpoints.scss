@@ -73,8 +73,12 @@
 
         &.right-open {
             header,
-            #content,
             footer {
+                
+                padding-right: $aside-width;
+            }
+
+            #content {
                 margin-right: $aside-width;
             }
         }

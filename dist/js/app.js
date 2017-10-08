@@ -653,7 +653,7 @@ $(function () {
         app.main.addClass('desktop');
     }
 
-    app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
+    app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     $(document).on('click', '.alert .close', function () {
         var $this = $(this).parent();
@@ -965,34 +965,31 @@ app.disableHtmlScroll = function () {
     var marginR = app.body.outerWidth() - initWidth;
     var marginB = app.body.outerHeight() - initHeight;
     app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
-    app.header.css({ 'padding-right': marginR });
+    app.header.css('right', marginR);
     if (app.main.hasClass('right-open')) {
         app.right.css({
-            'max-width': app.right.width() + marginR,
+            'max-width': app.right.outerWidth() + marginR,
             'padding-right': marginR
         });
     }
     if (app.main.hasClass('footer-fixed')) {
-        app.footer.css({ 'padding-right': marginR });
+        app.footer.css('right', marginR);
     }
 
     var popupsCenter = app.main.children('.popup[data-position*="center"]:visible');
     popupsCenter.each(function (index) {
         var $this = $(this);
-        var total = parseInt($this.css('margin-left')) - marginR / 2 + 'px';
-        $this.css('margin-left', total);
+        $this.css('margin-left', parseInt($this.css('margin-left')) - marginR / 2 + 'px');
     });
 
     var popupsRight = app.main.children('.popup[data-position*="right"]:visible');
     popupsRight.each(function (index) {
         var $this = $(this);
-        var total = parseInt($this.css('margin-right')) + marginR + 'px';
-        $this.css('margin-right', total);
+        $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
     });
 
     if (app.main.hasClass('two-columns') && app.contentHeader.length && app.contentHeader.css('position') === 'fixed') {
-        var total = app.contentHeader.width() + -marginR / 2 + 'px';
-        app.contentHeader.addClass('no-transitions').css('width', total);
+        app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
     }
 
 };
