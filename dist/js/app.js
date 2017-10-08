@@ -656,7 +656,10 @@ $(function () {
     app.footer.html('\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen');
 
     $(document).on('click', '.alert .close', function () {
-        $(this).parent().fadeOut(500);
+        var $this = $(this).parent();
+        $this.fadeOut(500, function () {
+            $this.addClass('hidden').css('display', '');
+        });
     });
 
     $('.aside').click(function () {
@@ -756,6 +759,22 @@ $(function () {
 
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select'));
+
+        app.content.find('#popup-position').on('click', '.btn', function () {
+            var position = $(this).attr('data-position');
+            var popup = app.main.children('.popup[data-position="' + position + '"]');
+            if (popup.length) {
+                popup.toggleClass('hidden');
+            } else {
+                var html = [];
+                html.push('<div class="popup alert theme-primary" data-position="' + position + '">');
+                html.push('<div><p>This is a primary alert—check it out!</p></div>');
+                html.push('<button class="close"><svg><use xlink:href="#svg-plus"></use></svg></button>');
+                html.push('</div>');
+                html = html.join("");
+                app.main.prepend(html);
+            }
+        });
     });
 });
 var app = app || {};

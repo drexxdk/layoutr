@@ -21,6 +21,10 @@
     @include align-items(flex-start);
     overflow: hidden;
 
+    &.hidden {
+        display: none;
+    }
+
     > div {
         padding: $padding-y $padding-x;
         min-height: $line-height + ($padding-y * 2);

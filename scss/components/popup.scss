@@ -1,0 +1,89 @@
+﻿/// <reference path="../references" />
+
+$popup-small: 200px;
+$popup-medium: 400px;
+$popup-large: 600px;
+$popup-spacer: $spacer;
+
+#main {
+    &.left-open .popup {
+        &[data-position*="center"] {
+            left: calc(#{($aside-width / 2) - $popup-spacer} + 50%);
+        }
+
+        &[data-position*="left"] {
+            left: $aside-width;
+        }
+    }
+
+    &.right-open .popup {
+        &[data-position*="center"] {
+            left: calc(-#{($aside-width / 2) + $spacer} + 50%);
+        }
+
+        &[data-position*="right"] {
+            right: $aside-width;
+        }
+    }
+
+    &.footer-fixed:not(.mobile) {
+        .popup[data-position*="middle"] {
+            top: calc(-#{$popup-spacer} + 50%);
+        }
+
+        .popup[data-position*="bottom"] {
+            bottom: $footer-height;
+        }
+    }
+}
+
+.popup {
+    width: 100%;
+    position: fixed;
+    z-index: $popup-z-index;
+    max-width: $popup-small;
+    margin: $popup-spacer;
+
+    &[data-position*="top"] {
+        top: $header-height;
+    }
+
+    &[data-position*="middle"] {
+        top: calc(#{($header-height / 2) - $popup-spacer} + 50%);
+        @include translateY(-50%);
+    }
+
+    &[data-position*="bottom"] {
+        bottom: 0;
+    }
+
+    &[data-position*="left"] {
+        left: 0;
+    }
+
+    &[data-position*="center"] {
+        left: calc(-#{$popup-spacer} + 50%);
+        @include translateX(-50%);
+    }
+
+    &[data-position*="right"] {
+        right: 0;
+    }
+
+    &[data-position="middle center"] {
+        @include translate(-50%, -50%);
+    }
+    /*&.small {
+        max-width: $popup-small;
+        max-height: $popup-small;
+    }*/
+    &.medium {
+        max-width: $popup-medium;
+        max-height: $popup-medium;
+    }
+
+    &.large {
+        max-width: $popup-large;
+        max-height: $popup-large;
+    }
+}

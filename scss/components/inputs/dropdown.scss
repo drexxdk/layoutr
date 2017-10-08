@@ -93,13 +93,6 @@ select {
     > div {
         @include flex-display();
         border: $component-border;
-        @extend .btn;
-
-        @each $color, $value in $theme-colors {
-            &.#{$color} {
-                @extend .#{$color};
-            }
-        }
 
         > label {
             flex-grow: 1;

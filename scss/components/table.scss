@@ -9,14 +9,17 @@
     overflow: auto;
 
     @each $color, $value in $theme-colors {
-        &.#{$color} table thead th {
+        &.theme-#{$color} table thead th {
             @include table-variant($value);
         }
     }
 
+    &.expand-width > table {
+        width: 100%;
+    }
+
     table {
         vertical-align: top;
-        width: 100%;
         overflow-x: auto;
         white-space: nowrap;
         border-collapse: collapse;
