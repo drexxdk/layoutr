@@ -965,15 +965,18 @@ app.disableHtmlScroll = function () {
     var marginR = app.body.outerWidth() - initWidth;
     var marginB = app.body.outerHeight() - initHeight;
     app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
-    app.header.css('right', marginR);
+
+    var headerFooterTag = 'padding-right';
     if (app.main.hasClass('right-open')) {
         app.right.css({
             'max-width': app.right.outerWidth() + marginR,
             'padding-right': marginR
         });
+        headerFooterTag = 'right';
     }
+    app.header.css(headerFooterTag, marginR);
     if (app.main.hasClass('footer-fixed')) {
-        app.footer.css('right', marginR);
+        app.footer.css(headerFooterTag, marginR);
     }
 
     var popupsCenter = app.main.children('.popup[data-position*="center"]:visible');
