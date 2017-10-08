@@ -2,7 +2,7 @@
 app.localStorage = typeof Storage !== "undefined";
 app.settings = [];
 
-app.applySettings = function (id, type, value, set = false) {
+app.applySettings = function (id, type, value, set) {
     if (app.localStorage && set) {
         var entry = {
             "id": id,
@@ -81,14 +81,14 @@ $(function () {
 
         if (app.localStorage) {
             $.each(app.settings, function (i, entry) {
-                app.applySettings(entry.id, entry.type, entry.value);
+                app.applySettings(entry.id, entry.type, entry.value, false);
             });
         }
 
         $(document).click(function (e) {
             if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
                 var target = $(e.target);
-                if (!target.closest("#loading").length && !target.closest(".aside").length) {
+                if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
                     if (app.main.hasClass('left-open') && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
                         app.main.removeClass('left-open');
                     } else if (app.main.hasClass('right-open') && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
