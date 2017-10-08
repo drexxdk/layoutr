@@ -46,40 +46,53 @@
         }
     }
 
-    &.flipped table {
-        @include flex-display();
-        overflow: hidden;
+    &.flipped {
 
-        thead {
-            @include flex-display();
-            flex-shrink: 0;
+        &.expand-width {
+            table tbody {
+                width: 100%;
+
+                tr {
+                    flex-grow: 1;
+                }
+            }
         }
 
-        tbody {
-            -webkit-overflow-scrolling: touch;
+        table {
             @include flex-display();
-            position: relative;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
+            overflow: hidden;
 
-        tr {
-            @include flex-display();
-            @include flex-direction(column);
-            flex-shrink: 0;
-
-            th,
-            td {
-                display: block;
+            thead {
+                @include flex-display();
+                flex-shrink: 0;
             }
 
-            th:not(:last-child),
-            td:not(:last-child) {
-                border-bottom: 0;
+            tbody {
+                -webkit-overflow-scrolling: touch;
+                @include flex-display();
+                position: relative;
+                overflow-x: auto;
+                overflow-y: hidden;
             }
 
-            td {
-                border-left: 0;
+            tr {
+                @include flex-display();
+                @include flex-direction(column);
+                flex-shrink: 0;
+
+                th,
+                td {
+                    display: block;
+                }
+
+                th:not(:last-child),
+                td:not(:last-child) {
+                    border-bottom: 0;
+                }
+
+                td {
+                    border-left: 0;
+                }
             }
         }
     }
