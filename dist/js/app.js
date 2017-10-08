@@ -769,7 +769,7 @@ $(function () {
                 var html = [];
                 html.push('<div class="popup alert theme-primary" data-position="' + position + '">');
                 html.push('<div><p>This is a primary alert—check it out!</p></div>');
-                html.push('<button class="close"><svg><use xlink:href="#svg-plus"></use></svg></button>');
+                html.push('<button class="close" aria-label="Close popup"><svg><use xlink:href="#svg-plus"></use></svg></button>');
                 html.push('</div>');
                 html = html.join("");
                 app.main.prepend(html);
