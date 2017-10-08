@@ -692,11 +692,11 @@ $(function () {
         app.addValidation(
             app.content.find('#form'),
             {
-                firstname: {
+                firstName: {
                     required: true,
                     minlength: 2
                 },
-                lastname: {
+                lastName: {
                     required: true,
                     minlength: 2
                 },
@@ -727,13 +727,13 @@ $(function () {
                 agree: "required"
             },
             {
-                firstname: {
-                    required: "Please enter your firstname",
-                    minlength: "Your lastname must consist of at least 2 characters"
+                firstName: {
+                    required: "Please enter your first name",
+                    minlength: "Your first name must consist of at least 2 characters"
                 },
-                lastname: {
-                    required: "Please enter your lastname",
-                    minlength: "Your lastname must consist of at least 2 characters"
+                lastName: {
+                    required: "Please enter your last name",
+                    minlength: "Your last name must consist of at least 2 characters"
                 },
                 username: {
                     required: "Please enter a username",
@@ -907,7 +907,7 @@ var youtube;
 $(function () {
     app.content.on('click', '#toggle-youtube', function () {
         if (youtube === undefined) {
-            app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/HZ5m_nlfZe4?ecver=2" allowfullscreen></iframe></div></section>');
+            app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/7flYUW9-A_M" allowfullscreen></iframe></div></section>');
             youtube = app.content.find('#youtube');
         } else {
             youtube.toggle();

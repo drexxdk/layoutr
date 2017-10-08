@@ -64,11 +64,11 @@ $(function () {
         app.addValidation(
             app.content.find('#form'),
             {
-                firstname: {
+                firstName: {
                     required: true,
                     minlength: 2
                 },
-                lastname: {
+                lastName: {
                     required: true,
                     minlength: 2
                 },
@@ -99,13 +99,13 @@ $(function () {
                 agree: "required"
             },
             {
-                firstname: {
-                    required: "Please enter your firstname",
-                    minlength: "Your lastname must consist of at least 2 characters"
+                firstName: {
+                    required: "Please enter your first name",
+                    minlength: "Your first name must consist of at least 2 characters"
                 },
-                lastname: {
-                    required: "Please enter your lastname",
-                    minlength: "Your lastname must consist of at least 2 characters"
+                lastName: {
+                    required: "Please enter your last name",
+                    minlength: "Your last name must consist of at least 2 characters"
                 },
                 username: {
                     required: "Please enter a username",
