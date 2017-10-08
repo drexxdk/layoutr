@@ -59,6 +59,8 @@ $(function () {
     });
     app.left.load('ajax/layout/menu.html');
     app.content.load('ajax/content/page1.html', function () {
+        app.contentHeader = app.content.children('.header');
+
         app.addValidation(
             app.content.find('#form'),
             {

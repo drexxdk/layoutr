@@ -687,6 +687,8 @@ $(function () {
     });
     app.left.load('ajax/layout/menu.html');
     app.content.load('ajax/content/page1.html', function () {
+        app.contentHeader = app.content.children('.header');
+
         app.addValidation(
             app.content.find('#form'),
             {
@@ -973,6 +975,26 @@ app.disableHtmlScroll = function () {
     if (app.main.hasClass('footer-fixed')) {
         app.footer.css({ 'padding-right': marginR });
     }
+
+    var popupsCenter = app.main.children('.popup[data-position*="center"]:visible');
+    popupsCenter.each(function (index) {
+        var $this = $(this);
+        var total = parseInt($this.css('margin-left')) - marginR / 2 + 'px';
+        $this.css('margin-left', total);
+    });
+
+    var popupsRight = app.main.children('.popup[data-position*="right"]:visible');
+    popupsRight.each(function (index) {
+        var $this = $(this);
+        var total = parseInt($this.css('margin-right')) + marginR + 'px';
+        $this.css('margin-right', total);
+    });
+
+    if (app.main.hasClass('two-columns') && app.contentHeader.length && app.contentHeader.css('position') === 'fixed') {
+        var total = app.contentHeader.width() + -marginR / 2 + 'px';
+        app.contentHeader.addClass('no-transitions').css('width', total);
+    }
+
 };
 
 app.enableHtmlScroll = function () {
@@ -984,6 +1006,13 @@ app.enableHtmlScroll = function () {
     app.header.removeAttr('style');
     app.right.removeAttr('style');
     app.footer.removeAttr('style');
+    var popups = app.main.children('.popup');
+    if (popups.length) {
+        popups.removeAttr('style');
+    }
+    if (app.contentHeader.length) {
+        app.contentHeader.removeClass('no-transitions').removeAttr('style');
+    }
 };
 
 app.showLoading = function () {
@@ -997,7 +1026,7 @@ app.hideLoading = function () {
 };
 
 $(function () {
-    app.body.on('click', '#toggle-loading', function () {
+    app.body.on('click', '.toggle-loading', function () {
         app.showLoading();
         setTimeout(function () {
             app.hideLoading();

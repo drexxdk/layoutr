@@ -90,12 +90,12 @@
             &.left-open,
             &.right-open {
                 #content .header {
-                    width: calc(50% - #{$aside-width / 2}) !important;
+                    width: calc(50% - #{$aside-width / 2});
                 }
             }
 
             &.left-open #content > .header {
-                left: $aside-width !important;
+                left: $aside-width;
             }
 
             &.footer-fixed.mobile #content > .header,
