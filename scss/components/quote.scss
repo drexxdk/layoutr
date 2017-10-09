@@ -28,7 +28,7 @@
     }
 
     > .text {
-        padding: $spacer;
+        padding: $padding-y $padding-x;
 
         > p {
             font-size: $font-size;
