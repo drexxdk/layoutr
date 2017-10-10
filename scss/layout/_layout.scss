@@ -21,6 +21,7 @@
     &.right-overlay.right-open #content:before {
         content: '';
         position: fixed;
+        -webkit-backface-visibility: hidden;
         top: -$extra-spacing;
         bottom: -$extra-spacing;
         left: -$extra-spacing;
@@ -79,6 +80,7 @@
 
         footer {
             position: fixed;
+            -webkit-backface-visibility: hidden;
             right: 0;
             bottom: 0;
             left: 0;

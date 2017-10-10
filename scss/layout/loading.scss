@@ -3,6 +3,7 @@
 body {
     > #loading {
         position: fixed;
+        -webkit-backface-visibility: hidden;
         display: none;
         z-index: $loading-z-index;
         top: -$extra-spacing;

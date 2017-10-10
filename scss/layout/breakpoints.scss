@@ -106,6 +106,7 @@
 
                 > .header {
                     position: fixed;
+                    -webkit-backface-visibility: hidden;
                     top: 0;
                     left: 0;
                     width: 50%;
