@@ -2,7 +2,6 @@
 
 aside {
     position: fixed;
-    -webkit-backface-visibility: hidden;
     z-index: $aside-z-index;
     top: -$extra-spacing;
     padding-top: $extra-spacing;

@@ -40,7 +40,6 @@ $popup-spacer: $spacer;
 .popup {
     width: 100%;
     position: fixed;
-    -webkit-backface-visibility: hidden;
     z-index: $popup-z-index;
     max-width: $popup-small;
     margin: $popup-spacer;
