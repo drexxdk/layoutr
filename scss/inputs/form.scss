@@ -1,4 +1,4 @@
-﻿/// <reference path="../../references" />
+﻿/// <reference path="../references" />
 
 @mixin validation-variant($background, $border, $color) {
     $background-light: theme-color-level($background, -10);

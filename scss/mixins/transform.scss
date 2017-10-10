@@ -1,80 +1,80 @@
 ﻿@mixin transition ($transition...) {
-    -webkit-transition: $transition;
+    /*-webkit-transition: $transition;
     -moz-transition: $transition;
     -ms-transition: $transition;
-    -o-transition: $transition;
+    -o-transition: $transition;*/
     transition: $transition;
 }
 
 @mixin transform($string) {
-    -webkit-transform: $string;
+    /*-webkit-transform: $string;
     -moz-transform: $string;
     -ms-transform: $string;
-    -o-transform: $string;
+    -o-transform: $string;*/
     transform: $string;
 }
 
 @mixin translateX($string) {
-    -webkit-transform: translateX($string);
+    /*-webkit-transform: translateX($string);
     -moz-transform: translateX($string);
     -ms-transform: translateX($string);
-    -o-transform: translateX($string);
+    -o-transform: translateX($string);*/
     transform: translateX($string);
 }
 
 @mixin translateY($string) {
-    -webkit-transform: translateY($string);
+    /*-webkit-transform: translateY($string);
     -moz-transform: translateY($string);
     -ms-transform: translateY($string);
-    -o-transform: translateY($string);
+    -o-transform: translateY($string);*/
     transform: translateY($string);
 }
 
 @mixin scale ($factor) {
-    -webkit-transform: scale($factor);
+    /*-webkit-transform: scale($factor);
     -moz-transform: scale($factor);
     -ms-transform: scale($factor);
-    -o-transform: scale($factor);
+    -o-transform: scale($factor);*/
     transform: scale($factor);
 }
 
 @mixin rotate ($deg) {
-    -webkit-transform: rotate(#{$deg}deg);
+    /*-webkit-transform: rotate(#{$deg}deg);
     -moz-transform: rotate(#{$deg}deg);
     -ms-transform: rotate(#{$deg}deg);
-    -o-transform: rotate(#{$deg}deg);
+    -o-transform: rotate(#{$deg}deg);*/
     transform: rotate(#{$deg}deg);
 }
 
 @mixin skew ($deg, $deg2) {
-    -webkit-transform: skew($deg, $deg2);
+    /*-webkit-transform: skew($deg, $deg2);
     -moz-transform: skew($deg, $deg2);
     -ms-transform: skew($deg, $deg2);
-    -o-transform: skew($deg, $deg2);
+    -o-transform: skew($deg, $deg2);*/
     transform: skew($deg, $deg2);
 }
 
 @mixin translate ($x, $y: 0) {
-    -webkit-transform: translate($x, $y);
+    /*-webkit-transform: translate($x, $y);
     -moz-transform: translate($x, $y);
     -ms-transform: translate($x, $y);
-    -o-transform: translate($x, $y);
+    -o-transform: translate($x, $y);*/
     transform: translate($x, $y);
 }
 
 @mixin translate3d ($x, $y: 0, $z: 0) {
-    -webkit-transform: translate3d($x, $y, $z);
+    /*-webkit-transform: translate3d($x, $y, $z);
     -moz-transform: translate3d($x, $y, $z);
     -ms-transform: translate3d($x, $y, $z);
-    -o-transform: translate3d($x, $y, $z);
+    -o-transform: translate3d($x, $y, $z);*/
     transform: translate3d($x, $y, $z);
 }
 
 @mixin transform-origin ($x: center, $y: center) {
-    -webkit-transform-origin: $x $y;
+    /*-webkit-transform-origin: $x $y;
     -moz-transform-origin: $x $y;
     -ms-transform-origin: $x $y;
-    -o-transform-origin: $x $y;
+    -o-transform-origin: $x $y;*/
     transform-origin: $x $y;
 }
 

@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 .accordion {
-    @include border-radius(.5rem);
+    @include border-radius($component-border-radius);
     overflow: hidden;
     border: $component-border;
     z-index:$component-z-index;

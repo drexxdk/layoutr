@@ -1,4 +1,4 @@
-﻿/// <reference path="../../references" />
+﻿/// <reference path="../references" />
 
 @mixin button-variant($background, $border) {
     @include color-yiq($background);

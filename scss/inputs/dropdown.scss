@@ -1,4 +1,4 @@
-﻿/// <reference path="../../references" />
+﻿/// <reference path="../references" />
 
 select {
     font-size: 0;
@@ -16,9 +16,7 @@ select {
     &.ellipsis {
         > div > label,
         > ul > li > div > label {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            @include ellipsis;
         }
     }
 

@@ -4,13 +4,6 @@
     color: $color;
     background-color: $background;
     border-color: $border;
-    /*hr {
-        border-top-color: darken($border, 5%);
-    }
-
-    .alert-link {
-        color: darken($color, 10%);
-    }*/
 }
 
 .alert {
@@ -20,10 +13,6 @@
     @include flex-display();
     @include align-items(flex-start);
     overflow: hidden;
-
-    &.hidden {
-        display: none;
-    }
 
     > div {
         padding: $padding-y $padding-x;

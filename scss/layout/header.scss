@@ -13,14 +13,12 @@ header {
     z-index: $header-z-index;
 
     > .title {
-        overflow: hidden;
         padding: 0 $spacer;
-        white-space: nowrap;
-        text-overflow: ellipsis;
         font-size: 1rem;
         font-weight: bold;
         line-height: $header-height;
         flex-grow: 1;
+        @include ellipsis;
     }
 
     > .aside {
