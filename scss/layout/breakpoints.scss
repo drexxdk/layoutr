@@ -48,15 +48,6 @@
         aside {
             height: calc(100% + #{-$header-height} + #{$extra-spacing * 2});
         }
-        /*&:not(.desktop) {
-            aside#right > .content {
-                direction: ltr;
-
-                > div {
-                    direction: ltr;
-                }
-            }
-        }*/
     }
 
     @include breakpoint-medium-one-column {
