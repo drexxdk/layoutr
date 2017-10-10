@@ -6,7 +6,6 @@ aside {
     top: -$extra-spacing;
     padding-top: $extra-spacing;
     padding-bottom: $extra-spacing;
-    height: calc(100% + #{$extra-spacing * 2});
     width: 100%;
     max-width: $aside-width;
     background-color: $layout-background-color;
