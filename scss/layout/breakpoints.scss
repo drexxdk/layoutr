@@ -44,14 +44,8 @@
         }
     }
 
-    /*@include breakpoint-small-one-column {
-        // removed this rule, since it caused the page to jump to top
+    @include breakpoint-small-one-column {
         &:not(.desktop) {
-            &.left-open,
-            &.right-open {
-                overflow: hidden;
-            }
-
             aside#right > .content {
                 direction: ltr;
 
@@ -60,7 +54,7 @@
                 }
             }
         }
-    }*/
+    }
 
     @include breakpoint-medium-one-column {
         &.left-open {
@@ -74,7 +68,7 @@
         &.right-open {
             header,
             #content,
-            footer {                
+            footer {
                 margin-right: $aside-width;
             }
         }

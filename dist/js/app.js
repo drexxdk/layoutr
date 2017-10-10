@@ -665,6 +665,13 @@ $(function () {
     $('.aside').click(function () {
         var $this = $(this);
         if ($this.is('#toggle-menu')) {
+            if (!app.main.hasClass('desktop')) {
+                if ($(window).width() < 732 && !app.main.hasClass('left-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             app.main.toggleClass('left-open').removeClass('right-open');
             if (app.main.hasClass('left-open')) {
                 app.left.children('.content').click();
@@ -672,6 +679,13 @@ $(function () {
                 app.html.focus();
             }
         } else if ($this.is('#toggle-settings')) {
+            if (!app.main.hasClass('desktop')) {
+                if ($(window).width() < 732 && !app.main.hasClass('right-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             app.main.toggleClass('right-open').removeClass('left-open');
             if (app.main.hasClass('right-open')) {
                 app.right.children('.content').click();
@@ -1125,8 +1139,10 @@ $(function () {
                 var target = $(e.target);
                 if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
                     if (app.main.hasClass('left-open') && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                        app.enableHtmlScroll();
                         app.main.removeClass('left-open');
                     } else if (app.main.hasClass('right-open') && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                        app.enableHtmlScroll();
                         app.main.removeClass('right-open');
                     }
                     app.checkGoogleMaps();

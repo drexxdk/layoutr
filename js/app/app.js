@@ -37,6 +37,13 @@ $(function () {
     $('.aside').click(function () {
         var $this = $(this);
         if ($this.is('#toggle-menu')) {
+            if (!app.main.hasClass('desktop')) {
+                if ($(window).width() < 732 && !app.main.hasClass('left-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             app.main.toggleClass('left-open').removeClass('right-open');
             if (app.main.hasClass('left-open')) {
                 app.left.children('.content').click();
@@ -44,6 +51,13 @@ $(function () {
                 app.html.focus();
             }
         } else if ($this.is('#toggle-settings')) {
+            if (!app.main.hasClass('desktop')) {
+                if ($(window).width() < 732 && !app.main.hasClass('right-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             app.main.toggleClass('right-open').removeClass('left-open');
             if (app.main.hasClass('right-open')) {
                 app.right.children('.content').click();
