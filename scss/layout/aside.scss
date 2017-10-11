@@ -4,6 +4,7 @@ aside {
     position: fixed;
     z-index: $aside-z-index;
     top: -$extra-spacing;
+    bottom:- $extra-spacing;
     padding-top: $extra-spacing;
     padding-bottom: $extra-spacing;
     width: 100%;
