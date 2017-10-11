@@ -26,3 +26,7 @@ $content-header-min-height: rem(250px);
 $breakpoint-main-min-width: px($main-min-width);
 $breakpoint-one-column: px($aside-width + $content-min-width);
 $breakpoint-two-columns: px($aside-width + $content-min-width + $content-min-width);
+
+$container-small: rem(300px);
+$container-medium: rem(500px);
+$container-large: rem(700px);

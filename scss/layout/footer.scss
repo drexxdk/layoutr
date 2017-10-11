@@ -10,5 +10,6 @@ footer {
     > p {
         padding: 0 $spacer;
         line-height: $footer-height;
+        @include ellipsis;
     }
 }

@@ -1,0 +1,17 @@
+﻿/// <reference path="../references" />
+
+.container {
+    max-width: $container-medium;
+
+    &.small {
+        max-width: $container-small;
+    }
+
+    &.large {
+        max-width: $container-large;
+    }
+
+    &.center {
+        margin: 0 auto;
+    }
+}
