@@ -1,5 +1,9 @@
 ﻿var app = app || {};
 
+app.isSmallBreakpoint = function() {
+    return $(window).width() < 732;
+}
+
 $(function () {
     app.main = $('#main');
     app.content = $('#content');
@@ -11,6 +15,8 @@ $(function () {
     app.body = $('body');
     app.html = $('html');
     app.transitionTime = 400;
+    app.htmlOverflowEnabled = true;
+    app.smallBreakpoint = 732;
 
     if (bowser.msedge) {
         app.main.addClass('msedge');
@@ -24,6 +30,7 @@ $(function () {
     } else {
         app.main.addClass('desktop');
     }
+    //app.main.addClass('mobile');
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
@@ -38,6 +45,13 @@ $(function () {
         var $this = $(this);
         if ($this.is('#toggle-menu')) {
             app.main.toggleClass('left-open').removeClass('right-open');
+            if (!app.main.hasClass('desktop')) {
+                if (app.isSmallBreakpoint() && app.main.hasClass('left-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             if (app.main.hasClass('left-open')) {
                 app.left.children('.content').click();
             } else {
@@ -45,6 +59,13 @@ $(function () {
             }
         } else if ($this.is('#toggle-settings')) {
             app.main.toggleClass('right-open').removeClass('left-open');
+            if (!app.main.hasClass('desktop')) {
+                if (app.isSmallBreakpoint() && app.main.hasClass('right-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             if (app.main.hasClass('right-open')) {
                 app.right.children('.content').click();
             } else {

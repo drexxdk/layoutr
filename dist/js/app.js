@@ -628,6 +628,10 @@ var e=Math.abs(this.options.ticks[d]-b);e<=c[1]&&(c=[this.options.ticks[d],e])}i
 });
 var app = app || {};
 
+app.isSmallBreakpoint = function() {
+    return $(window).width() < 732;
+}
+
 $(function () {
     app.main = $('#main');
     app.content = $('#content');
@@ -639,6 +643,8 @@ $(function () {
     app.body = $('body');
     app.html = $('html');
     app.transitionTime = 400;
+    app.htmlOverflowEnabled = true;
+    app.smallBreakpoint = 732;
 
     if (bowser.msedge) {
         app.main.addClass('msedge');
@@ -652,6 +658,7 @@ $(function () {
     } else {
         app.main.addClass('desktop');
     }
+    //app.main.addClass('mobile');
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
@@ -666,6 +673,13 @@ $(function () {
         var $this = $(this);
         if ($this.is('#toggle-menu')) {
             app.main.toggleClass('left-open').removeClass('right-open');
+            if (!app.main.hasClass('desktop')) {
+                if (app.isSmallBreakpoint() && app.main.hasClass('left-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             if (app.main.hasClass('left-open')) {
                 app.left.children('.content').click();
             } else {
@@ -673,6 +687,13 @@ $(function () {
             }
         } else if ($this.is('#toggle-settings')) {
             app.main.toggleClass('right-open').removeClass('left-open');
+            if (!app.main.hasClass('desktop')) {
+                if (app.isSmallBreakpoint() && app.main.hasClass('right-open')) {
+                    app.disableHtmlScroll();
+                } else {
+                    app.enableHtmlScroll();
+                }
+            }
             if (app.main.hasClass('right-open')) {
                 app.right.children('.content').click();
             } else {
@@ -952,66 +973,71 @@ app.addValidation = function (form, rules, messages) {
 var app = app || {};
 
 app.disableHtmlScroll = function () {
-    var initWidth = app.body.outerWidth();
-    var initHeight = app.body.outerHeight();
-    var scrollPosition = [
-        self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
-        self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-    ];
-    app.html.data('scroll-position', scrollPosition);
-    app.html.data('previous-overflow', app.html.css('overflow'));
-    app.html.css('overflow', 'hidden');
-    window.scrollTo(scrollPosition[0], scrollPosition[1]);
-    var marginR = app.body.outerWidth() - initWidth;
-    var marginB = app.body.outerHeight() - initHeight;
-    app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
+    if (app.htmlOverflowEnabled) {
+        var initWidth = app.body.outerWidth();
+        var initHeight = app.body.outerHeight();
+        var scrollPosition = [
+            self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
+            self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        ];
+        app.html.data('scroll-position', scrollPosition);
+        app.html.data('previous-overflow', app.html.css('overflow'));
+        app.html.css('overflow', 'hidden');
+        window.scrollTo(scrollPosition[0], scrollPosition[1]);
+        var marginR = app.body.outerWidth() - initWidth;
+        var marginB = app.body.outerHeight() - initHeight;
+        app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
 
-    var headerFooterTag = 'padding-right';
-    if (app.main.hasClass('right-open')) {
-        app.right.css({
-            'max-width': app.right.outerWidth() + marginR,
-            'padding-right': marginR
+        var headerFooterTag = 'padding-right';
+        if (app.main.hasClass('right-open')) {
+            app.right.css({
+                'max-width': app.right.outerWidth() + marginR,
+                'padding-right': marginR
+            });
+            headerFooterTag = 'right';
+        }
+        app.header.css(headerFooterTag, marginR);
+        if (app.main.hasClass('footer-fixed')) {
+            app.footer.css(headerFooterTag, marginR);
+        }
+
+        var popupsCenter = app.main.children('.popup[data-position*="center"]:visible');
+        popupsCenter.each(function (index) {
+            var $this = $(this);
+            $this.css('margin-left', parseInt($this.css('margin-left')) - marginR / 2 + 'px');
         });
-        headerFooterTag = 'right';
+
+        var popupsRight = app.main.children('.popup[data-position*="right"]:visible');
+        popupsRight.each(function (index) {
+            var $this = $(this);
+            $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
+        });
+
+        if (app.main.hasClass('two-columns') && app.contentHeader.length && app.contentHeader.css('position') === 'fixed') {
+            app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
+        }
+        app.htmlOverflowEnabled = false;
     }
-    app.header.css(headerFooterTag, marginR);
-    if (app.main.hasClass('footer-fixed')) {
-        app.footer.css(headerFooterTag, marginR);
-    }
-
-    var popupsCenter = app.main.children('.popup[data-position*="center"]:visible');
-    popupsCenter.each(function (index) {
-        var $this = $(this);
-        $this.css('margin-left', parseInt($this.css('margin-left')) - marginR / 2 + 'px');
-    });
-
-    var popupsRight = app.main.children('.popup[data-position*="right"]:visible');
-    popupsRight.each(function (index) {
-        var $this = $(this);
-        $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
-    });
-
-    if (app.main.hasClass('two-columns') && app.contentHeader.length && app.contentHeader.css('position') === 'fixed') {
-        app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
-    }
-
 };
 
 app.enableHtmlScroll = function () {
-    app.html.css('overflow', app.html.data('previous-overflow'));
-    var scrollPosition = app.html.data('scroll-position');
-    window.scrollTo(scrollPosition[0], scrollPosition[1]);
+    if (!app.htmlOverflowEnabled) {
+        app.html.css('overflow', app.html.data('previous-overflow'));
+        var scrollPosition = app.html.data('scroll-position');
+        window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
-    app.body.removeAttr('style');
-    app.header.removeAttr('style');
-    app.right.removeAttr('style');
-    app.footer.removeAttr('style');
-    var popups = app.main.children('.popup');
-    if (popups.length) {
-        popups.removeAttr('style');
-    }
-    if (app.contentHeader.length) {
-        app.contentHeader.removeClass('no-transitions').removeAttr('style');
+        app.body.removeAttr('style');
+        app.header.removeAttr('style');
+        app.right.removeAttr('style');
+        app.footer.removeAttr('style');
+        var popups = app.main.children('.popup');
+        if (popups.length) {
+            popups.removeAttr('style');
+        }
+        if (app.contentHeader.length) {
+            app.contentHeader.removeClass('no-transitions').removeAttr('style');
+        }
+        app.htmlOverflowEnabled = true;
     }
 };
 
@@ -1021,7 +1047,9 @@ app.showLoading = function () {
 };
 
 app.hideLoading = function () {
-    app.enableHtmlScroll();
+    if (!app.main.hasClass('desktop') && app.isSmallBreakpoint() && !app.main.hasClass('left-open') && !app.main.hasClass('right-open')) {
+        app.enableHtmlScroll();
+    }
     app.body.removeClass('loading');
 };
 
@@ -1125,8 +1153,10 @@ $(function () {
                 var target = $(e.target);
                 if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
                     if (app.main.hasClass('left-open') && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                        app.enableHtmlScroll();
                         app.main.removeClass('left-open');
                     } else if (app.main.hasClass('right-open') && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                        app.enableHtmlScroll();
                         app.main.removeClass('right-open');
                     }
                     app.checkGoogleMaps();
