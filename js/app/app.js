@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.isSmallBreakpoint = function() {
+app.isSmallBreakpoint = function () {
     return $(window).width() < 732;
 }
 
@@ -170,5 +170,12 @@ $(function () {
                 app.main.prepend(html);
             }
         });
+
+        app.content.find('.datepicker').datepicker();
+        //app.content.find('.datepicker').datepicker({
+        //    changeMonth: true,
+        //    changeYear: true
+        //});
+
     });
 });
