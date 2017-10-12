@@ -3,6 +3,7 @@
 @mixin validation-variant($background, $border, $color) {
     $background-light: theme-color-level($background, -10);
     $background-dark: theme-color-level($background, -4);
+
     input[type=text],
     input[type=password],
     input[type=email],
@@ -37,6 +38,11 @@
             @include box-shadow($box-shadow, 0 0 0 $btn-focus-box-shadow-width $border);
         }
     }
+
+    > div > .input-group > .input-group-addon {
+        background-color: $border;
+        border-color: $border;
+    }
 }
 
 .form-group,
@@ -44,12 +50,15 @@
 .form-group > div > .input-group {
     @include flex-display;
     @include flex-wrap(wrap);
-    @include align-items(flex-start);
     flex-grow: 1;
 }
 
-.form-group {
+.form-group,
+.form-group > div {
+    @include align-items(flex-start);
+}
 
+.form-group {
     > label {
         padding-right: $spacer;
         width: $form-label-width;
@@ -59,12 +68,12 @@
     input[type=text],
     input[type=password],
     input[type=email] {
-    padding: $padding-y $padding-x;
-    min-height: $line-height + ($padding-y * 2);
-    @include border-radius($component-border-radius);
-    border: $component-border;
-    z-index: $component-z-index;
-        width: 100%;
+        padding: $padding-y $padding-x;
+        min-height: $line-height + ($padding-y * 2);
+        @include border-radius($component-border-radius);
+        border: $component-border;
+        z-index: $component-z-index;
+        flex-grow: 1;
         @include box-shadow($input-box-shadow);
 
         &:focus {
@@ -75,6 +84,49 @@
     > div {
         min-width: $form-input-min-width;
         width: calc(100% - #{$form-label-width});
+
+        > .input-group {
+            position: relative;
+
+            > .input-group-addon {
+                position: absolute;
+                top: $component-border-width;
+                bottom: $component-border-width;
+                @include flex-display;
+                @include align-items(center);
+                z-index: $input-group-addon;
+                padding: 0 $padding-x;
+
+                &:first-child {
+                    left: $component-border-width;
+                    @include border-radiuses-ignore-0($component-border-radius, 0, 0, $component-border-radius);
+                    border-right: $component-border;
+                }
+
+                &:last-child {
+                    right: $component-border-width;
+                    @include border-radiuses-ignore-0(0, $component-border-radius, $component-border-radius, 0);
+                    border-left: $component-border;
+                }
+
+                $value: theme-color("light");
+                $active-background: darken($value, 7.5%);
+
+
+                color: theme-color-level($value, 8);
+                background-color: theme-color-level($value, -10);
+
+                > svg {
+                    width: $font-size;
+                    height: $font-size;
+                    flex-shrink: 0;
+                }
+
+                & + .form-control {
+                    padding-left: ($padding-x * 3) + $font-size;
+                }
+            }
+        }
     }
 
     &.theme-danger {

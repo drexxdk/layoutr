@@ -17,7 +17,7 @@ app.addValidation = function (form, rules, messages) {
         errorElement: "em",
         errorPlacement: function (error, element) {
             element = element.parent();
-            if(element.hasClass('checkbox') || element.hasClass('radio')) {
+            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
                 element = element.parent();
             }
             element.append(error);

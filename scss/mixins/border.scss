@@ -26,11 +26,6 @@
 }
 
 @mixin border-radiuses-ignore-0 ($topleft: 0, $topright: 0, $bottomright: 0, $bottomleft: 0) {
-    @if ($topright != 0) {
-        /*-webkit-border-top-right-radius: $topright;
-        -moz-border-radius-topright: $topright;*/
-        border-top-right-radius: $topright;
-    }
 
     @if ($topleft != 0) {
         /*-webkit-border-top-left-radius: $topleft;
@@ -38,16 +33,22 @@
         border-top-left-radius: $topleft;
     }
 
-    @if ($bottomleft != 0) {
-        /*-webkit-border-bottom-left-radius: $bottomleft;
-        -moz-border-radius-bottomleft: $bottomleft;*/
-        border-bottom-left-radius: $bottomleft;
+    @if ($topright != 0) {
+        /*-webkit-border-top-right-radius: $topright;
+        -moz-border-radius-topright: $topright;*/
+        border-top-right-radius: $topright;
     }
 
     @if ($bottomright != 0) {
         /*-webkit-border-bottom-right-radius: $bottomright;
         -moz-border-radius-bottomright: $bottomright;*/
         border-bottom-right-radius: $bottomright;
+    }
+
+    @if ($bottomleft != 0) {
+        /*-webkit-border-bottom-left-radius: $bottomleft;
+        -moz-border-radius-bottomleft: $bottomleft;*/
+        border-bottom-left-radius: $bottomleft;
     }
 
     /*-moz-background-clip: padding;
