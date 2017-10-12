@@ -1,6 +1,6 @@
 ﻿/// <reference path="../references" />
 
-select {
+select.dropdown {
     font-size: 0;
     visibility: hidden;
     opacity: 0;
@@ -9,7 +9,7 @@ select {
     height: 0;
 }
 
-.dropdown {
+div.dropdown {
     position: relative;
     width: 100%;
 

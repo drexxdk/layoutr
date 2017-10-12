@@ -828,11 +828,11 @@ $(function () {
             }
         });
 
-        app.content.find('.datepicker').datepicker();
-        //app.content.find('.datepicker').datepicker({
-        //    changeMonth: true,
-        //    changeYear: true
-        //});
+        //app.content.find('.datepicker').datepicker();
+        app.content.find('.datepicker').datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
 
     });
 });
@@ -873,9 +873,12 @@ app.dropdown = function (dropdowns) {
         var attr = $this.attr('class');
         var btn = '';
         if (typeof attr !== typeof undefined && attr !== false) {
-            var temp = $this.attr("class").match(/[\w-]*\b/);
-            if (temp !== null && temp !== undefined) {
-                btn = temp;
+            var temp = attr.split(' ');
+            temp = $.grep(temp, function (item, index) {
+                return item.trim().match(/^theme-/);
+            });
+            if (temp.length === 1) {
+                btn = temp[0];
             }
         }
         html.push('<div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
@@ -910,12 +913,12 @@ app.dropdown = function (dropdowns) {
 
 $(document).click(function (e) {
     var target = $(e.target);
-    if (target.closest(".dropdown").length) {
-        $('.dropdown').not(target.closest(".dropdown")).removeClass('open');
+    if (target.closest("div.dropdown").length) {
+        $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
     }
 
     if (!target.closest(".dropdown").length) {
-        $('.dropdown').removeClass('open');
+        $('div.dropdown').removeClass('open');
     }
 });
 var app = app || {};

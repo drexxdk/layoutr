@@ -171,11 +171,11 @@ $(function () {
             }
         });
 
-        app.content.find('.datepicker').datepicker();
-        //app.content.find('.datepicker').datepicker({
-        //    changeMonth: true,
-        //    changeYear: true
-        //});
+        //app.content.find('.datepicker').datepicker();
+        app.content.find('.datepicker').datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
 
     });
 });
