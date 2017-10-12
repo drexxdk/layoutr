@@ -4,6 +4,7 @@
     $background-light: theme-color-level($background, -10);
     $background-dark: theme-color-level($background, -4);
 
+    textarea,
     input[type=text],
     input[type=password],
     input[type=email],
@@ -65,16 +66,28 @@
         line-height: $line-height + ($padding-y * 2);
     }
 
+    textarea {
+        resize: none; /* Safari */
+        resize: vertical; /* Chrome */
+        min-height: ($line-height * 5) + ($padding-y * 2);
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=email] {
+        min-height: $line-height + ($padding-y * 2);
+    }
+
+    textarea,
     input[type=text],
     input[type=password],
     input[type=email] {
         padding: $padding-y $padding-x;
-        min-height: $line-height + ($padding-y * 2);
         @include border-radius($component-border-radius);
         border: $component-border;
         z-index: $component-z-index;
-        flex-grow: 1;
         @include box-shadow($input-box-shadow);
+        width: 100%;
 
         &:focus {
             @include box-shadow($input-focus-box-shadow);
@@ -87,6 +100,7 @@
 
         > .input-group {
             position: relative;
+            width: 100%;
 
             > .input-group-addon {
                 position: absolute;
