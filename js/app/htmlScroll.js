@@ -29,14 +29,8 @@ app.disableHtmlScroll = function () {
             app.footer.css(headerFooterTag, marginR);
         }
 
-        var popupsCenter = app.main.children('.popup[data-position*="center"]:visible');
-        popupsCenter.each(function (index) {
-            var $this = $(this);
-            $this.css('margin-left', parseInt($this.css('margin-left')) - marginR / 2 + 'px');
-        });
-
-        var popupsRight = app.main.children('.popup[data-position*="right"]:visible');
-        popupsRight.each(function (index) {
+        var popups = app.main.children('.popup');
+        popups.each(function (index) {
             var $this = $(this);
             $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
         });

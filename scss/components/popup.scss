@@ -19,9 +19,10 @@ $popup-spacer: $spacer;
     left: 0;
     right: 0;
     pointer-events: none;
+    padding: 0 $popup-spacer;
 
     > div {
-        margin: $popup-spacer;
+        margin: $popup-spacer 0;
         /*position: absolute;
         top: 0;*/
         max-width: $container-medium;
