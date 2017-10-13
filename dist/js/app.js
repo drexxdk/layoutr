@@ -682,13 +682,12 @@ $(function () {
         app.main.addClass('msie');
     }
     if (bowser.mobile) {
-        app.main.addClass('mobile');
+        app.main.addClass('mobile'); // disables fixed footer
     } else if (bowser.tablet) {
-        app.main.addClass('tablet');
+        app.main.addClass('tablet'); // does nothing currently
     } else {
-        app.main.addClass('desktop');
+        app.main.addClass('desktop'); // enables hover effects
     }
-    //app.main.addClass('mobile');
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
