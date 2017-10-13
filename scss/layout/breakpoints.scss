@@ -6,6 +6,10 @@
     }
 }
 
+#main {
+    /*width:$breakpoint-main-min-width;*/
+}
+
 @mixin breakpoint-small-one-column {
     @media (max-width: $breakpoint-one-column) {
         @content;

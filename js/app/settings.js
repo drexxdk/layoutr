@@ -85,7 +85,7 @@ $(function () {
             });
         }
 
-        $(document).click(function (e) {
+        $(window).click(function (e) {
             if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
                 var target = $(e.target);
                 if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {

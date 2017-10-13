@@ -658,7 +658,7 @@ app.addValidation = function (form, rules, messages) {
 var app = app || {};
 
 app.isSmallBreakpoint = function () {
-    return $(window).width() < 732;
+    return $(window).outerWidth() < 732;
 };
 
 $(function () {
@@ -704,37 +704,22 @@ $(function () {
         });
     });
 
+
+
+    $(window).resize(function () {
+        app.setHtmlOverflow();
+    });
+    app.setHtmlOverflow();
+
     $('.aside').click(function () {
         var $this = $(this);
+        app.enableHtmlScroll();
         if ($this.is('#toggle-menu')) {
             app.main.toggleClass('left-open').removeClass('right-open');
-            if (!app.main.hasClass('desktop')) {
-                if (app.isSmallBreakpoint() && app.main.hasClass('left-open')) {
-                    app.disableHtmlScroll();
-                } else {
-                    app.enableHtmlScroll();
-                }
-            }
-            if (app.main.hasClass('left-open')) {
-                app.left.children('.content').click();
-            } else {
-                app.html.focus();
-            }
         } else if ($this.is('#toggle-settings')) {
             app.main.toggleClass('right-open').removeClass('left-open');
-            if (!app.main.hasClass('desktop')) {
-                if (app.isSmallBreakpoint() && app.main.hasClass('right-open')) {
-                    app.disableHtmlScroll();
-                } else {
-                    app.enableHtmlScroll();
-                }
-            }
-            if (app.main.hasClass('right-open')) {
-                app.right.children('.content').click();
-            } else {
-                app.html.focus();
-            }
         }
+        app.setHtmlOverflow();
         app.checkGoogleMaps();
     });
 
@@ -834,7 +819,7 @@ $(function () {
         app.content.find('#popup-position').on('click', '.btn', function () {
             var position = $(this).attr('data-position');
             var popup = app.main.children('.popup[data-position="' + position + '"]');
-            
+
             if (popup.length) {
                 popup.append(alert);
             } else {
@@ -970,7 +955,7 @@ $(function () {
                     position: uluru,
                     map: map
                 });
-                $(window).resize(function () {
+                $(window).resize('#google-maps', function () {
                     google.maps.event.trigger(googleMaps, 'resize');
                 });
             });
@@ -1097,16 +1082,25 @@ app.enableHtmlScroll = function () {
     }
 };
 
+app.setHtmlOverflow = function () {
+    if (!app.main.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.main.hasClass('left-open') && !app.main.hasClass('right-open'))) {
+            app.enableHtmlScroll();
+    } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.hasClass('left-open') || app.main.hasClass('right-open'))) {
+        app.disableHtmlScroll();
+    }
+}
+
 app.showLoading = function () {
     app.disableHtmlScroll();
     app.body.addClass('loading');
 };
 
 app.hideLoading = function () {
-    if (!app.main.hasClass('desktop') && app.isSmallBreakpoint() && !app.main.hasClass('left-open') && !app.main.hasClass('right-open')) {
-        app.enableHtmlScroll();
-    }
     app.body.removeClass('loading');
+    app.setHtmlOverflow();
+    //if (!(app.isSmallBreakpoint() && !app.main.hasClass('left-open')) && !(app.isSmallBreakpoint() && !app.main.hasClass('right-open'))) {
+    //    app.enableHtmlScroll();
+    //}
 };
 
 $(function () {
@@ -1204,7 +1198,7 @@ $(function () {
             });
         }
 
-        $(document).click(function (e) {
+        $(window).click(function (e) {
             if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
                 var target = $(e.target);
                 if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {

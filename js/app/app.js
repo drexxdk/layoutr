@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 app.isSmallBreakpoint = function () {
-    return $(window).width() < 732;
+    return $(window).outerWidth() < 732;
 };
 
 $(function () {
@@ -47,37 +47,22 @@ $(function () {
         });
     });
 
+
+
+    $(window).resize(function () {
+        app.setHtmlOverflow();
+    });
+    app.setHtmlOverflow();
+
     $('.aside').click(function () {
         var $this = $(this);
+        app.enableHtmlScroll();
         if ($this.is('#toggle-menu')) {
             app.main.toggleClass('left-open').removeClass('right-open');
-            if (!app.main.hasClass('desktop')) {
-                if (app.isSmallBreakpoint() && app.main.hasClass('left-open')) {
-                    app.disableHtmlScroll();
-                } else {
-                    app.enableHtmlScroll();
-                }
-            }
-            if (app.main.hasClass('left-open')) {
-                app.left.children('.content').click();
-            } else {
-                app.html.focus();
-            }
         } else if ($this.is('#toggle-settings')) {
             app.main.toggleClass('right-open').removeClass('left-open');
-            if (!app.main.hasClass('desktop')) {
-                if (app.isSmallBreakpoint() && app.main.hasClass('right-open')) {
-                    app.disableHtmlScroll();
-                } else {
-                    app.enableHtmlScroll();
-                }
-            }
-            if (app.main.hasClass('right-open')) {
-                app.right.children('.content').click();
-            } else {
-                app.html.focus();
-            }
         }
+        app.setHtmlOverflow();
         app.checkGoogleMaps();
     });
 
@@ -177,7 +162,7 @@ $(function () {
         app.content.find('#popup-position').on('click', '.btn', function () {
             var position = $(this).attr('data-position');
             var popup = app.main.children('.popup[data-position="' + position + '"]');
-            
+
             if (popup.length) {
                 popup.append(alert);
             } else {

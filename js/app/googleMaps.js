@@ -30,7 +30,7 @@ $(function () {
                     position: uluru,
                     map: map
                 });
-                $(window).resize(function () {
+                $(window).resize('#google-maps', function () {
                     google.maps.event.trigger(googleMaps, 'resize');
                 });
             });

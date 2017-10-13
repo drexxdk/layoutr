@@ -69,16 +69,25 @@ app.enableHtmlScroll = function () {
     }
 };
 
+app.setHtmlOverflow = function () {
+    if (!app.main.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.main.hasClass('left-open') && !app.main.hasClass('right-open'))) {
+            app.enableHtmlScroll();
+    } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.hasClass('left-open') || app.main.hasClass('right-open'))) {
+        app.disableHtmlScroll();
+    }
+}
+
 app.showLoading = function () {
     app.disableHtmlScroll();
     app.body.addClass('loading');
 };
 
 app.hideLoading = function () {
-    if (!app.main.hasClass('desktop') && app.isSmallBreakpoint() && !app.main.hasClass('left-open') && !app.main.hasClass('right-open')) {
-        app.enableHtmlScroll();
-    }
     app.body.removeClass('loading');
+    app.setHtmlOverflow();
+    //if (!(app.isSmallBreakpoint() && !app.main.hasClass('left-open')) && !(app.isSmallBreakpoint() && !app.main.hasClass('right-open'))) {
+    //    app.enableHtmlScroll();
+    //}
 };
 
 $(function () {
