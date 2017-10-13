@@ -692,11 +692,11 @@ $(function () {
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
-    $(document).on('click', '.alert .close', function () {
+    app.main.on('click', '.alert .close', function () {
         var $this = $(this).parent();
         $this.fadeOut(app.fadeOutTime, function () {
             var parent = $this.parent();
-            if (parent.hasClass('popup')) {
+            if (parent.hasClass('popup') && parent.children().length === 1) {
                 parent.remove();
             } else {
                 $this.remove();
@@ -824,17 +824,24 @@ $(function () {
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select'));
 
+        var alert = [];
+        alert.push('<div class="alert theme-primary">');
+        alert.push('<div><p>This is a primary alert—check it out!</p></div>');
+        alert.push('<button class="close" aria-label="Close popup"><svg><use xlink:href="#svg-plus"></use></svg></button>');
+        alert.push('</div>');
+        alert = alert.join('');
+
         app.content.find('#popup-position').on('click', '.btn', function () {
             var position = $(this).attr('data-position');
             var popup = app.main.children('.popup[data-position="' + position + '"]');
+            
             if (popup.length) {
-                popup.toggleClass('hidden');
+                popup.append(alert);
             } else {
                 var html = [];
-                html.push('<div class="popup" data-position="' + position + '"><div class="alert theme-primary">');
-                html.push('<div><p>This is a primary alert—check it out!</p></div>');
-                html.push('<button class="close" aria-label="Close popup"><svg><use xlink:href="#svg-plus"></use></svg></button>');
-                html.push('</div></div>');
+                html.push('<div class="popup" data-position="' + position + '">');
+                html.push(alert);
+                html.push('</div>');
                 html = html.join("");
                 app.main.prepend(html);
             }

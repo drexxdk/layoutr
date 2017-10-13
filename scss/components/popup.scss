@@ -18,7 +18,6 @@ $popup-spacer: $spacer;
     z-index: $popup-z-index;
     left: 0;
     right: 0;
-    @include flex-display;
     pointer-events: none;
 
     > div {
@@ -43,21 +42,12 @@ $popup-spacer: $spacer;
         bottom: 0;
     }
 
-    &[data-position*="left"] > div {
-        left: 0;
+    &[data-position*="center"] > div {
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    &[data-position*="center"] {
-        /*margin-left: calc(-#{$popup-spacer} + 50%);
-        @include translateX(-50%);*/
-        @include justify-content(center);
-    }
-
-    &[data-position*="right"] {
-        @include justify-content(flex-end);
-    }
-
-    &[data-position="middle center"] {
-        @include translateY(-50%);
+    &[data-position*="right"] > div {
+        margin-left: auto;
     }
 }
