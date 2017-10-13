@@ -47,12 +47,10 @@ $(function () {
         });
     });
 
-
-
     $(window).resize(function () {
-        app.setHtmlOverflow();
+        app.setHtmlScroll();
     });
-    app.setHtmlOverflow();
+    app.setHtmlScroll();
 
     $('.aside').click(function () {
         var $this = $(this);
@@ -62,7 +60,7 @@ $(function () {
         } else if ($this.is('#toggle-settings')) {
             app.main.toggleClass('right-open').removeClass('left-open');
         }
-        app.setHtmlOverflow();
+        app.setHtmlScroll();
         app.checkGoogleMaps();
     });
 

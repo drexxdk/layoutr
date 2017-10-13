@@ -22,6 +22,7 @@
       "js/vendors/bowser.js",
       "js/app/form.js",
       "js/app/app.js",
+      "js/app/htmlScroll.js",
       "js/app/accordion.js",
       "js/app/dropdown.js",
       "js/app/googleMaps.js",
