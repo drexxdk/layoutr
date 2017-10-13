@@ -15,6 +15,7 @@ $(function () {
     app.body = $('body');
     app.html = $('html');
     app.transitionTime = 400;
+    app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
 
@@ -36,8 +37,13 @@ $(function () {
 
     $(document).on('click', '.alert .close', function () {
         var $this = $(this).parent();
-        $this.fadeOut(500, function () {
-            $this.addClass('hidden').css('display', '');
+        $this.fadeOut(app.fadeOutTime, function () {
+            var parent = $this.parent();
+            if (parent.hasClass('popup')) {
+                parent.remove();
+            } else {
+                $this.remove();
+            }
         });
     });
 
