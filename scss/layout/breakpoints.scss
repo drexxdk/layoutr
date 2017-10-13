@@ -61,6 +61,10 @@
             footer {
                 margin-left: $aside-width;
             }
+            .popup[data-position*="center"],
+            .popup[data-position*="left"] {
+                left: $aside-width;
+            }
         }
 
         &.right-open {
@@ -68,6 +72,11 @@
             #content,
             footer {
                 margin-right: $aside-width;
+            }
+
+            .popup[data-position*="center"],
+            .popup[data-position*="right"] {
+                right: $aside-width;
             }
         }
 

@@ -32,8 +32,7 @@
     &:not(.msedge):not(.msie).transitions {
         // ie/edge doesn't support transition for values that uses calc()
         #left,
-        .popup[data-position*="left"],
-        .popup[data-position*="center"] {
+        .popup[data-position*="left"] {
             @include transition(left 0.4s ease-in-out);
         }
 
@@ -41,6 +40,10 @@
         .popup[data-position*="right"] {
             @include transition(right 0.4s ease-in-out);
         }
+
+        .popup[data-position*="center"] {
+            @include transition(left 0.4s ease-in-out, right 0.4s ease-in-out);
+         }
 
         header,
         #content,
