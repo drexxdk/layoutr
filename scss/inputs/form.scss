@@ -60,10 +60,16 @@
 }
 
 .form-group {
-    > label {
+    > .control-label {
         padding-right: $spacer;
         width: $form-label-width;
         line-height: $line-height + ($padding-y * 2);
+
+        &.required:after {
+            content: '*';
+            color:theme-color("danger");
+            margin-left:$spacer / 3;
+        }
     }
 
     textarea {
