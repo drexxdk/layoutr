@@ -1012,7 +1012,7 @@ app.checkGoogleMaps = function () {
 $(function () {
     app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
-            app.content.find('> .content > div').prepend('<section id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></section>');
+            $('<div id="google-maps"><div class="embed-responsive embed-responsive-16by9"></div></div>').insertAfter($(this));
             googleMaps = document.getElementById('google-maps').children[0];
             $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
                 var uluru = { lat: -25.363, lng: 131.044 };
@@ -1029,7 +1029,7 @@ $(function () {
                 });
             });
         } else {
-            $(googleMaps).toggle();
+            $(googleMaps).parent().toggle();
         }
     });
 });
@@ -1038,7 +1038,7 @@ var youtube;
 $(function () {
     app.content.on('click', '#toggle-youtube', function () {
         if (youtube === undefined) {
-            app.content.find('> .content > div').prepend('<section id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/7flYUW9-A_M" allowfullscreen></iframe></div></section>');
+            $('<div id="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/7flYUW9-A_M" allowfullscreen></iframe></div></div>').insertAfter($(this));
             youtube = app.content.find('#youtube');
         } else {
             youtube.toggle();
