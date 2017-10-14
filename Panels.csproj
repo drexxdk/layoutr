@@ -109,17 +109,16 @@
     <Content Include="js\vendors\loadCSS\loadCSS.js" />
     <Content Include="js\vendors\loadCSS\onloadCSS.js" />
     <Content Include="js\app\loadCSS.js" />
-    <Content Include="js\vendors\polyfill\polyfill.object-fit.min.js" />
     <Content Include="js\vendors\jquery\jquery-3.1.1.min.js" />
     <Content Include="js\vendors\jquery\jquery-3.1.1.min.min.js">
       <DependentUpon>jquery-3.1.1.min.js</DependentUpon>
     </Content>
+    <Content Include=".gitignore" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="js\vendors\jquery\jquery-3.1.1.min.map" />
     <Content Include="scss\app.scss" />
     <Content Include="scss\mixins\_mixins.scss" />
     <Content Include="scss\mixins\shadow.scss" />
@@ -149,24 +148,32 @@
     <Content Include="scss\references.scss" />
     <Content Include="scss\components\_components.scss" />
     <Content Include="scss\layout\section.scss" />
-    <Content Include="scss\components\inputs\slider.scss" />
     <Content Include="scss\variables\colors.scss" />
     <Content Include="scss\mixins\color-yiq.scss" />
-    <Content Include="scss\components\inputs\button.scss" />
-    <Content Include="scss\components\inputs\_inputs.scss" />
-    <Content Include="scss\components\inputs\radio-checkbox.scss" />
     <Content Include="scss\variables\fonts.scss" />
     <Content Include="scss\components\headlines.scss" />
     <Content Include="scss\components\alert.scss" />
     <Content Include="scss\reset.scss" />
     <Content Include="scss\variables\layout.scss" />
     <Content Include="scss\components\accordion.scss" />
-    <Content Include="scss\components\inputs\form.scss" />
     <Content Include="scss\components\embed-responsive.scss" />
-    <Content Include="scss\components\inputs\dropdown.scss" />
     <Content Include="scss\components\quote.scss" />
     <Content Include="scss\components\img.scss" />
     <Content Include="scss\components\table.scss" />
+    <Content Include="scss\general.scss" />
+    <Content Include="scss\hover.scss" />
+    <Content Include="scss\mixins\absolute-fill.scss" />
+    <Content Include="scss\mixins\ellipsis.scss" />
+    <Content Include="scss\layout\container.scss" />
+    <Content Include="scss\inputs\button.scss" />
+    <Content Include="scss\inputs\dropdown.scss" />
+    <Content Include="scss\inputs\form.scss" />
+    <Content Include="scss\inputs\radio-checkbox.scss" />
+    <Content Include="scss\inputs\slider.scss" />
+    <Content Include="scss\inputs\_inputs.scss" />
+    <Content Include="scss\components\popup.scss" />
+    <Content Include="scss\variables\z-index.scss" />
+    <Content Include="scss\inputs\switch.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
