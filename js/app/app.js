@@ -81,9 +81,6 @@ $(function () {
                     required: true,
                     minlength: 2
                 },
-                birthDate: {
-                    required: true
-                },
                 username: {
                     required: true,
                     minlength: 2
@@ -118,9 +115,6 @@ $(function () {
                 lastName: {
                     required: "Please enter your last name",
                     minlength: "Your last name must consist of at least 2 characters"
-                },
-                birthDate: {
-                    required: "Please enter your birth date"
                 },
                 username: {
                     required: "Please enter a username",
@@ -170,11 +164,6 @@ $(function () {
                 html = html.join("");
                 app.main.prepend(html);
             }
-        });
-
-        app.content.find('.datepicker').datepicker({
-            changeMonth: true,
-            changeYear: true
         });
     });
 });
