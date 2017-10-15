@@ -397,7 +397,7 @@
         </section>
         <section>
             <h2>Form example</h2>
-            <div class="container medium">
+            <div class="container large">
                 <form id="form" method="post" class="flex-items small">
                     <div class="form-group">
                         <label class="control-label required" for="firstName">First name</label>
@@ -436,19 +436,34 @@
                     <div class="form-group">
                         <label class="control-label required" for="email">Email</label>
                         <div>
-                            <input id="email" name="email" class="form-control" type="text" placeholder="Email address">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <svg><use xlink:href="#svg-email"></use></svg>
+                                </div>
+                                <input id="email" name="email" class="form-control" type="text" placeholder="Email address">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label required" for="password">Password</label>
                         <div>
-                            <input id="password" name="password" class="form-control" type="password" placeholder="Password">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <svg><use xlink:href="#svg-password"></use></svg>
+                                </div>
+                                <input id="password" name="password" class="form-control" type="password" placeholder="Password">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label required" for="confirm_password">Confirm password</label>
                         <div>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" />
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <svg><use xlink:href="#svg-password"></use></svg>
+                                </div>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" />
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
