@@ -36,3 +36,8 @@ button {
 summary {
     outline: none;
 }
+
+ul,
+ol {
+    list-style-position: inside;
+}
