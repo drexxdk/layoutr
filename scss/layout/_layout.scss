@@ -43,7 +43,7 @@
 
         .popup[data-position*="center"] {
             @include transition(left 0.4s ease-in-out, right 0.4s ease-in-out);
-         }
+        }
 
         header,
         #content,
@@ -92,6 +92,7 @@
     #container {
         margin-top: $header-height;
         flex-grow: 1;
+        flex-shrink: 0;
 
         @include flex-display;
 
