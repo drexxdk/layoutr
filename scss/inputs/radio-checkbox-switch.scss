@@ -3,13 +3,19 @@
 .radio,
 .checkbox,
 .switch {
+    position: relative;
     padding: $padding-y $padding-x;
     line-height: $line-height;
-    z-index: $component-z-index;
     @include noselect;
 
     > input {
-        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        opacity: 0;
+        font-size: 0;
+        z-index: -1;
 
         &:checked + label > i {
             background-color: theme-color("primary");
@@ -20,6 +26,7 @@
         @include flex-display;
         @include align-items(center);
         font-size: $font-size;
+        z-index: $component-z-index;
     }
 }
 
@@ -54,7 +61,6 @@
 }
 
 .checkbox {
-    position: relative;
 
     > label > i > svg {
         display: none;
