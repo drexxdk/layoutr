@@ -4,7 +4,7 @@
 .checkbox,
 .switch {
     position: relative;
-    padding: $padding-y $padding-x;
+    padding: $padding-y $padding-x $padding-y 0;
     line-height: $line-height;
     @include noselect;
 
