@@ -45,8 +45,6 @@
             justify-content: center;
             top: 0;
             bottom: 0;
-            left: 50%;
-            @include translate(-50%, 0);
             max-width: $content-max-width - ($spacer * 2);
             margin: 0 auto;
             text-align: center;

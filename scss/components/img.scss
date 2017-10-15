@@ -1,5 +1,10 @@
 ﻿/// <reference path="../references" />
 
+div.cover {
+    background-size: cover;
+    background-position:center center;
+}
+
 img.cover {
     @include absolute-fill;
     object-fit: cover;

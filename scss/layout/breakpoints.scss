@@ -65,6 +65,7 @@
             footer {
                 margin-left: $aside-width;
             }
+
             .popup[data-position*="center"],
             .popup[data-position*="left"] {
                 left: $aside-width;
@@ -123,6 +124,7 @@
                     height: auto;
 
                     > div {
+                        top: $header-height;
                         bottom: 0;
                     }
 
