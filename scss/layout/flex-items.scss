@@ -4,6 +4,7 @@
     margin-top: -$spacer;
     margin-left: -$spacer;
     @include flex-display;
+    width: calc(100% + #{$spacer});
 
     > * {
         margin-top: $spacer;
