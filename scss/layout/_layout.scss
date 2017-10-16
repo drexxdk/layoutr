@@ -76,7 +76,7 @@ main {
     }
 
     &.footer-fixed:not(.mobile) {
-        #container {
+        #content {
             margin-bottom: $footer-height;
         }
 

@@ -6,6 +6,7 @@ footer {
     border-top: $layout-border-width solid $footer-border-color;
     background-color: $footer-background-color;
     color: $footer-color;
+    flex-shrink: 0;
 
     > p {
         padding: 0 $spacer;
