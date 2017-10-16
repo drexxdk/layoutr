@@ -27,25 +27,22 @@
         @include align-items(center);
         font-size: $font-size;
         z-index: $component-z-index;
+        cursor: pointer;
     }
 }
 
 .radio,
 .checkbox {
-    > label {
-        cursor: pointer;
-
-        > i {
-            display: block;
-            width: $font-size;
-            height: $font-size;
-            border: $component-border;
-            margin-right: ($spacer / 2);
-            position: relative;
-            overflow: hidden;
-            background-color: white;
-            flex-shrink: 0;
-        }
+    > label > i {
+        display: block;
+        width: $font-size;
+        height: $font-size;
+        border: $component-border;
+        margin-right: ($spacer / 2);
+        position: relative;
+        overflow: hidden;
+        background-color: white;
+        flex-shrink: 0;
     }
 }
 

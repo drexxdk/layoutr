@@ -98,7 +98,7 @@
             left: $spacer / 2;
             width: $spacer;
             height: $spacer;
-            min-height: initial;
+            min-height: 0;
             padding: 0;
             @include flex-display;
             @include justify-content(center);
