@@ -7,6 +7,9 @@
         // since svg will change color based on btn background-color
         $icon-bg: white;
         $icon-line-size: $font-size / 3;
+        width: $font-size;
+        height: $font-size;
+        flex-shrink: 0;
 
         &.center,
         &.corner {

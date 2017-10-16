@@ -59,8 +59,7 @@
         margin-left: $spacer / 2;
     }
 
-    > i,
-    > svg {
+    svg{
         width: $font-size;
         height: $font-size;
         flex-shrink: 0;
