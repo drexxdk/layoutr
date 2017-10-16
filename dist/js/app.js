@@ -622,7 +622,7 @@ $.validator.setDefaults({
 });
 
 $.validator.addMethod('password', function (value) {
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value);
+    return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
 }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
 
 app.addValidation = function (form, rules, messages) {
@@ -1036,7 +1036,7 @@ $.validator.setDefaults({
 });
 
 $.validator.addMethod('password', function (value) {
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value);
+    return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
 }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
 
 app.addValidation = function (form, rules, messages) {
