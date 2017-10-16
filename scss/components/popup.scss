@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 $popup-spacer: $spacer;
 
-#main {
+main {
     &.footer-fixed:not(.mobile) {
         .popup[data-position*="middle"] {
             top: calc(-#{$popup-spacer} + 50%);

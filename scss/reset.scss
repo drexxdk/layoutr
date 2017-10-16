@@ -24,6 +24,12 @@ body {
     line-height: $line-height;
 }
 
+header,
+footer,
+main {
+    display: block;
+}
+
 button {
     cursor: pointer;
     border: none;

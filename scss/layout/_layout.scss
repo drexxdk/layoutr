@@ -10,7 +10,7 @@
 @import "loading";
 @import "section";
 
-#main {
+main {
     height: 100%;
 
     @include flex-display;

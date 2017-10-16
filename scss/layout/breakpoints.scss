@@ -6,10 +6,6 @@
     }
 }
 
-#main {
-    /*width:$breakpoint-main-min-width;*/
-}
-
 @mixin breakpoint-small-one-column {
     @media (max-width: $breakpoint-one-column) {
         @content;
@@ -28,7 +24,7 @@
     }
 }
 
-#main {
+main {
     @include breakpoint-main-min-width {
         #content {
             > .header {

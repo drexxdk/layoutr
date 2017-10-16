@@ -5,7 +5,7 @@ app.isSmallBreakpoint = function () {
 };
 
 $(function () {
-    app.main = $('#main');
+    app.main = $('main');
     app.content = $('#content');
     app.header = $('header');
     app.footer = $('footer');
