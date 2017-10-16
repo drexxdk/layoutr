@@ -7,10 +7,12 @@ footer {
     background-color: $footer-background-color;
     color: $footer-color;
     flex-shrink: 0;
+    @include flex-display;
+    @include align-items(center);
 
     > p {
         padding: 0 $spacer;
-        line-height: $footer-height;
+        /*line-height: $footer-height;*/
         @include ellipsis;
     }
 }

@@ -95,7 +95,7 @@ div.dropdown {
         > label {
             flex-grow: 1;
             text-align: center;
-            line-height: $component-line-height;
+            line-height: $component-line-height - ($component-border-width * 2);
         }
 
         > svg {
