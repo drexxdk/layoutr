@@ -26,6 +26,7 @@
     &.small {
         margin-top: -($spacer / 2);
         margin-left: -($spacer / 2);
+        width: calc(100% + #{$spacer / 2});
 
         > * {
             margin-top: ($spacer / 2);
@@ -36,6 +37,7 @@
     &.smallest {
         margin-top: -($spacer / 4);
         margin-left: -($spacer / 4);
+        width: calc(100% + #{$spacer / 4});
 
         > * {
             margin-top: ($spacer / 4);
@@ -46,6 +48,7 @@
     &.large {
         margin-top: -($spacer * 2);
         margin-left: -($spacer * 2);
+        width: calc(100% + #{$spacer * 2});
 
         > * {
             margin-top: ($spacer * 2);
@@ -56,6 +59,7 @@
     &.largest {
         margin-top: -($spacer * 4);
         margin-left: -($spacer * 4);
+        width: calc(100% + #{$spacer * 4});
 
         > * {
             margin-top: ($spacer * 4);
