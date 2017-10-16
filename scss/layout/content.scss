@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references" />
 
 #content {
+    width: 100%;
+
     > .header {
         position: relative;
         height: $content-header-height;

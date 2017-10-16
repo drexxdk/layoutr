@@ -76,7 +76,7 @@ main {
     }
 
     &.footer-fixed:not(.mobile) {
-        #container > div {
+        #container {
             margin-bottom: $footer-height;
         }
 
@@ -90,16 +90,9 @@ main {
     }
 
     #container {
+        @include flex-display;
         margin-top: $header-height;
         flex-grow: 1;
         flex-shrink: 0;
-
-        @include flex-display;
-
-        @include flex-direction(column);
-
-        > div {
-            flex-grow: 1;
-        }
     }
 }

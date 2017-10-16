@@ -57,7 +57,11 @@ app.enableHtmlScroll = function () {
             popups.removeAttr('style');
         }
         if (app.contentHeader.length) {
-            app.contentHeader.removeClass('no-transitions').removeAttr('style');
+            app.contentHeader.removeClass('no-transitions').css({
+                'right': '',
+                'padding-right': '',
+                'width': ''
+            });
         }
         app.htmlOverflowEnabled = true;
     }
