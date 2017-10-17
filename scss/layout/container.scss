@@ -1,13 +1,15 @@
 ﻿/// <reference path="../references" />
 
-.container {
-    max-width: $container-medium;
-
-    &.small {
-        max-width: $container-small;
+#content .content.container {
+    > div:nth-child(1) {
+        background-color: red;
     }
 
-    &.large {
-        max-width: $container-large;
+    > div:nth-child(2) {
+        background-color: orange;
+    }
+
+    > div:nth-child(3) {
+        background-color: blue;
     }
 }
