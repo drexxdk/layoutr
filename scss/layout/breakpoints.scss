@@ -32,7 +32,7 @@ main {
                     bottom: $spacer * 4;
                 }
 
-                & + .content > div {
+                & + .content {
                     margin-top: -$spacer * 6;
                     min-height: 7rem;
                 }
@@ -127,10 +127,6 @@ main {
                     & + .content {
                         width: 50%;
                         margin: 0 0 0 auto;
-
-                        > div {
-                            margin-top: 0;
-                        }
                     }
                 }
 
