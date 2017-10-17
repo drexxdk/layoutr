@@ -9,7 +9,6 @@ app.disableHtmlScroll = function () {
             self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         ];
         app.html.data('scroll-position', scrollPosition);
-        app.html.data('previous-overflow', app.html.css('overflow'));
         app.html.addClass('overflowHidden');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
         var marginR = app.body.outerWidth() - initWidth;
