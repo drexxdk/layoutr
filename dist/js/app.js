@@ -829,7 +829,7 @@ app.disableHtmlScroll = function () {
         ];
         app.html.data('scroll-position', scrollPosition);
         app.html.data('previous-overflow', app.html.css('overflow'));
-        app.html.css('overflow', 'hidden');
+        app.html.addClass('overflowHidden');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
         var marginR = app.body.outerWidth() - initWidth;
         var marginB = app.body.outerHeight() - initHeight;
@@ -863,7 +863,7 @@ app.disableHtmlScroll = function () {
 
 app.enableHtmlScroll = function () {
     if (!app.htmlOverflowEnabled) {
-        app.html.css('overflow', app.html.data('previous-overflow'));
+        app.html.removeClass('overflowHidden');
         var scrollPosition = app.html.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
