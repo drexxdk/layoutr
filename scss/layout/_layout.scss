@@ -10,9 +10,13 @@
 @import "loading";
 @import "section";
 
-html.overflowHidden,
-html.overflowHidden > body {
+html.overflowHidden {
     overflow: hidden;
+
+    > body {
+        overflow: hidden;
+        height: auto;
+    }
 }
 
 main {

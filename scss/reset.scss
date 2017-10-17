@@ -36,12 +36,13 @@ button {
     border: none;
 }
 
-*:focus {
+
+:focus {
     outline: none;
 }
 
-summary {
-    outline: none;
+::-moz-focus-inner {
+    border: 0;
 }
 
 ul,
