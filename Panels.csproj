@@ -61,16 +61,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ajax\content\page2.html" />
+    <Content Include="ajax\content\page3.html" />
+    <Content Include="ajax\content\page4.html" />
     <Content Include="ajax\layout\menu.html" />
     <Content Include="ajax\layout\settings.html" />
     <Content Include="ajax\layout\svg.html" />
     <Content Include="dist\css\app.css" />
     <Content Include="dist\css\app.min.css" />
-    <Content Include="dist\img\content-header-1024.jpg" />
-    <Content Include="dist\img\content-header-1280.jpg" />
-    <Content Include="dist\img\content-header-1366.jpg" />
-    <Content Include="dist\img\content-header-1920.jpg" />
-    <Content Include="dist\img\content-header-0800.jpg" />
+    <Content Include="dist\img\content-header-1920-1.jpg" />
+    <Content Include="dist\img\content-header-1920-2.jpg" />
+    <Content Include="dist\img\eiffel-tower-1920.jpg" />
     <Content Include="dist\img\favicon\android-chrome-192x192.png" />
     <Content Include="dist\img\favicon\android-chrome-512x512.png" />
     <Content Include="dist\img\favicon\apple-touch-icon.png" />
@@ -80,7 +81,7 @@
     <Content Include="dist\img\favicon\favicon.ico" />
     <Content Include="dist\img\favicon\mstile-150x150.png" />
     <Content Include="dist\img\favicon\safari-pinned-tab.svg" />
-    <Content Include="dist\img\mahatma-gandhi.jpg" />
+    <Content Include="dist\img\mahatma-gandhi-200.jpg" />
     <Content Include="dist\js\app.js" />
     <Content Include="dist\js\app.min.js">
       <DependentUpon>app.js</DependentUpon>
@@ -92,6 +93,7 @@
     <Content Include="ajax\content\page1.html" />
     <Content Include="index.html" />
     <Content Include="js\app\accordion.js" />
+    <Content Include="js\app\alert.js" />
     <Content Include="js\app\app.js" />
     <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
@@ -99,6 +101,7 @@
     <Content Include="js\app\htmlScroll.js" />
     <Content Include="js\app\jquery-extensions.js" />
     <Content Include="js\app\loading.js" />
+    <Content Include="js\app\pages\page1.js" />
     <Content Include="js\app\settings.js" />
     <Content Include="js\app\youtube.js" />
     <Content Include="js\vendors\bootstrap-slider.min.js" />
@@ -164,16 +167,15 @@
     <Content Include="scss\hover.scss" />
     <Content Include="scss\mixins\absolute-fill.scss" />
     <Content Include="scss\mixins\ellipsis.scss" />
-    <Content Include="scss\layout\container.scss" />
     <Content Include="scss\inputs\button.scss" />
     <Content Include="scss\inputs\dropdown.scss" />
     <Content Include="scss\inputs\form.scss" />
-    <Content Include="scss\inputs\radio-checkbox.scss" />
+    <Content Include="scss\inputs\radio-checkbox-switch.scss" />
     <Content Include="scss\inputs\slider.scss" />
     <Content Include="scss\inputs\_inputs.scss" />
     <Content Include="scss\components\popup.scss" />
     <Content Include="scss\variables\z-index.scss" />
-    <Content Include="scss\inputs\switch.scss" />
+    <Content Include="scss\demo.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
