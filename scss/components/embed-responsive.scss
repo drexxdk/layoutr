@@ -51,10 +51,12 @@
         right: 0;
         margin: $spacer;
         @include flex-display;
+        pointer-events: none;
 
         > span {
             padding: $padding-y $padding-x;
             background-color: white;
+            pointer-events: all;
         }
 
         &.top {
