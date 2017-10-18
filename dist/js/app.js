@@ -755,20 +755,6 @@ app.page1 = function () {
 };
 var app = app || {};
 
-app.page2 = function () {
-    app.content.load('ajax/content/page2.html', function () {
-
-    });
-};
-var app = app || {};
-
-app.page3 = function () {
-    app.content.load('ajax/content/page3.html', function () {
-
-    });
-};
-var app = app || {};
-
 app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732;
 };
@@ -830,10 +816,6 @@ $(function () {
         var href = $this.attr('href');
         if (href === 'page1') {
             app.page1();
-        } else if (href === 'page2') {
-            app.page2();
-        } else if (href === 'page3') {
-            app.page3();
         } else {
             app.content.load('ajax/content/' + href + '.html');
         }
