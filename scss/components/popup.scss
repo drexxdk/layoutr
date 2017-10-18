@@ -23,8 +23,6 @@ main {
 
     > div {
         margin: $popup-spacer 0;
-        /*position: absolute;
-        top: 0;*/
         max-width: $container-medium;
         flex-grow: 1;
         pointer-events: all;
