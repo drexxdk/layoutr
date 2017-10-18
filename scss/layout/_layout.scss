@@ -46,9 +46,12 @@ main {
         }
 
         header,
-        #content,
         footer {
             @include transition(margin 0.4s ease-in-out);
+        }
+
+        #content {
+            @include transition(padding 0.4s ease-in-out);
         }
 
         &.two-columns {

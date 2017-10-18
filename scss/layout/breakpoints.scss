@@ -57,9 +57,12 @@ main {
 
         &.left-open {
             header,
-            #content,
             footer {
                 margin-left: $aside-width;
+            }
+
+            #content {
+                padding-left: $aside-width;
             }
 
             .popup[data-position*="center"],
@@ -70,9 +73,12 @@ main {
 
         &.right-open {
             header,
-            #content,
             footer {
                 margin-right: $aside-width;
+            }
+
+            #content {
+                padding-right: $aside-width;
             }
 
             .popup[data-position*="center"],
