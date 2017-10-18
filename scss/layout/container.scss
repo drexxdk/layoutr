@@ -1,6 +1,15 @@
 ﻿/// <reference path="../references" />
 
 #content .content.container {
+    /*padding: 0 0 $spacer $spacer;*/
+    @include flex-display;
+    @include flex-direction(column);
+    @include flex-wrap(wrap);
+
+    &.small {
+
+    }
+
     > div:nth-child(1) {
         background-color: red;
     }

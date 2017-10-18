@@ -39,7 +39,12 @@ main {
             }
 
             > .content {
-                padding: $spacer * 2;
+                padding: 0 ($spacer * 2) ($spacer * 2) 0;
+
+                > div {
+                    margin: ($spacer * 2) 0 0 ($spacer * 2);
+                    width: calc(100% - #{$spacer * 2});
+                }
             }
         }
     }
@@ -136,8 +141,9 @@ main {
                     }
                 }
 
-                > .content {
+                > .content:first-child {
                     width: 100%;
+                    @include flex-display;
                 }
             }
         }
