@@ -73,7 +73,8 @@
         position: relative;
         z-index: 2;
         @include flex-display;
-        @include justify-content(center);
+        @include flex-direction(column);
+        /*@include justify-content(flex-start);*/
 
         > div {
             padding: $spacer;
