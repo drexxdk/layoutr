@@ -22,6 +22,22 @@
                             <b>FontAwesome</b> made it easy to add icons for everything, but it was the biggest resource that had to be downloaded at page load,
                             therefore i replaced it with svg icons, that got added directly to the DOM.
                         </li>
+                        <li>
+                            Hover effects are only applied for desktop browsers, since mobiles can't display them correctly.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Bugs</h3>
+            <div class="alert theme-danger">
+                <div>
+                    <ul class="flex-items">
+                        <li>
+                            <b>IE</b> doesn't display rem values correctly. This causes some components like 'switch' to be displayed wrong at some zoom levels.
+                        </li>
+                        <li>
+                            <b>Edge/IE</b> doesn't display  transitions correctly. Transitions are therefore disabled for the layout on those browsers. 
+                        </li>
                     </ul>
                 </div>
             </div>

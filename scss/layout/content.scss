@@ -5,7 +5,6 @@
     > div {
         /*@include flex-display;
         @include justify-content(center);*/
-
         > .header {
             position: relative;
             height: $content-header-height;
@@ -77,10 +76,12 @@
             @include flex-display;
             @include flex-direction(column);
             @include justify-content(center);
+
             > div {
                 padding: $spacer;
                 background-color: $layout-background-color;
                 @include align-self(center);
+                width: 100%;
 
                 &:not(.full-width) {
                     max-width: $content-max-width - ($spacer * 2);
