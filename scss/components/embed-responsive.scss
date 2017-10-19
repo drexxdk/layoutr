@@ -44,45 +44,4 @@
             padding-top: percentage(1 / 1);
         }
     }
-
-    > .position {
-        position: absolute;
-        left: 0;
-        right: 0;
-        margin: $spacer;
-        @include flex-display;
-        pointer-events: none;
-
-        > span {
-            padding: $padding-y $padding-x;
-            background-color: white;
-            pointer-events: all;
-        }
-
-        &.top {
-            top: 0;
-        }
-
-        &.middle {
-            top: calc(50% - #{$spacer});
-            @include translateY(-50%);
-        }
-
-        &.bottom {
-            bottom: 0;
-        }
-
-        &.left > span {
-            margin-right: auto;
-        }
-
-        &.center > span {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        &.right > span {
-            margin-left: auto;
-        }
-    }
 }

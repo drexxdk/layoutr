@@ -1,0 +1,45 @@
+﻿/// <reference path="../references" />
+
+.position {
+    position: absolute;
+    z-index: $popup-z-index;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    padding: 0 $spacer;
+    @include flex-display;
+    @include flex-direction(column);
+
+    > div {
+        margin: $spacer 0;
+        max-width: $container-medium;
+        /*flex-grow: 1;*/
+        pointer-events: all;
+    }
+
+    &.top {
+        top: 0;
+    }
+
+    &.middle {
+        top: calc(#{$spacer} + 50%);
+        @include translateY(-50%);
+    }
+
+    &.bottom {
+        bottom: 0;
+    }
+
+    &.left > div {
+        margin-right: auto;
+    }
+
+    &.center > div {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &.right > div {
+        margin-left: auto;
+    }
+}

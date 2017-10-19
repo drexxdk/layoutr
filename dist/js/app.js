@@ -744,7 +744,8 @@ app.page1 = function () {
                 popup.append(alert);
             } else {
                 var html = [];
-                html.push('<div class="popup" data-position="' + position + '">');
+                //  position ' + position + '
+                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
                 html.push(alert);
                 html.push('</div>');
                 html = html.join("");
