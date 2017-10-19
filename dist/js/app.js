@@ -762,7 +762,7 @@ app.isSmallBreakpoint = function () {
 
 $(function () {
     app.main = $('main');
-    app.content = $('#content');
+    app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
     app.left = $('#left');

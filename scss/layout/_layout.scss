@@ -45,13 +45,11 @@ main {
         }
 
         header,
+        #content,
         footer {
             @include transition(margin 0.4s ease-in-out);
         }
 
-        #content {
-            @include transition(padding 0.4s ease-in-out);
-        }
 
         &.two-columns {
             #content .header {
@@ -78,7 +76,7 @@ main {
     }
 
     &.footer-fixed:not(.mobile) {
-        #content {
+        #container {
             margin-bottom: $footer-height;
         }
 
@@ -96,5 +94,11 @@ main {
         margin-top: $header-height;
         flex-grow: 1;
         flex-shrink: 0;
+
+        > div {
+             flex-grow: 1;
+             width:100%;
+            
+        }
     }
 }

@@ -18,8 +18,6 @@
       "js/vendors/bowser.js",
       "js/app/form.js",
       "js/app/pages/page1.js",
-      "js/app/pages/page2.js",
-      "js/app/pages/page3.js",
       "js/app/app.js",
       "js/app/htmlScroll.js",
       "js/app/accordion.js",

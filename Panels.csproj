@@ -176,6 +176,7 @@
     <Content Include="scss\components\popup.scss" />
     <Content Include="scss\variables\z-index.scss" />
     <Content Include="scss\demo.scss" />
+    <Content Include="scss\components\position.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

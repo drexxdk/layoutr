@@ -31,15 +31,14 @@
     }
 
     &.left > div {
-        margin-right: auto;
+        @include align-self(flex-start);
     }
 
     &.center > div {
-        margin-left: auto;
-        margin-right: auto;
+        @include align-self(center);
     }
 
     &.right > div {
-        margin-left: auto;
+        @include align-self(flex-end);
     }
 }

@@ -26,7 +26,7 @@
 
 main {
     @include breakpoint-main-min-width {
-        #content {
+        #content > div {
             > .header {
                 > div {
                     bottom: $spacer * 4;
@@ -62,12 +62,9 @@ main {
 
         &.left-open {
             header,
+            #content,
             footer {
                 margin-left: $aside-width;
-            }
-
-            #content {
-                padding-left: $aside-width;
             }
 
             .popup[data-position*="center"],
@@ -78,12 +75,9 @@ main {
 
         &.right-open {
             header,
+            #content,
             footer {
                 margin-right: $aside-width;
-            }
-
-            #content {
-                padding-right: $aside-width;
             }
 
             .popup[data-position*="center"],
@@ -102,48 +96,49 @@ main {
 
             &.left-open,
             &.right-open {
-                #content .header {
+                #content > div > .header {
                     width: calc(50% - #{$aside-width / 2});
                 }
             }
 
-            &.left-open #content > .header {
+            &.left-open #content > div > .header {
                 left: $aside-width;
             }
 
-            &.footer-fixed.mobile #content > .header,
-            &:not(.footer-fixed) #content > .header {
+            &.footer-fixed.mobile #content > div > .header,
+            &:not(.footer-fixed) #content > div > .header {
                 bottom: 0;
             }
 
-            &.footer-fixed:not(.mobile) #content > .header {
+            &.footer-fixed:not(.mobile) #content > div > .header {
                 bottom: $footer-height;
             }
 
             #content {
-                @include flex-display;
+                > div {
 
-                > .header {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 50%;
-                    height: auto;
-
-                    > div {
-                        top: $header-height;
-                        bottom: 0;
-                    }
-
-                    & + .content {
+                    > .header {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
                         width: 50%;
-                        margin: 0 0 0 auto;
-                    }
-                }
+                        height: auto;
 
-                > .content:first-child {
-                    width: 100%;
-                    @include flex-direction(row);
+                        > div {
+                            top: $header-height;
+                            bottom: 0;
+                        }
+
+                        & + .content {
+                            width: 50%;
+                            margin: 0 0 0 auto;
+                        }
+                    }
+
+                    > .content:first-child {
+                        width: 100%;
+                        @include flex-direction(row);
+                    }
                 }
             }
         }
