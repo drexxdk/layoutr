@@ -22,7 +22,7 @@
     }
 
     &.middle {
-        top: calc(#{$spacer} + 50%);
+        top: 50%;
         @include translateY(-50%);
     }
 

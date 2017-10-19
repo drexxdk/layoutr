@@ -3,7 +3,7 @@
 main {
     &.footer-fixed:not(.mobile) {
         .popup[data-position*="middle"] {
-            top: calc(-#{$spacer} + 50%) !important;
+            top: 50% !important;
         }
 
         .popup[data-position*="bottom"] {
@@ -25,7 +25,7 @@ main {
     }
 
     &.middle {
-        top: calc(#{($header-height / 2) - $spacer} + 50%) !important;
+        top: calc(#{$header-height / 2} + 50%) !important;
         @include translateY(-50%);
     }
 }
