@@ -21,10 +21,6 @@
     > .img {
         width: $quote-img-width;
         height: $quote-img-width;
-        flex-shrink: 0;
-        @include border-radius($component-border-radius);
-        position: relative;
-        overflow: hidden;
     }
 
     > .text {

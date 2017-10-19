@@ -1,6 +1,13 @@
 ﻿/// <reference path="../references" />
 
+.img {
+    flex-shrink: 0;
+    @include border-radius($component-border-radius);
+    position: relative;
+    overflow: hidden;
+}
+
 div.cover {
     background-size: cover;
-    background-position:center center;
+    background-position: center center;
 }
