@@ -656,7 +656,7 @@ $(function () {
 });
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
-        app.contentHeader = app.content.find('> div > .header');
+        app.contentHeader = app.content.children('.header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select'));
@@ -863,7 +863,6 @@ app.disableHtmlScroll = function () {
             var $this = $(this);
             $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
         });
-
         if (app.main.hasClass('two-columns') && app.contentHeader !== undefined && app.contentHeader.css('position') === 'fixed') {
             app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
         }

@@ -34,7 +34,6 @@ app.disableHtmlScroll = function () {
             var $this = $(this);
             $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
         });
-
         if (app.main.hasClass('two-columns') && app.contentHeader !== undefined && app.contentHeader.css('position') === 'fixed') {
             app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
         }
