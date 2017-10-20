@@ -60,7 +60,7 @@ main {
             height: calc(100% + #{$extra-spacing * 2});
         }
 
-        &.left-open {
+        &.left-open.left-push {
             header,
             #content,
             footer {
@@ -73,7 +73,7 @@ main {
             }
         }
 
-        &.right-open {
+        &.right-open.right-push {
             header,
             #content,
             footer {
@@ -86,7 +86,8 @@ main {
             }
         }
 
-        aside {
+        &.left-push #left,
+        &.right-push #right {
             margin-top: 0;
         }
     }
@@ -94,14 +95,14 @@ main {
     &.two-columns {
         @include breakpoint-two-columns {
 
-            &.left-open,
-            &.right-open {
+            &.left-open.left-push,
+            &.right-open.right-push {
                 #content > div > .header {
                     width: calc(50% - #{$aside-width / 2});
                 }
             }
 
-            &.left-open #content > div > .header {
+            &.left-open.left-push #content > div > .header {
                 left: $aside-width;
             }
 
