@@ -8,9 +8,9 @@ app.disableHtmlScroll = function () {
             self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
             self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         ];
-        app.html.data('scroll-position', scrollPosition);
-        app.html.data('previous-overflow', app.html.css('overflow'));
-        app.html.css('overflow', 'hidden');
+        app.body.data('scroll-position', scrollPosition);
+        app.body.data('previous-overflow', app.html.css('overflow'));
+        app.body.css('overflow', 'hidden');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
         var marginR = app.body.outerWidth() - initWidth;
         var marginB = app.body.outerHeight() - initHeight;
@@ -35,7 +35,7 @@ app.disableHtmlScroll = function () {
             $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
         });
 
-        if (app.main.hasClass('two-columns') && app.contentHeader.length && app.contentHeader.css('position') === 'fixed') {
+        if (app.main.hasClass('two-columns') && app.contentHeader !== undefined && app.contentHeader.css('position') === 'fixed') {
             app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
         }
         app.htmlOverflowEnabled = false;
@@ -44,8 +44,8 @@ app.disableHtmlScroll = function () {
 
 app.enableHtmlScroll = function () {
     if (!app.htmlOverflowEnabled) {
-        app.html.css('overflow', app.html.data('previous-overflow'));
-        var scrollPosition = app.html.data('scroll-position');
+        app.body.css('overflow', app.body.data('previous-overflow'));
+        var scrollPosition = app.body.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
         app.body.removeAttr('style');
@@ -56,7 +56,7 @@ app.enableHtmlScroll = function () {
         if (popups.length) {
             popups.removeAttr('style');
         }
-        if (app.contentHeader.length) {
+        if (app.contentHeader !== undefined) {
             app.contentHeader.removeClass('no-transitions').css({
                 'right': '',
                 'padding-right': '',

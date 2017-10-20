@@ -4,6 +4,7 @@ $(function () {
 });
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
+        app.contentHeader = app.content.find('> div > .header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select'));
