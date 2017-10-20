@@ -657,7 +657,9 @@ $(function () {
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
         app.lazyload(app.content.find('.lazy'));
-        
+        app.accordion(app.content.find('.accordion'));
+        app.dropdown(app.content.find('select'));
+
         app.addValidation(
             app.content.find('#form'),
             {
@@ -727,9 +729,6 @@ app.page1 = function () {
                 agree: "Please accept our policy"
             }
         );
-
-        app.accordion(app.content.find('.accordion'));
-        app.dropdown(app.content.find('select'));
 
         var alert = [];
         alert.push('<div class="alert theme-primary">');
