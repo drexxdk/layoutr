@@ -4,8 +4,8 @@ $(function () {
 });
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
-        app.contentHeader = app.content.children('.header');
-
+        app.lazyload(app.content.find('.lazy'));
+        
         app.addValidation(
             app.content.find('#form'),
             {

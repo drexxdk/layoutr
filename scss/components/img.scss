@@ -1,5 +1,10 @@
 ﻿/// <reference path="../references" />
 
+img,
+.img {
+    background-color: theme-color("light");
+}
+
 .img {
     flex-shrink: 0;
     @include border-radius($component-border-radius);

@@ -30,7 +30,7 @@
         $mix: mix($color-base, $color, $level * -1 * $theme-color-interval);
 
         @if lightness($mix) > 95% {
-            @return #efefef;
+            @return $color;
         }
 
         @return $mix;

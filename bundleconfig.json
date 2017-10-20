@@ -14,6 +14,7 @@
     "inputFiles": [
       "js/vendors/jquery/jquery-3.1.1.min.js",
       "js/vendors/jquery/validate/jquery.validate.min.js",
+      "js/vendors/jquery/jquery.lazyload.min.js",
       "js/vendors/bootstrap-slider.min.js",
       "js/vendors/bowser.js",
       "js/app/form.js",
@@ -27,7 +28,8 @@
       "js/app/form.js",
       "js/app/loading.js",
       "js/app/settings.js",
-      "js/app/alert.js"
+      "js/app/alert.js",
+      "js/app/lazyload.js"
     ],
     "minify": { "enabled": true }
   },
