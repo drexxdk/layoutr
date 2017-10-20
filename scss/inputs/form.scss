@@ -43,6 +43,7 @@
     > div > .input-group > .input-group-addon {
         background-color: $border;
         border-color: $border;
+        fill:$color;
     }
 }
 
@@ -67,8 +68,8 @@
 
         &.required:after {
             content: '*';
-            color:theme-color("danger");
-            margin-left:$spacer / 3;
+            color: theme-color("danger");
+            margin-left: $spacer / 3;
         }
     }
 
@@ -135,6 +136,7 @@
 
 
                 color: theme-color-level($value, 8);
+                fill: theme-color-level($value, 8);
                 background-color: theme-color-level($value, -10);
 
                 > svg {
