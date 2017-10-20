@@ -69,8 +69,8 @@
     <Content Include="ajax\layout\svg.html" />
     <Content Include="dist\css\app.css" />
     <Content Include="dist\css\app.min.css" />
-    <Content Include="dist\img\content-header-1920-1.jpg" />
-    <Content Include="dist\img\content-header-1920-2.jpg" />
+    <Content Include="dist\img\content-header-1-1920.jpg" />
+    <Content Include="dist\img\content-header-2-1920.jpg" />
     <Content Include="dist\img\eiffel-tower-1920.jpg" />
     <Content Include="dist\img\favicon\android-chrome-192x192.png" />
     <Content Include="dist\img\favicon\android-chrome-512x512.png" />
@@ -100,12 +100,14 @@
     <Content Include="js\app\googleMaps.js" />
     <Content Include="js\app\htmlScroll.js" />
     <Content Include="js\app\jquery-extensions.js" />
+    <Content Include="js\app\lazyload.js" />
     <Content Include="js\app\loading.js" />
     <Content Include="js\app\pages\page1.js" />
     <Content Include="js\app\settings.js" />
     <Content Include="js\app\youtube.js" />
     <Content Include="js\vendors\bootstrap-slider.min.js" />
     <Content Include="js\vendors\bowser.js" />
+    <Content Include="js\vendors\jquery\jquery.lazyload.min.js" />
     <Content Include="js\vendors\jquery\validate\additional-methods.min.js" />
     <Content Include="js\vendors\jquery\validate\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
@@ -177,6 +179,7 @@
     <Content Include="scss\variables\z-index.scss" />
     <Content Include="scss\demo.scss" />
     <Content Include="scss\components\position.scss" />
+    <Content Include="scss\layout\animation.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
