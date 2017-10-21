@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 .tree {
-    margin-left: $spacer;
+    margin-left: $spacer * 1.5;
     @include noselect;
     list-style-type: none;
     z-index:$component-z-index;
