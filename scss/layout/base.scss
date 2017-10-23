@@ -19,8 +19,8 @@ main {
         background-color: $overlay-background-color;
     }
 
-    &:not(.msedge):not(.msie).transitions {
-        // ie/edge doesn't support transition for values that uses calc()
+    &:not(.msie).transitions {
+        // IE cannot display multiple transitions simultaneously correctly
         #left,
         .popup[data-position*="left"] {
             @include transition(left $transition-time $transition-timing);

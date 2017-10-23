@@ -763,7 +763,7 @@ app.isSmallBreakpoint = function () {
 };
 
 app.hasTransitions = function () {
-    return (app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie'));
+    return (app.main.hasClass('transitions') && !app.main.hasClass('msie'));
 }
 
 $(function () {
