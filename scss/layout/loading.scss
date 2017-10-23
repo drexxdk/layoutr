@@ -3,7 +3,6 @@
 body {
     > #loading {
         position: fixed;
-        @include translateY(0);
         display: none;
         z-index: $loading-z-index;
         top: -$extra-spacing;

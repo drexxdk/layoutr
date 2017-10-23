@@ -23,10 +23,10 @@
 }
 
 @mixin translateY($string) {
-    -webkit-transform: translateY($string);
+    /*-webkit-transform: translateY($string);
     -moz-transform: translateY($string);
     -ms-transform: translateY($string);
-    -o-transform: translateY($string);
+    -o-transform: translateY($string);*/
     transform: translateY($string);
 }
 
