@@ -93,7 +93,8 @@ main {
     }
 }
 
-.header {
+header.header,
+aside > .header {
     height: $header-height;
     border-bottom: $layout-border;
     @include flex-display;
