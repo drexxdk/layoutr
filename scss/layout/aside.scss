@@ -8,13 +8,13 @@ aside {
     padding-top: $extra-spacing;
     padding-bottom: $extra-spacing;*/
     top: 0;
-    height: 50vh !important;
+    height: 100vh;
     width: 100%;
     max-width: $aside-width;
     background-color: $layout-background-color;
     flex-shrink: 0;
     flex-grow: 1;
-    margin-top: $header-height;
+    padding-top: $header-height;
 
     @include flex-direction(column);
 
