@@ -2,6 +2,7 @@
 
 aside {
     position: fixed;
+    @include translateY(0);
     z-index: $aside-z-index;
     top: -$extra-spacing;
     bottom: - $extra-spacing;
@@ -25,6 +26,7 @@ aside {
         text-align: center;
         line-height: $header-height;
         padding: 0 $padding-x;
+        background-color: red;
     }
 
     > .content {

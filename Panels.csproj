@@ -179,7 +179,6 @@
     <Content Include="scss\variables\z-index.scss" />
     <Content Include="scss\demo.scss" />
     <Content Include="scss\components\position.scss" />
-    <Content Include="scss\layout\animation.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
