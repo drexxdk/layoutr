@@ -8,6 +8,11 @@ app.hasTransitions = function () {
     return (app.main.hasClass('transitions') && !app.main.hasClass('msie'));
 }
 
+$.ajaxSetup({
+    // Disable caching of AJAX responses
+    cache: false
+});
+
 $(function () {
     app.main = $('main');
     app.content = $('#content > div');
