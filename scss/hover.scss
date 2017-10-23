@@ -2,7 +2,7 @@
 
 // hover effects should only be applied on desktop browsers
 .desktop {
-    header > .aside:hover svg {
+    .header > .aside:hover svg {
         fill: black;
         width: 75%;
         height: 75%;

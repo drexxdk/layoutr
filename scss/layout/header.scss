@@ -5,37 +5,6 @@ header {
     top: 0;
     right: 0;
     left: 0;
-    height: $header-height;
-    border-bottom: $layout-border;
     background-color: $layout-background-color;
-    @include flex-display;
-    flex-shrink: 0;
     z-index: $header-z-index;
-
-    > .title {
-        padding: 0 $spacer;
-        font-size: 1rem;
-        font-weight: bold;
-        line-height: $header-height;
-        flex-grow: 1;
-        @include ellipsis;
-    }
-
-    > .aside {
-        position: relative;
-        width: $header-height;
-        height: $header-height;
-        background-color: transparent;
-        @include noselect;
-
-        > svg {
-            margin-top: 50%;
-            margin-left: 50%;
-            @include translate(-50%, -50%);
-            width: 50%;
-            height: 50%;
-            fill: #808080;
-            @include button-transition(all);
-        }
-    }
 }

@@ -26,20 +26,42 @@
         <svg><use xlink:href="#svg-loading"></use></svg>
     </div>
     <main class="transitions two-columns left-overlay right-overlay close-left-click-outside close-right-click-outside left-push right-push">
-        <header>
-            <button id="toggle-menu" data-id="left" class="aside left" aria-label="Toggle menu">
+        <header class="header">
+            <button id="toggle-menu" class="aside left" aria-label="Toggle menu">
                 <svg><use xlink:href="#svg-menu"></use></svg>
             </button>
             <span class="title">Panels</span>
-            <button id="toggle-settings" data-id="right" class="aside right" aria-label="Toggle settings">
+            <button id="toggle-settings" class="aside right" aria-label="Toggle settings">
                 <svg><use xlink:href="#svg-settings"></use></svg>
             </button>
         </header>
         <div id="container">
             <div>
-                <aside id="left"></aside>
+                <aside id="left">
+                    <div class="header">
+                        <span class="title">Navigation</span>
+                        <button id="toggle-settings" class="aside right close" aria-label="Toggle settings">
+                            <svg><use xlink:href="#svg-close"></use></svg>
+                        </button>
+                    </div>
+                    <div class="content">
+                        <div>
+                        </div>
+                    </div>
+                </aside>
                 <div id="content"><div></div></div>
-                <aside id="right"></aside>
+                <aside id="right">
+                    <div class="header">
+                        <button id="toggle-settings" class="aside right close" aria-label="Toggle settings">
+                            <svg><use xlink:href="#svg-close"></use></svg>
+                        </button>
+                        <span class="title">Settings</span>
+                    </div>
+                    <div class="content">
+                        <div>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </div>
         <footer></footer>

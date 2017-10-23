@@ -31,7 +31,6 @@
         flex-shrink: 0;
 
         > svg {
-            @include rotate(45);
             width: $font-size;
             height: $font-size;
             flex-shrink: 0;

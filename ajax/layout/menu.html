@@ -1,125 +1,119 @@
-﻿<div class="header">
-    Navigation
-</div>
-<div class="content">
-    <div>
-        <section>
-            <ul class="tree">
-                <li><a href="page1" class="label">Page 1</a></li>
-                <li><a href="page2" class="label">Page 2</a></li>
-                <li><a href="page3" class="label">Page 3</a></li>
-                <li><a href="page4" class="label">Page 4</a></li>
+﻿
+<section>
+    <ul class="tree">
+        <li><a href="page1" class="label">Page 1</a></li>
+        <li><a href="page2" class="label">Page 2</a></li>
+        <li><a href="page3" class="label">Page 3</a></li>
+        <li><a href="page4" class="label">Page 4</a></li>
+        <li>
+            <input type="checkbox" id="c1" />
+            <label class="label" for="c1">
+                <span class="btn">
+                    <svg><use xlink:href="#svg-plus"></use></svg>
+                    <svg><use xlink:href="#svg-minus"></use></svg>
+                </span>
+                Level 0
+            </label>
+            <ul>
                 <li>
-                    <input type="checkbox" id="c1" />
-                    <label class="label" for="c1">
+                    <input type="checkbox" id="c2" />
+                    <label for="c2" class="label">
                         <span class="btn">
                             <svg><use xlink:href="#svg-plus"></use></svg>
                             <svg><use xlink:href="#svg-minus"></use></svg>
                         </span>
-                        Level 0
+                        Level 1
                     </label>
-                    <ul>
-                        <li>
-                            <input type="checkbox" id="c2" />
-                            <label for="c2" class="label">
-                                <span class="btn">
-                                    <svg><use xlink:href="#svg-plus"></use></svg>
-                                    <svg><use xlink:href="#svg-minus"></use></svg>
-                                </span>
-                                Level 1
-                            </label>
 
-                            <ul>
-                                <li><span class="label">Level 2</span></li>
-                                <li><span class="label">Level 2</span></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="c3" />
-                            <label for="c3" class="label">
-                                <span class="btn">
-                                    <svg><use xlink:href="#svg-plus"></use></svg>
-                                    <svg><use xlink:href="#svg-minus"></use></svg>
-                                </span>
-                                Looong level 1 <br />label text <br />with line-breaks
-                            </label>
-                            <ul>
-                                <li><span class="label">Level 2</span></li>
-                                <li>
-                                    <input type="checkbox" id="c4" />
-                                    <label for="c4" class="label">
-                                        <span class="btn">
-                                            <svg><use xlink:href="#svg-plus"></use></svg>
-                                            <svg><use xlink:href="#svg-minus"></use></svg>
-                                        </span>
-                                        <span class="highlight">Specified tree item view</span>
-                                    </label>
-                                    <ul>
-                                        <li><span class="label">Level 3</span></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                    <ul>
+                        <li><span class="label">Level 2</span></li>
+                        <li><span class="label">Level 2</span></li>
                     </ul>
                 </li>
-
                 <li>
-                    <input type="checkbox" id="c5" />
-                    <label class="label" for="c5">
+                    <input type="checkbox" id="c3" />
+                    <label for="c3" class="label">
                         <span class="btn">
                             <svg><use xlink:href="#svg-plus"></use></svg>
                             <svg><use xlink:href="#svg-minus"></use></svg>
                         </span>
-                        Level 0
+                        Looong level 1 <br />label text <br />with line-breaks
                     </label>
                     <ul>
+                        <li><span class="label">Level 2</span></li>
                         <li>
-                            <input type="checkbox" id="c6" />
-                            <label for="c6" class="label">
+                            <input type="checkbox" id="c4" />
+                            <label for="c4" class="label">
                                 <span class="btn">
                                     <svg><use xlink:href="#svg-plus"></use></svg>
                                     <svg><use xlink:href="#svg-minus"></use></svg>
                                 </span>
-                                Level 1
+                                <span class="highlight">Specified tree item view</span>
                             </label>
                             <ul>
-                                <li><span class="label">Level 2</span></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="c7" />
-                            <label for="c7" class="label">
-                                <span class="btn">
-                                    <svg><use xlink:href="#svg-plus"></use></svg>
-                                    <svg><use xlink:href="#svg-minus"></use></svg>
-                                </span>
-                                Level 1
-                            </label>
-                            <ul>
-                                <li><span class="label">Level 2</span></li>
-                                <li>
-                                    <input type="checkbox" id="c8" />
-                                    <label for="c8" class="label">
-                                        <span class="btn">
-                                            <svg><use xlink:href="#svg-plus"></use></svg>
-                                            <svg><use xlink:href="#svg-minus"></use></svg>
-                                        </span>
-                                        Level 2
-                                    </label>
-                                    <ul>
-                                        <li><span class="label">Level 3</span></li>
-                                    </ul>
-                                </li>
+                                <li><span class="label">Level 3</span></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
             </ul>
-        </section>
-        <section>
-            <div class="flex-items wrap small">
-                <button class="btn toggle-loading">Loading</button>
-            </div>
-        </section>
+        </li>
+
+        <li>
+            <input type="checkbox" id="c5" />
+            <label class="label" for="c5">
+                <span class="btn">
+                    <svg><use xlink:href="#svg-plus"></use></svg>
+                    <svg><use xlink:href="#svg-minus"></use></svg>
+                </span>
+                Level 0
+            </label>
+            <ul>
+                <li>
+                    <input type="checkbox" id="c6" />
+                    <label for="c6" class="label">
+                        <span class="btn">
+                            <svg><use xlink:href="#svg-plus"></use></svg>
+                            <svg><use xlink:href="#svg-minus"></use></svg>
+                        </span>
+                        Level 1
+                    </label>
+                    <ul>
+                        <li><span class="label">Level 2</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <input type="checkbox" id="c7" />
+                    <label for="c7" class="label">
+                        <span class="btn">
+                            <svg><use xlink:href="#svg-plus"></use></svg>
+                            <svg><use xlink:href="#svg-minus"></use></svg>
+                        </span>
+                        Level 1
+                    </label>
+                    <ul>
+                        <li><span class="label">Level 2</span></li>
+                        <li>
+                            <input type="checkbox" id="c8" />
+                            <label for="c8" class="label">
+                                <span class="btn">
+                                    <svg><use xlink:href="#svg-plus"></use></svg>
+                                    <svg><use xlink:href="#svg-minus"></use></svg>
+                                </span>
+                                Level 2
+                            </label>
+                            <ul>
+                                <li><span class="label">Level 3</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <div class="flex-items wrap small">
+        <button class="btn toggle-loading">Loading</button>
     </div>
-</div>
+</section>

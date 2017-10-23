@@ -9,8 +9,8 @@ $(function () {
     app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
-    app.left = $('#left');
-    app.right = $('#right');
+    app.left = $('#left > .content > div');
+    app.right = $('#right > .content > div');
     app.html = $('html');
     app.body = $('body');
     app.html = $('html');
@@ -42,9 +42,9 @@ $(function () {
     $('.aside').click(function () {
         var $this = $(this);
         app.enableHtmlScroll();
-        if ($this.is('#toggle-menu')) {
+        if ($this.is('.aside.left')) {
             app.main.toggleClass('left-open').removeClass('right-open');
-        } else if ($this.is('#toggle-settings')) {
+        } else if ($this.is('.aside.right')) {
             app.main.toggleClass('right-open').removeClass('left-open');
         }
         app.setHtmlScroll();

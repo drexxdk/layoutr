@@ -53,10 +53,6 @@ main {
     }
 
     @include breakpoint-medium-one-column {
-        aside {
-            padding-top: 0;
-        }
-
         &.left-open.left-push {
             header,
             #content,
