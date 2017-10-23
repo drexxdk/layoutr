@@ -50,15 +50,11 @@ main {
     }
 
     @include breakpoint-small-one-column {
-        aside {
-            /*height: calc(100% + #{-$header-height} + #{$extra-spacing * 2});*/
-        }
     }
 
     @include breakpoint-medium-one-column {
         aside {
             padding-top: 0;
-            /*height: calc(100% + #{$extra-spacing * 2});*/
         }
 
         &.left-open.left-push {
