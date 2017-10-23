@@ -30,3 +30,6 @@ $breakpoint-two-columns: px($aside-width + $content-min-width + $content-min-wid
 $container-small: rem(300px);
 $container-medium: rem(500px);
 $container-large: rem(700px);
+
+$transition-time: .4s;
+$transition-timing: ease-in-out;

@@ -38,7 +38,7 @@ app.applySettings = function (id, type, value, set) {
             app.html.css('font-size', value + 'px');
             setTimeout(function () {
                 app.main.addClass('transitions');
-            }, 500);
+            }, app.transitionTime);
 
         } else {
             app.html.css('font-size', value + 'px');

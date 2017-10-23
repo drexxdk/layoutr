@@ -762,6 +762,10 @@ app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732;
 };
 
+app.hasTransitions = function () {
+    return (app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie'));
+}
+
 $(function () {
     app.main = $('main');
     app.content = $('#content > div');
@@ -799,13 +803,26 @@ $(function () {
 
     $('.aside').click(function () {
         var $this = $(this);
-        app.enableHtmlScroll();
+        //app.enableHtmlScroll();
         if ($this.is('.aside.left')) {
+            if (!app.main.hasClass('left-open') && app.isSmallBreakpoint()) {
+                app.disableHtmlScroll();
+            }
             app.main.toggleClass('left-open').removeClass('right-open');
         } else if ($this.is('.aside.right')) {
+            if (!app.main.hasClass('left-open') && app.isSmallBreakpoint()) {
+                app.disableHtmlScroll();
+            }
             app.main.toggleClass('right-open').removeClass('left-open');
         }
-        app.setHtmlScroll();
+        if (app.hasTransitions) {
+            setTimeout(function () {
+                app.setHtmlScroll();
+            }, app.transitionTime);
+        } else {
+            app.setHtmlScroll();
+        }
+
         app.checkGoogleMaps();
     });
 
@@ -1135,7 +1152,7 @@ app.applySettings = function (id, type, value, set) {
             app.html.css('font-size', value + 'px');
             setTimeout(function () {
                 app.main.addClass('transitions');
-            }, 500);
+            }, app.transitionTime);
 
         } else {
             app.html.css('font-size', value + 'px');
