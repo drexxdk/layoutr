@@ -17,7 +17,7 @@ app.disableHtmlScroll = function () {
         app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
 
         var headerFooterTag = 'padding-right';
-        if (app.main.hasClass('right-open')) {
+        if (app.main.attr('data-aside') === 'right') {
             app.right.css({
                 'max-width': app.right.outerWidth() + marginR,
                 'padding-right': marginR
@@ -67,9 +67,9 @@ app.enableHtmlScroll = function () {
 };
 
 app.setHtmlScroll = function () {
-    if (!app.main.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.main.hasClass('left-open') && !app.main.hasClass('right-open'))) {
+    if (!app.main.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.main.attr('data-aside') !== 'left' && app.main.attr('data-aside') !== 'right')) {
         app.enableHtmlScroll();
-    } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.hasClass('left-open') || app.main.hasClass('right-open'))) {
+    } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.attr('data-aside') === 'left' || app.main.attr('data-aside') === 'right')) {
         app.disableHtmlScroll();
     }
 };

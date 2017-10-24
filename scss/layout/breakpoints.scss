@@ -53,7 +53,7 @@ main {
     }
 
     @include breakpoint-medium-one-column {
-        &.left-open.left-push {
+        &[data-aside="left"].left-push {
             header,
             #content,
             footer {
@@ -66,7 +66,7 @@ main {
             }
         }
 
-        &.right-open.right-push {
+        &[data-aside="right"].right-push {
             header,
             #content,
             footer {
@@ -88,14 +88,14 @@ main {
     &.two-columns {
         @include breakpoint-two-columns {
 
-            &.left-open.left-push,
-            &.right-open.right-push {
+            &[data-aside="left"].left-push,
+            &[data-aside="right"].right-push {
                 #content > div > .header {
                     width: calc(50% - #{$aside-width / 2});
                 }
             }
 
-            &.left-open.left-push #content > div > .header {
+            &[data-aside="left"].left-push #content > div > .header {
                 left: $aside-width;
             }
 

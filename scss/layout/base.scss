@@ -7,8 +7,8 @@ main {
 
     @include flex-direction(column);
 
-    &.left-overlay.left-open #content:before,
-    &.right-overlay.right-open #content:before {
+    &.left-overlay[data-aside="left"] #content:before,
+    &.right-overlay[data-aside="right"] #content:before {
         content: '';
         position: fixed;
         top: -$extra-spacing;
@@ -52,14 +52,14 @@ main {
         }
     }
 
-    &.left-open {
+    &[data-aside="left"] {
         #left {
             left: 0;
             @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
         }
     }
 
-    &.right-open {
+    &[data-aside="right"] {
         #right {
             right: 0;
             @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));

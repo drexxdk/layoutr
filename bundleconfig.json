@@ -29,7 +29,8 @@
       "js/app/loading.js",
       "js/app/settings.js",
       "js/app/alert.js",
-      "js/app/lazyload.js"
+      "js/app/lazyload.js",
+      "js/app/keyboard.js"
     ],
     "minify": { "enabled": true }
   },

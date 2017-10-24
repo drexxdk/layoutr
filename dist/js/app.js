@@ -776,8 +776,8 @@ $(function () {
     app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
-    app.left = $('#left > .content > div');
-    app.right = $('#right > .content > div');
+    app.left = $('#left');
+    app.right = $('#right');
     app.html = $('html');
     app.body = $('body');
     app.html = $('html');
@@ -806,29 +806,52 @@ $(function () {
     });
     app.setHtmlScroll();
 
-    $('.aside').click(function () {
-        var $this = $(this);
-        //app.enableHtmlScroll();
-        if ($this.is('.aside.left')) {
-            if (!app.main.hasClass('left-open') && app.isSmallBreakpoint()) {
-                app.disableHtmlScroll();
-            }
-            app.main.toggleClass('left-open').removeClass('right-open');
-        } else if ($this.is('.aside.right')) {
-            if (!app.main.hasClass('left-open') && app.isSmallBreakpoint()) {
-                app.disableHtmlScroll();
-            }
-            app.main.toggleClass('right-open').removeClass('left-open');
-        }
-        if (app.hasTransitions) {
-            setTimeout(function () {
-                app.setHtmlScroll();
-            }, app.transitionTime);
-        } else {
-            app.setHtmlScroll();
-        }
+    var transitionLock = false;
+    
+    app.toggleAside = function (aside) {
+        if (!transitionLock) {
+            transitionLock = true;
+            if (aside === undefined) {
+                app.main.attr('data-aside', '');
+            } else {
 
-        app.checkGoogleMaps();
+                if (app.main.attr('data-aside') !== aside && app.isSmallBreakpoint()) {
+                    app.disableHtmlScroll();
+                }
+
+                if (app.main.attr('data-aside').length) {
+                    if (app.main.attr('data-aside') === aside) {
+                        app.main.attr('data-aside', '');
+                    } else {
+                        app.main.attr('data-aside', aside);
+                    }
+                } else {
+                    app.main.attr('data-aside', aside);
+                }
+            }
+
+            if (app.main.hasClass('transitions')) {
+                setTimeout(function () {
+                    transitionLock = false;
+                    app.setHtmlScroll();
+                    app.checkGoogleMaps();
+                }, app.transitionTime);
+            } else {
+                transitionLock = false;
+                app.setHtmlScroll();
+                app.checkGoogleMaps();
+            }
+            
+        }
+    };
+    
+
+    $('.aside.left').click(function () {
+        app.toggleAside('left');
+    });
+
+    $('.aside.right').click(function () {
+        app.toggleAside('right');
     });
 
     $.get('ajax/layout/svg.html', function (data) {
@@ -846,7 +869,7 @@ $(function () {
         }
     });
 
-    app.left.load('ajax/layout/menu.html');
+    app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
 });
 var app = app || {};
@@ -868,7 +891,7 @@ app.disableHtmlScroll = function () {
         app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
 
         var headerFooterTag = 'padding-right';
-        if (app.main.hasClass('right-open')) {
+        if (app.main.attr('data-aside') === 'right') {
             app.right.css({
                 'max-width': app.right.outerWidth() + marginR,
                 'padding-right': marginR
@@ -918,9 +941,9 @@ app.enableHtmlScroll = function () {
 };
 
 app.setHtmlScroll = function () {
-    if (!app.main.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.main.hasClass('left-open') && !app.main.hasClass('right-open'))) {
+    if (!app.main.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.main.attr('data-aside') !== 'left' && app.main.attr('data-aside') !== 'right')) {
         app.enableHtmlScroll();
-    } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.hasClass('left-open') || app.main.hasClass('right-open'))) {
+    } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.attr('data-aside') === 'left' || app.main.attr('data-aside') === 'right')) {
         app.disableHtmlScroll();
     }
 };
@@ -1166,7 +1189,7 @@ app.applySettings = function (id, type, value, set) {
 };
 
 $(function () {
-    app.right.load('ajax/layout/settings.html', function () {
+    app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
         var $this = $(this);
         if (app.localStorage) {
             app.settings = JSON.parse(localStorage.getItem("settings"));
@@ -1208,12 +1231,12 @@ $(function () {
             if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
                 var target = $(e.target);
                 if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
-                    if (app.main.hasClass('left-open') && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    if (app.main.attr('data-aside') === 'left' && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
                         app.enableHtmlScroll();
-                        app.main.removeClass('left-open');
-                    } else if (app.main.hasClass('right-open') && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                        app.main.attr('data-aside', '');
+                    } else if (app.main.attr('data-aside') === 'right' && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
                         app.enableHtmlScroll();
-                        app.main.removeClass('right-open');
+                        app.main.attr('data-aside', '');
                     }
                     app.checkGoogleMaps();
                 }
@@ -1241,3 +1264,21 @@ var app = app || {};
 app.lazyload = function (elements) {
     elements.lazyload({ effect: "fadeIn" });
 };
+var app = app || {};
+$(function () {
+    app.body.on("keydown", function (e) {
+        if (e.which === 37) { // left
+            if (app.main.attr('data-aside') === 'left') {
+                app.toggleAside();
+            } else if (app.main.attr('data-aside') !== 'right') {
+                app.toggleAside('right');
+            } 
+        } else if (e.which === 39) { // right
+            if (app.main.attr('data-aside') === 'right') {
+                app.toggleAside();
+            } else if (app.main.attr('data-aside') !== 'left') {
+                app.toggleAside('left');
+            } 
+        }
+    });
+});

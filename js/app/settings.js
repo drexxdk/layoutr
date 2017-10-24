@@ -47,7 +47,7 @@ app.applySettings = function (id, type, value, set) {
 };
 
 $(function () {
-    app.right.load('ajax/layout/settings.html', function () {
+    app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
         var $this = $(this);
         if (app.localStorage) {
             app.settings = JSON.parse(localStorage.getItem("settings"));
@@ -89,12 +89,12 @@ $(function () {
             if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
                 var target = $(e.target);
                 if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
-                    if (app.main.hasClass('left-open') && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    if (app.main.attr('data-aside') === 'left' && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
                         app.enableHtmlScroll();
-                        app.main.removeClass('left-open');
-                    } else if (app.main.hasClass('right-open') && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                        app.main.attr('data-aside', '');
+                    } else if (app.main.attr('data-aside') === 'right' && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
                         app.enableHtmlScroll();
-                        app.main.removeClass('right-open');
+                        app.main.attr('data-aside', '');
                     }
                     app.checkGoogleMaps();
                 }

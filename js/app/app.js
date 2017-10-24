@@ -18,8 +18,8 @@ $(function () {
     app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
-    app.left = $('#left > .content > div');
-    app.right = $('#right > .content > div');
+    app.left = $('#left');
+    app.right = $('#right');
     app.html = $('html');
     app.body = $('body');
     app.html = $('html');
@@ -48,29 +48,52 @@ $(function () {
     });
     app.setHtmlScroll();
 
-    $('.aside').click(function () {
-        var $this = $(this);
-        //app.enableHtmlScroll();
-        if ($this.is('.aside.left')) {
-            if (!app.main.hasClass('left-open') && app.isSmallBreakpoint()) {
-                app.disableHtmlScroll();
-            }
-            app.main.toggleClass('left-open').removeClass('right-open');
-        } else if ($this.is('.aside.right')) {
-            if (!app.main.hasClass('left-open') && app.isSmallBreakpoint()) {
-                app.disableHtmlScroll();
-            }
-            app.main.toggleClass('right-open').removeClass('left-open');
-        }
-        if (app.hasTransitions) {
-            setTimeout(function () {
-                app.setHtmlScroll();
-            }, app.transitionTime);
-        } else {
-            app.setHtmlScroll();
-        }
+    var transitionLock = false;
+    
+    app.toggleAside = function (aside) {
+        if (!transitionLock) {
+            transitionLock = true;
+            if (aside === undefined) {
+                app.main.attr('data-aside', '');
+            } else {
 
-        app.checkGoogleMaps();
+                if (app.main.attr('data-aside') !== aside && app.isSmallBreakpoint()) {
+                    app.disableHtmlScroll();
+                }
+
+                if (app.main.attr('data-aside').length) {
+                    if (app.main.attr('data-aside') === aside) {
+                        app.main.attr('data-aside', '');
+                    } else {
+                        app.main.attr('data-aside', aside);
+                    }
+                } else {
+                    app.main.attr('data-aside', aside);
+                }
+            }
+
+            if (app.main.hasClass('transitions')) {
+                setTimeout(function () {
+                    transitionLock = false;
+                    app.setHtmlScroll();
+                    app.checkGoogleMaps();
+                }, app.transitionTime);
+            } else {
+                transitionLock = false;
+                app.setHtmlScroll();
+                app.checkGoogleMaps();
+            }
+            
+        }
+    };
+    
+
+    $('.aside.left').click(function () {
+        app.toggleAside('left');
+    });
+
+    $('.aside.right').click(function () {
+        app.toggleAside('right');
     });
 
     $.get('ajax/layout/svg.html', function (data) {
@@ -88,6 +111,6 @@ $(function () {
         }
     });
 
-    app.left.load('ajax/layout/menu.html');
+    app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
 });
