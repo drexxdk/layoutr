@@ -14,6 +14,10 @@
     @include align-items(flex-start);
     overflow: hidden;
 
+
+    $value: theme-color("light");
+    @include alert-variant(theme-color-level($value, -10), theme-color-level($value, -9), theme-color-level($value, 8));
+
     > div {
         padding: $padding-y $padding-x;
         min-height: $line-height + ($padding-y * 2);
