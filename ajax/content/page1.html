@@ -75,6 +75,12 @@
                         <li>
                             <b>IE</b> cannot display multiple transitions simultaneously correctly. Transitions are therefore disabled for the layout in that browser.
                         </li>
+                        <li>
+                            <b>Safari mobile</b> doesn't support app.disableHtmlScroll() correctly. It doesn't disable scroll.<br /> 
+                            This causes it to cut off bottom of opened aside when scrolling.<br />
+                            I have tried adding overflow: hidden to body instead, but then it jumps to top of page.<br />
+                            I will keep looking for a solution for this problem.
+                        </li>
                     </ul>
                 </div>
             </div>
