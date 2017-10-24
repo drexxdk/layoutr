@@ -1597,7 +1597,7 @@ main.footer-fixed:not(.mobile) .popup[data-position*="bottom"] {
     .quote > .text > .author {
       display: block;
       margin-top: 0.5rem;
-      opacity: 0.6;
+      opacity: 0.8;
       font-size: 0.75rem; }
 
 .table {
