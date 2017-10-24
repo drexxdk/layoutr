@@ -1012,7 +1012,7 @@ div.dropdown {
       -webkit-align-items: center;
       -ms-align-items: center;
       align-items: center;
-      z-index: 33;
+      z-index: 30;
       padding: 0 1rem;
       color: #595a5a;
       fill: #595a5a;

@@ -72,7 +72,7 @@ $(function () {
                 }
             }
 
-            if (app.main.hasClass('transitions')) {
+            if (app.hasTransitions()) {
                 setTimeout(function () {
                     transitionLock = false;
                     app.setHtmlScroll();

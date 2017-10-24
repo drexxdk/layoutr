@@ -830,7 +830,7 @@ $(function () {
                 }
             }
 
-            if (app.main.hasClass('transitions')) {
+            if (app.hasTransitions()) {
                 setTimeout(function () {
                     transitionLock = false;
                     app.setHtmlScroll();
@@ -1037,7 +1037,7 @@ var googleMaps, google;
 
 app.checkGoogleMaps = function () {
     if (googleMaps !== undefined && google !== undefined) {
-        if (app.main.hasClass('transitions')) {
+        if (app.hasTransitions()) {
             setTimeout(function () {
                 google.maps.event.trigger(googleMaps, 'resize');
             }, app.transitionTime);
@@ -1175,7 +1175,7 @@ app.applySettings = function (id, type, value, set) {
             app.main.removeClass(id);
         }
     } else if (id === 'font-size') {
-        if (app.main.hasClass('transitions')) {
+        if (app.hasTransitions()) {
             app.main.removeClass('transitions');
             app.html.css('font-size', value + 'px');
             setTimeout(function () {
@@ -1267,27 +1267,29 @@ app.lazyload = function (elements) {
 var app = app || {};
 $(function () {
     app.body.on("keydown", function (e) {
-        if (e.which === 37) { // left
-            if (app.main.attr('data-aside') === 'left') {
-                app.toggleAside(); // closes right
-            } else if (app.main.attr('data-aside') !== 'right') {
-                app.toggleAside('right'); // opens right
-            }
-        } else if (e.which === 39) { // right
-            if (app.main.attr('data-aside') === 'right') {
-                app.toggleAside(); // closes left
-            } else if (app.main.attr('data-aside') !== 'left') {
-                app.toggleAside('left'); // opens left
-            }
-        } else if (e.which === 27) { // esc
-            if (app.main.attr('data-aside').length) {
-                app.toggleAside(); // closes aside
-            }
-            var popups = app.main.children('.popup');
-            if (popups.length) {
-                popups.fadeOut(app.fadeOutTime, function () {
-                    popups.remove();
-                });
+        if (!app.body.hasClass('loading')) {
+            if (e.which === 37) { // left
+                if (app.main.attr('data-aside') === 'left') {
+                    app.toggleAside(); // closes right
+                } else if (app.main.attr('data-aside') !== 'right') {
+                    app.toggleAside('right'); // opens right
+                }
+            } else if (e.which === 39) { // right
+                if (app.main.attr('data-aside') === 'right') {
+                    app.toggleAside(); // closes left
+                } else if (app.main.attr('data-aside') !== 'left') {
+                    app.toggleAside('left'); // opens left
+                }
+            } else if (e.which === 27) { // esc
+                if (app.main.attr('data-aside').length) {
+                    app.toggleAside(); // closes aside
+                }
+                var popups = app.main.children('.popup');
+                if (popups.length) {
+                    popups.fadeOut(app.fadeOutTime, function () {
+                        popups.remove();
+                    });
+                }
             }
         }
     });

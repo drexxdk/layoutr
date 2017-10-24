@@ -33,7 +33,7 @@ app.applySettings = function (id, type, value, set) {
             app.main.removeClass(id);
         }
     } else if (id === 'font-size') {
-        if (app.main.hasClass('transitions')) {
+        if (app.hasTransitions()) {
             app.main.removeClass('transitions');
             app.html.css('font-size', value + 'px');
             setTimeout(function () {
