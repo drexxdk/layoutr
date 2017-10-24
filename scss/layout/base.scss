@@ -19,7 +19,7 @@ main {
         background-color: $overlay-background-color;
     }
 
-    &:not(.msie).transitions {
+    &:not(.msedge):not(.msie).transitions {
         // IE cannot display multiple transitions simultaneously correctly
         #left,
         .popup[data-position*="left"] {
