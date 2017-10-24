@@ -55,14 +55,20 @@ main {
     &[data-aside="left"] {
         #left {
             left: 0;
-            @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+
+            > .content {
+                @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+            }
         }
     }
 
     &[data-aside="right"] {
         #right {
             right: 0;
-            @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+
+            > .content {
+                @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+            }
         }
     }
 

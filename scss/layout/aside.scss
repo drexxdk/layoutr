@@ -17,6 +17,7 @@ aside {
 
     > .header {
         background-color: theme-color("light");
+        z-index: 1;
     }
 
     > .content {
@@ -29,16 +30,24 @@ aside {
 
     &#left {
         left: -$aside-width;
-        border-right: $layout-border;
 
         > .header > .title {
             padding-left: $spacer;
+        }
+
+        > .header,
+        > .content {
+            border-right: $layout-border;
         }
     }
 
     &#right {
         right: -$aside-width;
-        border-left: $layout-border;
+
+        > .header,
+        > .content {
+            border-left: $layout-border;
+        }
 
         > .header > .title {
             padding-right: $spacer;
