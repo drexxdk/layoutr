@@ -38,6 +38,22 @@
     transform: scale($factor);
 }
 
+@mixin scaleX ($factor) {
+    /*-webkit-transform: scale($factor);
+    -moz-transform: scale($factor);
+    -ms-transform: scale($factor);
+    -o-transform: scale($factor);*/
+    transform: scaleX($factor);
+}
+
+@mixin scaleY ($factor) {
+    /*-webkit-transform: scale($factor);
+    -moz-transform: scale($factor);
+    -ms-transform: scale($factor);
+    -o-transform: scale($factor);*/
+    transform: scaleY($factor);
+}
+
 @mixin rotate ($deg) {
     /*-webkit-transform: rotate(#{$deg}deg);
     -moz-transform: rotate(#{$deg}deg);
