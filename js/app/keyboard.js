@@ -3,16 +3,26 @@ $(function () {
     app.body.on("keydown", function (e) {
         if (e.which === 37) { // left
             if (app.main.attr('data-aside') === 'left') {
-                app.toggleAside();
+                app.toggleAside(); // closes right
             } else if (app.main.attr('data-aside') !== 'right') {
-                app.toggleAside('right');
-            } 
+                app.toggleAside('right'); // opens right
+            }
         } else if (e.which === 39) { // right
             if (app.main.attr('data-aside') === 'right') {
-                app.toggleAside();
+                app.toggleAside(); // closes left
             } else if (app.main.attr('data-aside') !== 'left') {
-                app.toggleAside('left');
-            } 
+                app.toggleAside('left'); // opens left
+            }
+        } else if (e.which === 27) { // esc
+            if (app.main.attr('data-aside').length) {
+                app.toggleAside(); // closes aside
+            }
+            var popups = app.main.children('.popup');
+            if (popups.length) {
+                popups.fadeOut(app.fadeOutTime, function () {
+                    popups.remove();
+                });
+            }
         }
     });
 });
