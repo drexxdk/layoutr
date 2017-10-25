@@ -52,6 +52,12 @@ main {
             left: 0;
         }
     }
+
+    &.left-auto-height #left, 
+    &.right-auto-height #right {
+        height: auto;
+        max-height: 100vh;
+    }
 }
 
 #container {
