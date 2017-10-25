@@ -10,6 +10,7 @@
     left: -$extra-spacing;
     background-color: $overlay-background-color;
     margin: $extra-spacing;
+    @include noselect;
 
     > * {
         position: absolute;
@@ -19,17 +20,13 @@
     }
 }
 
-#fullscreen {
-    cursor: pointer;
-
-    > img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto !important;
-        height: auto !important;
-        padding: $spacer * 2;
-        background-color: transparent;
-    }
+#fullscreen > img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    padding: $spacer * 2;
+    background-color: transparent;
 }
 
 .fullscreen {

@@ -17,7 +17,6 @@ main {
         right: -$extra-spacing;
         z-index: $overlay-z-index;
         background-color: $content-overlay-background-color;
-        cursor: pointer;
     }
 
     &[data-aside="left"] {
