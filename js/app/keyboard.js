@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 $(function () {
     app.body.on("keydown", function (e) {
-        if (!app.loading.hasClass('hidden')) {
+        if (app.loading.hasClass('hidden')) {
             if (e.which === 37) { // left
                 if (app.main.attr('data-aside') === 'left') {
                     app.toggleAside(); // closes right
