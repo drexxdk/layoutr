@@ -21,16 +21,17 @@
     </style>
 </head>
 <body>
-    <div id="loading">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
-    </div>
     <main class="transitions two-columns left-overlay right-overlay close-left-click-outside close-right-click-outside left-push right-push" data-aside="">
+        <div id="loading" class="hidden">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+        <div id="fullscreen" class="hidden"></div>
         <header class="header">
             <button class="aside left" aria-label="Toggle menu">
                 <svg><use xlink:href="#svg-menu"></use></svg>

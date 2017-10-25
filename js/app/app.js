@@ -22,7 +22,8 @@ $(function () {
     app.right = $('#right');
     app.html = $('html');
     app.body = $('body');
-    app.html = $('html');
+    app.loading = $('#loading');
+    app.fullscreen = $('#fullscreen');
     app.transitionTime = 400;
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
@@ -49,7 +50,7 @@ $(function () {
     app.setHtmlScroll();
 
     var transitionLock = false;
-    
+
     app.toggleAside = function (aside) {
         if (!transitionLock) {
             transitionLock = true;
@@ -83,10 +84,10 @@ $(function () {
                 app.setHtmlScroll();
                 app.checkGoogleMaps();
             }
-            
+
         }
     };
-    
+
 
     $('.aside.left').click(function () {
         app.toggleAside('left');
@@ -113,4 +114,39 @@ $(function () {
 
     app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
+
+    app.main.on('click', '.fullscreen', function () {
+        var $this = $(this);
+        var newSrc = $this.attr('data-img');
+        if (app.fullscreen.img === undefined) {
+            app.fullscreen.append('<img src="' + newSrc + '" alt="" />');
+            app.fullscreen.img = app.fullscreen.children();
+        } else if (app.fullscreen.img.attr('src') !== newSrc) {
+            app.fullscreen.img.attr('src', newSrc);
+        }
+        app.disableHtmlScroll();
+        app.fullscreen.removeClass('hidden');
+    });
+
+    $(window).click(function (e) {
+        var target = $(e.target);
+
+        if (target.closest('#fullscreen').length && !(app.isSmallBreakpoint() && app.main.attr('data-aside').length)) {
+            app.fullscreen.addClass('hidden');
+            app.enableHtmlScroll();
+        }
+
+        if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
+            if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
+                if (app.main.attr('data-aside') === 'left' && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    app.enableHtmlScroll();
+                    app.main.attr('data-aside', '');
+                } else if (app.main.attr('data-aside') === 'right' && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                    app.enableHtmlScroll();
+                    app.main.attr('data-aside', '');
+                }
+                app.checkGoogleMaps();
+            }
+        }
+    });
 });

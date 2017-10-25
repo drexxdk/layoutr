@@ -84,21 +84,5 @@ $(function () {
                 app.applySettings(entry.id, entry.type, entry.value, false);
             });
         }
-
-        $(window).click(function (e) {
-            if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
-                var target = $(e.target);
-                if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
-                    if (app.main.attr('data-aside') === 'left' && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
-                        app.enableHtmlScroll();
-                        app.main.attr('data-aside', '');
-                    } else if (app.main.attr('data-aside') === 'right' && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
-                        app.enableHtmlScroll();
-                        app.main.attr('data-aside', '');
-                    }
-                    app.checkGoogleMaps();
-                }
-            }
-        });
     });
 });

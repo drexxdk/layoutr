@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 $(function () {
     app.body.on("keydown", function (e) {
-        if (!app.body.hasClass('loading')) {
+        if (!app.loading.hasClass('hidden')) {
             if (e.which === 37) { // left
                 if (app.main.attr('data-aside') === 'left') {
                     app.toggleAside(); // closes right
@@ -17,6 +17,9 @@ $(function () {
             } else if (e.which === 27) { // esc
                 if (app.main.attr('data-aside').length) {
                     app.toggleAside(); // closes aside
+                }
+                if (!app.fullscreen.hasClass('hidden')) {
+                    app.fullscreen.addClass('hidden'); // closes fullscreen
                 }
                 var popups = app.main.children('.popup');
                 if (popups.length) {

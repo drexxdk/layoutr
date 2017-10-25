@@ -1,0 +1,34 @@
+﻿/// <reference path="../references" />
+
+main:not(.msedge):not(.msie).transitions {
+    // IE cannot display multiple transitions simultaneously correctly
+    #left,
+    .popup[data-position*="left"] {
+        @include transition(left $transition-time $transition-timing);
+    }
+
+    #right,
+    .popup[data-position*="right"] {
+        @include transition(right $transition-time $transition-timing);
+    }
+
+    .popup[data-position*="center"] {
+        @include transition(left $transition-time $transition-timing, right $transition-time $transition-timing);
+    }
+
+    header,
+    #content,
+    footer {
+        @include transition(margin $transition-time $transition-timing);
+    }
+
+
+    &.two-columns {
+        #content .header {
+
+            &:not(.no-transitions) {
+                @include transition(width $transition-time $transition-timing, left $transition-time $transition-timing);
+            }
+        }
+    }
+}

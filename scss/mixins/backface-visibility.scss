@@ -1,0 +1,5 @@
+﻿@mixin backface-visibility ($type: hidden) {
+    /* -moz-box-sizing: $type;*/
+    -backface-visibility: $type;
+    backface-visibility: $type;
+}

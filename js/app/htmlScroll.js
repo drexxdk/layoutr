@@ -1,7 +1,17 @@
 ﻿var app = app || {};
 
+var marginR;
+
+var updateContentHeader = function () {
+    app.contentHeader.css('width', '');
+    if (app.contentHeader !== undefined && app.body.css('overflow') === 'hidden' && app.main.hasClass('two-columns') && app.contentHeader.css('position') === 'fixed') {
+        app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
+    }
+};
+
 app.disableHtmlScroll = function () {
     if (app.htmlOverflowEnabled) {
+        app.htmlOverflowEnabled = false;
         var initWidth = app.body.outerWidth();
         var initHeight = app.body.outerHeight();
         var scrollPosition = [
@@ -12,10 +22,9 @@ app.disableHtmlScroll = function () {
         app.body.data('previous-overflow', app.html.css('overflow'));
         app.body.css('overflow', 'hidden');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
-        var marginR = app.body.outerWidth() - initWidth;
+        marginR = app.body.outerWidth() - initWidth;
         var marginB = app.body.outerHeight() - initHeight;
         app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
-
         var headerFooterTag = 'padding-right';
         if (app.main.attr('data-aside') === 'right') {
             app.right.css({
@@ -28,25 +37,22 @@ app.disableHtmlScroll = function () {
         if (app.main.hasClass('footer-fixed')) {
             app.footer.css(headerFooterTag, marginR);
         }
-
         var popups = app.main.children('.popup');
         popups.each(function (index) {
             var $this = $(this);
             $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
         });
-        if (app.main.hasClass('two-columns') && app.contentHeader !== undefined && app.contentHeader.css('position') === 'fixed') {
-            app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
-        }
-        app.htmlOverflowEnabled = false;
+        app.body.resize(updateContentHeader);
     }
 };
 
 app.enableHtmlScroll = function () {
     if (!app.htmlOverflowEnabled) {
+        app.htmlOverflowEnabled = true;
+        app.body.removeResize(updateContentHeader);
         app.body.css('overflow', app.body.data('previous-overflow'));
         var scrollPosition = app.body.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
-
         app.body.removeAttr('style');
         app.header.removeAttr('style');
         app.right.removeAttr('style');
@@ -62,12 +68,11 @@ app.enableHtmlScroll = function () {
                 'width': ''
             });
         }
-        app.htmlOverflowEnabled = true;
     }
 };
 
 app.setHtmlScroll = function () {
-    if (!app.main.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.main.attr('data-aside') !== 'left' && app.main.attr('data-aside') !== 'right')) {
+    if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled &&  (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.main.attr('data-aside') !== 'left' && app.main.attr('data-aside') !== 'right')) {
         app.enableHtmlScroll();
     } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.attr('data-aside') === 'left' || app.main.attr('data-aside') === 'right')) {
         app.disableHtmlScroll();
