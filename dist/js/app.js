@@ -666,7 +666,7 @@ app.page1 = function () {
         app.contentHeader = app.content.children('.header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
-        app.dropdown(app.content.find('select'));
+        app.dropdown(app.content.find('select.dropdown'));
 
         app.addValidation(
             app.content.find('#form'),
@@ -777,10 +777,6 @@ $.ajaxSetup({
     // Disable caching of AJAX responses
     cache: false
 });
-
-//$(document).ajaxComplete(function () {
-//    debugger;
-//});
 
 $(function () {
     app.main = $('main');

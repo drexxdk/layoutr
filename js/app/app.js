@@ -13,10 +13,6 @@ $.ajaxSetup({
     cache: false
 });
 
-//$(document).ajaxComplete(function () {
-//    debugger;
-//});
-
 $(function () {
     app.main = $('main');
     app.content = $('#content > div');
