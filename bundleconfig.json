@@ -17,6 +17,7 @@
       "js/vendors/jquery/jquery.lazyload.min.js",
       "js/vendors/bootstrap-slider.min.js",
       "js/vendors/jquery/jquery.resize.min.js",
+      "js/vendors/jquery/audioplayer.min.js",
       "js/vendors/bowser.js",
       "js/app/form.js",
       "js/app/pages/page1.js",
