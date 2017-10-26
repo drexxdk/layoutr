@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 @mixin validation-variant($background, $border, $color) {
-    $background-light: theme-light-background-color($background);
+    $background-light: theme-soft-background-color($background);
     $background-dark: theme-color-level($background, -4);
 
     textarea,
@@ -135,9 +135,9 @@
                 $active-background: darken($value, 7.5%);
 
 
-                color: theme-light-color($value);
-                fill: theme-light-color($value);
-                background-color: theme-light-background-color($value);
+                color: theme-soft-color($value);
+                fill: theme-soft-color($value);
+                background-color: theme-soft-background-color($value);
 
                 > svg {
                     width: $font-size;
@@ -162,7 +162,7 @@
 
     @each $color, $value in $theme-validation-colors {
         &.theme-#{$color} {
-            @include validation-variant($value, theme-light-border-color($value), theme-light-color($value));
+            @include validation-variant($value, theme-soft-border-color($value), theme-soft-color($value));
         }
     }
 }

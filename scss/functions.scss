@@ -40,14 +40,14 @@
     }
 }
 
-@function theme-light-background-color($value) {
+@function theme-soft-background-color($value) {
     @return theme-color-level($value, -10)
 }
 
-@function theme-light-border-color($value) {
+@function theme-soft-border-color($value) {
     @return theme-color-level($value, -9)
 }
 
-@function theme-light-color($value) {
+@function theme-soft-color($value) {
     @return theme-color-level($value, 8)
 }
