@@ -69,13 +69,13 @@
 
     $value: theme-color("primary");
     $active-background: darken($value, 7.5%);
-    @include button-variant($value, theme-color-level($value, -9));
+    @include button-variant($value, theme-light-border-color($value));
 
 
 
     @each $color, $value in $theme-colors {
         &.theme-#{$color} {
-            @include button-variant($value, theme-color-level($value, -9));
+            @include button-variant($value, theme-light-border-color($value));
         }
     }
 }

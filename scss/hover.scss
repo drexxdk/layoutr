@@ -39,7 +39,7 @@
 
     @each $color, $value in $theme-validation-colors {
         .form-group.theme-#{$color} .dropdown > .btn:hover {
-            $background: theme-color-level($value, -10);
+            $background: theme-light-background-color($value);
             background-color: darken($background, 7.5%);
             @include color-yiq(darken($background, 7.5%));
         }
@@ -73,7 +73,7 @@
     @each $color, $value in $theme-colors {
         .alert.theme-#{$color} .close:hover {
 
-            $active-background: darken(theme-color-level($value, -10), 7.5%);
+            $active-background: darken(theme-light-background-color($value), 7.5%);
             @include color-yiq($active-background);
             background-color: $active-background;
         }

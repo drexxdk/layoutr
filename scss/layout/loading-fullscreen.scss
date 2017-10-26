@@ -29,12 +29,6 @@
     background-color: transparent;
 }
 
-.fullscreen {
-    cursor: pointer;
-    @include noselect;
-}
-
-
 #loading > .spinner {
     height: $font-size * 4;
     @include flex-display;

@@ -16,7 +16,7 @@
 
 
     $value: theme-color("light");
-    @include alert-variant(theme-color-level($value, -10), theme-color-level($value, -9), theme-color-level($value, 8));
+    @include alert-variant(theme-light-background-color($value), theme-light-border-color($value), theme-light-color($value));
 
     > div {
         padding: $padding-y $padding-x;
@@ -44,7 +44,7 @@
 
     @each $color, $value in $theme-colors {
         &.theme-#{$color} {
-            @include alert-variant(theme-color-level($value, -10), theme-color-level($value, -9), theme-color-level($value, 8));
+            @include alert-variant(theme-light-background-color($value), theme-light-border-color($value), theme-light-color($value));
         }
     }
 }

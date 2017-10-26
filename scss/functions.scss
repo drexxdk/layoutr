@@ -39,3 +39,15 @@
         @return mix($color-base, $color, $level * $theme-color-interval);
     }
 }
+
+@function theme-light-background-color($value) {
+    @return theme-color-level($value, -10)
+}
+
+@function theme-light-border-color($value) {
+    @return theme-color-level($value, -9)
+}
+
+@function theme-light-color($value) {
+    @return theme-color-level($value, 8)
+}
