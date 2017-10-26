@@ -25,6 +25,10 @@ body {
     line-height: $line-height;
 }
 
+a {
+    color: $link-color;
+}
+
 header,
 footer,
 main {
