@@ -6,7 +6,6 @@ app.page1 = function () {
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
-        app.content.find('audio').audioPlayer();
 
         app.addValidation(
             app.content.find('#form'),
