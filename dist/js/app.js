@@ -22,162 +22,7 @@ var e=Math.abs(this.options.ticks[d]-b);e<=c[1]&&(c=[this.options.ticks[d],e])}i
 *
 * version: 0.5.3
 **/
-
-(function ($) {
-    var attachEvent = document.attachEvent,
-        stylesCreated = false;
-
-    var jQuery_resize = $.fn.resize;
-
-    $.fn.resize = function (callback) {
-        return this.each(function () {
-            if (this == window)
-                jQuery_resize.call(jQuery(this), callback);
-            else
-                addResizeListener(this, callback);
-        });
-    }
-
-    $.fn.removeResize = function (callback) {
-        return this.each(function () {
-            removeResizeListener(this, callback);
-        });
-    }
-
-    if (!attachEvent) {
-        var requestFrame = (function () {
-            var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
-                function (fn) { return window.setTimeout(fn, 20); };
-            return function (fn) { return raf(fn); };
-        })();
-
-        var cancelFrame = (function () {
-            var cancel = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame ||
-                window.clearTimeout;
-            return function (id) { return cancel(id); };
-        })();
-
-        function resetTriggers(element) {
-            var triggers = element.__resizeTriggers__,
-                expand = triggers.firstElementChild,
-                contract = triggers.lastElementChild,
-                expandChild = expand.firstElementChild;
-            contract.scrollLeft = contract.scrollWidth;
-            contract.scrollTop = contract.scrollHeight;
-            expandChild.style.width = expand.offsetWidth + 1 + 'px';
-            expandChild.style.height = expand.offsetHeight + 1 + 'px';
-            expand.scrollLeft = expand.scrollWidth;
-            expand.scrollTop = expand.scrollHeight;
-        };
-
-        function checkTriggers(element) {
-            return element.offsetWidth != element.__resizeLast__.width ||
-                element.offsetHeight != element.__resizeLast__.height;
-        }
-
-        function scrollListener(e) {
-            var element = this;
-            resetTriggers(this);
-            if (this.__resizeRAF__) cancelFrame(this.__resizeRAF__);
-            this.__resizeRAF__ = requestFrame(function () {
-                if (checkTriggers(element)) {
-                    element.__resizeLast__.width = element.offsetWidth;
-                    element.__resizeLast__.height = element.offsetHeight;
-                    element.__resizeListeners__.forEach(function (fn) {
-                        fn.call(element, e);
-                    });
-                }
-            });
-        };
-
-        /* Detect CSS Animations support to detect element display/re-attach */
-        var animation = false,
-            animationstring = 'animation',
-            keyframeprefix = '',
-            animationstartevent = 'animationstart',
-            domPrefixes = 'Webkit Moz O ms'.split(' '),
-            startEvents = 'webkitAnimationStart animationstart oAnimationStart MSAnimationStart'.split(' '),
-            pfx = '';
-        {
-            var elm = document.createElement('fakeelement');
-            if (elm.style.animationName !== undefined) { animation = true; }
-
-            if (animation === false) {
-                for (var i = 0; i < domPrefixes.length; i++) {
-                    if (elm.style[domPrefixes[i] + 'AnimationName'] !== undefined) {
-                        pfx = domPrefixes[i];
-                        animationstring = pfx + 'Animation';
-                        keyframeprefix = '-' + pfx.toLowerCase() + '-';
-                        animationstartevent = startEvents[i];
-                        animation = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        var animationName = 'resizeanim';
-        var animationKeyframes = '@' + keyframeprefix + 'keyframes ' + animationName + ' { from { opacity: 0; } to { opacity: 0; } } ';
-        var animationStyle = keyframeprefix + 'animation: 1ms ' + animationName + '; ';
-    }
-
-    function createStyles() {
-        if (!stylesCreated) {
-            //opacity:0 works around a chrome bug https://code.google.com/p/chromium/issues/detail?id=286360
-            var css = (animationKeyframes ? animationKeyframes : '') +
-                '.resize-triggers { ' + (animationStyle ? animationStyle : '') + 'visibility: hidden; opacity: 0; } ' +
-                '.resize-triggers, .resize-triggers > div, .contract-trigger:before { content: \" \"; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; } .resize-triggers > div { background: #eee; overflow: auto; } .contract-trigger:before { width: 200%; height: 200%; }',
-                head = document.head || document.getElementsByTagName('head')[0],
-                style = document.createElement('style');
-
-            style.type = 'text/css';
-            if (style.styleSheet) {
-                style.styleSheet.cssText = css;
-            } else {
-                style.appendChild(document.createTextNode(css));
-            }
-
-            head.appendChild(style);
-            stylesCreated = true;
-        }
-    }
-
-    window.addResizeListener = function (element, fn) {
-        if (attachEvent) element.attachEvent('onresize', fn);
-        else {
-            if (!element.__resizeTriggers__) {
-                if (getComputedStyle(element).position == 'static') element.style.position = 'relative';
-                createStyles();
-                element.__resizeLast__ = {};
-                element.__resizeListeners__ = [];
-                (element.__resizeTriggers__ = document.createElement('div')).className = 'resize-triggers';
-                element.__resizeTriggers__.innerHTML = '<div class="expand-trigger"><div></div></div>' +
-                    '<div class="contract-trigger"></div>';
-                element.appendChild(element.__resizeTriggers__);
-                resetTriggers(element);
-                element.addEventListener('scroll', scrollListener, true);
-
-                /* Listen for a css animation to detect element display/re-attach */
-                animationstartevent && element.__resizeTriggers__.addEventListener(animationstartevent, function (e) {
-                    if (e.animationName == animationName)
-                        resetTriggers(element);
-                });
-            }
-            element.__resizeListeners__.push(fn);
-        }
-    };
-
-    window.removeResizeListener = function (element, fn) {
-        if (attachEvent) element.detachEvent('onresize', fn);
-        else {
-            element.__resizeListeners__.splice(element.__resizeListeners__.indexOf(fn), 1);
-            if (!element.__resizeListeners__.length) {
-                element.removeEventListener('scroll', scrollListener);
-                element.__resizeTriggers__ = !element.removeChild(element.__resizeTriggers__);
-            }
-        }
-    }
-}(jQuery));
+!function (e) { function i(e) { var i = e.__resizeTriggers__, t = i.firstElementChild, r = i.lastElementChild, n = t.firstElementChild; r.scrollLeft = r.scrollWidth, r.scrollTop = r.scrollHeight, n.style.width = t.offsetWidth + 1 + "px", n.style.height = t.offsetHeight + 1 + "px", t.scrollLeft = t.scrollWidth, t.scrollTop = t.scrollHeight } function t(e) { return e.offsetWidth != e.__resizeLast__.width || e.offsetHeight != e.__resizeLast__.height } function r(e) { var r = this; i(this), this.__resizeRAF__ && c(this.__resizeRAF__), this.__resizeRAF__ = _(function () { t(r) && (r.__resizeLast__.width = r.offsetWidth, r.__resizeLast__.height = r.offsetHeight, r.__resizeListeners__.forEach(function (i) { i.call(r, e) })) }) } function n() { if (!o) { var e = (w || "") + ".resize-triggers { " + (p || "") + 'visibility: hidden; opacity: 0; } .resize-triggers, .resize-triggers > div, .contract-trigger:before { content: " "; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; } .resize-triggers > div { background: #eee; overflow: auto; } .contract-trigger:before { width: 200%; height: 200%; }', i = document.head || document.getElementsByTagName("head")[0], t = document.createElement("style"); t.type = "text/css", t.styleSheet ? t.styleSheet.cssText = e : t.appendChild(document.createTextNode(e)), i.appendChild(t), o = !0 } } var s = document.attachEvent, o = !1, a = e.fn.resize; if (e.fn.resize = function (e) { return this.each(function () { this == window ? a.call(jQuery(this), e) : addResizeListener(this, e) }) }, e.fn.removeResize = function (e) { return this.each(function () { removeResizeListener(this, e) }) }, !s) { var _ = function () { var e = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || function (e) { return window.setTimeout(e, 20) }; return function (i) { return e(i) } }(), c = function () { var e = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.clearTimeout; return function (i) { return e(i) } }(), d = !1, l = "", h = "animationstart", m = "Webkit Moz O ms".split(" "), f = "webkitAnimationStart animationstart oAnimationStart MSAnimationStart".split(" "), g = "", u = document.createElement("fakeelement"); if (void 0 !== u.style.animationName && (d = !0), !1 === d) for (var z = 0; z < m.length; z++)if (void 0 !== u.style[m[z] + "AnimationName"]) { (g = m[z]) + "Animation", l = "-" + g.toLowerCase() + "-", h = f[z], d = !0; break } var v = "resizeanim", w = "@" + l + "keyframes " + v + " { from { opacity: 0; } to { opacity: 0; } } ", p = l + "animation: 1ms " + v + "; " } window.addResizeListener = function (e, t) { s ? e.attachEvent("onresize", t) : (e.__resizeTriggers__ || ("static" == getComputedStyle(e).position && (e.style.position = "relative"), n(), e.__resizeLast__ = {}, e.__resizeListeners__ = [], (e.__resizeTriggers__ = document.createElement("div")).className = "resize-triggers", e.__resizeTriggers__.innerHTML = '<div class="expand-trigger"><div></div></div><div class="contract-trigger"></div>', e.appendChild(e.__resizeTriggers__), i(e), e.addEventListener("scroll", r, !0), h && e.__resizeTriggers__.addEventListener(h, function (t) { t.animationName == v && i(e) })), e.__resizeListeners__.push(t)) }, window.removeResizeListener = function (e, i) { s ? e.detachEvent("onresize", i) : (e.__resizeListeners__.splice(e.__resizeListeners__.indexOf(i), 1), e.__resizeListeners__.length || (e.removeEventListener("scroll", r), e.__resizeTriggers__ = !e.removeChild(e.__resizeTriggers__))) } }(jQuery);
 /*!
  * Bowser - a browser detector
  * https://github.com/ded/bowser
@@ -815,9 +660,7 @@ app.addValidation = function (form, rules, messages) {
     });
 };
 var app = app || {};
-$(function () {
 
-});
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
         app.contentHeader = app.content.children('.header');
@@ -927,13 +770,17 @@ app.isSmallBreakpoint = function () {
 };
 
 app.hasTransitions = function () {
-    return (app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie'));
-}
+    return app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie');
+};
 
 $.ajaxSetup({
     // Disable caching of AJAX responses
     cache: false
 });
+
+//$(document).ajaxComplete(function () {
+//    debugger;
+//});
 
 $(function () {
     app.main = $('main');
@@ -950,7 +797,7 @@ $(function () {
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
-
+    
     if (bowser.msedge) {
         app.main.addClass('msedge');
     } else if (bowser.msie) {

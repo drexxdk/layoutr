@@ -5,13 +5,17 @@ app.isSmallBreakpoint = function () {
 };
 
 app.hasTransitions = function () {
-    return (app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie'));
-}
+    return app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie');
+};
 
 $.ajaxSetup({
     // Disable caching of AJAX responses
     cache: false
 });
+
+//$(document).ajaxComplete(function () {
+//    debugger;
+//});
 
 $(function () {
     app.main = $('main');
@@ -28,7 +32,7 @@ $(function () {
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
-
+    
     if (bowser.msedge) {
         app.main.addClass('msedge');
     } else if (bowser.msie) {

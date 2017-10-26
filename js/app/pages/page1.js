@@ -1,7 +1,5 @@
 ﻿var app = app || {};
-$(function () {
 
-});
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
         app.contentHeader = app.content.children('.header');
