@@ -125,6 +125,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="scss\app.scss" />
+    <Content Include="scss\layout\loading.scss" />
     <Content Include="scss\mixins\_mixins.scss" />
     <Content Include="scss\mixins\shadow.scss" />
     <Content Include="scss\mixins\border.scss" />
@@ -146,7 +147,6 @@
     <Content Include="scss\variables\_variables.scss" />
     <Content Include="scss\components\tree.scss" />
     <Content Include="scss\layout\breakpoints.scss" />
-    <Content Include="scss\layout\loading.scss" />
     <Content Include="manifest.json" />
     <Content Include="scss\layout\flex-items.scss" />
     <Content Include="scss\functions.scss" />
@@ -179,6 +179,10 @@
     <Content Include="scss\variables\z-index.scss" />
     <Content Include="scss\demo.scss" />
     <Content Include="scss\components\position.scss" />
+    <Content Include="scss\layout\base.scss" />
+    <Content Include="scss\layout\loading-fullscreen.scss" />
+    <Content Include="scss\layout\position.scss" />
+    <Content Include="scss\layout\transitions.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

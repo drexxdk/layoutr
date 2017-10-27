@@ -1,10 +1,8 @@
 ﻿/// <reference path="../references" />
 
 main {
-    height: 100%;
-
+    height: 100vh;
     @include flex-display;
-
     @include flex-direction(column);
 
     &.left-overlay[data-aside="left"] #content:before,
@@ -53,7 +51,7 @@ main {
         }
     }
 
-    &.left-auto-height #left, 
+    &.left-auto-height #left,
     &.right-auto-height #right {
         height: auto;
         max-height: 100vh;
