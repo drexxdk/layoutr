@@ -20,7 +20,7 @@ app.disableHtmlScroll = function () {
         ];
         app.body.data('scroll-position', scrollPosition);
         app.body.data('previous-overflow', app.html.css('overflow'));
-        app.body.css('overflow', 'hidden');
+        app.main.css('overflow', 'hidden');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
         marginR = app.body.outerWidth() - initWidth;
         var marginB = app.body.outerHeight() - initHeight;
@@ -42,15 +42,15 @@ app.disableHtmlScroll = function () {
             var $this = $(this);
             $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
         });
-        app.main.resize(updateContentHeader);
+        app.body.resize(updateContentHeader);
     }
 };
 
 app.enableHtmlScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        app.main.removeResize(updateContentHeader);
-        app.body.css('overflow', app.body.data('previous-overflow'));
+        app.body.removeResize(updateContentHeader);
+        app.main.css('overflow', app.body.data('previous-overflow'));
         var scrollPosition = app.body.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
         app.body.removeAttr('style');
