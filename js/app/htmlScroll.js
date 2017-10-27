@@ -42,14 +42,14 @@ app.disableHtmlScroll = function () {
             var $this = $(this);
             $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
         });
-        app.body.resize(updateContentHeader);
+        app.main.resize(updateContentHeader);
     }
 };
 
 app.enableHtmlScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        app.body.removeResize(updateContentHeader);
+        app.main.removeResize(updateContentHeader);
         app.body.css('overflow', app.body.data('previous-overflow'));
         var scrollPosition = app.body.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
