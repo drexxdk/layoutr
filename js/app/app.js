@@ -58,9 +58,9 @@ $(function () {
                 app.main.attr('data-aside', '');
             } else {
 
-                if (app.main.attr('data-aside') !== aside && app.isSmallBreakpoint()) {
-                    app.disableHtmlScroll();
-                }
+                //if (app.main.attr('data-aside') !== aside && app.isSmallBreakpoint()) {
+                //    app.disableHtmlScroll();
+                //}
 
                 if (app.main.attr('data-aside').length) {
                     if (app.main.attr('data-aside') === aside) {
@@ -76,12 +76,12 @@ $(function () {
             if (app.hasTransitions()) {
                 setTimeout(function () {
                     transitionLock = false;
-                    app.setHtmlScroll();
+                    //app.setHtmlScroll();
                     app.checkGoogleMaps();
                 }, app.transitionTime);
             } else {
                 transitionLock = false;
-                app.setHtmlScroll();
+                //app.setHtmlScroll();
                 app.checkGoogleMaps();
             }
 
