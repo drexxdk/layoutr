@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 main {
-    height: 100vh;
+    height: 100%;
     @include flex-display;
     @include flex-direction(column);
 
@@ -51,7 +51,7 @@ main {
         }
     }
 
-    &.left-auto-height #left,
+    &.left-auto-height #left, 
     &.right-auto-height #right {
         height: auto;
         max-height: 100vh;

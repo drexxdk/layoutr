@@ -10,7 +10,6 @@ aside {
     background-color: $layout-background-color;
     flex-shrink: 0;
     flex-grow: 1;
-    background-color:red;
 
     @include flex-direction(column);
 
