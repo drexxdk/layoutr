@@ -66,6 +66,12 @@
                         <li>
                             #content images are loaded with lazyload.
                         </li>
+                        <li>
+                            Position fixed asides that works correctly in all browsers including Safari mobile that usually breaks position fixed elements.
+                        </li>
+                        <li>
+                            Scroll for the site will be disabled when displaying fullscreen image, aside without push and loading.
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -74,16 +80,10 @@
                 <div>
                     <ul class="flex-items ul">
                         <li>
-                            <b>Chrome/IE</b> cannot display rem values correctly. This causes some components like 'switch' to be displayed wrong at some zoom levels.
+                            <b>Chrome Desktop/IE</b> cannot display rem values correctly. This causes some components like 'switch' to be displayed wrong at some zoom levels.
                         </li>
                         <li>
                             <b>Edge/IE</b> cannot display multiple transitions simultaneously correctly. Transitions are therefore disabled for the layout in those browsers.
-                        </li>
-                        <li>
-                            <b>Safari mobile</b> doesn't support app.disableScroll() correctly. It doesn't disable scroll.<br /> 
-                            This causes it to cut off bottom of opened aside when scrolling.<br />
-                            I have tried adding overflow: hidden to body instead, but then it jumps to top of page.<br />
-                            I will keep looking for a solution for this problem.
                         </li>
                     </ul>
                 </div>
