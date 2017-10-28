@@ -1,12 +1,7 @@
 ﻿/// <reference path="../references" />
 
 select.dropdown {
-    font-size: 0;
-    visibility: hidden;
-    opacity: 0;
-    position: fixed;
-    width: 0;
-    height: 0;
+    @include hidden-input;
 }
 
 div.dropdown {

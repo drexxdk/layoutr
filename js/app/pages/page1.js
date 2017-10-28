@@ -6,6 +6,19 @@ app.page1 = function () {
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
+        
+        app.content.find('#font-size').slider({
+            min: 12,
+            max: 20,
+            step: 2,
+            value: 16,
+            tooltip: "hide"
+        }).on('change', function () {
+            var $this = $(this);
+            var id = $this.attr('id');
+            var type = "slider";
+            var value = $this.slider('getValue');
+        });
 
         app.addValidation(
             app.content.find('#form'),

@@ -80,7 +80,7 @@
                             <b>Edge/IE</b> cannot display multiple transitions simultaneously correctly. Transitions are therefore disabled for the layout in those browsers.
                         </li>
                         <li>
-                            <b>Safari mobile</b> doesn't support app.disableHtmlScroll() correctly. It doesn't disable scroll.<br /> 
+                            <b>Safari mobile</b> doesn't support app.disableScroll() correctly. It doesn't disable scroll.<br /> 
                             This causes it to cut off bottom of opened aside when scrolling.<br />
                             I have tried adding overflow: hidden to body instead, but then it jumps to top of page.<br />
                             I will keep looking for a solution for this problem.
@@ -635,6 +635,13 @@
                                 <option value="4">option 4</option>
                                 <option value="5">option 5</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label" for="font-size">Font-size</label>
+                        <div>
+                            <input id="font-size" type="text" />
                         </div>
                     </div>
                     <div class="form-group">

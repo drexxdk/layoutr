@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 app.showLoading = function () {
-    app.disableHtmlScroll();
+    app.disableScroll();
     app.loading.removeClass('hidden');
 };
 

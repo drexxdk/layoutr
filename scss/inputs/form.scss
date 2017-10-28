@@ -40,6 +40,16 @@
         }
     }
 
+    .slider {
+        .slider-track {
+            background-color: $background-light;
+        }
+
+        .slider-handle {
+            background-color:$background-dark;
+        }
+    }
+
     > div > .input-group > .input-group-addon {
         background-color: $border;
         border-color: $border;

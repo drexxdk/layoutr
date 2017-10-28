@@ -98,8 +98,9 @@
     <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
     <Content Include="js\app\googleMaps.js" />
-    <Content Include="js\app\htmlScroll.js" />
+    <Content Include="js\app\scroll.js" />
     <Content Include="js\app\jquery-extensions.js" />
+    <Content Include="js\app\keyboard.js" />
     <Content Include="js\app\lazyload.js" />
     <Content Include="js\app\loading.js" />
     <Content Include="js\app\pages\page1.js" />
@@ -183,6 +184,8 @@
     <Content Include="scss\layout\loading-fullscreen.scss" />
     <Content Include="scss\layout\position.scss" />
     <Content Include="scss\layout\transitions.scss" />
+    <Content Include="scss\mixins\backface-visibility.scss" />
+    <Content Include="scss\layout\container.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

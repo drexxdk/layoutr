@@ -1,0 +1,13 @@
+﻿/// <reference path="../references" />
+
+#container {
+    @include flex-display;
+    margin-top: $header-height;
+    flex-grow: 1;
+    flex-shrink: 0;
+
+    > div {
+        flex-grow: 1;
+        width: 100%;
+    }
+}

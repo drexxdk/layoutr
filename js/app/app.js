@@ -1,11 +1,11 @@
 ﻿var app = app || {};
 
 app.isSmallBreakpoint = function () {
-    return $(window).outerWidth() < 732;
+    return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
 };
 
 app.hasTransitions = function () {
-    return app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie');
+    return app.html.hasClass('transitions') && !app.html.hasClass('msedge') && !app.html.hasClass('msie');
 };
 
 $.ajaxSetup({
@@ -28,18 +28,19 @@ $(function () {
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
+    app.overflow = $('#overflow');
     
     if (bowser.msedge) {
-        app.main.addClass('msedge');
+        app.html.addClass('msedge');
     } else if (bowser.msie) {
-        app.main.addClass('msie');
+        app.html.addClass('msie');
     }
     if (bowser.mobile) {
-        app.main.addClass('mobile'); // disables fixed footer
+        app.html.addClass('mobile'); // disables fixed footer
     } else if (bowser.tablet) {
-        app.main.addClass('tablet'); // does nothing currently
+        app.html.addClass('tablet'); // does nothing currently
     } else {
-        app.main.addClass('desktop'); // enables hover effects
+        app.html.addClass('desktop'); // enables hover effects
     }
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
@@ -47,7 +48,7 @@ $(function () {
     $(window).resize(function () {
         app.setHtmlScroll();
     });
-    app.setHtmlScroll();
+    //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
     var transitionLock = false;
 
@@ -55,36 +56,28 @@ $(function () {
         if (!transitionLock) {
             transitionLock = true;
             if (aside === undefined) {
-                app.main.attr('data-aside', '');
+                app.html.attr('data-aside', '');
             } else {
-
-                //if (app.main.attr('data-aside') !== aside && app.isSmallBreakpoint()) {
-                //    app.disableHtmlScroll();
-                //}
-
-                if (app.main.attr('data-aside').length) {
-                    if (app.main.attr('data-aside') === aside) {
-                        app.main.attr('data-aside', '');
+                if (app.html.attr('data-aside').length) {
+                    if (app.html.attr('data-aside') === aside) {
+                        app.html.attr('data-aside', '');
                     } else {
-                        app.main.attr('data-aside', aside);
+                        app.html.attr('data-aside', aside);
                     }
                 } else {
-                    app.main.attr('data-aside', aside);
+                    app.html.attr('data-aside', aside);
                 }
             }
-
             if (app.hasTransitions()) {
                 setTimeout(function () {
                     transitionLock = false;
-                    //app.setHtmlScroll();
                     app.checkGoogleMaps();
                 }, app.transitionTime);
             } else {
                 transitionLock = false;
-                //app.setHtmlScroll();
                 app.checkGoogleMaps();
             }
-
+            app.setHtmlScroll();
         }
     };
 
@@ -124,26 +117,26 @@ $(function () {
         } else if (app.fullscreen.img.attr('src') !== newSrc) {
             app.fullscreen.img.attr('src', newSrc);
         }
-        app.disableHtmlScroll();
         app.fullscreen.removeClass('hidden');
+        app.setHtmlScroll();
     });
 
     $(window).click(function (e) {
         var target = $(e.target);
 
-        if (target.closest('#fullscreen').length && !(app.isSmallBreakpoint() && app.main.attr('data-aside').length)) {
+        if (target.closest('#fullscreen').length && !(app.isSmallBreakpoint() && app.html.attr('data-aside').length)) {
             app.fullscreen.addClass('hidden');
-            app.enableHtmlScroll();
+            app.setHtmlScroll();
         }
 
-        if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
-            if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
-                if (app.main.attr('data-aside') === 'left' && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
-                    app.enableHtmlScroll();
-                    app.main.attr('data-aside', '');
-                } else if (app.main.attr('data-aside') === 'right' && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
-                    app.enableHtmlScroll();
-                    app.main.attr('data-aside', '');
+        if (app.html.hasClass('close-left-click-outside') || app.html.hasClass('close-right-click-outside')) {
+            if (!target.closest("#fullscreen").length && !target.closest(".fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
+                if (app.html.attr('data-aside') === 'left' && app.html.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    app.enableScroll();
+                    app.html.attr('data-aside', '');
+                } else if (app.html.attr('data-aside') === 'right' && app.html.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                    app.enableScroll();
+                    app.html.attr('data-aside', '');
                 }
                 app.checkGoogleMaps();
             }

@@ -1,9 +1,22 @@
 ﻿/// <reference path="../references" />
 
-main {
-    height: 100%;
-    @include flex-display;
-    @include flex-direction(column);
+html {
+    &.scrollDisabled {
+        overflow-y: scroll;
+
+        &.msedge,
+        &.msie {
+            height: calc(100% - .5px);
+
+            body {
+                height: calc(100% - .5px);
+            }
+        }
+
+        body {
+            overflow: hidden;
+        }
+    }
 
     &.left-overlay[data-aside="left"] #content:before,
     &.right-overlay[data-aside="right"] #content:before {
@@ -39,7 +52,7 @@ main {
 
     &.footer-fixed:not(.mobile) {
         #container {
-            margin-bottom: $footer-height;
+            padding-bottom: $footer-height;
         }
 
         footer {
@@ -50,24 +63,12 @@ main {
             left: 0;
         }
     }
-
-    &.left-auto-height #left, 
-    &.right-auto-height #right {
-        height: auto;
-        max-height: 100vh;
-    }
 }
 
-#container {
+main {
+    height: 100vh;
     @include flex-display;
-    margin-top: $header-height;
-    flex-grow: 1;
-    flex-shrink: 0;
-
-    > div {
-        flex-grow: 1;
-        width: 100%;
-    }
+    @include flex-direction(column);
 }
 
 header.header,

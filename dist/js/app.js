@@ -667,6 +667,19 @@ app.page1 = function () {
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
+        
+        app.content.find('#font-size').slider({
+            min: 12,
+            max: 20,
+            step: 2,
+            value: 16,
+            tooltip: "hide"
+        }).on('change', function () {
+            var $this = $(this);
+            var id = $this.attr('id');
+            var type = "slider";
+            var value = $this.slider('getValue');
+        });
 
         app.addValidation(
             app.content.find('#form'),
@@ -766,11 +779,11 @@ app.page1 = function () {
 var app = app || {};
 
 app.isSmallBreakpoint = function () {
-    return $(window).outerWidth() < 732;
+    return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
 };
 
 app.hasTransitions = function () {
-    return app.main.hasClass('transitions') && !app.main.hasClass('msedge') && !app.main.hasClass('msie');
+    return app.html.hasClass('transitions') && !app.html.hasClass('msedge') && !app.html.hasClass('msie');
 };
 
 $.ajaxSetup({
@@ -793,18 +806,19 @@ $(function () {
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
+    app.overflow = $('#overflow');
     
     if (bowser.msedge) {
-        app.main.addClass('msedge');
+        app.html.addClass('msedge');
     } else if (bowser.msie) {
-        app.main.addClass('msie');
+        app.html.addClass('msie');
     }
     if (bowser.mobile) {
-        app.main.addClass('mobile'); // disables fixed footer
+        app.html.addClass('mobile'); // disables fixed footer
     } else if (bowser.tablet) {
-        app.main.addClass('tablet'); // does nothing currently
+        app.html.addClass('tablet'); // does nothing currently
     } else {
-        app.main.addClass('desktop'); // enables hover effects
+        app.html.addClass('desktop'); // enables hover effects
     }
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
@@ -812,7 +826,7 @@ $(function () {
     $(window).resize(function () {
         app.setHtmlScroll();
     });
-    app.setHtmlScroll();
+    //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
     var transitionLock = false;
 
@@ -820,36 +834,28 @@ $(function () {
         if (!transitionLock) {
             transitionLock = true;
             if (aside === undefined) {
-                app.main.attr('data-aside', '');
+                app.html.attr('data-aside', '');
             } else {
-
-                //if (app.main.attr('data-aside') !== aside && app.isSmallBreakpoint()) {
-                //    app.disableHtmlScroll();
-                //}
-
-                if (app.main.attr('data-aside').length) {
-                    if (app.main.attr('data-aside') === aside) {
-                        app.main.attr('data-aside', '');
+                if (app.html.attr('data-aside').length) {
+                    if (app.html.attr('data-aside') === aside) {
+                        app.html.attr('data-aside', '');
                     } else {
-                        app.main.attr('data-aside', aside);
+                        app.html.attr('data-aside', aside);
                     }
                 } else {
-                    app.main.attr('data-aside', aside);
+                    app.html.attr('data-aside', aside);
                 }
             }
-
             if (app.hasTransitions()) {
                 setTimeout(function () {
                     transitionLock = false;
-                    //app.setHtmlScroll();
                     app.checkGoogleMaps();
                 }, app.transitionTime);
             } else {
                 transitionLock = false;
-                //app.setHtmlScroll();
                 app.checkGoogleMaps();
             }
-
+            app.setHtmlScroll();
         }
     };
 
@@ -889,26 +895,26 @@ $(function () {
         } else if (app.fullscreen.img.attr('src') !== newSrc) {
             app.fullscreen.img.attr('src', newSrc);
         }
-        app.disableHtmlScroll();
         app.fullscreen.removeClass('hidden');
+        app.setHtmlScroll();
     });
 
     $(window).click(function (e) {
         var target = $(e.target);
 
-        if (target.closest('#fullscreen').length && !(app.isSmallBreakpoint() && app.main.attr('data-aside').length)) {
+        if (target.closest('#fullscreen').length && !(app.isSmallBreakpoint() && app.html.attr('data-aside').length)) {
             app.fullscreen.addClass('hidden');
-            app.enableHtmlScroll();
+            app.setHtmlScroll();
         }
 
-        if (app.main.hasClass('close-left-click-outside') || app.main.hasClass('close-right-click-outside')) {
-            if (!target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
-                if (app.main.attr('data-aside') === 'left' && app.main.hasClass('close-left-click-outside') && !target.closest("#left").length) {
-                    app.enableHtmlScroll();
-                    app.main.attr('data-aside', '');
-                } else if (app.main.attr('data-aside') === 'right' && app.main.hasClass('close-right-click-outside') && !target.closest("#right").length) {
-                    app.enableHtmlScroll();
-                    app.main.attr('data-aside', '');
+        if (app.html.hasClass('close-left-click-outside') || app.html.hasClass('close-right-click-outside')) {
+            if (!target.closest("#fullscreen").length && !target.closest(".fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
+                if (app.html.attr('data-aside') === 'left' && app.html.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                    app.enableScroll();
+                    app.html.attr('data-aside', '');
+                } else if (app.html.attr('data-aside') === 'right' && app.html.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                    app.enableScroll();
+                    app.html.attr('data-aside', '');
                 }
                 app.checkGoogleMaps();
             }
@@ -917,82 +923,41 @@ $(function () {
 });
 var app = app || {};
 
-var marginR;
-
-var updateContentHeader = function () {
-    app.contentHeader.css('width', '');
-    if (app.contentHeader !== undefined && app.body.css('overflow') === 'hidden' && app.main.hasClass('two-columns') && app.contentHeader.css('position') === 'fixed') {
-        app.contentHeader.addClass('no-transitions').css('width', app.contentHeader.outerWidth() + -marginR / 2 + 'px');
-    }
-};
-
-app.disableHtmlScroll = function () {
+app.disableScroll = function () {
     if (app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = false;
-        var initWidth = app.body.outerWidth();
-        var initHeight = app.body.outerHeight();
         var scrollPosition = [
             self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
             self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         ];
         app.body.data('scroll-position', scrollPosition);
-        app.body.data('previous-overflow', app.html.css('overflow'));
-        app.body.css('overflow', 'hidden');
-        window.scrollTo(scrollPosition[0], scrollPosition[1]);
-        marginR = app.body.outerWidth() - initWidth;
-        var marginB = app.body.outerHeight() - initHeight;
-        app.body.css({ 'margin-right': marginR, 'margin-bottom': marginB });
-        var headerFooterTag = 'padding-right';
-        if (app.main.attr('data-aside') === 'right') {
-            app.right.css({
-                'max-width': app.right.outerWidth() + marginR,
-                'padding-right': marginR
-            });
-            headerFooterTag = 'right';
-        }
-        app.header.css(headerFooterTag, marginR);
-        if (app.main.hasClass('footer-fixed')) {
-            app.footer.css(headerFooterTag, marginR);
-        }
-        var popups = app.main.children('.popup');
-        popups.each(function (index) {
-            var $this = $(this);
-            $this.css('margin-right', parseInt($this.css('margin-right')) + marginR + 'px');
-        });
-        app.body.resize(updateContentHeader);
+        app.html.addClass('scrollDisabled');
+        app.body.scrollTop(scrollPosition[1]).scrollLeft(scrollPosition[0]);
     }
 };
 
-app.enableHtmlScroll = function () {
+app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        app.body.removeResize(updateContentHeader);
-        app.body.css('overflow', app.body.data('previous-overflow'));
+        app.html.removeClass('scrollDisabled');
         var scrollPosition = app.body.data('scroll-position');
         window.scrollTo(scrollPosition[0], scrollPosition[1]);
-        app.body.removeAttr('style');
-        app.header.removeAttr('style');
-        app.right.removeAttr('style');
-        app.footer.removeAttr('style');
-        var popups = app.main.children('.popup');
-        if (popups.length) {
-            popups.removeAttr('style');
-        }
-        if (app.contentHeader !== undefined) {
-            app.contentHeader.removeClass('no-transitions').css({
-                'right': '',
-                'padding-right': '',
-                'width': ''
-            });
+
+        if (bowser.msie && !app.html.hasClass('footer-fixed')) {
+            // ie pushes footer out of view without this fix
+            app.footer.css('position', 'fixed');
+            setTimeout(function () {
+                app.footer.css('position', '');
+            }, 0);
         }
     }
 };
 
 app.setHtmlScroll = function () {
-    if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled &&  (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.main.attr('data-aside') !== 'left' && app.main.attr('data-aside') !== 'right')) {
-        app.enableHtmlScroll();
-    } else if (app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.main.attr('data-aside') === 'left' || app.main.attr('data-aside') === 'right')) {
-        app.disableHtmlScroll();
+    if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+        app.enableScroll();
+    } else if (!app.fullscreen.hasClass('hidden') || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
+        app.disableScroll();
     }
 };
 var app = app || {};
@@ -1171,7 +1136,7 @@ app.addValidation = function (form, rules, messages) {
 var app = app || {};
 
 app.showLoading = function () {
-    app.disableHtmlScroll();
+    app.disableScroll();
     app.loading.removeClass('hidden');
 };
 
@@ -1218,20 +1183,9 @@ app.applySettings = function (id, type, value, set) {
 
     if (type === 'checkbox') {
         if (value) {
-            app.main.addClass(id);
+            app.html.addClass(id);
         } else {
-            app.main.removeClass(id);
-        }
-    } else if (id === 'font-size') {
-        if (app.hasTransitions()) {
-            app.main.removeClass('transitions');
-            app.html.css('font-size', value + 'px');
-            setTimeout(function () {
-                app.main.addClass('transitions');
-            }, app.transitionTime);
-
-        } else {
-            app.html.css('font-size', value + 'px');
+            app.html.removeClass(id);
         }
     }
 };
@@ -1244,20 +1198,6 @@ $(function () {
             if (app.settings === null) app.settings = [];
         }
 
-        $this.find('#font-size').slider({
-            min: 12,
-            max: 20,
-            step: 2,
-            value: 16,
-            tooltip: "hide"
-        }).on('change', function () {
-            var $this = $(this);
-            var id = $this.attr('id');
-            var type = "slider";
-            var value = $this.slider('getValue');
-            app.applySettings(id, type, value, true);
-        });
-
         $this.on('click', 'input[type=checkbox]', function () {
             var $this = $(this);
             var id = $this.attr('id');
@@ -1267,8 +1207,10 @@ $(function () {
             if (id === 'two-columns') {
                 app.checkGoogleMaps();
             }
+            if (id === 'left-push' || id === 'right-push') {
+                app.setHtmlScroll();
+            }
         });
-
         if (app.localStorage) {
             $.each(app.settings, function (i, entry) {
                 app.applySettings(entry.id, entry.type, entry.value, false);
@@ -1301,19 +1243,19 @@ $(function () {
     app.body.on("keydown", function (e) {
         if (app.loading.hasClass('hidden')) {
             if (e.which === 37) { // left
-                if (app.main.attr('data-aside') === 'left') {
+                if (app.html.attr('data-aside') === 'left') {
                     app.toggleAside(); // closes right
-                } else if (app.main.attr('data-aside') !== 'right') {
+                } else if (app.html.attr('data-aside') !== 'right') {
                     app.toggleAside('right'); // opens right
                 }
             } else if (e.which === 39) { // right
-                if (app.main.attr('data-aside') === 'right') {
+                if (app.html.attr('data-aside') === 'right') {
                     app.toggleAside(); // closes left
-                } else if (app.main.attr('data-aside') !== 'left') {
+                } else if (app.html.attr('data-aside') !== 'left') {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.main.attr('data-aside').length) {
+                if (app.html.attr('data-aside').length) {
                     app.toggleAside(); // closes aside
                 }
                 if (!app.fullscreen.hasClass('hidden')) {

@@ -24,7 +24,7 @@
     }
 }
 
-main {
+html {
     @include breakpoint-main-min-width {
         #content > div {
             > .header {

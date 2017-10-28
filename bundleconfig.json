@@ -21,7 +21,7 @@
       "js/app/form.js",
       "js/app/pages/page1.js",
       "js/app/app.js",
-      "js/app/htmlScroll.js",
+      "js/app/scroll.js",
       "js/app/accordion.js",
       "js/app/dropdown.js",
       "js/app/googleMaps.js",
