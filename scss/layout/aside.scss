@@ -4,12 +4,13 @@ aside {
     position: fixed;
     z-index: $aside-z-index;
     top: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     max-width: $aside-width;
     background-color: $layout-background-color;
     flex-shrink: 0;
     flex-grow: 1;
+    overflow: auto;
 
     @include flex-direction(column);
 
@@ -22,7 +23,8 @@ aside {
 
     > .content {
         overflow: auto;
-        height: 100%; /*IE 10 */
+        flex-grow: 1;
+        /*height: 100%;*/ /*IE 10 */
         > div {
             padding: $spacer;
         }
