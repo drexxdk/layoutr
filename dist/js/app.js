@@ -908,7 +908,7 @@ $(function () {
         }
 
         if (app.html.hasClass('close-left-click-outside') || app.html.hasClass('close-right-click-outside')) {
-            if (!target.closest("#fullscreen").length && !target.closest(".fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
+            if (!target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
                 if (app.html.attr('data-aside') === 'left' && app.html.hasClass('close-left-click-outside') && !target.closest("#left").length) {
                     app.enableScroll();
                     app.html.attr('data-aside', '');
