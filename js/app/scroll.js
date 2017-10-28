@@ -37,3 +37,7 @@ app.setHtmlScroll = function () {
         app.disableScroll();
     }
 };
+
+$(window).resize(function () {
+    app.setHtmlScroll();
+});

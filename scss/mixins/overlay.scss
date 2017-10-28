@@ -1,0 +1,10 @@
+﻿/// <reference path="../references" />
+
+@mixin overlay {
+    position: fixed;
+    top: -$extra-spacing;
+    bottom: -$extra-spacing;
+    left: -$extra-spacing;
+    right: -$extra-spacing;
+    margin:$extra-spacing;
+}

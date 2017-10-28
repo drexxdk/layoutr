@@ -45,9 +45,6 @@ $(function () {
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
-    $(window).resize(function () {
-        app.setHtmlScroll();
-    });
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
     var transitionLock = false;
@@ -107,39 +104,20 @@ $(function () {
 
     app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
+});
 
-    app.main.on('click', '.fullscreen', function () {
-        var $this = $(this);
-        var newSrc = $this.attr('data-img');
-        if (app.fullscreen.img === undefined) {
-            app.fullscreen.append('<img src="' + newSrc + '" alt="" />');
-            app.fullscreen.img = app.fullscreen.children();
-        } else if (app.fullscreen.img.attr('src') !== newSrc) {
-            app.fullscreen.img.attr('src', newSrc);
-        }
-        app.fullscreen.removeClass('hidden');
-        app.setHtmlScroll();
-    });
-
-    $(window).click(function (e) {
-        var target = $(e.target);
-
-        if (target.closest('#fullscreen').length && !(app.isSmallBreakpoint() && app.html.attr('data-aside').length)) {
-            app.fullscreen.addClass('hidden');
-            app.setHtmlScroll();
-        }
-
-        if (app.html.hasClass('close-left-click-outside') || app.html.hasClass('close-right-click-outside')) {
-            if (!target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
-                if (app.html.attr('data-aside') === 'left' && app.html.hasClass('close-left-click-outside') && !target.closest("#left").length) {
-                    app.enableScroll();
-                    app.html.attr('data-aside', '');
-                } else if (app.html.attr('data-aside') === 'right' && app.html.hasClass('close-right-click-outside') && !target.closest("#right").length) {
-                    app.enableScroll();
-                    app.html.attr('data-aside', '');
-                }
-                app.checkGoogleMaps();
+$(window).click(function (e) {
+    var target = $(e.target);
+    if (app.html.hasClass('close-left-click-outside') || app.html.hasClass('close-right-click-outside')) {
+        if (!target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length) {
+            if (app.html.attr('data-aside') === 'left' && app.html.hasClass('close-left-click-outside') && !target.closest("#left").length) {
+                app.enableScroll();
+                app.html.attr('data-aside', '');
+            } else if (app.html.attr('data-aside') === 'right' && app.html.hasClass('close-right-click-outside') && !target.closest("#right").length) {
+                app.enableScroll();
+                app.html.attr('data-aside', '');
             }
+            app.checkGoogleMaps();
         }
-    });
+    }
 });

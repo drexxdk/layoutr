@@ -16,11 +16,11 @@
       "js/vendors/jquery/validate/jquery.validate.min.js",
       "js/vendors/jquery/jquery.lazyload.min.js",
       "js/vendors/bootstrap-slider.min.js",
-      "js/vendors/jquery/jquery.resize.min.js",
+      //"js/vendors/jquery/jquery.resize.min.js",
       "js/vendors/bowser.js",
+      "js/app/_app.js",
       "js/app/form.js",
       "js/app/pages/page1.js",
-      "js/app/app.js",
       "js/app/scroll.js",
       "js/app/accordion.js",
       "js/app/dropdown.js",
@@ -31,7 +31,8 @@
       "js/app/settings.js",
       "js/app/alert.js",
       "js/app/lazyload.js",
-      "js/app/keyboard.js"
+      "js/app/keyboard.js",
+      "js/app/fullscreen.js"
     ],
     "minify": { "enabled": true }
   },
