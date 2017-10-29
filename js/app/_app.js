@@ -23,12 +23,16 @@ $(function () {
     app.html = $('html');
     app.body = $('body');
     app.loading = $('#loading');
-    app.fullscreen = $('#fullscreen');
     app.transitionTime = 400;
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
     app.overflow = $('#overflow');
+
+    app.fullscreen = $('#fullscreen');
+    app.fullscreen.img = app.fullscreen.find('#fullscreen-img');
+    app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
+    app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
     
     if (bowser.msedge) {
         app.html.addClass('msedge');
