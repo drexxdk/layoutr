@@ -7,3 +7,34 @@
 .center {
     margin: 0 auto;
 }
+
+.overlay-dark,
+.overlay-light {
+    position: relative;
+
+    &:after {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: '';
+    }
+}
+
+.overlay-dark {
+    &:after {
+        background-color: $component-overlay-dark-background-color;
+    }
+
+    @include color-yiq($component-overlay-dark-background-color);
+}
+
+.overlay-light {
+    &:after {
+        background-color: $component-overlay-light-background-color;
+    }
+
+    @include color-yiq($component-overlay-light-background-color);
+}
