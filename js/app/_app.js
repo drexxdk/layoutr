@@ -33,6 +33,7 @@ $(function () {
     app.fullscreen.img = app.fullscreen.find('#fullscreen-img');
     app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
     app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
+    app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
     
     if (bowser.msedge) {
         app.html.addClass('msedge');

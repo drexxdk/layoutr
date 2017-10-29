@@ -10,20 +10,18 @@
 
     &:not(.has-info) {
         #fullscreen-title,
+        #fullscreen-description,
         #fullscreen-toggle {
             display: none;
         }
     }
 
-    &.has-info {
-
-        &:not(.info-shown) {
-            #fullscreen-title {
-                top: -($component-line-height + ($spacer * 2));
-            }
+    &.has-info:not(.info-shown) {
+        #fullscreen-title,
+        #fullscreen-description {
+            display: none;
         }
     }
-
 
     > div {
         @include flex-display;
@@ -37,21 +35,35 @@
             width: auto !important;
             height: auto !important;
             background-color: transparent;
+            flex-shrink: 0;
         }
 
-        #fullscreen-title {
+        #fullscreen-title:not(:empty),
+        #fullscreen-description:not(:empty) {
             position: absolute;
-            top: 0;
             left: 0;
             right: 0;
-            padding: $spacer;
-            text-align: center;
-            font-weight: $font-weight-bold;
             background-color: $component-overlay-dark-background-color;
             @include color-yiq($component-overlay-dark-background-color);
-            @include ellipsis;
-            height: $component-line-height + ($spacer * 2);
+        }
+
+
+        #fullscreen-title:not(:empty) {
+            top: 0;
+            padding: $spacer (rem(56px) + $spacer) $spacer $spacer;
+            text-align: center;
+            font-weight: $font-weight-bold;
             @include transition(top $transition-time $transition-timing);
+            height: $component-line-height + ($spacer * 2);
+            @include ellipsis;
+        }
+
+        #fullscreen-description:not(:empty) {
+            bottom: 0;
+            padding: $spacer;
+            @include transition(bottom $transition-time $transition-timing);
+            max-height: calc(100% - #{$component-line-height + ($spacer * 2)});
+            overflow: auto;
         }
 
         #fullscreen-toggle {
