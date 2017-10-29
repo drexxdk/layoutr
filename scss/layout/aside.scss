@@ -1,5 +1,9 @@
 ﻿/// <reference path="../references" />
 
+html.android aside {
+    height: 100vh;
+}
+
 aside {
     position: fixed;
     z-index: $aside-z-index;

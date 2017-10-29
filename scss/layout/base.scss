@@ -18,14 +18,6 @@ html {
         }
     }
 
-    &.left-overlay[data-aside="left"] #content:before,
-    &.right-overlay[data-aside="right"] #content:before {
-        @include overlay;
-        content: '';
-        z-index: $overlay-z-index;
-        background-color: $content-overlay-background-color;
-    }
-
     &[data-aside="left"] {
         #left {
             left: 0;

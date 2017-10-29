@@ -43,6 +43,12 @@ $(function () {
         app.html.addClass('desktop'); // enables hover effects
     }
 
+    if (bowser.android) {
+        app.html.addClass('android');
+    } else if (bowser.ios) {
+        app.html.addClass('ios');
+    }
+
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load

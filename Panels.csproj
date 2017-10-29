@@ -194,6 +194,7 @@
     <Content Include="scss\mixins\overlay.scss" />
     <Content Include="scss\components\loading.scss" />
     <Content Include="scss\components\fullscreen.scss" />
+    <Content Include="scss\components\ul.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

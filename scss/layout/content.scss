@@ -3,8 +3,6 @@
 #content {
 
     > div {
-        /*@include flex-display;
-        @include justify-content(center);*/
         > .header {
             position: relative;
             height: $content-header-height;
