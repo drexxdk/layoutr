@@ -1,6 +1,6 @@
 ﻿/// <reference path="../references" />
 
-.embed-responsive {
+.embed {
     position: relative;
     padding: 0;
     overflow: hidden;
@@ -12,7 +12,6 @@
         content: "";
     }
 
-    .embed-responsive-item,
     iframe,
     embed,
     object,

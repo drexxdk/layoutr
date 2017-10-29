@@ -1,31 +1,5 @@
 ﻿/// <reference path="../references" />
 
-#fullscreen, #loading {
-    @include overlay;
-    background-color: $overlay-background-color;
-    @include flex-display;
-    @include justify-content(center);
-    @include align-items(center);
-}
-
-#fullscreen {
-    z-index: $fullscreen-z-index;
-
-    > div {
-        @include flex-display;
-        @include align-items(flex-start);
-        position: relative;
-
-        > img {
-            max-width: 100%;
-            max-height: 100vh;
-            width: auto !important;
-            height: auto !important;
-            background-color: transparent;
-        }
-    }
-}
-
 #loading {
     z-index: $loading-z-index;
     @include noselect;

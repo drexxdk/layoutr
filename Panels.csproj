@@ -69,9 +69,9 @@
     <Content Include="ajax\layout\svg.html" />
     <Content Include="dist\css\app.css" />
     <Content Include="dist\css\app.min.css" />
-    <Content Include="dist\img\content-header-1-1920.jpg" />
-    <Content Include="dist\img\content-header-2-1920.jpg" />
-    <Content Include="dist\img\eiffel-tower-1920.jpg" />
+    <Content Include="dist\img\avengers-infinity-war-1920-1080.jpg" />
+    <Content Include="dist\img\deadpool-1920-1080.jpg" />
+    <Content Include="dist\img\deadpool-200-200.jpg" />
     <Content Include="dist\img\favicon\android-chrome-192x192.png" />
     <Content Include="dist\img\favicon\android-chrome-512x512.png" />
     <Content Include="dist\img\favicon\apple-touch-icon.png" />
@@ -81,7 +81,11 @@
     <Content Include="dist\img\favicon\favicon.ico" />
     <Content Include="dist\img\favicon\mstile-150x150.png" />
     <Content Include="dist\img\favicon\safari-pinned-tab.svg" />
-    <Content Include="dist\img\mahatma-gandhi-200.jpg" />
+    <Content Include="dist\img\guardians-of-the-galaxy-vol.-2-1920-1080.jpg" />
+    <Content Include="dist\img\justice-league-1920-1080.jpg" />
+    <Content Include="dist\img\spider-man-homecoming-1920-1080.jpg" />
+    <Content Include="dist\img\thor-ragnarok-1920-1080.jpg" />
+    <Content Include="dist\img\wonder-woman-1920-1080.jpg" />
     <Content Include="dist\js\app.js" />
     <Content Include="dist\js\app.min.js">
       <DependentUpon>app.js</DependentUpon>
@@ -94,9 +98,10 @@
     <Content Include="index.html" />
     <Content Include="js\app\accordion.js" />
     <Content Include="js\app\alert.js" />
-    <Content Include="js\app\app.js" />
+    <Content Include="js\app\_app.js" />
     <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
+    <Content Include="js\app\fullscreen.js" />
     <Content Include="js\app\googleMaps.js" />
     <Content Include="js\app\scroll.js" />
     <Content Include="js\app\jquery-extensions.js" />
@@ -162,7 +167,7 @@
     <Content Include="scss\reset.scss" />
     <Content Include="scss\variables\layout.scss" />
     <Content Include="scss\components\accordion.scss" />
-    <Content Include="scss\components\embed-responsive.scss" />
+    <Content Include="scss\components\embed.scss" />
     <Content Include="scss\components\quote.scss" />
     <Content Include="scss\components\img.scss" />
     <Content Include="scss\components\table.scss" />
@@ -181,11 +186,14 @@
     <Content Include="scss\demo.scss" />
     <Content Include="scss\components\position.scss" />
     <Content Include="scss\layout\base.scss" />
-    <Content Include="scss\layout\loading-fullscreen.scss" />
     <Content Include="scss\layout\position.scss" />
     <Content Include="scss\layout\transitions.scss" />
     <Content Include="scss\mixins\backface-visibility.scss" />
     <Content Include="scss\layout\container.scss" />
+    <Content Include="scss\mixins\hidden-input.scss" />
+    <Content Include="scss\mixins\overlay.scss" />
+    <Content Include="scss\components\loading.scss" />
+    <Content Include="scss\components\fullscreen.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
