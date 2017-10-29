@@ -2,7 +2,7 @@
 
 html.android aside {
     // android cuts off bottom of aside when scrolling the page unless aside height is based on viewport height instead of percentage
-    height: 100vh;
+    /*height: 100vh;*/
 }
 
 aside {
