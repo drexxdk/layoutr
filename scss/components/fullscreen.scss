@@ -1,5 +1,10 @@
 ﻿/// <reference path="../references" />
 
+.fullscreen {
+    cursor: pointer;
+    @include noselect;
+}
+
 #fullscreen {
     z-index: $fullscreen-z-index;
 
@@ -7,6 +12,18 @@
         @include flex-display;
         @include align-items(flex-start);
         position: relative;
+
+        > .title:not(:empty) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: $spacer;
+            text-align: center;
+            font-weight: $font-weight-bold;
+            background-color: $component-overlay-dark-background-color;
+            @include color-yiq($component-overlay-dark-background-color);
+        }
 
         > img {
             max-width: 100%;

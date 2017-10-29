@@ -1,8 +1,7 @@
 ﻿/// <reference path="../references" />
 
 html.android aside {
-    // android cuts off bottom of aside when scrolling the page unless aside height is based on viewport height instead of percentage
-    /*height: 100vh;*/
+    /*bottom: 0;*/
 }
 
 aside {
@@ -10,7 +9,6 @@ aside {
     z-index: $aside-z-index;
     top: 0;
     bottom: 0;
-    // ios doesn't scroll correctly in aside unless aside height is based on percentage instead of viewport
     height: 100%;
     width: 100%;
     max-width: $aside-width;
