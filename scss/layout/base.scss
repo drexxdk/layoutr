@@ -54,7 +54,7 @@ html {
 }
 
 main {
-    height: 100vh;
+    height: 100%;
     @include flex-display;
     @include flex-direction(column);
 }
