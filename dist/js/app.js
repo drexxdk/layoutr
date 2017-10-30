@@ -1252,6 +1252,11 @@ $(function () {
                 }
             }
         }
+        if (e.which === 9) { // tab
+            if (!app.loading.hasClass('hidden') || !app.fullscreen.hasClass('hidden')) {
+                e.preventDefault();
+            }
+        }
     });
 });
 var app = app || {};
