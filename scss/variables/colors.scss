@@ -11,17 +11,7 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black: #000;
 
-$grays: ( 
-    100: $gray-100, 
-    200: $gray-200, 
-    300: $gray-300, 
-    400: $gray-400, 
-    500: $gray-500, 
-    600: $gray-600, 
-    700: $gray-700, 
-    800: $gray-800, 
-    900: $gray-900 
-);
+$grays: ( 100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $gray-500, 600: $gray-600, 700: $gray-700, 800: $gray-800, 900: $gray-900 );
 
 $blue: #0072ED;
 $indigo: #6610f2;
@@ -34,37 +24,11 @@ $green: #218838;
 $teal: #20c997;
 $cyan: #138294;
 
-$colors: ( 
-    blue: $blue, 
-    indigo: $indigo, 
-    purple: $purple, 
-    pink: $pink, 
-    red: $red, 
-    orange: $orange, 
-    yellow: $yellow, 
-    green: $green, 
-    teal: $teal, 
-    cyan: $cyan, 
-    white: $white, 
-    gray: $gray-600, 
-    gray-dark: $gray-800 
-);
+$colors: ( blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600, gray-dark: $gray-800 );
 
-$theme-colors: ( 
-    primary: $blue, 
-    secondary: $gray-600, 
-    success: $green, 
-    info: $cyan, 
-    warning: $yellow, 
-    danger: $red, 
-    light: $gray-100, 
-    dark: $gray-800 
-);
+$theme-colors: ( primary: $blue, secondary: $gray-600, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-100, dark: $gray-800 );
 
-$theme-validation-colors: ( 
-    success: $green, 
-    danger: $red
-);
+$theme-validation-colors: ( success: $green, danger: $red );
 
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8%;
@@ -80,7 +44,7 @@ $footer-color: $gray-400;
 $footer-background-color: $gray-800;
 $footer-border-color: $gray-900;
 
-$font-light-opacity:.8;
+$font-light-opacity: .8;
 
 $loader-background-color: $gray-900;
 
@@ -88,4 +52,7 @@ $overlay-background-color: rgba(255, 255, 255, 0.6);
 $content-overlay-background-color: rgba(0, 0, 0, 0.6);
 
 $component-overlay-light-background-color: rgba(255, 255, 255, 0.4);
-$component-overlay-dark-background-color: rgba(0, 0, 0, 0.4)
+$component-overlay-dark-background-color: rgba(0, 0, 0, 0.4);
+
+$aside-icon-background-color: $gray-600;
+$aside-icon-hover-background-color: $black;

@@ -91,7 +91,7 @@ aside > .header {
             @include translate(-50%, -50%);
             width: 50%;
             height: 50%;
-            fill: #808080;
+            fill: $aside-icon-background-color;
             @include button-transition(all);
         }
     }
