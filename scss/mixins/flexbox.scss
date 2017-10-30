@@ -76,3 +76,9 @@
     -ms-align-self: $align;
     align-self: $align;
 }
+
+@mixin flex-center {
+    @include flex-display;
+    @include justify-content(center);
+    @include align-items(center);
+}

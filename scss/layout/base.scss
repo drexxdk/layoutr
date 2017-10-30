@@ -100,7 +100,5 @@ aside > .header {
 #fullscreen, #loading {
     @include overlay;
     background-color: $overlay-background-color;
-    @include flex-display;
-    @include justify-content(center);
-    @include align-items(center);
+    @include flex-center;
 }

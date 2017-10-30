@@ -4,7 +4,7 @@
     margin-left: $spacer * 1.5;
     @include noselect;
     list-style-type: none;
-    z-index:$component-z-index;
+    z-index: $component-z-index;
 
     ul {
         list-style-type: none;
@@ -100,9 +100,7 @@
             height: $spacer;
             min-height: 0;
             padding: 0;
-            @include flex-display;
-            @include justify-content(center);
-            @include align-items(center);
+            @include flex-center;
             @include button-transition(all);
 
             > svg {

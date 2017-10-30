@@ -7,18 +7,18 @@
             position: relative;
             height: $content-header-height;
             min-height: $content-header-min-height;
+            overflow: hidden;
 
             > div {
                 position: absolute;
                 z-index: 2;
-                @include flex-display;
+                @include flex-center;
                 @include flex-direction(column);
-                @include align-items(center);
-                @include justify-content(center);
                 top: 0;
                 bottom: 0;
+                left: 50%;
+                @include translateX(-50%);
                 max-width: $content-max-width - ($spacer * 2);
-                margin: 0 auto;
                 text-align: center;
                 width: 100%;
                 padding: $spacer;

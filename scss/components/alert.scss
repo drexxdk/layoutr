@@ -26,9 +26,7 @@
     }
 
     > .close {
-        @include flex-display();
-        @include justify-content(center);
-        @include align-items(center);
+        @include flex-center;
         width: $line-height + ($padding-y * 2);
         height: $line-height + ($padding-y * 2);
         background-color: transparent;
