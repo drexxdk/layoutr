@@ -2,6 +2,11 @@
 
 // hover effects should only be applied on desktop browsers
 .desktop {
+
+    a:hover {
+        text-decoration: none;
+    }
+
     .header > .aside:hover {
         overflow: hidden;
 

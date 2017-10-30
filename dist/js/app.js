@@ -650,7 +650,7 @@ $(function () {
     app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
     app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
-    
+
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used to exclude layout transitions
     } else if (bowser.msie) {
@@ -679,18 +679,15 @@ $(function () {
     app.toggleAside = function (aside) {
         if (!transitionLock) {
             transitionLock = true;
-            if (aside === undefined) {
-                app.html.attr('data-aside', '');
-            } else {
-                if (app.html.attr('data-aside').length) {
-                    if (app.html.attr('data-aside') === aside) {
-                        app.html.attr('data-aside', '');
-                    } else {
-                        app.html.attr('data-aside', aside);
-                    }
+            var currentAside = app.html.attr('data-aside');
+            if (currentAside.length) {
+                if (currentAside === aside) {
+                    app.html.attr('data-aside', '');
                 } else {
                     app.html.attr('data-aside', aside);
                 }
+            } else {
+                app.html.attr('data-aside', aside);
             }
             if (app.hasTransitions()) {
                 setTimeout(function () {

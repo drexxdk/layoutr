@@ -22,11 +22,15 @@ body {
     font-size: $font-size;
     font-weight: $font-weight;
     line-height: $line-height;
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
 
 a {
     color: $link-color;
+
+    &:focus {
+        text-decoration: none;
+    }
 }
 
 header,

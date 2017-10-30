@@ -81,6 +81,10 @@ aside > .header {
         background-color: transparent;
         @include noselect;
 
+        &:focus > svg {
+            fill: $aside-icon-hover-background-color;
+        }
+
         &.close {
             /*@include rotate(45);*/
         }
