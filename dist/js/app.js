@@ -1286,12 +1286,12 @@ $(function () {
     app.main.on('click', '#fullscreen-toggle', function () {
         app.fullscreen.toggleClass('info-shown');
     });
+});
 
-    $(window).on('resize', function () {
-        if (app.html.hasClass('android') && !app.fullscreen.hasClass('hidden')) {
-            app.fullscreen.img.css('max-height', window.innerHeight);
-        }
-    });
+$(window).on('resize', function () {
+    if (app.html.hasClass('android') && !app.fullscreen.hasClass('hidden')) {
+        app.fullscreen.img.css('max-height', window.innerHeight);
+    }
 });
 
 $(window).click(function (e) {
