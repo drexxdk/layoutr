@@ -1270,7 +1270,7 @@ $(function () {
         if (newTitle !== undefined || newDescription !== undefined) {
             app.fullscreen.addClass('has-info');
         }
-        
+
         if (newTitle !== undefined) {
             app.fullscreen.title.html(newTitle);
         }
@@ -1286,11 +1286,15 @@ $(function () {
     app.main.on('click', '#fullscreen-toggle', function () {
         app.fullscreen.toggleClass('info-shown');
     });
-});
 
-$(window).on('resize', function () {
-    if (app.html.hasClass('android') && !app.fullscreen.hasClass('hidden')) {
-        app.fullscreen.img.css('max-height', window.innerHeight);
+    if (app.html.hasClass('android')) {
+        // android doesn't handle vh correctly, so it gets converted to px
+        // might be a problem for ios also, but haven't tested it there yet
+        $(window).on('resize', function () {
+            if (!app.fullscreen.hasClass('hidden')) {
+                app.fullscreen.img.css('max-height', window.innerHeight);
+            }
+        });
     }
 });
 
