@@ -325,7 +325,7 @@ aside > .header {
   overflow: hidden; }
   #content > div > .header > div {
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: -ms-flex;

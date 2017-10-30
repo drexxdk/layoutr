@@ -11,7 +11,7 @@
 
             > div {
                 position: absolute;
-                z-index: 2;
+                z-index: 3;
                 @include flex-center;
                 @include flex-direction(column);
                 top: 0;
