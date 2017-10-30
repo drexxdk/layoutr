@@ -1,15 +1,11 @@
 ﻿/// <reference path="../references" />
 
-html.ios aside {
-    height: 100%;
-}
-
 aside {
     position: fixed;
     z-index: $aside-z-index;
     top: 0;
     /*bottom: 0;*/
-    height: 100vh;
+    height: 100%;
     width: 100%;
     max-width: $aside-width;
     background-color: $layout-background-color;

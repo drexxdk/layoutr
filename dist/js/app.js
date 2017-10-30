@@ -645,7 +645,6 @@ $(function () {
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
     app.overflow = $('#overflow');
-
     app.fullscreen = $('#fullscreen');
     app.fullscreen.img = app.fullscreen.find('#fullscreen-img');
     app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
@@ -653,9 +652,9 @@ $(function () {
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
     
     if (bowser.msedge) {
-        app.html.addClass('msedge');
+        app.html.addClass('msedge'); // used to exclude layout transitions
     } else if (bowser.msie) {
-        app.html.addClass('msie');
+        app.html.addClass('msie'); // used to exclude layout transitions
     }
     if (bowser.mobile) {
         app.html.addClass('mobile'); // disables fixed footer
@@ -666,9 +665,9 @@ $(function () {
     }
 
     if (bowser.android) {
-        app.html.addClass('android');
+        app.html.addClass('android'); // used by fullscreen
     } else if (bowser.ios) {
-        app.html.addClass('ios');
+        app.html.addClass('ios'); // not currently used for anything
     }
 
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
@@ -1263,7 +1262,6 @@ $(function () {
         var newSrc = $this.attr('data-fullscreen-img');
         var newTitle = $this.attr('data-fullscreen-title');
         var newDescription = $this.attr('data-fullscreen-description');
-
         app.fullscreen.img.attr('src', newSrc);
         app.fullscreen.img.css('max-height', window.innerHeight);
 

@@ -6,7 +6,6 @@ $(function () {
         var newSrc = $this.attr('data-fullscreen-img');
         var newTitle = $this.attr('data-fullscreen-title');
         var newDescription = $this.attr('data-fullscreen-description');
-
         app.fullscreen.img.attr('src', newSrc);
         app.fullscreen.img.css('max-height', window.innerHeight);
 

@@ -68,6 +68,11 @@ html {
             background-color: $content-overlay-background-color;
         }
 
+        &[data-aside="left"].left-push aside,
+        &[data-aside="right"].right-push aside {
+            height: 100vh;
+        }
+
         &[data-aside="left"].left-push {
             header,
             #content,
