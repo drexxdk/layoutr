@@ -666,6 +666,16 @@ $(function () {
 
     if (bowser.android) {
         app.html.addClass('android'); // used by fullscreen
+
+        // disable swipe down to refresh page
+        app.body.css("touch-action", "pan-down");
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 0) {
+                app.body.css("touch-action", "auto");
+            } else {
+                app.body.css("touch-action", "pan-down");
+            }
+        });
     } else if (bowser.ios) {
         app.html.addClass('ios'); // not currently used for anything
     }
