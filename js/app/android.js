@@ -13,11 +13,6 @@ $(function () {
                     element.css("touch-action", "pan-down");
                 }
             });
-            //element.on('touchstart touchend click', '.hack', function (e) {
-            //    // this disables click after swiping
-            //    // might be caused by ghostlab
-            //    e.preventDefault();
-            //});
         }
 
         // android doesn't handle vh correctly, so it gets converted to px
