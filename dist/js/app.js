@@ -1240,6 +1240,7 @@ $(function () {
                 }
                 if (!app.fullscreen.hasClass('hidden')) {
                     app.fullscreen.addClass('hidden'); // closes fullscreen
+                    app.setHtmlScroll();
                 }
                 var popups = app.main.children('.popup');
                 if (popups.length) {
