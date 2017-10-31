@@ -7,7 +7,6 @@ $(function () {
         var newTitle = $this.attr('data-fullscreen-title');
         var newDescription = $this.attr('data-fullscreen-description');
         app.fullscreen.img.attr('src', newSrc);
-        app.fullscreen.img.css('max-height', window.innerHeight);
 
         if (newTitle !== undefined || newDescription !== undefined) {
             app.fullscreen.addClass('has-info');
@@ -32,6 +31,7 @@ $(function () {
     if (app.html.hasClass('android')) {
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
+        app.fullscreen.img.css('max-height', window.innerHeight);
         $(window).on('resize', function () {
             if (!app.fullscreen.hasClass('hidden')) {
                 app.fullscreen.img.css('max-height', window.innerHeight);
