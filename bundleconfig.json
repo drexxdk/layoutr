@@ -32,7 +32,8 @@
       "js/app/alert.js",
       "js/app/lazyload.js",
       "js/app/keyboard.js",
-      "js/app/fullscreen.js"
+      "js/app/fullscreen.js",
+      "js/app/android.js"
     ],
     "minify": { "enabled": true }
   },
