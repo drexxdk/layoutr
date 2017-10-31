@@ -21,7 +21,7 @@ $content-max-width: rem(1280px);
 $content-header-height: 40vh;
 $content-header-min-height: rem(250px);
 
-$ul-ul-margin-left: rem(25px);
+$list-bullet-width: rem(6px);
 
 // em and rem should not be used in media queries, since they are based on browser font size, instead of website font size
 // there is currently no workaround for this browser limitations
