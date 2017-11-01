@@ -681,7 +681,7 @@ $(function () {
             transitionLock = true;
             var currentAside = app.html.attr('data-aside');
             if (currentAside.length) {
-                if (currentAside === aside) {
+                if (aside === undefined || currentAside === aside) {
                     app.html.attr('data-aside', '');
                 } else {
                     app.html.attr('data-aside', aside);
