@@ -3,7 +3,14 @@
 $(function () {
     if (app.html.hasClass('android')) {
 
-        var setTouchAndSwipe = function (element, scrollElement = element, scrollTopElement = element) {
+        var setTouchAndSwipe = function (element, scrollElement, scrollTopElement) {
+            if (scrollElement === undefined) {
+                scrollElement = element;
+            }
+            if (scrollTopElement === undefined) {
+                scrollTopElement = element;
+            }
+
             element.css("touch-action", "pan-down");
             scrollElement.scroll(function () {
                 // this disables page refresh when swiping down

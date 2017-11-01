@@ -1,16 +1,8 @@
 ﻿/// <reference path="../references" />
 
 @mixin list-variant($background) {
-    li {
-        > *:not(ol):before {
-            background-color: $background;
-            @include color-yiq($background);
-        }
-
-        > a:hover:after {
-            border-left-color: $background;
-        }
-    }
+    background-color: $background;
+    @include color-yiq($background);
 }
 
 ul.list {
@@ -51,8 +43,8 @@ ol.list {
     list-style-type: none;
 
     @each $color, $value in $theme-colors {
-        &.theme-#{$color} {
-                @include list-variant($value);
+        &.theme-#{$color} li > *:not(ol):before {
+            @include list-variant($value);
         }
     }
 

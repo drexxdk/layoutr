@@ -70,6 +70,17 @@
             @include color-yiq($active-background);
             background-color: $active-background;
         }
+
+        .alert.theme-#{$color} .close:hover {
+
+            $active-background: darken(theme-soft-background-color($value), 7.5%);
+            @include color-yiq($active-background);
+            background-color: $active-background;
+        }
+
+        ol.list.theme-#{$color} li > a:hover:after {
+                border-left-color: $value;
+        }
     }
 
     .btn:hover {
@@ -77,15 +88,5 @@
         $active-background: darken($value, 7.5%);
         @include color-yiq($active-background);
         background-color: $active-background;
-    }
-
-
-    @each $color, $value in $theme-colors {
-        .alert.theme-#{$color} .close:hover {
-
-            $active-background: darken(theme-soft-background-color($value), 7.5%);
-            @include color-yiq($active-background);
-            background-color: $active-background;
-        }
     }
 }
