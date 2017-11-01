@@ -83,7 +83,7 @@
         }
     }
 
-    ol .list li > a:hover:after {
+    ol.list li > a:hover:after {
         left: -($spacer / 2);
         border-left-color: $list-number-background-color;
     }
