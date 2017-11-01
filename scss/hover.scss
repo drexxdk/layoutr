@@ -3,6 +3,11 @@
 // hover effects should only be applied on desktop browsers
 .desktop {
 
+    .fullscreen.overlay-light:hover:after,
+    .fullscreen.overlay-dark:hover:after {
+        background-color: transparent;
+    }
+
     a:hover {
         text-decoration: none;
     }

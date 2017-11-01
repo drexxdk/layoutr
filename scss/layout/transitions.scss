@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
+// IE cannot display multiple transitions simultaneously correctly
 html:not(.msedge):not(.msie).transitions {
-    // IE cannot display multiple transitions simultaneously correctly
     #left,
     .popup[data-position*="left"] {
         @include transition(left $transition-time $transition-timing);
@@ -22,7 +22,6 @@ html:not(.msedge):not(.msie).transitions {
         @include transition(margin $transition-time $transition-timing);
     }
 
-
     &.two-columns {
         #content .header {
 
@@ -30,5 +29,10 @@ html:not(.msedge):not(.msie).transitions {
                 @include transition(width $transition-time $transition-timing, left $transition-time $transition-timing);
             }
         }
+    }
+
+    .fullscreen.overlay-light:after,
+    .fullscreen.overlay-dark:after {
+        @include transition(background-color $transition-time $transition-timing);
     }
 }
