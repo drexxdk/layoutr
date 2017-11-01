@@ -42,3 +42,7 @@ $slider-background-color-2: theme-color("primary");
 $quote-img-width: rem(100px);
 
 $table-td-background-color: theme-color("light");
+
+$list-background-color: theme-color("light");
+$list-number-background-color: theme-color("primary");
+$list-number-width: $component-line-height + ($padding-y * 2);

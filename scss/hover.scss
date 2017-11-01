@@ -79,8 +79,13 @@
         }
 
         ol.list.theme-#{$color} li > a:hover:after {
-                border-left-color: $value;
+            border-left-color: $value;
         }
+    }
+
+    ol .list li > a:hover:after {
+        left: -($spacer / 2);
+        border-left-color: $list-number-background-color;
     }
 
     .btn:hover {
