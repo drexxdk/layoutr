@@ -733,9 +733,9 @@ $(function () {
 $(window).click(function (e) {
     var target = $(e.target);
     var isSmallBreakpoint = app.isSmallBreakpoint();
-    var left = (app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length);
-    var right = (app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length);
-    var notTarget = (!target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length);
+    var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
+    var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
+    var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
     if ((left || right) && notTarget ) {
         app.enableScroll();
@@ -1312,7 +1312,7 @@ $(function () {
                     element.css("touch-action", "pan-down");
                 }
             });
-        }
+        };
 
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet

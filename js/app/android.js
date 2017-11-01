@@ -13,7 +13,7 @@ $(function () {
                     element.css("touch-action", "pan-down");
                 }
             });
-        }
+        };
 
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
