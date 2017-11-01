@@ -70,7 +70,7 @@
                             <b>Media queries</b> based on layout elements instead of just browser window width.
                         </li>
                         <li>
-                            <b>SVG icons</b> with fill color that can be set in SCSS. 
+                            <b>SVG icons</b> with fill color that can be set in SCSS.
                         </li>
                         <li>
                             Hover effects are only applied for desktop browsers, since mobiles can't display them correctly.
@@ -133,6 +133,35 @@
             </div>
         </section>
         <section>
+            <h2>Ordered list examples</h2>
+            <ol class="list">
+                <li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed felis sollicitudin, lacinia turpis et, imperdiet odio. Quisque vel lorem dui. Aliquam vitae nulla mi. Nam tellus purus, pellentesque a eros bibendum, suscipit volutpat augue. Fusce a libero a erat venenatis commodo sit amet a tortor.</span></li>
+                <li><span>List item</span></li>
+                <li>
+                    <span>List item</span>
+                    <ol>
+                        <li><span>List sub item</span></li>
+                        <li>
+                            <span>List sub item</span>
+                            <ol>
+                                <li><span>List sub item</span></li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+            </ol>
+            <ol class="list theme-secondary">
+                <li><span>List item</span></li>
+                <li><span>List item</span></li>
+            </ol>
+            <ol class="list theme-dark">
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+            </ol>
+        </section>
+        <section>
             <h2>img examples</h2>
             <div class="flex-items">
                 <div class="img embed aspect-ratio-21by9 lazy overlay-dark" data-original="dist/img/justice-league-1920-1080.jpg">
@@ -144,15 +173,15 @@
                     </div>
                 </div>
 
-                <div class="img embed aspect-ratio-16by9 lazy overlay-light fullscreen" 
-                     data-original="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg" 
+                <div class="img embed aspect-ratio-16by9 lazy overlay-light fullscreen"
+                     data-original="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
                      data-fullscreen-img="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
                      data-fullscreen-title="Guardians of the Galaxy Vol. 2"
                      data-fullscreen-description="The Guardians must fight to keep their newfound family together as they unravel the mystery of Peter Quill's true parentage.">
                     <div class="position top left"><div class="alert theme-primary"><div>16:9</div></div></div>
                 </div>
 
-                <div class="img embed aspect-ratio-4by3 lazy overlay-dark fullscreen" 
+                <div class="img embed aspect-ratio-4by3 lazy overlay-dark fullscreen"
                      data-original="dist/img/avengers-infinity-war-1920-1080.jpg"
                      data-fullscreen-img="dist/img/avengers-infinity-war-1920-1080.jpg">
                     <div class="position top left"><div class="alert theme-primary"><div>4:3</div></div></div>

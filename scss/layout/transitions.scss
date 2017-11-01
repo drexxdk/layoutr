@@ -31,8 +31,5 @@ html:not(.msedge):not(.msie).transitions {
         }
     }
 
-    .fullscreen.overlay-light:after,
-    .fullscreen.overlay-dark:after {
-        @include transition(background-color $transition-time $transition-timing);
-    }
+
 }

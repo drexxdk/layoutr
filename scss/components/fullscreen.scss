@@ -4,6 +4,10 @@
     cursor: pointer;
     @include noselect;
 
+    &.overlay-light:after,
+    &.overlay-dark:after {
+        @include transition(background-color $transition-time $transition-timing);
+    }
 }
 
 #fullscreen {

@@ -71,8 +71,6 @@
     $active-background: darken($value, 7.5%);
     @include button-variant($value, theme-soft-border-color($value));
 
-
-
     @each $color, $value in $theme-colors {
         &.theme-#{$color} {
             @include button-variant($value, theme-soft-border-color($value));
