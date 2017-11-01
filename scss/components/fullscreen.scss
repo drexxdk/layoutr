@@ -28,6 +28,7 @@
         @include align-items(flex-start);
         position: relative;
         overflow: hidden;
+        background-color: $fullscreen-background-color;
 
         #fullscreen-img {
             max-width: 100%;

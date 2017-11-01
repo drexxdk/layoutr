@@ -23,6 +23,9 @@ $(function () {
                 app.fullscreen.img.css('max-height', window.innerHeight);
             }
         });
+        app.main.on('click', '.fullscreen', function () {
+            app.fullscreen.img.css('max-height', window.innerHeight);
+        });
 
         setTouchAndSwipe(app.body, $(window), $(document));
         setTouchAndSwipe(app.left.children('.content'));
