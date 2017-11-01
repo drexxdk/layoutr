@@ -3,6 +3,7 @@
 img,
 .img {
     background-color: theme-color("light");
+    @include noselect;
 }
 
 .img {
