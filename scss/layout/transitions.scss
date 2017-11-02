@@ -1,6 +1,6 @@
 ﻿/// <reference path="../references" />
 
-// IE cannot display multiple transitions simultaneously correctly
+// Edge/IE cannot correctly display transitions on elements that uses calc()
 html:not(.msedge):not(.msie).transitions {
     #left,
     .popup[data-position*="left"] {
