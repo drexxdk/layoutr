@@ -33,7 +33,6 @@
       "js/app/lazyload.js",
       "js/app/keyboard.js",
       "js/app/fullscreen.js",
-      "js/app/tooltip.js",
       "js/app/android.js"
     ],
     "minify": { "enabled": true }

@@ -98,6 +98,8 @@
     <Content Include="index.html" />
     <Content Include="js\app\accordion.js" />
     <Content Include="js\app\alert.js" />
+    <Content Include="js\app\android.js" />
+    <Content Include="js\app\tooltip.js" />
     <Content Include="js\app\_app.js" />
     <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
@@ -131,7 +133,6 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="scss\app.scss" />
-    <Content Include="scss\layout\loading.scss" />
     <Content Include="scss\mixins\_mixins.scss" />
     <Content Include="scss\mixins\shadow.scss" />
     <Content Include="scss\mixins\border.scss" />
@@ -184,7 +185,6 @@
     <Content Include="scss\components\popup.scss" />
     <Content Include="scss\variables\z-index.scss" />
     <Content Include="scss\demo.scss" />
-    <Content Include="scss\components\position.scss" />
     <Content Include="scss\layout\base.scss" />
     <Content Include="scss\layout\position.scss" />
     <Content Include="scss\layout\transitions.scss" />
@@ -194,7 +194,8 @@
     <Content Include="scss\mixins\overlay.scss" />
     <Content Include="scss\components\loading.scss" />
     <Content Include="scss\components\fullscreen.scss" />
-    <Content Include="scss\components\ul.scss" />
+    <Content Include="scss\components\list.scss" />
+    <Content Include="scss\components\tooltip.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

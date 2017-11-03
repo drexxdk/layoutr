@@ -39,12 +39,12 @@
 
         > .content {
             position: relative;
-            z-index: 2;
             @include flex-display;
             @include flex-direction(column);
             @include justify-content(center);
 
             > div {
+                z-index: 3;
                 padding: $spacer;
                 background-color: $layout-background-color;
                 @include align-self(center);
