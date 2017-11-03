@@ -22,6 +22,9 @@ $(function () {
             });
         };
 
+        var viewport = app.head.find('meta[name="viewport"]');
+        viewport.attr('content', viewport.attr('content') + ', maximum-scale=1.0, user-scalable=no');
+
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
         app.fullscreen.img.css('max-height', window.innerHeight);

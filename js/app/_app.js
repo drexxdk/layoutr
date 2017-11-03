@@ -14,14 +14,15 @@ $.ajaxSetup({
 });
 
 $(function () {
+    app.html = $('html');
+    app.head = $('head');
+    app.body = $('body');
     app.main = $('main');
     app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
     app.left = $('#left');
     app.right = $('#right');
-    app.html = $('html');
-    app.body = $('body');
     app.loading = $('#loading');
     app.transitionTime = 400;
     app.fadeOutTime = 500;

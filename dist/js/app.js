@@ -631,14 +631,15 @@ $.ajaxSetup({
 });
 
 $(function () {
+    app.html = $('html');
+    app.head = $('head');
+    app.body = $('body');
     app.main = $('main');
     app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
     app.left = $('#left');
     app.right = $('#right');
-    app.html = $('html');
-    app.body = $('body');
     app.loading = $('#loading');
     app.transitionTime = 400;
     app.fadeOutTime = 500;
@@ -1362,6 +1363,9 @@ $(function () {
                 }
             });
         };
+
+        var viewport = app.head.find('meta[name="viewport"]');
+        viewport.attr('content', viewport.attr('content') + ', maximum-scale=1.0, user-scalable=no');
 
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
