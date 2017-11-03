@@ -1,5 +1,16 @@
 ﻿/// <reference path="../references" />
 
+@mixin percentage-circle-variant($value) {
+    .pie,
+    .fill
+    {
+        border-color: $value;
+    }
+
+    > span {
+        color: $value;
+    }
+}
 .percentage-circle {
     position: relative;
     font-size: 80px;
@@ -7,6 +18,12 @@
     height: 1em;
     @include border-radius(50%);
     background-color: $component-border-color;
+
+    @each $color, $value in $theme-colors {
+        &.theme-#{$color} {
+            @include percentage-circle-variant($value);
+        }
+    }
 
     .pie {
         position: absolute;
@@ -56,7 +73,8 @@
         clip: rect(0em, 1em, 1em, 0.5em);
     }
 
-    .bar {
+    .bar,
+    .fill{
         // circle to show the status
         @extend .pie;
     }
@@ -72,7 +90,6 @@
         }
 
         &.p#{$j} .fill {
-            @extend .pie;
             @include rotate(180);
         }
     }
