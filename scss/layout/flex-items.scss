@@ -4,8 +4,7 @@
     margin-top: -$spacer;
     margin-left: -$spacer;
     @include flex-display;
-    width: calc(100% + #{$spacer});
-
+    /*width: calc(100% + #{$spacer});*/
     > * {
         margin-top: $spacer;
         margin-left: $spacer;
@@ -21,6 +20,18 @@
 
     &.wrap {
         @include flex-wrap(wrap);
+    }
+
+    &.grow {
+        > * {
+            flex-grow: 1;
+        }
+    }
+
+    &.center {
+        > * {
+            @include align-self(center);
+        }
     }
 
     &.small {

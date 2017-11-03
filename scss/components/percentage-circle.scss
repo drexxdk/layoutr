@@ -1,0 +1,86 @@
+﻿/// <reference path="../references" />
+
+.percentage-circle {
+    position: relative;
+    font-size: 80px;
+    width: 1em;
+    height: 1em;
+    @include border-radius(50%);
+    background-color: $component-border-color;
+
+    .pie {
+        position: absolute;
+        border: $percentage-circle-width solid $percentage-circle-primary-color;
+        width: 1em;
+        height: 1em;
+        clip: rect(0em, 0.5em, 1em, 0em);
+        border-radius: 50%;
+        @include rotate(0);
+    }
+
+    > span {
+        // centered value inside circle
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 3.33em;
+        line-height: 3.33em;
+        font-size: 0.3em;
+        font-weight: bold;
+        color: $percentage-circle-primary-color;
+        display: block;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    &:after {
+        // background inside the circle
+        position: absolute;
+        top: $percentage-circle-width;
+        left: $percentage-circle-width;
+        display: block;
+        content: '';
+        background-color: $percentage-circle-bg-color;
+        width: 1 - (2 * $percentage-circle-width);
+        height: 1 - (2 * $percentage-circle-width);
+        @include border-radius(50%);
+    }
+
+    .slice {
+        // the slice (mask)
+        position: absolute;
+        width: 1em;
+        height: 1em;
+        clip: rect(0em, 1em, 1em, 0.5em);
+    }
+
+    .bar {
+        // circle to show the status
+        @extend .pie;
+    }
+
+    @for $j from 51 through 100 {
+        // loop to create all needed elements automatically
+        &.p#{$j} .slice {
+            clip: rect(auto, auto, auto, auto);
+        }
+
+        &.p#{$j} .bar:after {
+            @include rotate(180);
+        }
+
+        &.p#{$j} .fill {
+            @extend .pie;
+            @include rotate(180);
+        }
+    }
+
+    @for $j from 1 through 100 {
+        // loop to rotate all 100 circles
+        &.p#{$j} .bar {
+            @include rotate(360/100*$j);
+        }
+    }
+}

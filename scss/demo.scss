@@ -87,3 +87,9 @@
 #youtube {
     width: 100%;
 }
+
+#lighthouse {
+    > div {
+        width:rem(168px);
+    }
+}
