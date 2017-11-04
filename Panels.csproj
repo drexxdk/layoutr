@@ -99,7 +99,6 @@
     <Content Include="js\app\accordion.js" />
     <Content Include="js\app\alert.js" />
     <Content Include="js\app\android.js" />
-    <Content Include="js\app\tooltip.js" />
     <Content Include="js\app\_app.js" />
     <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
@@ -195,7 +194,7 @@
     <Content Include="scss\components\loading.scss" />
     <Content Include="scss\components\fullscreen.scss" />
     <Content Include="scss\components\list.scss" />
-    <Content Include="scss\components\tooltip.scss" />
+    <Content Include="scss\components\percentage-circle.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

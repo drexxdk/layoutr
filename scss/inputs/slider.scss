@@ -10,6 +10,56 @@
         @include hidden-input;
     }
 
+    .slider-track,
+    .slider-tick,
+    .slider-selection.tick-slider-selection {
+        background-color: $slider-background-color-1;
+    }
+
+    .slider-track {
+        @include border-radius($component-border-radius);
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .slider-selection {
+        @include border-radius($component-border-radius);
+        position: absolute;
+    }
+
+    .slider-handle {
+        position: absolute;
+        top: 0;
+        width: $slider-line-height;
+        height: $slider-line-height;
+        background-color: $slider-background-color-2;
+        border: none;
+        cursor: pointer;
+
+        &.round {
+            @include border-radius($slider-line-height);
+        }
+    }
+
+    .slider-tick {
+        @include box-sizing(border-box);
+        position: absolute;
+        width: $slider-line-height;
+        height: $slider-line-height;
+        filter: none;
+        opacity: 0.8;
+        border: none;
+
+        &.round {
+            @include border-radius(50%);
+        }
+
+        &.in-selection {
+            opacity: 1;
+        }
+    }
+
+
     &.slider-horizontal {
         margin: 0 ($slider-line-height / 2);
         height: $slider-line-height;
@@ -76,72 +126,76 @@
         display: none;
     }
 
-    .tooltip-inner {
-        white-space: nowrap;
-        max-width: none;
-    }
-
     .tooltip {
-        &.top {
-            margin-top: -36px;
-        }
-    }
+        position: absolute;
+        @include translateX(-50%);
+        margin-left: 0 !important;
 
-    .tooltip-inner {
-        white-space: nowrap;
-        max-width: none;
+        &:not(.in) {
+            display: none;
+        }
+
+        &.top {
+            bottom: calc(100% + #{$spacer / 2});
+
+            > .tooltip-arrow {
+                border-top: ($spacer / 2) solid $component-border-color;
+                top: calc(100% - #{$component-border-width});
+
+                &:after {
+                    top: -($spacer / 2);
+                    border-top: (($spacer / 2) - ($component-border-width)) solid theme-color("dark");
+                }
+            }
+        }
+
+        &.bottom {
+            top: calc(100% + #{$spacer / 2});
+
+            > .tooltip-arrow {
+                border-bottom: ($spacer / 2) solid $component-border-color;
+                bottom: calc(100% - #{$component-border-width});
+
+                &:after {
+                    bottom: -($spacer / 2);
+                    border-bottom: (($spacer / 2) - ($component-border-width)) solid theme-color("dark");
+                }
+            }
+        }
+
+        > .tooltip-inner {
+            white-space: nowrap;
+            max-width: none;
+            padding: $padding-y $padding-x;
+            background-color: theme-color("dark");
+            @include color-yiq(theme-color("dark"));
+            @include border-radius($component-border-radius);
+            border: $component-border;
+        }
+
+        > .tooltip-arrow {
+            width: 0;
+            height: 0;
+            border-left: ($spacer / 2) solid transparent;
+            border-right: ($spacer / 2) solid transparent;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+            &:after {
+                content: '';
+                position: absolute;
+                left: -($spacer / 2);
+                width: 0;
+                height: 0;
+                margin-left: $component-border-width;
+                border-left: (($spacer / 2) - ($component-border-width)) solid transparent;
+                border-right: (($spacer / 2) - ($component-border-width)) solid transparent;
+            }
+        }
     }
 
     .hide {
         display: none;
-    }
-}
-
-.slider-track,
-.slider-tick,
-.slider-selection.tick-slider-selection {
-    background-color: $slider-background-color-1;
-}
-
-.slider-track {
-    @include border-radius($component-border-radius);
-    position: absolute;
-    cursor: pointer;
-}
-
-.slider-selection {
-    @include border-radius($component-border-radius);
-    position: absolute;
-}
-
-.slider-handle {
-    position: absolute;
-    top: 0;
-    width: $slider-line-height;
-    height: $slider-line-height;
-    background-color: $slider-background-color-2;
-    border: none;
-    cursor: pointer;
-
-    &.round {
-        @include border-radius($slider-line-height);
-    }
-}
-
-.slider-tick {
-    @include box-sizing(border-box);
-    position: absolute;
-    width: $slider-line-height;
-    height: $slider-line-height;
-    filter: none;
-    opacity: 0.8;
-    border: none;
-
-    &.round {
-        @include border-radius(50%);
-    }
-
-    &.in-selection {
-        opacity: 1;
     }
 }

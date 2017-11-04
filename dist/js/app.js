@@ -793,7 +793,7 @@ app.page1 = function () {
             max: 20,
             step: 2,
             value: 16,
-            tooltip: "hide"
+            //tooltip: "hide"
         }).on('change', function () {
             var $this = $(this);
             var id = $this.attr('id');
