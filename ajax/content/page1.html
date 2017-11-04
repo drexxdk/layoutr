@@ -11,51 +11,6 @@
 <div class="content">
     <div>
         <section>
-            <h2>Lighthouse</h2>
-            <div id="lighthouse" class="flex-items column wrap grow">
-                <div class="flex-items center">
-                    <div class="percentage-circle p100 theme-success">
-                        <span>100</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <span>Progressive Web App</span>
-                </div>
-                <div class="flex-items center">
-                    <div class="percentage-circle p86 theme-success">
-                        <span>86</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <span>Performance</span>
-                </div>
-                <div class="flex-items center">
-                    <div class="percentage-circle p94 theme-success">
-                        <span>94</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <span>Accessibility</span>
-                </div>
-                <div class="flex-items center">
-                    <div class="percentage-circle p100 theme-success">
-                        <span>100</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <span>Best Practices</span>
-                </div>
-            </div>
-        </section>
-        <section>
             <h2>Introduction</h2>
             <div class="alert">
                 <div>
@@ -75,16 +30,18 @@
                     </ul>
                 </div>
             </div>
+        </section>
+        <section>
             <h2>Some of the features</h2>
             <div class="alert theme-info">
                 <div>
                     <ul class="list">
                         <li>
-                            Keyboard controls:
+                            <b>Keyboard controls</b>
                             <ul>
-                                <li><b>Left arrow key</b> opens settings or closes navigation if it is open.</li>
-                                <li><b>Right arrow key</b> opens navigation or closes settings if it is open.</li>
-                                <li><b>ESC key</b> closes aside, popups and fullscreen.</li>
+                                <li><b>Left arrow key</b>: Opens settings or closes navigation if it is open.</li>
+                                <li><b>Right arrow key</b>: Opens navigation or closes settings if it is open.</li>
+                                <li><b>ESC key</b>: Closes aside, popups and fullscreen.</li>
                             </ul>
                         </li>
                         <li>
@@ -132,6 +89,77 @@
                     </ul>
                 </div>
             </div>
+        </section>
+        <section>
+            <h2>Settings</h2>
+            <div class="alert">
+                <div>
+                    <ul class="list">
+                        <li>
+                            <b>Fixed footer</b>
+                            <ul>
+                                <li>
+                                    <b>Enabled</b>: Footer is fixed at bottom of screen.
+                                    Disabled for mobile.
+                                </li>
+                                <li>
+                                    <b>Disabled</b>: Footer is shown below content.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Two columns</b>
+                            <ul>
+                                <li>
+                                    <b>Enabled</b>: Content is displayed in two columns.<br />
+                                    Content is displayed in one column untill the screen is wide enough to switch to two columns
+                                </li>
+                                <li>
+                                    <b>Disabled</b>: Content is displayed in one column.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Transitions</b>
+                            <ul>
+                                <li>
+                                    <b>Enabled</b>:Layout uses transitions for the layout.<br />
+                                    Disabled for Edge and IE since they can't display transitions for elements that uses calc().
+                                </li>
+                                <li>
+                                    <b>Disabled</b>: Layout doesn't use transitions for the layout.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Push</b>
+                            <ul>
+                                <li>
+                                    <b>Enabled</b>: Aside pushes content<br />
+                                    Aside opens on top of content untill the screen is wide enough for it to push content.
+                                </li>
+                                <li>
+                                    <b>Disabled</b>: Aside opens on top of content.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Close on click outside</b>
+                            <ul>
+                                <li>
+                                    <b>Enabled</b>: Close aside when clicking outside it, unless target is #loading, #fullscreen or .popup.<br />
+                                    Always enabled when aside isn't pushing content.
+                                </li>
+                                <li>
+                                    <b>Disabled</b>: Don't close aside when clicking outside it.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
             <h2>Bugs</h2>
             <div class="alert theme-danger">
                 <div>
@@ -143,6 +171,51 @@
                             <b>Edge/IE</b> cannot correctly display transitions on elements that uses calc(). Transitions are therefore disabled for the layout in those browsers.
                         </li>
                     </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Lighthouse</h2>
+            <div id="lighthouse" class="flex-items column wrap grow">
+                <div class="flex-items center">
+                    <div class="percentage-circle p100 theme-success">
+                        <span>100</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <span>Progressive Web App</span>
+                </div>
+                <div class="flex-items center">
+                    <div class="percentage-circle p86 theme-success">
+                        <span>86</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <span>Performance</span>
+                </div>
+                <div class="flex-items center">
+                    <div class="percentage-circle p94 theme-success">
+                        <span>94</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <span>Accessibility</span>
+                </div>
+                <div class="flex-items center">
+                    <div class="percentage-circle p100 theme-success">
+                        <span>100</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <span>Best Practices</span>
                 </div>
             </div>
         </section>
