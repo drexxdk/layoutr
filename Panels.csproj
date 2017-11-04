@@ -123,9 +123,6 @@
     <Content Include="js\vendors\loadCSS\onloadCSS.js" />
     <Content Include="js\app\loadCSS.js" />
     <Content Include="js\vendors\jquery\jquery-3.1.1.min.js" />
-    <Content Include="js\vendors\jquery\jquery-3.1.1.min.min.js">
-      <DependentUpon>jquery-3.1.1.min.js</DependentUpon>
-    </Content>
     <Content Include=".gitignore" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
@@ -196,6 +193,9 @@
     <Content Include="scss\components\fullscreen.scss" />
     <Content Include="scss\components\list.scss" />
     <Content Include="scss\components\percentage-circle.scss" />
+    <Content Include="dist\js\app.min.js.gz">
+      <DependentUpon>app.min.js</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

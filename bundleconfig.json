@@ -35,7 +35,10 @@
       "js/app/fullscreen.js",
       "js/app/android.js"
     ],
-    "minify": { "enabled": true }
+    "minify": {
+      "enabled": true,
+      "gzip": true
+    }
   },
   {
     "outputFileName": "serviceWorker.js",
