@@ -16,7 +16,6 @@
       "js/vendors/jquery/validate/jquery.validate.min.js",
       "js/vendors/jquery/jquery.lazyload.min.js",
       "js/vendors/bootstrap-slider.min.js",
-      //"js/vendors/jquery/jquery.resize.min.js",
       "js/vendors/bowser.js",
       "js/app/_app.js",
       "js/app/form.js",
