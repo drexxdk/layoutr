@@ -11,8 +11,7 @@ app.page1 = function () {
             min: 12,
             max: 20,
             step: 2,
-            value: 16,
-            //tooltip: "hide"
+            value: 16
         }).on('change', function () {
             var $this = $(this);
             var id = $this.attr('id');
