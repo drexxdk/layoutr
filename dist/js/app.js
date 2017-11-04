@@ -1316,29 +1316,35 @@ var app = app || {};
 
 $(function () {
     if (app.html.hasClass('android')) {
+        
+        var pageYOffset;
+        var lastTouchY = 0;
+        var touchstartHandler = function (e) {
+            if (e.touches.length != 1) return;
+            lastTouchY = e.touches[0].clientY;
+            // Pull-to-refresh will only trigger if the scroll begins when the
+            // document's Y offset is zero.
+            pageYOffset = window.pageYOffset == 0;
+        }
 
-        var setTouchAndSwipe = function (element, scrollElement, scrollTopElement) {
-            if (scrollElement === undefined) {
-                scrollElement = element;
-            }
-            if (scrollTopElement === undefined) {
-                scrollTopElement = element;
-            }
-
-            element.css("touch-action", "pan-down");
-            scrollElement.scroll(function () {
-                // this disables page refresh when swiping down
-                if (scrollTopElement.scrollTop() > 0) {
-                    element.css("touch-action", "auto");
-                } else {
-                    element.css("touch-action", "pan-down");
+        var touchmoveHandler = function (e) {
+            var touchY = e.touches[0].clientY;
+            var touchYDelta = touchY - lastTouchY;
+            lastTouchY = touchY;
+            if (pageYOffset) {
+                // To suppress pull-to-refresh it is sufficient to preventDefault the
+                // first overscrolling touchmove.
+                pageYOffset = false;
+                if (touchYDelta > 0) {
+                    e.preventDefault();
+                    return;
                 }
-            });
-        };
+            }
+        }
 
-        var viewport = app.head.find('meta[name="viewport"]');
-        viewport.attr('content', viewport.attr('content') + ', maximum-scale=1.0, user-scalable=no');
-
+        document.addEventListener('touchstart', touchstartHandler, { passive: false });
+        document.addEventListener('touchmove', touchmoveHandler, { passive: false });
+        
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
         app.fullscreen.img.css('max-height', window.innerHeight);
@@ -1350,9 +1356,5 @@ $(function () {
         app.main.on('click', '.fullscreen', function () {
             app.fullscreen.img.css('max-height', window.innerHeight);
         });
-
-        setTouchAndSwipe(app.body, $(window), $(document));
-        setTouchAndSwipe(app.left.children('.content'));
-        setTouchAndSwipe(app.right.children('.content'));
     }
 });
