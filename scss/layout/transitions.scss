@@ -24,12 +24,7 @@ html:not(.msedge):not(.msie).transitions {
 
     &.two-columns {
         #content .header {
-
-            &:not(.no-transitions) {
-                @include transition(width $transition-time $transition-timing, left $transition-time $transition-timing);
-            }
+            @include transition(width $transition-time $transition-timing, left $transition-time $transition-timing);
         }
     }
-
-
 }

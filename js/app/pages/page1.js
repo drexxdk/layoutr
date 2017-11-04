@@ -2,6 +2,7 @@
 
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
+        app.toggleAside();
         app.contentHeader = app.content.children('.header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));

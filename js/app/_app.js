@@ -62,6 +62,7 @@ $(function () {
 
     app.toggleAside = function (aside) {
         if (!transitionLock) {
+            setTimeout(function () {
             transitionLock = true;
             var currentAside = app.html.attr('data-aside');
             if (currentAside.length) {
@@ -83,6 +84,7 @@ $(function () {
                 app.checkGoogleMaps();
             }
             app.setHtmlScroll();
+            }, 0);
         }
     };
 

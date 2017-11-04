@@ -679,6 +679,7 @@ $(function () {
 
     app.toggleAside = function (aside) {
         if (!transitionLock) {
+            setTimeout(function () {
             transitionLock = true;
             var currentAside = app.html.attr('data-aside');
             if (currentAside.length) {
@@ -700,6 +701,7 @@ $(function () {
                 app.checkGoogleMaps();
             }
             app.setHtmlScroll();
+            }, 0);
         }
     };
 
@@ -785,6 +787,7 @@ var app = app || {};
 
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
+        app.toggleAside();
         app.contentHeader = app.content.children('.header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
@@ -902,6 +905,7 @@ var app = app || {};
 
 app.page2 = function () {
     app.content.load('ajax/content/page2.html', function () {
+        app.toggleAside();
         app.contentHeader = app.content.children('.header');
         app.fireflies(app.contentHeader.find('canvas'), ['rgba(32,32,32,', 'rgba(128,128,128,']);
     });
