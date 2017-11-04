@@ -20,6 +20,7 @@
       "js/app/_app.js",
       "js/app/form.js",
       "js/app/pages/page1.js",
+      "js/app/pages/page2.js",
       "js/app/scroll.js",
       "js/app/accordion.js",
       "js/app/dropdown.js",
@@ -32,7 +33,8 @@
       "js/app/lazyload.js",
       "js/app/keyboard.js",
       "js/app/fullscreen.js",
-      "js/app/android.js"
+      "js/app/android.js",
+      "js/app/fireflies.js"
     ],
     "minify": { "enabled": true }
   },

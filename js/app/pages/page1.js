@@ -6,7 +6,8 @@ app.page1 = function () {
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
-        
+        app.fireflies(app.contentHeader.find('canvas'));
+
         app.content.find('#font-size').slider({
             min: 12,
             max: 20,
