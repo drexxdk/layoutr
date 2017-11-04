@@ -2,12 +2,13 @@
 
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
-        app.toggleAside();
+        setTimeout(function () {
+            app.toggleAside();
+        }, 200);
         app.contentHeader = app.content.children('.header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
-        app.fireflies(app.contentHeader.find('canvas'));
 
         app.content.find('#font-size').slider({
             min: 12,

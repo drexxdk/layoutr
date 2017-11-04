@@ -62,7 +62,6 @@ $(function () {
 
     app.toggleAside = function (aside) {
         if (!transitionLock) {
-            setTimeout(function () {
             transitionLock = true;
             var currentAside = app.html.attr('data-aside');
             if (currentAside.length) {
@@ -84,7 +83,6 @@ $(function () {
                 app.checkGoogleMaps();
             }
             app.setHtmlScroll();
-            }, 0);
         }
     };
 
@@ -125,7 +123,7 @@ $(window).click(function (e) {
     var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
     var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
-    if ((left || right) && notTarget ) {
+    if ((left || right) && notTarget) {
         app.enableScroll();
         app.html.attr('data-aside', '');
         app.checkGoogleMaps();
