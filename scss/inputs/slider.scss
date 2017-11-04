@@ -5,6 +5,7 @@
     vertical-align: middle;
     position: relative;
     z-index: $component-z-index;
+    @include noselect;
 
     + input {
         @include hidden-input;
