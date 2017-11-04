@@ -99,6 +99,7 @@
     <Content Include="js\app\accordion.js" />
     <Content Include="js\app\alert.js" />
     <Content Include="js\app\android.js" />
+    <Content Include="js\app\pages\page2.js" />
     <Content Include="js\app\_app.js" />
     <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
