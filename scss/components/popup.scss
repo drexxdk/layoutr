@@ -1,12 +1,12 @@
 ﻿/// <reference path="../references" />
 
-main {
+html {
     &.footer-fixed:not(.mobile) {
-        .popup[data-position*="middle"] {
+        .popup.middle {
             top: 50% !important;
         }
 
-        .popup[data-position*="bottom"] {
+        .popup.bottom {
             bottom: $footer-height !important;
         }
     }
