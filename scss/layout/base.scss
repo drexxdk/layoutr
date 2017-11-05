@@ -2,9 +2,9 @@
 
 html {
     overflow-y: scroll;
+    overflow-x: hidden;
 
     &.scrollDisabled {
-        overflow-y: scroll;
 
         &.msedge,
         &.msie {

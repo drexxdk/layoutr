@@ -3,13 +3,10 @@
 app.disableScroll = function () {
     if (app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = false;
-        var scrollPosition = [
-            self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
-            self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-        ];
-        app.body.data('scroll-position', scrollPosition);
+        var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        app.body.data('scroll-top', scrollTop);
         app.html.addClass('scrollDisabled');
-        app.body.scrollTop(scrollPosition[1]).scrollLeft(scrollPosition[0]);
+        app.body.scrollTop(scrollTop);
     }
 };
 
@@ -17,8 +14,8 @@ app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         app.html.removeClass('scrollDisabled');
-        var scrollPosition = app.body.data('scroll-position');
-        window.scrollTo(scrollPosition[0], scrollPosition[1]);
+        var scrollTop = app.body.data('scroll-top');
+        app.html.scrollTop(scrollTop);
 
         if (bowser.msie && !app.html.hasClass('footer-fixed')) {
             // ie pushes footer out of view without this fix
