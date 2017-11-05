@@ -6,8 +6,10 @@
     @include box-sizing();
 }
 
-html,
-body {
+html:not(.msedge),
+html:not(.msedge) body {
+    // app.disableScroll() doesn't work correctly in edge if html and body has height.
+    // if it has height, edge will return to top of page when calling app.disableScroll().
     height: 100vh;
 }
 
