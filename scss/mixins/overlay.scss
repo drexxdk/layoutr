@@ -2,9 +2,8 @@
 
 @mixin overlay {
     position: fixed;
-    top: -$extra-spacing;
-    bottom: -$extra-spacing;
-    left: -$extra-spacing;
-    right: -$extra-spacing;
-    margin:$extra-spacing;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
 }
