@@ -6,20 +6,19 @@ html {
 
     &.scrollDisabled {
 
-        &.msedge,
+        /*&.msedge,
         &.msie {
             height: calc(100% - .5px);
 
             body {
                 height: calc(100% - .5px);
             }
-        }
+        }*/
 
-        &:not(.msedge) {
-            body {
+            main {
                 overflow: hidden;
             }
-        }
+        
     }
 
     &[data-aside="left"] {
@@ -66,6 +65,11 @@ html {
 }
 
 main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom:0;
     height: 100%;
     @include flex-display;
     @include flex-direction(column);

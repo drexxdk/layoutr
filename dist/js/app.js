@@ -649,9 +649,9 @@ $(function () {
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
 
     if (bowser.msedge) {
-        app.html.addClass('msedge'); // used to exclude layout transitions
+        app.html.addClass('msedge'); // used by app.enableScroll()
     } else if (bowser.msie) {
-        app.html.addClass('msie'); // used to exclude layout transitions
+        app.html.addClass('msie'); // not currently used for anything
     }
     if (bowser.mobile) {
         app.html.addClass('mobile'); // disables fixed footer
@@ -912,9 +912,9 @@ app.disableScroll = function () {
     if (app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = false;
         var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-        app.body.data('scroll-top', scrollTop);
+        app.html.data('scroll-top', scrollTop);
         app.html.addClass('scrollDisabled');
-        app.body.scrollTop(scrollTop);
+        app.main.scrollTop(scrollTop);
     }
 };
 
@@ -922,15 +922,12 @@ app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         app.html.removeClass('scrollDisabled');
-        var scrollTop = app.body.data('scroll-top');
-        app.html.scrollTop(scrollTop);
+        var scrollTop = app.html.data('scroll-top');
 
-        if (bowser.msie && !app.html.hasClass('footer-fixed')) {
-            // ie pushes footer out of view without this fix
-            app.footer.css('position', 'fixed');
-            setTimeout(function () {
-                app.footer.css('position', '');
-            }, 0);
+        if (app.html.hasClass('msedge')) {
+            app.body.scrollTop(scrollTop);
+        } else {
+            app.html.scrollTop(scrollTop);
         }
     }
 };

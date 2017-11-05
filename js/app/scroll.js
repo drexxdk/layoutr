@@ -4,9 +4,9 @@ app.disableScroll = function () {
     if (app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = false;
         var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-        app.body.data('scroll-top', scrollTop);
+        app.html.data('scroll-top', scrollTop);
         app.html.addClass('scrollDisabled');
-        app.body.scrollTop(scrollTop);
+        app.main.scrollTop(scrollTop);
     }
 };
 
@@ -14,15 +14,12 @@ app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         app.html.removeClass('scrollDisabled');
-        var scrollTop = app.body.data('scroll-top');
-        app.html.scrollTop(scrollTop);
+        var scrollTop = app.html.data('scroll-top');
 
-        if (bowser.msie && !app.html.hasClass('footer-fixed')) {
-            // ie pushes footer out of view without this fix
-            app.footer.css('position', 'fixed');
-            setTimeout(function () {
-                app.footer.css('position', '');
-            }, 0);
+        if (app.html.hasClass('msedge')) {
+            app.body.scrollTop(scrollTop);
+        } else {
+            app.html.scrollTop(scrollTop);
         }
     }
 };

@@ -32,9 +32,9 @@ $(function () {
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
 
     if (bowser.msedge) {
-        app.html.addClass('msedge'); // used to exclude layout transitions
+        app.html.addClass('msedge'); // used by app.enableScroll()
     } else if (bowser.msie) {
-        app.html.addClass('msie'); // used to exclude layout transitions
+        app.html.addClass('msie'); // not currently used for anything
     }
     if (bowser.mobile) {
         app.html.addClass('mobile'); // disables fixed footer
