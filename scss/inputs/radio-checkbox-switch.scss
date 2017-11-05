@@ -103,8 +103,10 @@
                 content: "";
                 height: $font-size - ($component-border-width * 2);
                 width: $font-size - ($component-border-width * 2);
-                left: $component-border-width;
-                bottom: $component-border-width;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                border: $component-border-width solid $component-border-color;
                 background-color: white;
                 @include transition(.4s);
             }
