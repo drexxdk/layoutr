@@ -924,11 +924,8 @@ app.enableScroll = function () {
         app.html.removeClass('scrollDisabled');
         var scrollTop = app.html.data('scroll-top');
 
-        if (app.html.hasClass('msedge')) {
-            app.body.scrollTop(scrollTop);
-        } else {
-            app.html.scrollTop(scrollTop);
-        }
+        app.body.scrollTop(scrollTop); // edge, safari
+        app.html.scrollTop(scrollTop); // chrome, firefox, ie
     }
 };
 

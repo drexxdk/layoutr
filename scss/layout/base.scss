@@ -5,7 +5,6 @@ html {
     overflow-x: hidden;
 
     &.scrollDisabled {
-
         /*&.msedge,
         &.msie {
             height: calc(100% - .5px);
@@ -14,11 +13,9 @@ html {
                 height: calc(100% - .5px);
             }
         }*/
-
-            main {
-                overflow: hidden;
-            }
-        
+        main {
+            overflow: hidden;
+        }
     }
 
     &[data-aside="left"] {
@@ -69,8 +66,8 @@ main {
     top: 0;
     left: 0;
     right: 0;
-    bottom:0;
-    height: 100%;
+    bottom: 0;
+    height: 100vh;
     @include flex-display;
     @include flex-direction(column);
 }
