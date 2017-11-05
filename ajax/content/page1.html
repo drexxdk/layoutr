@@ -186,10 +186,25 @@
                 <div>
                     <ul class="list">
                         <li>
-                            <b>Chrome Desktop/IE</b> cannot correctly display rem values. This causes some components like 'switch' to be displayed wrong at some zoom levels.
+                            <b>Major</b>
+                            <ul>
+                                <li>
+                                    <b>Edge</b> can't handle css html{overflow-y: scroll;} correctly, that gets applied by app.disableScroll(). It has been disabled for that browser untill a solution is found.
+                                </li>
+                                <li>
+                                    <b>Edge/IE</b> doesn't support object-fit. Cover images are therefore made with background-image, 
+                                    but that can't load image based on browser window width, unless it is done with javascript.<br />
+                                    Have tried using polyfills, but can't get them to work.
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <b>Edge</b> can't handle css html{overflow-y: scroll;} correctly, that gets applied by app.disableScroll(). It has been disabled for that browser untill a solution is found.
+                            <b>Minor</b>
+                            <ul>
+                                <li>
+                                    <b>Chrome Desktop/IE</b> cannot correctly display rem values. This causes some components like 'switch' to be displayed wrong at some zoom levels.
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
