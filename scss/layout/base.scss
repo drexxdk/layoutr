@@ -98,10 +98,6 @@ aside > .header {
             fill: $aside-icon-hover-background-color;
         }
 
-        &.close {
-            /*@include rotate(45);*/
-        }
-
         > svg {
             margin-top: 50%;
             margin-left: 50%;
@@ -115,7 +111,14 @@ aside > .header {
 }
 
 #fullscreen, #loading {
-    @include overlay;
-    background-color: $overlay-background-color;
     @include flex-center;
+    @include overlay;
+    height: 100%;
+
+    &:before {
+        content: '';
+        @include overlay;
+        height: 100vh;
+        background-color: $overlay-background-color;
+    }
 }

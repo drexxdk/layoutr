@@ -33,6 +33,7 @@ html {
         &[data-aside="left"] #content:before,
         &[data-aside="right"] #content:before {
             @include overlay;
+            height: 100vh;
             content: '';
             z-index: $overlay-z-index;
             background-color: $content-overlay-background-color;
@@ -43,6 +44,7 @@ html {
         &:not(.left-push)[data-aside="left"] #content:before,
         &:not(.right-push)[data-aside="right"] #content:before {
             @include overlay;
+            height: 100vh;
             content: '';
             z-index: $overlay-z-index;
             background-color: $content-overlay-background-color;
