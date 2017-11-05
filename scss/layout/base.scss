@@ -3,7 +3,7 @@
 html {
     overflow-y:scroll;
     &.scrollDisabled {
-        /*overflow-y: scroll;*/
+        overflow-y: scroll;
 
         &.msedge,
         &.msie {
