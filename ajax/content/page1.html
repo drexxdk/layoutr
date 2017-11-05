@@ -1,11 +1,13 @@
-﻿<div class="header overlay-dark cover" style="background-image: url(dist/img/wonder-woman-1920-1080.jpg)">
-    <div>
-        <span class="title">Wonder Woman</span>
-        <span class="author">DC Comics</span>
-        <div class="position bottom left"><div>test</div></div>
-        <div class="position bottom right"><div>test</div></div>
-        <div class="position top left"><div>test</div></div>
-        <div class="position top right"><div>test</div></div>
+﻿<div class="header">
+    <div class="overlay-dark cover" style="background-image: url(dist/img/wonder-woman-1920-1080.jpg)">
+        <div>
+            <span class="title">Wonder Woman</span>
+            <span class="author">DC Comics</span>
+            <div class="position bottom left"><div>test</div></div>
+            <div class="position bottom right"><div>test</div></div>
+            <div class="position top left"><div>test</div></div>
+            <div class="position top right"><div>test</div></div>
+        </div>
     </div>
 </div>
 <div class="content">
@@ -70,6 +72,9 @@
                         </li>
                         <li>
                             <b>Scroll</b> is disabled for the site, when displaying fullscreen image, aside without push and loading.
+                        </li>
+                        <li>
+                            <b>Transitions</b> Made transitions work in all browsers by replacing all calc() used in transitions with margin/padding alternative.
                         </li>
                         <li>
                             <b>Android</b>
@@ -182,9 +187,6 @@
                     <ul class="list">
                         <li>
                             <b>Chrome Desktop/IE</b> cannot correctly display rem values. This causes some components like 'switch' to be displayed wrong at some zoom levels.
-                        </li>
-                        <li>
-                            <b>Edge/IE</b> cannot correctly display transitions on elements that uses calc(). Transitions are therefore disabled for the layout in those browsers.
                         </li>
                         <li>
                             <b>Edge</b> can't handle css html{overflow-y: scroll;} correctly, that gets applied by app.disableScroll(). It has been disabled for that browser untill a solution is found. 

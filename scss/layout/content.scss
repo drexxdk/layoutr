@@ -10,18 +10,23 @@
             overflow: hidden;
 
             > div {
-                position: absolute;
-                z-index: 3;
-                @include flex-center;
-                @include flex-direction(column);
-                top: 0;
-                bottom: 0;
-                left: 50%;
-                @include translateX(-50%);
-                max-width: $content-max-width - ($spacer * 2);
-                text-align: center;
                 width: 100%;
-                padding: $spacer;
+                height: 100%;
+
+                > div {
+                    z-index: 2;
+                    position: absolute;
+                    @include flex-center;
+                    @include flex-direction(column);
+                    top: 0;
+                    bottom: 0;
+                    left: 50%;
+                    @include translateX(-50%);
+                    max-width: $content-max-width - ($spacer * 2);
+                    text-align: center;
+                    width: 100%;
+                    padding: $spacer;
+                }
 
                 .title {
                     display: block;
@@ -46,7 +51,7 @@
             @include justify-content(center);
 
             > div {
-                z-index: 3;
+                z-index: 1;
                 padding: $spacer;
                 background-color: $layout-background-color;
                 @include align-self(center);

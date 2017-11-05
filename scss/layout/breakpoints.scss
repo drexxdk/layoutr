@@ -1,35 +1,11 @@
 ﻿/// <reference path="../references" />
 
-@mixin breakpoint-main-min-width {
-    @media (min-width: $breakpoint-main-min-width) {
-        @content;
-    }
-}
-
-@mixin breakpoint-small-one-column {
-    @media (max-width: $breakpoint-one-column) {
-        @content;
-    }
-}
-
-@mixin breakpoint-medium-one-column {
-    @media (min-width: $breakpoint-one-column) {
-        @content;
-    }
-}
-
-@mixin breakpoint-two-columns {
-    @media (min-width: $breakpoint-two-columns) {
-        @content;
-    }
-}
-
 html {
     @include breakpoint-main-min-width {
 
         #content > div {
             > .header {
-                > div {
+                > div > div {
                     left: calc(50% - #{$spacer * 2});
                     margin: 0 ($spacer * 2);
                     width: calc(100% - #{$spacer * 4});
@@ -112,12 +88,6 @@ html {
     &.two-columns {
         @include breakpoint-two-columns {
 
-            &[data-aside="left"].left-push,
-            &[data-aside="right"].right-push {
-                #content > div > .header {
-                    width: calc(50% - #{$aside-width / 2});
-                }
-            }
 
             &[data-aside="left"].left-push #content > div > .header {
                 left: $aside-width;
@@ -139,16 +109,18 @@ html {
                         position: fixed;
                         top: $header-height;
                         left: 0;
-                        width: 50%;
+                        width: 50% !important;
                         height: auto;
 
                         > div {
-                            top: 0;
-                            bottom: 0;
-                            left: 50%;
-                            margin: 0;
-                            width: 100%;
-                            max-width: 100%;
+
+                            > div {
+                                margin: 0;
+                                width: 100%;
+                                max-width: 100%;
+                                left: 50%;
+                                bottom: 0;
+                            }
                         }
 
                         & + .content {

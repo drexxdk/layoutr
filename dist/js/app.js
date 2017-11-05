@@ -621,10 +621,6 @@ app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
 };
 
-app.hasTransitions = function () {
-    return app.html.hasClass('transitions') && !app.html.hasClass('msedge') && !app.html.hasClass('msie');
-};
-
 $.ajaxSetup({
     // Disable caching of AJAX responses
     cache: false
@@ -690,7 +686,7 @@ $(function () {
             } else {
                 app.html.attr('data-aside', aside);
             }
-            if (app.hasTransitions()) {
+            if (app.html.hasClass('transitions')) {
                 setTimeout(function () {
                     transitionLock = false;
                     app.checkGoogleMaps();
@@ -1043,7 +1039,7 @@ var googleMaps, google;
 
 app.checkGoogleMaps = function () {
     if (googleMaps !== undefined && google !== undefined) {
-        if (app.hasTransitions()) {
+        if (app.html.hasClass('transitions')) {
             setTimeout(function () {
                 google.maps.event.trigger(googleMaps, 'resize');
             }, app.transitionTime);

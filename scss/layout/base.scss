@@ -1,7 +1,8 @@
 ﻿/// <reference path="../references" />
 
 html {
-    overflow-y:scroll;
+    overflow-y: scroll;
+
     &.scrollDisabled {
         overflow-y: scroll;
 
@@ -38,6 +39,14 @@ html {
             > .content {
                 @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
             }
+        }
+    }
+
+    &[data-aside="left"].left-push,
+    &[data-aside="right"].right-push {
+        #content > div > .header {
+            margin-right: -($aside-width / 2);
+            padding-right: $aside-width / 2;
         }
     }
 
