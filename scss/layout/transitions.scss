@@ -1,7 +1,16 @@
 ﻿/// <reference path="../references" />
 
-// Edge/IE cannot correctly display transitions on elements that uses calc()
 html.transitions {
+    header,
+    footer,
+    aside,
+    .popup,
+    #content .header {
+        // force GPU rendering
+        // https://www.sitepoint.com/introduction-to-hardware-acceleration-css-animations/
+        @include translateZ(0);
+    }
+
     #left,
     .popup[data-position*="left"] {
         @include transition(left $transition-time $transition-timing);
@@ -22,8 +31,7 @@ html.transitions {
         @include transition(margin $transition-time $transition-timing);
     }
 
-        #content .header {
-            @include transition(left $transition-time $transition-timing, margin-right $transition-time $transition-timing, padding-right $transition-time $transition-timing);
-        }
-    
+    #content .header {
+        @include transition(left $transition-time $transition-timing, margin-right $transition-time $transition-timing, padding-right $transition-time $transition-timing);
+    }
 }
