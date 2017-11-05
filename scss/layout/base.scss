@@ -1,8 +1,9 @@
 ﻿/// <reference path="../references" />
 
 html {
+    overflow-y:scroll;
     &.scrollDisabled {
-        overflow-y: scroll;
+        /*overflow-y: scroll;*/
 
         &.msedge,
         &.msie {
@@ -13,8 +14,10 @@ html {
             }
         }
 
-        body {
-            overflow: hidden;
+        &:not(.msedge) {
+            body {
+                overflow: hidden;
+            }
         }
     }
 
