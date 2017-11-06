@@ -1,6 +1,0 @@
-﻿@mixin perspective ($value: 1000) {
-    -webkit-perspective: $value;
-    -moz-perspective: $value;
-    -ms-perspective: $value;
-    perspective: $value;
-}

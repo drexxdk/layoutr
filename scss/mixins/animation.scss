@@ -1,13 +1,9 @@
 ﻿@mixin animation ($name, $duration: 300ms, $delay: 0, $ease: ease) {
-    /*-moz-animation: $name $duration $delay $ease;
-    -ms-animation: $name $duration $delay $ease;*/
     -webkit-animation: $name $duration $delay $ease;
     animation: $name $duration $delay $ease;
 }
 
 @mixin animation-delay ($delay) {
-    /*-moz-animation: $name $duration $delay $ease;
-    -ms-animation: $name $duration $delay $ease;*/
     -animation-delay: $delay;
     animation-delay: $delay;
 }

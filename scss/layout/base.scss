@@ -53,7 +53,6 @@ html {
 
         footer {
             position: fixed;
-            @include backface-visibility;
             right: 0;
             bottom: 0;
             left: 0;

@@ -1,8 +1,4 @@
 ﻿@mixin transition ($transition...) {
-    /*-webkit-transition: $transition;
-    -moz-transition: $transition;
-    -ms-transition: $transition;
-    -o-transition: $transition;*/
     transition: $transition;
 }
 
@@ -11,10 +7,6 @@
 }
 
 @mixin transform($string) {
-    /*-webkit-transform: $string;
-    -moz-transform: $string;
-    -ms-transform: $string;
-    -o-transform: $string;*/
     transform: $string;
 }
 
@@ -59,9 +51,5 @@
 }
 
 @mixin transform-origin ($x: center, $y: center) {
-    /*-webkit-transform-origin: $x $y;
-    -moz-transform-origin: $x $y;
-    -ms-transform-origin: $x $y;
-    -o-transform-origin: $x $y;*/
     transform-origin: $x $y;
 }

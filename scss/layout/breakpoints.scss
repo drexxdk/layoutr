@@ -30,24 +30,32 @@ html {
     }
 
     @include breakpoint-small-one-column {
-        &[data-aside="left"] #content:before,
-        &[data-aside="right"] #content:before {
-            @include overlay;
-            height: 100vh;
-            content: '';
-            z-index: $overlay-z-index;
-            background-color: $content-overlay-background-color;
+        &[data-aside="left"] #content,
+        &[data-aside="right"] #content {
+            @include noselect;
+
+            &:before {
+                @include overlay;
+                height: 100vh;
+                content: '';
+                z-index: $overlay-z-index;
+                background-color: $content-overlay-background-color;
+            }
         }
     }
 
     @include breakpoint-medium-one-column {
-        &:not(.left-push)[data-aside="left"] #content:before,
-        &:not(.right-push)[data-aside="right"] #content:before {
-            @include overlay;
-            height: 100vh;
-            content: '';
-            z-index: $overlay-z-index;
-            background-color: $content-overlay-background-color;
+        &:not(.left-push)[data-aside="left"] #content,
+        &:not(.right-push)[data-aside="right"] #content {
+            @include noselect;
+
+            &:before {
+                @include overlay;
+                height: 100vh;
+                content: '';
+                z-index: $overlay-z-index;
+                background-color: $content-overlay-background-color;
+            }
         }
 
         &[data-aside="left"].left-push aside,
