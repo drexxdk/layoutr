@@ -1316,7 +1316,7 @@ $(function () {
                     var currentAside = app.html.attr('data-aside');
                     if (currentAside === 'left' && currentAside !== 'right') {
                         app.toggleAside();
-                    } else {
+                    } else if (currentAside !== 'right') {
                         app.toggleAside('right');
                     }
                 })
@@ -1324,7 +1324,7 @@ $(function () {
                     var currentAside = app.html.attr('data-aside');
                     if (currentAside === 'right' && currentAside !== 'left') {
                         app.toggleAside();
-                    } else {
+                    } else if (currentAside !== 'left') {
                         app.toggleAside('left');
                     }
                 });
