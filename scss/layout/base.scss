@@ -1,18 +1,22 @@
 ﻿/// <reference path="../references" />
 
+
+
 html {
     overflow-y: scroll;
     overflow-x: hidden;
 
     &.scrollDisabled {
-        /*&.msedge,
         &.msie {
+            // ie displays overflow wrong without this fix
             height: calc(100% - .5px);
 
-            body {
+            body,
+            main {
                 height: calc(100% - .5px);
             }
-        }*/
+        }
+
         main {
             overflow: hidden;
         }
