@@ -95,11 +95,16 @@
       <DependentUpon>loadCSS.js</DependentUpon>
     </Content>
     <Content Include="ajax\content\page1.html" />
+    <Content Include="dist\js\touchDevice.js" />
+    <Content Include="dist\js\touchDevice.min.js">
+      <DependentUpon>touchDevice.js</DependentUpon>
+    </Content>
     <Content Include="index.html" />
     <Content Include="js\app\accordion.js" />
     <Content Include="js\app\alert.js" />
     <Content Include="js\app\android.js" />
     <Content Include="js\app\pages\page2.js" />
+    <Content Include="js\app\touchDevice.js" />
     <Content Include="js\app\_app.js" />
     <Content Include="js\app\dropdown.js" />
     <Content Include="js\app\form.js" />
@@ -115,7 +120,10 @@
     <Content Include="js\app\youtube.js" />
     <Content Include="js\vendors\bootstrap-slider.min.js" />
     <Content Include="js\vendors\bowser.js" />
+    <Content Include="js\vendors\jquery\jquery.event.move.min.js" />
+    <Content Include="js\vendors\jquery\jquery.event.swipe.min.js" />
     <Content Include="js\vendors\jquery\jquery.lazyload.min.js" />
+    <Content Include="js\vendors\jquery\lazyYT.min.js" />
     <Content Include="js\vendors\jquery\validate\additional-methods.min.js" />
     <Content Include="js\vendors\jquery\validate\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
@@ -195,6 +203,16 @@
     <Content Include="scss\components\percentage-circle.scss" />
     <Content Include="dist\js\app.min.js.gz">
       <DependentUpon>app.min.js</DependentUpon>
+    </Content>
+    <Content Include="scss\mixins\breakpoints.scss" />
+    <Content Include="dist\js\loadCSS.min.js.gz">
+      <DependentUpon>loadCSS.min.js</DependentUpon>
+    </Content>
+    <Content Include="serviceWorker.min.js.gz">
+      <DependentUpon>serviceWorker.min.js</DependentUpon>
+    </Content>
+    <Content Include="dist\js\touchDevice.min.js.gz">
+      <DependentUpon>touchDevice.min.js</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

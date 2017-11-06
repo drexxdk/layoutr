@@ -83,6 +83,9 @@ $(function () {
     };
 
 
+    
+
+
     $('.aside.left').click(function () {
         app.toggleAside('left');
     });
