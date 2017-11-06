@@ -1,16 +1,6 @@
 ﻿/// <reference path="../references" />
 
 html.transitions {
-    header,
-    footer,
-    aside,
-    .popup,
-    #content .header {
-        // force GPU rendering
-        // https://www.sitepoint.com/introduction-to-hardware-acceleration-css-animations/
-        @include translateZ(0);
-    }
-
     #left,
     .popup[data-position*="left"] {
         @include transition(left $transition-time $transition-timing);

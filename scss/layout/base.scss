@@ -9,11 +9,11 @@ html {
     &.scrollDisabled {
         &.msie {
             // ie displays overflow wrong without this fix
-            height: calc(100% - .5px);
+            height: calc(100% - .1rem);
 
             body,
             main {
-                height: calc(100% - .5px);
+                height: calc(100% - .1rem);
             }
         }
 
