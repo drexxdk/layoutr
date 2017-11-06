@@ -9,7 +9,7 @@ $(function () {
         $.getScript("dist/js/touchDevice.js", function (data, textStatus, jqxhr) {
             app.body
                 .on('swipeleft', function (e) {
-                    if (!html.hasClass('scrollDisabled')) {
+                    if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden')) {
                         var currentAside = app.html.attr('data-aside');
                         if (currentAside === 'left' && currentAside !== 'right') {
                             app.toggleAside();
@@ -19,7 +19,7 @@ $(function () {
                     }
                 })
                 .on('swiperight', function (e) {
-                    if (!html.hasClass('scrollDisabled')) {
+                    if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden')) {
                         var currentAside = app.html.attr('data-aside');
                         if (currentAside === 'right' && currentAside !== 'left') {
                             app.toggleAside();
