@@ -123,8 +123,12 @@ $(window).click(function (e) {
         app.focus = undefined;
     }
 
-    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length) {
-        app.focus = target;
+    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
+        if (target.closest('.slider').length) {
+            app.focus = target.closest('.slider');
+        } else {
+            app.focus = target;
+        }
         app.focus.addClass('focus');
     }
 
