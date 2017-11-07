@@ -8,45 +8,54 @@
     input[type=text],
     input[type=password],
     input[type=email],
-    .dropdown > div {
+    div.dropdown > div {
         color: $color;
         fill: $color;
-        background-color: $background-light;
+        background: theme-gradient($background-light);
         border-color: $border;
 
         .focus,
         &:focus {
-            @include box-shadow($box-shadow, 0 0 0 $btn-focus-box-shadow-width $border);
+            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
         }
     }
 
-    input[type=checkbox],
-    input[type=radio] {
+    .radio input,
+    .checkbox input,
+    .switch input {
 
         & + label > i {
             border-color: $border;
-            background-color: $background-light;
+            background: theme-gradient($background-light);
         }
 
         &:checked + label > i {
-            background-color: $background-dark;
+            background: theme-gradient($background-dark);
+        }
+
+        &.focus + label > i {
+            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
         }
     }
 
-    .dropdown.open {
+    div.dropdown.open {
         > div,
         > ul {
-            @include box-shadow($box-shadow, 0 0 0 $btn-focus-box-shadow-width $border);
+            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
         }
     }
 
     .slider {
         .slider-track {
-            background-color: $background-light;
+            background: theme-gradient($background-light);
         }
 
         .slider-handle {
-            background-color:$background-dark;
+            background: theme-gradient($background-dark);
+        }
+
+        &.focus .slider-handle {
+            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
         }
     }
 
@@ -101,14 +110,14 @@
     input[type=password],
     input[type=email] {
         padding: $padding-y $padding-x;
-        @include border-radius($component-border-radius);
+        border-radius: $component-border-radius;
         border: $component-border;
         z-index: $component-z-index;
-        @include box-shadow($input-box-shadow);
+        box-shadow: $input-box-shadow;
         width: 100%;
 
         &:focus {
-            @include box-shadow($input-focus-box-shadow);
+            box-shadow: $input-focus-box-shadow;
         }
     }
 
@@ -131,13 +140,15 @@
 
                 &:first-child {
                     left: $component-border-width;
-                    @include border-radiuses-ignore-0($component-border-radius, 0, 0, $component-border-radius);
+                    border-top-left-radius: $component-border-radius;
+                    border-top-right-radius: $component-border-radius;
                     border-right: $component-border;
                 }
 
                 &:last-child {
                     right: $component-border-width;
-                    @include border-radiuses-ignore-0(0, $component-border-radius, $component-border-radius, 0);
+                    border-bottom-left-radius: $component-border-radius;
+                    border-bottom-right-radius: $component-border-radius;
                     border-left: $component-border;
                 }
 

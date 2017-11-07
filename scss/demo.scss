@@ -10,7 +10,7 @@
 
         &.center,
         &.corner {
-            @include border-radius($font-size / 4);
+            border-radius: $font-size / 4;
             overflow: hidden;
         }
 
@@ -46,7 +46,7 @@
             content: '';
             position: absolute;
             background-color: $icon-bg;
-            @include border-radius($icon-line-size / 2);
+            border-radius: $icon-line-size / 2;
         }
 
         &.top:before {

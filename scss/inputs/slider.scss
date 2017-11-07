@@ -14,18 +14,23 @@
     .slider-track,
     .slider-tick,
     .slider-selection.tick-slider-selection {
-        background-color: $slider-background-color-1;
+        background-color: $slider-track-background-color;
     }
 
     .slider-track {
-        @include border-radius($component-border-radius);
+        border-radius: $component-border-radius;
         position: absolute;
         cursor: pointer;
     }
 
     .slider-selection {
-        @include border-radius($component-border-radius);
+        border-radius: $component-border-radius;
         position: absolute;
+    }
+
+    &.focus .slider-handle {
+        box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width theme-soft-border-color(theme-color("primary"));
+        z-index: $component-focus-z-index;
     }
 
     .slider-handle {
@@ -33,17 +38,16 @@
         top: 0;
         width: $slider-line-height;
         height: $slider-line-height;
-        background-color: $slider-background-color-2;
+        background: theme-gradient($slider-handle-background-color);
         border: none;
         cursor: pointer;
 
         &.round {
-            @include border-radius($slider-line-height);
+            border-radius: $slider-line-height;
         }
     }
 
     .slider-tick {
-        @include box-sizing(border-box);
         position: absolute;
         width: $slider-line-height;
         height: $slider-line-height;
@@ -52,7 +56,7 @@
         border: none;
 
         &.round {
-            @include border-radius(50%);
+            border-radius: 50%;
         }
 
         &.in-selection {
@@ -129,7 +133,7 @@
 
     .tooltip {
         position: absolute;
-        @include translateX(-50%);
+        transform: translateX(-50%);
         margin-left: 0 !important;
 
         &:not(.in) {
@@ -168,9 +172,9 @@
             white-space: nowrap;
             max-width: none;
             padding: $padding-y $padding-x;
-            background-color: theme-color("dark");
+            background: theme-gradient(theme-color("dark"));
             @include color-yiq(theme-color("dark"));
-            @include border-radius($component-border-radius);
+            border-radius: $component-border-radius;
             border: $component-border;
         }
 

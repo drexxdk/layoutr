@@ -3,11 +3,12 @@
 @mixin button-variant($background, $border) {
     @include color-yiq($background);
     background-color: $background;
-    @include box-shadow($box-shadow);
+    box-shadow: $box-shadow;
+    background: theme-gradient($background);
 
     &:focus,
     &.focus {
-        @include box-shadow($box-shadow, 0 0 0 $btn-focus-box-shadow-width $border);
+        box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
         z-index: $component-focus-z-index;
     }
 }
@@ -22,7 +23,7 @@
     }
 
     > .btn {
-        @include border-radius(0);
+        border-radius: 0;
     }
 }
 
@@ -32,8 +33,7 @@
     @include noselect;
     font-size: $font-size;
     padding: $padding-y $padding-x;
-    /*min-height: $line-height + ($padding-y * 2);*/
-    @include border-radius($component-border-radius);
+    border-radius: $component-border-radius;
     text-decoration: none;
     background-color: transparent;
     cursor: pointer;
@@ -81,10 +81,10 @@
 .theme-link {
     color: $link-color;
     text-decoration: $link-decoration;
-    background-color: transparent !important;
+    background: transparent !important;
 
     &:focus,
     &.focus {
-        @include box-shadow(none);
+        box-shadow: none;
     }
 }

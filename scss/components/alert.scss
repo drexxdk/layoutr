@@ -9,7 +9,7 @@
 .alert {
     font-size: $font-size;
     background-color: transparent;
-    @include border-radius($component-border-radius);
+    border-radius: $component-border-radius;
     @include flex-display();
     @include align-items(flex-start);
     overflow: hidden;

@@ -1,9 +1,9 @@
-﻿/// <reference path="references" />
+﻿/// <reference path="../references" />
 
 * {
     margin: 0;
     padding: 0;
-    @include box-sizing();
+    box-sizing: border-box;
 }
 
 html,
@@ -17,7 +17,7 @@ html {
 
 body {
     font-family: $font-family;
-    background-color: $body-bg;
+    background-color: $body-background-color;
     color: $body-color;
     font-size: $font-size;
     font-weight: $font-weight;

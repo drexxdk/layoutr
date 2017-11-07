@@ -732,8 +732,23 @@ $(function () {
     app.page1();
 });
 
+var focusElement;
 $(window).click(function (e) {
     var target = $(e.target);
+
+    if (focusElement !== undefined) {
+        focusElement.removeClass('focus');
+        focusElement = undefined;
+    }
+    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
+        if (target.closest('.slider').length) {
+            focusElement = target.closest('.slider');
+        } else {
+            focusElement = target;
+        }
+        focusElement.addClass('focus');
+    }
+
     var isSmallBreakpoint = app.isSmallBreakpoint();
     var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
     var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;

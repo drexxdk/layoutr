@@ -1,4 +1,4 @@
-﻿/// <reference path="references" />
+﻿/// <reference path="../references" />
 
 // hover effects should only be applied on desktop browsers
 .desktop {
@@ -50,7 +50,7 @@
     @each $color, $value in $theme-validation-colors {
         .form-group.theme-#{$color} .dropdown > .btn:hover {
             $background: theme-soft-background-color($value);
-            background-color: darken($background, 7.5%);
+            background: theme-gradient(darken($background, 7.5%));
             @include color-yiq(darken($background, 7.5%));
         }
     }
@@ -68,7 +68,7 @@
         .btn.theme-#{$color}:hover {
             $active-background: darken($value, 7.5%);
             @include color-yiq($active-background);
-            background-color: $active-background;
+            background: theme-gradient($active-background);
         }
 
         .alert.theme-#{$color} .close:hover {
@@ -92,6 +92,6 @@
         $value: theme-color("primary");
         $active-background: darken($value, 7.5%);
         @include color-yiq($active-background);
-        background-color: $active-background;
+        background: theme-gradient($active-background);
     }
 }

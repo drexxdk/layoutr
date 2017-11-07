@@ -91,7 +91,7 @@
         & ~ .label > .btn {
             position: absolute;
             z-index: 1;
-            @include border-radius(50%);
+            border-radius: 50%;
             text-align: center;
             color: $white;
             margin-top: 0;

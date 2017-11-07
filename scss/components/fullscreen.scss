@@ -6,7 +6,7 @@
 
     &.overlay-light:after,
     &.overlay-dark:after {
-        @include transition(background-color $transition-time $transition-timing);
+        transition: background-color $transition-time $transition-timing;
     }
 }
 
@@ -59,7 +59,7 @@
             padding: $spacer (rem(56px) + $spacer) $spacer $spacer;
             text-align: center;
             font-weight: $font-weight-bold;
-            @include transition(top $transition-time $transition-timing);
+            transition: top $transition-time $transition-timing;
             height: $component-line-height + ($spacer * 2);
             @include ellipsis;
         }
@@ -67,7 +67,7 @@
         #fullscreen-description:not(:empty) {
             bottom: 0;
             padding: $spacer;
-            @include transition(bottom $transition-time $transition-timing);
+            transition: bottom $transition-time $transition-timing;
             max-height: calc(100% - #{$component-line-height + ($spacer * 2)});
             overflow: auto;
         }

@@ -1,4 +1,4 @@
-﻿/// <reference path="references" />
+﻿/// <reference path="../references" />
 
 @function strip-unit($number) {
     @if type-of($number) == 'number' and not unitless($number) {
@@ -50,4 +50,8 @@
 
 @function theme-soft-color($value) {
     @return theme-color-level($value, 8)
+}
+
+@function theme-gradient($value) {
+    @return $value linear-gradient(180deg, mix($body-background-color, $value, 15%), $value) repeat-x !important;
 }

@@ -42,16 +42,16 @@ div.dropdown {
     &.direction-up {
         &.open {
             > div {
-                @include border-radiuses(0, 0, $component-border-radius, $component-border-radius);
+                border-radius: 0 0 $component-border-radius $component-border-radius;
 
                 > svg {
-                    @include rotate(90);
+                    transform: rotate(90deg);
                 }
             }
         }
 
         > div > svg {
-            @include rotate(270);
+            transform: rotate(270deg);
         }
 
         > ul {
@@ -59,18 +59,18 @@ div.dropdown {
             margin-bottom: $btn-focus-box-shadow-width;
             top: auto;
             bottom: 100%;
-            @include border-radiuses($component-border-radius, $component-border-radius, 0, 0);
+            border-radius: $component-border-radius $component-border-radius 0 0;
         }
     }
 
     &.open {
 
         > div {
-            @include border-radiuses($component-border-radius, $component-border-radius, 0, 0);
+            border-radius: $component-border-radius $component-border-radius 0 0;
             @extend .focus;
 
             > svg {
-                @include rotate(270);
+                transform: rotate(270deg);
             }
         }
 
@@ -94,7 +94,7 @@ div.dropdown {
         }
 
         > svg {
-            @include rotate(90);
+            transform: rotate(90deg);
         }
     }
 
@@ -109,14 +109,14 @@ div.dropdown {
         left: 0;
         right: 0;
         z-index: $dropdown-z-index;
-        @include border-radiuses(0, 0, $component-border-radius, $component-border-radius);
+        border-radius: 0 0 $component-border-radius $component-border-radius;
         overflow: auto;
         max-height: ($height * 4) + ($component-border-width * 4);
 
         > li {
 
             > div {
-                @include border-radius(0);
+                border-radius: 0;
                 display: block;
                 @include flex-display();
 

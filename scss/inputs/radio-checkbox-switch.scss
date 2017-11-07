@@ -17,8 +17,18 @@
         font-size: 0;
         z-index: -1;
 
-        &:checked + label > i {
-            background-color: theme-color("primary");
+        $background: theme-color("primary");
+
+        &:checked {
+            & + label > i {
+                border-color: $background;
+                background-color: theme-color("primary");
+            }
+        }
+
+        &.focus + label > i {
+            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width theme-soft-border-color($background);
+            z-index: $component-focus-z-index;
         }
     }
 
@@ -28,6 +38,10 @@
         font-size: $font-size;
         z-index: $component-z-index;
         cursor: pointer;
+
+        > i {
+            box-shadow: $box-shadow;
+        }
     }
 }
 
@@ -49,7 +63,7 @@
 .radio {
     > label > i,
     > label > i:before {
-        @include border-radius(50%);
+        border-radius: 50%;
     }
 }
 
@@ -85,7 +99,7 @@
     }
 
     > input:checked + label > i:before {
-        @include translateX($font-size);
+        transform: translateX($font-size);
     }
 
     > label {
@@ -94,9 +108,10 @@
             width: $font-size * 2;
             height: $font-size;
             background-color: $component-border-color;
-            @include transition(.4s);
+            transform: transition(.4s);
             position: relative;
             margin-right: ($spacer / 2);
+            border: $component-border-width solid $component-border-color;
 
             &:before {
                 position: absolute;
@@ -106,9 +121,8 @@
                 top: 0;
                 bottom: 0;
                 left: 0;
-                border: $component-border-width solid $component-border-color;
                 background-color: white;
-                @include transition(.4s);
+                transform: transition(.4s);
             }
         }
     }

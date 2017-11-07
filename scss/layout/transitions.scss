@@ -3,25 +3,25 @@
 html.transitions {
     #left,
     .popup[data-position*="left"] {
-        @include transition(left $transition-time $transition-timing);
+        transition: left $transition-time $transition-timing;
     }
 
     #right,
     .popup[data-position*="right"] {
-        @include transition(right $transition-time $transition-timing);
+        transition: right $transition-time $transition-timing;
     }
 
     .popup[data-position*="center"] {
-        @include transition(left $transition-time $transition-timing, right $transition-time $transition-timing);
+        transition: left $transition-time $transition-timing, right $transition-time $transition-timing;
     }
 
     header,
     #content,
     footer {
-        @include transition(margin $transition-time $transition-timing);
+        transition: margin $transition-time $transition-timing;
     }
 
     #content .header {
-        @include transition(left $transition-time $transition-timing, margin-right $transition-time $transition-timing, padding-right $transition-time $transition-timing);
+        transition: left $transition-time $transition-timing, margin-right $transition-time $transition-timing, padding-right $transition-time $transition-timing;
     }
 }

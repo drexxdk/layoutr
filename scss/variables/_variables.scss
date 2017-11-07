@@ -36,8 +36,8 @@ $input-focus-box-shadow: $input-box-shadow, 0 0 0 3px rgba(theme-color("primary"
 $btn-focus-box-shadow-width: rem(3px);
 
 $slider-line-height: 1.5rem;
-$slider-background-color-1: $gray-200;
-$slider-background-color-2: theme-color("primary");
+$slider-track-background-color: $gray-200;
+$slider-handle-background-color: theme-color("primary");
 
 $quote-img-width: rem(100px);
 

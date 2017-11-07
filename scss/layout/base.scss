@@ -27,7 +27,7 @@ html {
             left: 0;
 
             > .content {
-                @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+                box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
             }
         }
     }
@@ -37,7 +37,7 @@ html {
             right: 0;
 
             > .content {
-                @include box-shadow(0px 0px 5px 1px rgba(0, 0, 0, 0.1));
+                box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
             }
         }
     }
@@ -104,7 +104,7 @@ aside > .header {
         > svg {
             margin-top: 50%;
             margin-left: 50%;
-            @include translate(-50%, -50%);
+            transform: translate(-50%, -50%);
             width: 50%;
             height: 50%;
             fill: $aside-icon-background-color;

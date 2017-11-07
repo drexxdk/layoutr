@@ -1,14 +1,14 @@
 ﻿/// <reference path="../references" />
 
 .accordion {
-    @include border-radius($component-border-radius);
+    border-radius: $component-border-radius;
     overflow: hidden;
     border: $component-border;
-    z-index:$component-z-index;
+    z-index: $component-z-index;
 
     > div {
         > .headline {
-            @include border-radius(0);
+            border-radius: 0;
         }
 
         > .content {

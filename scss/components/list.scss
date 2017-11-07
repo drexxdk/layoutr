@@ -17,10 +17,10 @@ ul.list {
             position: absolute;
             top: #{$component-line-height / 2}rem;
             left: 0;
-            @include translateY(-50%);
+            transform: translateY(-50%);
             width: $list-bullet-width;
             height: $list-bullet-width;
-            @include border-radius(50%);
+            border-radius: 50%;
             background-color: currentColor;
         }
 
@@ -83,8 +83,8 @@ ol.list {
             top: $list-number-width / 2;
             left: -$spacer;
             border: ($spacer / 2) solid transparent;
-            @include translateY(-50%);
-            @include transition(all $transition-time $transition-timing);
+            transform: translateY(-50%);
+            transition: all $transition-time $transition-timing;
         }
     }
 }

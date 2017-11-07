@@ -8,7 +8,7 @@ img,
 
 .img {
     flex-shrink: 0;
-    @include border-radius($component-border-radius);
+    border-radius: $component-border-radius;
     position: relative;
     overflow: hidden;
 }

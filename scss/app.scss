@@ -1,12 +1,10 @@
-﻿@import "functions";
+﻿@import "functions/functions";
 @import "mixins/mixins";
 @import "variables/variables";
-@import "reset";
+@import "base/base";
 @import "layout/layout";
 @import "inputs/inputs";
 @import "components/components";
-@import "hover";
-@import "general";
 
 @import "demo";
 

@@ -1,9 +1,0 @@
-﻿@mixin gradient ($startColor: #eee, $endColor: white) {
-    background-color: $startColor;
-    background: linear-gradient(top, $startColor, $endColor);
-}
-
-@mixin horizontal-gradient ($startColor: #eee, $endColor: white) {
-    background-color: $startColor;
-    background-image: linear-gradient(left, $startColor, $endColor);
-}
