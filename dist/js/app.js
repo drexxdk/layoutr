@@ -647,6 +647,8 @@ $(function () {
     app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
     app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
+    app.focus;
+    app.focusChanged = false;
 
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
@@ -698,11 +700,7 @@ $(function () {
             app.setHtmlScroll();
         }
     };
-
-
     
-
-
     $('.aside.left').click(function () {
         app.toggleAside('left');
     });
@@ -731,22 +729,20 @@ $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
 });
-
-var focusElement;
 $(window).click(function (e) {
     var target = $(e.target);
-
-    if (focusElement !== undefined) {
-        focusElement.removeClass('focus');
-        focusElement = undefined;
+    if (app.focusChanged) {
+        app.focusChanged = false;
+        return;
     }
-    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
-        if (target.closest('.slider').length) {
-            focusElement = target.closest('.slider');
-        } else {
-            focusElement = target;
-        }
-        focusElement.addClass('focus');
+    if (app.focus !== undefined) {
+        app.focus.removeClass('focus');
+        app.focus = undefined;
+    }
+
+    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length) {
+        app.focus = target;
+        app.focus.addClass('focus');
     }
 
     var isSmallBreakpoint = app.isSmallBreakpoint();
@@ -811,12 +807,14 @@ app.page1 = function () {
             min: 12,
             max: 20,
             step: 2,
-            value: 16
+            value: 16,
+            focus: true
         }).on('change', function () {
             var $this = $(this);
-            var id = $this.attr('id');
-            var type = "slider";
-            var value = $this.slider('getValue');
+            var slider = $this.siblings('.slider');
+            slider.addClass('focus');
+            app.focus = slider;
+            app.focusChanged = true;
         });
 
         app.addValidation(

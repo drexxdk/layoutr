@@ -14,12 +14,14 @@ app.page1 = function () {
             min: 12,
             max: 20,
             step: 2,
-            value: 16
+            value: 16,
+            focus: true
         }).on('change', function () {
             var $this = $(this);
-            var id = $this.attr('id');
-            var type = "slider";
-            var value = $this.slider('getValue');
+            var slider = $this.siblings('.slider');
+            slider.addClass('focus');
+            app.focus = slider;
+            app.focusChanged = true;
         });
 
         app.addValidation(

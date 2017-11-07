@@ -30,6 +30,8 @@ $(function () {
     app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
     app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
+    app.focus;
+    app.focusChanged = false;
 
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
@@ -81,11 +83,7 @@ $(function () {
             app.setHtmlScroll();
         }
     };
-
-
     
-
-
     $('.aside.left').click(function () {
         app.toggleAside('left');
     });
@@ -114,22 +112,20 @@ $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
 });
-
-var focusElement;
 $(window).click(function (e) {
     var target = $(e.target);
-
-    if (focusElement !== undefined) {
-        focusElement.removeClass('focus');
-        focusElement = undefined;
+    if (app.focusChanged) {
+        app.focusChanged = false;
+        return;
     }
-    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
-        if (target.closest('.slider').length) {
-            focusElement = target.closest('.slider');
-        } else {
-            focusElement = target;
-        }
-        focusElement.addClass('focus');
+    if (app.focus !== undefined) {
+        app.focus.removeClass('focus');
+        app.focus = undefined;
+    }
+
+    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length) {
+        app.focus = target;
+        app.focus.addClass('focus');
     }
 
     var isSmallBreakpoint = app.isSmallBreakpoint();
