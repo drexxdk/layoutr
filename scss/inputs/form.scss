@@ -25,11 +25,15 @@
     .switch input {
 
         & + label > i {
-            border-color: $border;
             background: theme-gradient($background-light);
         }
 
+        &:not(:checked) + label > i {
+            border-color: $background-light;
+        }
+
         &:checked + label > i {
+            border-color: $background-dark;
             background: theme-gradient($background-dark);
         }
 
