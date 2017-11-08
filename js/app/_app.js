@@ -83,7 +83,7 @@ $(function () {
             app.setHtmlScroll();
         }
     };
-    
+
     $('.aside.left').click(function () {
         app.toggleAside('left');
     });
@@ -111,7 +111,7 @@ $(function () {
 
     app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
-    
+
     $(window).click(function (e) {
         var target = $(e.target);
         if (app.focusChanged) {
