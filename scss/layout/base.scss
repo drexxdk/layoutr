@@ -6,20 +6,6 @@ html {
     overflow-y: scroll;
     overflow-x: hidden;
 
-    &.android {
-        // this disables pull-to-refresh
-        overflow: visible;
-
-        > body {
-            overflow-y: hidden;
-
-            > main {
-                z-index: $android-main;
-                overflow-y: auto;
-            }
-        }
-    }
-
     &.scrollDisabled {
         &.msie {
             // ie displays overflow wrong without this fix
