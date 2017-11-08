@@ -5,6 +5,7 @@ $(function () {
         if (app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = false;
             var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            //debugger;
             app.html.data('scroll-top', scrollTop);
             app.html.addClass('scrollDisabled');
             app.main.scrollTop(scrollTop);
