@@ -13,18 +13,6 @@
     }
   },
   {
-    "outputFileName": "dist/js/touchDevice.js",
-    "inputFiles": [
-      "js/vendors/jquery/jquery.event.move.min.js",
-      "js/vendors/jquery/jquery.event.swipe.min.js",
-      "js/app/android.js"
-    ],
-    "minify": {
-      "enabled": true,
-      "gzip": true
-    }
-  },
-  {
     "outputFileName": "dist/js/app.js",
     "inputFiles": [
       "js/vendors/jquery/jquery-3.1.1.min.js",
@@ -48,7 +36,7 @@
       "js/app/lazyload.js",
       "js/app/keyboard.js",
       "js/app/fullscreen.js",
-      "js/app/touchDevice.js"
+      "js/app/android.js"
     ],
     "minify": {
       "enabled": true,
