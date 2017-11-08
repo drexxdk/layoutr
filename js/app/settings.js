@@ -1,41 +1,42 @@
 ﻿var app = app || {};
-app.localStorage = typeof Storage !== "undefined";
-app.settings = [];
-
-app.applySettings = function (id, type, value, set) {
-    if (app.localStorage && set) {
-        var entry = {
-            "id": id,
-            "type": type,
-            "value": value
-        };
-        var exists = $.grep(app.settings, function (e) { return e.id === id; });
-        if (exists.length === 0) {
-            // not found
-            app.settings.push(entry);
-        } else if (exists.length === 1) {
-            // found
-            exists[0].value = value;
-        }
-        localStorage.setItem('settings', JSON.stringify(app.settings));
-    } else {
-        if (type === "checkbox") {
-            $('#settings').find('#' + id).prop('checked', value);
-        } else if (type === "slider") {
-            $('#settings').find('#' + id).slider('setValue', value);
-        }
-    }
-
-    if (type === 'checkbox') {
-        if (value) {
-            app.html.addClass(id);
-        } else {
-            app.html.removeClass(id);
-        }
-    }
-};
 
 $(function () {
+    app.localStorage = typeof Storage !== "undefined";
+    app.settings = [];
+
+    app.applySettings = function (id, type, value, set) {
+        if (app.localStorage && set) {
+            var entry = {
+                "id": id,
+                "type": type,
+                "value": value
+            };
+            var exists = $.grep(app.settings, function (e) { return e.id === id; });
+            if (exists.length === 0) {
+                // not found
+                app.settings.push(entry);
+            } else if (exists.length === 1) {
+                // found
+                exists[0].value = value;
+            }
+            localStorage.setItem('settings', JSON.stringify(app.settings));
+        } else {
+            if (type === "checkbox") {
+                $('#settings').find('#' + id).prop('checked', value);
+            } else if (type === "slider") {
+                $('#settings').find('#' + id).slider('setValue', value);
+            }
+        }
+
+        if (type === 'checkbox') {
+            if (value) {
+                app.html.addClass(id);
+            } else {
+                app.html.removeClass(id);
+            }
+        }
+    };
+
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
         var $this = $(this);
         if (app.localStorage) {

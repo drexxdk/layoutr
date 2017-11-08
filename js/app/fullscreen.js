@@ -27,7 +27,6 @@ $(function () {
     app.main.on('click', '#fullscreen-toggle', function () {
         app.fullscreen.toggleClass('info-shown');
     });
-});
 
 $(window).click(function (e) {
     var target = $(e.target);
@@ -39,4 +38,5 @@ $(window).click(function (e) {
         app.fullscreen.description.empty();
         app.setHtmlScroll();
     }
+    });
 });

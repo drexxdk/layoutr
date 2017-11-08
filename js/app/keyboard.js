@@ -1,4 +1,5 @@
 ﻿var app = app || {};
+
 $(function () {
     app.body.on("keydown", function (e) {
         if (app.loading.hasClass('hidden')) {

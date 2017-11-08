@@ -1,21 +1,23 @@
 ﻿var app = app || {};
-var googleMaps, google;
 
-app.checkGoogleMaps = function () {
-    if (googleMaps !== undefined && google !== undefined) {
-        if (app.html.hasClass('transitions')) {
-            setTimeout(function () {
-                google.maps.event.trigger(googleMaps, 'resize');
-            }, app.transitionTime);
-        } else {
-            google.maps.event.trigger(googleMaps, 'resize');
-        }
-        return true;
-    } else {
-        return false;
-    }
-};
 $(function () {
+    var googleMaps, google;
+
+    app.checkGoogleMaps = function () {
+        if (googleMaps !== undefined && google !== undefined) {
+            if (app.html.hasClass('transitions')) {
+                setTimeout(function () {
+                    google.maps.event.trigger(googleMaps, 'resize');
+                }, app.transitionTime);
+            } else {
+                google.maps.event.trigger(googleMaps, 'resize');
+            }
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
             $('<div id="google-maps"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));

@@ -1,14 +1,5 @@
 ﻿var app = app || {};
 
-app.isSmallBreakpoint = function () {
-    return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
-};
-
-$.ajaxSetup({
-    // Disable caching of AJAX responses
-    cache: false
-});
-
 $(function () {
     app.html = $('html');
     app.head = $('head');
@@ -30,6 +21,15 @@ $(function () {
     app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
     app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
+
+    app.isSmallBreakpoint = function () {
+        return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
+    };
+
+    $.ajaxSetup({
+        // Disable caching of AJAX responses
+        cache: false
+    });
     app.focus;
     app.focusChanged = false;
 
@@ -111,35 +111,36 @@ $(function () {
 
     app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
-});
-$(window).click(function (e) {
-    var target = $(e.target);
-    if (app.focusChanged) {
-        app.focusChanged = false;
-        return;
-    }
-    if (app.focus !== undefined) {
-        app.focus.removeClass('focus');
-        app.focus = undefined;
-    }
-
-    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
-        if (target.closest('.slider').length) {
-            app.focus = target.closest('.slider');
-        } else {
-            app.focus = target;
+    
+    $(window).click(function (e) {
+        var target = $(e.target);
+        if (app.focusChanged) {
+            app.focusChanged = false;
+            return;
         }
-        app.focus.addClass('focus');
-    }
+        if (app.focus !== undefined) {
+            app.focus.removeClass('focus');
+            app.focus = undefined;
+        }
 
-    var isSmallBreakpoint = app.isSmallBreakpoint();
-    var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
-    var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
-    var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+        if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
+            if (target.closest('.slider').length) {
+                app.focus = target.closest('.slider');
+            } else {
+                app.focus = target;
+            }
+            app.focus.addClass('focus');
+        }
 
-    if ((left || right) && notTarget) {
-        app.enableScroll();
-        app.html.attr('data-aside', '');
-        app.checkGoogleMaps();
-    }
+        var isSmallBreakpoint = app.isSmallBreakpoint();
+        var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
+        var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
+        var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+
+        if ((left || right) && notTarget) {
+            app.enableScroll();
+            app.html.attr('data-aside', '');
+            app.checkGoogleMaps();
+        }
+    });
 });

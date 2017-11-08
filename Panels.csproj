@@ -111,19 +111,17 @@
     <Content Include="js\app\fullscreen.js" />
     <Content Include="js\app\googleMaps.js" />
     <Content Include="js\app\scroll.js" />
-    <Content Include="js\app\jquery-extensions.js" />
     <Content Include="js\app\keyboard.js" />
     <Content Include="js\app\lazyload.js" />
     <Content Include="js\app\loading.js" />
     <Content Include="js\app\pages\page1.js" />
     <Content Include="js\app\settings.js" />
     <Content Include="js\app\youtube.js" />
-    <Content Include="js\vendors\bootstrap-slider.min.js" />
+    <Content Include="js\vendors\jquery\bootstrap-slider.min.js" />
     <Content Include="js\vendors\bowser.js" />
     <Content Include="js\vendors\jquery\jquery.event.move.min.js" />
     <Content Include="js\vendors\jquery\jquery.event.swipe.min.js" />
     <Content Include="js\vendors\jquery\jquery.lazyload.min.js" />
-    <Content Include="js\vendors\jquery\lazyYT.min.js" />
     <Content Include="js\vendors\jquery\validate\additional-methods.min.js" />
     <Content Include="js\vendors\jquery\validate\jquery.validate.min.js" />
     <Content Include="js\vendors\loadCSS\cssrelpreload.js" />
@@ -139,14 +137,8 @@
     </None>
     <Content Include="scss\app.scss" />
     <Content Include="scss\mixins\_mixins.scss" />
-    <Content Include="scss\mixins\shadow.scss" />
-    <Content Include="scss\mixins\border.scss" />
     <Content Include="scss\mixins\transform.scss" />
-    <Content Include="scss\mixins\gradient.scss" />
-    <Content Include="scss\mixins\box-sizing.scss" />
-    <Content Include="scss\mixins\opacity.scss" />
     <Content Include="scss\mixins\animation.scss" />
-    <Content Include="scss\mixins\perspective.scss" />
     <Content Include="scss\mixins\flexbox.scss" />
     <Content Include="scss\mixins\noselect.scss" />
     <Content Include="scss\mixins\background-cover.scss" />
@@ -161,7 +153,7 @@
     <Content Include="scss\layout\breakpoints.scss" />
     <Content Include="manifest.json" />
     <Content Include="scss\layout\flex-items.scss" />
-    <Content Include="scss\functions.scss" />
+    <Content Include="scss\functions\functions.scss" />
     <Content Include="scss\references.scss" />
     <Content Include="scss\components\_components.scss" />
     <Content Include="scss\layout\section.scss" />
@@ -170,15 +162,15 @@
     <Content Include="scss\variables\fonts.scss" />
     <Content Include="scss\components\headlines.scss" />
     <Content Include="scss\components\alert.scss" />
-    <Content Include="scss\reset.scss" />
+    <Content Include="scss\base\reset.scss" />
     <Content Include="scss\variables\layout.scss" />
     <Content Include="scss\components\accordion.scss" />
     <Content Include="scss\components\embed.scss" />
     <Content Include="scss\components\quote.scss" />
     <Content Include="scss\components\img.scss" />
     <Content Include="scss\components\table.scss" />
-    <Content Include="scss\general.scss" />
-    <Content Include="scss\hover.scss" />
+    <Content Include="scss\base\general.scss" />
+    <Content Include="scss\base\hover.scss" />
     <Content Include="scss\mixins\absolute-fill.scss" />
     <Content Include="scss\mixins\ellipsis.scss" />
     <Content Include="scss\inputs\button.scss" />
@@ -193,7 +185,6 @@
     <Content Include="scss\layout\base.scss" />
     <Content Include="scss\layout\position.scss" />
     <Content Include="scss\layout\transitions.scss" />
-    <Content Include="scss\mixins\backface-visibility.scss" />
     <Content Include="scss\layout\container.scss" />
     <Content Include="scss\mixins\hidden-input.scss" />
     <Content Include="scss\mixins\overlay.scss" />
@@ -201,9 +192,6 @@
     <Content Include="scss\components\fullscreen.scss" />
     <Content Include="scss\components\list.scss" />
     <Content Include="scss\components\percentage-circle.scss" />
-    <Content Include="dist\js\app.min.js.gz">
-      <DependentUpon>app.min.js</DependentUpon>
-    </Content>
     <Content Include="scss\mixins\breakpoints.scss" />
     <Content Include="dist\js\loadCSS.min.js.gz">
       <DependentUpon>loadCSS.min.js</DependentUpon>
@@ -213,6 +201,10 @@
     </Content>
     <Content Include="dist\js\touchDevice.min.js.gz">
       <DependentUpon>touchDevice.min.js</DependentUpon>
+    </Content>
+    <Content Include="scss\base\_base.scss" />
+    <Content Include="dist\js\app.min.js.gz">
+      <DependentUpon>app.min.js</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

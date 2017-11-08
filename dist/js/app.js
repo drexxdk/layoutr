@@ -617,15 +617,6 @@ var e=Math.abs(this.options.ticks[d]-b);e<=c[1]&&(c=[this.options.ticks[d],e])}i
 });
 var app = app || {};
 
-app.isSmallBreakpoint = function () {
-    return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
-};
-
-$.ajaxSetup({
-    // Disable caching of AJAX responses
-    cache: false
-});
-
 $(function () {
     app.html = $('html');
     app.head = $('head');
@@ -647,6 +638,15 @@ $(function () {
     app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
     app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
     app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
+
+    app.isSmallBreakpoint = function () {
+        return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
+    };
+
+    $.ajaxSetup({
+        // Disable caching of AJAX responses
+        cache: false
+    });
     app.focus;
     app.focusChanged = false;
 
@@ -728,73 +728,76 @@ $(function () {
 
     app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
-});
-$(window).click(function (e) {
-    var target = $(e.target);
-    if (app.focusChanged) {
-        app.focusChanged = false;
-        return;
-    }
-    if (app.focus !== undefined) {
-        app.focus.removeClass('focus');
-        app.focus = undefined;
-    }
-
-    if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
-        if (target.closest('.slider').length) {
-            app.focus = target.closest('.slider');
-        } else {
-            app.focus = target;
+    
+    $(window).click(function (e) {
+        var target = $(e.target);
+        if (app.focusChanged) {
+            app.focusChanged = false;
+            return;
         }
-        app.focus.addClass('focus');
-    }
+        if (app.focus !== undefined) {
+            app.focus.removeClass('focus');
+            app.focus = undefined;
+        }
 
-    var isSmallBreakpoint = app.isSmallBreakpoint();
-    var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
-    var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
-    var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+        if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
+            if (target.closest('.slider').length) {
+                app.focus = target.closest('.slider');
+            } else {
+                app.focus = target;
+            }
+            app.focus.addClass('focus');
+        }
 
-    if ((left || right) && notTarget) {
-        app.enableScroll();
-        app.html.attr('data-aside', '');
-        app.checkGoogleMaps();
-    }
+        var isSmallBreakpoint = app.isSmallBreakpoint();
+        var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
+        var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
+        var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+
+        if ((left || right) && notTarget) {
+            app.enableScroll();
+            app.html.attr('data-aside', '');
+            app.checkGoogleMaps();
+        }
+    });
 });
 var app = app || {};
 
-$.validator.setDefaults({
-    submitHandler: function () {
-        alert("Submitted!");
-    }
-});
-
-$.validator.addMethod('password', function (value) {
-    return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
-}, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
-
-app.addValidation = function (form, rules, messages) {
-    form.validate({
-        rules: rules,
-        messages: messages,
-        errorElement: "em",
-        errorPlacement: function (error, element) {
-            element = element.parent();
-            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
-                element = element.parent();
-            }
-            element.append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
+$(function () {
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("Submitted!");
         }
     });
-    form.on('change', 'input, textarea, select', function () {
-        $(this).valid();
-    });
-};
+
+    $.validator.addMethod('password', function (value) {
+        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
+    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
+
+    app.addValidation = function (form, rules, messages) {
+        form.validate({
+            rules: rules,
+            messages: messages,
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                element = element.parent();
+                if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
+                    element = element.parent();
+                }
+                element.append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
+            }
+        });
+        form.on('change', 'input, textarea, select', function () {
+            $(this).valid();
+        });
+    };
+});
 var app = app || {};
 
 app.page1 = function () {
@@ -928,141 +931,149 @@ app.page2 = function () {
 };
 var app = app || {};
 
-app.disableScroll = function () {
-    if (app.htmlOverflowEnabled) {
-        app.htmlOverflowEnabled = false;
-        var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-        app.html.data('scroll-top', scrollTop);
-        app.html.addClass('scrollDisabled');
-        app.main.scrollTop(scrollTop);
-    }
-};
-
-app.enableScroll = function () {
-    if (!app.htmlOverflowEnabled) {
-        app.htmlOverflowEnabled = true;
-        app.html.removeClass('scrollDisabled');
-        var scrollTop = app.html.data('scroll-top');
-
-        app.body.scrollTop(scrollTop); // edge, safari
-        app.html.scrollTop(scrollTop); // chrome, firefox, ie
-    }
-};
-
-app.setHtmlScroll = function () {
-    if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
-        app.enableScroll();
-    } else if (!app.fullscreen.hasClass('hidden') || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
-        app.disableScroll();
-    }
-};
-
-$(window).resize(function () {
-    app.setHtmlScroll();
-});
-var app = app || {};
-
-app.accordion = function (elements) {
-    elements.on("click", ".headline", function () {
-        var content = $(this).next();
-        if (content.hasClass('open')) {
-            content
-                .removeClass('open')
-                .slideUp("800");
-        } else {
-            content
-                .addClass("open")
-                .slideToggle("800")
-                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
-        }
-    });
-};
-var app = app || {};
-
-app.dropdown = function (dropdowns) {
-    dropdowns.each(function () {
-        var $this = $(this);
-        var selected = $this.children('option:selected');
-        if (selected.length !== 1) {
-            selected = $this.children().first();
-        }
-        var html = [];
-        html.push('<div class="dropdown' +
-            ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
-            ($this.hasClass('align-left') ? ' align-left' : '') +
-            ($this.hasClass('align-right') ? ' align-right' : '') +
-            ($this.hasClass('direction-up') ? ' direction-up' : '') +
-            '">');
-
-        var attr = $this.attr('class');
-        var btn = '';
-        if (typeof attr !== typeof undefined && attr !== false) {
-            var temp = attr.split(' ');
-            temp = $.grep(temp, function (item, index) {
-                return item.trim().match(/^theme-/);
-            });
-            if (temp.length === 1) {
-                btn = temp[0];
-            }
-        }
-        html.push('<div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
-        html.push('<ul class="' + btn + '">');
-        $this.children(':not([value=""])').each(function (index) {
-            var $that = $(this);
-            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn theme-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
-        });
-        html.push('</ul>');
-        html.push('</div>');
-        var dropdown = html.join("");
-        $this.after(dropdown);
-        dropdown = $this.next();
-        dropdown.on('click', '> .btn', function () {
-            var $that = $(this);
-            $that.parent().toggleClass('open');
-        });
-        dropdown.on('click', 'li', function () {
-            var $that = $(this);
-            if (!$that.hasClass('selected')) {
-                $that.siblings('.selected').removeClass('selected');
-                $that.addClass('selected');
-                dropdown.children('div').children('label').text($that.text());
-                $this.children(':selected').removeAttr('selected');
-                $this.children('[value="' + $that.attr('data-id') + '"]').attr('selected', 'selected');
-                $this.change();
-            }
-            dropdown.removeClass('open');
-        });
-    });
-};
-
-$(document).click(function (e) {
-    var target = $(e.target);
-    if (target.closest("div.dropdown").length) {
-        $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
-    }
-
-    if (!target.closest(".dropdown").length) {
-        $('div.dropdown').removeClass('open');
-    }
-});
-var app = app || {};
-var googleMaps, google;
-
-app.checkGoogleMaps = function () {
-    if (googleMaps !== undefined && google !== undefined) {
-        if (app.html.hasClass('transitions')) {
-            setTimeout(function () {
-                google.maps.event.trigger(googleMaps, 'resize');
-            }, app.transitionTime);
-        } else {
-            google.maps.event.trigger(googleMaps, 'resize');
-        }
-        return true;
-    } else {
-        return false;
-    }
-};
 $(function () {
+    app.disableScroll = function () {
+        if (app.htmlOverflowEnabled) {
+            app.htmlOverflowEnabled = false;
+            var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            app.html.data('scroll-top', scrollTop);
+            app.html.addClass('scrollDisabled');
+            app.main.scrollTop(scrollTop);
+        }
+    };
+
+    app.enableScroll = function () {
+        if (!app.htmlOverflowEnabled) {
+            app.htmlOverflowEnabled = true;
+            app.html.removeClass('scrollDisabled');
+            var scrollTop = app.html.data('scroll-top');
+
+            app.body.scrollTop(scrollTop); // edge, safari
+            app.html.scrollTop(scrollTop); // chrome, firefox, ie
+        }
+    };
+
+    app.setHtmlScroll = function () {
+        if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+            app.enableScroll();
+        } else if (!app.fullscreen.hasClass('hidden') || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
+            app.disableScroll();
+        }
+    };
+
+    $(window).resize(function () {
+        app.setHtmlScroll();
+    });
+});
+var app = app || {};
+
+$(function () {
+    app.accordion = function (elements) {
+        elements.on("click", ".headline", function () {
+            var content = $(this).next();
+            if (content.hasClass('open')) {
+                content
+                    .removeClass('open')
+                    .slideUp("800");
+            } else {
+                content
+                    .addClass("open")
+                    .slideToggle("800")
+                    .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
+            }
+        });
+    };
+});
+var app = app || {};
+
+$(function () {
+    app.dropdown = function (dropdowns) {
+        dropdowns.each(function () {
+            var $this = $(this);
+            var selected = $this.children('option:selected');
+            if (selected.length !== 1) {
+                selected = $this.children().first();
+            }
+            var html = [];
+            html.push('<div class="dropdown' +
+                ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
+                ($this.hasClass('align-left') ? ' align-left' : '') +
+                ($this.hasClass('align-right') ? ' align-right' : '') +
+                ($this.hasClass('direction-up') ? ' direction-up' : '') +
+                '">');
+
+            var attr = $this.attr('class');
+            var btn = '';
+            if (typeof attr !== typeof undefined && attr !== false) {
+                var temp = attr.split(' ');
+                temp = $.grep(temp, function (item, index) {
+                    return item.trim().match(/^theme-/);
+                });
+                if (temp.length === 1) {
+                    btn = temp[0];
+                }
+            }
+            html.push('<div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
+            html.push('<ul class="' + btn + '">');
+            $this.children(':not([value=""])').each(function (index) {
+                var $that = $(this);
+                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn theme-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+            });
+            html.push('</ul>');
+            html.push('</div>');
+            var dropdown = html.join("");
+            $this.after(dropdown);
+            dropdown = $this.next();
+            dropdown.on('click', '> .btn', function () {
+                var $that = $(this);
+                $that.parent().toggleClass('open');
+            });
+            dropdown.on('click', 'li', function () {
+                var $that = $(this);
+                if (!$that.hasClass('selected')) {
+                    $that.siblings('.selected').removeClass('selected');
+                    $that.addClass('selected');
+                    dropdown.children('div').children('label').text($that.text());
+                    $this.children(':selected').removeAttr('selected');
+                    $this.children('[value="' + $that.attr('data-id') + '"]').attr('selected', 'selected');
+                    $this.change();
+                }
+                dropdown.removeClass('open');
+            });
+        });
+    };
+
+    $(document).click(function (e) {
+        var target = $(e.target);
+        if (target.closest("div.dropdown").length) {
+            $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
+        }
+
+        if (!target.closest(".dropdown").length) {
+            $('div.dropdown').removeClass('open');
+        }
+    });
+});
+var app = app || {};
+
+$(function () {
+    var googleMaps, google;
+
+    app.checkGoogleMaps = function () {
+        if (googleMaps !== undefined && google !== undefined) {
+            if (app.html.hasClass('transitions')) {
+                setTimeout(function () {
+                    google.maps.event.trigger(googleMaps, 'resize');
+                }, app.transitionTime);
+            } else {
+                google.maps.event.trigger(googleMaps, 'resize');
+            }
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
             $('<div id="google-maps"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
@@ -1087,8 +1098,8 @@ $(function () {
     });
 });
 var app = app || {};
-var youtube;
 $(function () {
+    var youtube;
     app.content.on('click', '#toggle-youtube', function () {
         if (youtube === undefined) {
             $('<div id="youtube"><div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div></div>').insertAfter($(this));
@@ -1100,52 +1111,54 @@ $(function () {
 });
 var app = app || {};
 
-$.validator.setDefaults({
-    submitHandler: function () {
-        alert("Submitted!");
-    }
-});
-
-$.validator.addMethod('password', function (value) {
-    return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
-}, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
-
-app.addValidation = function (form, rules, messages) {
-    form.validate({
-        rules: rules,
-        messages: messages,
-        errorElement: "em",
-        errorPlacement: function (error, element) {
-            element = element.parent();
-            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
-                element = element.parent();
-            }
-            element.append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
+$(function () {
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("Submitted!");
         }
     });
-    form.on('change', 'input, textarea, select', function () {
-        $(this).valid();
-    });
-};
+
+    $.validator.addMethod('password', function (value) {
+        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
+    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
+
+    app.addValidation = function (form, rules, messages) {
+        form.validate({
+            rules: rules,
+            messages: messages,
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                element = element.parent();
+                if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
+                    element = element.parent();
+                }
+                element.append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
+            }
+        });
+        form.on('change', 'input, textarea, select', function () {
+            $(this).valid();
+        });
+    };
+});
 var app = app || {};
 
-app.showLoading = function () {
-    app.disableScroll();
-    app.loading.removeClass('hidden');
-};
-
-app.hideLoading = function () {
-    app.loading.addClass('hidden');
-    app.setHtmlScroll();
-};
-
 $(function () {
+    app.showLoading = function () {
+        app.disableScroll();
+        app.loading.removeClass('hidden');
+    };
+
+    app.hideLoading = function () {
+        app.loading.addClass('hidden');
+        app.setHtmlScroll();
+    };
+
     app.main.on('click', '.toggle-loading', function () {
         app.showLoading();
         setTimeout(function () {
@@ -1154,43 +1167,44 @@ $(function () {
     });
 });
 var app = app || {};
-app.localStorage = typeof Storage !== "undefined";
-app.settings = [];
-
-app.applySettings = function (id, type, value, set) {
-    if (app.localStorage && set) {
-        var entry = {
-            "id": id,
-            "type": type,
-            "value": value
-        };
-        var exists = $.grep(app.settings, function (e) { return e.id === id; });
-        if (exists.length === 0) {
-            // not found
-            app.settings.push(entry);
-        } else if (exists.length === 1) {
-            // found
-            exists[0].value = value;
-        }
-        localStorage.setItem('settings', JSON.stringify(app.settings));
-    } else {
-        if (type === "checkbox") {
-            $('#settings').find('#' + id).prop('checked', value);
-        } else if (type === "slider") {
-            $('#settings').find('#' + id).slider('setValue', value);
-        }
-    }
-
-    if (type === 'checkbox') {
-        if (value) {
-            app.html.addClass(id);
-        } else {
-            app.html.removeClass(id);
-        }
-    }
-};
 
 $(function () {
+    app.localStorage = typeof Storage !== "undefined";
+    app.settings = [];
+
+    app.applySettings = function (id, type, value, set) {
+        if (app.localStorage && set) {
+            var entry = {
+                "id": id,
+                "type": type,
+                "value": value
+            };
+            var exists = $.grep(app.settings, function (e) { return e.id === id; });
+            if (exists.length === 0) {
+                // not found
+                app.settings.push(entry);
+            } else if (exists.length === 1) {
+                // found
+                exists[0].value = value;
+            }
+            localStorage.setItem('settings', JSON.stringify(app.settings));
+        } else {
+            if (type === "checkbox") {
+                $('#settings').find('#' + id).prop('checked', value);
+            } else if (type === "slider") {
+                $('#settings').find('#' + id).slider('setValue', value);
+            }
+        }
+
+        if (type === 'checkbox') {
+            if (value) {
+                app.html.addClass(id);
+            } else {
+                app.html.removeClass(id);
+            }
+        }
+    };
+
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
         var $this = $(this);
         if (app.localStorage) {
@@ -1235,10 +1249,13 @@ $(function () {
 });
 var app = app || {};
 
+$(function () { 
 app.lazyload = function (elements) {
     elements.lazyload({ effect: "fadeIn" });
-};
+    };
+});
 var app = app || {};
+
 $(function () {
     app.body.on("keydown", function (e) {
         if (app.loading.hasClass('hidden')) {
@@ -1306,7 +1323,6 @@ $(function () {
     app.main.on('click', '#fullscreen-toggle', function () {
         app.fullscreen.toggleClass('info-shown');
     });
-});
 
 $(window).click(function (e) {
     var target = $(e.target);
@@ -1318,6 +1334,7 @@ $(window).click(function (e) {
         app.fullscreen.description.empty();
         app.setHtmlScroll();
     }
+    });
 });
 var app = app || {};
 
