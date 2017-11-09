@@ -2,6 +2,8 @@
 
 $(function () {
     app.body.on("keydown", function (e) {
+        var target = $(e.target);
+        var parent = target.parent();
         if (app.loading.hasClass('hidden')) {
             if (e.which === 37) { // left
                 if (app.html.attr('data-aside') === 'left') {
@@ -31,18 +33,21 @@ $(function () {
                 }
             }
             if (e.which === 13) { // enter
-                var target = $(e.target);
-                var parent = target.parent();
                 if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch')) {
                     target.siblings('input').click();
                 } else if (target.hasClass('toggle')) {
-                        target.siblings('input').click();
+                    target.siblings('input').click();
+                } else if (parent.hasClass('dropdown')) {
+                    target.click();
                 }
             }
         }
         if (e.which === 9) { // tab
             if (!app.loading.hasClass('hidden') || !app.fullscreen.hasClass('hidden')) {
                 e.preventDefault();
+            }
+            if (parent.hasClass('dropdown') && parent.hasClass('open')) {
+                target.click();
             }
         }
     });

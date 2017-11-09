@@ -70,7 +70,6 @@ div.dropdown {
     }
 
     > div:focus {
-
         @extend .btn.focus;
 
         & + ul {
