@@ -3173,6 +3173,15 @@ $(function () {
                     });
                 }
             }
+            if (e.which === 13) { // enter
+                var target = $(e.target);
+                var parent = target.parent();
+                if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch')) {
+                    target.siblings('input').click();
+                } else if (target.hasClass('toggle')) {
+                        target.siblings('input').click();
+                }
+            }
         }
         if (e.which === 9) { // tab
             if (!app.loading.hasClass('hidden') || !app.fullscreen.hasClass('hidden')) {
