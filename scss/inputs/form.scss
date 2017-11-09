@@ -37,7 +37,7 @@
             background: theme-gradient($background-dark);
         }
 
-        &.focus + label > i {
+        & + label:focus > i {
             box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
         }
     }
@@ -56,10 +56,10 @@
 
         .slider-handle {
             background: theme-gradient($background-dark);
-        }
 
-        &.focus .slider-handle {
-            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
+            &:focus {
+                box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
+            }
         }
     }
 

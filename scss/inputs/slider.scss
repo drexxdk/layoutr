@@ -28,11 +28,6 @@
         position: absolute;
     }
 
-    &.focus .slider-handle {
-        box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width theme-soft-border-color(theme-color("primary"));
-        z-index: $component-focus-z-index;
-    }
-
     .slider-handle {
         position: absolute;
         top: 0;
@@ -41,6 +36,11 @@
         background: theme-gradient($slider-handle-background-color);
         border: none;
         cursor: pointer;
+
+        &:focus {
+            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width theme-soft-border-color(theme-color("primary"));
+            z-index: $component-focus-z-index;
+        }
 
         &.round {
             border-radius: $slider-line-height;

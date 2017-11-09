@@ -30,8 +30,6 @@ $(function () {
         // Disable caching of AJAX responses
         cache: false
     });
-    app.focus;
-    app.focusChanged = false;
 
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
@@ -114,24 +112,6 @@ $(function () {
 
     $(window).click(function (e) {
         var target = $(e.target);
-        if (app.focusChanged) {
-            app.focusChanged = false;
-            return;
-        }
-        if (app.focus !== undefined) {
-            app.focus.removeClass('focus');
-            app.focus = undefined;
-        }
-
-        if (target.closest('input[type="checkbox"]').length || target.closest('input[type="radio"]').length || target.closest('.slider').length) {
-            if (target.closest('.slider').length) {
-                app.focus = target.closest('.slider');
-            } else {
-                app.focus = target;
-            }
-            app.focus.addClass('focus');
-        }
-
         var isSmallBreakpoint = app.isSmallBreakpoint();
         var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
         var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;

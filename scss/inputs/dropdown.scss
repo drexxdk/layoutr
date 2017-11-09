@@ -2,6 +2,12 @@
 
 select.dropdown {
     @include hidden-input;
+
+    &:focus + div.dropdown {
+        > div {
+            @extend .focus;
+        }
+    }
 }
 
 div.dropdown {
@@ -63,6 +69,15 @@ div.dropdown {
         }
     }
 
+    > div:focus {
+
+        @extend .btn.focus;
+
+        & + ul {
+            @extend .btn.focus;
+        }
+    }
+
     &.open {
 
         > div {
@@ -76,16 +91,13 @@ div.dropdown {
 
         > ul {
             display: block;
-
-            @each $color, $value in $theme-colors {
-                @extend .btn.focus;
-            }
         }
     }
 
     > div {
         @include flex-display();
         border: $component-border;
+        @extend .btn;
 
         > label {
             flex-grow: 1;
@@ -119,6 +131,7 @@ div.dropdown {
                 border-radius: 0;
                 display: block;
                 @include flex-display();
+                @extend .btn;
 
                 > label {
                     flex-grow: 1;

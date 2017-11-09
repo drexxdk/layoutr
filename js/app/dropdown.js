@@ -27,18 +27,18 @@ $(function () {
                     btn = temp[0];
                 }
             }
-            html.push('<div class="btn ' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
+            html.push('<div tabindex="0" class="' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
             html.push('<ul class="' + btn + '">');
             $this.children(':not([value=""])').each(function (index) {
                 var $that = $(this);
-                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="btn theme-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="theme-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
             });
             html.push('</ul>');
             html.push('</div>');
             var dropdown = html.join("");
             $this.after(dropdown);
             dropdown = $this.next();
-            dropdown.on('click', '> .btn', function () {
+            dropdown.on('click', '> div', function () {
                 var $that = $(this);
                 $that.parent().toggleClass('open');
             });

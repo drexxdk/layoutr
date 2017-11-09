@@ -33,6 +33,10 @@
         }
     }
 
+    label.label > span {
+        @extend .btn;
+    }
+
     .label {
         position: relative;
         display: inline-block;

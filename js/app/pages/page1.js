@@ -10,18 +10,12 @@ app.page1 = function () {
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
 
-        app.content.find('#font-size').slider({
+        app.content.find('#font_size').slider({
             min: 12,
             max: 20,
             step: 2,
             value: 16,
             focus: true
-        }).on('change', function () {
-            var $this = $(this);
-            var slider = $this.siblings('.slider');
-            slider.addClass('focus');
-            app.focus = slider;
-            app.focusChanged = true;
         });
 
         app.addValidation(
@@ -59,7 +53,8 @@ app.page1 = function () {
                 dropdown_6: "required",
                 gender: "required",
                 interests: "required",
-                agree: "required"
+                agree: "required",
+                font_size: "required"
             },
             {
                 firstName: {
