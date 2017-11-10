@@ -3,3 +3,7 @@ obj/
 .vs/
 *.sln
 packages/
+Properties/
+*.config
+*.csproj
+*.csproj.user
