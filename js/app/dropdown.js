@@ -57,7 +57,7 @@ $(function () {
         });
     };
 
-    $(document).click(function (e) {
+    $(window).click(function (e) {
         var target = $(e.target);
         if (target.closest("div.dropdown").length) {
             $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');

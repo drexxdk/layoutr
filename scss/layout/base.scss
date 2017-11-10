@@ -92,6 +92,7 @@ aside > .header {
         height: $header-height-content;
         background-color: transparent;
         @include noselect;
+        flex-shrink: 0;
 
         &:focus > svg {
             fill: $aside-icon-hover-background-color;
