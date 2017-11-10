@@ -53,5 +53,5 @@
 }
 
 @function theme-gradient($value) {
-    @return $value linear-gradient(180deg, mix($body-background-color, $value, 15%), $value) repeat-x !important;
+    @return $value linear-gradient(180deg, mix($body-background-color, $value, 15%), $value) repeat-x;
 }

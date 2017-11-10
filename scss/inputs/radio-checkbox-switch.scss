@@ -15,13 +15,12 @@
         &:checked {
             & + label > i {
                 border-color: $background;
-                background-color: theme-color("primary");
+                background: theme-gradient(theme-color("primary"));
             }
         }
 
         & + label:focus > i {
-            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width theme-soft-border-color($background);
-            z-index: $component-focus-z-index;
+            @include focus;
         }
     }
 

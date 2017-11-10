@@ -2743,7 +2743,7 @@ app.page1 = function () {
         var alert = [];
         alert.push('<div class="alert theme-primary">');
         alert.push('<div><p>This is a primary alert—check it out!</p></div>');
-        alert.push('<button class="close" aria-label="Close popup"><svg><use xlink:href="#svg-close"></use></svg></button>');
+        alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
         alert.push('</div>');
         alert = alert.join('');
 
@@ -2850,21 +2850,21 @@ $(function () {
                 '">');
 
             var attr = $this.attr('class');
-            var btn = '';
+            var theme = '';
             if (typeof attr !== typeof undefined && attr !== false) {
                 var temp = attr.split(' ');
                 temp = $.grep(temp, function (item, index) {
                     return item.trim().match(/^theme-/);
                 });
                 if (temp.length === 1) {
-                    btn = temp[0];
+                    theme = temp[0];
                 }
             }
-            html.push('<div tabindex="0" class="' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
-            html.push('<ul class="' + btn + '">');
+            html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
+            html.push('<ul class="' + theme + '">');
             $this.children(':not([value=""])').each(function (index) {
                 var $that = $(this);
-                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="theme-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + $that.text() + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
             });
             html.push('</ul>');
             html.push('</div>');
@@ -2902,10 +2902,9 @@ $(function () {
     });
 });
 var app = app || {};
+var googleMaps, google;
 
 $(function () {
-    var googleMaps, google;
-
     app.checkGoogleMaps = function () {
         if (googleMaps !== undefined && google !== undefined) {
             if (app.html.hasClass('transitions')) {
@@ -2920,7 +2919,6 @@ $(function () {
             return false;
         }
     };
-
     app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
             $('<div id="google-maps"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
@@ -3134,21 +3132,36 @@ $(function () {
                 }
             }
             if (e.which === 13) { // enter
-                if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch')) {
+                if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch') || target.hasClass('toggle')) {
                     target.siblings('input').click();
-                } else if (target.hasClass('toggle')) {
-                    target.siblings('input').click();
-                } else if (parent.hasClass('dropdown')) {
+                    e.preventDefault();
+                } else if (parent.hasClass('dropdown') || parent.parent().hasClass('accordion')) {
                     target.click();
+                    e.preventDefault();
                 }
             }
         }
         if (e.which === 9) { // tab
             if (!app.loading.hasClass('hidden') || !app.fullscreen.hasClass('hidden')) {
                 e.preventDefault();
+                return;
             }
             if (parent.hasClass('dropdown') && parent.hasClass('open')) {
                 target.click();
+                e.preventDefault();
+                return;
+            }
+        }
+    });
+    
+    app.body.on('keyup', function (e) {
+        if (e.which === 9) { // tab
+            var target = $(e.target);
+            var aside = target.parents('aside');
+            if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
+                app.toggleAside(aside.attr('id'));
+            } else if (!aside.length && app.html.attr('data-aside').length) {
+                app.toggleAside();
             }
         }
     });

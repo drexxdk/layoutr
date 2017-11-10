@@ -9,6 +9,20 @@
     > div {
         > .headline {
             border-radius: 0;
+            @extend .btn;
+            @extend .btn.theme-light;
+
+            @each $color, $value in $theme-colors {
+                &.btn.theme-#{$color}:focus {
+                    $active-background: darken($value, 7.5%);
+                    @include color-yiq($active-background);
+                    background: theme-gradient($active-background);
+                }
+            }
+
+            &:focus {
+                box-shadow: none !important;
+            }
         }
 
         > .content {

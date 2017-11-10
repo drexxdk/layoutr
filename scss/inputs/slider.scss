@@ -38,8 +38,7 @@
         cursor: pointer;
 
         &:focus {
-            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width theme-soft-border-color(theme-color("primary"));
-            z-index: $component-focus-z-index;
+            @include focus;
         }
 
         &.round {

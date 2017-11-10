@@ -17,21 +17,21 @@ $(function () {
                 '">');
 
             var attr = $this.attr('class');
-            var btn = '';
+            var theme = '';
             if (typeof attr !== typeof undefined && attr !== false) {
                 var temp = attr.split(' ');
                 temp = $.grep(temp, function (item, index) {
                     return item.trim().match(/^theme-/);
                 });
                 if (temp.length === 1) {
-                    btn = temp[0];
+                    theme = temp[0];
                 }
             }
-            html.push('<div tabindex="0" class="' + btn + '"><label>' + selected.text() + '</label><svg><use xlink:href="#svg-arrow"></use></svg></div>');
-            html.push('<ul class="' + btn + '">');
+            html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
+            html.push('<ul class="' + theme + '">');
             $this.children(':not([value=""])').each(function (index) {
                 var $that = $(this);
-                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div class="theme-light"><label>' + $that.text() + '</label><svg><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + $that.text() + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
             });
             html.push('</ul>');
             html.push('</div>');

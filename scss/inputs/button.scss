@@ -1,16 +1,10 @@
 ﻿/// <reference path="../references" />
 
-@mixin button-variant($background, $border) {
+@mixin button-variant($background) {
     @include color-yiq($background);
     background-color: $background;
     box-shadow: $box-shadow;
     background: theme-gradient($background);
-
-    &:focus,
-    &.focus {
-        box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
-        z-index: $component-focus-z-index;
-    }
 }
 
 .group {
@@ -67,14 +61,17 @@
         flex-shrink: 0;
     }
 
-    $value: theme-color("primary");
-    $active-background: darken($value, 7.5%);
-    @include button-variant($value, theme-soft-border-color($value));
-
     @each $color, $value in $theme-colors {
         &.theme-#{$color} {
-            @include button-variant($value, theme-soft-border-color($value));
+            @include button-variant($value);
         }
+    }
+
+    $value: theme-color("primary");
+    @include button-variant($value);
+
+    &:focus {
+        @include focus;
     }
 }
 
@@ -82,9 +79,4 @@
     color: $link-color;
     text-decoration: $link-decoration;
     background: transparent !important;
-
-    &:focus,
-    &.focus {
-        box-shadow: none;
-    }
 }

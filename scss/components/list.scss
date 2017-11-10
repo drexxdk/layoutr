@@ -76,7 +76,14 @@ ol.list {
         }
     }
 
+    li > button,
     li > a {
+        &:focus {
+            $active-background: darken($list-background-color, 7.5%);
+            @include color-yiq($active-background);
+            background: theme-gradient($active-background);
+        }
+
         &:after {
             content: '';
             position: absolute;

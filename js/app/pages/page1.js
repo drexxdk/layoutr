@@ -92,7 +92,7 @@ app.page1 = function () {
         var alert = [];
         alert.push('<div class="alert theme-primary">');
         alert.push('<div><p>This is a primary alert—check it out!</p></div>');
-        alert.push('<button class="close" aria-label="Close popup"><svg><use xlink:href="#svg-close"></use></svg></button>');
+        alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
         alert.push('</div>');
         alert = alert.join('');
 

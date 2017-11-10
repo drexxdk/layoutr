@@ -38,7 +38,7 @@
     }
 
     label.label:focus > i {
-        @extend .btn.focus;
+        @extend .btn:focus;
     }
 
     .label {

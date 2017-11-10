@@ -86,10 +86,10 @@ aside > .header {
         @include ellipsis;
     }
 
-    > .aside {
+    > button {
         position: relative;
-        width: $header-height;
-        height: $header-height;
+        width: $header-height-content;
+        height: $header-height-content;
         background-color: transparent;
         @include noselect;
 

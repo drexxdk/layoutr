@@ -117,3 +117,29 @@
         }
     }
 }
+
+#authentication {
+    @include flex-display;
+
+    > button {
+        margin: ($spacer / 2);
+        padding: 0 $padding-x;
+        color: $link-color;
+        border-radius: $component-border-radius;
+
+        &:hover,
+        &:focus {
+            $background: theme-color("primary");
+            @include color-yiq($background);
+            background-color: $background;
+            box-shadow: $box-shadow;
+            background: theme-gradient($background);
+        }
+    }
+
+    > span {
+        margin: $spacer 0;
+        width: $layout-border-width;
+        background-color: $layout-border-color;
+    }
+}

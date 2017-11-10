@@ -3,6 +3,20 @@
 // hover effects should only be applied on desktop browsers
 .desktop {
 
+    .btn:hover {
+        $value: theme-color("primary");
+        $active-background: darken($value, 7.5%);
+        @include color-yiq($active-background);
+        background: theme-gradient($active-background);
+    }
+
+    .alert .close:hover {
+        $value: theme-color("light");
+        $active-background: darken(theme-soft-background-color($value), 7.5%);
+        @include color-yiq($active-background);
+        background-color: $active-background;
+    }
+
     .fullscreen.overlay-light:hover:after,
     .fullscreen.overlay-dark:hover:after {
         background-color: transparent;
@@ -12,13 +26,23 @@
         text-decoration: none;
     }
 
-    .header > .aside:hover {
-        overflow: hidden;
+    ol.list li > button:hover,
+    ol.list li > a:hover {
+        $active-background: darken($list-background-color, 7.5%);
+        @include color-yiq($active-background);
+        background: theme-gradient($active-background);
+    }
 
-        svg {
-            fill: $aside-icon-hover-background-color;
-            width: 75%;
-            height: 75%;
+    header.header,
+    aside > .header {
+        > button:hover {
+            overflow: hidden;
+
+            svg {
+                fill: $aside-icon-hover-background-color;
+                width: 75%;
+                height: 75%;
+            }
         }
     }
 
@@ -60,7 +84,7 @@
     }
 
     .theme-link:hover {
-        color: $link-hover-color !important;
+        color: $link-hover-color;
         text-decoration: $link-hover-decoration;
     }
 
@@ -72,7 +96,6 @@
         }
 
         .alert.theme-#{$color} .close:hover {
-
             $active-background: darken(theme-soft-background-color($value), 7.5%);
             @include color-yiq($active-background);
             background-color: $active-background;
@@ -86,12 +109,5 @@
     ol.list li > a:hover:after {
         left: -($spacer / 2);
         border-left-color: $list-number-background-color;
-    }
-
-    .btn:hover {
-        $value: theme-color("primary");
-        $active-background: darken($value, 7.5%);
-        @include color-yiq($active-background);
-        background: theme-gradient($active-background);
     }
 }

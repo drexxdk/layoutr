@@ -14,9 +14,8 @@
         background: theme-gradient($background-light);
         border-color: $border;
 
-        .focus,
         &:focus {
-            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
+            box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $border;
         }
     }
 
@@ -38,14 +37,14 @@
         }
 
         & + label:focus > i {
-            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
+            box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $border;
         }
     }
 
     div.dropdown.open {
         > div,
         > ul {
-            box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
+            box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $border;
         }
     }
 
@@ -58,7 +57,7 @@
             background: theme-gradient($background-dark);
 
             &:focus {
-                box-shadow: $box-shadow, 0 0 0 $btn-focus-box-shadow-width $border;
+                box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $border;
             }
         }
     }
@@ -145,13 +144,13 @@
                 &:first-child {
                     left: $component-border-width;
                     border-top-left-radius: $component-border-radius;
-                    border-top-right-radius: $component-border-radius;
+                    border-bottom-left-radius: $component-border-radius;
                     border-right: $component-border;
                 }
 
                 &:last-child {
                     right: $component-border-width;
-                    border-bottom-left-radius: $component-border-radius;
+                    border-top-right-radius: $component-border-radius;
                     border-bottom-right-radius: $component-border-radius;
                     border-left: $component-border;
                 }

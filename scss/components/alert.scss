@@ -18,6 +18,22 @@
     $value: theme-color("light");
     @include alert-variant(theme-soft-background-color($value), theme-soft-border-color($value), theme-soft-color($value));
 
+    & .close:focus {
+        $active-background: darken(theme-soft-background-color($value), 7.5%);
+        @include color-yiq($active-background);
+        background-color: $active-background;
+    }
+
+    @each $color, $value in $theme-colors {
+        &.theme-#{$color} .close:focus {
+
+            $active-background: darken(theme-soft-background-color($value), 7.5%);
+            @include color-yiq($active-background);
+            background-color: $active-background;
+        }
+    }
+
+
     > div {
         padding: $padding-y $padding-x;
         min-height: $line-height + ($padding-y * 2);

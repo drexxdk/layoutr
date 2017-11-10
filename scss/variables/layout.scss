@@ -10,7 +10,10 @@ $main-min-width: $aside-width + $aside-width;
 
 $loading-width: rem(200px);
 
-$header-height: rem(50px) + $layout-border-width;
+
+$header-height-content: rem(50px) ;
+
+$header-height: $header-height-content + $layout-border-width;
 
 $footer-height: rem(50px) + $layout-border-width;
 

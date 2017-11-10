@@ -44,6 +44,15 @@
                                 <li><b>Left arrow key</b> opens settings or closes navigation if it is open.</li>
                                 <li><b>Right arrow key</b> opens navigation or closes settings if it is open.</li>
                                 <li><b>ESC key</b> closes aside, popups and fullscreen.</li>
+                                <li>
+                                    <b>TAB</b>
+                                    <ul>
+                                        <li>Toggles aside if focused element is within/outside of it.</li>
+                                        <li>Closes dropdown if it has focus.</li>
+                                        <li>Disabled when loading or fullscreen is shown.</li>
+                                    </ul>
+                                </li>
+                                <li><b>ENTER</b> toggles checkbox/radio/dropdown/accordion/navigation if they have focus</li>
                             </ul>
                         </li>
                         <li>
@@ -206,42 +215,42 @@
                 <p>The site has been optimized for the newest version of these browsers:</p>
                 <div id="browsers" class="flex-items column wrap grow">
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-chrome"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-chrome"></use></svg></i>
                         <span class="title">Google</span>
                         <span>Chrome</span>
                     </div>
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-firefox"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-firefox"></use></svg></i>
                         <span class="title">Mozilla</span>
                         <span>Firefox</span>
                     </div>
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-edge"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-edge"></use></svg></i>
                         <span class="title">Microsoft</span>
                         <span>Edge</span>
                     </div>
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-ie"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-ie"></use></svg></i>
                         <span class="title">Microsoft</span>
                         <span>Internet Explorer</span>
                     </div>
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-safari"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-safari"></use></svg></i>
                         <span class="title">Apple</span>
                         <span>Safari</span>
                     </div>
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-opera"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-opera"></use></svg></i>
                         <span class="title">Opera</span>
                         <span>Opera</span>
                     </div>
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-uc"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-uc"></use></svg></i>
                         <span class="title">UCWeb</span>
                         <span>UC Browser</span>
                     </div>
                     <div class="flex-items center">
-                        <i><svg><use xlink:href="#svg-browser-internet"></use></svg></i>
+                        <i><svg focusable="false"><use xlink:href="#svg-browser-internet"></use></svg></i>
                         <span class="title">Samsung</span>
                         <span>Internet</span>
                     </div>
@@ -328,83 +337,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </section>
-        <section>
-            <h2>Ordered list examples</h2>
-            <ol class="list">
-                <li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed felis sollicitudin, lacinia turpis et, imperdiet odio. Quisque vel lorem dui. Aliquam vitae nulla mi. Nam tellus purus, pellentesque a eros bibendum, suscipit volutpat augue. Fusce a libero a erat venenatis commodo sit amet a tortor.</span></li>
-                <li><span>List item</span></li>
-                <li>
-                    <span>List item</span>
-                    <ol>
-                        <li><span>List sub item</span></li>
-                        <li>
-                            <span>List sub item</span>
-                            <ol>
-                                <li><span>List sub item</span></li>
-                            </ol>
-                        </li>
-                    </ol>
-                </li>
-                <li><a href="#">link</a></li>
-                <li><a href="#">link</a></li>
-            </ol>
-            <ol class="list theme-secondary">
-                <li><span>List item</span></li>
-                <li><span>List item</span></li>
-            </ol>
-            <ol class="list theme-dark">
-                <li><a href="#">link</a></li>
-                <li><a href="#">link</a></li>
-            </ol>
-        </section>
-        <section>
-            <h2>img examples</h2>
-            <div class="flex-items">
-                <div class="img embed aspect-ratio-21by9 lazy overlay-dark" data-original="dist/img/justice-league-1920-1080.jpg">
-                    <div class="position top left"><div class="alert theme-primary"><div>21:9</div></div></div>
-                    <div class="position top right">
-                        <button class="btn fullscreen" data-fullscreen-img="dist/img/justice-league-1920-1080.jpg" aria-label="Expand image">
-                            <svg><use xlink:href="#svg-expand"></use></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="img embed aspect-ratio-16by9 lazy overlay-light fullscreen"
-                     data-original="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
-                     data-fullscreen-img="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
-                     data-fullscreen-title="Guardians of the Galaxy Vol. 2"
-                     data-fullscreen-description="The Guardians must fight to keep their newfound family together as they unravel the mystery of Peter Quill's true parentage.">
-                    <div class="position top left"><div class="alert theme-primary"><div>16:9</div></div></div>
-                </div>
-
-                <div class="img embed aspect-ratio-4by3 lazy overlay-dark fullscreen"
-                     data-original="dist/img/avengers-infinity-war-1920-1080.jpg"
-                     data-fullscreen-img="dist/img/avengers-infinity-war-1920-1080.jpg">
-                    <div class="position top left"><div class="alert theme-primary"><div>4:3</div></div></div>
-                </div>
-
-                <div class="img embed aspect-ratio-1by1 lazy" data-original="dist/img/spider-man-homecoming-1920-1080.jpg">
-                    <div class="position top left"><div class="alert theme-primary"><div>1:1 - top left</div></div></div>
-                    <div class="position top center"><div class="alert theme-secondary"><div>top center</div></div></div>
-                    <div class="position top right">
-                        <div class="alert theme-success"><div>top right</div></div>
-                        <div class="alert theme-success"><div>top right</div></div>
-                    </div>
-                    <div class="position middle left"><div class="alert theme-danger"><div>middle left</div></div></div>
-                    <div class="position middle center">
-                        <div class="alert theme-warning"><div>middle center</div></div>
-                        <div class="alert theme-warning"><div>middle center</div></div>
-                    </div>
-                    <div class="position middle right"><div class="alert theme-info"><div>middle right</div></div></div>
-                    <div class="position bottom left">
-                        <div class="alert theme-light"><div>bottom left</div></div>
-                        <div class="alert theme-light"><div>bottom left</div></div>
-                    </div>
-                    <div class="position bottom center"><div class="alert theme-dark"><div>bottom center</div></div></div>
-                    <div class="position bottom right"><div class="alert theme-success"><div>bottom right</div></div></div>
-                </div>
             </div>
         </section>
         <section>
@@ -560,14 +492,14 @@
                 <div class="quote">
                     <div class="img cover lazy" data-original="dist/img/deadpool-200-200.jpg"></div>
                     <div class="text">
-                        <p><svg><use xlink:href="#svg-quote"></use></svg> A fourth wall break inside a fourth wall break? That's like, sixteen walls.</p>
+                        <p><svg focusable="false"><use xlink:href="#svg-quote"></use></svg> A fourth wall break inside a fourth wall break? That's like, sixteen walls.</p>
                         <span class="author">Deadpool</span>
                     </div>
                 </div>
                 <div class="quote large">
                     <div class="img cover lazy" data-original="dist/img/deadpool-200-200.jpg"></div>
                     <div class="text">
-                        <p><svg><use xlink:href="#svg-quote"></use></svg> A fourth wall break inside a fourth wall break? That's like, sixteen walls.</p>
+                        <p><svg focusable="false"><use xlink:href="#svg-quote"></use></svg> A fourth wall break inside a fourth wall break? That's like, sixteen walls.</p>
                         <span class="author">Deadpool</span>
                     </div>
                 </div>
@@ -595,55 +527,55 @@
                 <button type="button" class="btn theme-link">Link</button>
                 <div class="group">
                     <a class="btn theme-secondary" href="#" aria-label="Settings">
-                        <svg><use xlink:href="#svg-settings"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
                     </a>
                     <a class="btn theme-danger" href="#" aria-label="Delete">
-                        <svg><use xlink:href="#svg-delete"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-delete"></use></svg>
                     </a>
                     <a class="btn" href="#" aria-label="Navigation">
-                        <svg><use xlink:href="#svg-menu"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
                     </a>
                 </div>
                 <a class="btn theme-secondary" href="#" aria-label="Settings">
-                    <svg><use xlink:href="#svg-settings"></use></svg>
+                    <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
                 </a>
                 <a class="btn theme-danger" href="#" aria-label="Delete">
-                    <svg><use xlink:href="#svg-delete"></use></svg>
+                    <svg focusable="false"><use xlink:href="#svg-delete"></use></svg>
                 </a>
                 <a class="btn" href="#" aria-label="Navigation">
-                    <svg><use xlink:href="#svg-menu"></use></svg>
+                    <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
                 </a>
                 <a class="btn theme-danger" href="#">
-                    <svg><use xlink:href="#svg-delete"></use></svg>
+                    <svg focusable="false"><use xlink:href="#svg-delete"></use></svg>
                     <label>Delete</label>
                 </a>
                 <a class="btn theme-secondary sm" href="#">
-                    <svg><use xlink:href="#svg-settings"></use></svg>
+                    <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
                     <label>Settings</label>
                 </a>
                 <div class="group expand">
                     <a class="btn theme-secondary" href="#">
-                        <svg><use xlink:href="#svg-settings"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
                         <label>Settings</label>
                     </a>
                     <a class="btn theme-danger" href="#" aria-label="Delete">
-                        <svg><use xlink:href="#svg-delete"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-delete"></use></svg>
                         <label>Delete</label>
                     </a>
                     <a class="btn" href="#" aria-label="Navigation">
-                        <svg><use xlink:href="#svg-menu"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
                         <label>Navigation</label>
                     </a>
                     <a class="btn theme-secondary" href="#">
-                        <svg><use xlink:href="#svg-settings"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
                         <label>Settings</label>
                     </a>
                     <a class="btn theme-danger" href="#" aria-label="Delete">
-                        <svg><use xlink:href="#svg-delete"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-delete"></use></svg>
                         <label>Delete</label>
                     </a>
                     <a class="btn" href="#" aria-label="Navigation">
-                        <svg><use xlink:href="#svg-menu"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
                         <label>Navigation</label>
                     </a>
                 </div>
@@ -657,7 +589,7 @@
                         <p>This is a primary alert—check it out!</p>
                     </div>
                     <button class="close" aria-label="Close alert">
-                        <svg><use xlink:href="#svg-close"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
                     </button>
                 </div>
                 <div class="alert theme-secondary">
@@ -685,7 +617,7 @@
                         <p>This is a info alert—check it out!</p>
                     </div>
                 </div>
-                <div class="alert theme-light">
+                <div class="alert">
                     <div>
                         <p>This is a light alert—check it out!</p>
                     </div>
@@ -696,7 +628,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla eleifend tellus, sed ultrices libero pharetra non. Vivamus bibendum bibendum pellentesque. Etiam egestas semper diam, eget mollis purus sollicitudin et. Nam consequat metus a lacus lobortis, et suscipit lacus ullamcorper. Nulla ut odio a tellus suscipit sagittis at sed quam. Duis faucibus dui nec finibus ultricies. Nunc vestibulum lorem magna, quis luctus libero pretium at. Aenean porttitor ex ac bibendum mattis. Suspendisse potenti. Praesent commodo turpis nec placerat semper. Morbi a aliquet mi.</p>
                     </div>
                     <button class="close" aria-label="Close alert">
-                        <svg><use xlink:href="#svg-close"></use></svg>
+                        <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
                     </button>
                 </div>
             </div>
@@ -705,7 +637,7 @@
             <h2>Accordion example</h2>
             <div class="accordion">
                 <div>
-                    <div class="headline btn theme-light align-left">
+                    <div tabindex="0" class="headline align-left">
                         left headline
                     </div>
                     <div class="content">
@@ -713,7 +645,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="headline btn theme-light align-right">
+                    <div tabindex="0" class="headline theme-dark align-right">
                         right headline
                     </div>
                     <div class="content">
@@ -721,7 +653,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="headline btn theme-light">
+                    <div tabindex="0" class="headline">
                         headline
                     </div>
                     <div class="content">
@@ -729,7 +661,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="headline btn theme-light">
+                    <div tabindex="0" class="headline">
                         headline
                     </div>
                     <div class="content">
@@ -737,6 +669,35 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section>
+            <h2>Ordered list examples</h2>
+            <ol class="list">
+                <li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed felis sollicitudin, lacinia turpis et, imperdiet odio. Quisque vel lorem dui. Aliquam vitae nulla mi. Nam tellus purus, pellentesque a eros bibendum, suscipit volutpat augue. Fusce a libero a erat venenatis commodo sit amet a tortor.</span></li>
+                <li><span>List item</span></li>
+                <li>
+                    <span>List item</span>
+                    <ol>
+                        <li><span>List sub item</span></li>
+                        <li>
+                            <span>List sub item</span>
+                            <ol>
+                                <li><span>List sub item</span></li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+            </ol>
+            <ol class="list theme-secondary">
+                <li><span>List item</span></li>
+                <li><span>List item</span></li>
+            </ol>
+            <ol class="list theme-dark">
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+            </ol>
         </section>
         <section>
             <h2>Form example</h2>
@@ -747,7 +708,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" />
                             <div class="input-group-addon">
-                                <svg><use xlink:href="#svg-checkmark"></use></svg>
+                                <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
                             </div>
                         </div>
                     </div>
@@ -757,7 +718,7 @@
                     <div>
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <svg><use xlink:href="#svg-checkmark"></use></svg>
+                                <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
                             </div>
                             <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" />
                         </div>
@@ -780,7 +741,7 @@
                     <div>
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <svg><use xlink:href="#svg-email"></use></svg>
+                                <svg focusable="false"><use xlink:href="#svg-email"></use></svg>
                             </div>
                             <input id="email" name="email" class="form-control" type="text" placeholder="Email address">
                         </div>
@@ -791,7 +752,7 @@
                     <div>
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <svg><use xlink:href="#svg-password"></use></svg>
+                                <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
                             </div>
                             <input id="password" name="password" class="form-control" type="password" placeholder="Password">
                         </div>
@@ -802,7 +763,7 @@
                     <div>
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <svg><use xlink:href="#svg-password"></use></svg>
+                                <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
                             </div>
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" />
                         </div>
@@ -837,7 +798,7 @@
                 <div class="form-group">
                     <label class="control-label required" for="dropdown_3">Dropdown 3</label>
                     <div>
-                        <select id="dropdown_3" name="dropdown_3" class="dropdown theme-dark align-right">
+                        <select id="dropdown_3" name="dropdown_3" class="dropdown theme-warning align-right">
                             <option value="1">option 1</option>
                             <option value="2">option 2</option>
                             <option value="3" selected="selected">option 3</option>
@@ -849,7 +810,7 @@
                 <div class="form-group">
                     <label class="control-label required" for="dropdown_4">Dropdown 4</label>
                     <div>
-                        <select id="dropdown_4" name="dropdown_4" class="dropdown ellipsis">
+                        <select id="dropdown_4" name="dropdown_4" class="dropdown theme-info ellipsis">
                             <option value="1" selected="selected">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in ornare lorem. Aenean id dignissim libero.</option>
                             <option value="2">Ut lobortis rutrum nulla non bibendum.</option>
                             <option value="3">Cras ex nibh, rhoncus id tincidunt id, pretium vitae metus.</option>
@@ -861,7 +822,7 @@
                 <div class="form-group">
                     <label class="control-label required" for="dropdown_5">Dropdown 5</label>
                     <div>
-                        <select id="dropdown_5" name="dropdown_5" class="dropdown theme-secondary align-left">
+                        <select id="dropdown_5" name="dropdown_5" class="dropdown theme-light align-left">
                             <option value="1" selected="selected">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in ornare lorem. Aenean id dignissim libero.</option>
                             <option value="2">Ut lobortis rutrum nulla non bibendum.</option>
                             <option value="3">Cras ex nibh, rhoncus id tincidunt id, pretium vitae metus.</option>
@@ -914,19 +875,19 @@
                         <div class="input-group">
                             <div class="checkbox">
                                 <input id="interests_sports" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_sports"><i><svg><use xlink:href="#svg-checkmark"></use></svg></i> Sports</label>
+                                <label tabindex="0" for="interests_sports"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Sports</label>
                             </div>
                             <div class="checkbox">
                                 <input id="interests_traveling" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_traveling"><i><svg><use xlink:href="#svg-checkmark"></use></svg></i> Traveling</label>
+                                <label tabindex="0" for="interests_traveling"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Traveling</label>
                             </div>
                             <div class="checkbox">
                                 <input id="interests_computers" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_computers"><i><svg><use xlink:href="#svg-checkmark"></use></svg></i> Computers</label>
+                                <label tabindex="0" for="interests_computers"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Computers</label>
                             </div>
                             <div class="checkbox">
                                 <input id="interests_movies" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_movies"><i><svg><use xlink:href="#svg-checkmark"></use></svg></i> Movies</label>
+                                <label tabindex="0" for="interests_movies"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Movies</label>
                             </div>
                         </div>
                     </div>
@@ -950,7 +911,7 @@
                     <div>
                         <div class="checkbox">
                             <input id="agree" name="agree" type="checkbox">
-                            <label tabindex="0" for="agree"><i><svg><use xlink:href="#svg-checkmark"></use></svg></i> Please agree to our policy</label>
+                            <label tabindex="0" for="agree"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Please agree to our policy</label>
                         </div>
                     </div>
                 </div>
@@ -958,6 +919,54 @@
                     <button type="submit" class="btn" name="signup" value="Sign up">Sign up</button>
                 </div>
             </form>
+        </section>
+        <section>
+            <h2>img examples</h2>
+            <div class="flex-items">
+                <div class="img embed aspect-ratio-21by9 lazy overlay-dark" data-original="dist/img/justice-league-1920-1080.jpg">
+                    <div class="position top left"><div class="alert theme-primary"><div>21:9</div></div></div>
+                    <div class="position top right">
+                        <button class="btn fullscreen" data-fullscreen-img="dist/img/justice-league-1920-1080.jpg" aria-label="Expand image">
+                            <svg focusable="false"><use xlink:href="#svg-expand"></use></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="img embed aspect-ratio-16by9 lazy overlay-light fullscreen"
+                     data-original="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
+                     data-fullscreen-img="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
+                     data-fullscreen-title="Guardians of the Galaxy Vol. 2"
+                     data-fullscreen-description="The Guardians must fight to keep their newfound family together as they unravel the mystery of Peter Quill's true parentage.">
+                    <div class="position top left"><div class="alert theme-primary"><div>16:9</div></div></div>
+                </div>
+
+                <div class="img embed aspect-ratio-4by3 lazy overlay-dark fullscreen"
+                     data-original="dist/img/avengers-infinity-war-1920-1080.jpg"
+                     data-fullscreen-img="dist/img/avengers-infinity-war-1920-1080.jpg">
+                    <div class="position top left"><div class="alert theme-primary"><div>4:3</div></div></div>
+                </div>
+
+                <div class="img embed aspect-ratio-1by1 lazy" data-original="dist/img/spider-man-homecoming-1920-1080.jpg">
+                    <div class="position top left"><div class="alert theme-primary"><div>1:1 - top left</div></div></div>
+                    <div class="position top center"><div class="alert theme-secondary"><div>top center</div></div></div>
+                    <div class="position top right">
+                        <div class="alert theme-success"><div>top right</div></div>
+                        <div class="alert theme-success"><div>top right</div></div>
+                    </div>
+                    <div class="position middle left"><div class="alert theme-danger"><div>middle left</div></div></div>
+                    <div class="position middle center">
+                        <div class="alert theme-warning"><div>middle center</div></div>
+                        <div class="alert theme-warning"><div>middle center</div></div>
+                    </div>
+                    <div class="position middle right"><div class="alert theme-info"><div>middle right</div></div></div>
+                    <div class="position bottom left">
+                        <div class="alert theme-light"><div>bottom left</div></div>
+                        <div class="alert theme-light"><div>bottom left</div></div>
+                    </div>
+                    <div class="position bottom center"><div class="alert theme-dark"><div>bottom center</div></div></div>
+                    <div class="position bottom right"><div class="alert theme-success"><div>bottom right</div></div></div>
+                </div>
+            </div>
         </section>
     </div>
 </div>
