@@ -44,6 +44,13 @@ $(function () {
             if (app.settings === null) app.settings = [];
         }
 
+        if (app.html.hasClass('mobile')) {
+            var footer = $this.find('#footer-fixed');
+            if (footer.length) {
+                footer.parent().hide();
+            }
+        }
+
         $this.on('click', 'input[type=checkbox]', function () {
             var $this = $(this);
             var id = $this.attr('id');
