@@ -42,7 +42,7 @@ html {
                 height: 100vh;
                 content: '';
                 z-index: $overlay-z-index;
-                background-color: $content-overlay-background-color;
+                background-color: $overlay-background-color-dark;
             }
         }
     }
@@ -57,7 +57,7 @@ html {
                 height: 100vh;
                 content: '';
                 z-index: $overlay-z-index;
-                background-color: $content-overlay-background-color;
+                background-color: $overlay-background-color-dark;
             }
         }
 

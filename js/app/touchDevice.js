@@ -8,12 +8,12 @@ $(function () {
         var xDown = null;
         var yDown = null;
 
-        function handleTouchStart(evt) {
+        var handleTouchStart = function (evt) {
             xDown = evt.touches[0].clientX;
             yDown = evt.touches[0].clientY;
         };
 
-        function handleTouchMove(evt) {
+        var handleTouchMove = function (evt) {
             if (!xDown || !yDown) {
                 return;
             }
@@ -25,20 +25,21 @@ $(function () {
             if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
                 var distance = parseInt($(window).width() / 2);
                 if (yDiff > -100 || yDiff < 100) {
+                    var currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
                         if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
-                            var currentAside = app.html.attr('data-aside');
+                            currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
                             } else if (currentAside !== 'right') {
                                 app.toggleAside('right');
                             }
                         }
-                    } else if (xDiff < (-distance)) {
+                    } else if (xDiff < -distance) {
                         /* right swipe */
                         if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
-                            var currentAside = app.html.attr('data-aside');
+                            currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();
                             } else if (currentAside !== 'left') {
@@ -47,27 +48,27 @@ $(function () {
                         }
                     }
                 }
-                
+
             }
             /* reset values */
             xDown = null;
             yDown = null;
         };
-    }
-
-
+    };
+    
     if (app.html.hasClass('android')) {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
-        app.modal.image.img.css('max-height', window.innerHeight);
         $(window).on('resize', function () {
-            if (!app.modal.hasClass('hidden')) {
-                app.modal.image.img.css('max-height', window.innerHeight);
+            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
+                app.modal.find('img').css('max-height', window.innerHeight);
             }
         });
-        app.main.on('click', '.fullscreen', function () {
-            app.modal.image.img.css('max-height', window.innerHeight);
+        app.main.on('click', '.modal', function () {
+            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
+                app.modal.find('img').css('max-height', window.innerHeight);
+            }
         });
     }
 });

@@ -21,9 +21,8 @@ $(function () {
                 if (app.html.attr('data-aside').length) {
                     app.toggleAside(); // closes aside
                 }
-                if (!app.modal.hasClass('hidden')) {
-                    app.modal.addClass('hidden'); // closes fullscreen
-                    app.setHtmlScroll();
+                if (app.html.hasClass('modal')) {
+                    app.closeModal();
                 }
                 var popups = app.main.children('.popup');
                 if (popups.length) {
@@ -43,7 +42,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (!app.loading.hasClass('hidden') || !app.modal.hasClass('hidden')) {
+            if (!app.loading.hasClass('hidden') || app.html.hasClass('modal')) {
                 e.preventDefault();
                 return;
             }

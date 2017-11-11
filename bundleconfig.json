@@ -8,7 +8,7 @@
       "js/app/loadCSS.js"
     ],
     "minify": {
-      "enabled": true,
+      "enabled": true
       //"gzip": true
     }
   },
@@ -36,10 +36,10 @@
       "js/app/lazyload.js",
       "js/app/keyboard.js",
       "js/app/modal.js",
-      "js/app/android.js"
+      "js/app/touchDevice.js"
     ],
     "minify": {
-      "enabled": true,
+      "enabled": true
       //"gzip": true
     }
   },
@@ -49,7 +49,7 @@
       "js/app/serviceWorker.js"
     ],
     "minify": {
-      "enabled": true,
+      "enabled": true
       //"gzip": true
     }
   }

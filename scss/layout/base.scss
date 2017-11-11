@@ -69,6 +69,10 @@ main {
     height: 100vh;
     @include flex-display;
     @include flex-direction(column);
+
+    > svg {
+        display: none;
+    }
 }
 
 header.header,
@@ -107,18 +111,5 @@ aside > .header {
             fill: $aside-icon-background-color;
             @include button-transition(all);
         }
-    }
-}
-
-#modal, #loading {
-    @include flex-center;
-    @include overlay;
-    height: 100%;
-
-    &:before {
-        content: '';
-        @include overlay;
-        height: 100vh;
-        background-color: $overlay-background-color;
     }
 }

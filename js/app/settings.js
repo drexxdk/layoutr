@@ -61,6 +61,7 @@ $(function () {
                 app.checkGoogleMaps();
             }
             if (id === 'left-push' || id === 'right-push') {
+                debugger;
                 app.setHtmlScroll();
             }
         });

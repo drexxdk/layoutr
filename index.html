@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="transitions two-columns left-push" data-aside="">
+<html lang="en" class="transitions two-columns left-push" data-aside="" data-modal="">
 <head>
     <title>Panels</title>
     <meta charset="utf-8" />
@@ -14,8 +14,7 @@
     <link rel="shortcut icon" href="dist/img/favicon/favicon.ico">
     <link rel="manifest" href="manifest.json">
     <style>
-        body,
-        body > svg {
+        main {
             display: none;
         }
     </style>
@@ -31,16 +30,16 @@
                 <div class="rect5"></div>
             </div>
         </div>
-        <div id="modal" class="hidden" data-modal-type=""></div>
+        <div id="modal"></div>
         <header class="header">
             <button class="aside left" aria-label="Toggle menu">
                 <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
             </button>
             <span class="title">Panels</span>
             <div id="authentication">
-                <button class="modal" data-modal-type="login">Login</button>
+                <button class="modal" data-modal="form" data-modal-id="login">Login</button>
                 <span></span>
-                <button class="modal" data-modal-type="register">Register</button>
+                <button class="modal" data-modal="form" data-modal-id="register">Register</button>
             </div>
             <button class="aside right" aria-label="Toggle settings">
                 <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>

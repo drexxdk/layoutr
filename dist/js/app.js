@@ -2488,6 +2488,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 });
 var app = app || {};
 
+
+
+
 $(function () {
     app.html = $('html');
     app.head = $('head');
@@ -2505,7 +2508,23 @@ $(function () {
     app.smallBreakpoint = 732;
     app.overflow = $('#overflow');
     app.modal = $('#modal');
-    
+    app.scrollbarWidth = 0;
+
+    var scrollbarWidth = function () {
+            app.body.append('<div id="scrollbar-width"></div>');
+            var element = app.body.children('#scrollbar-width');
+            element.css({
+                'overflow': "scroll",
+                'visibility': "hidden",
+                'position': 'absolute',
+                'width': '100px',
+                'height': '100px'
+            });
+            app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
+            element.remove();
+    };
+    scrollbarWidth();
+
     app.isSmallBreakpoint = function () {
         return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
     };
@@ -2575,7 +2594,7 @@ $(function () {
     });
 
     $.get('ajax/layout/svg.html', function (data) {
-        $(data).prependTo(app.body);
+        $(data).prependTo(app.main);
     });
 
     app.left.on('click', '.tree a', function (e) {
@@ -2596,16 +2615,30 @@ $(function () {
 
     $(window).click(function (e) {
         var target = $(e.target);
-        var isSmallBreakpoint = app.isSmallBreakpoint();
-        var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
-        var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
-        var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+        var modal = target.closest(app.modal[0]);
+        if (modal.length) {
+            var image = app.html.attr('data-modal') === 'image' && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
+            var form = !target.closest('#modal > div').length && app.html.attr('data-modal') === 'form';
+            if (image || form) {
+                app.closeModal();
+            }
+        } else {
+            var isSmallBreakpoint = app.isSmallBreakpoint();
+            var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
+            var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
+            var notTarget = !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
-        if ((left || right) && notTarget) {
-            app.enableScroll();
-            app.html.attr('data-aside', '');
-            app.checkGoogleMaps();
+            if ((left || right) && notTarget) {
+                app.enableScroll();
+                app.html.attr('data-aside', '');
+                app.checkGoogleMaps();
+            }
         }
+
+
+
+
+        
     });
 });
 var app = app || {};
@@ -2781,6 +2814,10 @@ $(function () {
             //debugger;
             app.html.data('scroll-top', scrollTop);
             app.html.addClass('scrollDisabled');
+            if (app.html.attr('data-modal').length) {
+                app.checkModal();
+            }
+            app.body.scrollTop(scrollTop);
             app.main.scrollTop(scrollTop);
         }
     };
@@ -2788,24 +2825,47 @@ $(function () {
     app.enableScroll = function () {
         if (!app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = true;
-            app.html.removeClass('scrollDisabled');
+            app.html.removeClass('scrollDisabled modal');
             var scrollTop = app.html.data('scroll-top');
 
             app.body.scrollTop(scrollTop); // edge, safari
             app.html.scrollTop(scrollTop); // chrome, firefox, ie
+            app.checkModal();
         }
     };
 
     app.setHtmlScroll = function () {
-        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+        if (!app.html.attr('data-modal').length && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
             app.enableScroll();
-        } else if (!app.modal.hasClass('hidden') || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
+        } else if (app.html.attr('data-modal').length || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
             app.disableScroll();
+        }
+    };
+
+    app.checkModal = function () {
+        if (app.html.hasClass('modal')) {
+            app.body.css('padding-right', app.scrollbarWidth);
+            if (app.html.attr('data-aside') === 'right') {
+                app.right.css('margin-right', app.scrollbarWidth);
+            }
+        } else {
+            app.body.css('padding-right', 0);
+            app.right.css('margin-right', 0);
+        }
+
+        if (app.contentHeader !== undefined) {
+            if (app.html.hasClass('modal') && app.contentHeader.css('position') === 'fixed') {
+                var halfOverflowY = app.scrollbarWidth / 2;
+                app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+            } else {
+                app.contentHeader.children().css('width', '');
+            }
         }
     };
 
     $(window).resize(function () {
         app.setHtmlScroll();
+        app.checkModal();
     });
 });
 var app = app || {};
@@ -3070,6 +3130,7 @@ $(function () {
                 app.checkGoogleMaps();
             }
             if (id === 'left-push' || id === 'right-push') {
+                debugger;
                 app.setHtmlScroll();
             }
         });
@@ -3123,9 +3184,8 @@ $(function () {
                 if (app.html.attr('data-aside').length) {
                     app.toggleAside(); // closes aside
                 }
-                if (!app.modal.hasClass('hidden')) {
-                    app.modal.addClass('hidden'); // closes fullscreen
-                    app.setHtmlScroll();
+                if (app.html.hasClass('modal')) {
+                    app.closeModal();
                 }
                 var popups = app.main.children('.popup');
                 if (popups.length) {
@@ -3145,7 +3205,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (!app.loading.hasClass('hidden') || !app.modal.hasClass('hidden')) {
+            if (!app.loading.hasClass('hidden') || app.html.hasClass('modal')) {
                 e.preventDefault();
                 return;
             }
@@ -3175,13 +3235,14 @@ $(function () {
     app.main.on('click', '.modal', function () {
         var $this = $(this);
 
-        var type = $this.attr('data-modal-type');
-        if (type !== undefined && type.length && (type === 'image' || type === 'login' || type === 'register')) {
+        var type = $this.attr('data-modal');
+        if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
+            var id = $this.attr('data-modal-id');
+            var html = [];
+            html.push('<div><div>');
             if (type === 'image' && $this.attr('data-modal-img').length) {
                 var title = $this.attr('data-modal-title');
                 var description = $this.attr('data-modal-description');
-                var html = [];
-                html.push('<div>');
                 if (title !== undefined || description !== undefined) {
                     app.modal.addClass('has-info');
                     html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
@@ -3195,17 +3256,22 @@ $(function () {
                     html.push('<div id="modal-description">' + description + '</div>');
                 }
                 html.push('<img id="modal-img" src="' + $this.attr('data-modal-img') + '" />');
-                html.push('</div>');
-                var div = html.join("");
-                app.modal.html(div);
-            } else if (type === 'login') {
 
-            } else if (type === 'register') {
-
+            } else if (type === 'form' && id === 'login') {
+                html.push('<div><p>login box</p></div>');
+            } else if (type === 'form' && id === 'register') {
+                html.push('<div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis odio quis nunc porta tincidunt. Praesent in augue velit. Vivamus efficitur nisi eget convallis placerat. Quisque luctus nibh vitae mauris vehicula dignissim. Cras quis velit ac metus maximus luctus eget rutrum nisl. Nulla facilisi. Nullam gravida efficitur fringilla. Etiam pretium condimentum tempus. Sed feugiat tortor vitae est porttitor, eu pharetra arcu fringilla. Sed nec luctus enim, nec rhoncus velit. Fusce dolor sem, varius id rutrum in, efficitur sed magna.<br /><br />' +
+                    'Maecenas ut lacinia orci.Phasellus sagittis nisi eu mauris tempus, sit amet lobortis justo dapibus.Nulla facilisi.Aenean venenatis faucibus gravida.Praesent et justo fringilla mauris convallis pretium.Maecenas egestas lectus non erat tincidunt, in egestas risus ultricies.Praesent erat felis, rutrum ac accumsan eget, accumsan ac nisi.Integer sollicitudin risus sed purus maximus porta.Nam maximus, leo at dapibus lobortis, nunc eros molestie justo, vel scelerisque est dolor non tellus.Integer fermentum mi malesuada, placerat mi ac, laoreet risus.<br /><br />' +
+                    'Sed et felis a velit accumsan sollicitudin ut a dolor.Integer iaculis quam risus, ac placerat nibh fringilla non.Donec non diam nulla.Vestibulum pretium magna ac malesuada lobortis.Nam eleifend sapien sed efficitur fermentum.Ut magna sapien, mattis nec ligula sollicitudin, ultricies efficitur quam.Praesent vestibulum libero et lorem vulputate, sit amet sagittis velit bibendum.Morbi blandit quis nibh a rhoncus.Phasellus maximus justo ac varius dapibus.Mauris suscipit quam vitae augue ornare, eu rutrum elit tincidunt.Nam rutrum turpis ut bibendum iaculis.Nunc bibendum pretium turpis non ullamcorper.Morbi rhoncus tortor sit amet diam imperdiet luctus.Cras tempor interdum est, et sodales neque semper a.Aliquam imperdiet risus ex, id imperdiet urna egestas in. Vivamus eu suscipit augue.<br /><br />' +
+                    'Maecenas nec mauris diam.Aenean lobortis mauris sit amet ligula imperdiet tincidunt.Suspendisse ornare nisl metus, id sagittis ligula feugiat vitae.Nullam viverra velit non augue maximus, quis vulputate nisi tincidunt.Maecenas pretium mi sed tellus placerat molestie.Duis laoreet purus eu lectus accumsan faucibus.Donec cursus odio turpis, ac maximus lacus euismod finibus.Nunc blandit ultricies ultrices.Etiam vitae auctor quam.Ut sem libero, aliquam ut erat vitae, dapibus lacinia erat.Donec nec erat commodo, tincidunt arcu nec, tincidunt ligula.Maecenas id facilisis neque.In sollicitudin ligula non congue convallis.Sed et varius odio.Mauris scelerisque nisl ac ipsum sodales, ut lacinia nisi tempus.<br /><br />' +
+                    'Maecenas orci magna, convallis vel blandit id, tincidunt tempus lorem.Duis in purus velit.Vivamus elit urna, congue a congue ut, porttitor id orci.Vestibulum mattis, nisi in eleifend aliquet, lectus velit imperdiet est, at gravida quam erat et lectus.Aliquam vehicula nisi sed turpis posuere pretium.Integer a enim nec nisl faucibus varius.Cras pharetra viverra magna id finibus.Donec aliquet blandit est eu venenatis.Nunc et quam imperdiet, pellentesque neque at, malesuada lorem.Vivamus ut elementum ipsum.Vivamus mauris est, malesuada ut lacinia eu, porta id mauris.Suspendisse potenti.Nulla vel libero ac nunc porta mollis nec ac ligula.</p></div>');
             }
-            app.modal.attr('data-type', type);
-            app.modal.removeClass('hidden');
+            html.push('</div></div>');
+            var div = html.join("");
+            app.modal.html(div);
+            app.html.addClass('modal').attr('data-modal', type);
             app.setHtmlScroll();
+            app.checkModal();
         }
     });
 
@@ -3213,16 +3279,12 @@ $(function () {
         app.modal.toggleClass('info-shown');
     });
 
-    $(window).click(function (e) {
-        var target = $(e.target);
-        var modal = target.closest('#modal');
-        if (modal.length) {
-            if (modal.attr('data-type') === 'image' && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length) {
-                app.modal.addClass('hidden').removeClass('has-info info-shown').attr('data-type', '').empty();
-                app.setHtmlScroll();
-            }
-        }
-    });
+    app.closeModal = function () {
+        app.html.removeClass('modal').attr('data-modal', '');
+        app.modal.removeClass('info-shown').empty();
+        app.setHtmlScroll();
+        app.checkModal();
+    };
 });
 var app = app || {};
 
@@ -3234,12 +3296,12 @@ $(function () {
         var xDown = null;
         var yDown = null;
 
-        function handleTouchStart(evt) {
+        var handleTouchStart = function (evt) {
             xDown = evt.touches[0].clientX;
             yDown = evt.touches[0].clientY;
         };
 
-        function handleTouchMove(evt) {
+        var handleTouchMove = function (evt) {
             if (!xDown || !yDown) {
                 return;
             }
@@ -3251,20 +3313,21 @@ $(function () {
             if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
                 var distance = parseInt($(window).width() / 2);
                 if (yDiff > -100 || yDiff < 100) {
+                    var currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
                         if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
-                            var currentAside = app.html.attr('data-aside');
+                            currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
                             } else if (currentAside !== 'right') {
                                 app.toggleAside('right');
                             }
                         }
-                    } else if (xDiff < (-distance)) {
+                    } else if (xDiff < -distance) {
                         /* right swipe */
                         if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
-                            var currentAside = app.html.attr('data-aside');
+                            currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();
                             } else if (currentAside !== 'left') {
@@ -3273,27 +3336,27 @@ $(function () {
                         }
                     }
                 }
-                
+
             }
             /* reset values */
             xDown = null;
             yDown = null;
         };
-    }
-
-
+    };
+    
     if (app.html.hasClass('android')) {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
-        app.modal.image.img.css('max-height', window.innerHeight);
         $(window).on('resize', function () {
-            if (!app.modal.hasClass('hidden')) {
-                app.modal.image.img.css('max-height', window.innerHeight);
+            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
+                app.modal.find('img').css('max-height', window.innerHeight);
             }
         });
-        app.main.on('click', '.fullscreen', function () {
-            app.modal.image.img.css('max-height', window.innerHeight);
+        app.main.on('click', '.modal', function () {
+            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
+                app.modal.find('img').css('max-height', window.innerHeight);
+            }
         });
     }
 });

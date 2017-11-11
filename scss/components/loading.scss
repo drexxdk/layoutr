@@ -1,8 +1,18 @@
 ﻿/// <reference path="../references" />
 
 #loading {
+    @include flex-center;
+    @include overlay;
+    height: 100%;
     z-index: $loading-z-index;
     @include noselect;
+
+    &:before {
+        content: '';
+        @include overlay;
+        height: 100vh;
+        background-color: $overlay-background-color-light;
+    }
 
     > .spinner {
         height: $font-size * 4;
