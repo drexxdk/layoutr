@@ -51,20 +51,18 @@ $(function () {
                 //app.html.addClass('modal');
                 var image = app.modal.find('#modal-img');
                 image.on('load', function () {
-                    app.html.attr('data-modal', type);
                     if (app.html.hasClass('android')) {
-                        app.modal.find('#modal-img').css('max-height', window.innerHeight);
+                        image.css('max-height', window.innerHeight);
                     }
+                    app.html.attr('data-modal', type);
                 });
                 image.attr('src', $this.attr('data-modal-img'));
-                app.html.addClass('modal')
-                app.checkModal();
-                app.setHtmlScroll();
             } else {
-                app.html.addClass('modal').attr('data-modal', type);
-                app.checkModal();
-                app.setHtmlScroll();
+                app.html.attr('data-modal', type);
             }
+            app.html.addClass('modal')
+            app.checkModal();
+            app.setHtmlScroll();
         }
     });
 
