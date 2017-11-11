@@ -53,22 +53,25 @@ html {
 
         &[data-modal="form"] #modal > div {
             margin: 0 $spacer;
+            width: 100%;
+            max-width: $container-medium;
 
             > div {
                 @include flex-display;
                 @include flex-direction(column);
                 width: 100%;
+                @include align-items(center);
 
                 > div {
+                    width: 100%;
                     margin: $spacer 0;
-                    max-width: $container-medium;
                     border: $component-border;
                     border-radius: $component-border-radius;
                     background-color: $modal-background-color;
 
                     > .header {
                         > .title {
-                            padding-left:$spacer;
+                            padding-left: $spacer;
                         }
 
                         > #modal-close {
@@ -77,7 +80,7 @@ html {
                     }
 
                     > p {
-                        padding:$spacer;
+                        padding: $spacer;
                     }
                 }
             }

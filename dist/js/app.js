@@ -2618,7 +2618,7 @@ $(function () {
         var modal = target.closest(app.modal[0]);
         if (modal.length) {
             var image = app.html.attr('data-modal') === 'image' && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
-            var form = !target.closest('#modal > div').length && app.html.attr('data-modal') === 'form';
+            var form = !target.closest('#modal > div > div > div').length && app.html.attr('data-modal') === 'form';
             if (image || form) {
                 app.closeModal();
             }
