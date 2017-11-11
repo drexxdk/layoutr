@@ -21,8 +21,8 @@ $(function () {
                 if (app.html.attr('data-aside').length) {
                     app.toggleAside(); // closes aside
                 }
-                if (!app.fullscreen.hasClass('hidden')) {
-                    app.fullscreen.addClass('hidden'); // closes fullscreen
+                if (!app.modal.hasClass('hidden')) {
+                    app.modal.addClass('hidden'); // closes fullscreen
                     app.setHtmlScroll();
                 }
                 var popups = app.main.children('.popup');
@@ -43,7 +43,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (!app.loading.hasClass('hidden') || !app.fullscreen.hasClass('hidden')) {
+            if (!app.loading.hasClass('hidden') || !app.modal.hasClass('hidden')) {
                 e.preventDefault();
                 return;
             }

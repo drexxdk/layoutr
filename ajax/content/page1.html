@@ -43,13 +43,13 @@
                             <ul>
                                 <li><b>Left arrow key</b> opens settings or closes navigation if it is open.</li>
                                 <li><b>Right arrow key</b> opens navigation or closes settings if it is open.</li>
-                                <li><b>ESC key</b> closes aside, popups and fullscreen.</li>
+                                <li><b>ESC key</b> closes aside, popups and modal.</li>
                                 <li>
                                     <b>TAB</b>
                                     <ul>
                                         <li>Toggles aside if focused element is within/outside of it.</li>
                                         <li>Closes dropdown if it has focus.</li>
-                                        <li>Disabled when loading or fullscreen is shown.</li>
+                                        <li>Disabled when loading or modal is shown.</li>
                                     </ul>
                                 </li>
                                 <li><b>ENTER</b> toggles checkbox, radio, dropdown, accordion item, navigation tree item if it has focus.</li>
@@ -66,7 +66,7 @@
                             <b>Local storage</b> is used to save settings.
                         </li>
                         <li>
-                            <b>Fullscreen</b> keeps aspect ratio and always fills entire width or height of screen.
+                            <b>Modal</b> for image keeps aspect ratio and always fills entire width or height of screen.
                         </li>
                         <li>
                             <b>Tables</b> can be flipped without any javascript.
@@ -87,7 +87,7 @@
                             <b>Hover effects</b> are only applied for desktop browsers, since mobiles can't display them correctly.
                         </li>
                         <li>
-                            <b>Scroll</b> is disabled for the site, when displaying fullscreen image, aside without push and loading.
+                            <b>Scroll</b> is disabled for the site, when displaying modal, aside without push and loading.
                         </li>
                         <li>
                             <b>Transitions</b> works in all browsers by using margin/padding alternatives to calc(), since Edge/IE can't handle transitions with calc().
@@ -95,7 +95,7 @@
                         <li>
                             <b>Android</b>
                             <ul>
-                                <li><b>Fullscreen</b> shrinks/grows, when androids top bar is shown/hidden.</li>
+                                <li><b>Modal</b> image shrinks/grows, when androids top bar is shown/hidden.</li>
                             </ul>
                         </li>
                         <li>
@@ -182,7 +182,7 @@
                             <b>Close on click outside</b>
                             <ul>
                                 <li>
-                                    <b>Enabled</b>: Close aside when clicking outside it, unless target is #loading, #fullscreen or .popup.<br />
+                                    <b>Enabled</b>: Close aside when clicking outside it, unless target is loading, modal or popup.<br />
                                     Always enabled when aside isn't pushing content.
                                 </li>
                                 <li>
@@ -926,23 +926,28 @@
                 <div class="img embed aspect-ratio-21by9 lazy overlay-dark" data-original="dist/img/justice-league-1920-1080.jpg">
                     <div class="position top left"><div class="alert theme-primary"><div>21:9</div></div></div>
                     <div class="position top right">
-                        <button class="btn fullscreen" data-fullscreen-img="dist/img/justice-league-1920-1080.jpg" aria-label="Expand image">
+                        <button class="btn modal"
+                                data-modal-type="image"
+                                data-modal-img="dist/img/justice-league-1920-1080.jpg"
+                                aria-label="Expand image">
                             <svg focusable="false"><use xlink:href="#svg-expand"></use></svg>
                         </button>
                     </div>
                 </div>
 
-                <div class="img embed aspect-ratio-16by9 lazy overlay-light fullscreen"
+                <div class="img embed aspect-ratio-16by9 lazy overlay-light modal"
                      data-original="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
-                     data-fullscreen-img="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
-                     data-fullscreen-title="Guardians of the Galaxy Vol. 2"
-                     data-fullscreen-description="The Guardians must fight to keep their newfound family together as they unravel the mystery of Peter Quill's true parentage.">
+                     data-modal-type="image"
+                     data-modal-img="dist/img/guardians-of-the-galaxy-vol.-2-1920-1080.jpg"
+                     data-modal-title="Guardians of the Galaxy Vol. 2"
+                     data-modal-description="The Guardians must fight to keep their newfound family together as they unravel the mystery of Peter Quill's true parentage.">
                     <div class="position top left"><div class="alert theme-primary"><div>16:9</div></div></div>
                 </div>
 
-                <div class="img embed aspect-ratio-4by3 lazy overlay-dark fullscreen"
+                <div class="img embed aspect-ratio-4by3 lazy overlay-dark modal"
                      data-original="dist/img/avengers-infinity-war-1920-1080.jpg"
-                     data-fullscreen-img="dist/img/avengers-infinity-war-1920-1080.jpg">
+                     data-modal-type="image"
+                     data-modal-img="dist/img/avengers-infinity-war-1920-1080.jpg">
                     <div class="position top left"><div class="alert theme-primary"><div>4:3</div></div></div>
                 </div>
 

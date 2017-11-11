@@ -110,7 +110,7 @@ aside > .header {
     }
 }
 
-#fullscreen, #loading {
+#modal, #loading {
     @include flex-center;
     @include overlay;
     height: 100%;

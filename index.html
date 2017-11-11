@@ -31,25 +31,16 @@
                 <div class="rect5"></div>
             </div>
         </div>
-        <div id="fullscreen" class="hidden">
-            <div>
-                <button id="fullscreen-toggle" class="btn" aria-label="Toggle info">
-                    <svg focusable="false"><use xlink:href="#svg-info"></use></svg>
-                </button>
-                <div id="fullscreen-title"></div>
-                <img id="fullscreen-img" />
-                <div id="fullscreen-description"></div>
-            </div>
-        </div>
+        <div id="modal" class="hidden" data-modal-type=""></div>
         <header class="header">
             <button class="aside left" aria-label="Toggle menu">
                 <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
             </button>
             <span class="title">Panels</span>
             <div id="authentication">
-                <button>Login</button>
+                <button class="modal" data-modal-type="login">Login</button>
                 <span></span>
-                <button>Register</button>
+                <button class="modal" data-modal-type="register">Register</button>
             </div>
             <button class="aside right" aria-label="Toggle settings">
                 <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
@@ -88,6 +79,6 @@
     </main>
     <script type="text/javascript" async src="dist/js/loadCSS.min.js"></script>
     <!--<script type="text/javascript" async src="serviceWorker.min.js"></script>-->
-    <script type="text/javascript" src="dist/js/app.js"></script>
+    <script type="text/javascript" async src="dist/js/app.js"></script>
 </body>
 </html>

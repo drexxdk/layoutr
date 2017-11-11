@@ -27,7 +27,7 @@ $(function () {
                 if (yDiff > -100 || yDiff < 100) {
                     if (xDiff > distance) {
                         /* left swipe */
-                        if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden')) {
+                        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
                             var currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
@@ -37,7 +37,7 @@ $(function () {
                         }
                     } else if (xDiff < (-distance)) {
                         /* right swipe */
-                        if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden')) {
+                        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
                             var currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();
@@ -60,14 +60,14 @@ $(function () {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
-        app.fullscreen.img.css('max-height', window.innerHeight);
+        app.modal.image.img.css('max-height', window.innerHeight);
         $(window).on('resize', function () {
-            if (!app.fullscreen.hasClass('hidden')) {
-                app.fullscreen.img.css('max-height', window.innerHeight);
+            if (!app.modal.hasClass('hidden')) {
+                app.modal.image.img.css('max-height', window.innerHeight);
             }
         });
         app.main.on('click', '.fullscreen', function () {
-            app.fullscreen.img.css('max-height', window.innerHeight);
+            app.modal.image.img.css('max-height', window.innerHeight);
         });
     }
 });

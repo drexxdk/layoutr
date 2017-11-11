@@ -16,12 +16,8 @@ $(function () {
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
     app.overflow = $('#overflow');
-    app.fullscreen = $('#fullscreen');
-    app.fullscreen.img = app.fullscreen.find('#fullscreen-img');
-    app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
-    app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
-    app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
-
+    app.modal = $('#modal');
+    
     app.isSmallBreakpoint = function () {
         return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
     };

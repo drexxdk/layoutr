@@ -2504,12 +2504,8 @@ $(function () {
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
     app.overflow = $('#overflow');
-    app.fullscreen = $('#fullscreen');
-    app.fullscreen.img = app.fullscreen.find('#fullscreen-img');
-    app.fullscreen.title = app.fullscreen.find('#fullscreen-title');
-    app.fullscreen.toggle = app.fullscreen.find('#fullscreen-toggle');
-    app.fullscreen.description = app.fullscreen.find('#fullscreen-description');
-
+    app.modal = $('#modal');
+    
     app.isSmallBreakpoint = function () {
         return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
     };
@@ -2801,9 +2797,9 @@ $(function () {
     };
 
     app.setHtmlScroll = function () {
-        if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
             app.enableScroll();
-        } else if (!app.fullscreen.hasClass('hidden') || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
+        } else if (!app.modal.hasClass('hidden') || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
             app.disableScroll();
         }
     };
@@ -3127,8 +3123,8 @@ $(function () {
                 if (app.html.attr('data-aside').length) {
                     app.toggleAside(); // closes aside
                 }
-                if (!app.fullscreen.hasClass('hidden')) {
-                    app.fullscreen.addClass('hidden'); // closes fullscreen
+                if (!app.modal.hasClass('hidden')) {
+                    app.modal.addClass('hidden'); // closes fullscreen
                     app.setHtmlScroll();
                 }
                 var popups = app.main.children('.popup');
@@ -3149,7 +3145,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (!app.loading.hasClass('hidden') || !app.fullscreen.hasClass('hidden')) {
+            if (!app.loading.hasClass('hidden') || !app.modal.hasClass('hidden')) {
                 e.preventDefault();
                 return;
             }
@@ -3176,42 +3172,55 @@ $(function () {
 var app = app || {};
 
 $(function () {
-    app.main.on('click', '.fullscreen', function () {
+    app.main.on('click', '.modal', function () {
         var $this = $(this);
-        var newSrc = $this.attr('data-fullscreen-img');
-        var newTitle = $this.attr('data-fullscreen-title');
-        var newDescription = $this.attr('data-fullscreen-description');
-        app.fullscreen.img.attr('src', newSrc);
 
-        if (newTitle !== undefined || newDescription !== undefined) {
-            app.fullscreen.addClass('has-info');
+        var type = $this.attr('data-modal-type');
+        if (type !== undefined && type.length && (type === 'image' || type === 'login' || type === 'register')) {
+            if (type === 'image' && $this.attr('data-modal-img').length) {
+                var title = $this.attr('data-modal-title');
+                var description = $this.attr('data-modal-description');
+                var html = [];
+                html.push('<div>');
+                if (title !== undefined || description !== undefined) {
+                    app.modal.addClass('has-info');
+                    html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
+                    html.push('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
+                    html.push('</button>');
+                }
+                if (title !== undefined) {
+                    html.push('<div id="modal-title">' + title + '</div>');
+                }
+                if (description !== undefined) {
+                    html.push('<div id="modal-description">' + description + '</div>');
+                }
+                html.push('<img id="modal-img" src="' + $this.attr('data-modal-img') + '" />');
+                html.push('</div>');
+                var div = html.join("");
+                app.modal.html(div);
+            } else if (type === 'login') {
+
+            } else if (type === 'register') {
+
+            }
+            app.modal.attr('data-type', type);
+            app.modal.removeClass('hidden');
+            app.setHtmlScroll();
         }
-
-        if (newTitle !== undefined) {
-            app.fullscreen.title.html(newTitle);
-        }
-
-        if (newDescription !== undefined) {
-            app.fullscreen.description.html(newDescription);
-        }
-
-        app.fullscreen.removeClass('hidden');
-        app.setHtmlScroll();
     });
 
-    app.main.on('click', '#fullscreen-toggle', function () {
-        app.fullscreen.toggleClass('info-shown');
+    app.main.on('click', '#modal-toggle', function () {
+        app.modal.toggleClass('info-shown');
     });
 
     $(window).click(function (e) {
         var target = $(e.target);
-
-        if (target.closest('#fullscreen').length && !target.closest('#fullscreen-toggle').length && !target.closest('#fullscreen-title').length && !target.closest('#fullscreen-description').length) {
-            app.fullscreen.addClass('hidden').removeClass('has-info info-shown');
-            app.fullscreen.img.attr('src', '');
-            app.fullscreen.title.empty();
-            app.fullscreen.description.empty();
-            app.setHtmlScroll();
+        var modal = target.closest('#modal');
+        if (modal.length) {
+            if (modal.attr('data-type') === 'image' && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length) {
+                app.modal.addClass('hidden').removeClass('has-info info-shown').attr('data-type', '').empty();
+                app.setHtmlScroll();
+            }
         }
     });
 });
@@ -3244,7 +3253,7 @@ $(function () {
                 if (yDiff > -100 || yDiff < 100) {
                     if (xDiff > distance) {
                         /* left swipe */
-                        if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden')) {
+                        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
                             var currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
@@ -3254,7 +3263,7 @@ $(function () {
                         }
                     } else if (xDiff < (-distance)) {
                         /* right swipe */
-                        if (app.fullscreen.hasClass('hidden') && app.loading.hasClass('hidden')) {
+                        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
                             var currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();
@@ -3277,14 +3286,14 @@ $(function () {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         // might be a problem for ios also, but haven't tested it there yet
-        app.fullscreen.img.css('max-height', window.innerHeight);
+        app.modal.image.img.css('max-height', window.innerHeight);
         $(window).on('resize', function () {
-            if (!app.fullscreen.hasClass('hidden')) {
-                app.fullscreen.img.css('max-height', window.innerHeight);
+            if (!app.modal.hasClass('hidden')) {
+                app.modal.image.img.css('max-height', window.innerHeight);
             }
         });
         app.main.on('click', '.fullscreen', function () {
-            app.fullscreen.img.css('max-height', window.innerHeight);
+            app.modal.image.img.css('max-height', window.innerHeight);
         });
     }
 });
