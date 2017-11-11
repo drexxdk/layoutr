@@ -76,7 +76,8 @@ main {
 }
 
 header.header,
-aside > .header {
+aside > .header,
+#modal > div > div > div .header {
     height: $header-height;
     border-bottom: $layout-border;
     @include flex-display;

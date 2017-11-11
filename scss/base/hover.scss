@@ -34,7 +34,8 @@
     }
 
     header.header,
-    aside > .header {
+    aside > .header,
+    #modal > div > div > div .header {
         > button:hover {
             overflow: hidden;
 
