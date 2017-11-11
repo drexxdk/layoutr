@@ -17,8 +17,13 @@
         background-color: $active-background;
     }
 
-    .fullscreen.overlay-light:hover:after,
-    .fullscreen.overlay-dark:hover:after {
+    .modal.overlay-light:after,
+    .modal.overlay-dark:after {
+        transition: background-color $transition-time $transition-timing;
+    }
+
+    .modal.overlay-light:hover:after,
+    .modal.overlay-dark:hover:after {
         background-color: transparent;
     }
 
