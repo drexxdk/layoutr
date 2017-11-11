@@ -8,16 +8,6 @@ html {
             position: fixed;
         }
 
-        &.msie {
-            // ie displays overflow wrong without this fix
-            height: calc(100% - .1rem);
-
-            body,
-            main {
-                height: calc(100% - .1rem);
-            }
-        }
-
         main {
             overflow: hidden !important;
         }
