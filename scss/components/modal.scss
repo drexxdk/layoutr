@@ -70,6 +70,8 @@ html {
                     background-color: $modal-background-color;
 
                     > .header {
+                        background-color: theme-color("light");
+
                         > .title {
                             padding-left: $spacer;
                         }
