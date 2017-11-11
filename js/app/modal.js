@@ -48,8 +48,8 @@ $(function () {
             var div = html.join("");
             app.modal.html(div);
             app.html.addClass('modal').attr('data-modal', type);
-            app.setHtmlScroll();
             app.checkModal();
+            app.setHtmlScroll();
         }
     });
 
@@ -64,7 +64,7 @@ $(function () {
     app.closeModal = function () {
         app.html.removeClass('modal').attr('data-modal', '');
         app.modal.removeClass('info-shown').empty();
-        app.setHtmlScroll();
         app.checkModal();
+        app.setHtmlScroll();
     };
 });

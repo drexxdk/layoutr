@@ -5,8 +5,6 @@ $(function () {
         if (app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = false;
             var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-            //debugger;
-            app.html.data('scroll-top', scrollTop);
             app.html.addClass('scrollDisabled');
             if (app.html.attr('data-modal').length) {
                 app.checkModal();
@@ -19,9 +17,8 @@ $(function () {
     app.enableScroll = function () {
         if (!app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = true;
+            var scrollTop = app.body.scrollTop() || app.main.scrollTop();
             app.html.removeClass('scrollDisabled modal');
-            var scrollTop = app.html.data('scroll-top');
-
             app.body.scrollTop(scrollTop); // edge, safari
             app.html.scrollTop(scrollTop); // chrome, firefox, ie
             app.checkModal();
@@ -58,7 +55,7 @@ $(function () {
     };
 
     $(window).resize(function () {
-        app.setHtmlScroll();
         app.checkModal();
+        app.setHtmlScroll();
     });
 });

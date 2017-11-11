@@ -3,11 +3,6 @@
 html .modal {
     cursor: pointer;
     @include noselect;
-
-    &.overlay-light:after,
-    &.overlay-dark:after {
-        transition: background-color $transition-time $transition-timing;
-    }
 }
 
 html {
