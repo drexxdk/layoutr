@@ -62,12 +62,7 @@ $(function () {
         // might be a problem for ios also, but haven't tested it there yet
         $(window).on('resize', function () {
             if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
-                app.modal.find('img').css('max-height', window.innerHeight);
-            }
-        });
-        app.main.on('click', '.modal', function () {
-            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
-                app.modal.find('img').css('max-height', window.innerHeight);
+                app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
         });
     }

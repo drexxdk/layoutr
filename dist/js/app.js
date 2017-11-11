@@ -3252,7 +3252,7 @@ $(function () {
                 if (description !== undefined) {
                     html.push('<div id="modal-description">' + description + '</div>');
                 }
-                html.push('<img id="modal-img" src="' + $this.attr('data-modal-img') + '" />');
+                html.push('<img id="modal-img" />');
 
             } else if (type === 'form') {
                 html.push('<div class="header">');
@@ -3275,9 +3275,24 @@ $(function () {
             html.push('</div></div></div>');
             var div = html.join("");
             app.modal.html(div);
-            app.html.addClass('modal').attr('data-modal', type);
-            app.checkModal();
-            app.setHtmlScroll();
+            if (type === 'image') {
+                //app.html.addClass('modal');
+                var image = app.modal.find('#modal-img');
+                image.on('load', function () {
+                    app.html.attr('data-modal', type);
+                    if (app.html.hasClass('android')) {
+                        app.modal.find('#modal-img').css('max-height', window.innerHeight);
+                    }
+                });
+                image.attr('src', $this.attr('data-modal-img'));
+                app.html.addClass('modal')
+                app.checkModal();
+                app.setHtmlScroll();
+            } else {
+                app.html.addClass('modal').attr('data-modal', type);
+                app.checkModal();
+                app.setHtmlScroll();
+            }
         }
     });
 
@@ -3360,12 +3375,7 @@ $(function () {
         // might be a problem for ios also, but haven't tested it there yet
         $(window).on('resize', function () {
             if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
-                app.modal.find('img').css('max-height', window.innerHeight);
-            }
-        });
-        app.main.on('click', '.modal', function () {
-            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
-                app.modal.find('img').css('max-height', window.innerHeight);
+                app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
         });
     }
