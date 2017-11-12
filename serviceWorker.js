@@ -1,8 +1,6 @@
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('serviceWorker.min.js', {
-            useCache: false
-        }).then(function (registration) {
+        navigator.serviceWorker.register('serviceWorker.min.js').then(function (registration) {
             // Registration was successful
             console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function (err) {
@@ -11,6 +9,8 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+
+// <script type="text/javascript" src="serviceWorker.min.js"></script>
 
 /*
  Copyright 2016 Google Inc. All Rights Reserved.
@@ -35,8 +35,19 @@ const RUNTIME = 'runtime';
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
     'dist/css/app.min.css',
+
     'dist/js/app.min.js',
     'dist/js/loadCSS.min.js',
+    'serviceWorker.min.js',
+
+    'dist/img/favicon/android-chrome-192x192.png',
+    'dist/img/favicon/android-chrome-512x512.png',
+    'dist/img/favicon/apple-touch-icon.png',
+    'dist/img/favicon/favicon-16x16.png',
+    'dist/img/favicon/favicon-32x32.png',
+    'dist/img/favicon/favicon.ico',
+    'dist/img/favicon/mstile-150x150.png',
+    'dist/img/favicon/safari-pinned-tab.svg'
 ];
 
 // The install handler takes care of precaching the resources we always need.
