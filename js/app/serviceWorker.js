@@ -10,9 +10,6 @@
     });
 }
 
-
-//<script type= "text/javascript" async src= "serviceWorker.min.js" ></script >
-
 /*
  Copyright 2016 Google Inc. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,26 +26,15 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const VERSION = 2;
+const VERSION = 1;
 const PRECACHE = 'precache-v' + VERSION;
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
     'dist/css/app.min.css',
-
     'dist/js/app.min.js',
     'dist/js/loadCSS.min.js',
-    'serviceWorker.min.js',
-
-    'dist/img/favicon/android-chrome-192x192.png',
-    'dist/img/favicon/android-chrome-512x512.png',
-    'dist/img/favicon/apple-touch-icon.png',
-    'dist/img/favicon/favicon-16x16.png',
-    'dist/img/favicon/favicon-32x32.png',
-    'dist/img/favicon/favicon.ico',
-    'dist/img/favicon/mstile-150x150.png',
-    'dist/img/favicon/safari-pinned-tab.svg'
 ];
 
 // The install handler takes care of precaching the resources we always need.
