@@ -1,6 +1,8 @@
 ﻿if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('serviceWorker.min.js').then(function (registration) {
+        navigator.serviceWorker.register('serviceWorker.min.js', {
+            useCache: false
+        }).then(function (registration) {
             // Registration was successful
             console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function (err) {
@@ -26,7 +28,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const VERSION = 2;
+const VERSION = 1;
 const PRECACHE = 'precache-v' + VERSION;
 const RUNTIME = 'runtime';
 
