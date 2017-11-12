@@ -23,13 +23,6 @@ $(function () {
     app.scrollbarWidth = 0;
 
     var scrollbarWidth = function () {
-
-        if (app.body.css('display') === 'none') {
-            setTimeout(function () {
-                scrollbarWidth();
-                return;
-            }, 100);
-        }
         app.body.append('<div id="scrollbar-width"></div>');
         var element = app.body.children('#scrollbar-width');
         element.css({
@@ -76,9 +69,9 @@ $(function () {
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-    var transitionLock = false;
+    transitionLock = false;
 
-    app.toggleAside = function (aside) {
+    app.toggleAside = function (aside, pageChanged) {
         if (!transitionLock) {
             transitionLock = true;
             var currentAside = app.html.attr('data-aside');
@@ -95,6 +88,9 @@ $(function () {
                 setTimeout(function () {
                     transitionLock = false;
                     app.checkGoogleMaps();
+                    if (pageChanged) {
+                        app.responsiveBackground(app.content.find('.responsive-background'));
+                    }
                 }, app.transitionTime);
             } else {
                 transitionLock = false;

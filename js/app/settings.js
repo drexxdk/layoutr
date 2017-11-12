@@ -35,6 +35,9 @@ $(function () {
                 app.html.removeClass(id);
             }
         }
+        if (id === 'two-columns') {
+            app.responsiveBackground();
+        }
     };
 
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
@@ -61,7 +64,6 @@ $(function () {
                 app.checkGoogleMaps();
             }
             if (id === 'left-push' || id === 'right-push') {
-                debugger;
                 app.setHtmlScroll();
             }
         });

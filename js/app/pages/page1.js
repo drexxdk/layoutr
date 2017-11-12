@@ -3,12 +3,13 @@
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
         setTimeout(function () {
-            app.toggleAside();
+            app.toggleAside(undefined, true);
         }, 200);
         app.contentHeader = app.content.children('.header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
+        app.responsiveBackground(app.content.find('.responsive-background'));
 
         app.content.find('#font_size').slider({
             min: 12,

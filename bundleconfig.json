@@ -36,7 +36,8 @@
       "js/app/lazyload.js",
       "js/app/keyboard.js",
       "js/app/modal.js",
-      "js/app/touchDevice.js"
+      "js/app/touchDevice.js",
+      "js/app/responsiveBackground.js"
     ],
     "minify": {
       "enabled": true

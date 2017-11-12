@@ -2511,13 +2511,6 @@ $(function () {
     app.scrollbarWidth = 0;
 
     var scrollbarWidth = function () {
-
-        if (app.body.css('display') === 'none') {
-            setTimeout(function () {
-                scrollbarWidth();
-                return;
-            }, 100);
-        }
         app.body.append('<div id="scrollbar-width"></div>');
         var element = app.body.children('#scrollbar-width');
         element.css({
@@ -2564,9 +2557,9 @@ $(function () {
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-    var transitionLock = false;
+    transitionLock = false;
 
-    app.toggleAside = function (aside) {
+    app.toggleAside = function (aside, pageChanged) {
         if (!transitionLock) {
             transitionLock = true;
             var currentAside = app.html.attr('data-aside');
@@ -2583,6 +2576,9 @@ $(function () {
                 setTimeout(function () {
                     transitionLock = false;
                     app.checkGoogleMaps();
+                    if (pageChanged) {
+                        app.responsiveBackground(app.content.find('.responsive-background'));
+                    }
                 }, app.transitionTime);
             } else {
                 transitionLock = false;
@@ -2690,12 +2686,13 @@ var app = app || {};
 app.page1 = function () {
     app.content.load('ajax/content/page1.html', function () {
         setTimeout(function () {
-            app.toggleAside();
+            app.toggleAside(undefined, true);
         }, 200);
         app.contentHeader = app.content.children('.header');
         app.lazyload(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
+        app.responsiveBackground(app.content.find('.responsive-background'));
 
         app.content.find('#font_size').slider({
             min: 12,
@@ -2806,9 +2803,10 @@ var app = app || {};
 app.page2 = function () {
     app.content.load('ajax/content/page2.html', function () {
         setTimeout(function () {
-            app.toggleAside();
+            app.toggleAside(undefined, true);
         }, 200);
         app.contentHeader = app.content.children('.header');
+        app.responsiveBackground(app.content.find('.responsive-background'));
     });
 };
 var app = app || {};
@@ -3108,6 +3106,9 @@ $(function () {
                 app.html.removeClass(id);
             }
         }
+        if (id === 'two-columns') {
+            app.responsiveBackground();
+        }
     };
 
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
@@ -3134,7 +3135,6 @@ $(function () {
                 app.checkGoogleMaps();
             }
             if (id === 'left-push' || id === 'right-push') {
-                debugger;
                 app.setHtmlScroll();
             }
         });
@@ -3295,7 +3295,7 @@ $(function () {
             } else {
                 app.html.attr('data-modal', type);
             }
-            app.html.addClass('modal')
+            app.html.addClass('modal');
             app.checkModal();
             app.setHtmlScroll();
         }
@@ -3384,4 +3384,55 @@ $(function () {
             }
         });
     }
+});
+var app = app || {};
+
+$(function () {
+    app.responsiveBackground = function (elements) {
+        var images;
+        if (elements !== undefined && elements.length) {
+            images = elements;
+        } else {
+            images = app.body.find('.responsive-background');
+        }
+        images.each(function () {
+            var $this = $(this);
+            var image = $this.attr('data-responsive-background-image');
+            var filetype = $this.attr('data-responsive-background-image-filetype');
+            var sizes = $this.attr('data-responsive-background-sizes');
+            var current = $this.attr('data-responsive-background-current');
+            if (image !== undefined && image.length &&
+                filetype !== undefined && filetype.length &&
+                sizes !== undefined && sizes.length) {
+                if (filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') {
+                    sizes = sizes.replace(/\s/g, '').split(',');
+                    sizes = sizes.sort(function (a, b) { return a - b; });
+                    var goal = $this.width();
+                    var closest = null;
+                    $.each(sizes, function () {
+                        if (closest === null || Math.abs(this - goal) < Math.abs(closest - goal) || closest < goal) {
+                            closest = parseInt(this);
+                        }
+                    });
+
+                    if (current !== undefined && current.length && parseInt(current) < closest || current === undefined || current.length === 0) {
+
+
+                        app.body.append('<img id="responsive-background" class="hidden" src="' + image + '-' + closest + '.' + filetype + '" />');
+                        var tempImage = app.body.children('#responsive-background');
+                        tempImage.on('load', function () {
+                            tempImage.remove();
+                            var src = 'url(' + image + '-' + closest + '.' + filetype + ')';
+                            $this.css('background-image', src);
+                            $this.attr('data-responsive-background-current', closest);
+                        });
+                    }
+                }
+            }
+        });
+    };
+
+    $(window).resize(function () {
+        app.responsiveBackground();
+    });
 });

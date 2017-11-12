@@ -60,7 +60,7 @@ $(function () {
             } else {
                 app.html.attr('data-modal', type);
             }
-            app.html.addClass('modal')
+            app.html.addClass('modal');
             app.checkModal();
             app.setHtmlScroll();
         }
