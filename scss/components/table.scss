@@ -80,11 +80,6 @@
                 @include flex-direction(column);
                 flex-shrink: 0;
 
-                th,
-                td {
-                    display: block;
-                }
-
                 th:not(:last-child),
                 td:not(:last-child) {
                     border-bottom: 0;
@@ -92,6 +87,7 @@
 
                 th,
                 td {
+                    display: block;
                     border-left: 0;
                 }
             }

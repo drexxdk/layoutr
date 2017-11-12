@@ -8,7 +8,7 @@ $(function () {
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
             var id = $this.attr('data-modal-id');
             var html = [];
-            html.push('<div><div><div>');
+            html.push('<div><div><div id="modal-content">');
             var title = $this.attr('data-modal-title');
             if (type === 'image' && $this.attr('data-modal-img').length) {
                 var description = $this.attr('data-modal-description');

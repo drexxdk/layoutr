@@ -67,13 +67,14 @@ main {
 
 header.header,
 aside > .header,
-#modal > div > div > div .header {
+#modal-content .header {
     height: $header-height;
     border-bottom: $layout-border;
     @include flex-display;
     flex-shrink: 0;
 
     > .title {
+        margin: 0;
         font-size: 1rem;
         font-weight: bold;
         line-height: $header-height;
