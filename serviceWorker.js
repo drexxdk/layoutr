@@ -9,7 +9,6 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
-
 /*
  Copyright 2016 Google Inc. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,25 +25,27 @@ if ('serviceWorker' in navigator) {
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v1';
+const VERSION = 5;
+const PRECACHE = 'precache-v' + VERSION;
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
-    'dist/css/app.min.css',
+    '/index.html',
+    '/ajax/content/page1.html',
+    '/ajax/content/page2.html',
+    '/ajax/content/page3.html',
+    '/ajax/content/page4.html',
+    '/ajax/layout/menu.html',
+    '/ajax/layout/settings.html',
+    '/ajax/layout/svg.html',
+    '/dist/css/app.min.css',
+    '/dist/js/loadCSS.min.js',
+    '/serviceWorker.min.js',
 
-    'dist/js/app.min.js',
-    'dist/js/loadCSS.min.js',
-    'serviceWorker.min.js',
 
-    'dist/img/favicon/android-chrome-192x192.png',
-    'dist/img/favicon/android-chrome-512x512.png',
-    'dist/img/favicon/apple-touch-icon.png',
-    'dist/img/favicon/favicon-16x16.png',
-    'dist/img/favicon/favicon-32x32.png',
-    'dist/img/favicon/favicon.ico',
-    'dist/img/favicon/mstile-150x150.png',
-    'dist/img/favicon/safari-pinned-tab.svg'
+    '/dist/js/app.js',
+    '/dist/js/app.min.js',
 ];
 
 // The install handler takes care of precaching the resources we always need.
