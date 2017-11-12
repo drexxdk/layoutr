@@ -23,17 +23,24 @@ $(function () {
     app.scrollbarWidth = 0;
 
     var scrollbarWidth = function () {
-            app.body.append('<div id="scrollbar-width"></div>');
-            var element = app.body.children('#scrollbar-width');
-            element.css({
-                'overflow': "scroll",
-                'visibility': "hidden",
-                'position': 'absolute',
-                'width': '100px',
-                'height': '100px'
-            });
-            app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
-            element.remove();
+
+        if (app.body.css('display') === 'none') {
+            setTimeout(function () {
+                scrollbarWidth();
+                return;
+            }, 100);
+        }
+        app.body.append('<div id="scrollbar-width"></div>');
+        var element = app.body.children('#scrollbar-width');
+        element.css({
+            'overflow': "scroll",
+            'visibility': "hidden",
+            'position': 'absolute',
+            'width': '100px',
+            'height': '100px'
+        });
+        app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
+        element.remove();
     };
     scrollbarWidth();
 
@@ -150,6 +157,6 @@ $(function () {
 
 
 
-        
+
     });
 });
