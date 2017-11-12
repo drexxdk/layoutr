@@ -2,8 +2,6 @@
 
 $(function () {
     var swipe = function () {
-        document.addEventListener('touchstart', handleTouchStart, false);
-        document.addEventListener('touchend', handleTouchMove, false);
 
         var xDown = null;
         var yDown = null;
@@ -28,7 +26,7 @@ $(function () {
                     var currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
-                        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
+                        if (!app.html.hasClass('modal') && app.loading.hasClass('hidden')) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
@@ -38,7 +36,7 @@ $(function () {
                         }
                     } else if (xDiff < -distance) {
                         /* right swipe */
-                        if (app.modal.hasClass('hidden') && app.loading.hasClass('hidden')) {
+                        if (!app.html.hasClass('modal') && app.loading.hasClass('hidden')) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();
@@ -54,6 +52,8 @@ $(function () {
             xDown = null;
             yDown = null;
         };
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchend', handleTouchMove, false);
     };
     
     if (app.html.hasClass('android')) {
