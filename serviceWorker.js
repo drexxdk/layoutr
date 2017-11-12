@@ -31,21 +31,21 @@ const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
-    '/index.html',
-    '/ajax/content/page1.html',
-    '/ajax/content/page2.html',
-    '/ajax/content/page3.html',
-    '/ajax/content/page4.html',
-    '/ajax/layout/menu.html',
-    '/ajax/layout/settings.html',
-    '/ajax/layout/svg.html',
-    '/dist/css/app.min.css',
-    '/dist/js/loadCSS.min.js',
-    '/serviceWorker.min.js',
+    'index.html',
+    'ajax/content/page1.html',
+    'ajax/content/page2.html',
+    'ajax/content/page3.html',
+    'ajax/content/page4.html',
+    'ajax/layout/menu.html',
+    'ajax/layout/settings.html',
+    'ajax/layout/svg.html',
+    'dist/css/app.min.css',
+    'dist/js/loadCSS.min.js',
+    'serviceWorker.min.js',
 
 
-    '/dist/js/app.js',
-    '/dist/js/app.min.js',
+    'dist/js/app.js',
+    'dist/js/app.min.js',
 ];
 
 // The install handler takes care of precaching the resources we always need.
