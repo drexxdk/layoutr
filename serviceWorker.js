@@ -10,6 +10,9 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+
+//<script type= "text/javascript" async src= "serviceWorker.min.js" ></script >
+
 /*
  Copyright 2016 Google Inc. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");
