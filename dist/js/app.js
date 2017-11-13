@@ -2488,10 +2488,13 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 });
 var app = app || {};
 
-
-
-
 $(function () {
+
+    //$.ajaxSetup({
+    //    // Disable caching of AJAX responses
+    //    cache: false
+    //});
+
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');
@@ -2528,11 +2531,6 @@ $(function () {
     app.isSmallBreakpoint = function () {
         return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
     };
-
-    $.ajaxSetup({
-        // Disable caching of AJAX responses
-        cache: false
-    });
 
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
@@ -2637,11 +2635,6 @@ $(function () {
                 app.checkGoogleMaps();
             }
         }
-
-
-
-
-
     });
 });
 var app = app || {};
