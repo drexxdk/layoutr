@@ -131,10 +131,10 @@ $(function () {
     $(window).click(function (e) {
         var target = $(e.target);
         var modal = target.closest(app.modal[0]);
-        if (modal.length) {
+        if (modal.length || target.parents('#modal').length) {
             var image = app.html.attr('data-modal') === 'image' && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
             var form = !target.closest('#modal > div > div > div').length && app.html.attr('data-modal') === 'form';
-            if (image || form) {
+            if (image || form || target.closest('#modal-close').length) {
                 app.closeModal();
             }
         } else {

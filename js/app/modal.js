@@ -70,10 +70,6 @@ $(function () {
         app.modal.toggleClass('info-shown');
     });
 
-    app.main.on('click', '#modal-close', function () {
-        app.closeModal();
-    });
-
     app.closeModal = function () {
         app.html.removeClass('modal').attr('data-modal', '');
         app.modal.removeClass('info-shown').empty();

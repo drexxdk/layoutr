@@ -59,7 +59,6 @@ $(function () {
     if (app.html.hasClass('android')) {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
-        // might be a problem for ios also, but haven't tested it there yet
         $(window).on('resize', function () {
             if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
