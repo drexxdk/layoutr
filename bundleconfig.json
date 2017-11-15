@@ -38,7 +38,8 @@
       "js/app/keyboard.js",
       "js/app/modal.js",
       "js/app/touchDevice.js",
-      "js/app/responsiveBackground.js"
+      "js/app/responsiveBackground.js",
+      "js/app/tooltipster.js"
     ],
     "minify": {
       "enabled": true

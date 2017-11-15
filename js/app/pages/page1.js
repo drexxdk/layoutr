@@ -10,19 +10,7 @@ app.page1 = function () {
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
         app.responsiveBackground(app.content.find('.responsive-background'));
-        app.content.find('.tooltip').tooltipster({
-            interactive: true,
-            trigger: 'custom',
-            triggerOpen: {
-                mouseenter: true,
-                touchstart: true
-            },
-            triggerClose: {
-                mouseleave: true,
-                originClick: true,
-                touchleave: true
-            }
-        });
+        app.tooltipster(app.content.find('.tooltip'));
 
         app.content.find('#font_size').slider({
             min: 12,

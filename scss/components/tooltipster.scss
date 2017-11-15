@@ -2,6 +2,7 @@
 
 span.tooltip {
     border-bottom: $component-border-width dotted currentColor;
+    @include noselect;
 }
 
 $tooltip-arrow-size: rem(10px);
