@@ -7,20 +7,6 @@
     background: theme-gradient($background);
 }
 
-.group {
-    @include flex-display;
-    @include flex-wrap(wrap);
-
-
-    &.expand > .btn {
-        flex-grow: 1;
-    }
-
-    > .btn {
-        border-radius: 0;
-    }
-}
-
 .btn {
     @include flex-display;
     @include align-items(center);

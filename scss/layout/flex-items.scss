@@ -4,12 +4,11 @@
     @include flex-display;
     margin-top: -($spacer / 2);
     margin-left: -($spacer / 2);
-    /*width: calc(100% + #{$spacer / 2});*/
+
     > * {
         margin-top: ($spacer / 2);
         margin-left: ($spacer / 2);
     }
-
 
     &:not(.column) {
         @include flex-direction(column);
@@ -29,16 +28,33 @@
         }
     }
 
+    &.expand {
+        > * {
+            flex-grow: 1;
+        }
+    }
+
     &.center {
         > * {
             @include align-self(center);
         }
     }
 
+    &.no-spacing {
+        margin-top: 0;
+        margin-left: 0;
+
+        > * {
+            margin-top: 0;
+            margin-left: 0;
+            border-radius: 0;
+        }
+    }
+
     &.large {
         margin-top: -$spacer;
         margin-left: -$spacer;
-        /*width: calc(100% + #{$spacer});*/
+
         > * {
             margin-top: $spacer;
             margin-left: $spacer;
@@ -48,7 +64,7 @@
     &.largest {
         margin-top: -($spacer * 2);
         margin-left: -($spacer * 2);
-        /*width: calc(100% + #{$spacer * 2});*/
+
         > * {
             margin-top: ($spacer * 2);
             margin-left: ($spacer * 2);
