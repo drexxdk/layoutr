@@ -1,20 +1,9 @@
 [
-  // there is a weird freezing bug with loadCSS then it is added to bundleconfig
-
-  {
-    "outputFileName": "dist/js/loadCSS.js",
-    "inputFiles": [
-      "js/vendors/loadCSS/loadCSS.js",
-      "js/app/loadCSS.js"
-    ],
-    "minify": {
-      "enabled": true
-      //"gzip": true
-    }
-  },
   {
     "outputFileName": "dist/js/app.js",
     "inputFiles": [
+      "js/vendors/loadCSS/loadCSS.js",
+      "js/app/loadCSS.js",
       "js/vendors/jquery/jquery-3.1.1.min.js",
       "js/vendors/jquery/validate/jquery.validate.min.js",
       "js/vendors/jquery/jquery.lazyload.min.js",
@@ -43,17 +32,6 @@
     ],
     "minify": {
       "enabled": true
-      //"gzip": true
-    }
-  },
-  {
-    "outputFileName": "serviceWorker.js",
-    "inputFiles": [
-      "js/app/serviceWorker.js"
-    ],
-    "minify": {
-      "enabled": true
-      //"gzip": true
     }
   }
 ]
