@@ -3212,7 +3212,7 @@ $(function () {
                 if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch') || target.hasClass('toggle')) {
                     target.siblings('input').click();
                     e.preventDefault();
-                } else if (parent.hasClass('dropdown') || parent.parent().hasClass('accordion')) {
+                } else if (parent.hasClass('dropdown') || target.parents('div.dropdown').length || parent.parent().hasClass('accordion')) {
                     target.click();
                     e.preventDefault();
                 }
@@ -3223,27 +3223,27 @@ $(function () {
                 e.preventDefault();
                 return;
             }
-            if (parent.hasClass('dropdown') && parent.hasClass('open')) {
-                target.click();
-                e.preventDefault();
-                return;
-            }
         }
     });
 
     app.body.on('keyup', function (e) {
-        if (e.which === 9) { // tab
-            var target = $(e.target);
-            if (app.html.hasClass('modal')) {
-                if (!target.parents('#modal').length) {
-                    app.closeModal();
+        if (app.loading.hasClass('hidden')) {
+            if (e.which === 9) { // tab
+                var target = $(e.target);
+                if (!target.parents('div.dropdown.open').length) {
+                    $('div.dropdown.open').removeClass('open');
                 }
-            } else {
-                var aside = target.parents('aside');
-                if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
-                    app.toggleAside(aside.attr('id'));
-                } else if (!aside.length && app.html.attr('data-aside').length) {
-                    app.toggleAside();
+                if (app.html.hasClass('modal')) {
+                    if (!target.parents('#modal').length) {
+                        app.closeModal();
+                    }
+                } else {
+                    var aside = target.parents('aside');
+                    if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
+                        app.toggleAside(aside.attr('id'));
+                    } else if (!aside.length && app.html.attr('data-aside').length) {
+                        app.toggleAside();
+                    }
                 }
             }
         }

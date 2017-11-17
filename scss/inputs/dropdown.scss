@@ -88,6 +88,14 @@ div.dropdown {
 
         > ul {
             display: block;
+            @include focus;
+
+            > li > div:focus {
+                $background: theme-soft-background-color(theme-color("light"));
+                background: theme-gradient(darken($background, 7.5%));
+                @include color-yiq(darken($background, 7.5%));
+                box-shadow: none;
+            }
         }
     }
 
