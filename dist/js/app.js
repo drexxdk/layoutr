@@ -3451,7 +3451,8 @@ $(function () {
                     touchstart: true
                 },
                 triggerClose: {
-                    mouseleave: true
+                    mouseleave: true,
+                    tap: true
                 }
             });
         });
