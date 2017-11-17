@@ -60,9 +60,12 @@ $(function () {
                 app.html.attr('data-modal', type);
             }
             app.html.addClass('modal');
-            app.modal.focus();
-            app.checkModal();
-            app.setHtmlScroll();
+            if (app.html.hasClass('scrollDisabled')) {
+                app.checkModal();
+                app.modal.focus();
+            } else {
+                app.setHtmlScroll();
+            }
         }
     });
 
@@ -73,7 +76,6 @@ $(function () {
     app.closeModal = function () {
         app.html.removeClass('modal').attr('data-modal', '');
         app.modal.removeClass('info-shown').empty();
-        app.main.focus();
         app.checkModal();
         app.setHtmlScroll();
     };

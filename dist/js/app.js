@@ -2760,8 +2760,13 @@ $(function () {
     app.disableScroll = function () {
         if (app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = false;
+            if (app.html.hasClass('modal')) {
+                app.checkModal();
+                app.modal.focus();
+            }
             var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             app.html.addClass('scrollDisabled');
+          
             app.body.scrollTop(scrollTop);
             app.main.scrollTop(scrollTop);
         }
@@ -2772,6 +2777,7 @@ $(function () {
             app.htmlOverflowEnabled = true;
             var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
             app.html.removeClass('scrollDisabled modal');
+            app.main.focus();
             app.body.scrollTop(scrollTop); // edge, safari
             app.html.scrollTop(scrollTop); // chrome, firefox, ie
         }
@@ -3310,9 +3316,12 @@ $(function () {
                 app.html.attr('data-modal', type);
             }
             app.html.addClass('modal');
-            app.modal.focus();
-            app.checkModal();
-            app.setHtmlScroll();
+            if (app.html.hasClass('scrollDisabled')) {
+                app.checkModal();
+                app.modal.focus();
+            } else {
+                app.setHtmlScroll();
+            }
         }
     });
 
@@ -3323,7 +3332,6 @@ $(function () {
     app.closeModal = function () {
         app.html.removeClass('modal').attr('data-modal', '');
         app.modal.removeClass('info-shown').empty();
-        app.main.focus();
         app.checkModal();
         app.setHtmlScroll();
     };
