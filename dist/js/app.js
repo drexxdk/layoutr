@@ -2499,12 +2499,6 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 var app = app || {};
 
 $(function () {
-
-    //$.ajaxSetup({
-    //    // Disable caching of AJAX responses
-    //    cache: false
-    //});
-
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');
@@ -2564,70 +2558,11 @@ $(function () {
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
-
-    transitionLock = false;
-
-    app.toggleAside = function (aside, pageChanged) {
-        if (!transitionLock) {
-            transitionLock = true;
-            var currentAside = app.html.attr('data-aside');
-            if (currentAside.length) {
-                if (aside === undefined || currentAside === aside) {
-                    app.html.attr('data-aside', '');
-                    app.main.focus();
-                } else {
-                    app.html.attr('data-aside', aside);
-                }
-            } else {
-                app.html.attr('data-aside', aside);
-            }
-            if (aside === 'left') {
-                app.left.focus();
-            } else if (aside === 'right') {
-                app.right.focus();
-            }
-            if (app.html.hasClass('transitions')) {
-                setTimeout(function () {
-                    transitionLock = false;
-                    app.checkGoogleMaps();
-                    if (pageChanged) {
-                        app.responsiveBackground(app.content.find('.responsive-background'));
-                    }
-                }, app.transitionTime);
-            } else {
-                transitionLock = false;
-                app.checkGoogleMaps();
-            }
-            app.setHtmlScroll();
-        }
-    };
-
-    $('.aside.left').click(function () {
-        app.toggleAside('left');
-    });
-
-    $('.aside.right').click(function () {
-        app.toggleAside('right');
-    });
-
+    
     $.get('ajax/layout/svg.html', function (data) {
         $(data).prependTo(app.main);
     });
 
-    app.left.on('click', '.tree a', function (e) {
-        e.preventDefault();
-        var $this = $(this);
-        var href = $this.attr('href');
-        if (href === 'page1') {
-            app.page1();
-        } else if (href === 'page2') {
-            app.page2();
-        } else {
-            app.content.load('ajax/content/' + href + '.html');
-        }
-    });
-
-    app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
 
     $(window).click(function (e) {
@@ -2827,9 +2762,6 @@ $(function () {
             app.htmlOverflowEnabled = false;
             var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             app.html.addClass('scrollDisabled');
-            if (app.html.attr('data-modal').length) {
-                app.checkModal();
-            }
             app.body.scrollTop(scrollTop);
             app.main.scrollTop(scrollTop);
         }
@@ -2838,11 +2770,10 @@ $(function () {
     app.enableScroll = function () {
         if (!app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = true;
-            var scrollTop = app.body.scrollTop() || app.main.scrollTop();
+            var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
             app.html.removeClass('scrollDisabled modal');
             app.body.scrollTop(scrollTop); // edge, safari
             app.html.scrollTop(scrollTop); // chrome, firefox, ie
-            app.checkModal();
         }
     };
 
@@ -3082,6 +3013,75 @@ $(function () {
 var app = app || {};
 
 $(function () {
+    var transitionLock = false;
+
+    app.toggleAside = function (aside, pageChanged) {
+        if (!transitionLock) {
+            transitionLock = true;
+            var currentAside = app.html.attr('data-aside');
+            if (currentAside.length) {
+                if (aside === undefined || currentAside === aside) {
+                    var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
+                    app.html.attr('data-aside', '');
+                    app.main.focus();
+                    app.body.scrollTop(scrollTop); // edge, safari
+                    app.html.scrollTop(scrollTop); // chrome, firefox, ie
+                } else {
+                    app.html.attr('data-aside', aside);
+                }
+            } else {
+                app.html.attr('data-aside', aside);
+            }
+            if (aside === 'left') {
+                app.left.focus();
+            } else if (aside === 'right') {
+                app.right.focus();
+            }
+            if (app.html.hasClass('transitions')) {
+                setTimeout(function () {
+                    transitionLock = false;
+                    app.checkGoogleMaps();
+                    if (pageChanged) {
+                        app.responsiveBackground(app.content.find('.responsive-background'));
+                    }
+                }, app.transitionTime);
+            } else {
+                transitionLock = false;
+                app.checkGoogleMaps();
+            }
+            app.setHtmlScroll();
+        }
+    };
+
+    $('.aside.left').click(function () {
+        app.toggleAside('left');
+    });
+
+    $('.aside.right').click(function () {
+        app.toggleAside('right');
+    });
+});
+var app = app || {};
+
+$(function () {
+    app.left.find('> .content > div').load('ajax/layout/menu.html');
+
+    app.left.on('click', '.tree a', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var href = $this.attr('href');
+        if (href === 'page1') {
+            app.page1();
+        } else if (href === 'page2') {
+            app.page2();
+        } else {
+            app.content.load('ajax/content/' + href + '.html');
+        }
+    });
+});
+var app = app || {};
+
+$(function () {
     app.localStorage = typeof Storage !== "undefined";
     app.settings = [];
 
@@ -3195,11 +3195,10 @@ $(function () {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.html.attr('data-aside').length) {
-                    app.toggleAside(); // closes aside
-                }
                 if (app.html.hasClass('modal')) {
                     app.closeModal();
+                } else if (app.html.attr('data-aside').length) {
+                    app.toggleAside(); // closes aside
                 }
                 var popups = app.main.children('.popup');
                 if (popups.length) {
@@ -3311,9 +3310,9 @@ $(function () {
                 app.html.attr('data-modal', type);
             }
             app.html.addClass('modal');
+            app.modal.focus();
             app.checkModal();
             app.setHtmlScroll();
-            app.modal.focus();
         }
     });
 
@@ -3324,9 +3323,9 @@ $(function () {
     app.closeModal = function () {
         app.html.removeClass('modal').attr('data-modal', '');
         app.modal.removeClass('info-shown').empty();
+        app.main.focus();
         app.checkModal();
         app.setHtmlScroll();
-        app.main.focus();
     };
 });
 var app = app || {};

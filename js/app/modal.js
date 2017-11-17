@@ -60,9 +60,9 @@ $(function () {
                 app.html.attr('data-modal', type);
             }
             app.html.addClass('modal');
+            app.modal.focus();
             app.checkModal();
             app.setHtmlScroll();
-            app.modal.focus();
         }
     });
 
@@ -73,8 +73,8 @@ $(function () {
     app.closeModal = function () {
         app.html.removeClass('modal').attr('data-modal', '');
         app.modal.removeClass('info-shown').empty();
+        app.main.focus();
         app.checkModal();
         app.setHtmlScroll();
-        app.main.focus();
     };
 });

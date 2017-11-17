@@ -30,6 +30,8 @@
       "js/app/youtube.js",
       "js/app/form.js",
       "js/app/loading.js",
+      "js/app/aside.js",
+      "js/app/navigation.js",
       "js/app/settings.js",
       "js/app/alert.js",
       "js/app/lazyload.js",

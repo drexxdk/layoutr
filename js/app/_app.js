@@ -1,12 +1,6 @@
 ﻿var app = app || {};
 
 $(function () {
-
-    //$.ajaxSetup({
-    //    // Disable caching of AJAX responses
-    //    cache: false
-    //});
-
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');
@@ -66,70 +60,11 @@ $(function () {
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
-
-    transitionLock = false;
-
-    app.toggleAside = function (aside, pageChanged) {
-        if (!transitionLock) {
-            transitionLock = true;
-            var currentAside = app.html.attr('data-aside');
-            if (currentAside.length) {
-                if (aside === undefined || currentAside === aside) {
-                    app.html.attr('data-aside', '');
-                    app.main.focus();
-                } else {
-                    app.html.attr('data-aside', aside);
-                }
-            } else {
-                app.html.attr('data-aside', aside);
-            }
-            if (aside === 'left') {
-                app.left.focus();
-            } else if (aside === 'right') {
-                app.right.focus();
-            }
-            if (app.html.hasClass('transitions')) {
-                setTimeout(function () {
-                    transitionLock = false;
-                    app.checkGoogleMaps();
-                    if (pageChanged) {
-                        app.responsiveBackground(app.content.find('.responsive-background'));
-                    }
-                }, app.transitionTime);
-            } else {
-                transitionLock = false;
-                app.checkGoogleMaps();
-            }
-            app.setHtmlScroll();
-        }
-    };
-
-    $('.aside.left').click(function () {
-        app.toggleAside('left');
-    });
-
-    $('.aside.right').click(function () {
-        app.toggleAside('right');
-    });
-
+    
     $.get('ajax/layout/svg.html', function (data) {
         $(data).prependTo(app.main);
     });
 
-    app.left.on('click', '.tree a', function (e) {
-        e.preventDefault();
-        var $this = $(this);
-        var href = $this.attr('href');
-        if (href === 'page1') {
-            app.page1();
-        } else if (href === 'page2') {
-            app.page2();
-        } else {
-            app.content.load('ajax/content/' + href + '.html');
-        }
-    });
-
-    app.left.find('> .content > div').load('ajax/layout/menu.html');
     app.page1();
 
     $(window).click(function (e) {

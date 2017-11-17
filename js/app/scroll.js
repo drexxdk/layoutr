@@ -6,9 +6,6 @@ $(function () {
             app.htmlOverflowEnabled = false;
             var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             app.html.addClass('scrollDisabled');
-            if (app.html.attr('data-modal').length) {
-                app.checkModal();
-            }
             app.body.scrollTop(scrollTop);
             app.main.scrollTop(scrollTop);
         }
@@ -17,11 +14,10 @@ $(function () {
     app.enableScroll = function () {
         if (!app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = true;
-            var scrollTop = app.body.scrollTop() || app.main.scrollTop();
+            var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
             app.html.removeClass('scrollDisabled modal');
             app.body.scrollTop(scrollTop); // edge, safari
             app.html.scrollTop(scrollTop); // chrome, firefox, ie
-            app.checkModal();
         }
     };
 
