@@ -15,7 +15,8 @@ $(function () {
                 },
                 triggerClose: {
                     mouseleave: true,
-                    tap: true
+                    tap: true,
+                    scroll: true
                 }
             });
         });
