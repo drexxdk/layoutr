@@ -50,6 +50,7 @@
                                 <li>
                                     <b>TAB</b>
                                     <ul>
+                                        <li>Toggles modal if focused element is within/outside of it.</li>
                                         <li>Toggles aside if focused element is within/outside of it.</li>
                                         <li>Closes dropdown if it has focus.</li>
                                         <li>Disabled when loading or modal is shown.</li>
@@ -65,33 +66,15 @@
                                 <li><b>Swipe right</b> opens navigation or closes settings if it is open.</li>
                             </ul>
                         </li>
-                        <li>
-                            <b>Local storage</b> is used to save settings.
-                        </li>
-                        <li>
-                            <b>Modal</b> for image keeps aspect ratio and always fills entire width or height of screen.
-                        </li>
-                        <li>
-                            <b>Tables</b> can be flipped without any javascript.
-                        </li>
-                        <li>
-                            <b>REM</b> is used for everything instead of EM or PX. REM gets converted to PX for breakpoints, since browsers can't handle REM in breakpoints correctly.
-                        </li>
-                        <li>
-                            <b>Media queries</b> based on layout elements instead of just browser window width.
-                        </li>
-                        <li>
-                            <b>SVG icons</b> with fill color that can be set in SCSS.
-                        </li>
-                        <li>
-                            <b>Hover effects</b> are only applied for desktop browsers, since mobiles can't display them correctly.
-                        </li>
-                        <li>
-                            <b>Scroll</b> is disabled for the site, when displaying modal, aside without push and loading.
-                        </li>
-                        <li>
-                            <b>Transitions</b> works in all browsers by using margin/padding alternatives to calc(), since Edge/IE can't handle transitions with calc().
-                        </li>
+                        <li><b>Local storage</b> is used to save settings.</li>
+                        <li><b>Modal</b> for image keeps aspect ratio and always fills entire width or height of screen.</li>
+                        <li><b>Tables</b> can be flipped without any javascript.</li>
+                        <li><b>REM</b> is used for everything instead of EM or PX. REM gets converted to PX for breakpoints, since browsers can't handle REM in breakpoints correctly.</li>
+                        <li><b>Media queries</b> based on layout elements instead of just browser window width.</li>
+                        <li><b>SVG icons</b> with fill color that can be set in SCSS.</li>
+                        <li><b>Hover effects</b> are only applied for desktop browsers, since mobiles can't display them correctly.</li>
+                        <li><b>Scroll</b> is disabled for the site, when displaying modal, aside without push and loading.</li>
+                        <li><b>Transitions</b> works in all browsers by using margin/padding alternatives to calc(), since Edge/IE can't handle transitions with calc().</li>
                         <li>
                             <b>Android</b>
                             <ul>
@@ -101,29 +84,15 @@
                         <li>
                             <b>Visual Studio</b>
                             <ul>
-                                <li>
-                                    <b>Web Compiler by Mads Kristensen</b> is used to convert SCSS to CSS with sourcemap and minified version.
-                                </li>
-                                <li>
-                                    <b>Bundler & Minifier by Mads Kristensen</b> is used to combine and minify JS.
-                                </li>
+                                <li><b>Web Compiler by Mads Kristensen</b> is used to convert SCSS to CSS with sourcemap and minified version.</li>
+                                <li><b>Bundler & Minifier by Mads Kristensen</b> is used to combine and minify JS.</li>
                             </ul>
                         </li>
-                        <li>
-                            <b>loadCSS.js by Filament Group</b> is used to load CSS.
-                        </li>
-                        <li>
-                            <b>lazyload.js by Mika Tuupola</b> is used to load content images.
-                        </li>
-                        <li>
-                            <b>bowser.js by Dustin Diaz</b> is used to determinate user browser and device.
-                        </li>
-                        <li>
-                            <b>bootstrap-slider.js by Stefan Petre</b> is used to make sliders.
-                        </li>
-                        <li>
-                            <b>tooltipster.js by Caleb Jacob</b> is used to make tooltips.
-                        </li>
+                        <li><b>loadCSS.js by Filament Group</b> is used to load CSS.</li>
+                        <li><b>lazyload.js by Mika Tuupola</b> is used to load content images.</li>
+                        <li><b>bowser.js by Dustin Diaz</b> is used to determinate user browser and device.</li>
+                        <li><b>bootstrap-slider.js by Stefan Petre</b> is used to make sliders.</li>
+                        <li><b>tooltipster.js by Caleb Jacob</b> is used to make tooltips.</li>
                     </ul>
                 </div>
             </div>
@@ -138,12 +107,10 @@
                             <b>Fixed footer</b>
                             <ul>
                                 <li>
-                                    <b>Enabled</b>: Footer is fixed at bottom of screen.
+                                    <b>Enabled</b>: Footer is fixed at bottom of screen.<br />
                                     Disabled for mobile.
                                 </li>
-                                <li>
-                                    <b>Disabled</b>: Footer is shown below content.
-                                </li>
+                                <li><b>Disabled</b>: Footer is shown below content.</li>
                             </ul>
                         </li>
                         <li>
@@ -153,20 +120,14 @@
                                     <b>Enabled</b>: Content is displayed in two columns.<br />
                                     Content is displayed in one column untill the screen is wide enough to switch to two columns.
                                 </li>
-                                <li>
-                                    <b>Disabled</b>: Content is displayed in one column.
-                                </li>
+                                <li><b>Disabled</b>: Content is displayed in one column.</li>
                             </ul>
                         </li>
                         <li>
                             <b>Transitions</b>
                             <ul>
-                                <li>
-                                    <b>Enabled</b>:Layout uses transitions.
-                                </li>
-                                <li>
-                                    <b>Disabled</b>: Layout doesn't use transitions.
-                                </li>
+                                <li><b>Enabled</b>:Layout uses transitions.</li>
+                                <li><b>Disabled</b>: Layout doesn't use transitions.</li>
                             </ul>
                         </li>
                         <li>
@@ -176,9 +137,7 @@
                                     <b>Enabled</b>: Aside pushes content.<br />
                                     Aside opens on top of content untill the screen is wide enough for it to push content.
                                 </li>
-                                <li>
-                                    <b>Disabled</b>: Aside opens on top of content.
-                                </li>
+                                <li><b>Disabled</b>: Aside opens on top of content.</li>
                             </ul>
                         </li>
                         <li>
@@ -188,9 +147,7 @@
                                     <b>Enabled</b>: Close aside when clicking outside it, unless target is loading, modal or popup.<br />
                                     Always enabled when aside isn't pushing content.
                                 </li>
-                                <li>
-                                    <b>Disabled</b>: Don't close aside when clicking outside it.
-                                </li>
+                                <li><b>Disabled</b>: Don't close aside when clicking outside it.</li>
                             </ul>
                         </li>
                     </ul>
