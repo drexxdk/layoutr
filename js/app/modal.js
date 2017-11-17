@@ -25,7 +25,6 @@ $(function () {
                     html.push('<div id="modal-description">' + description + '</div>');
                 }
                 html.push('<img id="modal-img" />');
-
             } else if (type === 'form') {
                 html.push('<div class="header">');
                 if (title !== undefined) {
@@ -63,6 +62,7 @@ $(function () {
             app.html.addClass('modal');
             app.checkModal();
             app.setHtmlScroll();
+            app.modal.focus();
         }
     });
 
@@ -75,5 +75,6 @@ $(function () {
         app.modal.removeClass('info-shown').empty();
         app.checkModal();
         app.setHtmlScroll();
+        app.main.focus();
     };
 });

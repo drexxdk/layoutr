@@ -76,11 +76,17 @@ $(function () {
             if (currentAside.length) {
                 if (aside === undefined || currentAside === aside) {
                     app.html.attr('data-aside', '');
+                    app.main.focus();
                 } else {
                     app.html.attr('data-aside', aside);
                 }
             } else {
                 app.html.attr('data-aside', aside);
+            }
+            if (aside === 'left') {
+                app.left.focus();
+            } else if (aside === 'right') {
+                app.right.focus();
             }
             if (app.html.hasClass('transitions')) {
                 setTimeout(function () {
