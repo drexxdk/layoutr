@@ -39,6 +39,7 @@
       "js/app/keyboard.js",
       "js/app/modal.js",
       "js/app/touchDevice.js",
+      "js/app/browser.js",
       "js/app/responsiveBackground.js",
       "js/app/tooltipster.js"
     ],
