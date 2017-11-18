@@ -1,6 +1,17 @@
 ﻿var app = app || {};
 
 $(function () {
+    var showModal = function (type) {
+        app.html.attr('data-modal', type);
+        app.html.addClass('modal');
+        if (app.html.hasClass('scrollDisabled')) {
+            app.checkModal();
+            app.modal.focus();
+        } else {
+            app.setHtmlScroll();
+        }
+    };
+
     app.main.on('click', '.modal', function () {
         var $this = $(this);
 
@@ -53,18 +64,13 @@ $(function () {
                     if (app.html.hasClass('android')) {
                         image.css('max-height', window.innerHeight);
                     }
-                    app.html.attr('data-modal', type);
+                    app.hideLoading();
+                    showModal(type);
                 });
                 image.attr('src', $this.attr('data-modal-img'));
+                app.showLoading();
             } else {
-                app.html.attr('data-modal', type);
-            }
-            app.html.addClass('modal');
-            if (app.html.hasClass('scrollDisabled')) {
-                app.checkModal();
-                app.modal.focus();
-            } else {
-                app.setHtmlScroll();
+                showModal(type);
             }
         }
     });
