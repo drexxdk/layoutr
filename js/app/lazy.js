@@ -1,5 +1,9 @@
 ﻿var app = app || {};
 
 app.lazy = function (elements) {
-    elements.lazy(); //{ effect: "fadeIn" }
+    elements.lazy({
+        afterLoad: function (element) {
+            element.removeClass('lazy');
+        }
+    });
 };

@@ -23,7 +23,7 @@
     }
 }
 
-.overlay-dark {
+.overlay-dark:not(.lazy) {
     &:after {
         background-color: $component-overlay-dark-background-color;
     }
@@ -31,7 +31,7 @@
     @include color-yiq($component-overlay-dark-background-color);
 }
 
-.overlay-light {
+.overlay-light:not(.lazy) {
     &:after {
         background-color: $component-overlay-light-background-color;
     }
