@@ -1,6 +1,33 @@
 ﻿/// <reference path="../references" />
 
 html {
+
+    // Edge and IE has a weird 1px gap below footer for some unknown reason.
+    // This covers it up untill a solution is found. 
+    &.msie:not(.footer-fixed) #container, 
+    &.msedge:not(.footer-fixed) #container {
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            background-color: $footer-background-color;
+            z-index: $footer-z-index;
+        }
+    }
+
+    &.msie:not(.footer-fixed) #container:before {
+        bottom: -($footer-height + rem(2px));
+        height: rem(2px);
+    }
+
+    &.msedge:not(.footer-fixed) #container:before {
+        bottom: -(px($footer-height));
+        height: 1px;
+    }
+
     &.scrollDisabled {
         body {
             position: fixed;
