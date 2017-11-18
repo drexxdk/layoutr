@@ -20,14 +20,16 @@ $(function () {
             } else if (e.which === 27) { // esc
                 if (app.html.hasClass('modal')) {
                     app.closeModal();
-                } else if (app.html.attr('data-aside').length) {
-                    app.toggleAside(); // closes aside
-                }
-                var popups = app.main.children('.popup');
-                if (popups.length) {
-                    popups.fadeOut(app.fadeOutTime, function () {
-                        popups.remove();
-                    });
+                } else {
+                    if (app.html.attr('data-aside').length) {
+                        app.toggleAside(); // closes aside
+                    }
+                    var popups = app.main.children('.popup');
+                    if (popups.length) {
+                        popups.fadeOut(app.fadeOutTime, function () {
+                            popups.remove();
+                        });
+                    }
                 }
             }
             if (e.which === 13) { // enter

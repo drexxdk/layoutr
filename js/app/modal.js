@@ -85,4 +85,27 @@ $(function () {
         app.checkModal();
         app.setHtmlScroll();
     };
+
+    app.checkModal = function () {
+        if (app.html.hasClass('modal')) {
+            app.body.css('padding-right', app.scrollbarWidth);
+            if (app.html.attr('data-aside') === 'right') {
+                app.right.css('margin-right', app.scrollbarWidth);
+            }
+            app.main.children('.popup').css('margin-right', app.scrollbarWidth);
+        } else {
+            app.body.css('padding-right', 0);
+            app.right.css('margin-right', 0);
+            app.main.children('.popup').css('margin-right', 0);
+        }
+
+        if (app.contentHeader !== undefined) {
+            if (app.html.hasClass('modal') && app.contentHeader.css('position') === 'fixed') {
+                var halfOverflowY = app.scrollbarWidth / 2;
+                app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+            } else {
+                app.contentHeader.children().css('width', '');
+            }
+        }
+    };
 });
