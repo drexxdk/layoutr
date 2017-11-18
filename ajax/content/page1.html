@@ -228,7 +228,7 @@
             <div class="flex-items large">
                 <p>
                     Minified version of CSS and JS should be used when testing in Lighthouse.<br />
-                    These are the results from 12 November 2017:
+                    These are the results from 18 November 2017:
                 </p>
                 <div id="lighthouse" class="flex-items column wrap grow">
                     <div class="flex-items center">
@@ -242,8 +242,8 @@
                         <span>Progressive Web App</span>
                     </div>
                     <div class="flex-items center">
-                        <div class="percentage-circle p90 theme-success">
-                            <span>90</span>
+                        <div class="percentage-circle p88 theme-success">
+                            <span>88</span>
                             <div class="slice">
                                 <div class="bar"></div>
                                 <div class="fill"></div>
@@ -262,8 +262,8 @@
                         <span>Accessibility</span>
                     </div>
                     <div class="flex-items center">
-                        <div class="percentage-circle p100 theme-success">
-                            <span>100</span>
+                        <div class="percentage-circle p92 theme-success">
+                            <span>92</span>
                             <div class="slice">
                                 <div class="bar"></div>
                                 <div class="fill"></div>
@@ -273,8 +273,15 @@
                     </div>
                 </div>
                 <ul class="list">
-                    <li><b>Performance</b>: fluctuates a lot in the score.</li>
-                    <li><b>Best practices</b>: gets af 92 score, because of tooltipster.js.</li>
+                    <li>
+                        <b>Progressive Web App</b>: would get a 100% score if the website used ServiceWorker.<br />
+                        I could not get it to work correctly. The ServiceWorker cached everything forever and could only be refreshed by deleting it in the browser.
+                    </li>
+                    <li>
+                        <b>Performance</b>: fluctuates in the score, based on where and when you run the test.<br />
+                        If the website was not hosted on GitHub Pages, then all static content would be loaded with CDN to improve performance.
+                    </li>
+                    <li><b>Best practices</b>: would get a 100% score if the website did not use tooltipster.js.</li>
                 </ul>
             </div>
         </section>
