@@ -13,7 +13,7 @@ $(function () {
             app.toggleAside(undefined, true);
         }, 200);
         app.contentHeader = app.content.children('.header');
-        app.lazyload(app.content.find('.lazy'));
+        app.lazy(app.content.find('.lazy'));
         app.accordion(app.content.find('.accordion'));
         app.dropdown(app.content.find('select.dropdown'));
         app.responsiveBackground(app.content.find('.responsive-background'));
