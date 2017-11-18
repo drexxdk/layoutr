@@ -27,7 +27,6 @@ $(function () {
                 popup.append(alert);
             } else {
                 var html = [];
-                //  position ' + position + '
                 html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
                 html.push(alert);
                 html.push('</div>');

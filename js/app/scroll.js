@@ -10,7 +10,6 @@ $(function () {
             }
             var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             app.html.addClass('scrollDisabled');
-          
             app.body.scrollTop(scrollTop);
             app.main.scrollTop(scrollTop);
         }
@@ -41,9 +40,11 @@ $(function () {
             if (app.html.attr('data-aside') === 'right') {
                 app.right.css('margin-right', app.scrollbarWidth);
             }
+            app.main.children('.popup').css('margin-right', app.scrollbarWidth);
         } else {
             app.body.css('padding-right', 0);
             app.right.css('margin-right', 0);
+            app.main.children('.popup').css('margin-right', 0);
         }
 
         if (app.contentHeader !== undefined) {
