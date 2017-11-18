@@ -2549,6 +2549,10 @@ $(function () {
         app.html.addClass('desktop'); // enables hover effects
     }
 
+    if (app.html.hasClass('msie') || app.html.hasClass('msedge')) {
+        // add code here to add margin top to footer if it is making 1px bug
+    }
+
     if (bowser.android) {
         app.html.addClass('android'); // used by fullscreen
     } else if (bowser.ios) {
@@ -2627,8 +2631,9 @@ $(function () {
 });
 var app = app || {};
 
-app.page1 = function () {
-    app.content.load('ajax/content/page1.html', function () {
+$(function () {
+    app.pageLoaded = function () {
+        app.html.animate({ scrollTop: 0 }, 0);
         setTimeout(function () {
             app.toggleAside(undefined, true);
         }, 200);
@@ -2638,6 +2643,13 @@ app.page1 = function () {
         app.dropdown(app.content.find('select.dropdown'));
         app.responsiveBackground(app.content.find('.responsive-background'));
         app.tooltipster(app.content.find('.tooltip'));
+    };
+});
+var app = app || {};
+
+app.page1 = function () {
+    app.content.load('ajax/content/page1.html', function () {
+        app.pageLoaded();
 
         app.content.find('#font_size').slider({
             min: 12,
@@ -2747,11 +2759,7 @@ var app = app || {};
 
 app.page2 = function () {
     app.content.load('ajax/content/page2.html', function () {
-        setTimeout(function () {
-            app.toggleAside(undefined, true);
-        }, 200);
-        app.contentHeader = app.content.children('.header');
-        app.responsiveBackground(app.content.find('.responsive-background'));
+        app.pageLoaded();
     });
 };
 var app = app || {};
@@ -2775,7 +2783,7 @@ $(function () {
     app.enableScroll = function () {
         if (!app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = true;
-            var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
+            var scrollTop = app.body.scrollTop() || app.main.scrollTop() || app.html.scrollTop();
             app.html.removeClass('scrollDisabled modal');
             app.main.focus();
             app.body.scrollTop(scrollTop); // edge, safari

@@ -19,7 +19,7 @@ $(function () {
     app.enableScroll = function () {
         if (!app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = true;
-            var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
+            var scrollTop = app.body.scrollTop() || app.main.scrollTop() || app.html.scrollTop();
             app.html.removeClass('scrollDisabled modal');
             app.main.focus();
             app.body.scrollTop(scrollTop); // edge, safari

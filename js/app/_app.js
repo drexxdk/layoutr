@@ -51,6 +51,10 @@ $(function () {
         app.html.addClass('desktop'); // enables hover effects
     }
 
+    if (app.html.hasClass('msie') || app.html.hasClass('msedge')) {
+        // add code here to add margin top to footer if it is making 1px bug
+    }
+
     if (bowser.android) {
         app.html.addClass('android'); // used by fullscreen
     } else if (bowser.ios) {

@@ -2,10 +2,6 @@
 
 app.page2 = function () {
     app.content.load('ajax/content/page2.html', function () {
-        setTimeout(function () {
-            app.toggleAside(undefined, true);
-        }, 200);
-        app.contentHeader = app.content.children('.header');
-        app.responsiveBackground(app.content.find('.responsive-background'));
+        app.pageLoaded();
     });
 };
