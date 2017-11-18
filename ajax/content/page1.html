@@ -298,23 +298,102 @@
         </section>
         <section>
             <h3>Popup examples</h3>
-            <div id="popup-position" class="table">
+            <div class="table">
                 <table>
                     <tbody>
                         <tr>
-                            <td><button type="button" class="btn" data-position="top left" aria-label="Popup top left"><i class="corner top-left"></i></button></td>
-                            <td><button type="button" class="btn" data-position="top center" aria-label="Popup top center"><i class="line top"></i></button></td>
-                            <td><button type="button" class="btn" data-position="top right" aria-label="Popup top right"><i class="corner top-right"></i></button></td>
+                            <td>
+                                <button type="button"
+                                        class="btn show-popup"
+                                        data-popup-title="Popup top left"
+                                        data-popup-position="top left"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-top-left"></use></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn theme-secondary show-popup"
+                                        data-popup-title="Popup top center"
+                                        data-popup-position="top center"
+                                        data-popup-theme="secondary"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-line-top"></use></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn theme-success show-popup"
+                                        data-popup-title="Popup top right"
+                                        data-popup-position="top right"
+                                        data-popup-theme="success"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-top-right"></use></svg>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <td><button type="button" class="btn" data-position="middle left" aria-label="Popup middle left"><i class="line left"></i></button></td>
-                            <td><button type="button" class="btn" data-position="middle center" aria-label="Popup middle center"><i class="center"></i></button></td>
-                            <td><button type="button" class="btn" data-position="middle right" aria-label="Popup middle right"><i class="line right"></i></button></td>
+                            <td>
+                                <button type="button"
+                                        class="btn theme-danger show-popup"
+                                        data-popup-title="Popup middle left"
+                                        data-popup-position="middle left"
+                                        data-popup-theme="danger"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-line-left"></use></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn theme-warning show-popup"
+                                        data-popup-title="Popup middle center"
+                                        data-popup-position="middle center"
+                                        data-popup-theme="warning"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-center"></use></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn theme-info show-popup"
+                                        data-popup-title="Popup middle right"
+                                        data-popup-position="middle right"
+                                        data-popup-theme="info"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-line-right"></use></svg>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <td><button type="button" class="btn" data-position="bottom left" aria-label="Popup bottom left"><i class="corner bottom-left"></i></button></td>
-                            <td><button type="button" class="btn" data-position="bottom center" aria-label="Popup bottom center"><i class="line bottom"></i></button></td>
-                            <td><button type="button" class="btn" data-position="bottom right" aria-label="Popup bottom right"><i class="corner bottom-right"></i></button></td>
+                            <td>
+                                <button type="button"
+                                        class="btn theme-light show-popup"
+                                        data-popup-title="Popup bottom left"
+                                        data-popup-position="bottom left"
+                                        data-popup-theme="light"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-bottom-left"></use></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn theme-dark show-popup"
+                                        data-popup-title="Popup bottom center"
+                                        data-popup-position="bottom center"
+                                        data-popup-theme="dark"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-line-bottom"></use></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn show-popup"
+                                        data-popup-title="Popup bottom right"
+                                        data-popup-position="bottom right"
+                                        aria-label="Show popup">
+                                    <svg focusable="false"><use xlink:href="#svg-bottom-right"></use></svg>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -525,15 +604,15 @@
                 </div>
                 <div>
                     <div class="flex-items wrap column">
-                        <a class="btn theme-secondary" href="#" aria-label="Settings">
+                        <button class="btn theme-secondary" aria-label="Settings">
                             <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
-                        </a>
-                        <a class="btn theme-danger" href="#" aria-label="Delete">
+                        </button>
+                        <button class="btn theme-danger" aria-label="Delete">
                             <svg focusable="false"><use xlink:href="#svg-delete"></use></svg>
-                        </a>
-                        <a class="btn" href="#" aria-label="Navigation">
+                        </button>
+                        <button class="btn" aria-label="Navigation">
                             <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div>

@@ -55,11 +55,11 @@ $(function () {
         document.addEventListener('touchstart', handleTouchStart, false);
         document.addEventListener('touchend', handleTouchMove, false);
     };
-    
+
     if (app.html.hasClass('android')) {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
-        $(window).on('resize', function () {
+        $(window).resize(function () {
             if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
