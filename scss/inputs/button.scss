@@ -1,11 +1,5 @@
 ﻿/// <reference path="../references" />
 
-@mixin button-variant($background) {
-    @include color-yiq($background);
-    background: theme-gradient($background);
-    box-shadow: $box-shadow;
-}
-
 .btn {
     @include flex-display;
     @include align-items(center);
@@ -18,6 +12,7 @@
     cursor: pointer;
     line-height: $component-line-height;
     z-index: $component-z-index;
+    box-shadow: $box-shadow;
 
     &:not(.align-left):not(.align-right) {
         @include justify-content(center);
@@ -52,12 +47,12 @@
 
     @each $color, $value in $theme-colors {
         &.theme-#{$color} {
-            @include button-variant($value);
+            @include theme-element($value);
         }
     }
 
     $value: theme-color("primary");
-    @include button-variant($value);
+    @include theme-element($value);
 
     &:focus {
         @include focus;
@@ -68,4 +63,5 @@
     color: $link-color;
     text-decoration: $link-decoration;
     background: transparent !important;
+    border: $component-border-width solid $component-border-color !important;
 }

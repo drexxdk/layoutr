@@ -155,14 +155,8 @@
                     border-left: $component-border;
                 }
 
-                $value: theme-color("light");
-                $active-background: darken($value, 7.5%);
 
-
-                color: theme-soft-color($value);
-                fill: theme-soft-color($value);
-                background-color: theme-soft-background-color($value);
-
+                @include theme-element-soft(theme-color("light"), false);
                 > svg {
                     width: $font-size;
                     height: $font-size;

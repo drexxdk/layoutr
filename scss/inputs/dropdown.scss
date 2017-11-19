@@ -91,9 +91,7 @@ div.dropdown {
             @include focus;
 
             > li > div:focus {
-                $background: theme-soft-background-color(theme-color("light"));
-                background: theme-gradient(darken($background, 7.5%));
-                @include color-yiq(darken($background, 7.5%));
+                @include theme-element-soft-darken(theme-color("light"));
                 box-shadow: none;
             }
         }
@@ -137,6 +135,7 @@ div.dropdown {
                 display: block;
                 @include flex-display();
                 @extend .btn;
+                border: none !important;
 
                 > label {
                     flex-grow: 1;

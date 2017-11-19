@@ -45,7 +45,7 @@
 }
 
 @function theme-soft-border-color($value) {
-    @return theme-color-level($value, -9)
+    @return theme-color-level($value, -8)
 }
 
 @function theme-soft-color($value) {

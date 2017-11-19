@@ -11,6 +11,7 @@
             border-radius: 0;
             @extend .btn;
             @extend .btn.theme-light;
+            border: none!important;
 
             @each $color, $value in $theme-colors {
                 &.btn.theme-#{$color}:focus {

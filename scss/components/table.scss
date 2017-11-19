@@ -1,16 +1,11 @@
 ﻿/// <reference path="../references" />
 
-@mixin table-variant($background) {
-    background: theme-gradient($background);
-    @include color-yiq($background);
-}
-
 .table {
     overflow: auto;
 
     @each $color, $value in $theme-colors {
         &.theme-#{$color} table thead th {
-            @include table-variant($value);
+            @include theme-element($value, false);
         }
     }
 
@@ -27,7 +22,7 @@
         -webkit-overflow-scrolling: touch;
 
         thead th {
-            @include table-variant(theme-color("primary"));
+            @include theme-element(theme-color("primary"), false);
         }
 
         tbody tr:nth-child(even) th,

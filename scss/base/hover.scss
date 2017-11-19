@@ -5,16 +5,12 @@
 
     .btn:hover {
         $value: theme-color("primary");
-        $active-background: darken($value, 7.5%);
-        @include color-yiq($active-background);
-        background: theme-gradient($active-background);
+        @include theme-element-darken($value);
     }
 
     .alert .close:hover {
         $value: theme-color("light");
-        $active-background: darken(theme-soft-background-color($value), 7.5%);
-        @include color-yiq($active-background);
-        background-color: $active-background;
+        @include theme-element-darken($value, false);
     }
 
     .modal.overlay-light:after,
@@ -33,9 +29,7 @@
 
     ol.list li > button:hover,
     ol.list li > a:hover {
-        $active-background: darken($list-background-color, 7.5%);
-        @include color-yiq($active-background);
-        background: theme-gradient($active-background);
+        @include theme-element-darken($list-background-color);
     }
 
     header.header,
@@ -79,9 +73,7 @@
 
     @each $color, $value in $theme-validation-colors {
         .form-group.theme-#{$color} .dropdown > .btn:hover {
-            $background: theme-soft-background-color($value);
-            background: theme-gradient(darken($background, 7.5%));
-            @include color-yiq(darken($background, 7.5%));
+            @include theme-element-soft-darken($value, false);
         }
     }
 
@@ -96,15 +88,11 @@
 
     @each $color, $value in $theme-colors {
         .btn.theme-#{$color}:hover {
-            $active-background: darken($value, 7.5%);
-            @include color-yiq($active-background);
-            background: theme-gradient($active-background);
+            @include theme-element-darken($value);
         }
 
         .alert.theme-#{$color} .close:hover {
-            $active-background: darken(theme-soft-background-color($value), 7.5%);
-            @include color-yiq($active-background);
-            background-color: $active-background;
+            @include theme-element-soft-darken($value, false);
         }
 
         ol.list.theme-#{$color} li > a:hover:after {
@@ -113,7 +101,7 @@
     }
 
     ol.list li > a:hover:after {
-        left: -($spacer / 2);
+        left: -($spacer / 2) + $component-border-width;
         border-left-color: $list-number-background-color;
     }
 }

@@ -1,10 +1,5 @@
 ﻿/// <reference path="../references" />
 
-@mixin list-variant($background) {
-    background: theme-gradient($background);
-    @include color-yiq($background);
-}
-
 ul.list {
     list-style-type: none;
 
@@ -41,7 +36,7 @@ ol.list {
 
     @each $color, $value in $theme-colors {
         &.theme-#{$color} li > *:not(ol):before {
-            @include list-variant($value);
+            @include theme-element($value);
         }
     }
 
@@ -55,15 +50,14 @@ ol.list {
         position: relative;
         display: block;
         line-height: $component-line-height;
-        background-color: $list-background-color;
-        @include color-yiq($list-background-color);
+        @include theme-element($list-background-color);
         margin: ($spacer / 2) 0 ($spacer / 2) ($list-number-width + ($spacer / 2));
         padding: $padding-y $padding-x;
 
         &:before {
             content: counter(li);
             position: absolute;
-            top: 0;
+            top: -$component-border-width;
             left: -($list-number-width + ($spacer / 2));
             width: $list-number-width;
             height: $list-number-width;
@@ -71,17 +65,14 @@ ol.list {
             counter-increment: li;
             text-align: center;
             font-weight: bold;
-            background: theme-gradient($list-number-background-color);
-            @include color-yiq($list-number-background-color);
+            @include theme-element($list-number-background-color);
         }
     }
 
     li > button,
     li > a {
         &:focus {
-            $active-background: darken($list-background-color, 7.5%);
-            @include color-yiq($active-background);
-            background: theme-gradient($active-background);
+            @include theme-element-darken($list-background-color);
         }
 
         &:after {

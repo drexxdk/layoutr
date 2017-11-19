@@ -1,0 +1,22 @@
+﻿/// <reference path="../references" />
+
+@mixin theme-element($background, $includeBorder: true) {
+    @include color-yiq($background);
+    background: theme-gradient($background);
+
+    @if $includeBorder == true {
+        border: $component-border-width solid theme-color-level($background, 1);
+    }
+}
+
+@mixin theme-element-darken($background, $includeBorder: true) {
+    @include theme-element(darken($background, 7.5%), $includeBorder);
+}
+
+@mixin theme-element-soft($background, $includeBorder: true) {
+    @include theme-element(theme-color-level($background, -10), $includeBorder);
+}
+
+@mixin theme-element-soft-darken($background, $includeBorder: true) {
+    @include theme-element(darken(theme-color-level($background, -10), 7.5%), $includeBorder);
+}

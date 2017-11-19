@@ -1,38 +1,28 @@
 ﻿/// <reference path="../references" />
 
-@mixin alert-variant($background, $border, $color) {
-    color: $color;
-    background-color: $background;
-    border-color: $border;
-}
-
 .alert {
     font-size: $font-size;
-    background-color: transparent;
     border-radius: $component-border-radius;
     @include flex-display();
     @include align-items(flex-start);
     overflow: hidden;
 
-
     $value: theme-color("light");
-    @include alert-variant(theme-soft-background-color($value), theme-soft-border-color($value), theme-soft-color($value));
+    @include theme-element-soft($value);
 
-    & .close:focus {
-        $active-background: darken(theme-soft-background-color($value), 7.5%);
-        @include color-yiq($active-background);
-        background-color: $active-background;
+    .close:focus {
+        @include theme-element-soft-darken($value);
     }
 
     @each $color, $value in $theme-colors {
-        &.theme-#{$color} .close:focus {
+        &.theme-#{$color} {
+            @include theme-element-soft($value);
 
-            $active-background: darken(theme-soft-background-color($value), 7.5%);
-            @include color-yiq($active-background);
-            background-color: $active-background;
+            .close:focus {
+                @include theme-element-soft-darken($value);
+            }
         }
     }
-
 
     > div {
         padding: $padding-y $padding-x;
@@ -53,12 +43,6 @@
             height: $font-size;
             flex-shrink: 0;
             display: block;
-        }
-    }
-
-    @each $color, $value in $theme-colors {
-        &.theme-#{$color} {
-            @include alert-variant(theme-soft-background-color($value), theme-soft-border-color($value), theme-soft-color($value));
         }
     }
 }
