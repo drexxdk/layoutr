@@ -32,6 +32,10 @@
         cursor: pointer;
     }
 
+    > i + span,
+    > svg + span,
+    > span + i,
+    > span + svg,
     > i + label,
     > svg + label,
     > label + i,
