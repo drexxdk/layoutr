@@ -47,9 +47,7 @@
 
         &:hover,
         &:focus {
-            $background: theme-color("primary");
-            background: theme-gradient($background);
-            @include color-yiq($background);
+            @include theme-element-darken($primary);
             box-shadow: $box-shadow;
         }
     }

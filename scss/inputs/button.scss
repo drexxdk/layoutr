@@ -51,8 +51,7 @@
         }
     }
 
-    $value: theme-color("primary");
-    @include theme-element($value);
+    @include theme-element($primary);
 
     &:focus {
         @include focus;

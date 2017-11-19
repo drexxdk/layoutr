@@ -5,13 +5,13 @@
     overflow: hidden;
     border-radius: $component-border-radius;
     border: $component-border;
-    background: theme-color("light");
+    @include theme-element($light, false);
     min-height: $component-line-height + ($padding-y * 2) + ($component-border-width * 2);
 
     > span {
         padding: $padding-y $padding-x;
         text-align: center;
-        @include theme-element(theme-color("primary"), false);
+        @include theme-element($primary, false);
     }
 
     @each $color, $value in $theme-colors {

@@ -11,7 +11,7 @@ $tooltip-arrow-size: rem(10px);
 $tooltip-border-color: black;
 $tooltip-border: $component-border-width solid $tooltip-border-color;
 $tooltip-arrow-fix: $tooltip-arrow-size - $component-border-width;
-$tooltip-background-color: theme-color("dark");
+$tooltip-background-color: $dark;
 $tooltip-color: white;
 
 /* This is the core CSS of Tooltipster */

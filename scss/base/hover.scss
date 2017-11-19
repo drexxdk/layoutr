@@ -4,12 +4,12 @@
 .desktop {
 
     .btn:hover {
-        $value: theme-color("primary");
+        $value: $primary;
         @include theme-element-darken($value);
     }
 
     .alert .close:hover {
-        $value: theme-color("light");
+        $value: $light;
         @include theme-element-darken($value, false);
     }
 
@@ -73,7 +73,7 @@
 
     @each $color, $value in $theme-validation-colors {
         .form-group.theme-#{$color} .dropdown > .btn:hover {
-            @include theme-element-soft-darken($value, false);
+            @include theme-element-soft-darken($value);
         }
     }
 

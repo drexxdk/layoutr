@@ -17,7 +17,7 @@ aside {
     @include flex-display;
 
     > .header {
-        background-color: theme-color("light");
+        background-color: $light;
     }
 
     > .content {

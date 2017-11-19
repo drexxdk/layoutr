@@ -90,7 +90,7 @@
 
         &.required:after {
             content: '*';
-            color: theme-color("danger");
+            color: $danger;
             margin-left: $spacer / 3;
         }
     }
@@ -156,7 +156,7 @@
                 }
 
 
-                @include theme-element-soft(theme-color("light"), false);
+                @include theme-element-soft($light, false);
                 > svg {
                     width: $font-size;
                     height: $font-size;
@@ -172,7 +172,7 @@
 
     &.theme-danger {
         em {
-            color: theme-color("danger");
+            color: $danger;
             margin: ($spacer / 2) 0 $spacer 0;
             width: 100%;
         }

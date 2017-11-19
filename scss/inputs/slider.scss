@@ -33,8 +33,7 @@
         top: 0;
         width: $slider-line-height;
         height: $slider-line-height;
-        background: theme-gradient($slider-handle-background-color);
-        border: none;
+        @include theme-element($primary);
         cursor: pointer;
 
         &:focus {
@@ -148,7 +147,7 @@
 
                 &:after {
                     top: -($spacer / 2);
-                    border-top: (($spacer / 2) - ($component-border-width)) solid theme-color("dark");
+                    border-top: (($spacer / 2) - ($component-border-width)) solid $dark;
                 }
             }
         }
@@ -162,7 +161,7 @@
 
                 &:after {
                     bottom: -($spacer / 2);
-                    border-bottom: (($spacer / 2) - ($component-border-width)) solid theme-color("dark");
+                    border-bottom: (($spacer / 2) - ($component-border-width)) solid $dark;
                 }
             }
         }
@@ -171,8 +170,7 @@
             white-space: nowrap;
             max-width: none;
             padding: $padding-y $padding-x;
-            background: theme-gradient(theme-color("dark"));
-            @include color-yiq(theme-color("dark"));
+            @include theme-element($dark, false);
             border-radius: $component-border-radius;
             border: $component-border;
         }

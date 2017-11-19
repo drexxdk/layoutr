@@ -10,12 +10,10 @@
 
     > input {
         @include hidden-input;
-        $background: theme-color("primary");
 
         &:checked {
             & + label > i {
-                border-color: $background;
-                background: theme-gradient(theme-color("primary"));
+                @include theme-element($primary);
             }
         }
 
@@ -99,11 +97,10 @@
         > i {
             width: $font-size * 2;
             height: $font-size;
-            background-color: $component-border-color;
+            @include theme-element($component-border-color);
             transform: transition(.4s);
             position: relative;
             margin-right: ($spacer / 2);
-            border: $component-border-width solid $component-border-color;
 
             &:before {
                 position: absolute;

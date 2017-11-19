@@ -2,7 +2,7 @@
 
 img,
 .img {
-    background-color: theme-color("light");
+    background-color: $light;
     @include noselect;
 }
 

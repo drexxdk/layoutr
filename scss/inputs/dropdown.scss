@@ -91,7 +91,7 @@ div.dropdown {
             @include focus;
 
             > li > div:focus {
-                @include theme-element-soft-darken(theme-color("light"));
+                @include theme-element-soft-darken($light);
                 box-shadow: none;
             }
         }
@@ -154,7 +154,7 @@ div.dropdown {
                     pointer-events: none;
 
                     > svg {
-                        fill: theme-color("success");
+                        fill: $success;
                         opacity: 1;
                     }
                 }

@@ -22,7 +22,7 @@
         -webkit-overflow-scrolling: touch;
 
         thead th {
-            @include theme-element(theme-color("primary"), false);
+            @include theme-element($primary, false);
         }
 
         tbody tr:nth-child(even) th,

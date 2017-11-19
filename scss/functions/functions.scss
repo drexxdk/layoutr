@@ -18,10 +18,6 @@
     @return $value * 1px;
 }
 
-@function theme-color($key: "primary") {
-    @return map-get($theme-colors, $key);
-}
-
 @function theme-color-level($color, $level: 0) {
     $color-base: if($level > 0, #000, #fff);
 
