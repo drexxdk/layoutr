@@ -105,7 +105,7 @@
     input[type=text],
     input[type=password],
     input[type=email] {
-        min-height: $line-height + ($padding-y * 2);
+        min-height: $line-height + ($padding-y * 2) + ($component-border-width * 2);
     }
 
     textarea,
@@ -157,6 +157,7 @@
 
 
                 @include theme-element-soft($light, false);
+
                 > svg {
                     width: $font-size;
                     height: $font-size;
