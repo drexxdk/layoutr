@@ -4,7 +4,7 @@ $(function () {
     app.body.on("keydown", function (e) {
         var target = $(e.target);
         var parent = target.parent();
-        if (app.loading.hasClass('hidden')) {
+        if (!app.html.hasClass('loading')) {
             if (e.which === 37 && !app.html.hasClass('modal')) { // left
                 if (app.html.attr('data-aside') === 'left') {
                     app.toggleAside(); // closes right
@@ -43,7 +43,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (!app.loading.hasClass('hidden')) {
+            if (app.html.hasClass('loading')) {
                 e.preventDefault();
                 return;
             }
@@ -51,7 +51,7 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (app.loading.hasClass('hidden')) {
+        if (!app.html.hasClass('loading')) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {

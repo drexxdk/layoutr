@@ -1,45 +1,51 @@
 ﻿/// <reference path="../references" />
 
-#loading {
-    @include flex-center;
-    @include overlay;
-    height: 100%;
-    z-index: $loading-z-index;
-    @include noselect;
-
-    &:before {
-        content: '';
-        @include overlay;
-        height: 100vh;
-        background-color: $overlay-background-color-light;
+html {
+    &:not(.loading) #loading {
+        display: none;
     }
 
-    > .spinner {
-        height: $font-size * 4;
-        @include flex-display;
+    &.loading #loading {
+        @include flex-center;
+        @include overlay;
+        height: 100%;
+        z-index: $loading-z-index;
+        @include noselect;
 
-        > div {
-            background-color: $loader-background-color;
-            height: 100%;
-            margin: 0 ($font-size / 4);
-            width: ($font-size * 3) / 5;
-            @include animation(sk-stretchdelay, 1.2s, infinite, ease-in-out);
+        &:before {
+            content: '';
+            @include overlay;
+            height: 100vh;
+            background-color: $overlay-background-color-light;
         }
 
-        > .rect2 {
-            @include animation-delay(-1.1s);
-        }
+        > .spinner {
+            height: $font-size * 4;
+            @include flex-display;
 
-        > .rect3 {
-            @include animation-delay(-1.0s);
-        }
+            > div {
+                background-color: $loader-background-color;
+                height: 100%;
+                margin: 0 ($font-size / 4);
+                width: ($font-size * 3) / 5;
+                @include animation(sk-stretchdelay, 1.2s, infinite, ease-in-out);
+            }
 
-        > .rect4 {
-            @include animation-delay(-0.9s);
-        }
+            > .rect2 {
+                @include animation-delay(-1.1s);
+            }
 
-        > .rect5 {
-            @include animation-delay(-0.8s);
+            > .rect3 {
+                @include animation-delay(-1.0s);
+            }
+
+            > .rect4 {
+                @include animation-delay(-0.9s);
+            }
+
+            > .rect5 {
+                @include animation-delay(-0.8s);
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ $(function () {
                     var currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
-                        if (!app.html.hasClass('modal') && app.loading.hasClass('hidden')) {
+                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
@@ -36,7 +36,7 @@ $(function () {
                         }
                     } else if (xDiff < -distance) {
                         /* right swipe */
-                        if (!app.html.hasClass('modal') && app.loading.hasClass('hidden')) {
+                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();

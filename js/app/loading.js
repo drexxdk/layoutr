@@ -3,11 +3,11 @@
 $(function () {
     app.showLoading = function () {
         app.disableScroll();
-        app.loading.removeClass('hidden');
+        app.html.addClass('loading');
     };
 
     app.hideLoading = function () {
-        app.loading.addClass('hidden');
+        app.html.removeClass('loading');
         app.setHtmlScroll();
     };
 

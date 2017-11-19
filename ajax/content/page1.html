@@ -42,26 +42,13 @@
                 <div>
                     <ul class="list">
                         <li>
-                            <b>Keyboard controls</b>
+                            <b>Keyboard controls</b> is disabled when loading is shown.
                             <ul>
-                                <li><b>Left arrow key</b> opens settings or closes navigation if it is open.</li>
-                                <li><b>Right arrow key</b> opens navigation or closes settings if it is open.</li>
-                                <li><b>ESC key</b> closes aside, popups and modal.</li>
-                                <li>
-                                    <b>TAB</b>
-                                    <ul>
-                                        <li>Toggles modal, aside, dropdown if focused element is within/outside of it.</li>
-                                        <li>Disabled when loading is shown.</li>
-                                    </ul>
-                                </li>
+                                <li><b>Left arrow key</b> if modal isn't shown it will opens settings or closes navigation if it is open.</li>
+                                <li><b>Right arrow key</b> if modal isn't shown it will opens navigation or closes settings if it is open.</li>
+                                <li><b>ESC key</b> closes modal or aside and popups.</li>
+                                <li><b>TAB</b> toggles modal, aside, dropdown if focused element is within/outside of it.</li>
                                 <li><b>ENTER</b> toggles checkbox, radio, dropdown, accordion item, navigation tree item if it has focus.</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <b>Swipe controls (Android only)</b>
-                            <ul>
-                                <li><b>Swipe left</b> opens settings or closes navigation if it is open.</li>
-                                <li><b>Swipe right</b> opens navigation or closes settings if it is open.</li>
                             </ul>
                         </li>
                         <li><b>Local storage</b> is used to save settings.</li>
@@ -77,6 +64,13 @@
                             <b>Android</b>
                             <ul>
                                 <li><b>Modal</b> image shrinks/grows, when androids top bar is shown/hidden.</li>
+                                <li>
+                                    <b>Swipe controls</b> is disabled when loading or modal is shown.
+                                    <ul>
+                                        <li><b>Swipe left</b> opens settings or closes navigation if it is open.</li>
+                                        <li><b>Swipe right</b> opens navigation or closes settings if it is open.</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -87,7 +81,7 @@
                             </ul>
                         </li>
                         <li><b>loadCSS.js by Filament Group</b> is used to load CSS.</li>
-                        <li><b>lazy.js by Eisbehr</b> is used to load content images.</li>
+                        <li><b>lazy.js by Eisbehr</b> is used to load images.</li>
                         <li><b>bowser.js by Dustin Diaz</b> is used to determinate user browser and device.</li>
                         <li><b>bootstrap-slider.js by Stefan Petre</b> is used to make sliders.</li>
                         <li><b>tooltipster.js by Caleb Jacob</b> is used to make tooltips.</li>
@@ -102,22 +96,16 @@
                     <p>Settings work by applying classes to html and saving it in local storage.</p>
                     <ul class="list">
                         <li>
-                            <b>Fixed footer</b>
+                            <b>Fixed footer</b> is always disabled for mobile.
                             <ul>
-                                <li>
-                                    <b>Enabled</b>: Footer is fixed at bottom of screen.<br />
-                                    Disabled for mobile.
-                                </li>
+                                <li><b>Enabled</b>: Footer is fixed at bottom of screen.</li>
                                 <li><b>Disabled</b>: Footer is shown below content.</li>
                             </ul>
                         </li>
                         <li>
-                            <b>Two columns</b>
+                            <b>Two columns</b> is disabled untill screen is wide enough.
                             <ul>
-                                <li>
-                                    <b>Enabled</b>: Content is displayed in two columns.<br />
-                                    Content is displayed in one column untill the screen is wide enough to switch to two columns.
-                                </li>
+                                <li><b>Enabled</b>: Content is displayed in two columns.</li>
                                 <li><b>Disabled</b>: Content is displayed in one column.</li>
                             </ul>
                         </li>
@@ -129,22 +117,16 @@
                             </ul>
                         </li>
                         <li>
-                            <b>Push</b>
+                            <b>Push</b> is disabled untill screen is wide enough.
                             <ul>
-                                <li>
-                                    <b>Enabled</b>: Aside pushes content.<br />
-                                    Aside opens on top of content untill the screen is wide enough for it to push content.
-                                </li>
+                                <li><b>Enabled</b>: Aside pushes content.</li>
                                 <li><b>Disabled</b>: Aside opens on top of content.</li>
                             </ul>
                         </li>
                         <li>
-                            <b>Close on click outside</b>
+                            <b>Close on click outside</b> is always enabled when aside isn't pushing content.
                             <ul>
-                                <li>
-                                    <b>Enabled</b>: Close aside when clicking outside it, unless target is loading, modal or popup.<br />
-                                    Always enabled when aside isn't pushing content.
-                                </li>
+                                <li><b>Enabled</b>: Close aside when clicking outside it, unless target is loading, modal or popup.</li>
                                 <li><b>Disabled</b>: Don't close aside when clicking outside it.</li>
                             </ul>
                         </li>

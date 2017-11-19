@@ -2769,7 +2769,7 @@ $(function () {
     };
 
     app.setHtmlScroll = function () {
-        if (!app.html.attr('data-modal').length && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+        if (!app.html.attr('data-modal').length && !app.html.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
             app.enableScroll();
         } else if (app.html.attr('data-modal').length || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
             app.disableScroll();
@@ -2965,11 +2965,11 @@ var app = app || {};
 $(function () {
     app.showLoading = function () {
         app.disableScroll();
-        app.loading.removeClass('hidden');
+        app.html.addClass('loading');
     };
 
     app.hideLoading = function () {
-        app.loading.addClass('hidden');
+        app.html.removeClass('loading');
         app.setHtmlScroll();
     };
 
@@ -3155,7 +3155,7 @@ $(function () {
     app.body.on("keydown", function (e) {
         var target = $(e.target);
         var parent = target.parent();
-        if (app.loading.hasClass('hidden')) {
+        if (!app.html.hasClass('loading')) {
             if (e.which === 37 && !app.html.hasClass('modal')) { // left
                 if (app.html.attr('data-aside') === 'left') {
                     app.toggleAside(); // closes right
@@ -3194,7 +3194,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (!app.loading.hasClass('hidden')) {
+            if (app.html.hasClass('loading')) {
                 e.preventDefault();
                 return;
             }
@@ -3202,7 +3202,7 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (app.loading.hasClass('hidden')) {
+        if (!app.html.hasClass('loading')) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {
@@ -3363,7 +3363,7 @@ $(function () {
                     var currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
-                        if (!app.html.hasClass('modal') && app.loading.hasClass('hidden')) {
+                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
@@ -3373,7 +3373,7 @@ $(function () {
                         }
                     } else if (xDiff < -distance) {
                         /* right swipe */
-                        if (!app.html.hasClass('modal') && app.loading.hasClass('hidden')) {
+                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();

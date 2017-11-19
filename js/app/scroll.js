@@ -27,7 +27,7 @@ $(function () {
     };
 
     app.setHtmlScroll = function () {
-        if (!app.html.attr('data-modal').length && app.loading.hasClass('hidden') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+        if (!app.html.attr('data-modal').length && !app.html.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
             app.enableScroll();
         } else if (app.html.attr('data-modal').length || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
             app.disableScroll();
