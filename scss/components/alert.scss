@@ -11,7 +11,7 @@
     @include theme-element-soft($value);
 
     .close:focus {
-        @include theme-element-soft-darken($value);
+        @include theme-element-soft-darken($value, false);
     }
 
     @each $color, $value in $theme-colors {
@@ -19,7 +19,7 @@
             @include theme-element-soft($value);
 
             .close:focus {
-                @include theme-element-soft-darken($value);
+                @include theme-element-soft-darken($value, false);
             }
         }
     }
