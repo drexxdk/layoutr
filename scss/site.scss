@@ -48,10 +48,9 @@
         &:hover,
         &:focus {
             $background: theme-color("primary");
-            @include color-yiq($background);
-            background-color: $background;
-            box-shadow: $box-shadow;
             background: theme-gradient($background);
+            @include color-yiq($background);
+            box-shadow: $box-shadow;
         }
     }
 

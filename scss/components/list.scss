@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 @mixin list-variant($background) {
-    background-color: $background;
+    background: theme-gradient($background);
     @include color-yiq($background);
 }
 
@@ -71,7 +71,7 @@ ol.list {
             counter-increment: li;
             text-align: center;
             font-weight: bold;
-            background-color: $list-number-background-color;
+            background: theme-gradient($list-number-background-color);
             @include color-yiq($list-number-background-color);
         }
     }

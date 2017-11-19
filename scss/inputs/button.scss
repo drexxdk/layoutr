@@ -2,9 +2,8 @@
 
 @mixin button-variant($background) {
     @include color-yiq($background);
-    background-color: $background;
-    box-shadow: $box-shadow;
     background: theme-gradient($background);
+    box-shadow: $box-shadow;
 }
 
 .btn {

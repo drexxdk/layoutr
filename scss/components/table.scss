@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 @mixin table-variant($background) {
-    background-color: $background;
+    background: theme-gradient($background);
     @include color-yiq($background);
 }
 
