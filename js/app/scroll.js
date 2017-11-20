@@ -45,7 +45,8 @@ $(function () {
     app.setHtmlScroll = function () {
         if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isAsideLeft() && !app.isAsideRight())) {
             app.enableScroll();
-        } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled) {
+        } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.isAsideLeft() || app.isAsideRight())) {
+            debugger;
             app.disableScroll();
         }
     };

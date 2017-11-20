@@ -106,8 +106,8 @@ $(function () {
             }
         } else {
             var isSmallBreakpoint = app.isSmallBreakpoint();
-            var left = app.html.attr('data-aside') === 'left' && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
-            var right = app.html.attr('data-aside') === 'right' && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
+            var left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
+            var right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
             var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
             if ((left || right) && notTarget) {
