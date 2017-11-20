@@ -6,15 +6,15 @@ $(function () {
         var parent = target.parent();
         if (!app.html.hasClass('loading')) {
             if (e.which === 37 && !app.isModal()) { // left
-                if (app.isLeft()) {
+                if (app.isAsideLeft()) {
                     app.toggleAside(); // closes right
-                } else if (!app.isRight()) {
+                } else if (!app.isAsideRight()) {
                     app.toggleAside('right'); // opens right
                 }
             } else if (e.which === 39 && !app.isModal()) { // right
-                if (app.isRight()) {
+                if (app.isAsideRight()) {
                     app.toggleAside(); // closes left
-                } else if (!app.isLeft()) {
+                } else if (!app.isAsideLeft()) {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc

@@ -20,34 +20,38 @@ $(function () {
     app.scrollbarWidth = 0;
 
     app.isSmallBreakpoint = function () {
-        return $(window).outerWidth() < 732 || app.isLeft() && !app.isLeftPush() || app.isRight() && !app.isRightPush();
+        return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
     };
 
     app.isAside = function () {
         return app.html.attr('data-aside').length;
     };
 
-    app.isLeft = function () {
+    app.isAsideLeft = function () {
         return app.html.attr('data-aside') === 'left';
     };
 
-    app.isRight = function () {
+    app.isAsideRight = function () {
         return app.html.attr('data-aside') === 'right';
     };
 
-    app.isLeftPush = function () {
-        return app.html.hasClass('left-push') && app.isLeft();
+    app.isAsideLeftPush = function () {
+        return app.html.hasClass('left-push') && app.isAsideLeft();
     };
 
-    app.isRightPush = function () {
-        return app.html.hasClass('right-push') && app.isRight();
+    app.isAsideRightPush = function () {
+        return app.html.hasClass('right-push') && app.isAsideRight();
     };
     
-    app.isCloseLeftClickOutside = function () {
+    app.isAsideLeftCloseOnClickOutside = function () {
         return app.html.hasClass('close-left-click-outside');
     };
-    app.isCloseRightClickOutside = function () {
+    app.isAsideRightCloseOnClickOutside = function () {
         return app.html.hasClass('close-right-click-outside');
+    };
+
+    app.isModal = function () {
+        return app.html.hasClass('modal');
     };
 
     app.isModalForm = function () {
@@ -60,10 +64,6 @@ $(function () {
 
     app.isLoading = function () {
         return app.html.hasClass('loading');
-    };
-
-    app.isModal = function () {
-        return app.html.hasClass('modal');
     };
 
     if (bowser.msedge) {
@@ -106,8 +106,8 @@ $(function () {
             }
         } else {
             var isSmallBreakpoint = app.isSmallBreakpoint();
-            var left = app.html.attr('data-aside') === 'left' && (app.isCloseLeftClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
-            var right = app.html.attr('data-aside') === 'right' && (app.isCloseRightClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
+            var left = app.html.attr('data-aside') === 'left' && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
+            var right = app.html.attr('data-aside') === 'right' && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
             var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
             if ((left || right) && notTarget) {

@@ -2518,34 +2518,38 @@ $(function () {
     app.scrollbarWidth = 0;
 
     app.isSmallBreakpoint = function () {
-        return $(window).outerWidth() < 732 || app.isLeft() && !app.isLeftPush() || app.isRight() && !app.isRightPush();
+        return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
     };
 
     app.isAside = function () {
         return app.html.attr('data-aside').length;
     };
 
-    app.isLeft = function () {
+    app.isAsideLeft = function () {
         return app.html.attr('data-aside') === 'left';
     };
 
-    app.isRight = function () {
+    app.isAsideRight = function () {
         return app.html.attr('data-aside') === 'right';
     };
 
-    app.isLeftPush = function () {
-        return app.html.hasClass('left-push') && app.isLeft();
+    app.isAsideLeftPush = function () {
+        return app.html.hasClass('left-push') && app.isAsideLeft();
     };
 
-    app.isRightPush = function () {
-        return app.html.hasClass('right-push') && app.isRight();
+    app.isAsideRightPush = function () {
+        return app.html.hasClass('right-push') && app.isAsideRight();
     };
     
-    app.isCloseLeftClickOutside = function () {
+    app.isAsideLeftCloseOnClickOutside = function () {
         return app.html.hasClass('close-left-click-outside');
     };
-    app.isCloseRightClickOutside = function () {
+    app.isAsideRightCloseOnClickOutside = function () {
         return app.html.hasClass('close-right-click-outside');
+    };
+
+    app.isModal = function () {
+        return app.html.hasClass('modal');
     };
 
     app.isModalForm = function () {
@@ -2558,10 +2562,6 @@ $(function () {
 
     app.isLoading = function () {
         return app.html.hasClass('loading');
-    };
-
-    app.isModal = function () {
-        return app.html.hasClass('modal');
     };
 
     if (bowser.msedge) {
@@ -2604,8 +2604,8 @@ $(function () {
             }
         } else {
             var isSmallBreakpoint = app.isSmallBreakpoint();
-            var left = app.html.attr('data-aside') === 'left' && (app.isCloseLeftClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
-            var right = app.html.attr('data-aside') === 'right' && (app.isCloseRightClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
+            var left = app.html.attr('data-aside') === 'left' && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
+            var right = app.html.attr('data-aside') === 'right' && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
             var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
             if ((left || right) && notTarget) {
@@ -2813,7 +2813,7 @@ $(function () {
     };
 
     app.setHtmlScroll = function () {
-        if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isLeft() && !app.isRight())) {
+        if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isAsideLeft() && !app.isAsideRight())) {
             app.enableScroll();
         } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled) {
             app.disableScroll();
@@ -3201,15 +3201,15 @@ $(function () {
         var parent = target.parent();
         if (!app.html.hasClass('loading')) {
             if (e.which === 37 && !app.isModal()) { // left
-                if (app.isLeft()) {
+                if (app.isAsideLeft()) {
                     app.toggleAside(); // closes right
-                } else if (!app.isRight()) {
+                } else if (!app.isAsideRight()) {
                     app.toggleAside('right'); // opens right
                 }
             } else if (e.which === 39 && !app.isModal()) { // right
-                if (app.isRight()) {
+                if (app.isAsideRight()) {
                     app.toggleAside(); // closes left
-                } else if (!app.isLeft()) {
+                } else if (!app.isAsideLeft()) {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
