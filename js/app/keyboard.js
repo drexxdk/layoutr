@@ -5,23 +5,23 @@ $(function () {
         var target = $(e.target);
         var parent = target.parent();
         if (!app.html.hasClass('loading')) {
-            if (e.which === 37 && !app.html.hasClass('modal')) { // left
-                if (app.html.attr('data-aside') === 'left') {
+            if (e.which === 37 && !app.isModal()) { // left
+                if (app.isLeft()) {
                     app.toggleAside(); // closes right
-                } else if (app.html.attr('data-aside') !== 'right') {
+                } else if (!app.isRight()) {
                     app.toggleAside('right'); // opens right
                 }
-            } else if (e.which === 39 && !app.html.hasClass('modal')) { // right
-                if (app.html.attr('data-aside') === 'right') {
+            } else if (e.which === 39 && !app.isModal()) { // right
+                if (app.isRight()) {
                     app.toggleAside(); // closes left
-                } else if (app.html.attr('data-aside') !== 'left') {
+                } else if (!app.isLeft()) {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.html.hasClass('modal')) {
+                if (app.isModal()) {
                     app.closeModal();
                 } else {
-                    if (app.html.attr('data-aside').length) {
+                    if (app.isAside()) {
                         app.toggleAside(); // closes aside
                     }
                     var popups = app.main.children('.popup');
@@ -43,7 +43,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (app.html.hasClass('loading')) {
+            if (app.isLoading()) {
                 e.preventDefault();
                 return;
             }
@@ -51,13 +51,13 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (!app.html.hasClass('loading')) {
+        if (!app.isLoading()) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {
                     $('div.dropdown.open').removeClass('open');
                 }
-                if (app.html.hasClass('modal')) {
+                if (app.isModal()) {
                     if (!target.parents('#modal').length) {
                         app.closeModal();
                     }
@@ -65,7 +65,7 @@ $(function () {
                     var aside = target.parents('aside');
                     if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
                         app.toggleAside(aside.attr('id'));
-                    } else if (!aside.length && app.html.attr('data-aside').length) {
+                    } else if (!aside.length && app.isAside()) {
                         app.toggleAside();
                     }
                 }

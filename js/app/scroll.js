@@ -1,10 +1,26 @@
 ﻿var app = app || {};
 
 $(function () {
+    var scrollbarWidth = function () {
+        app.body.append('<div id="scrollbar-width"></div>');
+        var element = app.body.children('#scrollbar-width');
+        element.css({
+            'overflow': "scroll",
+            'visibility': "hidden",
+            'position': 'absolute',
+            'width': '100px',
+            'height': '100px'
+        });
+        app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
+        element.remove();
+    };
+
+    scrollbarWidth();
+
     app.disableScroll = function () {
         if (app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = false;
-            if (app.html.hasClass('modal')) {
+            if (app.isModal()) {
                 app.checkModal();
                 app.modal.focus();
             }
@@ -27,9 +43,9 @@ $(function () {
     };
 
     app.setHtmlScroll = function () {
-        if (!app.html.attr('data-modal').length && !app.html.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+        if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isLeft() && !app.isRight())) {
             app.enableScroll();
-        } else if (app.html.attr('data-modal').length || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
+        } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled) {
             app.disableScroll();
         }
     };

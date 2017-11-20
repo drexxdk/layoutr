@@ -19,23 +19,51 @@ $(function () {
     app.modal = $('#modal');
     app.scrollbarWidth = 0;
 
-    var scrollbarWidth = function () {
-        app.body.append('<div id="scrollbar-width"></div>');
-        var element = app.body.children('#scrollbar-width');
-        element.css({
-            'overflow': "scroll",
-            'visibility': "hidden",
-            'position': 'absolute',
-            'width': '100px',
-            'height': '100px'
-        });
-        app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
-        element.remove();
-    };
-    scrollbarWidth();
-
     app.isSmallBreakpoint = function () {
-        return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
+        return $(window).outerWidth() < 732 || app.isLeft() && !app.isLeftPush() || app.isRight() && !app.isRightPush();
+    };
+
+    app.isAside = function () {
+        return app.html.attr('data-aside').length;
+    };
+
+    app.isLeft = function () {
+        return app.html.attr('data-aside') === 'left';
+    };
+
+    app.isRight = function () {
+        return app.html.attr('data-aside') === 'right';
+    };
+
+    app.isLeftPush = function () {
+        return app.html.hasClass('left-push') && app.isLeft();
+    };
+
+    app.isRightPush = function () {
+        return app.html.hasClass('right-push') && app.isRight();
+    };
+    
+    app.isCloseLeftClickOutside = function () {
+        return app.html.hasClass('close-left-click-outside');
+    };
+    app.isCloseRightClickOutside = function () {
+        return app.html.hasClass('close-right-click-outside');
+    };
+
+    app.isModalForm = function () {
+        return app.html.attr('data-modal') === 'form';
+    };
+
+    app.isModalImage = function () {
+        return app.html.attr('data-modal') === 'image';
+    };
+
+    app.isLoading = function () {
+        return app.html.hasClass('loading');
+    };
+
+    app.isModal = function () {
+        return app.html.hasClass('modal');
     };
 
     if (bowser.msedge) {
@@ -52,7 +80,7 @@ $(function () {
     }
 
     if (bowser.android) {
-        app.html.addClass('android'); // used by fullscreen
+        app.html.addClass('android'); // used by modal
     } else if (bowser.ios) {
         app.html.addClass('ios'); // not currently used for anything
     }
@@ -71,16 +99,16 @@ $(function () {
         var target = $(e.target);
         var modal = target.closest(app.modal[0]);
         if (modal.length || target.parents('#modal').length) {
-            var image = app.html.attr('data-modal') === 'image' && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
-            var form = !target.closest('#modal > div > div > div').length && app.html.attr('data-modal') === 'form';
+            var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
+            var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
             if (image || form || target.closest('#modal-close').length) {
                 app.closeModal();
             }
         } else {
             var isSmallBreakpoint = app.isSmallBreakpoint();
-            var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
-            var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
-            var notTarget = !target.closest('.modal').length && !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+            var left = app.html.attr('data-aside') === 'left' && (app.isCloseLeftClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
+            var right = app.html.attr('data-aside') === 'right' && (app.isCloseRightClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
+            var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
             if ((left || right) && notTarget) {
                 app.enableScroll();

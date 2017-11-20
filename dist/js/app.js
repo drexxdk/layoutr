@@ -2517,23 +2517,51 @@ $(function () {
     app.modal = $('#modal');
     app.scrollbarWidth = 0;
 
-    var scrollbarWidth = function () {
-        app.body.append('<div id="scrollbar-width"></div>');
-        var element = app.body.children('#scrollbar-width');
-        element.css({
-            'overflow': "scroll",
-            'visibility': "hidden",
-            'position': 'absolute',
-            'width': '100px',
-            'height': '100px'
-        });
-        app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
-        element.remove();
-    };
-    scrollbarWidth();
-
     app.isSmallBreakpoint = function () {
-        return $(window).outerWidth() < 732 || !app.html.hasClass('left-push') && app.html.attr('data-aside') === 'left' || !app.html.hasClass('right-push') && app.html.attr('data-aside') === 'right';
+        return $(window).outerWidth() < 732 || app.isLeft() && !app.isLeftPush() || app.isRight() && !app.isRightPush();
+    };
+
+    app.isAside = function () {
+        return app.html.attr('data-aside').length;
+    };
+
+    app.isLeft = function () {
+        return app.html.attr('data-aside') === 'left';
+    };
+
+    app.isRight = function () {
+        return app.html.attr('data-aside') === 'right';
+    };
+
+    app.isLeftPush = function () {
+        return app.html.hasClass('left-push') && app.isLeft();
+    };
+
+    app.isRightPush = function () {
+        return app.html.hasClass('right-push') && app.isRight();
+    };
+    
+    app.isCloseLeftClickOutside = function () {
+        return app.html.hasClass('close-left-click-outside');
+    };
+    app.isCloseRightClickOutside = function () {
+        return app.html.hasClass('close-right-click-outside');
+    };
+
+    app.isModalForm = function () {
+        return app.html.attr('data-modal') === 'form';
+    };
+
+    app.isModalImage = function () {
+        return app.html.attr('data-modal') === 'image';
+    };
+
+    app.isLoading = function () {
+        return app.html.hasClass('loading');
+    };
+
+    app.isModal = function () {
+        return app.html.hasClass('modal');
     };
 
     if (bowser.msedge) {
@@ -2550,7 +2578,7 @@ $(function () {
     }
 
     if (bowser.android) {
-        app.html.addClass('android'); // used by fullscreen
+        app.html.addClass('android'); // used by modal
     } else if (bowser.ios) {
         app.html.addClass('ios'); // not currently used for anything
     }
@@ -2569,16 +2597,16 @@ $(function () {
         var target = $(e.target);
         var modal = target.closest(app.modal[0]);
         if (modal.length || target.parents('#modal').length) {
-            var image = app.html.attr('data-modal') === 'image' && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
-            var form = !target.closest('#modal > div > div > div').length && app.html.attr('data-modal') === 'form';
+            var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
+            var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
             if (image || form || target.closest('#modal-close').length) {
                 app.closeModal();
             }
         } else {
             var isSmallBreakpoint = app.isSmallBreakpoint();
-            var left = app.html.attr('data-aside') === 'left' && (app.html.hasClass('close-left-click-outside') || isSmallBreakpoint) && !target.closest("#left").length;
-            var right = app.html.attr('data-aside') === 'right' && (app.html.hasClass('close-right-click-outside') || isSmallBreakpoint) && !target.closest("#right").length;
-            var notTarget = !target.closest('.modal').length && !target.closest("#fullscreen").length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+            var left = app.html.attr('data-aside') === 'left' && (app.isCloseLeftClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
+            var right = app.html.attr('data-aside') === 'right' && (app.isCloseRightClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
+            var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
             if ((left || right) && notTarget) {
                 app.enableScroll();
@@ -2743,10 +2771,26 @@ app.page2 = function () {
 var app = app || {};
 
 $(function () {
+    var scrollbarWidth = function () {
+        app.body.append('<div id="scrollbar-width"></div>');
+        var element = app.body.children('#scrollbar-width');
+        element.css({
+            'overflow': "scroll",
+            'visibility': "hidden",
+            'position': 'absolute',
+            'width': '100px',
+            'height': '100px'
+        });
+        app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
+        element.remove();
+    };
+
+    scrollbarWidth();
+
     app.disableScroll = function () {
         if (app.htmlOverflowEnabled) {
             app.htmlOverflowEnabled = false;
-            if (app.html.hasClass('modal')) {
+            if (app.isModal()) {
                 app.checkModal();
                 app.modal.focus();
             }
@@ -2769,9 +2813,9 @@ $(function () {
     };
 
     app.setHtmlScroll = function () {
-        if (!app.html.attr('data-modal').length && !app.html.hasClass('loading') && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && app.html.attr('data-aside') !== 'left' && app.html.attr('data-aside') !== 'right')) {
+        if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isLeft() && !app.isRight())) {
             app.enableScroll();
-        } else if (app.html.attr('data-modal').length || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.html.attr('data-aside') === 'left' || app.html.attr('data-aside') === 'right')) {
+        } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled) {
             app.disableScroll();
         }
     };
@@ -3156,23 +3200,23 @@ $(function () {
         var target = $(e.target);
         var parent = target.parent();
         if (!app.html.hasClass('loading')) {
-            if (e.which === 37 && !app.html.hasClass('modal')) { // left
-                if (app.html.attr('data-aside') === 'left') {
+            if (e.which === 37 && !app.isModal()) { // left
+                if (app.isLeft()) {
                     app.toggleAside(); // closes right
-                } else if (app.html.attr('data-aside') !== 'right') {
+                } else if (!app.isRight()) {
                     app.toggleAside('right'); // opens right
                 }
-            } else if (e.which === 39 && !app.html.hasClass('modal')) { // right
-                if (app.html.attr('data-aside') === 'right') {
+            } else if (e.which === 39 && !app.isModal()) { // right
+                if (app.isRight()) {
                     app.toggleAside(); // closes left
-                } else if (app.html.attr('data-aside') !== 'left') {
+                } else if (!app.isLeft()) {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.html.hasClass('modal')) {
+                if (app.isModal()) {
                     app.closeModal();
                 } else {
-                    if (app.html.attr('data-aside').length) {
+                    if (app.isAside()) {
                         app.toggleAside(); // closes aside
                     }
                     var popups = app.main.children('.popup');
@@ -3194,7 +3238,7 @@ $(function () {
             }
         }
         if (e.which === 9) { // tab
-            if (app.html.hasClass('loading')) {
+            if (app.isLoading()) {
                 e.preventDefault();
                 return;
             }
@@ -3202,13 +3246,13 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (!app.html.hasClass('loading')) {
+        if (!app.isLoading()) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {
                     $('div.dropdown.open').removeClass('open');
                 }
-                if (app.html.hasClass('modal')) {
+                if (app.isModal()) {
                     if (!target.parents('#modal').length) {
                         app.closeModal();
                     }
@@ -3216,7 +3260,7 @@ $(function () {
                     var aside = target.parents('aside');
                     if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
                         app.toggleAside(aside.attr('id'));
-                    } else if (!aside.length && app.html.attr('data-aside').length) {
+                    } else if (!aside.length && app.isAside()) {
                         app.toggleAside();
                     }
                 }
@@ -3325,7 +3369,7 @@ $(function () {
         }
 
         if (app.contentHeader !== undefined) {
-            if (app.html.hasClass('modal') && app.contentHeader.css('position') === 'fixed') {
+            if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
                 var halfOverflowY = app.scrollbarWidth / 2;
                 app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
             } else {
@@ -3362,7 +3406,7 @@ $(function () {
                     var currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
-                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
+                        if (!app.isModal() && !app.isLoading()) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
@@ -3372,7 +3416,7 @@ $(function () {
                         }
                     } else if (xDiff < -distance) {
                         /* right swipe */
-                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
+                        if (!app.isModal() && !app.isLoading()) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();
@@ -3396,7 +3440,7 @@ $(function () {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         $(window).resize(function () {
-            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
+            if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
         });
@@ -3410,7 +3454,7 @@ $(function () {
         // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
         app.body.on("mousewheel", function (e) {
             var target = $(e.target);
-            if (!app.html.hasClass('modal') && event.ctrlKey !== true) {
+            if (!app.isModal() && event.ctrlKey !== true) {
                 var aside = target.closest('aside > .content') || target.parents('aside .content');
                 e.preventDefault();
                 var wheelDelta = e.originalEvent.wheelDelta;
@@ -3468,8 +3512,6 @@ $(function () {
                     });
 
                     if (current !== undefined && current.length && parseInt(current) < closest || current === undefined || current.length === 0) {
-
-
                         app.body.append('<img id="responsive-background" class="hidden" src="' + image + '-' + closest + '.' + filetype + '" />');
                         var tempImage = app.body.children('#responsive-background');
                         tempImage.on('load', function () {

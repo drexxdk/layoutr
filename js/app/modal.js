@@ -99,7 +99,7 @@ $(function () {
         }
 
         if (app.contentHeader !== undefined) {
-            if (app.html.hasClass('modal') && app.contentHeader.css('position') === 'fixed') {
+            if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
                 var halfOverflowY = app.scrollbarWidth / 2;
                 app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
             } else {

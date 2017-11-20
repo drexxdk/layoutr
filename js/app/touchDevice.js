@@ -26,7 +26,7 @@ $(function () {
                     var currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
-                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
+                        if (!app.isModal() && !app.isLoading()) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'left' && currentAside !== 'right') {
                                 app.toggleAside();
@@ -36,7 +36,7 @@ $(function () {
                         }
                     } else if (xDiff < -distance) {
                         /* right swipe */
-                        if (!app.html.hasClass('modal') && !app.html.hasClass('loading')) {
+                        if (!app.isModal() && !app.isLoading()) {
                             currentAside = app.html.attr('data-aside');
                             if (currentAside === 'right' && currentAside !== 'left') {
                                 app.toggleAside();
@@ -60,7 +60,7 @@ $(function () {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         $(window).resize(function () {
-            if (app.html.hasClass('modal') && app.html.attr('data-modal') === 'image') {
+            if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
         });

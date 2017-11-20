@@ -6,7 +6,7 @@ $(function () {
         // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
         app.body.on("mousewheel", function (e) {
             var target = $(e.target);
-            if (!app.html.hasClass('modal') && event.ctrlKey !== true) {
+            if (!app.isModal() && event.ctrlKey !== true) {
                 var aside = target.closest('aside > .content') || target.parents('aside .content');
                 e.preventDefault();
                 var wheelDelta = e.originalEvent.wheelDelta;

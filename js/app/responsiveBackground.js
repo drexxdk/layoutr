@@ -29,8 +29,6 @@ $(function () {
                     });
 
                     if (current !== undefined && current.length && parseInt(current) < closest || current === undefined || current.length === 0) {
-
-
                         app.body.append('<img id="responsive-background" class="hidden" src="' + image + '-' + closest + '.' + filetype + '" />');
                         var tempImage = app.body.children('#responsive-background');
                         tempImage.on('load', function () {
