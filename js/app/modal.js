@@ -14,7 +14,6 @@ $(function () {
 
     app.main.on('click', '.modal', function () {
         var $this = $(this);
-
         var type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
             var id = $this.attr('data-modal-id');
