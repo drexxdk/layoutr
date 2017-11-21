@@ -20,7 +20,7 @@ $(function () {
 
             var xDiff = xDown - xUp;
             var yDiff = yDown - yUp;
-            if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
                 var distance = parseInt($(window).width() / 2);
                 if (yDiff > -100 || yDiff < 100) {
                     var currentAside;

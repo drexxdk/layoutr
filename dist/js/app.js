@@ -3401,7 +3401,7 @@ $(function () {
 
             var xDiff = xDown - xUp;
             var yDiff = yDown - yUp;
-            if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
                 var distance = parseInt($(window).width() / 2);
                 if (yDiff > -100 || yDiff < 100) {
                     var currentAside;
@@ -3553,7 +3553,6 @@ $(function () {
                 }
             });
         });
-        
     };
 });
 var app = app || {};
@@ -3591,6 +3590,22 @@ $(function () {
                 html = html.join("");
                 app.main.prepend(html);
             }
+        }
+    });
+});
+var app = app || {};
+
+$(function () {
+    var mathjax;
+    app.content.on('click', '#toggle-mathjax', function () {
+        var $this = $(this);
+        if (mathjax === undefined) {
+            $.getScript('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML', function (data, textStatus, jqxhr) {
+                $('<div id="mathjax"><div class="alert theme-secondary"><div class="flex-items"><div>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</div></div></div></div>').insertAfter($this);
+                mathjax = app.content.find('#mathjax');
+            });
+        } else {
+            mathjax.toggle();
         }
     });
 });

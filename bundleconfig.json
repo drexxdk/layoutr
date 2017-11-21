@@ -42,7 +42,8 @@
       "js/app/browser.js",
       "js/app/responsiveBackground.js",
       "js/app/tooltipster.js",
-      "js/app/popup.js"
+      "js/app/popup.js",
+      "js/app/mathjax.js"
     ],
     "minify": {
       "enabled": true

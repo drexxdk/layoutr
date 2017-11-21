@@ -1,8 +1,15 @@
 ﻿/// <reference path="references" />
 
 #google-maps,
-#youtube {
+#youtube,
+#mathjax {
     width: 100%;
+}
+
+#mathjax {
+    .MJXc-display {
+        margin: 0 !important;
+    }
 }
 
 #lighthouse {
