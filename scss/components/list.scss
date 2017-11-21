@@ -43,7 +43,7 @@ ol.list {
     ol {
         list-style-type: none;
         counter-reset: li;
-        margin-left: $list-number-width + ($spacer / 2);
+        margin-left: $list-number-width + ($spacer / 2) + ($component-border-width * 2);
     }
 
     li > *:not(ol) {
@@ -51,14 +51,14 @@ ol.list {
         display: block;
         line-height: $component-line-height;
         @include theme-element($list-background-color);
-        margin: ($spacer / 2) 0 ($spacer / 2) ($list-number-width + ($spacer / 2));
+        margin: ($spacer / 2) 0 ($spacer / 2) ($list-number-width + ($spacer / 2) + ($component-border-width * 2));
         padding: $padding-y $padding-x;
 
         &:before {
             content: counter(li);
             position: absolute;
             top: -$component-border-width;
-            left: -($list-number-width + ($spacer / 2));
+            left: -($list-number-width + ($spacer / 2) + ($component-border-width * 3));
             width: $list-number-width;
             height: $list-number-width;
             line-height: $list-number-width;
