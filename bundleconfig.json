@@ -19,6 +19,8 @@
       "js/vendors/jquery/bootstrap-slider.js",
       "js/vendors/jquery/tooltipster.min.js",
       "js/vendors/bowser.js",
+      "js/vendors/katex/katex.min.js",
+      "js/vendors/katex/auto-render.min.js",
       "js/app/_app.js",
       "js/app/form.js",
       "js/app/pageLoaded.js",
@@ -42,8 +44,7 @@
       "js/app/browser.js",
       "js/app/responsiveBackground.js",
       "js/app/tooltipster.js",
-      "js/app/popup.js",
-      "js/app/mathjax.js"
+      "js/app/popup.js"
     ],
     "minify": {
       "enabled": true

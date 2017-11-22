@@ -38,3 +38,10 @@
 
     @include color-yiq($component-overlay-light-background-color);
 }
+
+pre {
+    display: block;
+    word-break: normal;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

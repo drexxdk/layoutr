@@ -18,5 +18,7 @@ $(function () {
         app.dropdown(app.content.find('select.dropdown'));
         app.responsiveBackground(app.content.find('.responsive-background'));
         app.tooltipster(app.content.find('.tooltip'));
+
+        renderMathInElement(app.content[0]);
     };
 });
