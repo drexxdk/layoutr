@@ -1,5 +1,52 @@
 ﻿var app = app || {};
 
+app.isSmallBreakpoint = function () {
+    return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
+};
+
+app.isAside = function () {
+    return app.html.attr('data-aside').length;
+};
+
+app.isAsideLeft = function () {
+    return app.html.attr('data-aside') === 'left';
+};
+
+app.isAsideRight = function () {
+    return app.html.attr('data-aside') === 'right';
+};
+
+app.isAsideLeftPush = function () {
+    return app.html.hasClass('left-push') && app.isAsideLeft();
+};
+
+app.isAsideRightPush = function () {
+    return app.html.hasClass('right-push') && app.isAsideRight();
+};
+
+app.isAsideLeftCloseOnClickOutside = function () {
+    return app.html.hasClass('close-left-click-outside');
+};
+app.isAsideRightCloseOnClickOutside = function () {
+    return app.html.hasClass('close-right-click-outside');
+};
+
+app.isModal = function () {
+    return app.html.hasClass('modal');
+};
+
+app.isModalForm = function () {
+    return app.html.attr('data-modal') === 'form';
+};
+
+app.isModalImage = function () {
+    return app.html.attr('data-modal') === 'image';
+};
+
+app.isLoading = function () {
+    return app.html.hasClass('loading');
+};
+
 $(function () {
     app.html = $('html');
     app.head = $('head');
@@ -18,53 +65,6 @@ $(function () {
     app.overflow = $('#overflow');
     app.modal = $('#modal');
     app.scrollbarWidth = 0;
-
-    app.isSmallBreakpoint = function () {
-        return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
-    };
-
-    app.isAside = function () {
-        return app.html.attr('data-aside').length;
-    };
-
-    app.isAsideLeft = function () {
-        return app.html.attr('data-aside') === 'left';
-    };
-
-    app.isAsideRight = function () {
-        return app.html.attr('data-aside') === 'right';
-    };
-
-    app.isAsideLeftPush = function () {
-        return app.html.hasClass('left-push') && app.isAsideLeft();
-    };
-
-    app.isAsideRightPush = function () {
-        return app.html.hasClass('right-push') && app.isAsideRight();
-    };
-    
-    app.isAsideLeftCloseOnClickOutside = function () {
-        return app.html.hasClass('close-left-click-outside');
-    };
-    app.isAsideRightCloseOnClickOutside = function () {
-        return app.html.hasClass('close-right-click-outside');
-    };
-
-    app.isModal = function () {
-        return app.html.hasClass('modal');
-    };
-
-    app.isModalForm = function () {
-        return app.html.attr('data-modal') === 'form';
-    };
-
-    app.isModalImage = function () {
-        return app.html.attr('data-modal') === 'image';
-    };
-
-    app.isLoading = function () {
-        return app.html.hasClass('loading');
-    };
 
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
@@ -94,27 +94,27 @@ $(function () {
     });
 
     app.page1();
+});
 
-    $(window).click(function (e) {
-        var target = $(e.target);
-        var modal = target.closest(app.modal[0]);
-        if (modal.length || target.parents('#modal').length) {
-            var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
-            var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
-            if (image || form || target.closest('#modal-close').length) {
-                app.closeModal();
-            }
-        } else {
-            var isSmallBreakpoint = app.isSmallBreakpoint();
-            var left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
-            var right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
-            var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
-
-            if ((left || right) && notTarget) {
-                app.enableScroll();
-                app.html.attr('data-aside', '');
-                app.checkGoogleMaps();
-            }
+$(window).click(function (e) {
+    var target = $(e.target);
+    var modal = target.closest(app.modal[0]);
+    if (modal.length || target.parents('#modal').length) {
+        var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
+        var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
+        if (image || form || target.closest('#modal-close').length) {
+            app.closeModal();
         }
-    });
+    } else {
+        var isSmallBreakpoint = app.isSmallBreakpoint();
+        var left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
+        var right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
+        var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
+
+        if ((left || right) && notTarget) {
+            app.enableScroll();
+            app.html.attr('data-aside', '');
+            app.checkGoogleMaps();
+        }
+    }
 });

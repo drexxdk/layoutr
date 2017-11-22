@@ -1,17 +1,47 @@
 ﻿var app = app || {};
 
-$(function () {
-    var showModal = function (type) {
-        app.html.attr('data-modal', type);
-        app.html.addClass('modal');
-        if (app.html.hasClass('scrollDisabled')) {
-            app.checkModal();
-            app.modal.focus();
-        } else {
-            app.setHtmlScroll();
-        }
-    };
+app.showModal = function (type) {
+    app.html.attr('data-modal', type);
+    app.html.addClass('modal');
+    if (app.html.hasClass('scrollDisabled')) {
+        app.checkModal();
+        app.modal.focus();
+    } else {
+        app.setHtmlScroll();
+    }
+};
 
+app.closeModal = function () {
+    app.html.removeClass('modal').attr('data-modal', '');
+    app.modal.removeClass('info-shown').empty();
+    app.checkModal();
+    app.setHtmlScroll();
+};
+
+app.checkModal = function () {
+    if (app.html.hasClass('modal')) {
+        app.body.css('padding-right', app.scrollbarWidth);
+        if (app.html.attr('data-aside') === 'right') {
+            app.right.css('margin-right', app.scrollbarWidth);
+        }
+        app.main.children('.popup').css('margin-right', app.scrollbarWidth);
+    } else {
+        app.body.css('padding-right', 0);
+        app.right.css('margin-right', 0);
+        app.main.children('.popup').css('margin-right', 0);
+    }
+
+    if (app.contentHeader !== undefined) {
+        if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
+            var halfOverflowY = app.scrollbarWidth / 2;
+            app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+        } else {
+            app.contentHeader.children().css('width', '');
+        }
+    }
+};
+
+$(function () {
     app.main.on('click', '.modal', function () {
         var $this = $(this);
         var type = $this.attr('data-modal');
@@ -64,12 +94,12 @@ $(function () {
                         image.css('max-height', window.innerHeight);
                     }
                     app.hideLoading();
-                    showModal(type);
+                    app.showModal(type);
                 });
                 image.attr('src', $this.attr('data-modal-img'));
                 app.showLoading();
             } else {
-                showModal(type);
+                app.showModal(type);
             }
         }
     });
@@ -77,34 +107,4 @@ $(function () {
     app.main.on('click', '#modal-toggle', function () {
         app.modal.toggleClass('info-shown');
     });
-
-    app.closeModal = function () {
-        app.html.removeClass('modal').attr('data-modal', '');
-        app.modal.removeClass('info-shown').empty();
-        app.checkModal();
-        app.setHtmlScroll();
-    };
-
-    app.checkModal = function () {
-        if (app.html.hasClass('modal')) {
-            app.body.css('padding-right', app.scrollbarWidth);
-            if (app.html.attr('data-aside') === 'right') {
-                app.right.css('margin-right', app.scrollbarWidth);
-            }
-            app.main.children('.popup').css('margin-right', app.scrollbarWidth);
-        } else {
-            app.body.css('padding-right', 0);
-            app.right.css('margin-right', 0);
-            app.main.children('.popup').css('margin-right', 0);
-        }
-
-        if (app.contentHeader !== undefined) {
-            if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
-                var halfOverflowY = app.scrollbarWidth / 2;
-                app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
-            } else {
-                app.contentHeader.children().css('width', '');
-            }
-        }
-    };
 });
