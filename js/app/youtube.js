@@ -1,12 +1,11 @@
 ﻿var app = app || {};
 $(function () {
-    var youtube;
     app.content.on('click', '#toggle-youtube', function () {
-        if (youtube === undefined) {
+        if (app.youtube === undefined) {
             $('<div id="youtube"><div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div></div>').insertAfter($(this));
-            youtube = app.content.find('#youtube');
+            app.youtube = app.content.find('#youtube');
         } else {
-            youtube.toggle();
+            app.youtube.toggle();
         }
     });
 });
