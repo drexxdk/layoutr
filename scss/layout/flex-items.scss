@@ -6,8 +6,24 @@
     margin-left: -($spacer / 2);
 
     > * {
-        margin-top: ($spacer / 2);
-        margin-left: ($spacer / 2);
+        margin-top: $spacer / 2;
+        margin-left: $spacer / 2;
+
+        &.flex-items {
+            padding-right: $spacer / 2;
+        }
+
+        &.flex-items.no-spacing {
+            padding-right: 0;
+        }
+
+        &.flex-items.large {
+            padding-right: $spacer;
+        }
+
+        &.flex-items.largest {
+            padding-right: $spacer * 2;
+        }
     }
 
     &:not(.column) {
@@ -66,8 +82,8 @@
         margin-left: -($spacer * 2);
 
         > * {
-            margin-top: ($spacer * 2);
-            margin-left: ($spacer * 2);
+            margin-top: $spacer * 2;
+            margin-left: $spacer * 2;
         }
     }
 }

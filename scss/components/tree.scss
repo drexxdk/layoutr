@@ -43,7 +43,7 @@
 
     .label {
         position: relative;
-        display: inline-block;
+        display: block;
         margin-left: -($spacer * 2.5);
         padding: ($spacer / 2) ($spacer / 2) ($spacer / 2) ($spacer * 2.5);
         width: calc(100% + (#{$spacer} * 2.5));
