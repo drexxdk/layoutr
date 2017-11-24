@@ -29,14 +29,14 @@ $form-input-min-width:rem(250px);
 $enable-shadows: true;
 
 $height: $line-height + ($padding-y * 2);
-$box-shadow: inset 0 1px 0 rgba($white,.15), 0 1px 1px rgba($black,.075);
-
-$input-box-shadow: inset 0 1px 1px rgba($black,.075);
-$input-focus-box-shadow: $input-box-shadow, 0 0 0 3px rgba($primary, .25);
+$box-shadow: inset 0 rem(1px) 0 rgba($white,.15), 0 rem(1px) rem(1px) rgba($black,.075);
 
 
 $component-focus-box-shadow-width: rem(3px);
 $component-focus-box-shadow-color: theme-soft-border-color($primary);
+
+$input-box-shadow: inset 0 rem(1px) rem(1px) rgba($black,.075);
+$input-focus-box-shadow: $input-box-shadow, 0 0 0 $component-focus-box-shadow-width rgba($primary, .25);
 
 $slider-line-height: 1.5rem;
 $slider-track-background-color: $gray-200;

@@ -11,6 +11,10 @@
         @include hidden-input;
     }
 
+    .tooltip-main {
+        z-index: $component-focus-z-index + 1;
+    }
+
     .slider-track,
     .slider-tick,
     .slider-selection.tick-slider-selection {
@@ -170,9 +174,8 @@
             white-space: nowrap;
             max-width: none;
             padding: $padding-y $padding-x;
-            @include theme-element($dark, false);
+            @include theme-element($dark);
             border-radius: $component-border-radius;
-            border: $component-border-width solid theme-border($dark);
         }
 
         > .tooltip-arrow {

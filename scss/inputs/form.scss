@@ -55,6 +55,7 @@
 
         .slider-handle {
             background: theme-gradient($background-dark);
+            border-color: $background-dark;
 
             &:focus {
                 box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $border;
