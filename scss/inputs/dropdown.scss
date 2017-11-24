@@ -99,7 +99,6 @@ div.dropdown {
 
     > div {
         @include flex-display();
-        border: $component-border;
         @extend .btn;
 
         > label {

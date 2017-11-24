@@ -1,22 +1,38 @@
 ﻿/// <reference path="../references" />
 
+@function theme-border($value) {
+    @return theme-color-level($value, 1);
+}
+
+@function theme-darken($value) {
+    @return darken($value, 7.5%);
+}
+
+@function theme-soft($value) {
+    @return theme-color-level($value, -10);
+}
+
+@mixin theme-color($value) {
+    @include color-yiq($value);
+}
+
 @mixin theme-element($background, $includeBorder: true) {
     @include color-yiq($background);
     background: theme-gradient($background);
 
     @if $includeBorder == true {
-        border: $component-border-width solid theme-color-level($background, 1);
+        border: $component-border-width solid theme-border($background);
     }
 }
 
 @mixin theme-element-darken($background, $includeBorder: true) {
-    @include theme-element(darken($background, 7.5%), $includeBorder);
+    @include theme-element(theme-darken($background), $includeBorder);
 }
 
 @mixin theme-element-soft($background, $includeBorder: true) {
-    @include theme-element(theme-color-level($background, -10), $includeBorder);
+    @include theme-element(theme-soft($background), $includeBorder);
 }
 
 @mixin theme-element-soft-darken($background, $includeBorder: true) {
-    @include theme-element(darken(theme-color-level($background, -10), 7.5%), $includeBorder);
+    @include theme-element(theme-darken(theme-soft($background)), $includeBorder);
 }

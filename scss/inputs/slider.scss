@@ -142,7 +142,7 @@
             bottom: calc(100% + #{$spacer / 2});
 
             > .tooltip-arrow {
-                border-top: ($spacer / 2) solid $component-border-color;
+                border-top: ($spacer / 2) solid theme-border($dark);
                 top: calc(100% - #{$component-border-width});
 
                 &:after {
@@ -156,7 +156,7 @@
             top: calc(100% + #{$spacer / 2});
 
             > .tooltip-arrow {
-                border-bottom: ($spacer / 2) solid $component-border-color;
+                border-bottom: ($spacer / 2) solid theme-border($dark);
                 bottom: calc(100% - #{$component-border-width});
 
                 &:after {
@@ -172,7 +172,7 @@
             padding: $padding-y $padding-x;
             @include theme-element($dark, false);
             border-radius: $component-border-radius;
-            border: $component-border;
+            border: $component-border-width solid theme-border($dark);
         }
 
         > .tooltip-arrow {
