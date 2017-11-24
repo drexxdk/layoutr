@@ -50,6 +50,7 @@ app.setHtmlScroll = function () {
 $(window).resize(function () {
     app.checkModal();
     app.setHtmlScroll();
+    scrollbarWidth();
 });
 
 $(function () {
