@@ -5,13 +5,18 @@ var swipe = function () {
     var xDown = null;
     var yDown = null;
 
+    var offsetBefore;
+
     var handleTouchStart = function (evt) {
         xDown = evt.touches[0].clientX;
         yDown = evt.touches[0].clientY;
+
+        offsetBefore = $(evt.target).offset().left;
     };
 
     var handleTouchMove = function (evt) {
-        if (!xDown || !yDown) {
+        var offsetAfter = $(evt.target).offset().left;
+        if (!xDown || !yDown || offsetBefore !== offsetAfter) {
             return;
         }
         var xUp = evt.changedTouches[0].clientX;
