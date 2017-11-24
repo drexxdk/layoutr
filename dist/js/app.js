@@ -3227,11 +3227,15 @@ $(function () {
                 }
             }
             if (e.which === 13) { // enter
-                if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch') || target.hasClass('toggle')) {
-                    target.siblings('input').click();
-                    e.preventDefault();
-                } else if (parent.hasClass('dropdown') || target.parents('div.dropdown').length || parent.parent().hasClass('accordion')) {
+                var dropdown = target.parents('div.dropdown');
+                if (dropdown.length || parent.parent().hasClass('accordion')) {
                     target.click();
+                    e.preventDefault();
+                    if (dropdown.length) {
+                        dropdown.children('div').focus();
+                    }
+                } else if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch') || target.hasClass('toggle')) {
+                    target.siblings('input').click();
                     e.preventDefault();
                 }
             }
