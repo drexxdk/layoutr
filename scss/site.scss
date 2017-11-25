@@ -64,3 +64,39 @@
         background-color: $layout-border-color;
     }
 }
+
+#gtmetric {
+    h5 {
+        color: $primary;
+        margin-bottom: 0;
+    }
+
+    .score {
+        .large,
+        .grade,
+        .percentage {
+            font-size: 200%;
+        }
+
+        .grade,
+        .percentage {
+            color: $success;
+        }
+
+        .grade {
+            font-weight: bold;
+        }
+
+        .percentage {
+        }
+
+        .arrow {
+            > svg {
+                width: $font-size;
+                height: $font-size;
+                transform: rotate(270deg);
+                fill: $success;
+            }
+        }
+    }
+}

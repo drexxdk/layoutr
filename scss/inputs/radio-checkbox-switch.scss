@@ -59,7 +59,7 @@
 
 .checkbox {
 
-    > label > i > svg {
+    > input:not(:checked) + label > i > svg {
         display: none;
     }
 
@@ -67,7 +67,6 @@
         padding: rem(2px);
 
         > svg {
-            display: block;
             width: 100%;
             height: 100%;
             z-index: 1;
