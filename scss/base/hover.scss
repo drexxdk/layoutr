@@ -101,7 +101,7 @@
     }
 
     ol.list li > a:hover:after {
-        left: -($spacer / 2) + $component-border-width;
+        left: -(($spacer / 2) + $component-border-width);
         border-left-color: $list-number-background-color;
     }
 }
