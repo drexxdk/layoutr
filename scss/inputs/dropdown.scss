@@ -154,11 +154,10 @@ div.dropdown {
                 > div {
                     background-color: white;
                     cursor: default;
-                    pointer-events: none;
 
                     > svg {
                         fill: $success;
-                        opacity: 1;
+                        opacity: 1 !important;
                     }
                 }
             }
