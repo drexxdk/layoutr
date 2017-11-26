@@ -11,6 +11,8 @@ $(function () {
             app.page1();
         } else if (href === 'page2') {
             app.page2();
+        } else if (href === 'page3') {
+            app.page3();
         } else {
             app.content.load('ajax/content/' + href + '.html');
         }

@@ -24,6 +24,7 @@
       "js/app/pageLoaded.js",
       "js/app/pages/page1.js",
       "js/app/pages/page2.js",
+      "js/app/pages/page3.js",
       "js/app/scroll.js",
       "js/app/accordion.js",
       "js/app/dropdown.js",

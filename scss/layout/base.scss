@@ -47,7 +47,7 @@ html {
 
     &[data-aside="left"].left-push,
     &[data-aside="right"].right-push {
-        #content > div > .header {
+        #content > div > .header:not(.full) {
             margin-right: -($aside-width / 2);
             padding-right: $aside-width / 2;
         }
