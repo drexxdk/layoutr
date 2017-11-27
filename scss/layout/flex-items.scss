@@ -1,75 +1,21 @@
 ﻿/// <reference path="../references" />
 
-/*.flex-items {
-    background-color: red;
-
-    .flex-items {
-        background-color: blue;
-
-        .flex-items {
-            background-color: yellow;
-
-            .flex-items {
-                background-color: orange;
-
-                .flex-items {
-                    background-color: pink;
-                }
-            }
-        }
-    }
-}*/
+$flex-space-base: $spacer / 4;
 
 .flex-items {
     @include flex-display;
 
-    &.space-smallest {
-        margin-top: -($spacer / 4);
-        margin-left: -($spacer / 4);
 
-        > * {
-            margin-top: $spacer / 4;
-            margin-left: $spacer / 4;
-        }
-    }
+    @for $i from 1 through 10 {
+        // loop to create all needed elements automatically
+        &.space-#{$i} {
+            margin-top: -($flex-space-base * $i);
+            margin-left: -($flex-space-base * $i);
 
-    &.space-small {
-        margin-top: -($spacer / 3);
-        margin-left: -($spacer / 3);
-
-        > * {
-            margin-top: $spacer / 3;
-            margin-left: $spacer / 3;
-        }
-    }
-
-    &.space-normal {
-        margin-top: -($spacer / 2);
-        margin-left: -($spacer / 2);
-
-        > * {
-            margin-top: $spacer / 2;
-            margin-left: $spacer / 2;
-        }
-    }
-
-    &.space-large {
-        margin-top: -$spacer;
-        margin-left: -$spacer;
-
-        > * {
-            margin-top: $spacer;
-            margin-left: $spacer;
-        }
-    }
-
-    &.space-largest {
-        margin-top: -($spacer * 2);
-        margin-left: -($spacer * 2);
-
-        > * {
-            margin-top: $spacer * 2;
-            margin-left: $spacer * 2;
+            > * {
+                margin-top: ($flex-space-base * $i);
+                margin-left: ($flex-space-base * $i);
+            }
         }
     }
 
