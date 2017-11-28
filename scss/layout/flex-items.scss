@@ -1,10 +1,8 @@
 ﻿/// <reference path="../references" />
 
-$flex-space-base: $spacer / 4;
-
 .flex-items {
     @include flex-display;
-
+    @include flex-direction(column);
 
     @for $i from 1 through 10 {
         // loop to create all needed elements automatically
@@ -30,15 +28,12 @@ $flex-space-base: $spacer / 4;
         }
     }
 
-    &:not(.column) {
-        @include flex-direction(column);
-    }
-
     &.vertical-center {
         @include align-items(center);
     }
 
     &.column {
+        @include flex-direction(row);
 
         &:not(.vertical-center) {
             @include align-items(flex-start);

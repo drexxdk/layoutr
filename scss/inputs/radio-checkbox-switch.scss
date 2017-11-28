@@ -1,12 +1,23 @@
 ﻿/// <reference path="../references" />
 
+.checkboxes,
+.radioboxes,
+.switches {
+    padding-top: $flex-space-base * 2;
+    @extend .flex-items;
+    @extend .flex-items.column;
+    @extend .flex-items.wrap;
+    @extend .flex-items.space-2;
+}
+
 .radio,
 .checkbox,
 .switch {
     position: relative;
-    padding: $padding-y $padding-x $padding-y 0;
+    /*padding: $padding-y $padding-x $padding-y 0;*/
     line-height: $line-height;
     @include noselect;
+    max-width: 100%;
 
     > input {
         @include hidden-input;
@@ -28,6 +39,12 @@
         font-size: $font-size;
         z-index: $component-z-index;
         cursor: pointer;
+        max-width: 100%;
+
+        > span {
+            max-width: 100%;
+            overflow: auto;
+        }
 
         > i {
             box-shadow: $box-shadow;
