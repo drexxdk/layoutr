@@ -2597,6 +2597,17 @@ $(function () {
 $(window).click(function (e) {
     var target = $(e.target);
     var modal = target.closest(app.modal[0]);
+    
+    if (bowser.ios) {
+        // ios browsers doesn't apply :focus to buttons in many cases,
+        // this forces :focus to be applied correctly.
+        if (target.parents('button').length) {
+            target.parents('button').focus();
+        } else if (target.closest('button').length) {
+            target.focus();
+        }
+    }
+        
     if (modal.length || target.parents('#modal').length) {
         var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
         var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
