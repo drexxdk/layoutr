@@ -3,4 +3,5 @@
 @mixin focus {
     box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $component-focus-box-shadow-color;
     z-index: $component-focus-z-index;
+    position: relative;
 }
