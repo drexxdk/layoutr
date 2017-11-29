@@ -2598,7 +2598,7 @@ $(window).click(function (e) {
     var target = $(e.target);
     var modal = target.closest(app.modal[0]);
     
-    if (bowser.ios) {
+    if (app.html.hasClass('ios')) {
         // ios browsers doesn't apply :focus to buttons in many cases,
         // this forces :focus to be applied correctly.
         if (target.parents('button').length) {
@@ -3174,13 +3174,6 @@ $(function () {
         if (app.localStorage) {
             app.settings = JSON.parse(localStorage.getItem("settings"));
             if (app.settings === null) app.settings = [];
-        }
-
-        if (app.html.hasClass('mobile')) {
-            var footer = $this.find('#footer-fixed');
-            if (footer.length) {
-                footer.parent().hide();
-            }
         }
 
         $this.on('click', 'input[type=checkbox]', function () {

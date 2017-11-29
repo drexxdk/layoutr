@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 html {
-    &.footer-fixed:not(.mobile) {
+    &.footer-fixed {
         .popup.middle {
             top: 50% !important;
         }

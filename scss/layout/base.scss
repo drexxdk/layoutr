@@ -1,6 +1,10 @@
 ﻿/// <reference path="../references" />
 
 html {
+    &.ios aside {
+        height: 100%;
+    }
+
     &.msedge:not(.footer-fixed).subpixel,
     &.msie:not(.footer-fixed).subpixel {
         body:after {
@@ -53,7 +57,7 @@ html {
         }
     }
 
-    &.footer-fixed:not(.mobile) {
+    &.footer-fixed {
         #container {
             padding-bottom: $footer-height;
         }

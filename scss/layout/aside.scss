@@ -23,7 +23,6 @@ aside {
     > .content {
         overflow: auto;
         flex-grow: 1;
-        /*height: 100%;*/ /*IE 10 */
         > div {
             padding: $spacer;
         }

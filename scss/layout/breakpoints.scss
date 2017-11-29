@@ -106,12 +106,11 @@ html {
                 left: $aside-width;
             }
 
-            &.footer-fixed.mobile #content > div > .header:not(.full),
             &:not(.footer-fixed) #content > div > .header:not(.full) {
                 bottom: 0;
             }
 
-            &.footer-fixed:not(.mobile) #content > div > .header:not(.full) {
+            &.footer-fixed #content > div > .header:not(.full) {
                 bottom: $footer-height;
             }
 
