@@ -119,9 +119,13 @@
         z-index: $component-z-index;
         box-shadow: $input-box-shadow;
         width: 100%;
+        font-size: $font-size;
+        -webkit-appearance: none;
 
         &:focus {
             box-shadow: $input-focus-box-shadow;
+            z-index: $component-focus-z-index;
+            position: relative;
         }
     }
 
