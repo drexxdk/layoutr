@@ -105,8 +105,8 @@ $(window).click(function (e) {
         // this forces :focus to be applied correctly.
         if (target.parents('button').length) {
             target.parents('button').focus();
-        } else if (target.parents('.slider-handle').length) {
-            target.parents('.slider-handle').focus();
+        } else if (target.parents('.slider').length) {
+            target.parents('.slider').find('.slider-handle').focus();
         } else if (target.closest('button').length || target.closest('.slider-handle').length) {
             target.focus();
         }
