@@ -72,6 +72,7 @@ div.dropdown {
     > div:focus {
         & + ul {
             @include focus;
+            position: absolute;
         }
     }
 
@@ -89,6 +90,7 @@ div.dropdown {
         > ul {
             display: block;
             @include focus;
+            position: absolute;
 
             > li > div:focus {
                 @include theme-element-soft-darken($light);
