@@ -32,6 +32,11 @@
         position: absolute;
     }
 
+    &:focus .slider-handle,
+    .slider-handle:focus {
+        @include focus;
+    }
+
     .slider-handle {
         position: absolute;
         top: 0;
@@ -39,10 +44,6 @@
         height: $slider-line-height;
         @include theme-element($primary);
         cursor: pointer;
-
-        &:focus {
-            @include focus;
-        }
 
         &.round {
             border-radius: $slider-line-height;
