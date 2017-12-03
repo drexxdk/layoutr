@@ -1,7 +1,8 @@
 ﻿var app = app || {};
 
 app.pageLoaded = function () {
-    app.html.animate({ scrollTop: 0 }, 0);
+    app.body.scrollTop(0); // edge, safari
+    app.html.scrollTop(0); // chrome, firefox, ie
     if (app.html.hasClass('msie')) {
         app.body.css('overflow', 'hidden');
     }

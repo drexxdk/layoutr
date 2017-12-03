@@ -2667,7 +2667,8 @@ $(function () {
 var app = app || {};
 
 app.pageLoaded = function () {
-    app.html.animate({ scrollTop: 0 }, 0);
+    app.body.scrollTop(0); // edge, safari
+    app.html.scrollTop(0); // chrome, firefox, ie
     if (app.html.hasClass('msie')) {
         app.body.css('overflow', 'hidden');
     }
@@ -2811,7 +2812,7 @@ app.disableScroll = function () {
             app.checkModal();
             app.modal.focus();
         }
-        var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
         app.html.addClass('scrollDisabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
@@ -2821,7 +2822,7 @@ app.disableScroll = function () {
 app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        var scrollTop = app.body.scrollTop() || app.main.scrollTop() || app.html.scrollTop();
+        var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
         app.html.removeClass('scrollDisabled modal');
         app.main.focus();
         app.body.scrollTop(scrollTop); // edge, safari
