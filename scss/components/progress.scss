@@ -1,22 +1,51 @@
 ﻿/// <reference path="../references" />
 
 .progress {
+    padding: $spacer 0;
+    position: relative;
     @include flex-display;
-    overflow: hidden;
-    border-radius: $component-border-radius;
-    border: $component-border;
-    @include theme-element($light, false);
-    min-height: $component-line-height + ($padding-y * 2) + ($component-border-width * 2);
 
-    > span {
-        padding: $padding-y $padding-x;
-        text-align: center;
-        @include theme-element($primary, false);
+    > div {
+        width: 100%;
+        @include flex-display;
+        position: relative;
+
+        > .line {
+            width: 100%;
+            height: $spacer;
+            @include theme-element($light);
+            border-radius: $component-border-radius;
+        }
+
+        > .number {
+            flex-shrink: 0;
+            width: $spacer * 3;
+            height: $spacer * 3;
+            border-radius: 50%;
+            @include flex-display;
+            @include justify-content(center);
+            @include align-items(center);
+            @include theme-element($light);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        > .number:first-child {
+            left: -#{$spacer * 1.5};
+        }
+
+        > .line:first-child + .number {
+            right: -#{$spacer * 1.5};
+        }
     }
 
+
+
     @each $color, $value in $theme-colors {
-        &.theme-#{$color} > span {
-            @include theme-element($value, false);
+        > div > span.theme-#{$color} {
+            @include theme-element($value);
         }
     }
 }
