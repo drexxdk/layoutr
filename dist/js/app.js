@@ -3290,6 +3290,9 @@ $(function () {
                     }
                 } else {
                     var aside = target.parents('aside');
+                    if (aside.length === 0 && target.is('aside')) {
+                        aside = target;
+                    }
                     if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
                         app.toggleAside(aside.attr('id'));
                     } else if (!aside.length && app.isAside()) {
