@@ -30,6 +30,10 @@ $(function () {
                             popups.remove();
                         });
                     }
+                    var dropdowns = app.content.find('div.dropdown.open');
+                    if (dropdowns.length) {
+                        dropdowns.removeClass('open');
+                    }
                 }
             }
             if (e.which === 13) { // enter
