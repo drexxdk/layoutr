@@ -7,6 +7,11 @@
     @include theme-element($light);
     min-height: $component-line-height + ($padding-y * 2) + ($component-border-width * 2);
 
+    &.striped > span {
+        background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
+        background-size: $component-line-height + ($padding-y * 2) $component-line-height + ($padding-y * 2) !important;
+    }
+
     > span {
         padding: $padding-y $padding-x;
         text-align: center;
