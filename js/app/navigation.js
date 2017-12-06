@@ -29,17 +29,19 @@ $(function () {
 
     app.loadPage = function (url, pushState) {
         url = url.replace(/^\/+/g, '');
-
+        var q = url.indexOf('?');
+        url = url.substring(0, q != -1 ? q : url.length);
+        
         if (!app.isLocalhost) {
             url = url.substring(url.indexOf("/") + 1);
         }
-        
+
         if (url === '') {
             app.pageHome();
-        } else if (url === 'page2') {
-            app.page2();
-        } else if (url === 'page3') {
-            app.page3();
+        } else if (url === 'cover-and-two-content') {
+            app.pageCoverAndTwoContent();
+        } else if (url === 'cover') {
+            app.pageCover();
         } else {
             app.content.load('ajax/content/' + url + '.html');
         }
