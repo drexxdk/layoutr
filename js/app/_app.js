@@ -13,7 +13,6 @@
                 (app.q.q ? ('?' + app.q.q) : '') +
                 l.hash
             );
-            debugger;
         }
     }
 }(window.location))
@@ -110,8 +109,6 @@ $(function () {
     $.get('ajax/layout/svg.html', function (data) {
         $(data).prependTo(app.main);
     });
-
-    app.page1();
 });
 
 $(window).click(function (e) {

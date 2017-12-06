@@ -2511,7 +2511,6 @@ var app = app || {};
                 (app.q.q ? ('?' + app.q.q) : '') +
                 l.hash
             );
-            debugger;
         }
     }
 }(window.location))
@@ -2608,8 +2607,6 @@ $(function () {
     $.get('ajax/layout/svg.html', function (data) {
         $(data).prependTo(app.main);
     });
-
-    app.page1();
 });
 
 $(window).click(function (e) {
@@ -2709,8 +2706,8 @@ app.pageLoaded = function () {
 };
 var app = app || {};
 
-app.page1 = function () {
-    app.content.load('ajax/content/page1.html', function () {
+app.pageHome = function () {
+    app.content.load('ajax/content/home.html', function () {
         app.pageLoaded();
 
         app.content.find('#font_size').slider({
@@ -3131,12 +3128,17 @@ var app = app || {};
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
 
+    if (app.q && app.q.p) {
+        debugger;
+    }
+    app.pageHome();
+
     app.left.on('click', '.tree a', function (e) {
         e.preventDefault();
         var $this = $(this);
         var href = $this.attr('href');
-        if (href === 'page1') {
-            app.page1();
+        if (href === '/') {
+            app.pageHome();
         } else if (href === 'page2') {
             app.page2();
         } else if (href === 'page3') {
@@ -3144,6 +3146,10 @@ $(function () {
         } else {
             app.content.load('ajax/content/' + href + '.html');
         }
+        
+        window.history.replaceState(null, null,
+            '/' + href.replace(/^\/+/g, '')
+        );
     });
 });
 var app = app || {};
