@@ -3585,25 +3585,24 @@ app.responsiveBackground = function (elements) {
         images = app.body.find('.responsive-background');
     }
     images.each(function () {
-        var $this = $(this);
-        var image = $this.attr('data-responsive-background-image');
-        var filetype = $this.attr('data-responsive-background-image-filetype');
-        var sizesWidth = $this.attr('data-responsive-background-sizes');
-        var current = $this.attr('data-responsive-background-current');
-        var aspectRatio = $this.attr('data-aspect-ratio');
+        var $this = $(this),
+            image = $this.attr('data-responsive-background-image'),
+            filetype = $this.attr('data-responsive-background-image-filetype'),
+            sizesWidth = $this.attr('data-responsive-background-sizes'),
+            current = $this.attr('data-responsive-background-current'),
+            aspectRatio = $this.attr('data-aspect-ratio');
         if (image !== undefined && image.length &&
             filetype !== undefined && filetype.length &&
             sizesWidth !== undefined && sizesWidth.length &&
             aspectRatio !== undefined && aspectRatio.length) {
             if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
                 (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
-                sizesWidth = sizesWidth.replace(/\s/g, '').split(',');
-                sizesWidth = sizesWidth.sort(function (a, b) { return a - b; });
-                var goalWidth = $this.width();
-                var goalHeight = $this.height();
-                var closestWidth = null;
-                var closestHeight = null;
-                var heightPercentage;
+                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort(function (a, b) { return a - b; });
+                var goalWidth = $this.width(),
+                    goalHeight = $this.height(),
+                    closestWidth,
+                    closestHeight,
+                    heightPercentage;
 
                 function getHeightInPercentage(num, amount) {
                     return (num * 100) / amount;
@@ -3626,11 +3625,11 @@ app.responsiveBackground = function (elements) {
                 }
 
                 $.each(sizesWidth, function (index) {
-                    var $this = parseInt(this);
-                    var height = getHeightInPixels(heightPercentage, $this);
-                    if (closestWidth === null || Math.abs($this - goalWidth) < Math.abs(closestWidth - goalWidth) || closestWidth < goalWidth ||
-                        closestHeight === null || height < goalHeight || closestHeight < goalHeight) {
-                        closestWidth = $this;
+                    var width = parseInt(this);
+                    var height = getHeightInPixels(heightPercentage, width);
+                    if (closestWidth === undefined || Math.abs(width - goalWidth) < Math.abs(closestWidth - goalWidth) || closestWidth < goalWidth ||
+                        closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
+                        closestWidth = width;
                         closestHeight = height;
                     }
                 });
