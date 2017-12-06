@@ -3133,11 +3133,13 @@ $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
 
     if (app.q && app.q.p) {
-        debugger;
+        loadPage(app.q.p);
+    } else {
+        app.pageHome();
     }
-    app.pageHome();
 
     var loadPage = function (url) {
+        url = url.replace(/^\/+/g, '');
         if (url === '') {
             app.pageHome();
         } else if (url === 'page2') {
@@ -3161,9 +3163,7 @@ $(function () {
 
     app.left.on('click', '.tree a', function (e) {
         e.preventDefault();
-        var $this = $(this);
-        var url = $this.attr('href').replace(/^\/+/g, '');
-        loadPage(url);
+        loadPage($(this).attr('href'));
     });
 });
 var app = app || {};
