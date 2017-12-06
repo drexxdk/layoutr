@@ -2498,9 +2498,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 });
 var app = app || {};
 
-app.isLocalhost = function () {
-    return location.hostname === "localhost" || location.hostname === "127.0.0.1"
-};
+app.isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
 
 app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
@@ -3141,6 +3139,11 @@ $(function () {
 
     app.loadPage = function (url, pushState) {
         url = url.replace(/^\/+/g, '');
+
+        if (!app.isLocalhost) {
+            url = url.substring(url.indexOf("/") + 1);
+        }
+        
         if (url === '') {
             app.pageHome();
         } else if (url === 'page2') {
@@ -3151,7 +3154,7 @@ $(function () {
             app.content.load('ajax/content/' + url + '.html');
         }
 
-        if (app.isLocalhost()) {
+        if (app.isLocalhost) {
             url = '/' + url;
         } else {
             url = '/Panels/' + url;

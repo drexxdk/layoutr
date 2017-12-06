@@ -29,6 +29,11 @@ $(function () {
 
     app.loadPage = function (url, pushState) {
         url = url.replace(/^\/+/g, '');
+
+        if (!app.isLocalhost) {
+            url = url.substring(url.indexOf("/") + 1);
+        }
+        
         if (url === '') {
             app.pageHome();
         } else if (url === 'page2') {
@@ -39,7 +44,7 @@ $(function () {
             app.content.load('ajax/content/' + url + '.html');
         }
 
-        if (app.isLocalhost()) {
+        if (app.isLocalhost) {
             url = '/' + url;
         } else {
             url = '/Panels/' + url;

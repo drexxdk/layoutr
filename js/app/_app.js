@@ -1,8 +1,6 @@
 ﻿var app = app || {};
 
-app.isLocalhost = function () {
-    return location.hostname === "localhost" || location.hostname === "127.0.0.1"
-};
+app.isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
 
 app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
