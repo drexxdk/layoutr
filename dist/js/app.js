@@ -3150,9 +3150,7 @@ $(function () {
             url = '/Panels/' + url;
         }
 
-        window.history.replaceState(null, null,
-            url
-        );
+        window.history.pushState(null, null, url);
     }
 
     if (app.q && app.q.p) {
