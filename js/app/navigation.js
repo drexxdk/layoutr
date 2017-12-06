@@ -20,13 +20,7 @@
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
 
-    if (app.q && app.q.p) {
-        loadPage(app.q.p);
-    } else {
-        app.pageHome();
-    }
-
-    var loadPage = function (url) {
+    app.loadPage = function (url) {
         url = url.replace(/^\/+/g, '');
         if (url === '') {
             app.pageHome();
@@ -49,8 +43,14 @@ $(function () {
         );
     }
 
+    if (app.q && app.q.p) {
+        app.loadPage(app.q.p);
+    } else {
+        app.pageHome();
+    }
+
     app.left.on('click', '.tree a', function (e) {
         e.preventDefault();
-        loadPage($(this).attr('href'));
+        app.loadPage($(this).attr('href'));
     });
 });
