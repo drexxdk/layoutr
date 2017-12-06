@@ -3627,7 +3627,7 @@ app.responsiveBackground = function (elements) {
                 $.each(sizesWidth, function (index) {
                     var width = parseInt(this);
                     var height = getHeightInPixels(heightPercentage, width);
-                    if (closestWidth === undefined || Math.abs(width - goalWidth) < Math.abs(closestWidth - goalWidth) || closestWidth < goalWidth ||
+                    if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
                         closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
                         closestWidth = width;
                         closestHeight = height;
