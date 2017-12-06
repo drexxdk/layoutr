@@ -1,21 +1,8 @@
 ﻿var app = app || {};
 
-(function (l) {
-    if (l.search) {
-        app.q = {};
-        l.search.slice(1).split('&').forEach(function (v) {
-            var a = v.split('=');
-            app.q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-        });
-        if (app.q.p !== undefined) {
-            window.history.replaceState(null, null,
-                l.pathname.slice(0, -1) + (app.q.p || '') +
-                (app.q.q ? ('?' + app.q.q) : '') +
-                l.hash
-            );
-        }
-    }
-}(window.location))
+app.isLocalhost = function () {
+    return location.hostname === "localhost" || location.hostname === "127.0.0.1"
+};
 
 app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
@@ -114,7 +101,7 @@ $(function () {
 $(window).click(function (e) {
     var target = $(e.target);
     var modal = target.closest(app.modal[0]);
-    
+
     if (app.html.hasClass('ios')) {
         // ios browsers doesn't apply :focus to buttons in many cases,
         // this forces :focus to be applied correctly.
@@ -124,7 +111,7 @@ $(window).click(function (e) {
             target.focus();
         }
     }
-        
+
     if (modal.length || target.parents('#modal').length) {
         var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
         var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
