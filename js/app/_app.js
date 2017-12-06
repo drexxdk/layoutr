@@ -1,5 +1,23 @@
 ﻿var app = app || {};
 
+(function (l) {
+    if (l.search) {
+        app.q = {};
+        l.search.slice(1).split('&').forEach(function (v) {
+            var a = v.split('=');
+            app.q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+        });
+        if (app.q.p !== undefined) {
+            window.history.replaceState(null, null,
+                l.pathname.slice(0, -1) + (app.q.p || '') +
+                (app.q.q ? ('?' + app.q.q) : '') +
+                l.hash
+            );
+            debugger;
+        }
+    }
+}(window.location))
+
 app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
 };
