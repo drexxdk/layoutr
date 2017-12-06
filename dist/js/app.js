@@ -3129,10 +3129,17 @@ var app = app || {};
     }
 }(window.location))
 
+var loadPage = window.history.state;
+window.onpopstate = function (event) {
+    if (loadPage) {
+        app.loadPage(location.pathname, false);
+    }
+};
+
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
 
-    app.loadPage = function (url) {
+    app.loadPage = function (url, pushState) {
         url = url.replace(/^\/+/g, '');
         if (url === '') {
             app.pageHome();
@@ -3150,18 +3157,21 @@ $(function () {
             url = '/Panels/' + url;
         }
 
-        window.history.pushState(null, null, url);
+        if (pushState) {
+            window.history.pushState(null, null, url);
+            loadPage = true;
+        }
     }
 
     if (app.q && app.q.p) {
-        app.loadPage(app.q.p);
+        app.loadPage(app.q.p, true);
     } else {
         app.pageHome();
     }
 
     app.left.on('click', '.tree a', function (e) {
         e.preventDefault();
-        app.loadPage($(this).attr('href'));
+        app.loadPage($(this).attr('href'), true);
     });
 });
 var app = app || {};
