@@ -18,6 +18,9 @@ app.applySettings = function (id, type, value, set) {
             // found
             exists[0].value = value;
         }
+        if (id === 'two-columns') {
+            app.responsiveBackground();
+        }
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
         if (type === "checkbox") {
@@ -33,9 +36,6 @@ app.applySettings = function (id, type, value, set) {
         } else {
             app.html.removeClass(id);
         }
-    }
-    if (id === 'two-columns') {
-        app.responsiveBackground();
     }
 };
 
