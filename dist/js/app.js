@@ -3590,7 +3590,7 @@ app.responsiveBackground = function (elements) {
             filetype = $this.attr('data-responsive-background-image-filetype'),
             sizesWidth = $this.attr('data-responsive-background-sizes'),
             current = $this.attr('data-responsive-background-current'),
-            aspectRatio = $this.attr('data-aspect-ratio');
+            aspectRatio = $this.attr('data-responsive-background-aspect-ratio');
         if (image !== undefined && image.length &&
             filetype !== undefined && filetype.length &&
             sizesWidth !== undefined && sizesWidth.length &&
