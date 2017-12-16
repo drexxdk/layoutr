@@ -7,7 +7,7 @@ html {
         }
 
         #content > div {
-            > .header {
+            > .content-header {
                 &:not(.full) > div > div {
                     left: calc(50% - #{$spacer * 2});
                     margin: 0 ($spacer * 2);
@@ -102,22 +102,21 @@ html {
         @include breakpoint-two-columns {
 
 
-            &[data-aside="left"].left-push #content > div > .header:not(.full) {
+            &[data-aside="left"].left-push #content > div > .content-header:not(.full) {
                 left: $aside-width;
             }
 
-            &:not(.footer-fixed) #content > div > .header:not(.full) {
+            &:not(.footer-fixed) #content > div > .content-header:not(.full) {
                 bottom: 0;
             }
 
-            &.footer-fixed #content > div > .header:not(.full) {
+            &.footer-fixed #content > div > .content-header:not(.full) {
                 bottom: $footer-height;
             }
 
             #content {
                 > div {
-
-                    > .header:not(.full) {
+                    > .content-header:not(.full) {
                         position: fixed;
                         top: $header-height;
                         left: 0;

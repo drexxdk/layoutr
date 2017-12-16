@@ -16,6 +16,13 @@
     max-width: 100%;
     overflow: auto;
 
+    html.desktop & {
+        &:hover {
+            $value: $primary;
+            @include theme-element-darken($value);
+        }
+    }
+
     > span {
         max-width: 100%;
     }
@@ -54,6 +61,12 @@
     @each $color, $value in $theme-colors {
         &.theme-#{$color} {
             @include theme-element($value);
+
+            html.desktop & {
+                &:hover {
+                    @include theme-element-darken($value);
+                }
+            }
         }
     }
 
@@ -69,4 +82,11 @@
     text-decoration: $link-decoration;
     background: transparent !important;
     border: $component-border-width solid $component-border-color !important;
+
+    html.desktop & {
+        &:hover {
+            color: $link-hover-color;
+            text-decoration: $link-hover-decoration;
+        }
+    }
 }

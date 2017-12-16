@@ -1,10 +1,5 @@
 ﻿/// <reference path="../references" />
 
-html .modal {
-    cursor: pointer;
-    @include noselect;
-}
-
 html {
 
     &:not(.modal) #modal {
@@ -68,18 +63,6 @@ html {
                     border: $component-border;
                     border-radius: $component-border-radius;
                     background-color: $modal-background-color;
-
-                    > .header {
-                        background-color: $light;
-
-                        > .title {
-                            padding-left: $spacer;
-                        }
-
-                        > #modal-close {
-                            margin-left: auto;
-                        }
-                    }
 
                     > p {
                         padding: $spacer;
@@ -148,5 +131,21 @@ html {
                 }
             }
         }
+    }
+
+    .modal {
+        cursor: pointer;
+        @include noselect;
+    }
+}
+html.desktop {
+    .modal.overlay-light:after,
+    .modal.overlay-dark:after {
+        transition: background-color $transition-time $transition-timing;
+    }
+
+    .modal.overlay-light:hover:after,
+    .modal.overlay-dark:hover:after {
+        background-color: transparent;
     }
 }

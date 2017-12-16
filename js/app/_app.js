@@ -2,6 +2,16 @@
 
 app.isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
 
+app.guid = function () {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
 app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
 };

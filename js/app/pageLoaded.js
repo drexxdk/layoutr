@@ -18,6 +18,7 @@ app.pageLoaded = function () {
     app.dropdown(app.content.find('select.dropdown'));
     app.responsiveBackground(app.content.find('.responsive-background'));
     app.tooltipster(app.content.find('.tooltip'));
+    app.assignment(app.content.find('.assignment'));
     renderMathInElement(app.content[0]);
 
     app.youtube = undefined;

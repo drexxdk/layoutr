@@ -21,7 +21,7 @@ html.transitions {
         transition: margin $transition-time $transition-timing;
     }
 
-    #content .header {
+    #content > div > .content-header {
         transition: left $transition-time $transition-timing, margin-right $transition-time $transition-timing, padding-right $transition-time $transition-timing;
     }
 }

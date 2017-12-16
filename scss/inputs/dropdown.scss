@@ -140,6 +140,12 @@ div.dropdown {
                 @extend .btn;
                 border: none !important;
 
+                html.desktop & {
+                    &:hover > svg {
+                        opacity: .4;
+                    }
+                }
+
                 > label {
                     flex-grow: 1;
                     text-align: center;

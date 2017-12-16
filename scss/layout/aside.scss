@@ -11,18 +11,13 @@ aside {
     flex-shrink: 0;
     flex-grow: 1;
     overflow: auto;
-
     @include flex-direction(column);
-
     @include flex-display;
-
-    > .header {
-        background-color: $light;
-    }
 
     > .content {
         overflow: auto;
         flex-grow: 1;
+
         > div {
             padding: $spacer;
         }
@@ -30,10 +25,6 @@ aside {
 
     &#left {
         left: -$aside-width;
-
-        > .header > .title {
-            padding-left: $spacer;
-        }
 
         > .header,
         > .content {
@@ -49,15 +40,30 @@ aside {
             border-left: $layout-border;
         }
 
-        > .header > .title {
-            padding-right: $spacer;
-        }
-
         > .content {
             direction: rtl;
 
             > div {
                 direction: ltr;
+            }
+        }
+    }
+
+    html.desktop & {
+        &:hover > .content,
+        & > .content > div,
+        & > .content:hover,
+        & > .content:focus {
+            visibility: visible;
+        }
+
+        & > .content {
+            visibility: hidden;
+
+            & > div,
+            &:hover,
+            &:focus {
+                visibility: visible;
             }
         }
     }

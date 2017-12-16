@@ -68,6 +68,12 @@
         border-color: $border;
         fill: $color;
     }
+
+    html.desktop & {
+        .dropdown > .btn:hover {
+            @include theme-element-soft-darken($background);
+        }
+    }
 }
 
 .form-group,

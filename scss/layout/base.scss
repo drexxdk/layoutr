@@ -51,7 +51,7 @@ html {
 
     &[data-aside="left"].left-push,
     &[data-aside="right"].right-push {
-        #content > div > .header:not(.full) {
+        #content > div > .content-header:not(.full) {
             margin-right: -($aside-width / 2);
             padding-right: $aside-width / 2;
         }
@@ -81,16 +81,28 @@ main {
     }
 }
 
-header.header,
-aside > .header,
-#modal-content .header {
+.header {
     height: $header-height;
     border-bottom: $layout-border;
     @include flex-display;
     flex-shrink: 0;
+    background-color: $light;
+
+    html.desktop & {
+        > button:hover {
+            overflow: hidden;
+
+            svg {
+                fill: $aside-icon-hover-background-color;
+                width: 75%;
+                height: 75%;
+            }
+        }
+    }
 
     > .title {
         margin: 0;
+        padding: 0 $padding-x;
         font-size: 1rem;
         font-weight: bold;
         line-height: $header-height;

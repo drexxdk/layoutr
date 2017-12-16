@@ -1,0 +1,44 @@
+﻿/// <reference path="../references" />
+
+.assignment.move {
+    .box {
+        border: $component-border;
+    }
+
+    .content {
+
+    }
+
+    .container {
+        padding: $spacer / 2;
+        min-height: rem(66px);
+    }
+
+    .place {
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    html.desktop & {
+        &.moving .box:hover .place {
+            pointer-events: all;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    html.mobile &,
+    html.tablet & {
+        &.moving .place {
+            pointer-events: all;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .item > label {
+        @include theme-element($light);
+        padding: $padding-y $padding-x;
+    }
+}

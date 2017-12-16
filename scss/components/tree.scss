@@ -50,6 +50,16 @@
         width: calc(100% + (#{$spacer} * 2.5));
         cursor: pointer;
 
+        html.desktop & {
+            &:hover {
+                background-color: $tree-hover-background-color;
+
+                > .btn {
+                    @extend .btn:hover;
+                }
+            }
+        }
+
         &:after {
             content: '';
             position: absolute;

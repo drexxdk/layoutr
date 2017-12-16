@@ -35,8 +35,16 @@ ol.list {
     list-style-type: none;
 
     @each $color, $value in $theme-colors {
-        &.theme-#{$color} li > *:not(ol):before {
-            @include theme-element($value);
+        &.theme-#{$color} li {
+            > *:not(ol):before {
+                @include theme-element($value);
+            }
+
+            html.desktop & {
+                > a:hover:after {
+                    border-left-color: $value;
+                }
+            }
         }
     }
 
@@ -75,6 +83,13 @@ ol.list {
             @include theme-element-darken($list-background-color);
         }
 
+        html.desktop & {
+            &:hover:after {
+                left: -(($spacer / 2) + $component-border-width);
+                border-left-color: $list-number-background-color;
+            }
+        }
+
         &:after {
             content: '';
             position: absolute;
@@ -83,6 +98,16 @@ ol.list {
             border: ($spacer / 2) solid transparent;
             transform: translateY(-50%);
             transition: all $transition-time $transition-timing;
+        }
+    }
+}
+
+ul.list,
+ol.list {
+    html.desktop & {
+        li > button:hover,
+        li > a:hover {
+            @include theme-element-darken($list-background-color);
         }
     }
 }

@@ -39,6 +39,12 @@ a {
     &:focus {
         text-decoration: none;
     }
+
+    html.desktop & {
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 header,
