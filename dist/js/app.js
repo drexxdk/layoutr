@@ -3764,6 +3764,7 @@ $(function () {
                     Sortable.create($(this)[0], {
                         group: 'container', draggable: ".item",
                         animation: 0,
+                        scroll: false,
                         fallbackOnBody: true,
                         onAdd: function () {
                             setTimeout(function () {
