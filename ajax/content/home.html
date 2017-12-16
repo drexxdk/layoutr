@@ -19,93 +19,6 @@
 <div class="content">
     <div>
         <section>
-            <h3>DragAndSort</h3>
-            <div class="flex-items space-2 assignment move multiple">
-                <div class="from box">
-                    <div class="header">
-                        <span class="title">Items</span>
-                        <button class="place" tabindex="0">
-                            <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                        </button>
-                    </div>
-                    <div class="content">
-                        <div class="container flex-items space-2 column wrap">
-                            <div class="item checkbox">
-                                <input id="interests_sports" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_sports"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Sports</label>
-                            </div>
-                            <div class="item checkbox">
-                                <input id="interests_traveling" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_traveling"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Traveling</label>
-                            </div>
-                            <div class="item checkbox">
-                                <input id="interests_computers" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_computers"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Computers</label>
-                            </div>
-                            <div class="item checkbox">
-                                <input id="interests_movies" name="interests" type="checkbox">
-                                <label tabindex="0" for="interests_movies"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Movies</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="to">
-                    <div class="flex-items space-2 column wrap grow">
-                        <div class="box" data-id="1">
-                            <div class="header">
-                                <span class="title">Items</span>
-                                <button class="place" tabindex="0">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2"></div>
-                            </div>
-                        </div>
-                        <div class="box" data-id="2">
-                            <div class="header">
-                                <span class="title">Items</span>
-                                <button class="place" tabindex="0">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2"></div>
-                            </div>
-                        </div>
-                        <div class="box" data-id="3">
-                            <div class="header">
-                                <span class="title">Items</span>
-                                <button class="place" tabindex="0">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2"></div>
-                            </div>
-                        </div>
-                        <div class="box" data-id="4">
-                            <div class="header">
-                                <span class="title">Items</span>
-                                <button class="place" tabindex="0">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="buttons">
-                    <div class="flex-items wrap column space-2">
-                        <button type="submit" class="btn">Submit</button>
-                        <button type="reset" class="btn theme-secondary">Reset</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
             <h3>Introduction</h3>
             <div class="alert">
                 <div>
@@ -178,6 +91,7 @@
                         <li><b>tooltipster.js by Caleb Jacob</b> is used to make tooltips.</li>
                         <li><b>katex.js by Khan Academy</b> is used to display mathematics.</li>
                         <li><b>jquery.validate.js by Jörn Zaefferer</b> is used for form validation.</li>
+                        <li><b>sortable.js by Lebedev Konstantin</b> is used for drag and drop.</li>
                     </ul>
                 </div>
             </div>
@@ -460,6 +374,93 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>DragAndDrop example</h3>
+            <div class="flex-items space-2 assignment move multiple">
+                <div class="from box">
+                    <div class="header">
+                        <span class="title">Items</span>
+                        <button class="place" tabindex="0">
+                            <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                        </button>
+                    </div>
+                    <div class="content">
+                        <div class="container flex-items space-2 column wrap">
+                            <div class="item checkbox">
+                                <input id="interests_sports" name="interests" type="checkbox">
+                                <label tabindex="0" for="interests_sports"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Sports</label>
+                            </div>
+                            <div class="item checkbox">
+                                <input id="interests_traveling" name="interests" type="checkbox">
+                                <label tabindex="0" for="interests_traveling"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Traveling</label>
+                            </div>
+                            <div class="item checkbox">
+                                <input id="interests_computers" name="interests" type="checkbox">
+                                <label tabindex="0" for="interests_computers"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Computers</label>
+                            </div>
+                            <div class="item checkbox">
+                                <input id="interests_movies" name="interests" type="checkbox">
+                                <label tabindex="0" for="interests_movies"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> Movies</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="to">
+                    <div class="flex-items space-2 column wrap grow">
+                        <div class="box" data-id="1">
+                            <div class="header">
+                                <span class="title">Items</span>
+                                <button class="place" tabindex="0">
+                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                </button>
+                            </div>
+                            <div class="content">
+                                <div class="container flex-items space-2"></div>
+                            </div>
+                        </div>
+                        <div class="box" data-id="2">
+                            <div class="header">
+                                <span class="title">Items</span>
+                                <button class="place" tabindex="0">
+                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                </button>
+                            </div>
+                            <div class="content">
+                                <div class="container flex-items space-2"></div>
+                            </div>
+                        </div>
+                        <div class="box" data-id="3">
+                            <div class="header">
+                                <span class="title">Items</span>
+                                <button class="place" tabindex="0">
+                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                </button>
+                            </div>
+                            <div class="content">
+                                <div class="container flex-items space-2"></div>
+                            </div>
+                        </div>
+                        <div class="box" data-id="4">
+                            <div class="header">
+                                <span class="title">Items</span>
+                                <button class="place" tabindex="0">
+                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                </button>
+                            </div>
+                            <div class="content">
+                                <div class="container flex-items space-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="flex-items wrap column space-2">
+                        <button type="submit" class="btn">Submit</button>
+                        <button type="reset" class="btn theme-secondary">Reset</button>
                     </div>
                 </div>
             </div>

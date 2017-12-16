@@ -25,6 +25,7 @@ $(function () {
                         group: 'container', draggable: ".item",
                         animation: 0,
                         scroll: false,
+                        forceFallback: true,
                         fallbackOnBody: true,
                         onAdd: function () {
                             setTimeout(function () {
