@@ -15,11 +15,11 @@
     "inputFiles": [
       "js/vendors/jquery/jquery-3.1.1.min.js",
       "js/vendors/jquery/validate/jquery.validate.min.js",
-      "js/vendors/jquery/jquery-ui.min.js",
       "js/vendors/jquery/jquery.lazy.min.js",
       "js/vendors/jquery/bootstrap-slider.js",
       "js/vendors/jquery/tooltipster.min.js",
       "js/vendors/bowser.js",
+      "js/vendors/sortable.min.js",
       "js/vendors/katex/katex.min.js",
       "js/vendors/katex/auto-render.min.js",
       "js/app/_app.js",

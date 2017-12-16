@@ -5,12 +5,35 @@ $(function () {
         $(assignments).each(function (index, assignment) {
             assignment = $(assignment);
             if (assignment.hasClass('move multiple')) {
-                assignment.find('.container').sortable({
-                    connectWith: ".container",
-                    start: function (event, ui) {
-                        assignment.find('input[type=checkbox]:checked').prop('checked', false);
-                    }
+                //assignment.find('.container').sortable({
+                //    connectWith: ".container",
+                //    start: function (event, ui) {
+                //        assignment.find('input[type=checkbox]:checked').prop('checked', false);
+                //    },
+                //    stop: function (event, ui) {
+                //        ui.item.removeAttr("style");
+                //    }
+                //});
+
+                //sortable('.container', {
+                //    connectWith: 'container',
+                //    forcePlaceholderSize: true
+                //});
+
+                assignment.find('.container').each(function () {
+                    Sortable.create($(this)[0], {
+                        group: 'container', draggable: ".item",
+                        animation: 0,
+                        fallbackOnBody: true,
+                        onEnd: function () {
+                            setTimeout(function () {
+                                assignment.find('input[type=checkbox]:checked').prop('checked', false);
+                                assignment.removeClass('moving');
+                            }, 0);
+                        }
+                    });
                 });
+                
                 assignment.attr('data-moving', 0);
                 var from = assignment.find('.from .container');
                 var to = assignment.find('.to .container');

@@ -5,10 +5,6 @@
         border: $component-border;
     }
 
-    .content {
-
-    }
-
     .container {
         padding: $spacer / 2;
         min-height: rem(66px);
@@ -37,8 +33,50 @@
         }
     }
 
-    .item > label {
-        @include theme-element($light);
-        padding: $padding-y $padding-x;
+    .item {
+        > label {
+            @include theme-element($light);
+            padding: $padding-y $padding-x;
+        }
     }
+    /*.sortable-drag {
+        label {
+            background: blue !important;
+
+            i {
+                box-shadow: none !important;
+            }
+        }
+    }*/
+    .to {
+        .item {
+            position: relative;
+
+            &:before {
+                content: '';
+                display: block;
+                width: 100%;
+                height: rem(42px);
+            }
+
+            > label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+    }
+}
+
+.item.checkbox.sortable-chosen label {
+    @include theme-element-soft($secondary);
+    padding: $padding-y $padding-x;
+    i {
+        box-shadow: none !important;
+    }
+}
+
+.item.checkbox.sortable-ghost label {
+    @include theme-element-soft($secondary);
 }
