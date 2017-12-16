@@ -25,7 +25,7 @@ $(function () {
                         group: 'container', draggable: ".item",
                         animation: 0,
                         fallbackOnBody: true,
-                        onEnd: function () {
+                        onAdd: function () {
                             setTimeout(function () {
                                 assignment.find('input[type=checkbox]:checked').prop('checked', false);
                                 assignment.removeClass('moving');

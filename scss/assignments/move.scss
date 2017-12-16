@@ -69,11 +69,18 @@
     }
 }
 
-.item.checkbox.sortable-chosen label {
-    @include theme-element-soft($secondary);
-    padding: $padding-y $padding-x;
-    i {
-        box-shadow: none !important;
+.item.checkbox.sortable-chosen {
+    &.sortable-fallback {
+        margin: $flex-space-base * 2;
+    }
+
+    label {
+        @include theme-element-soft($secondary);
+        padding: $padding-y $padding-x;
+
+        i {
+            box-shadow: none !important;
+        }
     }
 }
 
