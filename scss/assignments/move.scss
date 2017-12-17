@@ -29,6 +29,10 @@
     }
 
     html.desktop & {
+        &:not(.moving) .place {
+            visibility:hidden;
+        }
+
         &.moving .box:hover .place,
         &.moving .place:focus {
             pointer-events: all;
