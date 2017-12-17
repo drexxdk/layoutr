@@ -86,8 +86,8 @@ main {
     border-bottom: $layout-border;
     @include flex-display;
     flex-shrink: 0;
-    background-color: $light;
-
+    @include theme-element($light, false);
+    
     html.desktop & {
         > button:hover {
             overflow: hidden;

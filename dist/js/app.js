@@ -2714,10 +2714,12 @@ app.pageLoaded = function () {
 
     app.youtube = undefined;
     app.google = undefined;
+    app.hideLoading();
 };
 var app = app || {};
 
 app.pageHome = function () {
+    app.showLoading();
     app.content.load('ajax/content/home.html', function () {
         app.pageLoaded();
 
@@ -2799,20 +2801,6 @@ app.pageHome = function () {
                 agree: "Please accept our policy"
             }
         );
-    });
-};
-var app = app || {};
-
-app.pageCoverAndTwoContent = function () {
-    app.content.load('ajax/content/cover-and-two-content.html', function () {
-        app.pageLoaded();
-    });
-};
-var app = app || {};
-
-app.pageCover = function () {
-    app.content.load('ajax/content/cover.html', function () {
-        app.pageLoaded();
     });
 };
 var app = app || {};
@@ -3162,7 +3150,6 @@ window.onpopstate = function (event) {
 
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
-
     app.loadPage = function (url, pushState) {
         url = url.replace(/^\/+/g, '');
         var q = url.indexOf('?');
@@ -3174,12 +3161,10 @@ $(function () {
 
         if (url === '') {
             app.pageHome();
-        } else if (url === 'cover-and-two-content') {
-            app.pageCoverAndTwoContent();
-        } else if (url === 'cover') {
-            app.pageCover();
         } else {
-            app.content.load('ajax/content/' + url + '.html');
+            app.content.load('ajax/content/' + url + '.html', function () {
+                app.pageLoaded();
+            });
         }
 
         if (app.isLocalhost) {

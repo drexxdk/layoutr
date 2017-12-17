@@ -26,7 +26,6 @@ window.onpopstate = function (event) {
 
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html');
-
     app.loadPage = function (url, pushState) {
         url = url.replace(/^\/+/g, '');
         var q = url.indexOf('?');
@@ -38,12 +37,10 @@ $(function () {
 
         if (url === '') {
             app.pageHome();
-        } else if (url === 'cover-and-two-content') {
-            app.pageCoverAndTwoContent();
-        } else if (url === 'cover') {
-            app.pageCover();
         } else {
-            app.content.load('ajax/content/' + url + '.html');
+            app.content.load('ajax/content/' + url + '.html', function () {
+                app.pageLoaded();
+            });
         }
 
         if (app.isLocalhost) {

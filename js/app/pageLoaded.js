@@ -23,4 +23,5 @@ app.pageLoaded = function () {
 
     app.youtube = undefined;
     app.google = undefined;
+    app.hideLoading();
 };

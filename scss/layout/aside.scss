@@ -25,20 +25,12 @@ aside {
 
     &#left {
         left: -$aside-width;
-
-        > .header,
-        > .content {
-            border-right: $layout-border;
-        }
+        border-right: $layout-border;
     }
 
     &#right {
         right: -$aside-width;
-
-        > .header,
-        > .content {
-            border-left: $layout-border;
-        }
+        border-left: $layout-border;
 
         > .content {
             direction: rtl;

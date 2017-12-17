@@ -1,6 +1,11 @@
 ﻿/// <reference path="../references" />
 
 .assignment.move {
+
+    .header {
+        @include theme-element($secondary);
+    }
+
     .box {
         border: $component-border;
     }
@@ -39,15 +44,6 @@
             padding: $padding-y $padding-x;
         }
     }
-    /*.sortable-drag {
-        label {
-            background: blue !important;
-
-            i {
-                box-shadow: none !important;
-            }
-        }
-    }*/
     .to {
         .item {
             position: relative;
@@ -64,6 +60,10 @@
                 top: 0;
                 left: 0;
                 right: 0;
+
+                > span {
+                    @include ellipsis;
+                }
             }
         }
     }

@@ -26,8 +26,6 @@
       "js/app/form.js",
       "js/app/pageLoaded.js",
       "js/app/pages/home.js",
-      "js/app/pages/cover-and-two-content.js",
-      "js/app/pages/cover.js",
       "js/app/scroll.js",
       "js/app/accordion.js",
       "js/app/dropdown.js",
