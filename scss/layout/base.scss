@@ -94,15 +94,18 @@ main {
 
             svg {
                 opacity: 1;
-                width: 75%;
-                height: 75%;
+                width: 65%;
+                height: 65%;
             }
         }
     }
 
+    > .title:first-child {
+        padding: 0 $padding-x;
+    }
+
     > .title {
         margin: 0;
-        padding: 0 $padding-x;
         font-size: 1rem;
         font-weight: bold;
         line-height: $header-height;

@@ -380,107 +380,113 @@
         </section>
         <section>
             <h3>DragAndDrop example</h3>
-            <div class="flex-items space-2 assignment move multiple">
+            <div class="flex-items space-2">
                 <p>
                     Place the items in the boxes they belong to and click submit to validate it.<br />
                     Multiple items can be moved simultaneously by making them checked, before clicking on the checkmark in one of the box headers.<br />
                 </p>
-                <div class="from box">
-                    <div class="header">
-                        <span class="title">Items</span>
-                        <button class="place">
-                            <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                        </button>
-                    </div>
-                    <div class="content">
-                        <div class="container flex-items space-2 column wrap">
-                            <div class="item checkbox" data-id="1">
-                                <input id="move_1" name="move" type="checkbox">
-                                <label tabindex="0" for="move_1"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Football</span></label>
+                <div class="alert">
+                    <div>
+                        <div class="flex-items space-4 assignment move multiple">
+                            <div class="from box">
+                                <div class="header">
+                                    <span class="title">Items</span>
+                                    <button class="place">
+                                        <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                    </button>
+                                </div>
+                                <div class="content">
+                                    <div class="container flex-items space-2 column wrap">
+                                        <div class="item checkbox" data-id="1">
+                                            <input id="move_1" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_1"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Football</span></label>
+                                        </div>
+                                        <div class="item checkbox" data-id="2">
+                                            <input id="move_2" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_2"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Jazz</span></label>
+                                        </div>
+                                        <div class="item checkbox" data-id="3">
+                                            <input id="move_3" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_3"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Tennis</span></label>
+                                        </div>
+                                        <div class="item checkbox" data-id="4">
+                                            <input id="move_4" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_4"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Rock</span></label>
+                                        </div>
+                                        <div class="item checkbox" data-id="5">
+                                            <input id="move_5" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_5"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Drama</span></label>
+                                        </div>
+                                        <div class="item checkbox" data-id="6">
+                                            <input id="move_6" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_6"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>FPS</span></label>
+                                        </div>
+                                        <div class="item checkbox" data-id="7">
+                                            <input id="move_7" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_7"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Documentary</span></label>
+                                        </div>
+                                        <div class="item checkbox" data-id="8">
+                                            <input id="move_8" name="move" type="checkbox">
+                                            <label tabindex="0" for="move_8"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>MMORPG</span></label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item checkbox" data-id="2">
-                                <input id="move_2" name="move" type="checkbox">
-                                <label tabindex="0" for="move_2"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Jazz</span></label>
+                            <div class="to">
+                                <div class="flex-items space-4 column wrap grow">
+                                    <div class="box">
+                                        <div class="header">
+                                            <span class="title">TV</span>
+                                            <button class="place">
+                                                <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                            </button>
+                                        </div>
+                                        <div class="content">
+                                            <div class="container flex-items space-2" data-id="1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="header">
+                                            <span class="title">Gaming</span>
+                                            <button class="place">
+                                                <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                            </button>
+                                        </div>
+                                        <div class="content">
+                                            <div class="container flex-items space-2" data-id="2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="header">
+                                            <span class="title">Music</span>
+                                            <button class="place">
+                                                <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                            </button>
+                                        </div>
+                                        <div class="content">
+                                            <div class="container flex-items space-2" data-id="3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="header">
+                                            <span class="title">Sport</span>
+                                            <button class="place">
+                                                <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+                                            </button>
+                                        </div>
+                                        <div class="content">
+                                            <div class="container flex-items space-2" data-id="4"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item checkbox" data-id="3">
-                                <input id="move_3" name="move" type="checkbox">
-                                <label tabindex="0" for="move_3"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Tennis</span></label>
-                            </div>
-                            <div class="item checkbox" data-id="4">
-                                <input id="move_4" name="move" type="checkbox">
-                                <label tabindex="0" for="move_4"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Rock</span></label>
-                            </div>
-                            <div class="item checkbox" data-id="5">
-                                <input id="move_5" name="move" type="checkbox">
-                                <label tabindex="0" for="move_5"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Drama</span></label>
-                            </div>
-                            <div class="item checkbox" data-id="6">
-                                <input id="move_6" name="move" type="checkbox">
-                                <label tabindex="0" for="move_6"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>FPS</span></label>
-                            </div>
-                            <div class="item checkbox" data-id="7">
-                                <input id="move_7" name="move" type="checkbox">
-                                <label tabindex="0" for="move_7"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Documentary</span></label>
-                            </div>
-                            <div class="item checkbox" data-id="8">
-                                <input id="move_8" name="move" type="checkbox">
-                                <label tabindex="0" for="move_8"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>MMORPG</span></label>
+                            <div class="buttons">
+                                <div class="flex-items wrap column space-2">
+                                    <button type="submit" class="btn">Submit</button>
+                                    <button type="reset" class="btn theme-secondary">Reset</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="to">
-                    <div class="flex-items space-2 column wrap grow">
-                        <div class="box">
-                            <div class="header">
-                                <span class="title">TV</span>
-                                <button class="place">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2" data-id="1"></div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="header">
-                                <span class="title">Gaming</span>
-                                <button class="place">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2" data-id="2"></div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="header">
-                                <span class="title">Music</span>
-                                <button class="place">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2" data-id="3"></div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="header">
-                                <span class="title">Sport</span>
-                                <button class="place">
-                                    <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-                                </button>
-                            </div>
-                            <div class="content">
-                                <div class="container flex-items space-2" data-id="4"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="buttons">
-                    <div class="flex-items wrap column space-2">
-                        <button type="submit" class="btn">Submit</button>
-                        <button type="reset" class="btn theme-secondary">Reset</button>
                     </div>
                 </div>
             </div>

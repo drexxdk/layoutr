@@ -3,21 +3,38 @@
 .assignment.move {
 
     .header {
-        @include theme-element($secondary);
+        @include theme-element($secondary, false);
+        position: relative;
+
+        .title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: $header-height-content;
+            @include ellipsis;
+        }
+
+        .place {
+            margin-left: auto;
+            pointer-events: none;
+            opacity: 0;
+        }
     }
 
     .box {
+        min-width:rem(150px);
         border: $component-border;
+        border-radius: $component-border-radius;
+        overflow: hidden;
     }
 
-    .container {
-        padding: $spacer / 2;
-        min-height: rem(66px);
-    }
+    .content {
+        background-color: white;
 
-    .place {
-        pointer-events: none;
-        opacity: 0;
+        .container {
+            padding: $spacer / 2;
+            min-height: rem(66px);
+        }
     }
 
     &.validated {
@@ -30,7 +47,7 @@
 
     html.desktop & {
         &:not(.moving) .place {
-            visibility:hidden;
+            visibility: hidden;
         }
 
         &.moving .box:hover .place,
