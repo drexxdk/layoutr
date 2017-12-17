@@ -21,6 +21,14 @@
         visibility: hidden;
     }
 
+    &.validated {
+
+        .from,
+        .to {
+            pointer-events: none;
+        }
+    }
+
     html.desktop & {
         &.moving .box:hover .place {
             pointer-events: all;
@@ -43,7 +51,16 @@
             @include theme-element($light);
             padding: $padding-y $padding-x;
         }
+
+        &.valid > label {
+            @include theme-element-soft($success);
+        }
+
+        &.invalid > label {
+            @include theme-element-soft($danger);
+        }
     }
+
     .to {
         .item {
             position: relative;
