@@ -64,7 +64,7 @@
     }
 
     > div > .input-group > .input-group-addon {
-        background-color: $border;
+        @include theme-element($border, false);
         border-color: $border;
         fill: $color;
     }
