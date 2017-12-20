@@ -1,6 +1,7 @@
 ﻿/// <reference path="../references" />
 
 .assignment.move {
+    padding: ($spacer / 2) 0;
 
     .header {
         @include theme-element($secondary, false);
@@ -22,7 +23,7 @@
     }
 
     .box {
-        min-width:rem(150px);
+        min-width: rem(150px);
         border: $component-border;
         border-radius: $component-border-radius;
         overflow: hidden;
