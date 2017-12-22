@@ -17,7 +17,6 @@ app.loadPage = function (url, pushState) {
     } else {
         var found = app.left.find('a.label[href="' + url + '"]');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
-        debugger;
         app.content.load('ajax/content/' + url + '.html', function () {
             app.pageLoaded();
         });
@@ -37,15 +36,16 @@ app.loadPage = function (url, pushState) {
 
 (function (l) {
     if (l.search) {
-        app.q = {};
+        app.url = {};
         l.search.slice(1).split('&').forEach(function (v) {
             var a = v.split('=');
-            app.q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+            app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
-        if (app.q.p !== undefined) {
+        if (app.url.p !== undefined) {
+            app.url.p = app.url.p.replace(/^\/+/g, '');
             window.history.replaceState(null, null,
-                l.pathname.slice(0, -1) + (app.q.p || '') +
-                (app.q.q ? '?' + app.q.q : '') +
+                l.pathname.slice(0, -1) + app.url.p +
+                (app.url.q ? '?' + app.url.q : '') +
                 l.hash
             );
         }
@@ -61,16 +61,15 @@ window.onpopstate = function (event) {
 
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
-        if (app.q && app.q.p) {
-            app.left.find('a.label[href="' + app.q.p.replace(/^\/+/g, '') + '"]').addClass('active');
+        if (app.url && app.url.p) {
+            app.left.find('a.label[href="' + app.url.p + '"]').addClass('active');
         } else {
-            debugger;
             app.left.find('a.label[href="/"]').addClass('active');
         }
     });
 
-    if (app.q && app.q.p) {
-        app.loadPage(app.q.p, true);
+    if (app.url && app.url.p) {
+        app.loadPage(app.url.p, true);
     } else {
         app.loadPage('', false);
     }
