@@ -3230,8 +3230,7 @@ window.onpopstate = function (event) {
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
         if (app.q && app.q.p) {
-            debugger;
-            app.left.find('a.label[href="' + app.q.p + '"]').addClass('active');
+            app.left.find('a.label[href="' + app.q.p.replace(/^\/+/g, '') + '"]').addClass('active');
         } else {
             debugger;
             app.left.find('a.label[href="/"]').addClass('active');
