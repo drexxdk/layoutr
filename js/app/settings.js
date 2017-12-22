@@ -31,7 +31,7 @@ app.applySettings = function (id, type, value, set) {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.responsiveBackground(app.content.find('.responsive-background'));
+            app.responsiveBackground();
         }
     }
 };

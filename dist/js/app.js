@@ -2710,7 +2710,7 @@ app.pageLoaded = function () {
     app.lazy(app.content.find('.lazy'));
     app.accordion(app.content.find('.accordion'));
     app.dropdown(app.content.find('select.dropdown'));
-    app.responsiveBackground(app.content.find('.responsive-background'));
+    app.responsiveBackground();
     app.tooltipster(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
     renderMathInElement(app.content[0]);
@@ -2918,7 +2918,7 @@ app.toggleAside = function (aside, pageChanged) {
                 transitionLock = false;
                 app.checkGoogleMaps();
                 if (pageChanged) {
-                    app.responsiveBackground(app.content.find('.responsive-background'));
+                    app.responsiveBackground();
                 }
             }, app.transitionTime);
         } else {
@@ -3053,7 +3053,7 @@ app.applySettings = function (id, type, value, set) {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.responsiveBackground(app.content.find('.responsive-background'));
+            app.responsiveBackground();
         }
     }
 };
@@ -3557,8 +3557,8 @@ app.lazy = function (elements) {
 };
 var app = app || {};
 
-app.responsiveBackground = function (elements) {
-    elements.each(function () {
+app.responsiveBackground = function () {
+    app.content.find('.responsive-background').each(function () {
         var $this = $(this),
             image = $this.attr('data-responsive-background-image'),
             filetype = $this.attr('data-responsive-background-image-filetype'),
@@ -3624,7 +3624,7 @@ app.responsiveBackground = function (elements) {
 };
 
 $(window).resize(function () {
-    app.responsiveBackground(app.main.find('.responsive-background'));
+    app.responsiveBackground();
 });
 var app = app || {};
 

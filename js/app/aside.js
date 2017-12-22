@@ -29,7 +29,7 @@ app.toggleAside = function (aside, pageChanged) {
                 transitionLock = false;
                 app.checkGoogleMaps();
                 if (pageChanged) {
-                    app.responsiveBackground(app.content.find('.responsive-background'));
+                    app.responsiveBackground();
                 }
             }, app.transitionTime);
         } else {

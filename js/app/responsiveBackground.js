@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
-app.responsiveBackground = function (elements) {
-    elements.each(function () {
+app.responsiveBackground = function () {
+    app.content.find('.responsive-background').each(function () {
         var $this = $(this),
             image = $this.attr('data-responsive-background-image'),
             filetype = $this.attr('data-responsive-background-image-filetype'),
@@ -67,5 +67,5 @@ app.responsiveBackground = function (elements) {
 };
 
 $(window).resize(function () {
-    app.responsiveBackground(app.main.find('.responsive-background'));
+    app.responsiveBackground();
 });
