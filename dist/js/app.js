@@ -2513,7 +2513,29 @@ n(i,o,g,"\u2292","\\sqsupseteq");n(i,o,g,"\u2250","\\doteq");n(i,o,g,"\u2322","\
 
 var app = app || {};
 
-app.isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+$(function () {
+    app.html = $('html');
+    app.head = $('head');
+    app.body = $('body');
+    app.main = $('main');
+    app.content = $('#content > div');
+    app.header = $('header');
+    app.footer = $('footer');
+    app.left = $('#left');
+    app.right = $('#right');
+    app.loading = $('#loading');
+    app.overflow = $('#overflow');
+    app.modal = $('#modal');
+    app.transitionTime = 400;
+    app.fadeOutTime = 500;
+    app.htmlOverflowEnabled = true;
+    app.smallBreakpoint = 732;
+    app.scrollbarWidth = 0;
+    app.loadingCount = 0;
+    app.localStorage = typeof Storage !== "undefined";
+    app.settings = [];
+});
+var app = app || {};
 
 app.guid = function () {
     function s4() {
@@ -2523,7 +2545,7 @@ app.guid = function () {
     }
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
-}
+};
 
 app.isSmallBreakpoint = function () {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
@@ -2571,26 +2593,9 @@ app.isModalImage = function () {
 app.isLoading = function () {
     return app.html.hasClass('loading');
 };
+var app = app || {};
 
 $(function () {
-    app.html = $('html');
-    app.head = $('head');
-    app.body = $('body');
-    app.main = $('main');
-    app.content = $('#content > div');
-    app.header = $('header');
-    app.footer = $('footer');
-    app.left = $('#left');
-    app.right = $('#right');
-    app.loading = $('#loading');
-    app.transitionTime = 400;
-    app.fadeOutTime = 500;
-    app.htmlOverflowEnabled = true;
-    app.smallBreakpoint = 732;
-    app.overflow = $('#overflow');
-    app.modal = $('#modal');
-    app.scrollbarWidth = 0;
-
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
     } else if (bowser.msie) {
@@ -2607,9 +2612,44 @@ $(function () {
     if (bowser.android) {
         app.html.addClass('android'); // used by modal
     } else if (bowser.ios) {
-        app.html.addClass('ios'); // not currently used for anything
+        app.html.addClass('ios'); // used to apply focus
     }
 
+    if (app.html.hasClass('msie') || app.html.hasClass('msedge')) {
+        // disable smooth scrolling, since it causes element jumping/lagging on scroll
+        // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
+        app.body.on("mousewheel", function (e) {
+            var target = $(e.target);
+            if (!app.isModal() && event.ctrlKey !== true) {
+                var aside = target.closest('aside > .content') || target.parents('aside .content');
+                e.preventDefault();
+                var wheelDelta = e.originalEvent.wheelDelta;
+                var currentScrollPosition;
+                if (aside.length) {
+                    currentScrollPosition = aside.scrollTop();
+                    aside.scrollTop(currentScrollPosition - wheelDelta);
+                } else {
+                    currentScrollPosition = window.pageYOffset;
+                    window.scrollTo(0, currentScrollPosition - wheelDelta);
+                }
+            }
+        });
+
+        // at some zoom levels edge/ie makes $(window) heigher than $(document)
+        // it causes a gap between footer and the bottom of $(window).
+        $(window).scroll(function () {
+            var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            if (scrollTop + $(window).height() >= $(document).height()) {
+                app.html.addClass('subpixel');
+            } else {
+                app.html.removeClass('subpixel');
+            }
+        });
+    }
+});
+var app = app || {};
+
+$(function () {
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
@@ -2719,7 +2759,6 @@ app.pageLoaded = function () {
 var app = app || {};
 
 app.pageHome = function () {
-    app.showLoading();
     app.content.load('ajax/content/home.html', function () {
         app.pageLoaded();
 
@@ -3004,6 +3043,7 @@ $(function () {
     });
 });
 var app = app || {};
+
 $(function () {
     app.content.on('click', '#toggle-youtube', function () {
         if (app.youtube === undefined) {
@@ -3054,13 +3094,17 @@ $(function () {
 var app = app || {};
 
 app.showLoading = function () {
+    app.loadingCount++;
     app.disableScroll();
     app.html.addClass('loading');
 };
 
 app.hideLoading = function () {
-    app.html.removeClass('loading');
-    app.setHtmlScroll();
+    app.loadingCount--;
+    if (app.loadingCount === 0) {
+        app.html.removeClass('loading');
+        app.setHtmlScroll();
+    }
 };
 
 $(function () {
@@ -3124,6 +3168,36 @@ $(function () {
 });
 var app = app || {};
 
+app.loadPage = function (url, pushState) {
+    app.showLoading();
+    url = url.replace(/^\/+/g, '');
+    var q = url.indexOf('?');
+    url = url.substring(0, q !== -1 ? q : url.length);
+
+    if (!app.isLocalhost) {
+        url = url.substring(url.indexOf("/") + 1);
+    }
+
+    if (url === '') {
+        app.pageHome();
+    } else {
+        app.content.load('ajax/content/' + url + '.html', function () {
+            app.pageLoaded();
+        });
+    }
+
+    if (app.isLocalhost) {
+        url = '/' + url;
+    } else {
+        url = '/Panels/' + url;
+    }
+
+    if (pushState) {
+        window.history.pushState(null, null, url);
+        loadPage = true;
+    }
+};
+
 (function (l) {
     if (l.search) {
         app.q = {};
@@ -3134,12 +3208,12 @@ var app = app || {};
         if (app.q.p !== undefined) {
             window.history.replaceState(null, null,
                 l.pathname.slice(0, -1) + (app.q.p || '') +
-                (app.q.q ? ('?' + app.q.q) : '') +
+                (app.q.q ? '?' + app.q.q : '') +
                 l.hash
             );
         }
     }
-}(window.location))
+}(window.location));
 
 var loadPage = window.history.state;
 window.onpopstate = function (event) {
@@ -3149,51 +3223,29 @@ window.onpopstate = function (event) {
 };
 
 $(function () {
-    app.left.find('> .content > div').load('ajax/layout/menu.html');
-    app.loadPage = function (url, pushState) {
-        url = url.replace(/^\/+/g, '');
-        var q = url.indexOf('?');
-        url = url.substring(0, q != -1 ? q : url.length);
-        
-        if (!app.isLocalhost) {
-            url = url.substring(url.indexOf("/") + 1);
-        }
-
-        if (url === '') {
-            app.pageHome();
+    app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
+        if (app.q && app.q.p) {
+            app.left.find('a.label[href="' + app.q.p + '"]').addClass('active');
         } else {
-            app.content.load('ajax/content/' + url + '.html', function () {
-                app.pageLoaded();
-            });
+            app.left.find('a.label[href="/"]').addClass('active');
         }
-
-        if (app.isLocalhost) {
-            url = '/' + url;
-        } else {
-            url = '/Panels/' + url;
-        }
-
-        if (pushState) {
-            window.history.pushState(null, null, url);
-            loadPage = true;
-        }
-    }
+    });
 
     if (app.q && app.q.p) {
         app.loadPage(app.q.p, true);
     } else {
-        app.pageHome();
+        app.loadPage('', false);
     }
 
-    app.left.on('click', '.tree a', function (e) {
+    app.left.on('click', '.tree a.label:not(.active)', function (e) {
         e.preventDefault();
-        app.loadPage($(this).attr('href'), true);
+        var $this = $(this);
+        $this.parents('.tree').find('a.label.active').removeClass('active');
+        $this.addClass('active');
+        app.loadPage($this.attr('href'), true);
     });
 });
 var app = app || {};
-
-app.localStorage = typeof Storage !== "undefined";
-app.settings = [];
 
 app.applySettings = function (id, type, value, set) {
     if (app.localStorage && set) {
@@ -3554,40 +3606,6 @@ $(function () {
 });
 var app = app || {};
 
-$(function () {
-    if (app.html.hasClass('msie') || app.html.hasClass('msedge')) {
-        // disable smooth scrolling, since it causes element jumping/lagging on scroll
-        // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
-        app.body.on("mousewheel", function (e) {
-            var target = $(e.target);
-            if (!app.isModal() && event.ctrlKey !== true) {
-                var aside = target.closest('aside > .content') || target.parents('aside .content');
-                e.preventDefault();
-                var wheelDelta = e.originalEvent.wheelDelta;
-                if (aside.length) {
-                    var currentScrollPosition = aside.scrollTop();
-                    aside.scrollTop(currentScrollPosition - wheelDelta);
-                } else {
-                    var currentScrollPosition = window.pageYOffset;
-                    window.scrollTo(0, currentScrollPosition - wheelDelta);
-                }
-            }
-        });
-
-        // at some zoom levels edge/ie makes $(window) heigher than $(document)
-        // it causes a gap between footer and the bottom of $(window).
-        $(window).scroll(function () {
-            var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-            if (scrollTop + $(window).height() >= $(document).height()) {
-                app.html.addClass('subpixel');
-            } else {
-                app.html.removeClass('subpixel');
-            }
-        });
-    }
-});
-var app = app || {};
-
 app.responsiveBackground = function (elements) {
     var images;
     if (elements !== undefined && elements.length) {
@@ -3725,128 +3743,126 @@ $(function () {
 });
 var app = app || {};
 
-$(function () {
-    app.assignment = function (assignments) {
-        $(assignments).each(function (index, assignment) {
-            assignment = $(assignment);
-            if (assignment.hasClass('move multiple')) {
-                assignment.attr('data-moving', 0);
-                var from = assignment.find('.from .container');
-                var items = assignment.find('.item');
-                var checkboxes = items.find('input[type=checkbox]');
+app.assignment = function (assignments) {
+    $(assignments).each(function (index, assignment) {
+        assignment = $(assignment);
+        if (assignment.hasClass('move multiple')) {
+            assignment.attr('data-moving', 0);
+            var from = assignment.find('.from .container');
+            var items = assignment.find('.item');
+            var checkboxes = items.find('input[type=checkbox]');
 
-                function getChecked() {
-                    return $($.map(checkboxes, function (n, i) {
-                        if (n.checked) {
-                            return n;
-                        }
-                    }));
-                };
-
-                function getItem(id) {
-                    return $($.map(items, function (n, i) {
-                        if (n.getAttribute("data-id") === id) {
-                            return n;
-                        }
-                    }));
-                }
-
-                assignment.find('.container').each(function () {
-                    Sortable.create($(this)[0], {
-                        group: 'container', draggable: ".item",
-                        animation: 0,
-                        scroll: false,
-                        forceFallback: true,
-                        fallbackOnBody: true,
-                        onAdd: function () {
-                            setTimeout(function () {
-                                var checked = getChecked();
-                                if (checked.length) {
-                                    checked.prop('checked', false);
-                                    assignment.removeClass('moving');
-                                }
-                            }, 0);
-                        }
-                    });
-                });
-
-                assignment.on('click', '.item input[type=checkbox]', function () {
-                    var $this = $(this);
-                    var item = $this.parents('.item');
-                    var moving = parseInt(assignment.attr('data-moving'));
-                    if ($this.is(':checked')) {
-                        moving++;
-                        assignment.attr('data-moving', moving);
-                        assignment.addClass('moving');
-                    } else {
-                        moving--;
-                        assignment.attr('data-moving', moving);
-                        if (moving === 0) {
-                            assignment.removeClass('moving');
-                        }
+            function getChecked() {
+                return $($.map(checkboxes, function (n, i) {
+                    if (n.checked) {
+                        return n;
                     }
-                });
+                }));
+            };
 
-                assignment.on('click', '.place', function () {
-                    assignment.removeClass('moving');
-                    var checked = getChecked();
-                    if (checked.length) {
-                        checked.prop('checked', false);
-                        $(this).parent('.header').next().children('.container').append(checked.parent());
+            function getItem(id) {
+                return $($.map(items, function (n, i) {
+                    if (n.getAttribute("data-id") === id) {
+                        return n;
                     }
-                });
-
-                assignment.on('click', 'button[type="submit"]', function () {
-                    if (!assignment.hasClass('validated')) {
-                        var checked = getChecked();
-                        if (checked.length) {
-                            checked.prop('checked', false);
-                        }
-                        assignment.addClass('validated');
-
-                        // this should be retrieved with api call
-                        var correct = [
-                            {
-                                id: '1', // TV
-                                items: ['5', '7']
-                            },
-                            {
-                                id: '2', // Games
-                                items: ['6', '8']
-                            },
-                            {
-                                id: '3', // Music
-                                items: ['2', '4']
-                            },
-                            {
-                                id: '4', // Sport
-                                items: ['1', '3']
-                            }
-                        ];
-
-                        $(correct).each(function (i, data) {
-                            $(data.items).each(function (j, id) {
-                                var item = getItem(id);
-                                if (item.parent().attr('data-id') === data.id) {
-                                    item.addClass('valid');
-                                } else if (item.parents('.to').length) {
-                                    item.addClass('invalid');
-                                }
-                            });
-                        });
-                    }
-                });
-
-                assignment.on('click', 'button[type="reset"]', function () {
-                    items.removeClass('valid invalid');
-                    var checked = getChecked();
-                    if (checked.length) {
-                        checked.prop('checked', false);
-                    }
-                    from.append(items);
-                    assignment.removeClass('validated moving');
-                });
+                }));
             }
-        });
-    };
-});
+
+            assignment.find('.container').each(function () {
+                Sortable.create($(this)[0], {
+                    group: 'container', draggable: ".item",
+                    animation: 0,
+                    scroll: false,
+                    forceFallback: true,
+                    fallbackOnBody: true,
+                    onAdd: function () {
+                        setTimeout(function () {
+                            var checked = getChecked();
+                            if (checked.length) {
+                                checked.prop('checked', false);
+                                assignment.removeClass('moving');
+                            }
+                        }, 0);
+                    }
+                });
+            });
+
+            assignment.on('click', '.item input[type=checkbox]', function () {
+                var $this = $(this);
+                var item = $this.parents('.item');
+                var moving = parseInt(assignment.attr('data-moving'));
+                if ($this.is(':checked')) {
+                    moving++;
+                    assignment.attr('data-moving', moving);
+                    assignment.addClass('moving');
+                } else {
+                    moving--;
+                    assignment.attr('data-moving', moving);
+                    if (moving === 0) {
+                        assignment.removeClass('moving');
+                    }
+                }
+            });
+
+            assignment.on('click', '.place', function () {
+                assignment.removeClass('moving');
+                var checked = getChecked();
+                if (checked.length) {
+                    checked.prop('checked', false);
+                    $(this).parent('.header').next().children('.container').append(checked.parent());
+                }
+            });
+
+            assignment.on('click', 'button[type="submit"]', function () {
+                if (!assignment.hasClass('validated')) {
+                    var checked = getChecked();
+                    if (checked.length) {
+                        checked.prop('checked', false);
+                    }
+                    assignment.addClass('validated');
+
+                    // this should be retrieved with api call
+                    var correct = [
+                        {
+                            id: '1', // TV
+                            items: ['5', '7']
+                        },
+                        {
+                            id: '2', // Games
+                            items: ['6', '8']
+                        },
+                        {
+                            id: '3', // Music
+                            items: ['2', '4']
+                        },
+                        {
+                            id: '4', // Sport
+                            items: ['1', '3']
+                        }
+                    ];
+
+                    $(correct).each(function (i, data) {
+                        $(data.items).each(function (j, id) {
+                            var item = getItem(id);
+                            if (item.parent().attr('data-id') === data.id) {
+                                item.addClass('valid');
+                            } else if (item.parents('.to').length) {
+                                item.addClass('invalid');
+                            }
+                        });
+                    });
+                }
+            });
+
+            assignment.on('click', 'button[type="reset"]', function () {
+                items.removeClass('valid invalid');
+                var checked = getChecked();
+                if (checked.length) {
+                    checked.prop('checked', false);
+                }
+                from.append(items);
+                assignment.removeClass('validated moving');
+            });
+        }
+    });
+};

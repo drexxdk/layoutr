@@ -1,4 +1,5 @@
 ﻿var app = app || {};
+
 $(function () {
     app.content.on('click', '#toggle-youtube', function () {
         if (app.youtube === undefined) {

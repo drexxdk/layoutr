@@ -1,5 +1,35 @@
 ﻿var app = app || {};
 
+app.loadPage = function (url, pushState) {
+    app.showLoading();
+    url = url.replace(/^\/+/g, '');
+    var q = url.indexOf('?');
+    url = url.substring(0, q !== -1 ? q : url.length);
+
+    if (!app.isLocalhost) {
+        url = url.substring(url.indexOf("/") + 1);
+    }
+
+    if (url === '') {
+        app.pageHome();
+    } else {
+        app.content.load('ajax/content/' + url + '.html', function () {
+            app.pageLoaded();
+        });
+    }
+
+    if (app.isLocalhost) {
+        url = '/' + url;
+    } else {
+        url = '/Panels/' + url;
+    }
+
+    if (pushState) {
+        window.history.pushState(null, null, url);
+        loadPage = true;
+    }
+};
+
 (function (l) {
     if (l.search) {
         app.q = {};
@@ -10,12 +40,12 @@
         if (app.q.p !== undefined) {
             window.history.replaceState(null, null,
                 l.pathname.slice(0, -1) + (app.q.p || '') +
-                (app.q.q ? ('?' + app.q.q) : '') +
+                (app.q.q ? '?' + app.q.q : '') +
                 l.hash
             );
         }
     }
-}(window.location))
+}(window.location));
 
 var loadPage = window.history.state;
 window.onpopstate = function (event) {
@@ -25,44 +55,25 @@ window.onpopstate = function (event) {
 };
 
 $(function () {
-    app.left.find('> .content > div').load('ajax/layout/menu.html');
-    app.loadPage = function (url, pushState) {
-        url = url.replace(/^\/+/g, '');
-        var q = url.indexOf('?');
-        url = url.substring(0, q != -1 ? q : url.length);
-        
-        if (!app.isLocalhost) {
-            url = url.substring(url.indexOf("/") + 1);
-        }
-
-        if (url === '') {
-            app.pageHome();
+    app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
+        if (app.q && app.q.p) {
+            app.left.find('a.label[href="' + app.q.p + '"]').addClass('active');
         } else {
-            app.content.load('ajax/content/' + url + '.html', function () {
-                app.pageLoaded();
-            });
+            app.left.find('a.label[href="/"]').addClass('active');
         }
-
-        if (app.isLocalhost) {
-            url = '/' + url;
-        } else {
-            url = '/Panels/' + url;
-        }
-
-        if (pushState) {
-            window.history.pushState(null, null, url);
-            loadPage = true;
-        }
-    }
+    });
 
     if (app.q && app.q.p) {
         app.loadPage(app.q.p, true);
     } else {
-        app.pageHome();
+        app.loadPage('', false);
     }
 
-    app.left.on('click', '.tree a', function (e) {
+    app.left.on('click', '.tree a.label:not(.active)', function (e) {
         e.preventDefault();
-        app.loadPage($(this).attr('href'), true);
+        var $this = $(this);
+        $this.parents('.tree').find('a.label.active').removeClass('active');
+        $this.addClass('active');
+        app.loadPage($this.attr('href'), true);
     });
 });

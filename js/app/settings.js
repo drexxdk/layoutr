@@ -1,8 +1,5 @@
 ﻿var app = app || {};
 
-app.localStorage = typeof Storage !== "undefined";
-app.settings = [];
-
 app.applySettings = function (id, type, value, set) {
     if (app.localStorage && set) {
         var entry = {

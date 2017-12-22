@@ -9,11 +9,11 @@
     $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
 
     @if ($yiq >= 150) {
-        fill: #111;
-        color: #111;
+        fill: $color-dark;
+        color: $color-dark;
     }
     @else {
-        fill: #fff;
-        color: #fff;
+        fill: $color-light;
+        color: $color-light;
     }
 }

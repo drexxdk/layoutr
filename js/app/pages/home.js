@@ -1,7 +1,6 @@
 ﻿var app = app || {};
 
 app.pageHome = function () {
-    app.showLoading();
     app.content.load('ajax/content/home.html', function () {
         app.pageLoaded();
 

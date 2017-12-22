@@ -42,6 +42,21 @@
         @extend .btn:focus;
     }
 
+
+    li {
+        a.label.active {
+            @include theme-element($primary, false);
+            pointer-events: none;
+            text-decoration: none;
+        }
+
+        html.desktop & {
+            .label:not(.active):hover {
+                background: theme-gradient($tree-hover-background-color);
+            }
+        }
+    }
+
     .label {
         position: relative;
         display: block;
@@ -49,16 +64,6 @@
         padding: ($spacer / 2) ($spacer / 2) ($spacer / 2) ($spacer * 2.5);
         width: calc(100% + (#{$spacer} * 2.5));
         cursor: pointer;
-
-        html.desktop & {
-            &:hover {
-                background-color: $tree-hover-background-color;
-
-                > .btn {
-                    @extend .btn:hover;
-                }
-            }
-        }
 
         &:after {
             content: '';
