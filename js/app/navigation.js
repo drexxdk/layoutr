@@ -15,6 +15,7 @@ app.loadPage = function (url, pushState) {
         app.left.find('a.label[href="/"]').addClass('active');
         app.pageHome();
     } else {
+        var found = app.left.find('a.label[href="' + url + '"]');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
         debugger;
         app.content.load('ajax/content/' + url + '.html', function () {
