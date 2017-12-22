@@ -10,9 +10,13 @@ app.loadPage = function (url, pushState) {
         url = url.substring(url.indexOf("/") + 1);
     }
 
+    app.left.find('.tree a.label.active').removeClass('active');
     if (url === '') {
+        app.left.find('a.label[href="/"]').addClass('active');
         app.pageHome();
     } else {
+        app.left.find('a.label[href="' + url + '"]').addClass('active');
+        debugger;
         app.content.load('ajax/content/' + url + '.html', function () {
             app.pageLoaded();
         });
