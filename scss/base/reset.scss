@@ -31,6 +31,7 @@ body {
     font-weight: $font-weight;
     line-height: $line-height;
     visibility: visible;
+    overflow: unset;
 }
 
 a {

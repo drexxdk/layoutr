@@ -2694,43 +2694,6 @@ $(window).click(function (e) {
 });
 var app = app || {};
 
-app.addValidation = function (form, rules, messages) {
-    form.validate({
-        rules: rules,
-        messages: messages,
-        errorElement: "em",
-        errorPlacement: function (error, element) {
-            element = element.parent();
-            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
-                element = element.parent();
-            }
-            element.append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
-        }
-    });
-    form.on('change', 'input, textarea, select', function () {
-        $(this).valid();
-    });
-};
-
-$(function () {
-    $.validator.setDefaults({
-        submitHandler: function () {
-            alert("Submitted!");
-        }
-    });
-
-    $.validator.addMethod('password', function (value) {
-        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
-    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
-});
-var app = app || {};
-
 app.pageLoaded = function () {
     app.body.scrollTop(0); // edge, safari
     app.html.scrollTop(0); // chrome, firefox, ie
@@ -2899,197 +2862,6 @@ $(window).resize(function () {
 
 $(function () {
     scrollbarWidth();
-});
-var app = app || {};
-
-app.accordion = function (elements) {
-    elements.on("click", ".headline", function () {
-        var content = $(this).next();
-        if (content.hasClass('open')) {
-            content
-                .removeClass('open')
-                .slideUp("800");
-        } else {
-            content
-                .addClass("open")
-                .slideToggle("800")
-                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
-        }
-    });
-};
-var app = app || {};
-
-app.dropdown = function (dropdowns) {
-    dropdowns.each(function () {
-        var $this = $(this);
-        var selected = $this.children('option:selected');
-        if (selected.length !== 1) {
-            selected = $this.children().first();
-        }
-        var html = [];
-        html.push('<div class="dropdown' +
-            ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
-            ($this.hasClass('align-left') ? ' align-left' : '') +
-            ($this.hasClass('align-right') ? ' align-right' : '') +
-            ($this.hasClass('direction-up') ? ' direction-up' : '') +
-            '">');
-
-        var attr = $this.attr('class');
-        var theme = '';
-        if (typeof attr !== typeof undefined && attr !== false) {
-            var temp = attr.split(' ');
-            temp = $.grep(temp, function (item, index) {
-                return item.trim().match(/^theme-/);
-            });
-            if (temp.length === 1) {
-                theme = temp[0];
-            }
-        }
-        html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
-        html.push('<ul class="' + theme + '">');
-        $this.children(':not([value=""])').each(function (index) {
-            var $that = $(this);
-            var text = $that.text();
-            if (text.indexOf('$$') == 0) {
-                $that.attr('data-math', text);
-            }
-
-            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
-        });
-        html.push('</ul>');
-        html.push('</div>');
-        var dropdown = html.join("");
-        $this.after(dropdown);
-        dropdown = $this.next();
-        dropdown.on('click', '> div', function () {
-            var $that = $(this);
-            $that.parent().toggleClass('open');
-        });
-        dropdown.on('click', 'li', function () {
-            var $that = $(this);
-            if (!$that.hasClass('selected')) {
-                $that.siblings('.selected').removeClass('selected');
-                $that.addClass('selected');
-                var option = $this.children('[value="' + $that.attr('data-id') + '"]');
-                var text = $that.text();
-                var math = option.attr('data-math');
-                if (math !== undefined) {
-                    text = math;
-                }
-                var label = dropdown.children('div').children('label');
-                label.text(text);
-                if (math !== undefined) {
-                    renderMathInElement(label[0]);
-                }
-                $this.children(':selected').removeAttr('selected');
-                option.attr('selected', 'selected');
-                $this.change();
-            }
-            dropdown.removeClass('open');
-        });
-    });
-};
-
-$(window).click(function (e) {
-    var target = $(e.target);
-    if (target.closest("div.dropdown").length) {
-        $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
-    }
-
-    if (!target.closest(".dropdown").length) {
-        $('div.dropdown').removeClass('open');
-    }
-});
-var app = app || {};
-var google;
-
-app.checkGoogleMaps = function () {
-    if (app.google !== undefined && google !== undefined) {
-        if (app.html.hasClass('transitions')) {
-            setTimeout(function () {
-                google.maps.event.trigger(app.google, 'resize');
-            }, app.transitionTime);
-        } else {
-            google.maps.event.trigger(app.google, 'resize');
-        }
-        return true;
-    } else {
-        return false;
-    }
-};
-
-$(function () {
-    app.content.on('click', '#toggle-google-maps', function () {
-        if (!app.checkGoogleMaps()) {
-            $('<div id="google-maps"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
-            app.google = document.getElementById('google-maps').children[0];
-            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
-                var uluru = { lat: -25.363, lng: 131.044 };
-                var map = new google.maps.Map(app.google, {
-                    zoom: 4,
-                    center: uluru
-                });
-                var marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map
-                });
-                $(window).resize('#google-maps', function () {
-                    google.maps.event.trigger(app.google, 'resize');
-                });
-            });
-        } else {
-            $(app.google).parent().toggle();
-        }
-    });
-});
-var app = app || {};
-
-$(function () {
-    app.content.on('click', '#toggle-youtube', function () {
-        if (app.youtube === undefined) {
-            $('<div id="youtube"><div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div></div>').insertAfter($(this));
-            app.youtube = app.content.find('#youtube');
-        } else {
-            app.youtube.toggle();
-        }
-    });
-});
-var app = app || {};
-
-app.addValidation = function (form, rules, messages) {
-    form.validate({
-        rules: rules,
-        messages: messages,
-        errorElement: "em",
-        errorPlacement: function (error, element) {
-            element = element.parent();
-            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
-                element = element.parent();
-            }
-            element.append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
-        }
-    });
-    form.on('change', 'input, textarea, select', function () {
-        $(this).valid();
-    });
-};
-
-$(function () {
-    $.validator.setDefaults({
-        submitHandler: function () {
-            alert("Submitted!");
-        }
-    });
-
-    $.validator.addMethod('password', function (value) {
-        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
-    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
 });
 var app = app || {};
 
@@ -3265,9 +3037,6 @@ app.applySettings = function (id, type, value, set) {
             // found
             exists[0].value = value;
         }
-        if (id === 'two-columns') {
-            app.responsiveBackground();
-        }
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
         if (type === "checkbox") {
@@ -3282,6 +3051,9 @@ app.applySettings = function (id, type, value, set) {
             app.html.addClass(id);
         } else {
             app.html.removeClass(id);
+        }
+        if (id === 'two-columns') {
+            app.responsiveBackground(app.content.find('.responsive-background'));
         }
     }
 };
@@ -3315,30 +3087,6 @@ $(function () {
         }
     });
 });
-var app = app || {};
-
-$(function () {
-    app.main.on('click', '.alert .close', function () {
-        var $this = $(this).parent();
-        $this.fadeOut(app.fadeOutTime, function () {
-            var parent = $this.parent();
-            if (parent.hasClass('popup') && parent.children().length === 1) {
-                parent.remove();
-            } else {
-                $this.remove();
-            }
-        });
-    });
-});
-var app = app || {};
-
-app.lazy = function (elements) {
-    elements.lazy({
-        afterLoad: function (element) {
-            element.removeClass('lazy');
-        }
-    });
-};
 var app = app || {};
 
 $(function () {
@@ -3610,14 +3358,207 @@ $(function () {
 });
 var app = app || {};
 
-app.responsiveBackground = function (elements) {
-    var images;
-    if (elements !== undefined && elements.length) {
-        images = elements;
-    } else {
-        images = app.body.find('.responsive-background');
+$(function () {
+    app.main.on('click', '.show-popup', function () {
+        var $this = $(this);
+        var title = $this.attr('data-popup-title');
+        if (title !== undefined) {
+            var theme = $this.attr('data-popup-theme');
+            if (theme === undefined) {
+                theme = 'primary';
+            }
+
+            var alert = [];
+            alert.push('<div class="alert theme-' + theme + '">');
+            alert.push('<div><p>' + title + '</p></div>');
+            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
+            alert.push('</div>');
+            alert = alert.join('');
+            
+            var position = $(this).attr('data-popup-position');
+            if (position === undefined) {
+                position = 'top left';
+            }
+
+            var popup = app.main.children('.popup[data-position="' + position + '"]');
+            if (popup.length) {
+                popup.append(alert);
+            } else {
+                var html = [];
+                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
+                html.push(alert);
+                html.push('</div>');
+                html = html.join("");
+                app.main.prepend(html);
+            }
+        }
+    });
+});
+var app = app || {};
+
+$(function () {
+    app.main.on('click', '.alert .close', function () {
+        var $this = $(this).parent();
+        $this.fadeOut(app.fadeOutTime, function () {
+            var parent = $this.parent();
+            if (parent.hasClass('popup') && parent.children().length === 1) {
+                parent.remove();
+            } else {
+                $this.remove();
+            }
+        });
+    });
+});
+var app = app || {};
+
+app.accordion = function (elements) {
+    elements.on("click", ".headline", function () {
+        var content = $(this).next();
+        if (content.hasClass('open')) {
+            content
+                .removeClass('open')
+                .slideUp("800");
+        } else {
+            content
+                .addClass("open")
+                .slideToggle("800")
+                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
+        }
+    });
+};
+var app = app || {};
+
+app.dropdown = function (dropdowns) {
+    dropdowns.each(function () {
+        var $this = $(this);
+        var selected = $this.children('option:selected');
+        if (selected.length !== 1) {
+            selected = $this.children().first();
+        }
+        var html = [];
+        html.push('<div class="dropdown' +
+            ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
+            ($this.hasClass('align-left') ? ' align-left' : '') +
+            ($this.hasClass('align-right') ? ' align-right' : '') +
+            ($this.hasClass('direction-up') ? ' direction-up' : '') +
+            '">');
+
+        var attr = $this.attr('class');
+        var theme = '';
+        if (typeof attr !== typeof undefined && attr !== false) {
+            var temp = attr.split(' ');
+            temp = $.grep(temp, function (item, index) {
+                return item.trim().match(/^theme-/);
+            });
+            if (temp.length === 1) {
+                theme = temp[0];
+            }
+        }
+        html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
+        html.push('<ul class="' + theme + '">');
+        $this.children(':not([value=""])').each(function (index) {
+            var $that = $(this);
+            var text = $that.text();
+            if (text.indexOf('$$') == 0) {
+                $that.attr('data-math', text);
+            }
+
+            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+        });
+        html.push('</ul>');
+        html.push('</div>');
+        var dropdown = html.join("");
+        $this.after(dropdown);
+        dropdown = $this.next();
+        dropdown.on('click', '> div', function () {
+            var $that = $(this);
+            $that.parent().toggleClass('open');
+        });
+        dropdown.on('click', 'li', function () {
+            var $that = $(this);
+            if (!$that.hasClass('selected')) {
+                $that.siblings('.selected').removeClass('selected');
+                $that.addClass('selected');
+                var option = $this.children('[value="' + $that.attr('data-id') + '"]');
+                var text = $that.text();
+                var math = option.attr('data-math');
+                if (math !== undefined) {
+                    text = math;
+                }
+                var label = dropdown.children('div').children('label');
+                label.text(text);
+                if (math !== undefined) {
+                    renderMathInElement(label[0]);
+                }
+                $this.children(':selected').removeAttr('selected');
+                option.attr('selected', 'selected');
+                $this.change();
+            }
+            dropdown.removeClass('open');
+        });
+    });
+};
+
+$(window).click(function (e) {
+    var target = $(e.target);
+    if (target.closest("div.dropdown").length) {
+        $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
     }
-    images.each(function () {
+
+    if (!target.closest(".dropdown").length) {
+        $('div.dropdown').removeClass('open');
+    }
+});
+var app = app || {};
+
+app.addValidation = function (form, rules, messages) {
+    form.validate({
+        rules: rules,
+        messages: messages,
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            element = element.parent();
+            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
+                element = element.parent();
+            }
+            element.append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
+        }
+    });
+    form.on('change', 'input, textarea, select', function () {
+        $(this).valid();
+    });
+};
+
+$(function () {
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("Submitted!");
+        }
+    });
+
+    $.validator.addMethod('password', function (value) {
+        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
+    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
+});
+var app = app || {};
+
+app.lazy = function (elements) {
+    elements.lazy({
+        afterLoad: function (element) {
+            element.removeClass('lazy');
+        }
+    });
+};
+var app = app || {};
+
+app.responsiveBackground = function (elements) {
+    elements.each(function () {
         var $this = $(this),
             image = $this.attr('data-responsive-background-image'),
             filetype = $this.attr('data-responsive-background-image-filetype'),
@@ -3709,164 +3650,183 @@ app.tooltipster = function (elements) {
 };
 var app = app || {};
 
-$(function () {
-    app.main.on('click', '.show-popup', function () {
+app.assignment = function (assignments) {
+    $(assignments).each(function (index, assignment) {
+        assignment = $(assignment);
+        if (assignment.hasClass('move multiple')) {
+            app.assignment.move(assignment);
+        }
+    });
+};
+app.assignment.move = function (assignment) {
+    assignment.attr('data-moving', 0);
+    var from = assignment.find('.from .container');
+    var items = assignment.find('.item');
+    var checkboxes = items.find('input[type=checkbox]');
+
+    var getChecked = function () {
+        return $($.map(checkboxes, function (n, i) {
+            if (n.checked) {
+                return n;
+            }
+        }));
+    };
+
+    var getItem = function (id) {
+        return $($.map(items, function (n, i) {
+            if (n.getAttribute("data-id") === id) {
+                return n;
+            }
+        }));
+    };
+
+    assignment.find('.container').each(function () {
+        Sortable.create($(this)[0], {
+            group: 'container', draggable: ".item",
+            animation: 0,
+            scroll: false,
+            forceFallback: true,
+            fallbackOnBody: true,
+            onAdd: function () {
+                setTimeout(function () {
+                    var checked = getChecked();
+                    if (checked.length) {
+                        checked.prop('checked', false);
+                        assignment.removeClass('moving');
+                    }
+                }, 0);
+            }
+        });
+    });
+
+    assignment.on('click', '.item input[type=checkbox]', function () {
         var $this = $(this);
-        var title = $this.attr('data-popup-title');
-        if (title !== undefined) {
-            var theme = $this.attr('data-popup-theme');
-            if (theme === undefined) {
-                theme = 'primary';
+        var item = $this.parents('.item');
+        var moving = parseInt(assignment.attr('data-moving'));
+        if ($this.is(':checked')) {
+            moving++;
+            assignment.attr('data-moving', moving);
+            assignment.addClass('moving');
+        } else {
+            moving--;
+            assignment.attr('data-moving', moving);
+            if (moving === 0) {
+                assignment.removeClass('moving');
             }
+        }
+    });
 
-            var alert = [];
-            alert.push('<div class="alert theme-' + theme + '">');
-            alert.push('<div><p>' + title + '</p></div>');
-            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
-            alert.push('</div>');
-            alert = alert.join('');
-            
-            var position = $(this).attr('data-popup-position');
-            if (position === undefined) {
-                position = 'top left';
-            }
+    assignment.on('click', '.place', function () {
+        assignment.removeClass('moving');
+        var checked = getChecked();
+        if (checked.length) {
+            checked.prop('checked', false);
+            $(this).parent('.header').next().children('.container').append(checked.parent());
+        }
+    });
 
-            var popup = app.main.children('.popup[data-position="' + position + '"]');
-            if (popup.length) {
-                popup.append(alert);
-            } else {
-                var html = [];
-                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
-                html.push(alert);
-                html.push('</div>');
-                html = html.join("");
-                app.main.prepend(html);
+    assignment.on('click', 'button[type="submit"]', function () {
+        if (!assignment.hasClass('validated')) {
+            var checked = getChecked();
+            if (checked.length) {
+                checked.prop('checked', false);
             }
+            assignment.addClass('validated');
+
+            // this should be retrieved with api call
+            var correct = [
+                {
+                    id: '1', // TV
+                    items: ['5', '7']
+                },
+                {
+                    id: '2', // Games
+                    items: ['6', '8']
+                },
+                {
+                    id: '3', // Music
+                    items: ['2', '4']
+                },
+                {
+                    id: '4', // Sport
+                    items: ['1', '3']
+                }
+            ];
+
+            $(correct).each(function (i, data) {
+                $(data.items).each(function (j, id) {
+                    var item = getItem(id);
+                    if (item.parent().attr('data-id') === data.id) {
+                        item.addClass('valid');
+                    } else if (item.parents('.to').length) {
+                        item.addClass('invalid');
+                    }
+                });
+            });
+        }
+    });
+
+    assignment.on('click', 'button[type="reset"]', function () {
+        items.removeClass('valid invalid');
+        var checked = getChecked();
+        if (checked.length) {
+            checked.prop('checked', false);
+        }
+        from.append(items);
+        assignment.removeClass('validated moving');
+    });
+}
+var app = app || {};
+var google;
+
+app.checkGoogleMaps = function () {
+    if (app.google !== undefined && google !== undefined) {
+        if (app.html.hasClass('transitions')) {
+            setTimeout(function () {
+                google.maps.event.trigger(app.google, 'resize');
+            }, app.transitionTime);
+        } else {
+            google.maps.event.trigger(app.google, 'resize');
+        }
+        return true;
+    } else {
+        return false;
+    }
+};
+
+$(function () {
+    app.content.on('click', '#toggle-google-maps', function () {
+        if (!app.checkGoogleMaps()) {
+            $('<div id="google-maps"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
+            app.google = document.getElementById('google-maps').children[0];
+            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
+                var uluru = { lat: -25.363, lng: 131.044 };
+                var map = new google.maps.Map(app.google, {
+                    zoom: 4,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+                $(window).resize('#google-maps', function () {
+                    google.maps.event.trigger(app.google, 'resize');
+                });
+            });
+        } else {
+            $(app.google).parent().toggle();
         }
     });
 });
 var app = app || {};
 
-app.assignment = function (assignments) {
-    $(assignments).each(function (index, assignment) {
-        assignment = $(assignment);
-        if (assignment.hasClass('move multiple')) {
-            assignment.attr('data-moving', 0);
-            var from = assignment.find('.from .container');
-            var items = assignment.find('.item');
-            var checkboxes = items.find('input[type=checkbox]');
-
-            function getChecked() {
-                return $($.map(checkboxes, function (n, i) {
-                    if (n.checked) {
-                        return n;
-                    }
-                }));
-            };
-
-            function getItem(id) {
-                return $($.map(items, function (n, i) {
-                    if (n.getAttribute("data-id") === id) {
-                        return n;
-                    }
-                }));
-            }
-
-            assignment.find('.container').each(function () {
-                Sortable.create($(this)[0], {
-                    group: 'container', draggable: ".item",
-                    animation: 0,
-                    scroll: false,
-                    forceFallback: true,
-                    fallbackOnBody: true,
-                    onAdd: function () {
-                        setTimeout(function () {
-                            var checked = getChecked();
-                            if (checked.length) {
-                                checked.prop('checked', false);
-                                assignment.removeClass('moving');
-                            }
-                        }, 0);
-                    }
-                });
-            });
-
-            assignment.on('click', '.item input[type=checkbox]', function () {
-                var $this = $(this);
-                var item = $this.parents('.item');
-                var moving = parseInt(assignment.attr('data-moving'));
-                if ($this.is(':checked')) {
-                    moving++;
-                    assignment.attr('data-moving', moving);
-                    assignment.addClass('moving');
-                } else {
-                    moving--;
-                    assignment.attr('data-moving', moving);
-                    if (moving === 0) {
-                        assignment.removeClass('moving');
-                    }
-                }
-            });
-
-            assignment.on('click', '.place', function () {
-                assignment.removeClass('moving');
-                var checked = getChecked();
-                if (checked.length) {
-                    checked.prop('checked', false);
-                    $(this).parent('.header').next().children('.container').append(checked.parent());
-                }
-            });
-
-            assignment.on('click', 'button[type="submit"]', function () {
-                if (!assignment.hasClass('validated')) {
-                    var checked = getChecked();
-                    if (checked.length) {
-                        checked.prop('checked', false);
-                    }
-                    assignment.addClass('validated');
-
-                    // this should be retrieved with api call
-                    var correct = [
-                        {
-                            id: '1', // TV
-                            items: ['5', '7']
-                        },
-                        {
-                            id: '2', // Games
-                            items: ['6', '8']
-                        },
-                        {
-                            id: '3', // Music
-                            items: ['2', '4']
-                        },
-                        {
-                            id: '4', // Sport
-                            items: ['1', '3']
-                        }
-                    ];
-
-                    $(correct).each(function (i, data) {
-                        $(data.items).each(function (j, id) {
-                            var item = getItem(id);
-                            if (item.parent().attr('data-id') === data.id) {
-                                item.addClass('valid');
-                            } else if (item.parents('.to').length) {
-                                item.addClass('invalid');
-                            }
-                        });
-                    });
-                }
-            });
-
-            assignment.on('click', 'button[type="reset"]', function () {
-                items.removeClass('valid invalid');
-                var checked = getChecked();
-                if (checked.length) {
-                    checked.prop('checked', false);
-                }
-                from.append(items);
-                assignment.removeClass('validated moving');
-            });
+$(function () {
+    app.content.on('click', '#toggle-youtube', function () {
+        if (app.youtube === undefined) {
+            $('<div id="youtube"><div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div></div>').insertAfter($(this));
+            app.youtube = app.content.find('#youtube');
+        } else {
+            app.youtube.toggle();
         }
     });
-};
+});

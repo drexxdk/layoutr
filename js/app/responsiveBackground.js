@@ -1,13 +1,7 @@
 ﻿var app = app || {};
 
 app.responsiveBackground = function (elements) {
-    var images;
-    if (elements !== undefined && elements.length) {
-        images = elements;
-    } else {
-        images = app.body.find('.responsive-background');
-    }
-    images.each(function () {
+    elements.each(function () {
         var $this = $(this),
             image = $this.attr('data-responsive-background-image'),
             filetype = $this.attr('data-responsive-background-image-filetype'),
