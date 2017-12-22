@@ -30,7 +30,8 @@ body {
     font-size: $font-size;
     font-weight: $font-weight;
     line-height: $line-height;
-    visibility: visible;
+    /* override inline styling */
+    visibility: unset;
     overflow: unset;
 }
 
