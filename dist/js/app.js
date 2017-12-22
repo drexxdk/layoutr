@@ -3624,7 +3624,7 @@ app.responsiveBackground = function (elements) {
 };
 
 $(window).resize(function () {
-    app.responsiveBackground();
+    app.responsiveBackground(app.main.find('.responsive-background'));
 });
 var app = app || {};
 
