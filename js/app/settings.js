@@ -38,6 +38,7 @@ app.applySettings = function (id, type, value, set) {
 
 $(function () {
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
+        app.header.find('.aside.right').addClass('loaded');
         var $this = $(this);
         if (app.localStorage) {
             app.settings = JSON.parse(localStorage.getItem("settings"));

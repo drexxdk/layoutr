@@ -60,6 +60,7 @@ window.onpopstate = function (event) {
 
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
+        app.header.find('.aside.left').addClass('loaded');
         if (app.url && app.url.p) {
             app.left.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
         } else {

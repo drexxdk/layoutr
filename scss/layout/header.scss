@@ -7,4 +7,9 @@ header {
     left: 0;
     background-color: $layout-background-color;
     z-index: $header-z-index;
+
+    .aside:not(.loaded) {
+        opacity: 0;
+        pointer-events: none;
+    }
 }
