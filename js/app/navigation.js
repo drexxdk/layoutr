@@ -42,7 +42,6 @@ app.loadPage = function (url, pushState) {
             app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
         if (app.url.p !== undefined) {
-            app.url.p = app.url.p.replace(/^\/+/g, '');
             window.history.replaceState(null, null,
                 l.pathname.slice(0, -1) + app.url.p +
                 (app.url.q ? '?' + app.url.q : '') +
