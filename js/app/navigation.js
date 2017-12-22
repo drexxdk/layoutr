@@ -62,8 +62,10 @@ window.onpopstate = function (event) {
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
         if (app.q && app.q.p) {
+            debugger;
             app.left.find('a.label[href="' + app.q.p + '"]').addClass('active');
         } else {
+            debugger;
             app.left.find('a.label[href="/"]').addClass('active');
         }
     });
@@ -77,8 +79,6 @@ $(function () {
     app.left.on('click', '.tree a.label:not(.active)', function (e) {
         e.preventDefault();
         var $this = $(this);
-        $this.parents('.tree').find('a.label.active').removeClass('active');
-        $this.addClass('active');
         app.loadPage($this.attr('href'), true);
     });
 });
