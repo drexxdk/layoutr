@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.pageLoaded = function () {
+app.pageLoaded = function (initial) {
     app.body.scrollTop(0); // edge, safari
     app.html.scrollTop(0); // chrome, firefox, ie
     if (app.html.hasClass('msie')) {
@@ -24,4 +24,7 @@ app.pageLoaded = function () {
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();
+    if (initial) {
+        app.html.addClass('siteLoaded');
+    }
 };

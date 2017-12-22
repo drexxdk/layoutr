@@ -16,22 +16,24 @@
     <link rel="manifest" href="manifest.json">
     <style>
         body {
+            overflow: hidden;
+        }
+        main {
             visibility: hidden;
-            overflow:hidden;
         }
     </style>
 </head>
 <body>
-    <main tabindex="0">
-        <div id="loading">
-            <div class="spinner">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
-            </div>
+    <div id="loading">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
         </div>
+    </div>
+    <main tabindex="0">
         <div id="modal" tabindex="0"></div>
         <header class="header">
             <button type="button" class="aside left" aria-label="Toggle menu">

@@ -1,9 +1,7 @@
 ﻿var app = app || {};
 
-app.pageHome = function () {
+app.pageHome = function (initial) {
     app.content.load('ajax/content/home.html', function () {
-        app.pageLoaded();
-
         app.content.find('#font_size').slider({
             min: 12,
             max: 20,
@@ -82,5 +80,7 @@ app.pageHome = function () {
                 agree: "Please accept our policy"
             }
         );
+
+        app.pageLoaded(initial);
     });
 };

@@ -2694,7 +2694,7 @@ $(window).click(function (e) {
 });
 var app = app || {};
 
-app.pageLoaded = function () {
+app.pageLoaded = function (initial) {
     app.body.scrollTop(0); // edge, safari
     app.html.scrollTop(0); // chrome, firefox, ie
     if (app.html.hasClass('msie')) {
@@ -2718,13 +2718,14 @@ app.pageLoaded = function () {
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();
+    if (initial) {
+        app.html.addClass('siteLoaded');
+    }
 };
 var app = app || {};
 
-app.pageHome = function () {
+app.pageHome = function (initial) {
     app.content.load('ajax/content/home.html', function () {
-        app.pageLoaded();
-
         app.content.find('#font_size').slider({
             min: 12,
             max: 20,
@@ -2803,6 +2804,8 @@ app.pageHome = function () {
                 agree: "Please accept our policy"
             }
         );
+
+        app.pageLoaded(initial);
     });
 };
 var app = app || {};
@@ -2940,7 +2943,7 @@ $(function () {
 });
 var app = app || {};
 
-app.loadPage = function (url, pushState) {
+app.loadPage = function (url, pushState, initial) {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
@@ -2953,12 +2956,12 @@ app.loadPage = function (url, pushState) {
     app.left.find('.tree a.label.active').removeClass('active');
     if (url === '') {
         app.left.find('a.label[href="/"]').addClass('active');
-        app.pageHome();
+        app.pageHome(initial);
     } else {
         var found = app.left.find('a.label[href="' + url + '"]');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
         app.content.load('ajax/content/' + url + '.html', function () {
-            app.pageLoaded();
+            app.pageLoaded(initial);
         });
     }
 
@@ -2994,7 +2997,7 @@ app.loadPage = function (url, pushState) {
 var loadPage = window.history.state;
 window.onpopstate = function (event) {
     if (loadPage) {
-        app.loadPage(location.pathname, false);
+        app.loadPage(location.pathname, false, true);
     }
 };
 
@@ -3009,15 +3012,15 @@ $(function () {
     });
 
     if (app.url && app.url.p) {
-        app.loadPage(app.url.p, true);
+        app.loadPage(app.url.p, true, true);
     } else {
-        app.loadPage('', false);
+        app.loadPage('', false, true);
     }
 
     app.left.on('click', '.tree a.label:not(.active)', function (e) {
         e.preventDefault();
         var $this = $(this);
-        app.loadPage($this.attr('href'), true);
+        app.loadPage($this.attr('href'), true, false);
     });
 });
 var app = app || {};
