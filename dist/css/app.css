@@ -825,13 +825,13 @@ html.transitions #content > div > .content-header {
   .btn.theme-warning, div.dropdown > div.theme-warning, div.dropdown > ul > li > div.theme-warning, .accordion > div > .theme-warning.headline, .tree label.label > i.theme-warning {
     fill: #fff;
     color: #fff;
-    background: #F07107 linear-gradient(180deg, #f0842a, #F07107) repeat-x;
-    border: 0.0625rem solid #dd6806; }
+    background: #BE5A06 linear-gradient(180deg, #c67129, #BE5A06) repeat-x;
+    border: 0.0625rem solid #af5306; }
     html.desktop .btn.theme-warning:hover, html.desktop div.dropdown > div.theme-warning:hover, html.desktop div.dropdown > ul > li > div.theme-warning:hover, html.desktop .accordion > div > .theme-warning.headline:hover, html.desktop .tree label.label > i.theme-warning:hover, .tree html.desktop label.label > i.theme-warning:hover {
       fill: #fff;
       color: #fff;
-      background: #cb6006 linear-gradient(180deg, #d17529, #cb6006) repeat-x;
-      border: 0.0625rem solid #bb5805; }
+      background: #994805 linear-gradient(180deg, #a66228, #994805) repeat-x;
+      border: 0.0625rem solid #8d4304; }
   .btn.theme-danger, div.dropdown > div.theme-danger, div.dropdown > ul > li > div.theme-danger, .accordion > div > .theme-danger.headline, .tree label.label > i.theme-danger {
     fill: #fff;
     color: #fff;
@@ -1541,7 +1541,7 @@ html.desktop .form-group.theme-danger .dropdown > .btn:hover, html.desktop .form
     .accordion > div > .headline.btn.theme-warning:focus, .accordion > select.dropdown:focus + div.dropdown > div.headline.theme-warning, .accordion > div.dropdown > div.headline.theme-warning:focus, .accordion > div > .headline.theme-warning:focus {
       fill: #fff;
       color: #fff;
-      background: #cb6006 linear-gradient(180deg, #d17529, #cb6006) repeat-x;
+      background: #994805 linear-gradient(180deg, #a66228, #994805) repeat-x;
       box-shadow: none; }
     .accordion > div > .headline.btn.theme-danger:focus, .accordion > select.dropdown:focus + div.dropdown > div.headline.theme-danger, .accordion > div.dropdown > div.headline.theme-danger:focus, .accordion > div > .headline.theme-danger:focus {
       fill: #fff;
@@ -1635,16 +1635,16 @@ html.desktop .form-group.theme-danger .dropdown > .btn:hover, html.desktop .form
   .alert.theme-warning {
     fill: #212529;
     color: #212529;
-    background: #fce3cd linear-gradient(180deg, #fae5d2, #fce3cd) repeat-x;
-    border: 0.0625rem solid #e8d1bd; }
+    background: #f2decd linear-gradient(180deg, #f2e1d2, #f2decd) repeat-x;
+    border: 0.0625rem solid #dfccbd; }
     .alert.theme-warning .close:focus, .alert.theme-warning select.dropdown:focus + div.dropdown > div.close {
       fill: #212529;
       color: #212529;
-      background: #facfa9 linear-gradient(180deg, #f9d4b4, #facfa9) repeat-x; }
+      background: #eacaaf linear-gradient(180deg, #ebd0b9, #eacaaf) repeat-x; }
     html.desktop .alert.theme-warning .close:hover {
       fill: #212529;
       color: #212529;
-      background: #facfa9 linear-gradient(180deg, #f9d4b4, #facfa9) repeat-x; }
+      background: #eacaaf linear-gradient(180deg, #ebd0b9, #eacaaf) repeat-x; }
   .alert.theme-danger {
     fill: #212529;
     color: #212529;
@@ -2535,10 +2535,10 @@ ol.list {
   ol.list.theme-warning li > *:not(ol):before {
     fill: #fff;
     color: #fff;
-    background: #F07107 linear-gradient(180deg, #f0842a, #F07107) repeat-x;
-    border: 0.0625rem solid #dd6806; }
+    background: #BE5A06 linear-gradient(180deg, #c67129, #BE5A06) repeat-x;
+    border: 0.0625rem solid #af5306; }
   html.desktop ol.list.theme-warning li > a:hover:after {
-    border-left-color: #F07107; }
+    border-left-color: #BE5A06; }
   ol.list.theme-danger li > *:not(ol):before {
     fill: #fff;
     color: #fff;
@@ -2871,9 +2871,9 @@ html.desktop .modal.overlay-dark:hover:after {
     color: #138294; }
   .percentage-circle.theme-warning .pie, .percentage-circle.theme-warning .bar, .percentage-circle.theme-warning .fill,
   .percentage-circle.theme-warning .fill {
-    border-color: #F07107; }
+    border-color: #BE5A06; }
   .percentage-circle.theme-warning > span {
-    color: #F07107; }
+    color: #BE5A06; }
   .percentage-circle.theme-danger .pie, .percentage-circle.theme-danger .bar, .percentage-circle.theme-danger .fill,
   .percentage-circle.theme-danger .fill {
     border-color: #dc3545; }
@@ -3475,7 +3475,7 @@ html.desktop .modal.overlay-dark:hover:after {
   .percentage.theme-warning > span {
     fill: #fff;
     color: #fff;
-    background: #F07107 linear-gradient(180deg, #f0842a, #F07107) repeat-x; }
+    background: #BE5A06 linear-gradient(180deg, #c67129, #BE5A06) repeat-x; }
   .percentage.theme-danger > span {
     fill: #fff;
     color: #fff;
@@ -3578,8 +3578,8 @@ html.footer-fixed .popup.bottom {
   .progress > div > span.theme-warning {
     fill: #fff;
     color: #fff;
-    background: #F07107 linear-gradient(180deg, #f0842a, #F07107) repeat-x;
-    border: 0.0625rem solid #dd6806; }
+    background: #BE5A06 linear-gradient(180deg, #c67129, #BE5A06) repeat-x;
+    border: 0.0625rem solid #af5306; }
   .progress > div > span.theme-danger {
     fill: #fff;
     color: #fff;
@@ -3646,7 +3646,7 @@ html.footer-fixed .popup.bottom {
   .table.theme-warning table thead th {
     fill: #fff;
     color: #fff;
-    background: #F07107 linear-gradient(180deg, #f0842a, #F07107) repeat-x; }
+    background: #BE5A06 linear-gradient(180deg, #c67129, #BE5A06) repeat-x; }
   .table.theme-danger table thead th {
     fill: #fff;
     color: #fff;
