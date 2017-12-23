@@ -1,6 +1,7 @@
 ﻿var app = app || {};
 
 app.loadPage = function (url, pushState, initial) {
+    debugger;
     app.showLoading();
     var q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
@@ -19,10 +20,12 @@ app.loadPage = function (url, pushState, initial) {
     if (app.isLocalhost) {
         url = '/' + url;
     } else {
+        debugger;
         url = '/Panels/' + url;
     }
 
     if (pushState) {
+        debugger;
         window.history.pushState(null, null, url);
         loadPage = true;
     }
@@ -48,6 +51,7 @@ app.loadPage = function (url, pushState, initial) {
 var loadPage = window.history.state;
 window.onpopstate = function (event) {
     if (loadPage) {
+        debugger;
         app.loadPage(location.pathname, false, true);
     }
 };
