@@ -16,12 +16,25 @@ html {
             content: '';
             @include overlay;
             height: 100vh;
-            background-color: $overlay-background-color-light;
+            /*background-color: $overlay-background-color-light;*/
         }
 
         > .spinner {
+            position: relative;
             height: $font-size * 4;
             @include flex-display;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: -$spacer;
+                bottom: -$spacer;
+                left: -($spacer * 2);
+                right: -($spacer * 2);
+                background-color: $overlay-background-color-light;
+                border-radius: $component-border-radius * 2;
+                border: (($font-size * 3) / 5) solid $loader-background-color;
+            }
 
             > div {
                 background-color: $loader-background-color;

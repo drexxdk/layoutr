@@ -10,7 +10,9 @@ app.pageLoaded = function (initial) {
         if (app.html.hasClass('msie')) {
             app.body.css('overflow', '');
         }
-        app.toggleAside(undefined, true);
+        if (!initial) {
+            app.toggleAside(undefined, true);
+        }
     }, 200);
     app.contentHeader = app.content.children('.header:not(.full)');
     app.lazy(app.content.find('.lazy'));

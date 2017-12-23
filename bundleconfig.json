@@ -27,7 +27,7 @@
       "js/app/_bowser.js",
       "js/app/_app.js",
       "js/app/pageLoaded.js",
-      "js/app/pages/home.js",
+      "js/app/pages/form.js",
       "js/app/scroll.js",
       "js/app/loading.js",
       "js/app/aside.js",

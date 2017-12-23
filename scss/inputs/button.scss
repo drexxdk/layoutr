@@ -13,9 +13,6 @@
     line-height: $component-line-height;
     z-index: $component-z-index;
     box-shadow: $box-shadow;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
 
     html.desktop & {
         &:hover {

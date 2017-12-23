@@ -2,22 +2,16 @@
 
 app.loadPage = function (url, pushState, initial) {
     app.showLoading();
-    url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
-
-    if (!app.isLocalhost) {
-        url = url.substring(url.indexOf("/") + 1);
-    }
-
+    
     app.left.find('.tree a.label.active').removeClass('active');
-    if (url === '') {
-        app.left.find('a.label[href="/"]').addClass('active');
-        app.pageHome(initial);
+    if (url === 'form') {
+        app.left.find('a.label[href="form"]').addClass('active');
+        app.pageForm(initial);
     } else {
-        var found = app.left.find('a.label[href="' + url + '"]');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
-        app.content.load('ajax/content/' + url + '.html', function () {
+        app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
             app.pageLoaded(initial);
         });
     }

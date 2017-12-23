@@ -16,7 +16,6 @@
     position: relative;
     line-height: $line-height;
     @include noselect;
-    max-width: 100%;
 
     > input {
         @include hidden-input;

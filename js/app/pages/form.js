@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
-app.pageHome = function (initial) {
-    app.content.load('ajax/content/home.html', function () {
+app.pageForm = function (initial) {
+    app.content.load('ajax/pages/form.html', function () {
         app.content.find('#font_size').slider({
             min: 12,
             max: 20,

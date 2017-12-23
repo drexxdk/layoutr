@@ -2704,7 +2704,9 @@ app.pageLoaded = function (initial) {
         if (app.html.hasClass('msie')) {
             app.body.css('overflow', '');
         }
-        app.toggleAside(undefined, true);
+        if (!initial) {
+            app.toggleAside(undefined, true);
+        }
     }, 200);
     app.contentHeader = app.content.children('.header:not(.full)');
     app.lazy(app.content.find('.lazy'));
@@ -2724,8 +2726,8 @@ app.pageLoaded = function (initial) {
 };
 var app = app || {};
 
-app.pageHome = function (initial) {
-    app.content.load('ajax/content/home.html', function () {
+app.pageForm = function (initial) {
+    app.content.load('ajax/pages/form.html', function () {
         app.content.find('#font_size').slider({
             min: 12,
             max: 20,
@@ -2945,22 +2947,16 @@ var app = app || {};
 
 app.loadPage = function (url, pushState, initial) {
     app.showLoading();
-    url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
-
-    if (!app.isLocalhost) {
-        url = url.substring(url.indexOf("/") + 1);
-    }
-
+    
     app.left.find('.tree a.label.active').removeClass('active');
-    if (url === '') {
-        app.left.find('a.label[href="/"]').addClass('active');
-        app.pageHome(initial);
+    if (url === 'form') {
+        app.left.find('a.label[href="form"]').addClass('active');
+        app.pageForm(initial);
     } else {
-        var found = app.left.find('a.label[href="' + url + '"]');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
-        app.content.load('ajax/content/' + url + '.html', function () {
+        app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
             app.pageLoaded(initial);
         });
     }

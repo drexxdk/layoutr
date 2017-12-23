@@ -1,0 +1,383 @@
+﻿<div class="content-header">
+    <div class="overlay-dark cover responsive-background"
+         data-responsive-background-image="dist/img/responsive-background/wonder-woman"
+         data-responsive-background-image-filetype="jpg"
+         data-responsive-background-sizes="800,1024,1200,1920,3840"
+         data-responsive-background-aspect-ratio="16by9"
+         data-responsive-background-current="800"
+         style="background-position: center 36%; background-image:url(dist/img/responsive-background/wonder-woman-800.jpg)">
+        <div>
+            <span class="title">Wonder Woman</span>
+            <span class="author">DC Comics</span>
+            <div class="position bottom left"><div>test</div></div>
+            <div class="position bottom right"><div>test</div></div>
+            <div class="position top left"><div>test</div></div>
+            <div class="position top right"><div>test</div></div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div>
+        <section>
+            <h3>Introduction</h3>
+            <div class="alert">
+                <div>
+                    <ul class="list">
+                        <li>
+                            The goal with this website is to make a dynamic layout with all the features a modern website should have, that works in all browsers on all devices.
+                        </li>
+                        <li>
+                            Originally the website used <a href="http://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a> and <a href="http://fontawesome.io/" target="_blank" rel="noopener">FontAwesome</a>, but it bloated the website and effected performance,
+                            therefore I removed them after copying the parts from Bootstrap I needed and added it to my own SCSS files.
+                        </li>
+                        <li>
+                            FontAwesome made it easy to add icons for everything, but it was the biggest resource that had to be downloaded at page load,
+                            therefore I replaced it with svg icons, that got added directly to the DOM.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Some of the features</h3>
+            <div class="alert theme-info">
+                <div>
+                    <ul class="list">
+                        <li>
+                            <b>Keyboard controls</b> is disabled when loading is shown.
+                            <ul>
+                                <li><b>Left arrow key</b> if modal isn't shown it will opens settings or closes navigation if it is open.</li>
+                                <li><b>Right arrow key</b> if modal isn't shown it will opens navigation or closes settings if it is open.</li>
+                                <li><b>ESC key</b> closes modal or aside, popups and dropdowns.</li>
+                                <li><b>TAB</b> toggles modal, aside, dropdown if focused element is within/outside of it.</li>
+                                <li><b>ENTER</b> toggles checkbox, radio, dropdown, accordion item, navigation tree item if it has focus.</li>
+                            </ul>
+                        </li>
+                        <li><b>Local storage</b> is used to save settings.</li>
+                        <li><b>Modal</b> for image keeps aspect ratio and always fills entire width or height of screen.</li>
+                        <li><b>Tables</b> can be flipped without any javascript.</li>
+                        <li><b>REM</b> is used for everything instead of EM or PX. REM gets converted to PX for breakpoints, since browsers can't handle REM in breakpoints correctly.</li>
+                        <li><b>Media queries</b> based on layout elements instead of just browser window width.</li>
+                        <li><b>SVG icons</b> with fill color that can be set in SCSS.</li>
+                        <li><b>Hover effects</b> is only applied for desktop browsers, since mobiles can't display them correctly.</li>
+                        <li><b>Responsive design</b> that works down to around 300x300px.</li>
+                        <li><b>Focus</b> is applied to all inputs for accessibility.</li>
+                        <li><b>Scroll</b> is disabled for the site, when displaying modal, aside without push and loading.</li>
+                        <li><b>Transitions</b> works in all browsers by using margin/padding alternatives to calc(), since Edge/IE can't handle transitions with calc().</li>
+                        <li>
+                            <b>Android</b>
+                            <ul>
+                                <li><b>Modal</b> image shrinks/grows, when androids top bar is shown/hidden.</li>
+                                <li>
+                                    <b>Swipe controls</b> is disabled when loading or modal is shown or when horizontally scrolling.
+                                    <ul>
+                                        <li><b>Swipe left</b> opens settings or closes navigation if it is open.</li>
+                                        <li><b>Swipe right</b> opens navigation or closes settings if it is open.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Visual Studio</b>
+                            <ul>
+                                <li><b>Web Compiler by Mads Kristensen</b> is used to convert SCSS to CSS with sourcemap and minified version.</li>
+                                <li><b>Bundler & Minifier by Mads Kristensen</b> is used to combine and minify JS.</li>
+                            </ul>
+                        </li>
+                        <li><b>SPA by Rafael Pedicini</b> is used to make the website into a Single-Page-Application.</li>
+                        <li><b>loadCSS.js by Filament Group</b> is used to load CSS.</li>
+                        <li><b>lazy.js by Eisbehr</b> is used to load images.</li>
+                        <li><b>bowser.js by Dustin Diaz</b> is used to determinate user browser and device.</li>
+                        <li><b>bootstrap-slider.js by Stefan Petre</b> is used to make sliders.</li>
+                        <li><b>tooltipster.js by Caleb Jacob</b> is used to make tooltips.</li>
+                        <li><b>katex.js by Khan Academy</b> is used to display mathematics.</li>
+                        <li><b>jquery.validate.js by Jörn Zaefferer</b> is used for form validation.</li>
+                        <li><b>sortable.js by Lebedev Konstantin</b> is used for drag and drop.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Settings</h3>
+            <div class="alert">
+                <div class="flex-items space-2">
+                    <p>Settings work by applying classes to html and saving it in local storage.</p>
+                    <ul class="list">
+                        <li>
+                            <b>Fixed footer</b>
+                            <ul>
+                                <li><b>Enabled</b>: Footer is fixed at bottom of screen.</li>
+                                <li><b>Disabled</b>: Footer is shown below content.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Two columns</b> is disabled untill screen is wide enough.
+                            <ul>
+                                <li><b>Enabled</b>: Content is displayed in two columns.</li>
+                                <li><b>Disabled</b>: Content is displayed in one column.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Transitions</b>
+                            <ul>
+                                <li><b>Enabled</b>: Layout uses transitions.</li>
+                                <li><b>Disabled</b>: Layout doesn't use transitions.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Push</b> is disabled untill screen is wide enough.
+                            <ul>
+                                <li><b>Enabled</b>: Aside pushes content.</li>
+                                <li><b>Disabled</b>: Aside opens on top of content.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Close on click outside</b> is always enabled when aside isn't pushing content.
+                            <ul>
+                                <li><b>Enabled</b>: Close aside when clicking outside it, unless target is loading, modal or popup.</li>
+                                <li><b>Disabled</b>: Don't close aside when clicking outside it.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Browser support</h3>
+            <div class="flex-items space-2">
+                <p>The site has been optimized for the newest version of these browsers:</p>
+                <div>
+                    <div id="browsers" class="flex-items column wrap grow space-2">
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-chrome"></use></svg></i>
+                                <span class="title">Google</span>
+                                <span>Chrome</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-firefox"></use></svg></i>
+                                <span class="title">Mozilla</span>
+                                <span>Firefox</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-edge"></use></svg></i>
+                                <span class="title">Microsoft</span>
+                                <span>Edge</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-ie"></use></svg></i>
+                                <span class="title">Microsoft</span>
+                                <span>Internet Explorer</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-safari"></use></svg></i>
+                                <span class="title">Apple</span>
+                                <span>Safari</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-opera"></use></svg></i>
+                                <span class="title">Opera</span>
+                                <span>Opera</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-uc"></use></svg></i>
+                                <span class="title">UCWeb</span>
+                                <span>UC Browser</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-browser-internet"></use></svg></i>
+                                <span class="title">Samsung</span>
+                                <span>Internet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Platform support</h3>
+            <div class="flex-items space-3">
+                <p>The site has been optimized for these platforms:</p>
+                <div>
+                    <div id="platforms" class="flex-items column wrap grow space-2">
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-windows"></use></svg></i>
+                                <span class="title">Microsoft</span>
+                                <span>Windows</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-android"></use></svg></i>
+                                <span class="title">Google</span>
+                                <span>Android</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <i><svg focusable="false"><use xlink:href="#svg-ios"></use></svg></i>
+                                <span class="title">Apple</span>
+                                <span>macOS / iOS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Lighthouse</h3>
+            <div class="flex-items space-3">
+                <p>Results from 18 November 2017:</p>
+                <div>
+                    <div id="lighthouse" class="flex-items column wrap grow space-2">
+                        <div>
+                            <div class="flex-items center space-2">
+                                <div class="percentage-circle p64 theme-warning">
+                                    <span>64</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <span>Progressive Web App</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <div class="percentage-circle p88 theme-success">
+                                    <span>88</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <span>Performance</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <div class="percentage-circle p94 theme-success">
+                                    <span>97</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <span>Accessibility</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <div class="percentage-circle p92 theme-success">
+                                    <span>92</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <span>Best Practices</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list">
+                    <li>
+                        <b>Progressive Web App</b>: would get a 100% score if the website used ServiceWorker.<br />
+                        I could not get it to work correctly. The ServiceWorker cached everything forever and could only be refreshed by deleting it in the browser.
+                    </li>
+                    <li>
+                        <b>Performance</b>: fluctuates in the score, based on where and when you run the test.<br />
+                        If the website was not hosted on GitHub Pages, then all static content would be loaded with CDN to improve performance.
+                    </li>
+                    <li><b>Best practices</b>: would get a 100% score if the website did not use tooltipster.js.</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h3>GTmetric</h3>
+            <div class="flex-items space-3">
+                <p>Results from 25 November 2017:</p>
+                <div>
+                    <div id="gtmetric" class="flex-items column grow wrap space-3">
+                        <div class="flex-items">
+                            <h5>Performance Scores</h5>
+                            <div class="alert">
+                                <div class="flex-items column grow wrap space-8">
+                                    <div class="flex-items">
+                                        <h6>PageSpeed Score</h6>
+                                        <div class="flex-items column vertical-center score space-2">
+                                            <span class="grade">A</span>
+                                            <span class="percentage">(96%)</span>
+                                            <i class="arrow">
+                                                <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-items">
+                                        <h6>YSlow Score</h6>
+                                        <div class="flex-items column vertical-center score space-2">
+                                            <span class="grade">A</span>
+                                            <span class="percentage">(95%)</span>
+                                            <i class="arrow">
+                                                <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-items">
+                            <h5>Page Details</h5>
+                            <div class="alert">
+                                <div class="flex-items column grow wrap space-8">
+                                    <div class="flex-items">
+                                        <h6>Fully Loaded Time</h6>
+                                        <div class="flex-items column vertical-center score space-2">
+                                            <span class="large">1.0s</span>
+                                            <i class="arrow">
+                                                <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-items">
+                                        <h6>Total Page Size</h6>
+                                        <div class="flex-items column vertical-center score space-2">
+                                            <span class="large">269KB</span>
+                                            <i class="arrow">
+                                                <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-items">
+                                        <h6>Requests</h6>
+                                        <div class="flex-items column vertical-center score space-2">
+                                            <span class="large">15</span>
+                                            <i class="arrow">
+                                                <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
