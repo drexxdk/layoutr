@@ -242,7 +242,7 @@
         <section>
             <h3>Lighthouse</h3>
             <div class="flex-items space-3">
-                <p>Results from 18 November 2017:</p>
+                <p>Results from 23 December 2017:</p>
                 <div>
                     <div id="lighthouse" class="flex-items column wrap grow space-2">
                         <div>
@@ -259,8 +259,8 @@
                         </div>
                         <div>
                             <div class="flex-items center space-2">
-                                <div class="percentage-circle p88 theme-success">
-                                    <span>88</span>
+                                <div class="percentage-circle p71 theme-warning">
+                                    <span>71</span>
                                     <div class="slice">
                                         <div class="bar"></div>
                                         <div class="fill"></div>
@@ -271,8 +271,8 @@
                         </div>
                         <div>
                             <div class="flex-items center space-2">
-                                <div class="percentage-circle p94 theme-success">
-                                    <span>97</span>
+                                <div class="percentage-circle p100 theme-success">
+                                    <span>100</span>
                                     <div class="slice">
                                         <div class="bar"></div>
                                         <div class="fill"></div>
@@ -283,8 +283,8 @@
                         </div>
                         <div>
                             <div class="flex-items center space-2">
-                                <div class="percentage-circle p92 theme-success">
-                                    <span>92</span>
+                                <div class="percentage-circle p100 theme-success">
+                                    <span>100</span>
                                     <div class="slice">
                                         <div class="bar"></div>
                                         <div class="fill"></div>
@@ -293,25 +293,36 @@
                                 <span>Best Practices</span>
                             </div>
                         </div>
+                        <div>
+                            <div class="flex-items center space-2">
+                                <div class="percentage-circle p100 theme-success">
+                                    <span>100</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <span>SEO</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <ul class="list">
                     <li>
-                        <b>Progressive Web App</b>: would get a 100% score if the website used ServiceWorker.<br />
-                        I could not get it to work correctly. The ServiceWorker cached everything forever and could only be refreshed by deleting it in the browser.
+                        <b>Progressive Web App</b>: would get a 100% score if the website used ServiceWorker, 
+                        but I could not get it to work correctly. The ServiceWorker cached everything forever and could only be refreshed by deleting it in the browser.
                     </li>
                     <li>
                         <b>Performance</b>: fluctuates in the score, based on where and when you run the test.<br />
-                        If the website was not hosted on GitHub Pages, then all static content would be loaded with CDN to improve performance.
+                        If the website was not hosted on GitHub Pages, then all static content would be gzipped and loaded with CDN to improve performance.
                     </li>
-                    <li><b>Best practices</b>: would get a 100% score if the website did not use tooltipster.js.</li>
                 </ul>
             </div>
         </section>
         <section>
             <h3>GTmetric</h3>
             <div class="flex-items space-3">
-                <p>Results from 25 November 2017:</p>
+                <p>Results from 23 December 2017:</p>
                 <div>
                     <div id="gtmetric" class="flex-items column grow wrap space-3">
                         <div class="flex-items">
@@ -322,7 +333,7 @@
                                         <h6>PageSpeed Score</h6>
                                         <div class="flex-items column vertical-center score space-2">
                                             <span class="grade">A</span>
-                                            <span class="percentage">(96%)</span>
+                                            <span class="percentage">(95%)</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
                                             </i>
@@ -332,7 +343,7 @@
                                         <h6>YSlow Score</h6>
                                         <div class="flex-items column vertical-center score space-2">
                                             <span class="grade">A</span>
-                                            <span class="percentage">(95%)</span>
+                                            <span class="percentage">(93%)</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
                                             </i>
@@ -348,7 +359,7 @@
                                     <div class="flex-items">
                                         <h6>Fully Loaded Time</h6>
                                         <div class="flex-items column vertical-center score space-2">
-                                            <span class="large">1.0s</span>
+                                            <span class="large">0.6s</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
                                             </i>
@@ -357,7 +368,7 @@
                                     <div class="flex-items">
                                         <h6>Total Page Size</h6>
                                         <div class="flex-items column vertical-center score space-2">
-                                            <span class="large">269KB</span>
+                                            <span class="large">285KB</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
                                             </i>
@@ -366,7 +377,7 @@
                                     <div class="flex-items">
                                         <h6>Requests</h6>
                                         <div class="flex-items column vertical-center score space-2">
-                                            <span class="large">15</span>
+                                            <span class="large">14</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
                                             </i>
