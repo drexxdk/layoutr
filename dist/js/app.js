@@ -2898,6 +2898,10 @@ app.loadPage = function (url, pushState, initial) {
             app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
         if (app.url.p !== undefined) {
+            var xd = l.pathname.slice(0, -1) + app.url.p +
+                (app.url.q ? '?' + app.url.q : '') +
+                l.hash;
+            debugger;
             window.history.replaceState(null, null,
                 l.pathname.slice(0, -1) + app.url.p +
                 (app.url.q ? '?' + app.url.q : '') +
