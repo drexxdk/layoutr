@@ -2861,9 +2861,14 @@ var app = app || {};
 
 app.loadPage = function (url, pushState, initial) {
     app.showLoading();
+    url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
-    
+
+    if (!app.isLocalhost) {
+        url = url.substring(url.indexOf("/") + 1);
+    }
+
     app.left.find('.tree a.label.active').removeClass('active');
     if (url === 'form') {
         app.left.find('a.label[href="form"]').addClass('active');
@@ -2895,14 +2900,6 @@ app.loadPage = function (url, pushState, initial) {
             app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
         if (app.url.p !== undefined) {
-            var xd = l.pathname.slice(0, -1) + app.url.p +
-                (app.url.q ? '?' + app.url.q : '') +
-                l.hash;
-
-            var xx = l.pathname.slice(0, -1) + app.url.p.replace(/^\/+/g, '') +
-                (app.url.q ? '?' + app.url.q : '') +
-                l.hash;
-            debugger;
             window.history.replaceState(null, null,
                 l.pathname.slice(0, -1) + app.url.p +
                 (app.url.q ? '?' + app.url.q : '') +
