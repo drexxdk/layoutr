@@ -14,7 +14,7 @@ app.pageLoaded = function (initial) {
             app.toggleAside(undefined, true);
         }
     }, 200);
-    app.contentHeader = app.content.children('.header:not(.full)');
+    app.contentHeader = app.content.children('.content-header:not(.full)');
     app.lazy(app.content.find('.lazy'));
     app.accordion(app.content.find('.accordion'));
     app.dropdown(app.content.find('select.dropdown'));
