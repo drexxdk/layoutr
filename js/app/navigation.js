@@ -11,15 +11,26 @@ app.loadPage = function (url, pushState, initial) {
     }
 
     app.left.find('.tree a.label.active').removeClass('active');
-    if (url === 'form') {
-        app.left.find('a.label[href="form"]').addClass('active');
-        app.pageForm(initial);
-    } else {
-        app.left.find('a.label[href="' + url + '"]').addClass('active');
-        app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+    app.left.find('a.label[href="' + url + '"]').addClass('active');
+    var tempUrl = url;
+    app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+        url = tempUrl;
+            if (url === '') {
+                if (app.main.children('#svg-browser').length === 0) {
+                    $.get('ajax/svg/browser.html', function (data) {
+                        $(data).prependTo(app.main);
+                    });
+                }
+                if (app.main.children('#svg-os').length === 0) {
+                    $.get('ajax/svg/os.html', function (data) {
+                        $(data).prependTo(app.main);
+                    });
+                }
+            } else if (url === 'form') {
+                app.pageForm();
+            }
             app.pageLoaded(initial);
         });
-    }
 
     if (app.isLocalhost) {
         url = '/' + url;

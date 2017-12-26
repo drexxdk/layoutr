@@ -2654,7 +2654,7 @@ $(function () {
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-    $.get('ajax/layout/svg.html', function (data) {
+    $.get('ajax/svg/base.html', function (data) {
         $(data).prependTo(app.main);
     });
 });
@@ -2870,15 +2870,26 @@ app.loadPage = function (url, pushState, initial) {
     }
 
     app.left.find('.tree a.label.active').removeClass('active');
-    if (url === 'form') {
-        app.left.find('a.label[href="form"]').addClass('active');
-        app.pageForm(initial);
-    } else {
-        app.left.find('a.label[href="' + url + '"]').addClass('active');
-        app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+    app.left.find('a.label[href="' + url + '"]').addClass('active');
+    var tempUrl = url;
+    app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+        url = tempUrl;
+            if (url === '') {
+                if (app.main.children('#svg-browser').length === 0) {
+                    $.get('ajax/svg/browser.html', function (data) {
+                        $(data).prependTo(app.main);
+                    });
+                }
+                if (app.main.children('#svg-os').length === 0) {
+                    $.get('ajax/svg/os.html', function (data) {
+                        $(data).prependTo(app.main);
+                    });
+                }
+            } else if (url === 'form') {
+                app.pageForm();
+            }
             app.pageLoaded(initial);
         });
-    }
 
     if (app.isLocalhost) {
         url = '/' + url;
@@ -3347,89 +3358,85 @@ $(window).resize(function () {
 });
 var app = app || {};
 
-app.pageForm = function (initial) {
-    app.content.load('ajax/pages/form.html', function () {
-        app.content.find('#font_size').slider({
-            min: 12,
-            max: 20,
-            step: 2,
-            value: 16,
-            focus: true
-        });
-
-        app.addValidation(
-            app.content.find('#form'),
-            {
-                firstName: {
-                    required: true,
-                    minlength: 2
-                },
-                lastName: {
-                    required: true,
-                    minlength: 2
-                },
-                username: {
-                    required: true,
-                    minlength: 2
-                },
-                password: {
-                    required: true,
-                    password: true
-                },
-                confirm_password: {
-                    required: true,
-                    equalTo: "#password"
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                dropdown_1: "required",
-                dropdown_2: "required",
-                dropdown_3: "required",
-                dropdown_4: "required",
-                dropdown_5: "required",
-                dropdown_6: "required",
-                gender: "required",
-                interests: "required",
-                agree: "required",
-                font_size: "required"
-            },
-            {
-                firstName: {
-                    required: "Please enter your first name",
-                    minlength: "Your first name must consist of at least 2 characters"
-                },
-                lastName: {
-                    required: "Please enter your last name",
-                    minlength: "Your last name must consist of at least 2 characters"
-                },
-                username: {
-                    required: "Please enter a username",
-                    minlength: "Your username must consist of at least 2 characters"
-                },
-                password: {
-                    required: "Please provide a password"
-                },
-                confirm_password: {
-                    required: "Please provide a password",
-                    equalTo: "Please enter the same password as above"
-                },
-                email: "Please enter a valid email address",
-                dropdown_1: "Please select an option",
-                dropdown_2: "Please select an option",
-                dropdown_3: "Please select an option",
-                dropdown_4: "Please select an option",
-                dropdown_5: "Please select an option",
-                dropdown_6: "Please select an option",
-                gender: "Please select your gender",
-                interests: "Please select at least one interest",
-                agree: "Please accept our policy"
-            }
-        );
-
-        app.pageLoaded(initial);
+app.pageForm = function () {
+    app.content.find('#font_size').slider({
+        min: 12,
+        max: 20,
+        step: 2,
+        value: 16,
+        focus: true
     });
+
+    app.addValidation(
+        app.content.find('#form'),
+        {
+            firstName: {
+                required: true,
+                minlength: 2
+            },
+            lastName: {
+                required: true,
+                minlength: 2
+            },
+            username: {
+                required: true,
+                minlength: 2
+            },
+            password: {
+                required: true,
+                password: true
+            },
+            confirm_password: {
+                required: true,
+                equalTo: "#password"
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            dropdown_1: "required",
+            dropdown_2: "required",
+            dropdown_3: "required",
+            dropdown_4: "required",
+            dropdown_5: "required",
+            dropdown_6: "required",
+            gender: "required",
+            interests: "required",
+            agree: "required",
+            font_size: "required"
+        },
+        {
+            firstName: {
+                required: "Please enter your first name",
+                minlength: "Your first name must consist of at least 2 characters"
+            },
+            lastName: {
+                required: "Please enter your last name",
+                minlength: "Your last name must consist of at least 2 characters"
+            },
+            username: {
+                required: "Please enter a username",
+                minlength: "Your username must consist of at least 2 characters"
+            },
+            password: {
+                required: "Please provide a password"
+            },
+            confirm_password: {
+                required: "Please provide a password",
+                equalTo: "Please enter the same password as above"
+            },
+            email: "Please enter a valid email address",
+            dropdown_1: "Please select an option",
+            dropdown_2: "Please select an option",
+            dropdown_3: "Please select an option",
+            dropdown_4: "Please select an option",
+            dropdown_5: "Please select an option",
+            dropdown_6: "Please select an option",
+            gender: "Please select your gender",
+            interests: "Please select at least one interest",
+            agree: "Please accept our policy"
+        }
+    );
 };
 var app = app || {};
 
