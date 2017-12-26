@@ -1745,7 +1745,7 @@ var app = app || {};
 
 app.katex = function (katex) {
     if (katex.length) {
-        $.getScript('/dist/js/katex.js', function () {
+        $.getScript('/dist/js/katex.min.js', function () {
             katex.each(function () {
                 renderMathInElement($(this)[0]);
             });
@@ -1778,7 +1778,7 @@ var app = app || {};
 
 app.assignment = function (assignments) {
     if (assignments.length) {
-        $.getScript('/dist/js/assignments.js', function () {
+        $.getScript('/dist/js/assignments.min.js', function () {
             $(assignments).each(function (index, assignment) {
                 assignment = $(assignment);
                 if (assignment.hasClass('move multiple')) {
