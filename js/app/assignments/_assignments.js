@@ -2,7 +2,7 @@
 
 app.assignment = function (assignments) {
     if (assignments.length) {
-        $.getScript('/dist/js/assignments.min.js', function () {
+        $.getScript('dist/js/assignments.min.js', function () {
             $(assignments).each(function (index, assignment) {
                 assignment = $(assignment);
                 if (assignment.hasClass('move multiple')) {
