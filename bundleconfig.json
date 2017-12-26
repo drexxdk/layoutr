@@ -4,11 +4,7 @@
     "inputFiles": [
       "js/vendors/loadCSS/loadCSS.js",
       "js/app/loadCSS.js"
-    ],
-    "minify": {
-      "enabled": true
-      //"gzip": true
-    }
+    ]
   },
   {
     "outputFileName": "dist/js/app.js",
@@ -16,11 +12,7 @@
       "js/vendors/jquery/jquery-3.1.1.min.js",
       "js/vendors/jquery/validate/jquery.validate.min.js",
       "js/vendors/jquery/jquery.lazy.min.js",
-      "js/vendors/jquery/bootstrap-slider.js",
       "js/vendors/jquery/tooltipster.min.js",
-      "js/vendors/sortable.min.js",
-      "js/vendors/katex/katex.min.js",
-      "js/vendors/katex/auto-render.min.js",
       "js/vendors/bowser.js",
       "js/app/_variables.js",
       "js/app/_functions.js",
@@ -43,14 +35,25 @@
       "js/app/dropdown.js",
       "js/app/form.js",
       "js/app/lazy.js",
+      "js/app/katex.js",
       "js/app/tooltipster.js",
       "js/app/assignments/_assignments.js",
-      "js/app/assignments/move.js",
       "js/app/site/googleMaps.js",
       "js/app/site/youtube.js"
-    ],
-    "minify": {
-      "enabled": true
-    }
+    ]
+  },
+  {
+    "outputFileName": "dist/js/katex.js",
+    "inputFiles": [
+      "js/vendors/katex/katex.min.js",
+      "js/vendors/katex/auto-render.min.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/js/assignments.js",
+    "inputFiles": [
+      "js/vendors/sortable.min.js",
+      "js/app/assignments/move.js"
+    ]
   }
 ]

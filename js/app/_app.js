@@ -1,5 +1,9 @@
 ﻿var app = app || {};
 
+$.ajaxSetup({
+    cache: true
+});
+
 $(function () {
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 

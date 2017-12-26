@@ -21,8 +21,7 @@ app.pageLoaded = function (initial) {
     app.responsiveBackground();
     app.tooltipster(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
-    renderMathInElement(app.content[0]);
-
+    app.katex(app.content.find('.katex'));
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();

@@ -48,21 +48,6 @@
         }
     }
 
-    .slider {
-        .slider-track {
-            background: theme-gradient($background-light);
-        }
-
-        .slider-handle {
-            background: theme-gradient($background-dark);
-            border-color: $background-dark;
-
-            &:focus {
-                box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $border;
-            }
-        }
-    }
-
     > div > .input-group > .input-group-addon {
         @include theme-element($border, false);
         border-color: $border;

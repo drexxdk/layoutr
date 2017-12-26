@@ -1,10 +1,14 @@
 ﻿var app = app || {};
 
 app.assignment = function (assignments) {
-    $(assignments).each(function (index, assignment) {
-        assignment = $(assignment);
-        if (assignment.hasClass('move multiple')) {
-            app.assignment.move(assignment);
-        }
-    });
+    if (assignments.length) {
+        $.getScript('/dist/js/assignments.js', function () {
+            $(assignments).each(function (index, assignment) {
+                assignment = $(assignment);
+                if (assignment.hasClass('move multiple')) {
+                    app.assignment.move(assignment);
+                }
+            });
+        });
+    }
 };

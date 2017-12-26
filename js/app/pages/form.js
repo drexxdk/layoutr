@@ -1,14 +1,6 @@
 ﻿var app = app || {};
 
 app.pageForm = function () {
-    app.content.find('#font_size').slider({
-        min: 12,
-        max: 20,
-        step: 2,
-        value: 16,
-        focus: true
-    });
-
     app.addValidation(
         app.content.find('#form'),
         {
