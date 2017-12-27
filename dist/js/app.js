@@ -702,6 +702,10 @@ app.isModalImage = function () {
 app.isLoading = function () {
     return app.html.hasClass('loading');
 };
+
+app.isScrollDisabled = function () {
+    return app.html.hasClass('scroll-disabled');
+};
 var app = app || {};
 
 $(function () {
@@ -833,7 +837,7 @@ app.pageLoaded = function (initial) {
     app.google = undefined;
     app.hideLoading();
     if (initial) {
-        app.html.addClass('siteLoaded');
+        app.html.addClass('site-loaded');
     }
 };
 var app = app || {};
@@ -860,7 +864,7 @@ app.disableScroll = function () {
             app.modal.focus();
         }
         var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
-        app.html.addClass('scrollDisabled');
+        app.html.addClass('scroll-disabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
     }
@@ -870,7 +874,7 @@ app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
-        app.html.removeClass('scrollDisabled modal');
+        app.html.removeClass('scroll-disabled modal');
         app.main.focus();
         app.body.scrollTop(scrollTop); // edge, safari
         app.html.scrollTop(scrollTop); // chrome, firefox, ie
@@ -1219,7 +1223,7 @@ var app = app || {};
 app.showModal = function (type) {
     app.html.attr('data-modal', type);
     app.html.addClass('modal');
-    if (app.html.hasClass('scrollDisabled')) {
+    if (app.isScrollDisabled()) {
         app.checkModal();
         app.modal.focus();
     } else {

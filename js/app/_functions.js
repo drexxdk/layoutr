@@ -56,3 +56,7 @@ app.isModalImage = function () {
 app.isLoading = function () {
     return app.html.hasClass('loading');
 };
+
+app.isScrollDisabled = function () {
+    return app.html.hasClass('scroll-disabled');
+};

@@ -26,6 +26,6 @@ app.pageLoaded = function (initial) {
     app.google = undefined;
     app.hideLoading();
     if (initial) {
-        app.html.addClass('siteLoaded');
+        app.html.addClass('site-loaded');
     }
 };

@@ -3,7 +3,7 @@
 app.showModal = function (type) {
     app.html.attr('data-modal', type);
     app.html.addClass('modal');
-    if (app.html.hasClass('scrollDisabled')) {
+    if (app.isScrollDisabled()) {
         app.checkModal();
         app.modal.focus();
     } else {
