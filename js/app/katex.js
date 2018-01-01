@@ -6,7 +6,7 @@ app.katex = function (katex) {
             katex.each(function () {
                 var $this = $(this);
                 $.when(renderMathInElement($this[0])).done(function () {
-                    $this.show();
+                    $this.removeClass('katex');
                 });
             });
         });
