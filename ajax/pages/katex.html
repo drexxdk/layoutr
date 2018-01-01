@@ -1,6 +1,6 @@
 ﻿<div class="content">
     <div>
-        <section class="katex">
+        <section>
             <h3>KaTeX</h3>
             <div class="flex-items space-3">
                 <pre class="alert">
@@ -8,7 +8,7 @@
 f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
 $$</code>
                 </pre>
-                <div>
+                <div class="katex">
                     $$ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$
                 </div>
                 <pre class="alert">
@@ -16,7 +16,7 @@ $$</code>
 \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
 $$</code>
                 </pre>
-                <div>
+                <div class="katex">
                     $$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$
                 </div>
                 <pre class="alert">
@@ -24,34 +24,36 @@ $$</code>
 1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert&#60;1. 
 $$</code>
                 </pre>
-                <div>
+                <div class="katex">
                     $$ 1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert&#60;1. $$
                 </div>
                 <div>
                     <h4>Button</h4>
-                    <div class="flex-items column wrap space-3">
+                    <div class="flex-items column wrap space-3 katex">
                         <button type="button" class="btn">$$ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$</button>
                         <button type="button" class="btn theme-secondary">$$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$</button>
                     </div>
                 </div>
                 <div>
                     <h4>Dropdown</h4>
-                    <select class="dropdown">
-                        <option value="1">$$ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$</option>
-                        <option value="2">$$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$</option>
-                        <option value="3">$$ 1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert&#60;1. $$</option>
-                    </select>
+                    <div class="katex">
+                        <select class="dropdown">
+                            <option value="1">$$ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$</option>
+                            <option value="2">$$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$</option>
+                            <option value="3">$$ 1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert&#60;1. $$</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <h4>Checkbox</h4>
-                    <div class="flex-items column wrap center space-3">
+                    <div class="flex-items column wrap center space-3 katex">
                         <div class="checkbox">
                             <input id="math_1" name="math" type="checkbox">
-                            <label tabindex="0" for="math_1"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> $$ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$</label>
+                            <label tabindex="0" for="math_1"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>$$ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$</span></label>
                         </div>
                         <div class="checkbox">
                             <input id="math_2" name="math" type="checkbox">
-                            <label tabindex="0" for="math_2"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i> $$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$</label>
+                            <label tabindex="0" for="math_2"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>$$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$</span></label>
                         </div>
                     </div>
                 </div>
