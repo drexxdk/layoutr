@@ -3,8 +3,11 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; // disable android focus glow
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 html,
@@ -13,6 +16,7 @@ body {
 }
 
 html {
+    box-sizing: border-box;
     overflow-y: scroll;
     overflow-x: hidden;
     font-size: rem($rem-difference);
