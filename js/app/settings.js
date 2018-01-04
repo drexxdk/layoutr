@@ -54,7 +54,7 @@ $(function () {
             if (id === 'two-columns') {
                 app.checkGoogleMaps();
             }
-            if (id === 'left-push' || id === 'right-push') {
+            if (id === 'left-shrink' || id === 'right-shrink') {
                 app.setHtmlScroll();
             }
         });

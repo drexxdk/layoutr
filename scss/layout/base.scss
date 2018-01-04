@@ -49,8 +49,8 @@ html {
         }
     }
 
-    &[data-aside="left"].left-push,
-    &[data-aside="right"].right-push {
+    &[data-aside="left"].left-shrink,
+    &[data-aside="right"].right-shrink {
         #content > div > .content-header:not(.full) {
             margin-right: -($aside-width / 2);
             padding-right: $aside-width / 2;

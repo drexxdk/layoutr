@@ -48,8 +48,8 @@ html {
     }
 
     @include breakpoint-medium-one-column {
-        &:not(.left-push)[data-aside="left"] #content,
-        &:not(.right-push)[data-aside="right"] #content {
+        &:not(.left-shrink)[data-aside="left"] #content,
+        &:not(.right-shrink)[data-aside="right"] #content {
             @include noselect;
 
             &:before {
@@ -61,12 +61,12 @@ html {
             }
         }
 
-        &[data-aside="left"].left-push aside,
-        &[data-aside="right"].right-push aside {
+        &[data-aside="left"].left-shrink aside,
+        &[data-aside="right"].right-shrink aside {
             height: 100vh;
         }
 
-        &[data-aside="left"].left-push {
+        &[data-aside="left"].left-shrink {
             header,
             #content,
             footer {
@@ -79,7 +79,7 @@ html {
             }
         }
 
-        &[data-aside="right"].right-push {
+        &[data-aside="right"].right-shrink {
             header,
             #content,
             footer {
@@ -92,8 +92,8 @@ html {
             }
         }
 
-        &.left-push #left,
-        &.right-push #right {
+        &.left-shrink #left,
+        &.right-shrink #right {
             margin-top: 0;
         }
     }
@@ -102,7 +102,7 @@ html {
         @include breakpoint-two-columns {
 
 
-            &[data-aside="left"].left-push #content > div > .content-header:not(.full) {
+            &[data-aside="left"].left-shrink #content > div > .content-header:not(.full) {
                 left: $aside-width;
             }
 

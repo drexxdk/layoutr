@@ -8,7 +8,7 @@ app.dropdown = function (dropdowns) {
             selected = $this.children().first();
         }
         var html = [];
-        html.push('<div class="dropdown' +
+        html.shrink('<div class="dropdown' +
             ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
             ($this.hasClass('align-left') ? ' align-left' : '') +
             ($this.hasClass('align-right') ? ' align-right' : '') +
@@ -26,8 +26,8 @@ app.dropdown = function (dropdowns) {
                 theme = temp[0];
             }
         }
-        html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
-        html.push('<ul class="' + theme + '">');
+        html.shrink('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
+        html.shrink('<ul class="' + theme + '">');
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this);
             var text = $that.text();
@@ -35,10 +35,10 @@ app.dropdown = function (dropdowns) {
                 $that.attr('data-math', text);
             }
 
-            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+            html.shrink('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
         });
-        html.push('</ul>');
-        html.push('</div>');
+        html.shrink('</ul>');
+        html.shrink('</div>');
         var dropdown = html.join("");
         $this.after(dropdown);
         dropdown = $this.next();

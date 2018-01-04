@@ -11,7 +11,7 @@ app.guid = function () {
 };
 
 app.isSmallBreakpoint = function () {
-    return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftPush() || app.isAsideRight() && !app.isAsideRightPush();
+    return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftShrink() || app.isAsideRight() && !app.isAsideRightShrink();
 };
 
 app.isAside = function () {
@@ -26,12 +26,12 @@ app.isAsideRight = function () {
     return app.html.attr('data-aside') === 'right';
 };
 
-app.isAsideLeftPush = function () {
-    return app.html.hasClass('left-push') && app.isAsideLeft();
+app.isAsideLeftShrink = function () {
+    return app.html.hasClass('left-shrink') && app.isAsideLeft();
 };
 
-app.isAsideRightPush = function () {
-    return app.html.hasClass('right-push') && app.isAsideRight();
+app.isAsideRightShrink = function () {
+    return app.html.hasClass('right-shrink') && app.isAsideRight();
 };
 
 app.isAsideLeftCloseOnClickOutside = function () {
