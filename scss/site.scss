@@ -64,20 +64,17 @@
     .score {
         .large,
         .grade,
-        .percentage {
+        .number {
             font-size: 200%;
         }
 
         .grade,
-        .percentage {
+        .number {
             color: $success;
         }
 
         .grade {
             font-weight: bold;
-        }
-
-        .percentage {
         }
 
         .arrow {
