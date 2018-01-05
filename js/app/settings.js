@@ -1,13 +1,14 @@
 ﻿var app = app || {};
 
-app.applySettings = function (id, type, value, set) {
+app.applySettings = function (id, name, type, value, set) {
     if (app.localStorage && set) {
         var entry = {
             "id": id,
+            "name": name,
             "type": type,
             "value": value
         };
-        var exists = $.grep(app.settings, function (e) { return e.id === id; });
+        var exists = $.grep(app.settings, function (e) { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.settings.push(entry);
@@ -17,14 +18,19 @@ app.applySettings = function (id, type, value, set) {
         }
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
-        if (type === "checkbox") {
+        if (type === "checkbox" || type === "radio") {
             $('#settings').find('#' + id).prop('checked', value);
         } else if (type === "slider") {
             $('#settings').find('#' + id).slider('setValue', value);
         }
     }
 
-    if (type === 'checkbox') {
+    if (type === 'checkbox' || type === "radio") {
+        if (type === 'radio') {
+            $.each(app.right.find('input[type=radio][name=' + name + ']:not(#' + id + ')'), function (i, radio) {
+                app.html.removeClass($(radio).attr('id'));
+            });
+        }
         if (value) {
             app.html.addClass(id);
         } else {
@@ -45,22 +51,25 @@ $(function () {
             if (app.settings === null) app.settings = [];
         }
 
-        $this.on('click', 'input[type=checkbox]', function () {
+        $this.on('click', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this);
             var id = $this.attr('id');
-            var type = "checkbox";
+            var name = $this.attr('name');
+            var type = $this.attr('type');
             var value = $this.is(':checked');
-            app.applySettings(id, type, value, true);
+            app.applySettings(id, name, type, value, true);
             if (id === 'two-columns') {
                 app.checkGoogleMaps();
             }
-            if (id === 'left-shrink' || id === 'right-shrink') {
+            if (id === 'left-shrink' || id === 'right-shrink' ||
+                id === 'left-push' || id === 'right-push' ||
+                id === 'left-overlay' || id === 'right-overlay') {
                 app.setHtmlScroll();
             }
         });
         if (app.localStorage) {
             $.each(app.settings, function (i, entry) {
-                app.applySettings(entry.id, entry.type, entry.value, false);
+                app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
             });
         }
     });

@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.loadPage = function (url, shrinkState, initial) {
+app.loadPage = function (url, pushState, initial) {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
@@ -38,8 +38,8 @@ app.loadPage = function (url, shrinkState, initial) {
         url = '/Panels/' + url;
     }
 
-    if (shrinkState) {
-        window.history.shrinkState(null, null, url);
+    if (pushState) {
+        window.history.pushState(null, null, url);
         loadPage = true;
     }
 };

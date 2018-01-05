@@ -1,6 +1,7 @@
 ﻿/// <reference path="../references" />
 
 html.transitions {
+
     #left,
     .popup[data-position*="left"] {
         transition: left $transition-time $transition-timing;
@@ -18,7 +19,7 @@ html.transitions {
     header,
     #content,
     footer {
-        transition: margin $transition-time $transition-timing;
+        transition: margin $transition-time $transition-timing, left $transition-time $transition-timing, right $transition-time $transition-timing;
     }
 
     #content > div > .content-header {

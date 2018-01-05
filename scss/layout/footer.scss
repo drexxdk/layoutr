@@ -1,6 +1,21 @@
 ﻿/// <reference path="../references" />
 
+html {
+    &[data-aside="left"].left-push footer {
+        left: $aside-width;
+        right: -$aside-width;
+    }
+
+    &[data-aside="right"].right-push footer {
+        left: -$aside-width;
+        right: $aside-width;
+    }
+}
+
 footer {
+    position: relative;
+    left: 0;
+    right: 0;
     z-index: $footer-z-index;
     height: $footer-height;
     border-top: $layout-border-width solid $footer-border-color;

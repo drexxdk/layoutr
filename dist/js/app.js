@@ -975,7 +975,7 @@ $(function () {
 });
 var app = app || {};
 
-app.loadPage = function (url, shrinkState, initial) {
+app.loadPage = function (url, pushState, initial) {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
@@ -1013,8 +1013,8 @@ app.loadPage = function (url, shrinkState, initial) {
         url = '/Panels/' + url;
     }
 
-    if (shrinkState) {
-        window.history.shrinkState(null, null, url);
+    if (pushState) {
+        window.history.pushState(null, null, url);
         loadPage = true;
     }
 };
@@ -1067,14 +1067,15 @@ $(function () {
 });
 var app = app || {};
 
-app.applySettings = function (id, type, value, set) {
+app.applySettings = function (id, name, type, value, set) {
     if (app.localStorage && set) {
         var entry = {
             "id": id,
+            "name": name,
             "type": type,
             "value": value
         };
-        var exists = $.grep(app.settings, function (e) { return e.id === id; });
+        var exists = $.grep(app.settings, function (e) { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.settings.push(entry);
@@ -1084,14 +1085,19 @@ app.applySettings = function (id, type, value, set) {
         }
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
-        if (type === "checkbox") {
+        if (type === "checkbox" || type === "radio") {
             $('#settings').find('#' + id).prop('checked', value);
         } else if (type === "slider") {
             $('#settings').find('#' + id).slider('setValue', value);
         }
     }
 
-    if (type === 'checkbox') {
+    if (type === 'checkbox' || type === "radio") {
+        if (type === 'radio') {
+            $.each(app.right.find('input[type=radio][name=' + name + ']:not(#' + id + ')'), function (i, radio) {
+                app.html.removeClass($(radio).attr('id'));
+            });
+        }
         if (value) {
             app.html.addClass(id);
         } else {
@@ -1112,22 +1118,25 @@ $(function () {
             if (app.settings === null) app.settings = [];
         }
 
-        $this.on('click', 'input[type=checkbox]', function () {
+        $this.on('click', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this);
             var id = $this.attr('id');
-            var type = "checkbox";
+            var name = $this.attr('name');
+            var type = $this.attr('type');
             var value = $this.is(':checked');
-            app.applySettings(id, type, value, true);
+            app.applySettings(id, name, type, value, true);
             if (id === 'two-columns') {
                 app.checkGoogleMaps();
             }
-            if (id === 'left-shrink' || id === 'right-shrink') {
+            if (id === 'left-shrink' || id === 'right-shrink' ||
+                id === 'left-push' || id === 'right-push' ||
+                id === 'left-overlay' || id === 'right-overlay') {
                 app.setHtmlScroll();
             }
         });
         if (app.localStorage) {
             $.each(app.settings, function (i, entry) {
-                app.applySettings(entry.id, entry.type, entry.value, false);
+                app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
             });
         }
     });
@@ -1268,42 +1277,42 @@ $(function () {
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
             var id = $this.attr('data-modal-id');
             var html = [];
-            html.shrink('<div><div><div id="modal-content">');
+            html.push('<div><div><div id="modal-content">');
             var title = $this.attr('data-modal-title');
             if (type === 'image' && $this.attr('data-modal-img').length) {
                 var description = $this.attr('data-modal-description');
                 if (title !== undefined || description !== undefined) {
                     app.modal.addClass('has-info');
-                    html.shrink('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
-                    html.shrink('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
-                    html.shrink('</button>');
+                    html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
+                    html.push('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
+                    html.push('</button>');
                 }
                 if (title !== undefined) {
-                    html.shrink('<div id="modal-title">' + title + '</div>');
+                    html.push('<div id="modal-title">' + title + '</div>');
                 }
                 if (description !== undefined) {
-                    html.shrink('<div id="modal-description">' + description + '</div>');
+                    html.push('<div id="modal-description">' + description + '</div>');
                 }
-                html.shrink('<img id="modal-img" />');
+                html.push('<img id="modal-img" />');
             } else if (type === 'form') {
-                html.shrink('<div class="header">');
+                html.push('<div class="header">');
                 if (title !== undefined) {
-                    html.shrink('<span class="title">' + title + '</span>');
+                    html.push('<span class="title">' + title + '</span>');
                 }
-                html.shrink('<button id="modal-close" class="close" aria-label="Close ' + (title !== undefined ? title : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
-                html.shrink('</div>');
+                html.push('<button id="modal-close" class="close" aria-label="Close ' + (title !== undefined ? title : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
+                html.push('</div>');
 
                 if (id === 'login') {
-                    html.shrink('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>');
+                    html.push('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>');
                 } else if (id === 'register') {
-                    html.shrink('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis odio quis nunc porta tincidunt. Praesent in augue velit. Vivamus efficitur nisi eget convallis placerat. Quisque luctus nibh vitae mauris vehicula dignissim. Cras quis velit ac metus maximus luctus eget rutrum nisl. Nulla facilisi. Nullam gravida efficitur fringilla. Etiam pretium condimentum tempus. Sed feugiat tortor vitae est porttitor, eu pharetra arcu fringilla. Sed nec luctus enim, nec rhoncus velit. Fusce dolor sem, varius id rutrum in, efficitur sed magna.<br /><br />' +
+                    html.push('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis odio quis nunc porta tincidunt. Praesent in augue velit. Vivamus efficitur nisi eget convallis placerat. Quisque luctus nibh vitae mauris vehicula dignissim. Cras quis velit ac metus maximus luctus eget rutrum nisl. Nulla facilisi. Nullam gravida efficitur fringilla. Etiam pretium condimentum tempus. Sed feugiat tortor vitae est porttitor, eu pharetra arcu fringilla. Sed nec luctus enim, nec rhoncus velit. Fusce dolor sem, varius id rutrum in, efficitur sed magna.<br /><br />' +
                         'Maecenas ut lacinia orci.Phasellus sagittis nisi eu mauris tempus, sit amet lobortis justo dapibus.Nulla facilisi.Aenean venenatis faucibus gravida.Praesent et justo fringilla mauris convallis pretium.Maecenas egestas lectus non erat tincidunt, in egestas risus ultricies.Praesent erat felis, rutrum ac accumsan eget, accumsan ac nisi.Integer sollicitudin risus sed purus maximus porta.Nam maximus, leo at dapibus lobortis, nunc eros molestie justo, vel scelerisque est dolor non tellus.Integer fermentum mi malesuada, placerat mi ac, laoreet risus.<br /><br />' +
                         'Sed et felis a velit accumsan sollicitudin ut a dolor.Integer iaculis quam risus, ac placerat nibh fringilla non.Donec non diam nulla.Vestibulum pretium magna ac malesuada lobortis.Nam eleifend sapien sed efficitur fermentum.Ut magna sapien, mattis nec ligula sollicitudin, ultricies efficitur quam.Praesent vestibulum libero et lorem vulputate, sit amet sagittis velit bibendum.Morbi blandit quis nibh a rhoncus.Phasellus maximus justo ac varius dapibus.Mauris suscipit quam vitae augue ornare, eu rutrum elit tincidunt.Nam rutrum turpis ut bibendum iaculis.Nunc bibendum pretium turpis non ullamcorper.Morbi rhoncus tortor sit amet diam imperdiet luctus.Cras tempor interdum est, et sodales neque semper a.Aliquam imperdiet risus ex, id imperdiet urna egestas in. Vivamus eu suscipit augue.<br /><br />' +
                         'Maecenas nec mauris diam.Aenean lobortis mauris sit amet ligula imperdiet tincidunt.Suspendisse ornare nisl metus, id sagittis ligula feugiat vitae.Nullam viverra velit non augue maximus, quis vulputate nisi tincidunt.Maecenas pretium mi sed tellus placerat molestie.Duis laoreet purus eu lectus accumsan faucibus.Donec cursus odio turpis, ac maximus lacus euismod finibus.Nunc blandit ultricies ultrices.Etiam vitae auctor quam.Ut sem libero, aliquam ut erat vitae, dapibus lacinia erat.Donec nec erat commodo, tincidunt arcu nec, tincidunt ligula.Maecenas id facilisis neque.In sollicitudin ligula non congue convallis.Sed et varius odio.Mauris scelerisque nisl ac ipsum sodales, ut lacinia nisi tempus.<br /><br />' +
                         'Maecenas orci magna, convallis vel blandit id, tincidunt tempus lorem.Duis in purus velit.Vivamus elit urna, congue a congue ut, porttitor id orci.Vestibulum mattis, nisi in eleifend aliquet, lectus velit imperdiet est, at gravida quam erat et lectus.Aliquam vehicula nisi sed turpis posuere pretium.Integer a enim nec nisl faucibus varius.Cras pharetra viverra magna id finibus.Donec aliquet blandit est eu venenatis.Nunc et quam imperdiet, pellentesque neque at, malesuada lorem.Vivamus ut elementum ipsum.Vivamus mauris est, malesuada ut lacinia eu, porta id mauris.Suspendisse potenti.Nulla vel libero ac nunc porta mollis nec ac ligula.</p>');
                 }
             }
-            html.shrink('</div></div></div>');
+            html.push('</div></div></div>');
             var div = html.join("");
             app.modal.html(div);
             if (type === 'image') {
@@ -1559,10 +1568,10 @@ $(function () {
             }
 
             var alert = [];
-            alert.shrink('<div class="alert theme-' + theme + '">');
-            alert.shrink('<div><p>' + title + '</p></div>');
-            alert.shrink('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
-            alert.shrink('</div>');
+            alert.push('<div class="alert theme-' + theme + '">');
+            alert.push('<div><p>' + title + '</p></div>');
+            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
+            alert.push('</div>');
             alert = alert.join('');
             
             var position = $(this).attr('data-popup-position');
@@ -1575,9 +1584,9 @@ $(function () {
                 popup.append(alert);
             } else {
                 var html = [];
-                html.shrink('<div class="popup position ' + position + '" data-position="' + position + '">');
-                html.shrink(alert);
-                html.shrink('</div>');
+                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
+                html.push(alert);
+                html.push('</div>');
                 html = html.join("");
                 app.main.prepend(html);
             }
@@ -1626,7 +1635,7 @@ app.dropdown = function (dropdowns) {
             selected = $this.children().first();
         }
         var html = [];
-        html.shrink('<div class="dropdown' +
+        html.push('<div class="dropdown' +
             ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
             ($this.hasClass('align-left') ? ' align-left' : '') +
             ($this.hasClass('align-right') ? ' align-right' : '') +
@@ -1644,8 +1653,8 @@ app.dropdown = function (dropdowns) {
                 theme = temp[0];
             }
         }
-        html.shrink('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
-        html.shrink('<ul class="' + theme + '">');
+        html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
+        html.push('<ul class="' + theme + '">');
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this);
             var text = $that.text();
@@ -1653,10 +1662,10 @@ app.dropdown = function (dropdowns) {
                 $that.attr('data-math', text);
             }
 
-            html.shrink('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
         });
-        html.shrink('</ul>');
-        html.shrink('</div>');
+        html.push('</ul>');
+        html.push('</div>');
         var dropdown = html.join("");
         $this.after(dropdown);
         dropdown = $this.next();
@@ -1789,7 +1798,7 @@ app.assignment = function (assignments) {
             $(assignments).each(function (index, assignment) {
                 assignment = $(assignment);
                 if (assignment.hasClass('move multiple')) {
-                    app.assignment.move(assignment);
+                    app.assignment.move(assignment); 
                 }
             });
         });

@@ -11,10 +11,10 @@ $(function () {
             }
 
             var alert = [];
-            alert.shrink('<div class="alert theme-' + theme + '">');
-            alert.shrink('<div><p>' + title + '</p></div>');
-            alert.shrink('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
-            alert.shrink('</div>');
+            alert.push('<div class="alert theme-' + theme + '">');
+            alert.push('<div><p>' + title + '</p></div>');
+            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
+            alert.push('</div>');
             alert = alert.join('');
             
             var position = $(this).attr('data-popup-position');
@@ -27,9 +27,9 @@ $(function () {
                 popup.append(alert);
             } else {
                 var html = [];
-                html.shrink('<div class="popup position ' + position + '" data-position="' + position + '">');
-                html.shrink(alert);
-                html.shrink('</div>');
+                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
+                html.push(alert);
+                html.push('</div>');
                 html = html.join("");
                 app.main.prepend(html);
             }

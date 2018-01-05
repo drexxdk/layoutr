@@ -101,6 +101,13 @@ html {
     &.two-columns {
         @include breakpoint-two-columns {
 
+            &[data-aside="left"].left-push #content > div > .content-header:not(.full) {
+                left: $aside-width;
+            }
+
+            &[data-aside="right"].right-push #content > div > .content-header:not(.full) {
+                left: -$aside-width;
+            }
 
             &[data-aside="left"].left-shrink #content > div > .content-header:not(.full) {
                 left: $aside-width;

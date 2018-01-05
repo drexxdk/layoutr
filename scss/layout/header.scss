@@ -1,5 +1,16 @@
 ﻿/// <reference path="../references" />
 
+html {
+    &[data-aside="left"].left-push header {
+        left: $aside-width;
+        right: -$aside-width;
+    }
+
+    &[data-aside="right"].right-push header {
+        left: -$aside-width;
+        right: $aside-width;
+    }
+}
 header {
     position: fixed;
     top: 0;
