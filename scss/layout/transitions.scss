@@ -1,7 +1,6 @@
 ﻿/// <reference path="../references" />
 
 html.transitions {
-
     #left,
     .popup[data-position*="left"] {
         transition: left $transition-time $transition-timing;

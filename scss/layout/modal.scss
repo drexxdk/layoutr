@@ -1,7 +1,6 @@
 ﻿/// <reference path="../references" />
 
 html {
-
     &:not(.modal) #modal {
         display: none;
     }
@@ -16,7 +15,6 @@ html {
             background-color: $overlay-background-color-dark;
             z-index: $modal-z-index;
         }
-
 
         header,
         &.footer-fixed footer {
@@ -138,6 +136,7 @@ html {
         @include noselect;
     }
 }
+
 html.desktop {
     .modal.overlay-light:after,
     .modal.overlay-dark:after {

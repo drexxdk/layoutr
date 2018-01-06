@@ -34,6 +34,24 @@ body {
     font-size: $font-size;
     font-weight: $font-weight;
     line-height: $line-height;
+
+    html.scroll-disabled & {
+        position: fixed;
+    }
+
+    html.msedge:not(.footer-fixed).subpixel &,
+    html.msie:not(.footer-fixed).subpixel & {
+        &:after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: rem(2px);
+            background-color: $footer-background-color;
+            z-index: $footer-z-index;
+        }
+    }
 }
 
 a {
@@ -81,4 +99,11 @@ html.site-loaded {
     main {
         visibility: unset;
     }
+}
+
+pre {
+    display: block;
+    word-break: normal;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }

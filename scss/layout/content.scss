@@ -1,19 +1,17 @@
 ﻿/// <reference path="../references" />
 
-html {
-    &[data-aside="left"].left-push #content {
+#content {
+    overflow: hidden;
+
+    html[data-aside="left"].left-push & {
         margin-left: $aside-width;
         margin-right: -$aside-width;
     }
 
-    &[data-aside="right"].right-push #content {
+    html[data-aside="right"].right-push & {
         margin-left: -$aside-width;
         margin-right: $aside-width;
     }
-}
-
-#content {
-    overflow: hidden;
 
     > div {
         > .content-header {
@@ -21,6 +19,12 @@ html {
 
             &:not(.full) {
                 height: $content-header-height;
+
+                html[data-aside="left"].left-shrink &,
+                html[data-aside="right"].right-shrink & {
+                    margin-right: -($aside-width / 2);
+                    padding-right: $aside-width / 2;
+                }
 
                 > div > div {
                     max-width: $content-max-width - ($spacer * 2);

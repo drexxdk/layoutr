@@ -1,17 +1,5 @@
 ﻿/// <reference path="../references" />
 
-html {
-    &[data-aside="left"].left-push footer {
-        left: $aside-width;
-        right: -$aside-width;
-    }
-
-    &[data-aside="right"].right-push footer {
-        left: -$aside-width;
-        right: $aside-width;
-    }
-}
-
 footer {
     position: relative;
     left: 0;
@@ -25,9 +13,25 @@ footer {
     @include flex-display;
     @include align-items(center);
 
+    html[data-aside="left"].left-push & {
+        left: $aside-width;
+        right: -$aside-width;
+    }
+
+    html[data-aside="right"].right-push & {
+        left: -$aside-width;
+        right: $aside-width;
+    }
+
+    html.footer-fixed & {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+    }
+
     > p {
         padding: 0 $spacer;
-        /*line-height: $footer-height;*/
         @include ellipsis;
     }
 }

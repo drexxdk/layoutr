@@ -14,6 +14,30 @@ aside {
     @include flex-direction(column);
     @include flex-display;
 
+    html.ios & {
+        height: 100%;
+    }
+
+    html[data-aside="left"]  & {
+        &#left {
+            left: 0;
+
+            > .content {
+                box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    html[data-aside="right"] & {
+        &#right {
+            right: 0;
+
+            > .content {
+                box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
     > .content {
         overflow: auto;
         flex-grow: 1;

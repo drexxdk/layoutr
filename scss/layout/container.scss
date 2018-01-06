@@ -6,6 +6,10 @@
     flex-grow: 1;
     flex-shrink: 0;
 
+    html.footer-fixed & {
+        padding-bottom: $footer-height;
+    }
+
     > div {
         flex-grow: 1;
         width: 100%;

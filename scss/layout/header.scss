@@ -1,16 +1,5 @@
 ﻿/// <reference path="../references" />
 
-html {
-    &[data-aside="left"].left-push header {
-        left: $aside-width;
-        right: -$aside-width;
-    }
-
-    &[data-aside="right"].right-push header {
-        left: -$aside-width;
-        right: $aside-width;
-    }
-}
 header {
     position: fixed;
     top: 0;
@@ -19,8 +8,74 @@ header {
     background-color: $layout-background-color;
     z-index: $header-z-index;
 
+    html[data-aside="left"].left-push & {
+        left: $aside-width;
+        right: -$aside-width;
+    }
+
+    html[data-aside="right"].right-push & {
+        left: -$aside-width;
+        right: $aside-width;
+    }
+
     .aside:not(.loaded) {
         opacity: 0;
         pointer-events: none;
+    }
+}
+
+.header {
+    height: $header-height;
+    border-bottom: $layout-border;
+    @include flex-display;
+    flex-shrink: 0;
+    @include theme-element($light, false);
+
+    > .title:first-child {
+        padding: 0 $padding-x;
+    }
+
+    > .title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: $header-height;
+        flex-grow: 1;
+        @include ellipsis;
+    }
+
+    > button {
+        position: relative;
+        width: $header-height-content;
+        height: $header-height-content;
+        background-color: transparent;
+        @include noselect;
+        flex-shrink: 0;
+
+        html.desktop & {
+            &:hover {
+                overflow: hidden;
+
+                svg {
+                    opacity: 1;
+                    width: 65%;
+                    height: 65%;
+                }
+            }
+        }
+
+        &:focus > svg {
+            opacity: 1;
+        }
+
+        > svg {
+            margin-top: 50%;
+            margin-left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            opacity: .5;
+            @include button-transition(all);
+        }
     }
 }
