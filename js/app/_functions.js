@@ -60,3 +60,7 @@ app.isLoading = function () {
 app.isScrollDisabled = function () {
     return app.html.hasClass('scroll-disabled');
 };
+
+app.isCloseLeftPageChange = function () {
+    return app.html.hasClass('close-left-page-change');
+};

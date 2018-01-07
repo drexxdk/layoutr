@@ -10,7 +10,7 @@ app.pageLoaded = function (initial) {
         if (app.html.hasClass('msie')) {
             app.body.css('overflow', '');
         }
-        if (!initial) {
+        if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
         }
     }, 200);

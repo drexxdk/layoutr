@@ -706,6 +706,10 @@ app.isLoading = function () {
 app.isScrollDisabled = function () {
     return app.html.hasClass('scroll-disabled');
 };
+
+app.isCloseLeftPageChange = function () {
+    return app.html.hasClass('close-left-page-change');
+};
 var app = app || {};
 
 $(function () {
@@ -821,7 +825,7 @@ app.pageLoaded = function (initial) {
         if (app.html.hasClass('msie')) {
             app.body.css('overflow', '');
         }
-        if (!initial) {
+        if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
         }
     }, 200);
