@@ -642,6 +642,7 @@ $(function () {
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
     app.localStorage = typeof Storage !== "undefined";
+    app.navigation = [];
     app.settings = [];
 });
 var app = app || {};
@@ -998,22 +999,22 @@ app.loadPage = function (url, pushState, initial) {
     var tempUrl = url;
     app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
         url = tempUrl;
-            if (url === '') {
-                if (app.main.children('#svg-browser').length === 0) {
-                    $.get('ajax/svg/browser.html', function (data) {
-                        $(data).prependTo(app.main);
-                    });
-                }
-                if (app.main.children('#svg-os').length === 0) {
-                    $.get('ajax/svg/os.html', function (data) {
-                        $(data).prependTo(app.main);
-                    });
-                }
-            } else if (url === 'form') {
-                app.pageForm();
+        if (url === '') {
+            if (app.main.children('#svg-browser').length === 0) {
+                $.get('ajax/svg/browser.html', function (data) {
+                    $(data).prependTo(app.main);
+                });
             }
-            app.pageLoaded(initial);
-        });
+            if (app.main.children('#svg-os').length === 0) {
+                $.get('ajax/svg/os.html', function (data) {
+                    $(data).prependTo(app.main);
+                });
+            }
+        } else if (url === 'form') {
+            app.pageForm();
+        }
+        app.pageLoaded(initial);
+    });
 
     if (app.isLocalhost) {
         url = '/' + url;
@@ -1051,8 +1052,40 @@ window.onpopstate = function (event) {
     }
 };
 
+app.applyNavigation = function (id, value, set) {
+    if (app.localStorage && set) {
+        var entry = {
+            "id": id,
+            "value": value
+        };
+        var exists = $.grep(app.navigation, function (e) { return e.name === name; });
+        if (exists.length === 0) {
+            // not found
+            app.navigation.push(entry);
+        } else if (exists.length === 1) {
+            // found
+            exists[0].value = value;
+        }
+        localStorage.setItem('navigation', JSON.stringify(app.navigation));
+    } else {
+        app.left.find('#' + id).prop('checked', value);
+    }
+};
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
+        if (app.localStorage) {
+            app.navigation = JSON.parse(localStorage.getItem("navigation"));
+            if (app.navigation === null) app.navigation = [];
+            $.each(app.navigation, function (i, entry) {
+                app.applyNavigation(entry.id, entry.value, false);
+            });
+            app.left.on('change', '.tree input[type=checkbox]', function () {
+                var $this = $(this);
+                var id = $this.attr('id');
+                var value = $this.is(':checked');
+                app.applyNavigation(id, value, true);
+            });
+        }
         app.header.find('.aside.left').addClass('loaded');
         if (app.url && app.url.p) {
             app.left.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
@@ -1089,6 +1122,7 @@ app.applySettings = function (id, name, type, value, set) {
             app.settings.push(entry);
         } else if (exists.length === 1) {
             // found
+            exists[0].id = id;
             exists[0].value = value;
         }
         localStorage.setItem('settings', JSON.stringify(app.settings));
@@ -1119,13 +1153,15 @@ app.applySettings = function (id, name, type, value, set) {
 
 $(function () {
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
-        app.header.find('.aside.right').addClass('loaded');
-        var $this = $(this);
         if (app.localStorage) {
             app.settings = JSON.parse(localStorage.getItem("settings"));
             if (app.settings === null) app.settings = [];
+            $.each(app.settings, function (i, entry) {
+                app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
+            });
         }
-
+        app.header.find('.aside.right').addClass('loaded');
+        var $this = $(this);
         $this.on('change', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this);
             var id = $this.attr('id');
@@ -1142,11 +1178,6 @@ $(function () {
                 app.setHtmlScroll();
             }
         });
-        if (app.localStorage) {
-            $.each(app.settings, function (i, entry) {
-                app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-            });
-        }
     });
 });
 var app = app || {};

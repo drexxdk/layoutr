@@ -20,5 +20,6 @@ $(function () {
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
     app.localStorage = typeof Storage !== "undefined";
+    app.navigation = [];
     app.settings = [];
 });

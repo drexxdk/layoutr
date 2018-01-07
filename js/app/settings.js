@@ -14,6 +14,7 @@ app.applySettings = function (id, name, type, value, set) {
             app.settings.push(entry);
         } else if (exists.length === 1) {
             // found
+            exists[0].id = id;
             exists[0].value = value;
         }
         localStorage.setItem('settings', JSON.stringify(app.settings));
@@ -44,13 +45,15 @@ app.applySettings = function (id, name, type, value, set) {
 
 $(function () {
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
-        app.header.find('.aside.right').addClass('loaded');
-        var $this = $(this);
         if (app.localStorage) {
             app.settings = JSON.parse(localStorage.getItem("settings"));
             if (app.settings === null) app.settings = [];
+            $.each(app.settings, function (i, entry) {
+                app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
+            });
         }
-
+        app.header.find('.aside.right').addClass('loaded');
+        var $this = $(this);
         $this.on('change', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this);
             var id = $this.attr('id');
@@ -67,10 +70,5 @@ $(function () {
                 app.setHtmlScroll();
             }
         });
-        if (app.localStorage) {
-            $.each(app.settings, function (i, entry) {
-                app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-            });
-        }
     });
 });
