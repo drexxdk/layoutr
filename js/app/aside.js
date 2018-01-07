@@ -24,7 +24,7 @@ app.toggleAside = function (aside, pageChanged) {
         } else if (aside === 'right') {
             app.right.focus();
         }
-        if (app.html.hasClass('transitions')) {
+        if (app.isTransitions()) {
             setTimeout(function () {
                 transitionLock = false;
                 app.checkGoogleMaps();

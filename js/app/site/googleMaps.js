@@ -3,7 +3,7 @@ var google;
 
 app.checkGoogleMaps = function () {
     if (app.google !== undefined && google !== undefined) {
-        if (app.html.hasClass('transitions')) {
+        if (app.isTransitions()) {
             setTimeout(function () {
                 google.maps.event.trigger(app.google, 'resize');
             }, app.transitionTime);

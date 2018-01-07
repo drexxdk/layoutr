@@ -4,7 +4,11 @@ $(function () {
     app.body.on("keydown", function (e) {
         var target = $(e.target);
         var parent = target.parent();
-        if (!app.html.hasClass('loading')) {
+        if (app.isLoading()) {
+            if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
+                e.preventDefault();
+            }
+        } else {
             if (e.which === 37 && !app.isModal()) { // left
                 if (app.isAsideLeft()) {
                     app.toggleAside(); // closes right
@@ -48,12 +52,6 @@ $(function () {
                     target.siblings('input').click();
                     e.preventDefault();
                 }
-            }
-        }
-        if (e.which === 9) { // tab
-            if (app.isLoading()) {
-                e.preventDefault();
-                return;
             }
         }
     });

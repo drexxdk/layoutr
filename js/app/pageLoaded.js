@@ -3,11 +3,11 @@
 app.pageLoaded = function (initial) {
     app.body.scrollTop(0); // edge, safari
     app.html.scrollTop(0); // chrome, firefox, ie
-    if (app.html.hasClass('msie')) {
+    if (bowser.msie) {
         app.body.css('overflow', 'hidden');
     }
     setTimeout(function () {
-        if (app.html.hasClass('msie')) {
+        if (bowser.msie) {
             app.body.css('overflow', '');
         }
         if (!initial && app.isCloseLeftPageChange()) {

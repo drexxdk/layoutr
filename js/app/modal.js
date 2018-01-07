@@ -19,7 +19,7 @@ app.closeModal = function () {
 };
 
 app.checkModal = function () {
-    if (app.html.hasClass('modal')) {
+    if (app.isModal()) {
         app.body.css('padding-right', app.scrollbarWidth);
         if (app.html.attr('data-aside') === 'right') {
             app.right.css('margin-right', app.scrollbarWidth);
@@ -90,7 +90,7 @@ $(function () {
                 //app.html.addClass('modal');
                 var image = app.modal.find('#modal-img');
                 image.on('load', function () {
-                    if (app.html.hasClass('android')) {
+                    if (bowser.android) {
                         image.css('max-height', window.innerHeight);
                     }
                     app.hideLoading();

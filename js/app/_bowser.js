@@ -20,7 +20,7 @@ $(function () {
         app.html.addClass('ios'); // used to apply focus
     }
 
-    if (app.html.hasClass('msie') || app.html.hasClass('msedge')) {
+    if (bowser.msie || bowser.msedge) {
         // disable smooth scrolling, since it causes element jumping/lagging on scroll
         // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
         app.body.on("mousewheel", function (e) {

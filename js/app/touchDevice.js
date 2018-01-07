@@ -61,7 +61,7 @@ var swipe = function () {
 };
 
 $(function () {
-    if (app.html.hasClass('android')) {
+    if (bowser.android) {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         $(window).resize(function () {

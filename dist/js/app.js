@@ -710,6 +710,10 @@ app.isScrollDisabled = function () {
 app.isCloseLeftPageChange = function () {
     return app.html.hasClass('close-left-page-change');
 };
+
+app.isTransitions = function () {
+    return app.html.hasClass('transitions');
+};
 var app = app || {};
 
 $(function () {
@@ -732,7 +736,7 @@ $(function () {
         app.html.addClass('ios'); // used to apply focus
     }
 
-    if (app.html.hasClass('msie') || app.html.hasClass('msedge')) {
+    if (bowser.msie || bowser.msedge) {
         // disable smooth scrolling, since it causes element jumping/lagging on scroll
         // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
         app.body.on("mousewheel", function (e) {
@@ -784,7 +788,7 @@ $(window).click(function (e) {
     var target = $(e.target);
     var modal = target.closest(app.modal[0]);
 
-    if (app.html.hasClass('ios')) {
+    if (bowser.ios) {
         // ios browsers doesn't apply :focus to buttons in many cases,
         // this forces :focus to be applied correctly.
         if (target.parents('button').length) {
@@ -818,11 +822,11 @@ var app = app || {};
 app.pageLoaded = function (initial) {
     app.body.scrollTop(0); // edge, safari
     app.html.scrollTop(0); // chrome, firefox, ie
-    if (app.html.hasClass('msie')) {
+    if (bowser.msie) {
         app.body.css('overflow', 'hidden');
     }
     setTimeout(function () {
-        if (app.html.hasClass('msie')) {
+        if (bowser.msie) {
             app.body.css('overflow', '');
         }
         if (!initial && app.isCloseLeftPageChange()) {
@@ -952,7 +956,7 @@ app.toggleAside = function (aside, pageChanged) {
         } else if (aside === 'right') {
             app.right.focus();
         }
-        if (app.html.hasClass('transitions')) {
+        if (app.isTransitions()) {
             setTimeout(function () {
                 transitionLock = false;
                 app.checkGoogleMaps();
@@ -1090,9 +1094,9 @@ app.applySettings = function (id, name, type, value, set) {
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
         if (type === "checkbox" || type === "radio") {
-            $('#settings').find('#' + id).prop('checked', value);
+            app.right.find('#' + id).prop('checked', value);
         } else if (type === "slider") {
-            $('#settings').find('#' + id).slider('setValue', value);
+            app.right.find('#' + id).slider('setValue', value);
         }
     }
 
@@ -1122,7 +1126,7 @@ $(function () {
             if (app.settings === null) app.settings = [];
         }
 
-        $this.on('click', 'input[type=checkbox], input[type=radio]', function () {
+        $this.on('change', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this);
             var id = $this.attr('id');
             var name = $this.attr('name');
@@ -1151,7 +1155,11 @@ $(function () {
     app.body.on("keydown", function (e) {
         var target = $(e.target);
         var parent = target.parent();
-        if (!app.html.hasClass('loading')) {
+        if (app.isLoading()) {
+            if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
+                e.preventDefault();
+            }
+        } else {
             if (e.which === 37 && !app.isModal()) { // left
                 if (app.isAsideLeft()) {
                     app.toggleAside(); // closes right
@@ -1195,12 +1203,6 @@ $(function () {
                     target.siblings('input').click();
                     e.preventDefault();
                 }
-            }
-        }
-        if (e.which === 9) { // tab
-            if (app.isLoading()) {
-                e.preventDefault();
-                return;
             }
         }
     });
@@ -1252,7 +1254,7 @@ app.closeModal = function () {
 };
 
 app.checkModal = function () {
-    if (app.html.hasClass('modal')) {
+    if (app.isModal()) {
         app.body.css('padding-right', app.scrollbarWidth);
         if (app.html.attr('data-aside') === 'right') {
             app.right.css('margin-right', app.scrollbarWidth);
@@ -1323,7 +1325,7 @@ $(function () {
                 //app.html.addClass('modal');
                 var image = app.modal.find('#modal-img');
                 image.on('load', function () {
-                    if (app.html.hasClass('android')) {
+                    if (bowser.android) {
                         image.css('max-height', window.innerHeight);
                     }
                     app.hideLoading();
@@ -1404,7 +1406,7 @@ var swipe = function () {
 };
 
 $(function () {
-    if (app.html.hasClass('android')) {
+    if (bowser.android) {
         swipe();
         // android doesn't handle vh correctly, so it gets converted to px
         $(window).resize(function () {
@@ -1813,7 +1815,7 @@ var google;
 
 app.checkGoogleMaps = function () {
     if (app.google !== undefined && google !== undefined) {
-        if (app.html.hasClass('transitions')) {
+        if (app.isTransitions()) {
             setTimeout(function () {
                 google.maps.event.trigger(app.google, 'resize');
             }, app.transitionTime);

@@ -19,9 +19,9 @@ app.applySettings = function (id, name, type, value, set) {
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
         if (type === "checkbox" || type === "radio") {
-            $('#settings').find('#' + id).prop('checked', value);
+            app.right.find('#' + id).prop('checked', value);
         } else if (type === "slider") {
-            $('#settings').find('#' + id).slider('setValue', value);
+            app.right.find('#' + id).slider('setValue', value);
         }
     }
 
@@ -51,7 +51,7 @@ $(function () {
             if (app.settings === null) app.settings = [];
         }
 
-        $this.on('click', 'input[type=checkbox], input[type=radio]', function () {
+        $this.on('change', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this);
             var id = $this.attr('id');
             var name = $this.attr('name');

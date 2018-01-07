@@ -64,3 +64,7 @@ app.isScrollDisabled = function () {
 app.isCloseLeftPageChange = function () {
     return app.html.hasClass('close-left-page-change');
 };
+
+app.isTransitions = function () {
+    return app.html.hasClass('transitions');
+};
