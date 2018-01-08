@@ -81,14 +81,14 @@
     }
 
     > input:checked + label > i:before {
-        height: $font-size / 4 * 3;
-        width: $font-size / 4 * 3;
+        height: $font-size - ($component-border-width * 4);
+        width: $font-size - ($component-border-width * 4);
         background-color: white;
     }
 
     > input:checked + label > i:after {
-        height: $font-size / 4 * 2;
-        width: $font-size / 4 * 2;
+        height: $font-size - ($component-border-width * 8);
+        width: $font-size - ($component-border-width * 8);
         background-color: $primary;
     }
 }
