@@ -5,16 +5,12 @@ app.loadPage = function (url, pushState, initial) {
     url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
-    if (url === '') {
-        url = 'pages/home';
-    }
-    
     app.left.find('.tree a.label.active').removeClass('active');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     var tempUrl = url;
-    app.content.load('ajax/' + url + '.html', function () {
+    app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
         url = tempUrl;
-        if (url === 'pages/home') {
+        if (url === '') {
             if (app.main.children('#svg-browser').length === 0) {
                 $.get('ajax/svg/browser.html', function (data) {
                     $(data).prependTo(app.main);
@@ -25,12 +21,12 @@ app.loadPage = function (url, pushState, initial) {
                     $(data).prependTo(app.main);
                 });
             }
-        } else if (url === 'inputs/form') {
+        } else if (url === 'form') {
             app.pageForm();
         }
         app.pageLoaded(initial);
     });
-    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url.split('/')[1];
+    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
     if (pushState) {
         window.history.pushState(null, null, url);
         loadPage = true;
@@ -59,11 +55,8 @@ window.onpopstate = function (event) {
     if (loadPage) {
         var url = location.pathname;
         if (!app.isLocalhost) {
-            url = url.substring(url.indexOf("/", url.indexOf("/") + 1))
-            url = url.substring(url.lastIndexOf("/") + 1);
-            debugger;
+            url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
         }
-        debugger;
         app.loadPage(url, false, true);
     }
 };
