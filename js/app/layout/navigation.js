@@ -3,11 +3,14 @@
 app.loadPage = function (url, pushState, initial) {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
+    var q = url.indexOf('?');
+    url = url.substring(0, q !== -1 ? q : url.length);
+    if (!app.isLocalhost) {
+        url = url.substring(url.indexOf("/") + 1);
+    }
     if (url === '') {
         url = 'pages/home';
     }
-    var q = url.indexOf('?');
-    url = url.substring(0, q !== -1 ? q : url.length);
     
     app.left.find('.tree a.label.active').removeClass('active');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
@@ -57,6 +60,7 @@ app.loadPage = function (url, pushState, initial) {
 var loadPage = window.history.state;
 window.onpopstate = function (event) {
     if (loadPage) {
+        debugger;
         app.loadPage(location.pathname, false, true);
     }
 };
