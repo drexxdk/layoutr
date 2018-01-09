@@ -1,7 +1,6 @@
 ﻿var app = app || {};
 
 app.loadPage = function (url, pushState, initial) {
-    debugger;
     app.showLoading();
     url = url.replace(/^\/+/g, '');
     var q = url.indexOf('?');
@@ -9,7 +8,6 @@ app.loadPage = function (url, pushState, initial) {
     if (url === '') {
         url = 'pages/home';
     }
-    debugger;
     
     app.left.find('.tree a.label.active').removeClass('active');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
@@ -61,6 +59,7 @@ window.onpopstate = function (event) {
     if (loadPage) {
         var url = location.pathname;
         if (!app.isLocalhost) {
+            url = url.substring(url.indexOf("/", url.indexOf("/") + 1))
             url = url.substring(url.lastIndexOf("/") + 1);
             debugger;
         }
