@@ -31,11 +31,10 @@ app.loadPage = function (url, pushState, initial) {
         }
         app.pageLoaded(initial);
     });
-
     if (app.isLocalhost) {
         url = '/' + url.split('/')[1];
     } else {
-        url = '/' + window.location.pathname.split('/')[0] + '/' + url.split('/')[1];
+        url = '/' + window.location.pathname.split('/')[1] + '/' + url.split('/')[1];
     }
 
     if (pushState) {
