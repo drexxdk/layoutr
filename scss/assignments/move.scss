@@ -40,6 +40,10 @@
 
     &.validated {
 
+        .item > label > i {
+            display: none;
+        }
+
         .from,
         .to {
             pointer-events: none;
