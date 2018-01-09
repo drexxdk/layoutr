@@ -10,7 +10,7 @@ app.pageLoaded = function (initial) {
         if (bowser.msie) {
             app.body.css('overflow', '');
         }
-        if (!initial && app.isCloseLeftPageChange()) {
+        if (app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
         }
     }, 200);

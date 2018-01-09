@@ -830,7 +830,7 @@ app.pageLoaded = function (initial) {
         if (bowser.msie) {
             app.body.css('overflow', '');
         }
-        if (!initial && app.isCloseLeftPageChange()) {
+        if (app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
         }
     }, 200);
@@ -987,19 +987,18 @@ var app = app || {};
 app.loadPage = function (url, pushState, initial) {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
+    if (url === '') {
+        url = 'pages/home';
+    }
     var q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
-
-    if (!app.isLocalhost) {
-        url = url.substring(url.indexOf("/") + 1);
-    }
-
+    
     app.left.find('.tree a.label.active').removeClass('active');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     var tempUrl = url;
-    app.content.load('ajax/' + (url === '' ? 'pages/home' : url) + '.html', function () {
+    app.content.load('ajax/' + url + '.html', function () {
         url = tempUrl;
-        if (url === '') {
+        if (url === 'pages/home') {
             if (app.main.children('#svg-browser').length === 0) {
                 $.get('ajax/svg/browser.html', function (data) {
                     $(data).prependTo(app.main);
@@ -1015,16 +1014,7 @@ app.loadPage = function (url, pushState, initial) {
         }
         app.pageLoaded(initial);
     });
-    var a = window.location.pathname;
-    debugger;
-    var b = window.location.pathname.split('/');
-    debugger;
-    if (app.isLocalhost) {
-        url = '/' + url.split('/')[1];
-    } else {
-        url = '/' + window.location.pathname.split('/')[1] + '/' + url.split('/')[1];
-    }
-
+    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url.split('/')[1];
     if (pushState) {
         window.history.pushState(null, null, url);
         loadPage = true;
