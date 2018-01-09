@@ -3,7 +3,7 @@
     "outputFileName": "dist/js/loadCSS.js",
     "inputFiles": [
       "js/vendors/loadCSS/loadCSS.js",
-      "js/app/loadCSS.js"
+      "js/app/layout/loadCSS.js"
     ]
   },
   {
@@ -14,30 +14,34 @@
       "js/vendors/jquery/jquery.lazy.min.js",
       "js/vendors/jquery/tooltipster.min.js",
       "js/vendors/bowser.js",
-      "js/app/_variables.js",
-      "js/app/_functions.js",
-      "js/app/_bowser.js",
-      "js/app/_app.js",
-      "js/app/pageLoaded.js",
-      "js/app/scroll.js",
-      "js/app/loading.js",
-      "js/app/aside.js",
-      "js/app/navigation.js",
-      "js/app/settings.js",
-      "js/app/keyboard.js",
-      "js/app/modal.js",
-      "js/app/touchDevice.js",
-      "js/app/responsiveBackground.js",
-      "js/app/pages/form.js",
-      "js/app/popup.js",
-      "js/app/alert.js",
-      "js/app/accordion.js",
-      "js/app/dropdown.js",
-      "js/app/form.js",
-      "js/app/lazy.js",
-      "js/app/katex.js",
-      "js/app/tooltipster.js",
+
+      "js/app/layout/_variables.js",
+      "js/app/layout/_functions.js",
+      "js/app/layout/_bowser.js",
+      "js/app/layout/_app.js",
+      "js/app/layout/pageLoaded.js",
+      "js/app/layout/scroll.js",
+      "js/app/layout/loading.js",
+      "js/app/layout/aside.js",
+      "js/app/layout/navigation.js",
+      "js/app/layout/settings.js",
+      "js/app/layout/keyboard.js",
+      "js/app/layout/modal.js",
+      "js/app/layout/touchDevice.js",
+      "js/app/layout/responsiveBackground.js",
+
+      "js/app/inputs/dropdown.js",
+      "js/app/inputs/form.js",
+
+      "js/app/components/accordion.js",
+      "js/app/components/alert.js",
+      "js/app/components/katex.js",
+      "js/app/components/lazy.js",
+      "js/app/components/popup.js",
+      "js/app/components/tooltipster.js",
       "js/app/assignments/_assignments.js",
+
+      "js/app/site/form.js",
       "js/app/site/googleMaps.js",
       "js/app/site/youtube.js"
     ]
@@ -53,7 +57,7 @@
     "outputFileName": "dist/js/assignments.js",
     "inputFiles": [
       "js/vendors/sortable.min.js",
-      "js/app/assignments/move.js"
+      "js/app/assignments/dragAndDrop.js"
     ]
   }
 ]

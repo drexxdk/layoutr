@@ -5,8 +5,8 @@ app.assignment = function (assignments) {
         $.getScript('dist/js/assignments.min.js', function () {
             $(assignments).each(function (index, assignment) {
                 assignment = $(assignment);
-                if (assignment.hasClass('move multiple')) {
-                    app.assignment.move(assignment); 
+                if (assignment.hasClass('drag-and-drop')) {
+                    app.assignment.dragAndDrop(assignment); 
                 }
             });
         });

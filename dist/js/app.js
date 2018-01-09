@@ -997,7 +997,7 @@ app.loadPage = function (url, pushState, initial) {
     app.left.find('.tree a.label.active').removeClass('active');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     var tempUrl = url;
-    app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+    app.content.load('ajax/' + (url === '' ? 'pages/home' : url) + '.html', function () {
         url = tempUrl;
         if (url === '') {
             if (app.main.children('#svg-browser').length === 0) {
@@ -1010,16 +1010,16 @@ app.loadPage = function (url, pushState, initial) {
                     $(data).prependTo(app.main);
                 });
             }
-        } else if (url === 'form') {
+        } else if (url === 'inputs/form') {
             app.pageForm();
         }
         app.pageLoaded(initial);
     });
 
     if (app.isLocalhost) {
-        url = '/' + url;
+        url = '/' + url.split('/')[1];
     } else {
-        url = '/Panels/' + url;
+        url = '/' + window.location.pathname.split('/')[0] + '/' + url.split('/')[1];
     }
 
     if (pushState) {
@@ -1520,150 +1520,6 @@ $(window).resize(function () {
 });
 var app = app || {};
 
-app.pageForm = function () {
-    app.addValidation(
-        app.content.find('#form'),
-        {
-            firstName: {
-                required: true,
-                minlength: 2
-            },
-            lastName: {
-                required: true,
-                minlength: 2
-            },
-            username: {
-                required: true,
-                minlength: 2
-            },
-            password: {
-                required: true,
-                password: true
-            },
-            confirm_password: {
-                required: true,
-                equalTo: "#password"
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            dropdown_1: "required",
-            dropdown_2: "required",
-            dropdown_3: "required",
-            dropdown_4: "required",
-            dropdown_5: "required",
-            dropdown_6: "required",
-            gender: "required",
-            interests: "required",
-            agree: "required",
-            font_size: "required"
-        },
-        {
-            firstName: {
-                required: "Please enter your first name",
-                minlength: "Your first name must consist of at least 2 characters"
-            },
-            lastName: {
-                required: "Please enter your last name",
-                minlength: "Your last name must consist of at least 2 characters"
-            },
-            username: {
-                required: "Please enter a username",
-                minlength: "Your username must consist of at least 2 characters"
-            },
-            password: {
-                required: "Please provide a password"
-            },
-            confirm_password: {
-                required: "Please provide a password",
-                equalTo: "Please enter the same password as above"
-            },
-            email: "Please enter a valid email address",
-            dropdown_1: "Please select an option",
-            dropdown_2: "Please select an option",
-            dropdown_3: "Please select an option",
-            dropdown_4: "Please select an option",
-            dropdown_5: "Please select an option",
-            dropdown_6: "Please select an option",
-            gender: "Please select your gender",
-            interests: "Please select at least one interest",
-            agree: "Please accept our policy"
-        }
-    );
-};
-var app = app || {};
-
-$(function () {
-    app.main.on('click', '.show-popup', function () {
-        var $this = $(this);
-        var title = $this.attr('data-popup-title');
-        if (title !== undefined) {
-            var theme = $this.attr('data-popup-theme');
-            if (theme === undefined) {
-                theme = 'primary';
-            }
-
-            var alert = [];
-            alert.push('<div class="alert theme-' + theme + '">');
-            alert.push('<div><p>' + title + '</p></div>');
-            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
-            alert.push('</div>');
-            alert = alert.join('');
-            
-            var position = $(this).attr('data-popup-position');
-            if (position === undefined) {
-                position = 'top left';
-            }
-
-            var popup = app.main.children('.popup[data-position="' + position + '"]');
-            if (popup.length) {
-                popup.append(alert);
-            } else {
-                var html = [];
-                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
-                html.push(alert);
-                html.push('</div>');
-                html = html.join("");
-                app.main.prepend(html);
-            }
-        }
-    });
-});
-var app = app || {};
-
-$(function () {
-    app.main.on('click', '.alert .close', function () {
-        var $this = $(this).parent();
-        $this.fadeOut(app.fadeOutTime, function () {
-            var parent = $this.parent();
-            if (parent.hasClass('popup') && parent.children().length === 1) {
-                parent.remove();
-            } else {
-                $this.remove();
-            }
-        });
-    });
-});
-var app = app || {};
-
-app.accordion = function (elements) {
-    elements.on("click", ".headline", function () {
-        var content = $(this).next();
-        if (content.hasClass('open')) {
-            content
-                .removeClass('open')
-                .slideUp("800");
-        } else {
-            content
-                .addClass("open")
-                .slideToggle("800")
-                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
-        }
-    });
-};
-var app = app || {};
-
 app.dropdown = function (dropdowns) {
     dropdowns.each(function () {
         var $this = $(this);
@@ -1784,13 +1640,36 @@ $(function () {
 });
 var app = app || {};
 
-app.lazy = function (elements) {
-    elements.lazy({
-        afterLoad: function (element) {
-            element.removeClass('lazy');
+app.accordion = function (elements) {
+    elements.on("click", ".headline", function () {
+        var content = $(this).next();
+        if (content.hasClass('open')) {
+            content
+                .removeClass('open')
+                .slideUp("800");
+        } else {
+            content
+                .addClass("open")
+                .slideToggle("800")
+                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
         }
     });
 };
+var app = app || {};
+
+$(function () {
+    app.main.on('click', '.alert .close', function () {
+        var $this = $(this).parent();
+        $this.fadeOut(app.fadeOutTime, function () {
+            var parent = $this.parent();
+            if (parent.hasClass('popup') && parent.children().length === 1) {
+                parent.remove();
+            } else {
+                $this.remove();
+            }
+        });
+    });
+});
 var app = app || {};
 
 app.katex = function (katex) {
@@ -1805,6 +1684,53 @@ app.katex = function (katex) {
         });
     }
 };
+var app = app || {};
+
+app.lazy = function (elements) {
+    elements.lazy({
+        afterLoad: function (element) {
+            element.removeClass('lazy');
+        }
+    });
+};
+var app = app || {};
+
+$(function () {
+    app.main.on('click', '.show-popup', function () {
+        var $this = $(this);
+        var title = $this.attr('data-popup-title');
+        if (title !== undefined) {
+            var theme = $this.attr('data-popup-theme');
+            if (theme === undefined) {
+                theme = 'primary';
+            }
+
+            var alert = [];
+            alert.push('<div class="alert theme-' + theme + '">');
+            alert.push('<div><p>' + title + '</p></div>');
+            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
+            alert.push('</div>');
+            alert = alert.join('');
+            
+            var position = $(this).attr('data-popup-position');
+            if (position === undefined) {
+                position = 'top left';
+            }
+
+            var popup = app.main.children('.popup[data-position="' + position + '"]');
+            if (popup.length) {
+                popup.append(alert);
+            } else {
+                var html = [];
+                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
+                html.push(alert);
+                html.push('</div>');
+                html = html.join("");
+                app.main.prepend(html);
+            }
+        }
+    });
+});
 var app = app || {};
 
 app.tooltipster = function (elements) {
@@ -1834,12 +1760,86 @@ app.assignment = function (assignments) {
         $.getScript('dist/js/assignments.min.js', function () {
             $(assignments).each(function (index, assignment) {
                 assignment = $(assignment);
-                if (assignment.hasClass('move multiple')) {
-                    app.assignment.move(assignment); 
+                if (assignment.hasClass('drag-and-drop')) {
+                    app.assignment.dragAndDrop(assignment); 
                 }
             });
         });
     }
+};
+var app = app || {};
+
+app.pageForm = function () {
+    app.addValidation(
+        app.content.find('#form'),
+        {
+            firstName: {
+                required: true,
+                minlength: 2
+            },
+            lastName: {
+                required: true,
+                minlength: 2
+            },
+            username: {
+                required: true,
+                minlength: 2
+            },
+            password: {
+                required: true,
+                password: true
+            },
+            confirm_password: {
+                required: true,
+                equalTo: "#password"
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            dropdown_1: "required",
+            dropdown_2: "required",
+            dropdown_3: "required",
+            dropdown_4: "required",
+            dropdown_5: "required",
+            dropdown_6: "required",
+            gender: "required",
+            interests: "required",
+            agree: "required",
+            font_size: "required"
+        },
+        {
+            firstName: {
+                required: "Please enter your first name",
+                minlength: "Your first name must consist of at least 2 characters"
+            },
+            lastName: {
+                required: "Please enter your last name",
+                minlength: "Your last name must consist of at least 2 characters"
+            },
+            username: {
+                required: "Please enter a username",
+                minlength: "Your username must consist of at least 2 characters"
+            },
+            password: {
+                required: "Please provide a password"
+            },
+            confirm_password: {
+                required: "Please provide a password",
+                equalTo: "Please enter the same password as above"
+            },
+            email: "Please enter a valid email address",
+            dropdown_1: "Please select an option",
+            dropdown_2: "Please select an option",
+            dropdown_3: "Please select an option",
+            dropdown_4: "Please select an option",
+            dropdown_5: "Please select an option",
+            dropdown_6: "Please select an option",
+            gender: "Please select your gender",
+            interests: "Please select at least one interest",
+            agree: "Please accept our policy"
+        }
+    );
 };
 var app = app || {};
 var google;

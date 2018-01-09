@@ -13,7 +13,7 @@ app.loadPage = function (url, pushState, initial) {
     app.left.find('.tree a.label.active').removeClass('active');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     var tempUrl = url;
-    app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+    app.content.load('ajax/' + (url === '' ? 'pages/home' : url) + '.html', function () {
         url = tempUrl;
         if (url === '') {
             if (app.main.children('#svg-browser').length === 0) {
@@ -26,16 +26,16 @@ app.loadPage = function (url, pushState, initial) {
                     $(data).prependTo(app.main);
                 });
             }
-        } else if (url === 'form') {
+        } else if (url === 'inputs/form') {
             app.pageForm();
         }
         app.pageLoaded(initial);
     });
 
     if (app.isLocalhost) {
-        url = '/' + url;
+        url = '/' + url.split('/')[1];
     } else {
-        url = '/Panels/' + url;
+        url = '/' + window.location.pathname.split('/')[0] + '/' + url.split('/')[1];
     }
 
     if (pushState) {

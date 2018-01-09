@@ -1,23 +1,55 @@
-﻿app.assignment.move = function (assignment) {
+﻿app.assignment.dragAndDrop = function (assignment) {
     assignment.attr('data-moving', 0);
     var from = assignment.find('.from .container');
     var items = assignment.find('.item');
     var checkboxes = items.find('input[type=checkbox]');
 
     var getChecked = function () {
-        return $($.map(checkboxes, function (n, i) {
-            if (n.checked) {
-                return n;
+        return $($.map(checkboxes, function (item) {
+            if (item.checked) {
+                return item;
             }
         }));
     };
 
     var getItem = function (id) {
-        return $($.map(items, function (n, i) {
-            if (n.getAttribute("data-id") === id) {
-                return n;
+        return $($.map(items, function (item) {
+            if (item.getAttribute("data-id") === id) {
+                return item;
             }
         }));
+    };
+
+    var reset = function () {
+        items.removeClass('valid invalid');
+        var checked = getChecked();
+        if (checked.length) {
+            checked.prop('checked', false);
+        }
+        from.append(items);
+        assignment.removeClass('validated moving');
+    };
+
+    var getCorrect = function () {
+        // this should be retrieved with api call
+        return [
+            {
+                id: '1', // TV
+                items: ['5', '7']
+            },
+            {
+                id: '2', // Games
+                items: ['6', '8']
+            },
+            {
+                id: '3', // Music
+                items: ['2', '4']
+            },
+            {
+                id: '4', // Sport
+                items: ['1', '3']
+            }
+        ];
     };
 
     assignment.find('.container').each(function () {
@@ -72,47 +104,36 @@
                 checked.prop('checked', false);
             }
             assignment.addClass('validated');
-
-            // this should be retrieved with api call
-            var correct = [
-                {
-                    id: '1', // TV
-                    items: ['5', '7']
-                },
-                {
-                    id: '2', // Games
-                    items: ['6', '8']
-                },
-                {
-                    id: '3', // Music
-                    items: ['2', '4']
-                },
-                {
-                    id: '4', // Sport
-                    items: ['1', '3']
-                }
-            ];
-
+            var correct = getCorrect();
             $(correct).each(function (i, data) {
-                $(data.items).each(function (j, id) {
-                    var item = getItem(id);
-                    if (item.parent().attr('data-id') === data.id) {
-                        item.addClass('valid');
-                    } else if (item.parents('.to').length) {
-                        item.addClass('invalid');
-                    }
+                var container = assignment.find('.to .container[data-id="' + data.id + '"]');
+                container.children().each(function () {
+                    var item = $(this);
+                    if ($.inArray(item.attr('data-id'), data.items) !== -1) {
+                       item.addClass('valid');
+                   } else {
+                       item.addClass('invalid');
+                   }
                 });
             });
         }
     });
 
     assignment.on('click', 'button[type="reset"]', function () {
-        items.removeClass('valid invalid');
-        var checked = getChecked();
-        if (checked.length) {
-            checked.prop('checked', false);
-        }
-        from.append(items);
-        assignment.removeClass('validated moving');
+        reset();
+    });
+
+    assignment.on('click', 'button.correct', function () {
+        reset();
+        assignment.addClass('validated');
+        var correct = getCorrect();
+        $(correct).each(function (i, data) {
+            var container = assignment.find('.to .container[data-id="' + data.id + '"]');
+            $(data.items).each(function (j, id) {
+                var item = getItem(id);
+                item.addClass('valid');
+                item.appendTo(container);
+            });
+        });
     });
 }
