@@ -61,7 +61,7 @@ window.onpopstate = function (event) {
     if (loadPage) {
         var url = location.pathname;
         if (!app.isLocalhost) {
-            url = url.substring(url.indexOf("/") + 2);
+            url = url.substring(url.lastIndexOf("/") + 1);
             debugger;
         }
         debugger;
