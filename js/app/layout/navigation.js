@@ -31,6 +31,10 @@ app.loadPage = function (url, pushState, initial) {
         }
         app.pageLoaded(initial);
     });
+    var a = window.location.pathname;
+    debugger;
+    var b = window.location.pathname.split('/');
+    debugger;
     if (app.isLocalhost) {
         url = '/' + url.split('/')[1];
     } else {
