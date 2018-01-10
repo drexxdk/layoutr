@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
-app.tooltipster = function (elements) {
-    elements.each(function () {
+app.tooltip = function (tooltips) {
+    tooltips.each(function () {
         var $this = $(this);
         var interactive = $this.hasClass('interactive');
         $this.tooltipster({

@@ -35,10 +35,10 @@
 
       "js/app/components/accordion.js",
       "js/app/components/alert.js",
-      "js/app/components/katex.js",
+      "js/app/components/math.js",
       "js/app/components/lazy.js",
       "js/app/components/popup.js",
-      "js/app/components/tooltipster.js",
+      "js/app/components/tooltip.js",
       "js/app/assignments/_assignments.js",
 
       "js/app/site/form.js",

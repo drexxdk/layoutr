@@ -7,3 +7,7 @@ div.cover {
     background-size: cover;
     background-position: center center;
 }
+
+.math {
+    @include hidden;
+}

@@ -19,9 +19,9 @@ app.pageLoaded = function (initial) {
     app.accordion(app.content.find('.accordion'));
     app.dropdown(app.content.find('select.dropdown'));
     app.responsiveBackground();
-    app.tooltipster(app.content.find('.tooltip'));
+    app.tooltip(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
-    app.katex(app.content.find('.katex'));
+    app.math(app.content.find('.math'));
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();

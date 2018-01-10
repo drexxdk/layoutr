@@ -19,7 +19,7 @@
         @include noselect;
 
         > input {
-            @include hidden-input;
+            @include hidden;
 
             &:checked {
                 & + label > i {

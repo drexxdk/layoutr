@@ -2,7 +2,7 @@
 
 @mixin layoutr-dropdown {
     select.dropdown {
-        @include hidden-input;
+        @include hidden;
 
         &:focus + div.dropdown {
             > div {

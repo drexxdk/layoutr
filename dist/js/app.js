@@ -839,9 +839,9 @@ app.pageLoaded = function (initial) {
     app.accordion(app.content.find('.accordion'));
     app.dropdown(app.content.find('select.dropdown'));
     app.responsiveBackground();
-    app.tooltipster(app.content.find('.tooltip'));
+    app.tooltip(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
-    app.katex(app.content.find('.katex'));
+    app.math(app.content.find('.math'));
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();
@@ -1665,18 +1665,19 @@ $(function () {
 });
 var app = app || {};
 
-app.katex = function (katex) {
-    if (katex.length) {
-        if (!app.html.hasClass('katex-loaded')) {
-            app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
+app.math = function (math) {
+    if (math.length) {
+        if (!app.html.hasClass('math-loaded')) {
             app.body.append($('<script type="text/javascript" src="dist/js/katex.min.js">'));
-            app.html.addClass('katex-loaded');
+            app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
+            app.html.addClass('math-loaded');
         }
-        katex.each(function () {
+        math.each(function () {
             var $this = $(this);
-            $.when(renderMathInElement($this[0])).done(function () {
-                $this.removeClass('katex');
-            });
+            renderMathInElement($this[0]);
+            setTimeout(function () {
+                $this.removeClass('math');
+            }, 0);
         });
     }
 };
@@ -1729,8 +1730,8 @@ $(function () {
 });
 var app = app || {};
 
-app.tooltipster = function (elements) {
-    elements.each(function () {
+app.tooltip = function (tooltips) {
+    tooltips.each(function () {
         var $this = $(this);
         var interactive = $this.hasClass('interactive');
         $this.tooltipster({
