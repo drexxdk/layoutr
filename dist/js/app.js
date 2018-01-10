@@ -811,7 +811,7 @@ $(window).click(function (e) {
         var right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
         var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
 
-        if ((left || right) && notTarget) {
+        if ((left || right) && notTarget && !app.isLoading()) {
             app.enableScroll();
             app.html.attr('data-aside', '');
             app.checkGoogleMaps();
