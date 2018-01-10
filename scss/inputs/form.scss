@@ -61,123 +61,125 @@
     }
 }
 
-.form-group,
-.form-group > div,
-.form-group > div > .input-group {
-    @include flex-display;
-    @include flex-wrap(wrap);
-    flex-grow: 1;
-}
+@mixin layoutr-form {
+    .form-group,
+    .form-group > div,
+    .form-group > div > .input-group {
+        @include flex-display;
+        @include flex-wrap(wrap);
+        flex-grow: 1;
+    }
 
-.form-group,
-.form-group > div {
-    @include align-items(flex-start);
-}
+    .form-group,
+    .form-group > div {
+        @include align-items(flex-start);
+    }
 
-.form-group {
-    > .control-label {
-        padding-right: $spacer;
-        width: $form-label-width;
-        line-height: $line-height + ($padding-y * 2);
+    .form-group {
+        > .control-label {
+            padding-right: $spacer;
+            width: $form-label-width;
+            line-height: $line-height + ($padding-y * 2);
 
-        &.required:after {
-            content: '*';
-            color: $danger;
-            margin-left: $spacer / 3;
+            &.required:after {
+                content: '*';
+                color: $danger;
+                margin-left: $spacer / 3;
+            }
         }
-    }
 
-    textarea {
-        resize: none; /* Safari */
-        resize: vertical; /* Chrome */
-        min-height: ($line-height * 5) + ($padding-y * 2);
-        line-height: $line-height;
-    }
-
-    input[type=text],
-    input[type=password],
-    input[type=email] {
-        min-height: $line-height + ($padding-y * 2) + ($component-border-width * 2);
-    }
-
-    textarea,
-    input[type=text],
-    input[type=password],
-    input[type=email] {
-        padding: $padding-y $padding-x;
-        border-radius: $component-border-radius;
-        border: $component-border;
-        z-index: $component-z-index;
-        box-shadow: $input-box-shadow;
-        width: 100%;
-        font-size: $font-size;
-        -webkit-appearance: none;
-
-        &:focus {
-            box-shadow: $input-focus-box-shadow;
-            z-index: $component-focus-z-index;
-            position: relative;
+        textarea {
+            resize: none; /* Safari */
+            resize: vertical; /* Chrome */
+            min-height: ($line-height * 5) + ($padding-y * 2);
+            line-height: $line-height;
         }
-    }
 
-    > div {
-        min-width: $form-input-min-width;
-        width: calc(100% - #{$form-label-width});
+        input[type=text],
+        input[type=password],
+        input[type=email] {
+            min-height: $line-height + ($padding-y * 2) + ($component-border-width * 2);
+        }
 
-        > .input-group {
-            position: relative;
+        textarea,
+        input[type=text],
+        input[type=password],
+        input[type=email] {
+            padding: $padding-y $padding-x;
+            border-radius: $component-border-radius;
+            border: $component-border;
+            z-index: $component-z-index;
+            box-shadow: $input-box-shadow;
             width: 100%;
+            font-size: $font-size;
+            -webkit-appearance: none;
 
-            > .input-group-addon {
-                position: absolute;
-                top: $component-border-width;
-                bottom: $component-border-width;
-                @include flex-display;
-                @include align-items(center);
-                z-index: $input-group-addon;
-                padding: 0 $padding-x;
+            &:focus {
+                box-shadow: $input-focus-box-shadow;
+                z-index: $component-focus-z-index;
+                position: relative;
+            }
+        }
 
-                &:first-child {
-                    left: $component-border-width;
-                    border-top-left-radius: $component-border-radius;
-                    border-bottom-left-radius: $component-border-radius;
-                    border-right: $component-border;
-                }
+        > div {
+            min-width: $form-input-min-width;
+            width: calc(100% - #{$form-label-width});
 
-                &:last-child {
-                    right: $component-border-width;
-                    border-top-right-radius: $component-border-radius;
-                    border-bottom-right-radius: $component-border-radius;
-                    border-left: $component-border;
-                }
+            > .input-group {
+                position: relative;
+                width: 100%;
+
+                > .input-group-addon {
+                    position: absolute;
+                    top: $component-border-width;
+                    bottom: $component-border-width;
+                    @include flex-display;
+                    @include align-items(center);
+                    z-index: $input-group-addon;
+                    padding: 0 $padding-x;
+
+                    &:first-child {
+                        left: $component-border-width;
+                        border-top-left-radius: $component-border-radius;
+                        border-bottom-left-radius: $component-border-radius;
+                        border-right: $component-border;
+                    }
+
+                    &:last-child {
+                        right: $component-border-width;
+                        border-top-right-radius: $component-border-radius;
+                        border-bottom-right-radius: $component-border-radius;
+                        border-left: $component-border;
+                    }
 
 
-                @include theme-element-soft($light, false);
+                    @include theme-element-soft($light, false);
 
-                > svg {
-                    width: $font-size;
-                    height: $font-size;
-                    flex-shrink: 0;
-                }
+                    > svg {
+                        width: $font-size;
+                        height: $font-size;
+                        flex-shrink: 0;
+                    }
 
-                & + .form-control {
-                    padding-left: ($padding-x * 3) + $font-size;
+                    & + .form-control {
+                        padding-left: ($padding-x * 3) + $font-size;
+                    }
                 }
             }
         }
-    }
 
-    &.theme-danger {
-        em {
-            color: $danger;
-            margin: ($spacer / 2) 0 $spacer 0;
-            width: 100%;
+        &.theme-danger {
+            em {
+                color: $danger;
+                margin: ($spacer / 2) 0 $spacer 0;
+                width: 100%;
+            }
         }
-    }
 
-    @each $color, $value in $theme-validation-colors {
-        &.theme-#{$color} {
-            @include validation-variant($value, theme-soft-border-color($value), theme-soft-color($value));
+        @each $color, $value in $theme-validation-colors {
+            &.theme-#{$color} {
+                @include validation-variant($value, theme-soft-border-color($value), theme-soft-color($value));
+            }
         }
     }
 }

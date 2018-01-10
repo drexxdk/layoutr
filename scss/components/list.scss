@@ -1,113 +1,115 @@
 ﻿/// <reference path="../references" />
 
-ul.list {
-    list-style-type: none;
-
-    li {
-        position: relative;
-        padding-left: $list-bullet-width + $spacer;
-
-        &:before {
-            content: '';
-            position: absolute;
-            top: #{$component-line-height / 2}rem;
-            left: 0;
-            transform: translateY(-50%);
-            width: $list-bullet-width;
-            height: $list-bullet-width;
-            border-radius: 50%;
-            background-color: currentColor;
-        }
-
-        & + li {
-            margin-top: $spacer / 2;
-        }
-    }
-
-    ul {
-        margin-top: $spacer / 2;
+@mixin layoutr-list {
+    ul.list {
         list-style-type: none;
-    }
-}
 
-ol.list {
-    counter-reset: li;
-    list-style-type: none;
+        li {
+            position: relative;
+            padding-left: $list-bullet-width + $spacer;
 
-    @each $color, $value in $theme-colors {
-        &.theme-#{$color} li {
-            > *:not(ol):before {
-                @include theme-element($value);
+            &:before {
+                content: '';
+                position: absolute;
+                top: #{$component-line-height / 2}rem;
+                left: 0;
+                transform: translateY(-50%);
+                width: $list-bullet-width;
+                height: $list-bullet-width;
+                border-radius: 50%;
+                background-color: currentColor;
             }
 
-            html.desktop & {
-                > a:hover:after {
-                    border-left-color: $value;
+            & + li {
+                margin-top: $spacer / 2;
+            }
+        }
+
+        ul {
+            margin-top: $spacer / 2;
+            list-style-type: none;
+        }
+    }
+
+    ol.list {
+        counter-reset: li;
+        list-style-type: none;
+
+        @each $color, $value in $theme-colors {
+            &.theme-#{$color} li {
+                > *:not(ol):before {
+                    @include theme-element($value);
+                }
+
+                html.desktop & {
+                    > a:hover:after {
+                        border-left-color: $value;
+                    }
                 }
             }
         }
-    }
 
-    ol {
-        list-style-type: none;
-        counter-reset: li;
-        margin-left: $list-number-width + ($spacer / 2) + ($component-border-width * 2);
-    }
-
-    li > *:not(ol) {
-        position: relative;
-        display: block;
-        line-height: $component-line-height;
-        @include theme-element($list-background-color);
-        margin: ($spacer / 2) 0 ($spacer / 2) ($list-number-width + ($spacer / 2) + ($component-border-width * 2));
-        padding: $padding-y $padding-x;
-
-        &:before {
-            content: counter(li);
-            position: absolute;
-            top: -$component-border-width;
-            left: -($list-number-width + ($spacer / 2) + ($component-border-width * 3));
-            width: $list-number-width;
-            height: $list-number-width;
-            line-height: $list-number-width;
-            counter-increment: li;
-            text-align: center;
-            font-weight: bold;
-            @include theme-element($list-number-background-color);
-        }
-    }
-
-    li > button,
-    li > a {
-        &:focus {
-            @include theme-element-darken($list-background-color);
+        ol {
+            list-style-type: none;
+            counter-reset: li;
+            margin-left: $list-number-width + ($spacer / 2) + ($component-border-width * 2);
         }
 
-        html.desktop & {
-            &:hover:after {
-                left: -(($spacer / 2) + $component-border-width);
-                border-left-color: $list-number-background-color;
+        li > *:not(ol) {
+            position: relative;
+            display: block;
+            line-height: $component-line-height;
+            @include theme-element($list-background-color);
+            margin: ($spacer / 2) 0 ($spacer / 2) ($list-number-width + ($spacer / 2) + ($component-border-width * 2));
+            padding: $padding-y $padding-x;
+
+            &:before {
+                content: counter(li);
+                position: absolute;
+                top: -$component-border-width;
+                left: -($list-number-width + ($spacer / 2) + ($component-border-width * 3));
+                width: $list-number-width;
+                height: $list-number-width;
+                line-height: $list-number-width;
+                counter-increment: li;
+                text-align: center;
+                font-weight: bold;
+                @include theme-element($list-number-background-color);
             }
         }
 
-        &:after {
-            content: '';
-            position: absolute;
-            top: $list-number-width / 2;
-            left: -$spacer;
-            border: ($spacer / 2) solid transparent;
-            transform: translateY(-50%);
-            transition: all $transition-time $transition-timing;
+        li > button,
+        li > a {
+            &:focus {
+                @include theme-element-darken($list-background-color);
+            }
+
+            html.desktop & {
+                &:hover:after {
+                    left: -(($spacer / 2) + $component-border-width);
+                    border-left-color: $list-number-background-color;
+                }
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: $list-number-width / 2;
+                left: -$spacer;
+                border: ($spacer / 2) solid transparent;
+                transform: translateY(-50%);
+                transition: all $transition-time $transition-timing;
+            }
         }
     }
-}
 
-ul.list,
-ol.list {
-    html.desktop & {
-        li > button:hover,
-        li > a:hover {
-            @include theme-element-darken($list-background-color);
+    ul.list,
+    ol.list {
+        html.desktop & {
+            li > button:hover,
+            li > a:hover {
+                @include theme-element-darken($list-background-color);
+            }
         }
     }
 }

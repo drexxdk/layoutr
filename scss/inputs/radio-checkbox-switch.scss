@@ -1,142 +1,144 @@
 ﻿/// <reference path="../references" />
 
-.checkboxes,
-.radioboxes,
-.switches {
-    padding-top: $flex-space-base * 2;
-    @extend .flex-items;
-    @extend .flex-items.column;
-    @extend .flex-items.wrap;
-    @extend .flex-items.space-2;
-}
-
-.radio,
-.checkbox,
-.switch {
-    position: relative;
-    line-height: $line-height;
-    @include noselect;
-
-    > input {
-        @include hidden-input;
-
-        &:checked {
-            & + label > i {
-                @include theme-element($primary);
-            }
-        }
-
-        & + label:focus > i {
-            @include focus;
-        }
+@mixin layoutr-radio-checkbox-switch {
+    .checkboxes,
+    .radioboxes,
+    .switches {
+        padding-top: $flex-space-base * 2;
+        @extend .flex-items;
+        @extend .flex-items.column;
+        @extend .flex-items.wrap;
+        @extend .flex-items.space-2;
     }
 
-    > label {
-        @include flex-display;
-        @include align-items(center);
-        font-size: $font-size;
-        z-index: $component-z-index;
-        cursor: pointer;
-        max-width: 100%;
-
-        > span {
-            max-width: 100%;
-            overflow: auto;
-        }
-
-        > i {
-            box-shadow: $box-shadow;
-        }
-    }
-}
-
-.radio,
-.checkbox {
-    > label > i {
-        display: block;
-        width: $font-size;
-        height: $font-size;
-        border: $component-border;
-        margin-right: ($spacer / 2);
+    .radio,
+    .checkbox,
+    .switch {
         position: relative;
-        overflow: hidden;
-        background-color: white;
-        flex-shrink: 0;
-    }
-}
+        line-height: $line-height;
+        @include noselect;
 
-.radio {
-    > label > i {
-        border-radius: 50%;
-    }
+        > input {
+            @include hidden-input;
 
-    > input:checked + label > i:before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, - 50%);
-        border-radius: 50%;
-        height: $font-size - ($component-border-width * 4);
-        width: $font-size - ($component-border-width * 4);
-        border: ($component-border-width * 2) solid $white;
-    }
-}
+            &:checked {
+                & + label > i {
+                    @include theme-element($primary);
+                }
+            }
 
-.checkbox {
-
-    > input:not(:checked) + label > i > svg {
-        display: none;
-    }
-
-    > input:checked + label > i {
-        padding: rem(2px);
-
-        > svg {
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            position: relative;
-            fill: $white;
+            & + label:focus > i {
+                @include focus;
+            }
         }
-    }
-}
 
-.switch {
-    &.round {
-        > label > i {
-            border-radius: $font-size - ($component-border-width * 2) / 2;
+        > label {
+            @include flex-display;
+            @include align-items(center);
+            font-size: $font-size;
+            z-index: $component-z-index;
+            cursor: pointer;
+            max-width: 100%;
 
-            &:before {
-                border-radius: 50%;
+            > span {
+                max-width: 100%;
+                overflow: auto;
+            }
+
+            > i {
+                box-shadow: $box-shadow;
             }
         }
     }
 
-    > input:checked + label > i:before {
-        transform: translateX($font-size);
+    .radio,
+    .checkbox {
+        > label > i {
+            display: block;
+            width: $font-size;
+            height: $font-size;
+            border: $component-border;
+            margin-right: ($spacer / 2);
+            position: relative;
+            overflow: hidden;
+            background-color: white;
+            flex-shrink: 0;
+        }
     }
 
-    > label {
+    .radio {
+        > label > i {
+            border-radius: 50%;
+        }
 
-        > i {
-            width: $font-size * 2;
-            height: $font-size;
-            @include theme-element($component-border-color);
-            transform: transition(.4s);
-            position: relative;
-            margin-right: ($spacer / 2);
+        > input:checked + label > i:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, - 50%);
+            border-radius: 50%;
+            height: $font-size - ($component-border-width * 4);
+            width: $font-size - ($component-border-width * 4);
+            border: ($component-border-width * 2) solid $white;
+        }
+    }
 
-            &:before {
-                position: absolute;
-                content: "";
-                height: $font-size - ($component-border-width * 2);
-                width: $font-size - ($component-border-width * 2);
-                top: 0;
-                bottom: 0;
-                left: 0;
-                background-color: white;
+    .checkbox {
+
+        > input:not(:checked) + label > i > svg {
+            display: none;
+        }
+
+        > input:checked + label > i {
+            padding: rem(2px);
+
+            > svg {
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                position: relative;
+                fill: $white;
+            }
+        }
+    }
+
+    .switch {
+        &.round {
+            > label > i {
+                border-radius: $font-size - ($component-border-width * 2) / 2;
+
+                &:before {
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        > input:checked + label > i:before {
+            transform: translateX($font-size);
+        }
+
+        > label {
+
+            > i {
+                width: $font-size * 2;
+                height: $font-size;
+                @include theme-element($component-border-color);
                 transform: transition(.4s);
+                position: relative;
+                margin-right: ($spacer / 2);
+
+                &:before {
+                    position: absolute;
+                    content: "";
+                    height: $font-size - ($component-border-width * 2);
+                    width: $font-size - ($component-border-width * 2);
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    background-color: white;
+                    transform: transition(.4s);
+                }
             }
         }
     }

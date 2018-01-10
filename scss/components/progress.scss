@@ -1,51 +1,53 @@
 ﻿/// <reference path="../references" />
 
-.progress {
-    padding: $spacer 0;
-    position: relative;
-    @include flex-display;
-
-    > div {
-        width: 100%;
-        @include flex-display;
+@mixin layoutr-progress {
+    .progress {
+        padding: $spacer 0;
         position: relative;
+        @include flex-display;
 
-        > .line {
+        > div {
             width: 100%;
-            height: $spacer;
-            @include theme-element($light);
-            border-radius: $component-border-radius;
-        }
-
-        > .number {
-            flex-shrink: 0;
-            width: $spacer * 3;
-            height: $spacer * 3;
-            border-radius: 50%;
             @include flex-display;
-            @include justify-content(center);
-            @include align-items(center);
-            @include theme-element($light);
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1;
+            position: relative;
+
+            > .line {
+                width: 100%;
+                height: $spacer;
+                @include theme-element($light);
+                border-radius: $component-border-radius;
+            }
+
+            > .number {
+                flex-shrink: 0;
+                width: $spacer * 3;
+                height: $spacer * 3;
+                border-radius: 50%;
+                @include flex-display;
+                @include justify-content(center);
+                @include align-items(center);
+                @include theme-element($light);
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 1;
+            }
+
+            > .number:first-child {
+                left: -#{$spacer * 1.5};
+            }
+
+            > .line:first-child + .number {
+                right: -#{$spacer * 1.5};
+            }
         }
 
-        > .number:first-child {
-            left: -#{$spacer * 1.5};
-        }
-
-        > .line:first-child + .number {
-            right: -#{$spacer * 1.5};
-        }
-    }
 
 
-
-    @each $color, $value in $theme-colors {
-        > div > span.theme-#{$color} {
-            @include theme-element($value);
+        @each $color, $value in $theme-colors {
+            > div > span.theme-#{$color} {
+                @include theme-element($value);
+            }
         }
     }
 }

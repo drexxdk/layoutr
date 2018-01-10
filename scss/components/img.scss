@@ -1,19 +1,16 @@
 ﻿/// <reference path="../references" />
 
-img,
-.img {
-    background-color: $light;
-    @include noselect;
-}
+@mixin layoutr-img {
+    img,
+    .img {
+        background-color: $light;
+        @include noselect;
+    }
 
-.img {
-    flex-shrink: 0;
-    border-radius: $component-border-radius;
-    position: relative;
-    overflow: hidden;
-}
-
-div.cover {
-    background-size: cover;
-    background-position: center center;
+    .img {
+        flex-shrink: 0;
+        border-radius: $component-border-radius;
+        position: relative;
+        overflow: hidden;
+    }
 }

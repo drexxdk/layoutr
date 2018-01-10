@@ -3,7 +3,7 @@
     "outputFile": "dist/css/app.css",
     "inputFile": "scss/app.scss",
     "minify": {
-      "enabled": false
+      "enabled": true
     },
     "includeInProject": true,
     "options": {
@@ -11,14 +11,14 @@
     }
   },
   {
-    "outputFile": "dist/css/app.min.css",
-    "inputFile": "scss/app.scss",
+    "outputFile": "dist/css/katex.css",
+    "inputFile": "scss/components/katex.scss",
     "minify": {
       "enabled": true
     },
     "includeInProject": true,
     "options": {
-      "sourceMap": false
+      "sourceMap": true
     }
   }
 ]

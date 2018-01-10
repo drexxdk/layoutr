@@ -1,39 +1,41 @@
 ﻿/// <reference path="../references" />
+@mixin layoutr-accordion {
+    .accordion {
+        border-radius: $component-border-radius;
+        overflow: hidden;
+        border: $component-border;
+        z-index: $component-z-index;
 
-.accordion {
-    border-radius: $component-border-radius;
-    overflow: hidden;
-    border: $component-border;
-    z-index: $component-z-index;
+        > div {
+            > .headline {
+                border-radius: 0;
+                @extend .btn;
+                @extend .btn.theme-light;
+                border: none !important;
 
-    > div {
-        > .headline {
-            border-radius: 0;
-            @extend .btn;
-            @extend .btn.theme-light;
-            border: none!important;
+                @each $color, $value in $theme-colors {
+                    &.btn.theme-#{$color}:focus {
+                        $active-background: darken($value, 7.5%);
+                        @include color-yiq($active-background);
+                        background: theme-gradient($active-background);
+                        box-shadow: none;
+                    }
+                }
 
-            @each $color, $value in $theme-colors {
-                &.btn.theme-#{$color}:focus {
-                    $active-background: darken($value, 7.5%);
-                    @include color-yiq($active-background);
-                    background: theme-gradient($active-background);
-                    box-shadow: none;
+                &:focus {
                 }
             }
 
-            &:focus {
+            > .content {
+                padding: $spacer;
+                display: none;
+                border-top: $component-border;
             }
-        }
 
-        > .content {
-            padding: $spacer;
-            display: none;
-            border-top: $component-border;
-        }
-
-        & + div {
-            border-top: $component-border;
+            & + div {
+                border-top: $component-border;
+            }
         }
     }
 }
+

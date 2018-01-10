@@ -1,0 +1,92 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-btn {
+    .btn {
+        @include flex-display;
+        @include align-items(center);
+        @include noselect;
+        font-size: $font-size;
+        padding: $padding-y $padding-x;
+        border-radius: $component-border-radius;
+        text-decoration: none;
+        background-color: transparent;
+        cursor: pointer;
+        line-height: $component-line-height;
+        z-index: $component-z-index;
+        box-shadow: $box-shadow;
+
+        html.desktop & {
+            &:hover {
+                $value: $primary;
+                @include theme-element-darken($value);
+            }
+        }
+
+        > span {
+            max-width: 100%;
+        }
+
+        &:not(.align-left):not(.align-right) {
+            @include justify-content(center);
+        }
+
+        &.align-right {
+            @include justify-content(flex-end);
+        }
+
+        > * {
+            cursor: pointer;
+        }
+
+        > i + span,
+        > svg + span,
+        > span + i,
+        > span + svg,
+        > i + label,
+        > svg + label,
+        > label + i,
+        > label + svg {
+            margin-left: $spacer / 2;
+        }
+
+        > i,
+        > svg {
+            margin: #{(($component-line-height * $font-size) - $font-size) / 2} 0;
+            width: $font-size;
+            height: $font-size;
+            flex-shrink: 0;
+        }
+
+        @each $color, $value in $theme-colors {
+            &.theme-#{$color} {
+                @include theme-element($value);
+
+                html.desktop & {
+                    &:hover {
+                        @include theme-element-darken($value);
+                    }
+                }
+            }
+        }
+
+        @include theme-element($primary);
+
+        &:focus {
+            @include focus;
+        }
+    }
+
+    .theme-link {
+        color: $link-color;
+        text-decoration: $link-decoration;
+        background: transparent !important;
+        border: $component-border-width solid $component-border-color !important;
+
+        html.desktop & {
+            &:hover {
+                color: $link-hover-color;
+                text-decoration: $link-hover-decoration;
+            }
+        }
+    }
+}

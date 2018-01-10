@@ -1,130 +1,132 @@
 ﻿/// <reference path="../references" />
 
-.assignment.drag-and-drop {
-    padding: ($spacer / 2) 0;
+@mixin layoutr-drag-and-drop {
+    .assignment.drag-and-drop {
+        padding: ($spacer / 2) 0;
 
-    .header {
-        @include theme-element($secondary, false);
-        position: relative;
-
-        .title {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: $header-height-content;
-            @include ellipsis;
-        }
-
-        .place {
-            margin-left: auto;
-            pointer-events: none;
-            opacity: 0;
-        }
-    }
-
-    .box {
-        min-width: rem(150px);
-        border: $component-border;
-        border-radius: $component-border-radius;
-        overflow: hidden;
-    }
-
-    .content {
-        background-color: white;
-
-        .container {
-            padding: $spacer / 2;
-            min-height: rem(66px);
-        }
-    }
-
-    &.validated {
-
-        .item > label > i {
-            display: none;
-        }
-
-        .from,
-        .to {
-            pointer-events: none;
-        }
-    }
-
-    html.desktop & {
-        &:not(.moving) .place {
-            visibility: hidden;
-        }
-
-        &.moving .box:hover .place,
-        &.moving .place:focus {
-            pointer-events: all;
-            opacity: 1;
-        }
-    }
-
-    html.mobile &,
-    html.tablet & {
-        &.moving .place {
-            pointer-events: all;
-            opacity: 1;
-        }
-    }
-
-    .item {
-        > label {
-            @include theme-element($light);
-            padding: $padding-y $padding-x;
-        }
-
-        &.valid > label {
-            @include theme-element-soft($success);
-        }
-
-        &.invalid > label {
-            @include theme-element-soft($danger);
-        }
-    }
-
-    .to {
-        .item {
+        .header {
+            @include theme-element($secondary, false);
             position: relative;
 
-            &:before {
-                content: '';
-                display: block;
-                width: 100%;
-                height: rem(42px);
-            }
-
-            > label {
+            .title {
                 position: absolute;
                 top: 0;
                 left: 0;
-                right: 0;
+                right: $header-height-content;
+                @include ellipsis;
+            }
 
-                > span {
-                    @include ellipsis;
+            .place {
+                margin-left: auto;
+                pointer-events: none;
+                opacity: 0;
+            }
+        }
+
+        .box {
+            min-width: rem(150px);
+            border: $component-border;
+            border-radius: $component-border-radius;
+            overflow: hidden;
+        }
+
+        .content {
+            background-color: white;
+
+            .container {
+                padding: $spacer / 2;
+                min-height: rem(66px);
+            }
+        }
+
+        &.validated {
+
+            .item > label > i {
+                display: none;
+            }
+
+            .from,
+            .to {
+                pointer-events: none;
+            }
+        }
+
+        html.desktop & {
+            &:not(.moving) .place {
+                visibility: hidden;
+            }
+
+            &.moving .box:hover .place,
+            &.moving .place:focus {
+                pointer-events: all;
+                opacity: 1;
+            }
+        }
+
+        html.mobile &,
+        html.tablet & {
+            &.moving .place {
+                pointer-events: all;
+                opacity: 1;
+            }
+        }
+
+        .item {
+            > label {
+                @include theme-element($light);
+                padding: $padding-y $padding-x;
+            }
+
+            &.valid > label {
+                @include theme-element-soft($success);
+            }
+
+            &.invalid > label {
+                @include theme-element-soft($danger);
+            }
+        }
+
+        .to {
+            .item {
+                position: relative;
+
+                &:before {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: rem(42px);
+                }
+
+                > label {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+
+                    > span {
+                        @include ellipsis;
+                    }
                 }
             }
         }
     }
-}
 
-.item.checkbox.sortable-chosen {
-    &.sortable-fallback {
-        margin: $flex-space-base * 2;
-    }
+    .item.checkbox.sortable-chosen {
+        &.sortable-fallback {
+            margin: $flex-space-base * 2;
+        }
 
-    label {
-        @include theme-element-soft($secondary);
-        padding: $padding-y $padding-x;
+        label {
+            @include theme-element-soft($secondary);
+            padding: $padding-y $padding-x;
 
-        i {
-            box-shadow: none !important;
+            i {
+                box-shadow: none !important;
+            }
         }
     }
-}
 
-.item.checkbox.sortable-ghost label {
-    @include theme-element-soft($secondary);
+    .item.checkbox.sortable-ghost label {
+        @include theme-element-soft($secondary);
+    }
 }

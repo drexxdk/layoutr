@@ -1,46 +1,48 @@
 ﻿/// <reference path="../references" />
 
-.quote {
-    @include flex-display();
+@mixin layoutr-quote {
+    .quote {
+        @include flex-display();
 
-    &.large > .text {
-        > p {
-            font-size: $font-size-lg;
+        &.large > .text {
+            > p {
+                font-size: $font-size-lg;
 
-            > svg {
-                width: $font-size-lg;
-                height: $font-size-lg;
+                > svg {
+                    width: $font-size-lg;
+                    height: $font-size-lg;
+                }
+            }
+
+            > .author {
+                font-size: $font-size;
             }
         }
 
-        > .author {
-            font-size: $font-size;
+        > .img {
+            width: $quote-img-width;
+            height: $quote-img-width;
         }
-    }
 
-    > .img {
-        width: $quote-img-width;
-        height: $quote-img-width;
-    }
+        > .text {
+            padding: $padding-y $padding-x;
 
-    > .text {
-        padding: $padding-y $padding-x;
+            > p {
+                font-size: $font-size;
 
-        > p {
-            font-size: $font-size;
-
-            > svg {
-                display: inline;
-                width: $font-size;
-                height: $font-size;
+                > svg {
+                    display: inline;
+                    width: $font-size;
+                    height: $font-size;
+                }
             }
-        }
 
-        > .author {
-            display: block;
-            margin-top: $spacer / 2;
-            opacity: $font-light-opacity;
-            font-size: $font-size-sm;
+            > .author {
+                display: block;
+                margin-top: $spacer / 2;
+                opacity: $font-light-opacity;
+                font-size: $font-size-sm;
+            }
         }
     }
 }

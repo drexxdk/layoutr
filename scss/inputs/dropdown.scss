@@ -1,177 +1,179 @@
 ﻿/// <reference path="../references" />
 
-select.dropdown {
-    @include hidden-input;
+@mixin layoutr-dropdown {
+    select.dropdown {
+        @include hidden-input;
 
-    &:focus + div.dropdown {
-        > div {
-            @extend :focus;
-        }
-    }
-}
-
-div.dropdown {
-    position: relative;
-    width: 100%;
-
-    &.ellipsis {
-        > div > label,
-        > ul > li > div > label {
-            @include ellipsis;
+        &:focus + div.dropdown {
+            > div {
+                @extend :focus;
+            }
         }
     }
 
-    &.align-left {
-        > div > label,
-        > ul > li > div > label {
-            text-align: left;
-        }
-    }
+    div.dropdown {
+        position: relative;
+        width: 100%;
 
-    &.align-right {
-        > div > label {
-            text-align: right;
+        &.ellipsis {
+            > div > label,
+            > ul > li > div > label {
+                @include ellipsis;
+            }
         }
 
-        > ul > li > div {
-            > label {
+        &.align-left {
+            > div > label,
+            > ul > li > div > label {
+                text-align: left;
+            }
+        }
+
+        &.align-right {
+            > div > label {
                 text-align: right;
-                order: 2;
             }
 
-            > svg {
-                order: 1;
-            }
-        }
-    }
-
-    &.direction-up {
-        &.open {
-            > div {
-                border-radius: 0 0 $component-border-radius $component-border-radius;
-
-                > svg {
-                    transform: rotate(90deg);
-                }
-            }
-        }
-
-        > div > svg {
-            transform: rotate(270deg);
-        }
-
-        > ul {
-            margin-top: 0;
-            margin-bottom: $component-focus-box-shadow-width;
-            top: auto;
-            bottom: 100%;
-            border-radius: $component-border-radius $component-border-radius 0 0;
-        }
-    }
-
-    > div:focus {
-        & + ul {
-            @include focus;
-            position: absolute;
-        }
-    }
-
-    &.open {
-
-        > div {
-            border-radius: $component-border-radius $component-border-radius 0 0;
-            @include focus;
-
-            > svg {
-                transform: rotate(270deg);
-            }
-        }
-
-        > ul {
-            display: block;
-            @include focus;
-            position: absolute;
-
-            > li > div:focus {
-                @include theme-element-soft-darken($light);
-                box-shadow: none;
-            }
-        }
-    }
-
-    > div {
-        @include flex-display();
-        @extend .btn;
-
-        > label {
-            flex-grow: 1;
-            text-align: center;
-            line-height: $component-line-height - ($component-border-width * 2);
-            max-width: 100%;
-            overflow: auto;
-        }
-
-        > svg {
-            transform: rotate(90deg);
-        }
-    }
-
-    > ul {
-        display: none;
-        list-style-type: none;
-        background-color: $gray-100;
-        border: $component-border;
-        position: absolute;
-        top: 100%;
-        margin-top: $component-focus-box-shadow-width;
-        left: 0;
-        right: 0;
-        z-index: $dropdown-z-index;
-        border-radius: 0 0 $component-border-radius $component-border-radius;
-        overflow: auto;
-        max-height: ($height * 4) + ($component-border-width * 4);
-
-        > li {
-
-            > div {
-                border-radius: 0;
-                display: block;
-                @include flex-display();
-                @extend .btn;
-                border: none !important;
-
-                html.desktop & {
-                    &:hover > svg {
-                        opacity: .4;
-                    }
-                }
-
+            > ul > li > div {
                 > label {
-                    flex-grow: 1;
-                    text-align: center;
-                    max-width: 100%;
-                    overflow: auto;
+                    text-align: right;
+                    order: 2;
                 }
 
                 > svg {
-                    opacity: 0;
+                    order: 1;
                 }
             }
+        }
 
-            &.selected {
+        &.direction-up {
+            &.open {
                 > div {
-                    background-color: white;
-                    cursor: default;
+                    border-radius: 0 0 $component-border-radius $component-border-radius;
 
                     > svg {
-                        fill: $success;
-                        opacity: 1 !important;
+                        transform: rotate(90deg);
                     }
                 }
             }
 
-            & + li {
-                border-top: $component-border;
+            > div > svg {
+                transform: rotate(270deg);
+            }
+
+            > ul {
+                margin-top: 0;
+                margin-bottom: $component-focus-box-shadow-width;
+                top: auto;
+                bottom: 100%;
+                border-radius: $component-border-radius $component-border-radius 0 0;
+            }
+        }
+
+        > div:focus {
+            & + ul {
+                @include focus;
+                position: absolute;
+            }
+        }
+
+        &.open {
+
+            > div {
+                border-radius: $component-border-radius $component-border-radius 0 0;
+                @include focus;
+
+                > svg {
+                    transform: rotate(270deg);
+                }
+            }
+
+            > ul {
+                display: block;
+                @include focus;
+                position: absolute;
+
+                > li > div:focus {
+                    @include theme-element-soft-darken($light);
+                    box-shadow: none;
+                }
+            }
+        }
+
+        > div {
+            @include flex-display();
+            @extend .btn;
+
+            > label {
+                flex-grow: 1;
+                text-align: center;
+                line-height: $component-line-height - ($component-border-width * 2);
+                max-width: 100%;
+                overflow: auto;
+            }
+
+            > svg {
+                transform: rotate(90deg);
+            }
+        }
+
+        > ul {
+            display: none;
+            list-style-type: none;
+            background-color: $gray-100;
+            border: $component-border;
+            position: absolute;
+            top: 100%;
+            margin-top: $component-focus-box-shadow-width;
+            left: 0;
+            right: 0;
+            z-index: $dropdown-z-index;
+            border-radius: 0 0 $component-border-radius $component-border-radius;
+            overflow: auto;
+            max-height: ($height * 4) + ($component-border-width * 4);
+
+            > li {
+
+                > div {
+                    border-radius: 0;
+                    display: block;
+                    @include flex-display();
+                    @extend .btn;
+                    border: none !important;
+
+                    html.desktop & {
+                        &:hover > svg {
+                            opacity: .4;
+                        }
+                    }
+
+                    > label {
+                        flex-grow: 1;
+                        text-align: center;
+                        max-width: 100%;
+                        overflow: auto;
+                    }
+
+                    > svg {
+                        opacity: 0;
+                    }
+                }
+
+                &.selected {
+                    > div {
+                        background-color: white;
+                        cursor: default;
+
+                        > svg {
+                            fill: $success;
+                            opacity: 1 !important;
+                        }
+                    }
+                }
+
+                & + li {
+                    border-top: $component-border;
+                }
             }
         }
     }

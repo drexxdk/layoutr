@@ -1,199 +1,199 @@
 ﻿/// <reference path="../references" />
 
-button.tooltip {
-    border-bottom: $component-border-width dotted currentColor;
-    @include noselect;
-    cursor:default;
-    font-size:$font-size;
-}
-
-$tooltip-arrow-size: rem(10px);
-$tooltip-border-color: black;
-$tooltip-border: $component-border-width solid $tooltip-border-color;
-$tooltip-arrow-fix: $tooltip-arrow-size - $component-border-width;
-$tooltip-background-color: $dark;
-$tooltip-color: white;
-
-/* This is the core CSS of Tooltipster */
-
-/* GENERAL STRUCTURE RULES (do not edit this section) */
-
-.tooltipster-base {
-    @include flex-display;
-    pointer-events: none;
-    position: absolute;
-
-    .tooltipster-box {
-        flex-grow: 1;
-        flex-shrink: 1;
-
-        .tooltipster-content {
-            max-height: $container-medium - ($component-border-width / 2);
-            max-width: $container-medium - ($component-border-width / 2);
-            overflow: auto;
-        }
+@mixin layoutr-tooltipster {
+    button.tooltip {
+        border-bottom: $component-border-width dotted currentColor;
+        @include noselect;
+        cursor: default;
+        font-size: $font-size;
     }
 
-    &.tooltipster-sidetip {
+    $tooltip-arrow-size: rem(10px);
+    $tooltip-border-color: black;
+    $tooltip-border: $component-border-width solid $tooltip-border-color;
+    $tooltip-arrow-fix: $tooltip-arrow-size - $component-border-width;
+    $tooltip-background-color: $dark;
+    $tooltip-color: white;
+
+    /* This is the core CSS of Tooltipster */
+    /* GENERAL STRUCTURE RULES (do not edit this section) */
+    .tooltipster-base {
+        @include flex-display;
+        pointer-events: none;
+        position: absolute;
+
         .tooltipster-box {
-            background: $tooltip-background-color;
-            border: $tooltip-border;
-            border-radius: $component-border-radius;
+            flex-grow: 1;
+            flex-shrink: 1;
+
+            .tooltipster-content {
+                max-height: $container-medium - ($component-border-width / 2);
+                max-width: $container-medium - ($component-border-width / 2);
+                overflow: auto;
+            }
         }
 
-        &.tooltipster-bottom {
-            padding: 0 $spacer $spacer $spacer;
-
+        &.tooltipster-sidetip {
             .tooltipster-box {
-                margin-top: $tooltip-arrow-fix;
+                background: $tooltip-background-color;
+                border: $tooltip-border;
+                border-radius: $component-border-radius;
+            }
+
+            &.tooltipster-bottom {
+                padding: 0 $spacer $spacer $spacer;
+
+                .tooltipster-box {
+                    margin-top: $tooltip-arrow-fix;
+                }
+
+                .tooltipster-arrow {
+                    height: $tooltip-arrow-size;
+                    /* half the width, for centering */
+                    margin-left: -$tooltip-arrow-size;
+                    top: 0;
+                    width: $tooltip-arrow-size * 2;
+
+                    .tooltipster-arrow-border {
+                        border-bottom-color: $tooltip-border-color;
+                    }
+
+                    .tooltipster-arrow-background {
+                        border-bottom-color: $tooltip-background-color;
+                        left: 0px;
+                        top: $component-border-width;
+                    }
+                }
+
+                .tooltipster-arrow-uncropped {
+                    top: -$tooltip-arrow-size;
+                }
+            }
+
+            &.tooltipster-left {
+                padding: $spacer 0 $spacer $spacer;
+
+                .tooltipster-box {
+                    margin-right: $tooltip-arrow-fix;
+                }
+
+                .tooltipster-arrow {
+                    height: $tooltip-arrow-size * 2;
+                    margin-top: -$tooltip-arrow-size;
+                    right: 0;
+                    /* top 0 to keep the arrow from overflowing .tooltipster-base when it has not been positioned yet */
+                    top: 0;
+                    width: $tooltip-arrow-size;
+
+                    .tooltipster-arrow-border {
+                        border-left-color: $tooltip-border-color;
+                    }
+
+                    .tooltipster-arrow-background {
+                        border-left-color: $tooltip-background-color;
+                        left: -$component-border-width;
+                        top: 0px;
+                    }
+                }
+            }
+
+            &.tooltipster-right {
+                padding: $spacer $spacer $spacer 0;
+
+                .tooltipster-box {
+                    margin-left: $tooltip-arrow-fix;
+                }
+
+                .tooltipster-arrow {
+                    height: $tooltip-arrow-size * 2;
+                    margin-top: -$tooltip-arrow-size;
+                    left: 0;
+                    /* same as .tooltipster-left .tooltipster-arrow */
+                    top: 0;
+                    width: $tooltip-arrow-size;
+
+                    .tooltipster-arrow-border {
+                        border-right-color: $tooltip-border-color;
+                    }
+
+                    .tooltipster-arrow-background {
+                        border-right-color: $tooltip-background-color;
+                        left: $component-border-width;
+                        top: 0px;
+                    }
+                }
+
+                .tooltipster-arrow-uncropped {
+                    left: -$tooltip-arrow-size;
+                }
+            }
+
+            &.tooltipster-top {
+                padding: $spacer $spacer 0 $spacer;
+
+                .tooltipster-box {
+                    margin-bottom: $tooltip-arrow-fix;
+                }
+
+                .tooltipster-arrow {
+                    bottom: 0;
+                    height: $tooltip-arrow-size;
+                    margin-left: -$tooltip-arrow-size;
+                    width: $tooltip-arrow-size * 2;
+
+                    .tooltipster-arrow-border {
+                        border-top-color: $tooltip-border-color;
+                    }
+
+                    .tooltipster-arrow-background {
+                        border-top-color: $tooltip-background-color;
+                        left: 0px;
+                        top: -$component-border-width;
+                    }
+                }
+            }
+
+            .tooltipster-content {
+                color: $tooltip-color;
+                line-height: $component-line-height;
+                padding: $padding-y $padding-x;
             }
 
             .tooltipster-arrow {
-                height: $tooltip-arrow-size;
-                /* half the width, for centering */
-                margin-left: -$tooltip-arrow-size;
-                top: 0;
-                width: $tooltip-arrow-size * 2;
-
-                .tooltipster-arrow-border {
-                    border-bottom-color: $tooltip-border-color;
-                }
-
-                .tooltipster-arrow-background {
-                    border-bottom-color: $tooltip-background-color;
-                    left: 0px;
-                    top: $component-border-width;
-                }
-            }
-
-            .tooltipster-arrow-uncropped {
-                top: -$tooltip-arrow-size;
-            }
-        }
-
-        &.tooltipster-left {
-            padding: $spacer 0 $spacer $spacer;
-
-            .tooltipster-box {
-                margin-right: $tooltip-arrow-fix;
-            }
-
-            .tooltipster-arrow {
-                height: $tooltip-arrow-size * 2;
-                margin-top: -$tooltip-arrow-size;
-                right: 0;
-                /* top 0 to keep the arrow from overflowing .tooltipster-base when it has not been positioned yet */
-                top: 0;
-                width: $tooltip-arrow-size;
-
-                .tooltipster-arrow-border {
-                    border-left-color: $tooltip-border-color;
-                }
-
-                .tooltipster-arrow-background {
-                    border-left-color: $tooltip-background-color;
-                    left: -$component-border-width;
-                    top: 0px;
-                }
-            }
-        }
-
-        &.tooltipster-right {
-            padding: $spacer $spacer $spacer 0;
-
-            .tooltipster-box {
-                margin-left: $tooltip-arrow-fix;
-            }
-
-            .tooltipster-arrow {
-                height: $tooltip-arrow-size * 2;
-                margin-top: -$tooltip-arrow-size;
-                left: 0;
-                /* same as .tooltipster-left .tooltipster-arrow */
-                top: 0;
-                width: $tooltip-arrow-size;
-
-                .tooltipster-arrow-border {
-                    border-right-color: $tooltip-border-color;
-                }
-
-                .tooltipster-arrow-background {
-                    border-right-color: $tooltip-background-color;
-                    left: $component-border-width;
-                    top: 0px;
-                }
-            }
-
-            .tooltipster-arrow-uncropped {
-                left: -$tooltip-arrow-size;
-            }
-        }
-
-        &.tooltipster-top {
-            padding: $spacer $spacer 0 $spacer;
-
-            .tooltipster-box {
-                margin-bottom: $tooltip-arrow-fix;
-            }
-
-            .tooltipster-arrow {
-                bottom: 0;
-                height: $tooltip-arrow-size;
-                margin-left: -$tooltip-arrow-size;
-                width: $tooltip-arrow-size * 2;
-
-                .tooltipster-arrow-border {
-                    border-top-color: $tooltip-border-color;
-                }
-
-                .tooltipster-arrow-background {
-                    border-top-color: $tooltip-background-color;
-                    left: 0px;
-                    top: -$component-border-width;
-                }
-            }
-        }
-
-        .tooltipster-content {
-            color: $tooltip-color;
-            line-height: $component-line-height;
-            padding: $padding-y $padding-x;
-        }
-
-        .tooltipster-arrow {
-            position: absolute;
-
-            .tooltipster-arrow-border,
-            .tooltipster-arrow-background {
-                height: 0;
                 position: absolute;
-                width: 0;
+
+                .tooltipster-arrow-border,
+                .tooltipster-arrow-background {
+                    height: 0;
+                    position: absolute;
+                    width: 0;
+                }
+
+                .tooltipster-arrow-border {
+                    border: $tooltip-arrow-size solid transparent;
+                    left: 0;
+                    top: 0;
+                }
+
+                .tooltipster-arrow-background {
+                    border: $tooltip-arrow-size solid transparent;
+                }
             }
 
-            .tooltipster-arrow-border {
-                border: $tooltip-arrow-size solid transparent;
-                left: 0;
-                top: 0;
+            .tooltipster-arrow-uncropped {
+                position: relative;
             }
-
-            .tooltipster-arrow-background {
-                border: $tooltip-arrow-size solid transparent;
-            }
-        }
-
-        .tooltipster-arrow-uncropped {
-            position: relative;
         }
     }
-}
 
-.tooltipster-ruler {
-    /* these let us test the size of the tooltip without overflowing the window */
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    position: fixed;
-    right: 0;
-    top: 0;
-    visibility: hidden;
+    .tooltipster-ruler {
+        /* these let us test the size of the tooltip without overflowing the window */
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        position: fixed;
+        right: 0;
+        top: 0;
+        visibility: hidden;
+    }
 }

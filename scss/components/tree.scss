@@ -1,142 +1,144 @@
 ﻿/// <reference path="../references" />
 
-.tree {
-    margin-left: $spacer * 1.5;
-    @include noselect;
-    list-style-type: none;
-    z-index: $component-z-index;
-
-    ul {
+@mixin layoutr-tree {
+    .tree {
+        margin-left: $spacer * 1.5;
+        @include noselect;
         list-style-type: none;
-    }
+        z-index: $component-z-index;
 
-    li {
-        line-height: $spacer;
-        position: relative;
-        padding-left: $spacer;
-
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: -($spacer / 2);
-            display: block;
-            width: 0;
-            border-left: 1px solid $component-border-color;
-            z-index: 1;
+        ul {
+            list-style-type: none;
         }
 
-        &:last-child:before {
-            height: 1rem;
-            bottom: auto;
-        }
-    }
+        li {
+            line-height: $spacer;
+            position: relative;
+            padding-left: $spacer;
 
-    label.label > i {
-        @extend .btn;
-        overflow: hidden;
-    }
-
-    label.label:focus > i {
-        @extend .btn:focus;
-    }
-
-
-    li {
-        a.label.active {
-            @include theme-element($primary, false);
-            pointer-events: none;
-            text-decoration: none;
-        }
-
-        html.desktop & {
-            .label:not(.active):hover {
-                background: theme-gradient($tree-hover-background-color);
-            }
-        }
-    }
-
-    .label {
-        position: relative;
-        display: block;
-        margin-left: -($spacer * 2.5);
-        padding: ($spacer / 2) ($spacer / 2) ($spacer / 2) ($spacer * 2.5);
-        width: calc(100% + (#{$spacer} * 2.5));
-        cursor: pointer;
-
-        &:after {
-            content: '';
-            position: absolute;
-            top: $spacer;
-            left: $spacer;
-            margin-left: 0;
-            display: block;
-            height: 1px;
-            width: $spacer;
-            border-bottom: 1px solid $component-border-color;
-            border-left: 1px solid $component-border-color;
-        }
-    }
-
-    input[type=checkbox] {
-        display: none;
-
-        &:checked {
-            & ~ ul {
-                display: block;
-            }
-
-            & ~ label.label:after {
-                border-top: 1px solid $component-border-color;
-                border-right: 1px solid $component-border-color;
-                border-bottom: 0;
-                border-left: 0;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
                 bottom: 0;
-                height: auto;
+                left: -($spacer / 2);
+                display: block;
+                width: 0;
+                border-left: 1px solid $component-border-color;
+                z-index: 1;
+            }
+
+            &:last-child:before {
+                height: 1rem;
+                bottom: auto;
+            }
+        }
+
+        label.label > i {
+            @extend .btn;
+            overflow: hidden;
+        }
+
+        label.label:focus > i {
+            @extend .btn:focus;
+        }
+
+
+        li {
+            a.label.active {
+                @include theme-element($primary, false);
+                pointer-events: none;
+                text-decoration: none;
+            }
+
+            html.desktop & {
+                .label:not(.active):hover {
+                    background: theme-gradient($tree-hover-background-color);
+                }
+            }
+        }
+
+        .label {
+            position: relative;
+            display: block;
+            margin-left: -($spacer * 2.5);
+            padding: ($spacer / 2) ($spacer / 2) ($spacer / 2) ($spacer * 2.5);
+            width: calc(100% + (#{$spacer} * 2.5));
+            cursor: pointer;
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: $spacer;
                 left: $spacer;
-            }
-
-            & ~ .label > i > svg:first-child {
-                display: none;
-            }
-        }
-
-        &:not(:checked) {
-            & ~ ul {
-                display: none;
-            }
-
-            & ~ .label > i > svg:last-child {
-                display: none;
+                margin-left: 0;
+                display: block;
+                height: 1px;
+                width: $spacer;
+                border-bottom: 1px solid $component-border-color;
+                border-left: 1px solid $component-border-color;
             }
         }
 
-        & ~ .label > i {
-            position: absolute;
-            z-index: 1;
-            border-radius: 50%;
-            text-align: center;
-            color: $white;
-            margin-top: 0;
-            left: $spacer / 2;
-            width: $spacer;
-            height: $spacer;
-            min-height: 0;
-            padding: 0;
-            @include flex-center;
-            @include button-transition(all);
+        input[type=checkbox] {
+            display: none;
 
-            > svg {
-                width: $spacer / 2;
-                height: $spacer / 2;
+            &:checked {
+                & ~ ul {
+                    display: block;
+                }
+
+                & ~ label.label:after {
+                    border-top: 1px solid $component-border-color;
+                    border-right: 1px solid $component-border-color;
+                    border-bottom: 0;
+                    border-left: 0;
+                    bottom: 0;
+                    height: auto;
+                    left: $spacer;
+                }
+
+                & ~ .label > i > svg:first-child {
+                    display: none;
+                }
+            }
+
+            &:not(:checked) {
+                & ~ ul {
+                    display: none;
+                }
+
+                & ~ .label > i > svg:last-child {
+                    display: none;
+                }
+            }
+
+            & ~ .label > i {
+                position: absolute;
+                z-index: 1;
+                border-radius: 50%;
+                text-align: center;
+                color: $white;
+                margin-top: 0;
+                left: $spacer / 2;
+                width: $spacer;
+                height: $spacer;
+                min-height: 0;
+                padding: 0;
+                @include flex-center;
+                @include button-transition(all);
+
+                > svg {
+                    width: $spacer / 2;
+                    height: $spacer / 2;
+                }
             }
         }
-    }
 
-    .highlight {
-        display: block;
-        background-color: $tree-highlight-background-color;
-        padding: $padding-y $padding-x;
+        .highlight {
+            display: block;
+            background-color: $tree-highlight-background-color;
+            padding: $padding-y $padding-x;
+        }
     }
 }

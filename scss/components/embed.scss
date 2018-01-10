@@ -1,46 +1,48 @@
 ﻿/// <reference path="../references" />
 
-.embed {
-    position: relative;
-    padding: 0;
-    overflow: hidden;
-    z-index: $component-z-index;
-    @extend .cover;
+@mixin layoutr-embed {
+    .embed {
+        position: relative;
+        padding: 0;
+        overflow: hidden;
+        z-index: $component-z-index;
+        @extend .cover;
 
-    &::before {
-        display: block;
-        content: "";
-    }
-
-    iframe,
-    embed,
-    object,
-    video {
-        @include absolute-fill;
-        border: 0;
-    }
-
-    &.aspect-ratio-21by9 {
         &::before {
-            padding-top: percentage(9 / 21);
+            display: block;
+            content: "";
         }
-    }
 
-    &.aspect-ratio-16by9 {
-        &::before {
-            padding-top: percentage(9 / 16);
+        iframe,
+        embed,
+        object,
+        video {
+            @include absolute-fill;
+            border: 0;
         }
-    }
 
-    &.aspect-ratio-4by3 {
-        &::before {
-            padding-top: percentage(3 / 4);
+        &.aspect-ratio-21by9 {
+            &::before {
+                padding-top: percentage(9 / 21);
+            }
         }
-    }
 
-    &.aspect-ratio-1by1 {
-        &::before {
-            padding-top: percentage(1 / 1);
+        &.aspect-ratio-16by9 {
+            &::before {
+                padding-top: percentage(9 / 16);
+            }
+        }
+
+        &.aspect-ratio-4by3 {
+            &::before {
+                padding-top: percentage(3 / 4);
+            }
+        }
+
+        &.aspect-ratio-1by1 {
+            &::before {
+                padding-top: percentage(1 / 1);
+            }
         }
     }
 }

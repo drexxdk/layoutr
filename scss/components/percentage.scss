@@ -1,42 +1,43 @@
 ﻿/// <reference path="../references" />
+@mixin layoutr-percentage {
+    @keyframes progress-bar-stripes {
+        from {
+            background-position: $component-line-height + ($padding-y * 2) 0;
+        }
 
-@keyframes progress-bar-stripes {
-    from {
-        background-position: $component-line-height + ($padding-y * 2) 0;
+        to {
+            background-position: 0 0;
+        }
     }
 
-    to {
-        background-position: 0 0;
-    }
-}
+    .percentage {
+        @include flex-display;
+        overflow: hidden;
+        border-radius: $component-border-radius;
+        @include theme-element($light);
+        min-height: $component-line-height + ($padding-y * 2) + ($component-border-width * 2);
 
-.percentage {
-    @include flex-display;
-    overflow: hidden;
-    border-radius: $component-border-radius;
-    @include theme-element($light);
-    min-height: $component-line-height + ($padding-y * 2) + ($component-border-width * 2);
+        &.striped {
+            &.animated > span {
+                animation: progress-bar-stripes 1s linear infinite;
+            }
 
-    &.striped {
-        &.animated > span {
-            animation: progress-bar-stripes 1s linear infinite;
+            > span {
+                background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
+                background-size: $component-line-height + ($padding-y * 2) $component-line-height + ($padding-y * 2) !important;
+            }
         }
 
         > span {
-            background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
-            background-size: $component-line-height + ($padding-y * 2) $component-line-height + ($padding-y * 2) !important;
+            padding: $padding-y $padding-x;
+            text-align: center;
+            @include theme-element($primary, false);
         }
-    }
 
-    > span {
-        padding: $padding-y $padding-x;
-        text-align: center;
-        @include theme-element($primary, false);
-    }
-
-    @each $color, $value in $theme-colors {
-        &.theme-#{$color} > span {
-            @include theme-element($value, false);
+        @each $color, $value in $theme-colors {
+            &.theme-#{$color} > span {
+                @include theme-element($value, false);
+            }
         }
     }
 }

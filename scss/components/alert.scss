@@ -1,60 +1,62 @@
 ﻿/// <reference path="../references" />
 
-.alert {
-    font-size: $font-size;
-    border-radius: $component-border-radius;
-    @include flex-display();
-    @include align-items(flex-start);
-    overflow: hidden;
+@mixin layoutr-alert {
+    .alert {
+        font-size: $font-size;
+        border-radius: $component-border-radius;
+        @include flex-display();
+        @include align-items(flex-start);
+        overflow: hidden;
 
-    $value: $light;
-    @include theme-element-soft($value);
+        $value: $light;
+        @include theme-element-soft($value);
 
-    @each $color, $value in $theme-colors {
-        &.theme-#{$color} {
-            @include theme-element-soft($value);
+        @each $color, $value in $theme-colors {
+            &.theme-#{$color} {
+                @include theme-element-soft($value);
 
-            .close:focus {
-                @include theme-element-soft-darken($value, false);
-            }
-
-            html.desktop & {
-                .close:hover {
+                .close:focus {
                     @include theme-element-soft-darken($value, false);
+                }
+
+                html.desktop & {
+                    .close:hover {
+                        @include theme-element-soft-darken($value, false);
+                    }
                 }
             }
         }
-    }
 
-    > * {
-        padding: $padding-y $padding-x;
-        min-height: $line-height + ($padding-y * 2);
-        flex-grow: 1;
-        width: 100%;
-    }
+        > * {
+            padding: $padding-y $padding-x;
+            min-height: $line-height + ($padding-y * 2);
+            flex-grow: 1;
+            width: 100%;
+        }
 
-    > .close {
-        @include flex-center;
-        width: $line-height + ($padding-y * 2);
-        height: $line-height + ($padding-y * 2);
-        background-color: transparent;
-        flex-shrink: 0;
-
-        > svg {
-            width: $font-size;
-            height: $font-size;
+        > .close {
+            @include flex-center;
+            width: $line-height + ($padding-y * 2);
+            height: $line-height + ($padding-y * 2);
+            background-color: transparent;
             flex-shrink: 0;
-        }
 
-        html.desktop & {
-            &:hover {
-                $value: $light;
-                @include theme-element-darken($value, false);
+            > svg {
+                width: $font-size;
+                height: $font-size;
+                flex-shrink: 0;
             }
-        }
 
-        &:focus {
-            @include theme-element-soft-darken($value, false);
+            html.desktop & {
+                &:hover {
+                    $value: $light;
+                    @include theme-element-darken($value, false);
+                }
+            }
+
+            &:focus {
+                @include theme-element-soft-darken($value, false);
+            }
         }
     }
 }

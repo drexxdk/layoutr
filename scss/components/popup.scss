@@ -1,31 +1,33 @@
 ﻿/// <reference path="../references" />
 
-html {
-    &.footer-fixed {
-        .popup.middle {
-            top: 50% !important;
+@mixin layoutr-popup {
+    html {
+        &.footer-fixed {
+            .popup.middle {
+                top: 50% !important;
+            }
+
+            .popup.bottom {
+                bottom: $footer-height !important;
+            }
+        }
+    }
+
+    .popup {
+        position: fixed !important;
+        z-index: $popup-z-index;
+
+        > div {
+            flex-grow: 1;
         }
 
-        .popup.bottom {
-            bottom: $footer-height !important;
+        &.top {
+            top: $header-height !important;
         }
-    }
-}
 
-.popup {
-    position: fixed !important;
-    z-index: $popup-z-index;
-
-    > div {
-        flex-grow: 1;
-    }
-
-    &.top {
-        top: $header-height !important;
-    }
-
-    &.middle {
-        top: calc(#{$header-height / 2} + 50%) !important;
-        transform: translateY(-50%);
+        &.middle {
+            top: calc(#{$header-height / 2} + 50%) !important;
+            transform: translateY(-50%);
+        }
     }
 }
