@@ -1,7 +1,7 @@
 {
   "start_url": "https://drexxdk.github.io/layoutr/",
-  "name": "Panels",
-  "short_name": "Panels",
+  "name": "layoutr",
+  "short_name": "layoutr",
   "icons": [
     {
       "src": "https://drexxdk.github.io/layoutr/dist/img/favicon/android-chrome-192x192.png",
