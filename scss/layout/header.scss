@@ -22,6 +22,25 @@ header {
         opacity: 0;
         pointer-events: none;
     }
+
+    #title:not(:empty) {
+        position: relative;
+        margin-left: $spacer / 2;
+        padding-left: ($spacer / 2) + ($spacer / 3);
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: $spacer / 3;
+            height: $spacer / 3;
+            background-color: currentColor;
+            border-radius: 50%;
+            opacity: .5;
+        }
+    }
 }
 
 .header {

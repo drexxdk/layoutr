@@ -68,3 +68,7 @@ app.isCloseLeftPageChange = function () {
 app.isTransitions = function () {
     return app.html.hasClass('transitions');
 };
+
+app.capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

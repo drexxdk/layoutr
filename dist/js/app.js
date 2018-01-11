@@ -635,12 +635,15 @@ $(function () {
     app.loading = $('#loading');
     app.overflow = $('#overflow');
     app.modal = $('#modal');
+    app.title = $('#title');
+
     app.transitionTime = 400;
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
     app.smallBreakpoint = 732;
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
+
     app.localStorage = typeof Storage !== "undefined";
     app.navigation = [];
     app.settings = [];
@@ -715,6 +718,10 @@ app.isCloseLeftPageChange = function () {
 app.isTransitions = function () {
     return app.html.hasClass('transitions');
 };
+
+app.capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 var app = app || {};
 
 $(function () {
@@ -995,6 +1002,7 @@ app.loadPage = function (url, pushState, initial) {
     app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
         url = tempUrl;
         if (url === '') {
+            app.title.html('');
             if (app.main.children('#svg-browser').length === 0) {
                 $.get('ajax/svg/browser.html', function (data) {
                     $(data).prependTo(app.main);
@@ -1005,8 +1013,11 @@ app.loadPage = function (url, pushState, initial) {
                     $(data).prependTo(app.main);
                 });
             }
-        } else if (url === 'form') {
-            app.pageForm();
+        } else {
+            app.title.html(app.capitalize(url.replace('-', ' ')));
+            if (url === 'form') {
+                app.pageForm();
+            }
         }
         app.pageLoaded(initial);
     });
@@ -1065,7 +1076,7 @@ app.applyNavigation = function (id, value, set) {
     }
 };
 $(function () {
-    app.left.find('> .content > div').load('ajax/layout/menu.html', function () {
+    app.left.find('> .content > div').load('ajax/layout/navigation.html', function () {
         if (app.localStorage) {
             app.navigation = JSON.parse(localStorage.getItem("navigation"));
             if (app.navigation === null) app.navigation = [];
