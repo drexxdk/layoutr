@@ -1,21 +1,19 @@
 ﻿/// <reference path="../references" />
 
 @mixin layoutr-popup {
-    html {
-        &.footer-fixed {
-            .popup.middle {
-                top: 50% !important;
-            }
-
-            .popup.bottom {
-                bottom: $footer-height !important;
-            }
-        }
-    }
-
     .popup {
         position: fixed !important;
         z-index: $popup-z-index;
+
+        html.footer-fixed & {
+            &.middle {
+                top: 50% !important;
+            }
+
+            &.bottom {
+                bottom: $footer-height !important;
+            }
+        }
 
         > div {
             flex-grow: 1;

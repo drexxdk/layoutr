@@ -38,7 +38,7 @@ app.applySettings = function (id, name, type, value, set) {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.responsiveBackground();
+            app.rb();
         }
     }
 };

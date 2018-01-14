@@ -1,6 +1,6 @@
 ﻿/// <reference path="../references" />
 
-@mixin layoutr-tooltipster {
+@mixin layoutr-tooltip {
     button.tooltip {
         border-bottom: $component-border-width dotted currentColor;
         @include noselect;

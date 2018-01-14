@@ -12,7 +12,7 @@ app.math = function (math) {
             renderMathInElement($this[0]);
             setTimeout(function () {
                 $this.removeClass('math');
-            }, 0);
+            });
         });
     }
 };

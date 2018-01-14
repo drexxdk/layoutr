@@ -66,7 +66,7 @@
                         checked.prop('checked', false);
                         assignment.removeClass('moving');
                     }
-                }, 0);
+                });
             }
         });
     });

@@ -18,7 +18,7 @@ app.pageLoaded = function (initial) {
     app.lazy(app.content.find('.lazy'));
     app.accordion(app.content.find('.accordion'));
     app.dropdown(app.content.find('select.dropdown'));
-    app.responsiveBackground();
+    app.rb();
     app.tooltip(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
     app.math(app.content.find('.math'));

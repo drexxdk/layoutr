@@ -28,7 +28,7 @@
       "js/app/layout/keyboard.js",
       "js/app/layout/modal.js",
       "js/app/layout/touchDevice.js",
-      "js/app/layout/responsiveBackground.js",
+      "js/app/layout/rb.js",
 
       "js/app/inputs/dropdown.js",
       "js/app/inputs/form.js",
@@ -39,6 +39,7 @@
       "js/app/components/lazy.js",
       "js/app/components/popup.js",
       "js/app/components/tooltip.js",
+
       "js/app/assignments/_assignments.js",
 
       "js/app/site/form.js",

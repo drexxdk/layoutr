@@ -69,7 +69,7 @@ app.assignment.dragAndDrop = function (assignment) {
                         checked.prop('checked', false);
                         assignment.removeClass('moving');
                     }
-                }, 0);
+                });
             }
         });
     });

@@ -845,7 +845,7 @@ app.pageLoaded = function (initial) {
     app.lazy(app.content.find('.lazy'));
     app.accordion(app.content.find('.accordion'));
     app.dropdown(app.content.find('select.dropdown'));
-    app.responsiveBackground();
+    app.rb();
     app.tooltip(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
     app.math(app.content.find('.math'));
@@ -969,7 +969,7 @@ app.toggleAside = function (aside, pageChanged) {
                 transitionLock = false;
                 app.checkGoogleMaps();
                 if (pageChanged) {
-                    app.responsiveBackground();
+                    app.rb();
                 }
             }, app.transitionTime);
         } else {
@@ -1150,7 +1150,7 @@ app.applySettings = function (id, name, type, value, set) {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.responsiveBackground();
+            app.rb();
         }
     }
 };
@@ -1453,14 +1453,15 @@ $(function () {
 });
 var app = app || {};
 
-app.responsiveBackground = function () {
-    app.content.find('.responsive-background').each(function () {
+// responsive-background
+app.rb = function () {
+    app.content.find('.rb').each(function () {
         var $this = $(this),
-            image = $this.attr('data-responsive-background-image'),
-            filetype = $this.attr('data-responsive-background-image-filetype'),
-            sizesWidth = $this.attr('data-responsive-background-sizes'),
-            current = $this.attr('data-responsive-background-current'),
-            aspectRatio = $this.attr('data-responsive-background-aspect-ratio');
+            image = $this.attr('data-rb-image'),
+            filetype = $this.attr('data-rb-image-filetype'),
+            sizesWidth = $this.attr('data-rb-sizes'),
+            current = $this.attr('data-rb-current'),
+            aspectRatio = $this.attr('data-rb-aspect-ratio');
         if (image !== undefined && image.length &&
             filetype !== undefined && filetype.length &&
             sizesWidth !== undefined && sizesWidth.length &&
@@ -1474,9 +1475,9 @@ app.responsiveBackground = function () {
                     closestHeight,
                     heightPercentage;
 
-                function getHeightInPercentage(num, amount) {
-                    return (num * 100) / amount;
-                }
+                var getHeightInPercentage = function (num, amount) {
+                    return num * 100 / amount;
+                };
 
                 if (aspectRatio === '21by9') {
                     heightPercentage = getHeightInPercentage(9, 21);
@@ -1490,9 +1491,9 @@ app.responsiveBackground = function () {
                     heightPercentage = 100;
                 }
 
-                function getHeightInPixels(num, amount) {
+                var getHeightInPixels = function (num, amount) {
                     return num * amount / 100;
-                }
+                };
 
                 $.each(sizesWidth, function (index) {
                     var width = parseInt(this);
@@ -1505,13 +1506,13 @@ app.responsiveBackground = function () {
                 });
 
                 if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
-                    app.body.append('<img id="responsive-background" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
-                    var tempImage = app.body.children('#responsive-background');
+                    app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
+                    var tempImage = app.body.children('#rb');
                     tempImage.on('load', function () {
                         tempImage.remove();
                         var src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
                         $this.css('background-image', src);
-                        $this.attr('data-responsive-background-current', closestWidth);
+                        $this.attr('data-rb-current', closestWidth);
                     });
                 }
             }
@@ -1520,7 +1521,7 @@ app.responsiveBackground = function () {
 };
 
 $(window).resize(function () {
-    app.responsiveBackground();
+    app.rb();
 });
 var app = app || {};
 
@@ -1688,7 +1689,7 @@ app.math = function (math) {
             renderMathInElement($this[0]);
             setTimeout(function () {
                 $this.removeClass('math');
-            }, 0);
+            });
         });
     }
 };
