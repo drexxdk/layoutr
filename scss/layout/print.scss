@@ -1,0 +1,49 @@
+﻿/// <reference path="../references" />
+
+@media print {
+    *, *:before, *:after {
+        box-shadow: none !important;
+        color: black !important;
+        text-shadow: none !important;
+        background: transparent !important;
+    }
+
+    svg {
+        fill: black !important;
+        opacity: 1 !important;
+    }
+
+    a {
+        color: $link-color !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    header,
+    footer {
+        position: relative;
+    }
+
+    aside {
+        display: none !important;
+    }
+
+    header,
+    footer {
+        border-color: $component-border-color;
+    }
+
+    #container {
+        margin-top: 0;
+    }
+
+    ul.list li:before {
+        border-bottom: $list-bullet-width solid currentColor;
+        border-right: $list-bullet-width solid currentColor;
+        width: inherit;
+        height: inherit;
+    }
+}
