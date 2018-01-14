@@ -22,28 +22,27 @@
         text-decoration: underline;
     }
 
-    header,
-    footer {
-        position: relative;
-    }
-
-    aside {
-        display: none !important;
-    }
-
-    header,
-    footer {
-        border-color: $component-border-color;
-    }
-
-    #container {
-        margin-top: 0;
-    }
-
     ul.list li:before {
         border-bottom: $list-bullet-width solid currentColor;
         border-right: $list-bullet-width solid currentColor;
         width: inherit;
         height: inherit;
+    }
+
+    header > button,
+    .header > #authentication,
+    footer,
+    aside {
+        display: none;
+    }
+
+    html.modal {
+        #container {
+            display: none;
+        }
+    }
+
+    #content > div > .content-header.full {
+        height: calc(100vh - #{$header-height});
     }
 }

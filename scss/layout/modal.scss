@@ -6,37 +6,44 @@ html {
     }
 
     &.modal {
-        overflow: hidden;
+        @media screen {
+            overflow: hidden;
 
-        body:before {
-            content: '';
-            @include overlay;
-            height: 100vh;
-            background-color: $overlay-background-color-dark;
-            z-index: $modal-z-index;
-        }
+            body:before {
+                content: '';
+                @include overlay;
+                height: 100vh;
+                background-color: $overlay-background-color-dark;
+                z-index: $modal-z-index;
+            }
 
-        header,
-        &.footer-fixed footer {
-            overflow-y: scroll !important;
-        }
+            header,
+            &.footer-fixed footer {
+                overflow-y: scroll !important;
+            }
 
-        #modal {
-            @include flex-center;
-            @include overlay;
-            height: 100%;
-            overflow-y: scroll;
-            z-index: $modal-z-index;
-
-            > div {
-                @include flex-display;
-                position: relative;
-                max-height: 100%;
+            #modal {
+                @include flex-center;
+                @include overlay;
+                height: 100%;
+                overflow-y: scroll;
+                z-index: $modal-z-index;
 
                 > div {
-                    @include align-self(flex-start);
-                    overflow: hidden;
+                    @include flex-display;
+                    position: relative;
+                    max-height: 100%;
+
+                    > div {
+                        @include align-self(flex-start);
+                        overflow: hidden;
+                    }
                 }
+            }
+
+            &[data-modal="form"] #modal > div {
+                margin: 0 $spacer;
+                max-width: $container-medium;
             }
         }
 
@@ -45,9 +52,7 @@ html {
         }
 
         &[data-modal="form"] #modal > div {
-            margin: 0 $spacer;
             width: 100%;
-            max-width: $container-medium;
 
             > div {
                 @include flex-display;

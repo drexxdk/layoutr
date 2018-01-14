@@ -6,9 +6,12 @@
     left: 0;
     right: 0;
     pointer-events: none;
-    padding: 0 $spacer;
     @include flex-display;
     @include flex-direction(column);
+
+    @media screen {
+        padding: 0 $spacer;
+    }
 
     > * {
         margin: $spacer 0;

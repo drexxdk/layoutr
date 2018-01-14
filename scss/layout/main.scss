@@ -5,8 +5,10 @@ main {
     @include flex-display;
     @include flex-direction(column);
 
-    html.scroll-disabled & {
-        overflow: hidden !important;
+    @media screen {
+        html.scroll-disabled & {
+            overflow: hidden !important;
+        }
     }
 
     > svg {

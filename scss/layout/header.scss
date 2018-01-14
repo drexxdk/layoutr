@@ -1,21 +1,23 @@
 ﻿/// <reference path="../references" />
 
 header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    background-color: $layout-background-color;
-    z-index: $header-z-index;
+    @media screen {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        background-color: $layout-background-color;
+        z-index: $header-z-index;
 
-    html[data-aside="left"].left-push & {
-        left: $aside-width;
-        right: -$aside-width;
-    }
+        html[data-aside="left"].left-push & {
+            left: $aside-width;
+            right: -$aside-width;
+        }
 
-    html[data-aside="right"].right-push & {
-        left: -$aside-width;
-        right: $aside-width;
+        html[data-aside="right"].right-push & {
+            left: -$aside-width;
+            right: $aside-width;
+        }
     }
 
     .aside:not(.loaded) {

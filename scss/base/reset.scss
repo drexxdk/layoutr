@@ -35,21 +35,23 @@ body {
     font-weight: $font-weight;
     line-height: $line-height;
 
-    html.scroll-disabled & {
-        position: fixed;
-    }
-
-    html.msedge:not(.footer-fixed).subpixel &,
-    html.msie:not(.footer-fixed).subpixel & {
-        &:after {
-            content: '';
+    @media screen {
+        html.scroll-disabled & {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: rem(2px);
-            background-color: $footer-background-color;
-            z-index: $footer-z-index;
+        }
+
+        html.msedge:not(.footer-fixed).subpixel &,
+        html.msie:not(.footer-fixed).subpixel & {
+            &:after {
+                content: '';
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: rem(2px);
+                background-color: $footer-background-color;
+                z-index: $footer-z-index;
+            }
         }
     }
 }

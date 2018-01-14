@@ -3,14 +3,16 @@
 #content {
     overflow: hidden;
 
-    html[data-aside="left"].left-push & {
-        margin-left: $aside-width;
-        margin-right: -$aside-width;
-    }
+    @media screen {
+        html[data-aside="left"].left-push & {
+            margin-left: $aside-width;
+            margin-right: -$aside-width;
+        }
 
-    html[data-aside="right"].right-push & {
-        margin-left: -$aside-width;
-        margin-right: $aside-width;
+        html[data-aside="right"].right-push & {
+            margin-left: -$aside-width;
+            margin-right: $aside-width;
+        }
     }
 
     > div {
@@ -20,10 +22,12 @@
             &:not(.full) {
                 height: $content-header-height;
 
-                html[data-aside="left"].left-shrink &,
-                html[data-aside="right"].right-shrink & {
-                    margin-right: -($aside-width / 2);
-                    padding-right: $aside-width / 2;
+                @media screen {
+                    html[data-aside="left"].left-shrink &,
+                    html[data-aside="right"].right-shrink & {
+                        margin-right: -($aside-width / 2);
+                        padding-right: $aside-width / 2;
+                    }
                 }
 
                 > div > div {
@@ -53,7 +57,10 @@
                     transform: translateX(-50%);
                     text-align: center;
                     width: 100%;
-                    padding: $spacer;
+
+                    @media screen {
+                        padding: $spacer;
+                    }
                 }
 
                 .title {
@@ -79,8 +86,11 @@
             @include justify-content(center);
 
             > div {
+                @media screen {
+                    padding: $spacer;
+                }
+
                 z-index: 1;
-                padding: $spacer;
                 background-color: $layout-background-color;
                 @include align-self(center);
                 width: 100%;

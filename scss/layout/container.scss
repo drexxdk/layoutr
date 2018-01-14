@@ -2,13 +2,17 @@
 
 #container {
     @include flex-display;
-    margin-top: $header-height;
+
+    @media screen {
+        margin-top: $header-height;
+
+        html.footer-fixed & {
+            padding-bottom: $footer-height;
+        }
+    }
+
     flex-grow: 1;
     flex-shrink: 0;
-
-    html.footer-fixed & {
-        padding-bottom: $footer-height;
-    }
 
     > div {
         flex-grow: 1;
