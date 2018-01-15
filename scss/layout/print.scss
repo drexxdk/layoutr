@@ -23,21 +23,6 @@
         text-decoration: underline;
     }
 
-    ul.list li:before {
-        border-bottom: $list-bullet-width solid currentColor;
-        border-right: $list-bullet-width solid currentColor;
-        width: inherit;
-        height: inherit;
-    }
-
-    header #title:not(:empty):before {
-        border-bottom: ($spacer / 4) solid currentColor;
-        border-right: ($spacer / 4) solid currentColor;
-        width: inherit;
-        height: inherit;
-        opacity: 1;
-    }
-
     header > button,
     .header > #authentication,
     footer,
@@ -46,9 +31,19 @@
     .alert > .close,
     html.modal #container,
     .dropdown > ul,
-    ol.list li > button:after, 
+    ol.list li > button:after,
     ol.list li > a:after {
         display: none !important;
+    }
+
+    ul.list li:before {
+        border-bottom: $list-bullet-width solid currentColor !important;
+        border-right: $list-bullet-width solid currentColor !important;
+    }
+
+    header #title:not(:empty):before {
+        border-bottom: ($spacer / 4) solid currentColor !important;
+        border-right: ($spacer / 4) solid currentColor !important;
     }
 
     #content > div {
@@ -96,5 +91,19 @@
         height: 0;
         padding: 0 $padding-x !important;
         line-height: $height;
+    }
+
+    .progress > div > .line:first-child + .number {
+        &:before {
+            z-index:-1;
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, - 50%);
+            border-radius: 50%;
+            border-bottom: (($spacer * 3) - $component-border-width) solid white !important;
+            border-right: (($spacer * 3) - $component-border-width) solid white !important;
+        }
     }
 }
