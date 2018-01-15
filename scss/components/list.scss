@@ -86,7 +86,7 @@
 
             html.desktop & {
                 &:hover:after {
-                    left: -(($spacer / 2) + $component-border-width);
+                    left: -(($spacer / 2) + $component-border-width * 3);
                     border-left-color: $list-number-background-color;
                 }
             }
