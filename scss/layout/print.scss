@@ -93,17 +93,15 @@
         line-height: $height;
     }
 
-    .progress > div > .line:first-child + .number {
-        &:before {
-            z-index:-1;
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, - 50%);
-            border-radius: 50%;
-            border-bottom: (($spacer * 3) - $component-border-width) solid white !important;
-            border-right: (($spacer * 3) - $component-border-width) solid white !important;
-        }
+    .progress > div > .line:first-child + .number:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, - 50%);
+        border-radius: 50%;
+        border-bottom: (($spacer * 3) - $component-border-width) solid white !important;
+        border-right: (($spacer * 3) - $component-border-width) solid white !important;
     }
 }
