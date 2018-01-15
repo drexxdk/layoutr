@@ -92,17 +92,6 @@ button {
     border: 0;
 }
 
-
-html.site-loaded {
-    body {
-        overflow: unset;
-    }
-
-    main {
-        visibility: unset;
-    }
-}
-
 pre {
     display: block;
     word-break: normal;
