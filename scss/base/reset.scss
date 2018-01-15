@@ -77,6 +77,10 @@ svg {
     display: block;
 }
 
+svg {
+    pointer-events: none;
+}
+
 button {
     cursor: pointer;
     border: none;
