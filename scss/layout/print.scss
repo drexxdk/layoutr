@@ -44,7 +44,8 @@
     aside,
     .popup,
     .alert > .close,
-    html.modal #container {
+    html.modal #container,
+    .dropdown > ul {
         display: none !important;
     }
 
@@ -58,11 +59,32 @@
         }
     }
 
-    .accordion > div > .content {
-        display: block !important;
+    .accordion > div > .headline {
+        font-weight: $font-weight-bold;
     }
 
-    .accordion > div > .headline {
-        font-weight:$font-weight-bold;
+    .radio > input:checked + label > i {
+        &:before {
+            border-color: $white !important;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, - 50%);
+            border-radius: 50%;
+            border-bottom: $font-size - ($component-border-width * 9) solid $component-border-color;
+            border-right: $font-size - ($component-border-width * 9) solid $component-border-color;
+        }
+    }
+
+    .switch > label > i:before {
+        margin: $component-border-width * 2;
+        border-bottom: $font-size - ($component-border-width * 6) solid $component-border-color;
+        border-right: $font-size - ($component-border-width * 6) solid $component-border-color;
+        width: 0 !important;
+        height: 0 !important;
     }
 }

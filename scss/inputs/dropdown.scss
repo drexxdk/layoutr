@@ -47,12 +47,14 @@
         }
 
         &.direction-up {
-            &.open {
-                > div {
-                    border-radius: 0 0 $component-border-radius $component-border-radius;
+            @media screen {
+                &.open {
+                    > div {
+                        border-radius: 0 0 $component-border-radius $component-border-radius;
 
-                    > svg {
-                        transform: rotate(90deg);
+                        > svg {
+                            transform: rotate(90deg);
+                        }
                     }
                 }
             }
@@ -77,25 +79,26 @@
             }
         }
 
-        &.open {
+        @media screen {
+            &.open {
+                > div {
+                    border-radius: $component-border-radius $component-border-radius 0 0;
+                    @include focus;
 
-            > div {
-                border-radius: $component-border-radius $component-border-radius 0 0;
-                @include focus;
-
-                > svg {
-                    transform: rotate(270deg);
+                    > svg {
+                        transform: rotate(270deg);
+                    }
                 }
-            }
 
-            > ul {
-                display: block;
-                @include focus;
-                position: absolute;
+                > ul {
+                    display: block;
+                    @include focus;
+                    position: absolute;
 
-                > li > div:focus {
-                    @include theme-element-soft-darken($light);
-                    box-shadow: none;
+                    > li > div:focus {
+                        @include theme-element-soft-darken($light);
+                        box-shadow: none;
+                    }
                 }
             }
         }

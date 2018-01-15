@@ -71,16 +71,20 @@
             border-radius: 50%;
         }
 
-        > input:checked + label > i:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, - 50%);
-            border-radius: 50%;
-            height: $font-size - ($component-border-width * 4);
-            width: $font-size - ($component-border-width * 4);
-            border: ($component-border-width * 2) solid $white;
+        > input:checked + label > i {
+            border-width: $component-border-width * 2;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, - 50%);
+                border-radius: 50%;
+                height: $font-size - ($component-border-width * 4);
+                width: $font-size - ($component-border-width * 4);
+                border: ($component-border-width * 2) solid $white;
+            }
         }
     }
 
