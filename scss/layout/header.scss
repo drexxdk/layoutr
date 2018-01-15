@@ -28,7 +28,7 @@ header {
     #title:not(:empty) {
         position: relative;
         margin-left: $spacer / 2;
-        padding-left: ($spacer / 2) + ($spacer / 3);
+        padding-left: ($spacer / 2) + ($spacer / 4);
 
         &:before {
             content: '';
@@ -36,8 +36,8 @@ header {
             top: 50%;
             left: 0;
             transform: translateY(-50%);
-            width: $spacer / 3;
-            height: $spacer / 3;
+            width: $spacer / 4;
+            height: $spacer / 4;
             background-color: currentColor;
             border-radius: 50%;
             opacity: .5;
