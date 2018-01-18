@@ -1,8 +1,8 @@
 ﻿app.assignment.dragAndDrop = function (assignment) {
     assignment.attr('data-moving', 0);
-    var from = assignment.find('.from .container');
-    var items = assignment.find('.item');
-    var checkboxes = items.find('input[type=checkbox]');
+    var from = assignment.find('.from .container'),
+        items = assignment.find('.item'),
+        checkboxes = items.find('input[type=checkbox]');
 
     var getChecked = function () {
         return $($.map(checkboxes, function (item) {
@@ -72,9 +72,9 @@
     });
 
     assignment.on('click', '.item input[type=checkbox]', function () {
-        var $this = $(this);
-        var item = $this.parents('.item');
-        var moving = parseInt(assignment.attr('data-moving'));
+        var $this = $(this),
+            item = $this.parents('.item'),
+            moving = parseInt(assignment.attr('data-moving'));
         if ($this.is(':checked')) {
             moving++;
             assignment.attr('data-moving', moving);

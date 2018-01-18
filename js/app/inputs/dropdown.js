@@ -2,21 +2,20 @@
 
 app.dropdown = function (dropdowns) {
     dropdowns.each(function () {
-        var $this = $(this);
-        var selected = $this.children('option:selected');
+        var $this = $(this),
+            selected = $this.children('option:selected'),
+            html = [],
+            attr = $this.attr('class'),
+            theme = '';
         if (selected.length !== 1) {
             selected = $this.children().first();
         }
-        var html = [];
         html.push('<div class="dropdown' +
             ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
             ($this.hasClass('align-left') ? ' align-left' : '') +
             ($this.hasClass('align-right') ? ' align-right' : '') +
             ($this.hasClass('direction-up') ? ' direction-up' : '') +
             '">');
-
-        var attr = $this.attr('class');
-        var theme = '';
         if (typeof attr !== typeof undefined && attr !== false) {
             var temp = attr.split(' ');
             temp = $.grep(temp, function (item, index) {
@@ -29,8 +28,8 @@ app.dropdown = function (dropdowns) {
         html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul class="' + theme + '">');
         $this.children(':not([value=""])').each(function (index) {
-            var $that = $(this);
-            var text = $that.text();
+            var $that = $(this),
+                text = $that.text();
             if (text.indexOf('$$') == 0) {
                 $that.attr('data-math', text);
             }
@@ -51,9 +50,9 @@ app.dropdown = function (dropdowns) {
             if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
-                var option = $this.children('[value="' + $that.attr('data-id') + '"]');
-                var text = $that.text();
-                var math = option.attr('data-math');
+                var option = $this.children('[value="' + $that.attr('data-id') + '"]'),
+                    text = $that.text(),
+                    math = option.attr('data-math');
                 if (math !== undefined) {
                     text = math;
                 }

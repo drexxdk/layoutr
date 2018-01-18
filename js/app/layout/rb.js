@@ -43,8 +43,8 @@ app.rb = function () {
                 };
 
                 $.each(sizesWidth, function (index) {
-                    var width = parseInt(this);
-                    var height = getHeightInPixels(heightPercentage, width);
+                    var width = parseInt(this),
+                        height = getHeightInPixels(heightPercentage, width);
                     if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
                         closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
                         closestWidth = width;

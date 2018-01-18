@@ -750,10 +750,10 @@ $(function () {
         app.body.on("mousewheel", function (e) {
             var target = $(e.target);
             if (!app.isModal() && event.ctrlKey !== true) {
-                var aside = target.closest('aside > .content') || target.parents('aside .content');
                 e.preventDefault();
-                var wheelDelta = e.originalEvent.wheelDelta;
-                var currentScrollPosition;
+                var aside = target.closest('aside > .content') || target.parents('aside .content'),
+                    wheelDelta = e.originalEvent.wheelDelta,
+                    currentScrollPosition;
                 if (aside.length) {
                     currentScrollPosition = aside.scrollTop();
                     aside.scrollTop(currentScrollPosition - wheelDelta);
@@ -807,17 +807,16 @@ $(window).click(function (e) {
     }
 
     if (modal.length || target.parents('#modal').length) {
-        var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
-        var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
+        var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
+            form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
         if (image || form || target.closest('#modal-close').length) {
             app.closeModal();
         }
     } else {
-        var isSmallBreakpoint = app.isSmallBreakpoint();
-        var left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
-        var right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
-        var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
-
+        var isSmallBreakpoint = app.isSmallBreakpoint(),
+            left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
+            right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
+            notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
         if ((left || right) && notTarget && !app.isLoading()) {
             app.enableScroll();
             app.html.attr('data-aside', '');
@@ -1084,9 +1083,9 @@ $(function () {
                 app.applyNavigation(entry.id, entry.value, false);
             });
             app.left.on('change', '.tree input[type=checkbox]', function () {
-                var $this = $(this);
-                var id = $this.attr('id');
-                var value = $this.is(':checked');
+                var $this = $(this),
+                    id = $this.attr('id'),
+                    value = $this.is(':checked');
                 app.applyNavigation(id, value, true);
             });
         }
@@ -1119,8 +1118,8 @@ app.applySettings = function (id, name, type, value, set) {
             "name": name,
             "type": type,
             "value": value
-        };
-        var exists = $.grep(app.settings, function (e) { return e.name === name; });
+        },
+            exists = $.grep(app.settings, function (e) { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.settings.push(entry);
@@ -1165,13 +1164,12 @@ $(function () {
             });
         }
         app.header.find('.aside.right').addClass('loaded');
-        var $this = $(this);
-        $this.on('change', 'input[type=checkbox], input[type=radio]', function () {
-            var $this = $(this);
-            var id = $this.attr('id');
-            var name = $this.attr('name');
-            var type = $this.attr('type');
-            var value = $this.is(':checked');
+        $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
+            var $this = $(this),
+                id = $this.attr('id'),
+                name = $this.attr('name'),
+                type = $this.attr('type'),
+                value = $this.is(':checked');
             app.applySettings(id, name, type, value, true);
             if (id === 'two-columns') {
                 app.checkGoogleMaps();
@@ -1188,8 +1186,8 @@ var app = app || {};
 
 $(function () {
     app.body.on("keydown", function (e) {
-        var target = $(e.target);
-        var parent = target.parent();
+        var target = $(e.target),
+            parent = target.parent();
         if (app.isLoading()) {
             if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
                 e.preventDefault();
@@ -1313,13 +1311,13 @@ app.checkModal = function () {
 
 $(function () {
     app.main.on('click', '.modal', function () {
-        var $this = $(this);
-        var type = $this.attr('data-modal');
+        var $this = $(this),
+            type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
-            var id = $this.attr('data-modal-id');
-            var html = [];
+            var id = $this.attr('data-modal-id'),
+                html = [],
+                title = $this.attr('data-modal-title');
             html.push('<div><div><div id="modal-content">');
-            var title = $this.attr('data-modal-title');
             if (type === 'image' && $this.attr('data-modal-img').length) {
                 var description = $this.attr('data-modal-description');
                 if (title !== undefined || description !== undefined) {
@@ -1496,8 +1494,8 @@ app.rb = function () {
                 };
 
                 $.each(sizesWidth, function (index) {
-                    var width = parseInt(this);
-                    var height = getHeightInPixels(heightPercentage, width);
+                    var width = parseInt(this),
+                        height = getHeightInPixels(heightPercentage, width);
                     if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
                         closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
                         closestWidth = width;
@@ -1527,21 +1525,20 @@ var app = app || {};
 
 app.dropdown = function (dropdowns) {
     dropdowns.each(function () {
-        var $this = $(this);
-        var selected = $this.children('option:selected');
+        var $this = $(this),
+            selected = $this.children('option:selected'),
+            html = [],
+            attr = $this.attr('class'),
+            theme = '';
         if (selected.length !== 1) {
             selected = $this.children().first();
         }
-        var html = [];
         html.push('<div class="dropdown' +
             ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
             ($this.hasClass('align-left') ? ' align-left' : '') +
             ($this.hasClass('align-right') ? ' align-right' : '') +
             ($this.hasClass('direction-up') ? ' direction-up' : '') +
             '">');
-
-        var attr = $this.attr('class');
-        var theme = '';
         if (typeof attr !== typeof undefined && attr !== false) {
             var temp = attr.split(' ');
             temp = $.grep(temp, function (item, index) {
@@ -1554,8 +1551,8 @@ app.dropdown = function (dropdowns) {
         html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul class="' + theme + '">');
         $this.children(':not([value=""])').each(function (index) {
-            var $that = $(this);
-            var text = $that.text();
+            var $that = $(this),
+                text = $that.text();
             if (text.indexOf('$$') == 0) {
                 $that.attr('data-math', text);
             }
@@ -1576,9 +1573,9 @@ app.dropdown = function (dropdowns) {
             if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
-                var option = $this.children('[value="' + $that.attr('data-id') + '"]');
-                var text = $that.text();
-                var math = option.attr('data-math');
+                var option = $this.children('[value="' + $that.attr('data-id') + '"]'),
+                    text = $that.text(),
+                    math = option.attr('data-math');
                 if (math !== undefined) {
                     text = math;
                 }
@@ -1706,27 +1703,24 @@ var app = app || {};
 
 $(function () {
     app.main.on('click', '.show-popup', function () {
-        var $this = $(this);
-        var title = $this.attr('data-popup-title');
+        var $this = $(this),
+            title = $this.attr('data-popup-title');
         if (title !== undefined) {
-            var theme = $this.attr('data-popup-theme');
+            var theme = $this.attr('data-popup-theme'),
+                alert = [],
+                position = $(this).attr('data-popup-position'),
+                popup = app.main.children('.popup[data-position="' + position + '"]');
             if (theme === undefined) {
                 theme = 'primary';
             }
-
-            var alert = [];
             alert.push('<div class="alert theme-' + theme + '">');
             alert.push('<div><p>' + title + '</p></div>');
             alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
             alert.push('</div>');
             alert = alert.join('');
-            
-            var position = $(this).attr('data-popup-position');
             if (position === undefined) {
                 position = 'top left';
             }
-
-            var popup = app.main.children('.popup[data-position="' + position + '"]');
             if (popup.length) {
                 popup.append(alert);
             } else {
@@ -1744,8 +1738,8 @@ var app = app || {};
 
 app.tooltip = function (tooltips) {
     tooltips.each(function () {
-        var $this = $(this);
-        var interactive = $this.hasClass('interactive');
+        var $this = $(this),
+            interactive = $this.hasClass('interactive');
         $this.tooltipster({
             animationDuration: 0,
             interactive: interactive,

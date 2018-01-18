@@ -26,10 +26,10 @@ $(function () {
         app.body.on("mousewheel", function (e) {
             var target = $(e.target);
             if (!app.isModal() && event.ctrlKey !== true) {
-                var aside = target.closest('aside > .content') || target.parents('aside .content');
                 e.preventDefault();
-                var wheelDelta = e.originalEvent.wheelDelta;
-                var currentScrollPosition;
+                var aside = target.closest('aside > .content') || target.parents('aside .content'),
+                    wheelDelta = e.originalEvent.wheelDelta,
+                    currentScrollPosition;
                 if (aside.length) {
                     currentScrollPosition = aside.scrollTop();
                     aside.scrollTop(currentScrollPosition - wheelDelta);

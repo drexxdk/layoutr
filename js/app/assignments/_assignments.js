@@ -1,5 +1,6 @@
 ﻿var app = app || {};
 
+
 app.assignment = function (assignments) {
     if (assignments.length) {
         $.getScript('dist/js/assignments.min.js', function () {

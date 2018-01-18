@@ -29,17 +29,16 @@ $(window).click(function (e) {
     }
 
     if (modal.length || target.parents('#modal').length) {
-        var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length;
-        var form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
+        var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
+            form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
         if (image || form || target.closest('#modal-close').length) {
             app.closeModal();
         }
     } else {
-        var isSmallBreakpoint = app.isSmallBreakpoint();
-        var left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length;
-        var right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length;
-        var notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
-
+        var isSmallBreakpoint = app.isSmallBreakpoint(),
+            left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
+            right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
+            notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length;
         if ((left || right) && notTarget && !app.isLoading()) {
             app.enableScroll();
             app.html.attr('data-aside', '');

@@ -43,13 +43,13 @@ app.checkModal = function () {
 
 $(function () {
     app.main.on('click', '.modal', function () {
-        var $this = $(this);
-        var type = $this.attr('data-modal');
+        var $this = $(this),
+            type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
-            var id = $this.attr('data-modal-id');
-            var html = [];
+            var id = $this.attr('data-modal-id'),
+                html = [],
+                title = $this.attr('data-modal-title');
             html.push('<div><div><div id="modal-content">');
-            var title = $this.attr('data-modal-title');
             if (type === 'image' && $this.attr('data-modal-img').length) {
                 var description = $this.attr('data-modal-description');
                 if (title !== undefined || description !== undefined) {

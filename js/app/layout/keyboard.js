@@ -2,8 +2,8 @@
 
 $(function () {
     app.body.on("keydown", function (e) {
-        var target = $(e.target);
-        var parent = target.parent();
+        var target = $(e.target),
+            parent = target.parent();
         if (app.isLoading()) {
             if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
                 e.preventDefault();

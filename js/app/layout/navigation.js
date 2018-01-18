@@ -93,9 +93,9 @@ $(function () {
                 app.applyNavigation(entry.id, entry.value, false);
             });
             app.left.on('change', '.tree input[type=checkbox]', function () {
-                var $this = $(this);
-                var id = $this.attr('id');
-                var value = $this.is(':checked');
+                var $this = $(this),
+                    id = $this.attr('id'),
+                    value = $this.is(':checked');
                 app.applyNavigation(id, value, true);
             });
         }
