@@ -1,18 +1,17 @@
 ﻿/// <reference path="../references" />
 
 #container {
-    @include flex-display;
 
     @media screen {
+        @include flex-display;
+        flex-grow: 1;
+        flex-shrink: 0;
         margin-top: $header-height;
 
         html.footer-fixed & {
             padding-bottom: $footer-height;
         }
     }
-
-    flex-grow: 1;
-    flex-shrink: 0;
 
     > div {
         flex-grow: 1;

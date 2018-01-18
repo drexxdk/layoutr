@@ -1,11 +1,11 @@
 ﻿/// <reference path="../references" />
 
 main {
-    height: 100vh;
-    @include flex-display;
-    @include flex-direction(column);
-
     @media screen {
+        @include flex-display;
+        @include flex-direction(column);
+        height: 100vh;
+
         html.scroll-disabled & {
             overflow: hidden !important;
         }

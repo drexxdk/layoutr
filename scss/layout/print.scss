@@ -32,7 +32,8 @@
     html.modal #container,
     .dropdown > ul,
     ol.list li > button:after,
-    ol.list li > a:after {
+    ol.list li > a:after,
+    #loading {
         display: none !important;
     }
 
