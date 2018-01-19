@@ -104,12 +104,17 @@
             left: 0;
             right: 0;
             padding: $spacer;
+            pointer-events: none;
 
             > div {
+                pointer-events: all;
+                max-height: calc(100vh - #{$header-height + ($spacer * 2)});
+                overflow: auto;
                 margin-left: auto;
                 max-width: 300px;
                 background-color: $white;
                 border: $layout-border;
+                padding: $spacer;
             }
         }
     }
