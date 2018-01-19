@@ -39,24 +39,79 @@
 #authentication {
     @include flex-display;
 
-    > button {
-        margin: ($spacer / 2);
-        padding: 0 $padding-x;
-        color: $link-color;
-        border-radius: $component-border-radius;
-        border: $component-border-width solid transparent;
+    #unauthenticated {
+        @include flex-display;
 
-        &:hover,
-        &:focus {
-            @include theme-element-darken($primary);
-            box-shadow: $box-shadow;
+        > button {
+            margin: ($spacer / 2);
+            padding: 0 $padding-x;
+            color: $link-color;
+            border-radius: $component-border-radius;
+            border: $component-border-width solid transparent;
+
+            &:hover,
+            &:focus {
+                @include theme-element-darken($primary);
+                box-shadow: $box-shadow;
+            }
+        }
+
+        > span {
+            margin: $spacer 0;
+            width: $layout-border-width;
+            background-color: $layout-border-color;
         }
     }
 
-    > span {
-        margin: $spacer 0;
-        width: $layout-border-width;
-        background-color: $layout-border-color;
+    #authenticated {
+
+        > button:hover {
+            overflow: unset;
+        }
+
+        &:not(.open) > div {
+            display: none;
+        }
+
+        &.open > button {
+            position: relative;
+
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                top: calc(100% + #{($spacer / 2) + $layout-border-width});
+                left: 50%;
+                transform: translateX(-50%);
+                border-left: $spacer / 2 solid transparent;
+                border-right: $spacer / 2 solid transparent;
+                z-index: 1;
+            }
+
+            &:before {
+                border-bottom: $spacer / 2 solid $layout-border-color;
+            }
+
+            &:after {
+                margin-top: $layout-border-width;
+                border-bottom: $spacer / 2 solid $white;
+            }
+        }
+
+        > div {
+            position: absolute;
+            top: $header-height;
+            left: 0;
+            right: 0;
+            padding: $spacer;
+
+            > div {
+                margin-left: auto;
+                max-width: 300px;
+                background-color: $white;
+                border: $layout-border;
+            }
+        }
     }
 }
 

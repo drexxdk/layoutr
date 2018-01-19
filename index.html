@@ -36,16 +36,33 @@
     </div>
     <main tabindex="0">
         <header class="header">
-            <button type="button" class="aside left" aria-label="Toggle menu">
+            <button type="button" class="expand aside left" aria-label="Toggle menu">
                 <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
             </button>
             <h1 class="title"><span>layoutr</span><span id="title"></span></h1>
             <div id="authentication">
-                <button type="button" class="modal" data-modal="form" data-modal-id="login" data-modal-title="Login">Login</button>
-                <span></span>
-                <button class="modal" data-modal="form" data-modal-id="register" data-modal-title="Register">Register</button>
-            </div>
-            <button type="button" class="aside right" aria-label="Toggle settings">
+                <div id="authenticated">
+                    <button type="button" class="expand" aria-label="Toggle user menu">
+                        <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                    </button>
+                    <div>
+                        <div>
+                            <ul class="list">
+                                <li>work in progress</li>
+                                <li>work in progress</li>
+                                <li>work in progress</li>
+                                <li>work in progress</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="unauthenticated">
+                    <button type="button" class="modal" data-modal="form" data-modal-id="login" data-modal-title="Login">Login</button>
+                    <span></span>
+                    <button class="modal" data-modal="form" data-modal-id="register" data-modal-title="Register">Register</button>
+                </div>
+           </div>
+            <button type="button" class="expand aside right" aria-label="Toggle settings">
                 <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
             </button>
         </header>
@@ -56,7 +73,7 @@
                 <aside id="left" tabindex="0">
                     <div class="header">
                         <h2 class="title">Navigation</h2>
-                        <button type="button" class="aside left close" aria-label="Toggle settings">
+                        <button type="button" class="expand aside left close" aria-label="Toggle settings">
                             <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
                         </button>
                     </div>
@@ -67,7 +84,7 @@
                 </aside>
                 <aside id="right" tabindex="0">
                     <div class="header">
-                        <button type="button" class="aside right close" aria-label="Toggle settings">
+                        <button type="button" class="expand aside right close" aria-label="Toggle settings">
                             <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
                         </button>
                         <h2 class="title">Settings</h2>

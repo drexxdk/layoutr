@@ -65,7 +65,7 @@ header {
         @include ellipsis;
     }
 
-    > button {
+    button.expand {
         position: relative;
         width: $header-height-content;
         height: $header-height-content;
