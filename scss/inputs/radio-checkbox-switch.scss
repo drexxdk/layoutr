@@ -21,10 +21,8 @@
         > input {
             @include hidden;
 
-            &:checked {
-                & + label > i {
-                    @include theme-element($primary);
-                }
+            &:checked + label > i {
+                @include theme-element($primary);
             }
 
             & + label:focus > i {

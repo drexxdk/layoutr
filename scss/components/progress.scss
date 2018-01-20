@@ -42,8 +42,6 @@
             }
         }
 
-
-
         @each $color, $value in $theme-colors {
             > div > span.theme-#{$color} {
                 @include theme-element($value);

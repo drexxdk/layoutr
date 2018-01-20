@@ -19,7 +19,7 @@ app.checkGoogleMaps = function () {
 $(function () {
     app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
-            $('<div id="google-maps"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
+            $('<div id="google-maps" class="full-width"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
             app.google = document.getElementById('google-maps').children[0];
             $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
                 var uluru = { lat: -25.363, lng: 131.044 };

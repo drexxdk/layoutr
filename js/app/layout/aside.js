@@ -3,7 +3,7 @@
 var transitionLock = false;
 
 app.toggleAside = function (aside, pageChanged) {
-    if (!transitionLock) {
+    if (!transitionLock && aside !== undefined) {
         transitionLock = true;
         app.authenticated.removeClass('open');
         var currentAside = app.html.attr('data-aside');

@@ -54,10 +54,8 @@
         fill: $color;
     }
 
-    html.desktop & {
-        .dropdown > .btn:hover {
-            @include theme-element-soft-darken($background);
-        }
+    html.desktop & .dropdown > .btn:hover {
+        @include theme-element-soft-darken($background);
     }
 }
 
@@ -137,6 +135,7 @@
                     @include align-items(center);
                     z-index: $input-group-addon;
                     padding: 0 $padding-x;
+                    @include theme-element-soft($light, false);
 
                     &:first-child {
                         left: $component-border-width;
@@ -152,9 +151,6 @@
                         border-left: $component-border;
                     }
 
-
-                    @include theme-element-soft($light, false);
-
                     > svg {
                         width: $font-size;
                         height: $font-size;
@@ -168,12 +164,10 @@
             }
         }
 
-        &.theme-danger {
-            em {
-                color: $danger;
-                margin: ($spacer / 2) 0 $spacer 0;
-                width: 100%;
-            }
+        &.theme-danger em {
+            color: $danger;
+            margin: ($spacer / 2) 0 $spacer 0;
+            width: 100%;
         }
 
         @each $color, $value in $theme-validation-colors {

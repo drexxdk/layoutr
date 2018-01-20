@@ -45,21 +45,15 @@
         @include flex-wrap(wrap);
     }
 
-    &.grow {
-        > * {
-            flex-grow: 1;
-        }
+    &.grow > * {
+        flex-grow: 1;
     }
 
-    &.expand {
-        > * {
-            flex-grow: 1;
-        }
+    &.expand > * {
+        flex-grow: 1;
     }
 
-    &.center {
-        > * {
-            @include align-self(center);
-        }
+    &.center > * {
+        @include align-self(center);
     }
 }

@@ -65,14 +65,9 @@ body {
 a {
     color: $link-color;
 
-    &:focus {
+    &:focus,
+    html.desktop &:hover {
         text-decoration: none;
-    }
-
-    html.desktop & {
-        &:hover {
-            text-decoration: none;
-        }
     }
 }
 

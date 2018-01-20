@@ -15,11 +15,9 @@
         z-index: $component-z-index;
         box-shadow: $box-shadow;
 
-        html.desktop & {
-            &:hover {
-                $value: $primary;
-                @include theme-element-darken($value);
-            }
+        html.desktop &:hover {
+            $value: $primary;
+            @include theme-element-darken($value);
         }
 
         > span {
@@ -61,10 +59,8 @@
             &.theme-#{$color} {
                 @include theme-element($value);
 
-                html.desktop & {
-                    &:hover {
-                        @include theme-element-darken($value);
-                    }
+                html.desktop &:hover {
+                    @include theme-element-darken($value);
                 }
             }
         }
@@ -82,11 +78,9 @@
         background: transparent !important;
         border: $component-border-width solid $component-border-color !important;
 
-        html.desktop & {
-            &:hover {
-                color: $link-hover-color;
-                text-decoration: $link-hover-decoration;
-            }
+        html.desktop &:hover {
+            color: $link-hover-color;
+            text-decoration: $link-hover-decoration;
         }
     }
 }

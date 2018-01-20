@@ -840,8 +840,8 @@ app.pageLoaded = function (initial) {
         if (bowser.msie) {
             app.body.css('overflow', '');
         }
-        if (app.isCloseLeftPageChange()) {
-            app.toggleAside(undefined, true);
+        if (!initial && app.isCloseLeftPageChange()) {
+            app.toggleAside("", true);
         }
     }, 200);
     app.contentHeader = app.content.children('.content-header:not(.full)');
@@ -946,7 +946,7 @@ var app = app || {};
 var transitionLock = false;
 
 app.toggleAside = function (aside, pageChanged) {
-    if (!transitionLock) {
+    if (!transitionLock && aside !== undefined) {
         transitionLock = true;
         app.authenticated.removeClass('open');
         var currentAside = app.html.attr('data-aside');
@@ -1884,7 +1884,7 @@ app.checkGoogleMaps = function () {
 $(function () {
     app.content.on('click', '#toggle-google-maps', function () {
         if (!app.checkGoogleMaps()) {
-            $('<div id="google-maps"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
+            $('<div id="google-maps" class="full-width"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
             app.google = document.getElementById('google-maps').children[0];
             $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
                 var uluru = { lat: -25.363, lng: 131.044 };
@@ -1910,7 +1910,7 @@ var app = app || {};
 $(function () {
     app.content.on('click', '#toggle-youtube', function () {
         if (app.youtube === undefined) {
-            $('<div id="youtube"><div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div></div>').insertAfter($(this));
+            $('<div id="youtube" class="full-width"><div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div></div>').insertAfter($(this));
             app.youtube = app.content.find('#youtube');
         } else {
             app.youtube.toggle();

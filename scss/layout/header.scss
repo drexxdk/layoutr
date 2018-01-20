@@ -73,15 +73,13 @@ header {
         @include noselect;
         flex-shrink: 0;
 
-        html.desktop & {
-            &:hover {
-                overflow: hidden;
+        html.desktop &:hover {
+            overflow: hidden;
 
-                svg {
-                    opacity: 1;
-                    width: 65%;
-                    height: 65%;
-                }
+            svg {
+                opacity: 1;
+                width: 65%;
+                height: 65%;
             }
         }
 

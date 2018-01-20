@@ -1,14 +1,7 @@
 ﻿/// <reference path="references" />
 
-#google-maps,
-#youtube {
-    width: 100%;
-}
-
-#lighthouse {
-    > div {
-        width: rem(168px);
-    }
+#lighthouse > div {
+    width: rem(168px);
 }
 
 #browsers,
@@ -36,114 +29,28 @@
     }
 }
 
-#authentication {
-    @include flex-display;
-
-    #unauthenticated {
-        @include flex-display;
-
-        > button {
-            margin: ($spacer / 2);
-            padding: 0 $padding-x;
-            color: $link-color;
-            border-radius: $component-border-radius;
-            border: $component-border-width solid transparent;
-
-            &:hover,
-            &:focus {
-                @include theme-element-darken($primary);
-                box-shadow: $box-shadow;
-            }
-        }
-
-        > span {
-            margin: $spacer 0;
-            width: $layout-border-width;
-            background-color: $layout-border-color;
-        }
+#gtmetric .score {
+    .large,
+    .grade,
+    .number {
+        font-size: 200%;
     }
 
-    #authenticated {
-
-        > button:hover {
-            overflow: unset;
-        }
-
-        &:not(.open) > div {
-            display: none;
-        }
-
-        &.open > button {
-            position: relative;
-
-            &:before,
-            &:after {
-                content: '';
-                position: absolute;
-                top: calc(100% + #{($spacer / 2) + $layout-border-width});
-                left: 50%;
-                transform: translateX(-50%);
-                border-left: $spacer / 2 solid transparent;
-                border-right: $spacer / 2 solid transparent;
-                z-index: 1;
-            }
-
-            &:before {
-                border-bottom: $spacer / 2 solid $layout-border-color;
-            }
-
-            &:after {
-                margin-top: $layout-border-width;
-                border-bottom: $spacer / 2 solid $white;
-            }
-        }
-
-        > div {
-            position: absolute;
-            top: $header-height;
-            left: 0;
-            right: 0;
-            padding: $spacer;
-            pointer-events: none;
-
-            > div {
-                pointer-events: all;
-                max-height: calc(100vh - #{$header-height + ($spacer * 2)});
-                overflow: auto;
-                margin-left: auto;
-                max-width: 300px;
-                background-color: $white;
-                border: $layout-border;
-                padding: $spacer;
-            }
-        }
+    .grade,
+    .number {
+        color: $success;
     }
-}
 
-#gtmetric {
-    .score {
-        .large,
-        .grade,
-        .number {
-            font-size: 200%;
-        }
+    .grade {
+        font-weight: bold;
+    }
 
-        .grade,
-        .number {
-            color: $success;
-        }
-
-        .grade {
-            font-weight: bold;
-        }
-
-        .arrow {
-            > svg {
-                width: $font-size;
-                height: $font-size;
-                transform: rotate(270deg);
-                fill: $success;
-            }
+    .arrow {
+        > svg {
+            width: $font-size;
+            height: $font-size;
+            transform: rotate(270deg);
+            fill: $success;
         }
     }
 }

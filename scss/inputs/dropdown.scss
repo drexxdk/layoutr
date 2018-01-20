@@ -4,10 +4,8 @@
     select.dropdown {
         @include hidden;
 
-        &:focus + div.dropdown {
-            > div {
-                @extend :focus;
-            }
+        &:focus + div.dropdown > div {
+            @extend :focus;
         }
     }
 
@@ -48,13 +46,11 @@
 
         &.direction-up {
             @media screen {
-                &.open {
-                    > div {
-                        border-radius: 0 0 $component-border-radius $component-border-radius;
+                &.open > div {
+                    border-radius: 0 0 $component-border-radius $component-border-radius;
 
-                        > svg {
-                            transform: rotate(90deg);
-                        }
+                    > svg {
+                        transform: rotate(90deg);
                     }
                 }
             }
@@ -72,11 +68,9 @@
             }
         }
 
-        > div:focus {
-            & + ul {
-                @include focus;
-                position: absolute;
-            }
+        > div:focus + ul {
+            @include focus;
+            position: absolute;
         }
 
         @media screen {
@@ -136,7 +130,6 @@
             max-height: ($height * 4) + ($component-border-width * 4);
 
             > li {
-
                 > div {
                     border-radius: 0;
                     display: block;
@@ -144,10 +137,8 @@
                     @extend .btn;
                     border: none !important;
 
-                    html.desktop & {
-                        &:hover > svg {
-                            opacity: .4;
-                        }
+                    html.desktop &:hover > svg {
+                        opacity: .4;
                     }
 
                     > label {
@@ -162,15 +153,13 @@
                     }
                 }
 
-                &.selected {
-                    > div {
-                        background-color: white;
-                        cursor: default;
+                &.selected > div {
+                    background-color: white;
+                    cursor: default;
 
-                        > svg {
-                            fill: $success;
-                            opacity: 1 !important;
-                        }
+                    > svg {
+                        fill: $success;
+                        opacity: 1 !important;
                     }
                 }
 

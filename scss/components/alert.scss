@@ -15,14 +15,10 @@
             &.theme-#{$color} {
                 @include theme-element-soft($value);
 
-                .close:focus {
-                    @include theme-element-soft-darken($value, false);
-                }
 
-                html.desktop & {
-                    .close:hover {
-                        @include theme-element-soft-darken($value, false);
-                    }
+                .close:focus,
+                html.desktop & .close:hover {
+                    @include theme-element-soft-darken($value, false);
                 }
             }
         }
@@ -47,14 +43,8 @@
                 flex-shrink: 0;
             }
 
-            html.desktop & {
-                &:hover {
-                    $value: $light;
-                    @include theme-element-darken($value, false);
-                }
-            }
-
-            &:focus {
+            &:focus,
+            html.desktop &:hover {
                 @include theme-element-soft-darken($value, false);
             }
         }

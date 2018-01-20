@@ -41,10 +41,8 @@
                     @include theme-element($value);
                 }
 
-                html.desktop & {
-                    > a:hover:after {
-                        border-left-color: $value;
-                    }
+                html.desktop & > a:hover:after {
+                    border-left-color: $value;
                 }
             }
         }
@@ -84,11 +82,9 @@
                 @include theme-element-darken($list-background-color);
             }
 
-            html.desktop & {
-                &:hover:after {
-                    left: -(($spacer / 2) + $component-border-width * 3);
-                    border-left-color: $list-number-background-color;
-                }
+            html.desktop &:hover:after {
+                left: -(($spacer / 2) + $component-border-width * 3);
+                border-left-color: $list-number-background-color;
             }
 
             &:after {
@@ -103,13 +99,10 @@
         }
     }
 
-    ul.list,
-    ol.list {
-        html.desktop & {
-            li > button:hover,
-            li > a:hover {
-                @include theme-element-darken($list-background-color);
-            }
+    html.desktop & ol.list {
+        li > button:hover,
+        li > a:hover {
+            @include theme-element-darken($list-background-color);
         }
     }
 }

@@ -11,3 +11,7 @@ div.cover {
 .math {
     @include hidden;
 }
+
+.full-width {
+    width:100%;
+}
