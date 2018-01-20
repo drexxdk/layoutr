@@ -34,3 +34,11 @@
 
 // assignments
 @include layoutr-drag-and-drop;
+
+body {
+    overflow: visible;
+}
+
+main {
+    visibility: visible;
+}

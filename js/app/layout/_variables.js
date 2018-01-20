@@ -14,6 +14,7 @@ $(function () {
     app.overflow = $('#overflow');
     app.modal = $('#modal');
     app.title = $('#title');
+    app.authenticated = $('#authenticated');
 
     app.transitionTime = 400;
     app.fadeOutTime = 500;

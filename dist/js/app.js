@@ -636,6 +636,7 @@ $(function () {
     app.overflow = $('#overflow');
     app.modal = $('#modal');
     app.title = $('#title');
+    app.authenticated = $('#authenticated');
 
     app.transitionTime = 400;
     app.fadeOutTime = 500;
@@ -793,8 +794,9 @@ $(function () {
 });
 
 $(window).click(function (e) {
-    var target = $(e.target);
-    var modal = target.closest(app.modal[0]);
+    var target = $(e.target),
+        modal = target.closest(app.modal[0]),
+        authenticated = target.closest(app.authenticated[0]);
 
     if (bowser.ios) {
         // ios browsers doesn't apply :focus to buttons in many cases,
@@ -805,7 +807,9 @@ $(window).click(function (e) {
             target.focus();
         }
     }
-
+    if (!authenticated.length && !target.parents('#authenticated').length) {
+        app.authenticated.removeClass('open');
+    }
     if (modal.length || target.parents('#modal').length) {
         var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
             form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
@@ -944,6 +948,7 @@ var transitionLock = false;
 app.toggleAside = function (aside, pageChanged) {
     if (!transitionLock) {
         transitionLock = true;
+        app.authenticated.removeClass('open');
         var currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
@@ -986,6 +991,19 @@ $(function () {
 
     $('.aside.right').click(function () {
         app.toggleAside('right');
+    });
+});
+var app = app || {};
+
+$(function () {
+    app.authenticated.on('click', '> button', function () {
+        var $this = $(this).parent();
+        $this.toggleClass('open');
+        if ($this.hasClass('open')) {
+            app.authenticated.find('> div > div').focus();
+        } else {
+            app.main.focus();
+        }
     });
 });
 var app = app || {};
@@ -1338,7 +1356,7 @@ $(function () {
                 if (title !== undefined) {
                     html.push('<span class="title">' + title + '</span>');
                 }
-                html.push('<button id="modal-close" class="close" aria-label="Close ' + (title !== undefined ? title : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
+                html.push('<button id="modal-close" class="close expand" aria-label="Close ' + (title !== undefined ? title : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
                 html.push('</div>');
 
                 if (id === 'login') {
@@ -1757,6 +1775,7 @@ app.tooltip = function (tooltips) {
     });
 };
 var app = app || {};
+
 
 app.assignment = function (assignments) {
     if (assignments.length) {

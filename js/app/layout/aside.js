@@ -5,6 +5,7 @@ var transitionLock = false;
 app.toggleAside = function (aside, pageChanged) {
     if (!transitionLock) {
         transitionLock = true;
+        app.authenticated.removeClass('open');
         var currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {

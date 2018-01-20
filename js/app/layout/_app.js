@@ -15,8 +15,9 @@ $(function () {
 });
 
 $(window).click(function (e) {
-    var target = $(e.target);
-    var modal = target.closest(app.modal[0]);
+    var target = $(e.target),
+        modal = target.closest(app.modal[0]),
+        authenticated = target.closest(app.authenticated[0]);
 
     if (bowser.ios) {
         // ios browsers doesn't apply :focus to buttons in many cases,
@@ -27,7 +28,9 @@ $(window).click(function (e) {
             target.focus();
         }
     }
-
+    if (!authenticated.length && !target.parents('#authenticated').length) {
+        app.authenticated.removeClass('open');
+    }
     if (modal.length || target.parents('#modal').length) {
         var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
             form = app.isModalForm() && !target.closest('#modal > div > div > div').length;

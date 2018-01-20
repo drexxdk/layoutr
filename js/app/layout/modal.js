@@ -70,7 +70,7 @@ $(function () {
                 if (title !== undefined) {
                     html.push('<span class="title">' + title + '</span>');
                 }
-                html.push('<button id="modal-close" class="close" aria-label="Close ' + (title !== undefined ? title : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
+                html.push('<button id="modal-close" class="close expand" aria-label="Close ' + (title !== undefined ? title : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
                 html.push('</div>');
 
                 if (id === 'login') {
