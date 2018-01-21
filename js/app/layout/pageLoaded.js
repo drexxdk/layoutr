@@ -4,9 +4,13 @@ app.pageLoaded = function (initial) {
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
-    var scrolledTop = $(document).scrollTop();
+    var offsetTop = $(document).scrollTop();
     setTimeout(function () {
-        alert(scrolledTop);
+        alert(scrolledTop + ' a');
+        if (offsetTop > 0) {
+            app.html.animate({ scrollTop: -offsetTop }, 'slow');
+        }
+
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside("", true);
         }
