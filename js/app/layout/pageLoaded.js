@@ -4,9 +4,7 @@ app.pageLoaded = function (initial) {
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
-    var scrolledTop = $(document).scrollTop();
     setTimeout(function () {
-        alert(scrolledTop);
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside("", true);
         }
