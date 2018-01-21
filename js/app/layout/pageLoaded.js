@@ -4,13 +4,11 @@ app.pageLoaded = function (initial) {
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
-    var offsetTop = $(document).scrollTop();
     setTimeout(function () {
-        alert(offsetTop + ' a');
-        if (offsetTop > 0) {
-            app.html.animate({ scrollTop: -offsetTop }, 'slow');
+        if ($(document).scrollTop() > 0) {
+            // android navigation bar offset fix
+            app.html.animate({ scrollTop: -offsetTop }, 0);
         }
-
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside("", true);
         }
