@@ -69,6 +69,10 @@ app.isTransitions = function () {
     return app.html.hasClass('transitions');
 };
 
+app.isAndroidSwipe = function () {
+    return app.html.hasClass('android-swipe');
+};
+
 app.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
+};

@@ -1,15 +1,10 @@
 ﻿var app = app || {};
 
 app.pageLoaded = function (initial) {
-    app.body.scrollTop(0); // edge, safari
-    app.html.scrollTop(0); // chrome, firefox, ie
-    if (bowser.msie) {
-        app.body.css('overflow', 'hidden');
-    }
+    app.main.css('overflow', 'auto');
+    app.main.scrollTop(0);
+    app.main.css('overflow', '');
     setTimeout(function () {
-        if (bowser.msie) {
-            app.body.css('overflow', '');
-        }
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside("", true);
         }

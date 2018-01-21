@@ -1,9 +1,5 @@
 ﻿/// <reference path="references" />
 
-#lighthouse > div {
-    width: rem(168px);
-}
-
 #browsers,
 #platforms {
     > div {
@@ -37,6 +33,10 @@
             }
         }
     }
+}
+
+#lighthouse > div {
+    width: rem(168px);
 }
 
 #gtmetric .score {
