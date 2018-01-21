@@ -5,6 +5,18 @@ html {
         display: none;
     }
 
+    &.desktop {
+        .modal.overlay-light:after,
+        .modal.overlay-dark:after {
+            transition: background-color $transition-time $transition-timing;
+        }
+
+        .modal.overlay-light:hover:after,
+        .modal.overlay-dark:hover:after {
+            background-color: transparent;
+        }
+    }
+
     &.modal {
         @media screen {
             overflow: hidden;
@@ -137,17 +149,5 @@ html {
     .modal {
         cursor: pointer;
         @include noselect;
-    }
-}
-
-html.desktop {
-    .modal.overlay-light:after,
-    .modal.overlay-dark:after {
-        transition: background-color $transition-time $transition-timing;
-    }
-
-    .modal.overlay-light:hover:after,
-    .modal.overlay-dark:hover:after {
-        background-color: transparent;
     }
 }

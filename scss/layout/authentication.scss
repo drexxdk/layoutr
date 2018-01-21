@@ -1,10 +1,22 @@
 ﻿/// <reference path="../references" />
 
 #authentication {
-    @include flex-display;
+    html:not(.site-loaded) & {
+        display: none;
+    }
+
+    html.site-loaded & {
+        @include flex-display;
+    }
 
     #unauthenticated {
-        @include flex-display;
+        html:not(.signed-in) & {
+            @include flex-display;
+        }
+
+        html.signed-in & {
+            display: none;
+        }
 
         > button {
             margin: ($spacer / 2);
@@ -13,8 +25,8 @@
             border-radius: $component-border-radius;
             border: $component-border-width solid transparent;
 
-            html.desktop &:hover,
-            &:focus {
+            &:focus,
+            html.desktop &:hover {
                 @include theme-element-darken($primary);
                 box-shadow: $box-shadow;
             }
@@ -28,13 +40,13 @@
     }
 
     #authenticated {
+        &:not(.open) > div,
+        html:not(.signed-in) & {
+            display: none;
+        }
 
         html.desktop & > button:hover {
             overflow: unset;
-        }
-
-        &:not(.open) > div {
-            display: none;
         }
 
         &.open > button {
