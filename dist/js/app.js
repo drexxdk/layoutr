@@ -838,11 +838,12 @@ app.pageLoaded = function (initial) {
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
+    app.html.animate({ scrollTop: 0 }, 0);
+    //if ($(document).scrollTop() > 0) {
+    //    // android navigation bar offset fix
+    //    app.html.animate({ scrollTop: -offsetTop }, 0);
+    //}
     setTimeout(function () {
-        app.html.animate({ scrollTop: 0 }, 0);
-        if ($(document).scrollTop() > 0) {
-            // android navigation bar offset fix
-        }
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside("", true);
         }
