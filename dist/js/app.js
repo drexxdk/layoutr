@@ -840,7 +840,7 @@ app.pageLoaded = function (initial) {
     app.main.css('overflow', '');
     var offsetTop = $(document).scrollTop();
     setTimeout(function () {
-        alert(scrolledTop + ' a');
+        alert(offsetTop + ' a');
         if (offsetTop > 0) {
             app.html.animate({ scrollTop: -offsetTop }, 'slow');
         }
