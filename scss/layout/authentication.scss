@@ -49,31 +49,6 @@
             overflow: unset;
         }
 
-        &.open > button {
-            position: relative;
-
-            &:before,
-            &:after {
-                content: '';
-                position: absolute;
-                top: calc(100% + #{($spacer / 2) + $layout-border-width});
-                left: 50%;
-                transform: translateX(-50%);
-                border-left: $spacer / 2 solid transparent;
-                border-right: $spacer / 2 solid transparent;
-                z-index: 1;
-            }
-
-            &:before {
-                border-bottom: $spacer / 2 solid $layout-border-color;
-            }
-
-            &:after {
-                margin-top: $layout-border-width;
-                border-bottom: $spacer / 2 solid $white;
-            }
-        }
-
         > div {
             position: absolute;
             top: $header-height;
@@ -90,7 +65,45 @@
                 max-width: 300px;
                 background-color: $white;
                 border: $layout-border;
-                padding: $spacer;
+                box-shadow: 0 0 $spacer / 2 0 rgba(0,0,0,0.75);
+
+
+                #authenticated-user {
+                    @include flex-display;
+                    @include align-items(center);
+                    padding: $spacer;
+                    background-color: $gray-200;
+
+                    > i {
+                        width: ($line-height * 2) + ($spacer / 2);
+                        height: ($line-height * 2) + ($spacer / 2);
+                        border-radius: 50%;
+                        overflow: hidden;
+
+                        > * {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    > div {
+                        @include flex-display;
+                        @include flex-direction(column);
+                        margin-left: $spacer;
+
+                        #authenticated-username {
+                            font-weight: $font-weight-bold;
+                        }
+
+                        #authenticated-email {
+                            margin-top: $spacer / 2;
+                        }
+                    }
+                }
+
+                > ul {
+                    margin: $spacer;
+                }
             }
         }
     }
