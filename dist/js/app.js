@@ -727,6 +727,10 @@ app.isAndroidSwipe = function () {
 app.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+app.scrollTop = function () {
+    return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
+}
 var app = app || {};
 
 $(function () {
@@ -882,7 +886,7 @@ app.disableScroll = function () {
             app.checkModal();
             app.modal.focus();
         }
-        var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
+        var scrollTop = app.scrollTop()
         app.html.addClass('scroll-disabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
@@ -892,7 +896,7 @@ app.disableScroll = function () {
 app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
+        var scrollTop = app.scrollTop();
         app.html.removeClass('scroll-disabled modal');
         app.main.focus();
         app.body.scrollTop(scrollTop); // edge, safari
@@ -952,7 +956,7 @@ app.toggleAside = function (aside, pageChanged) {
         var currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
-                var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
+                var scrollTop = app.scrollTop();
                 app.html.attr('data-aside', '');
                 app.main.focus();
                 app.body.scrollTop(scrollTop); // edge, safari
@@ -1002,7 +1006,10 @@ $(function () {
         if ($this.hasClass('open')) {
             app.authenticated.find('> div > div').focus();
         } else {
+            var scrollTop = app.scrollTop();
             app.main.focus();
+            app.body.scrollTop(scrollTop); // edge, safari
+            app.html.scrollTop(scrollTop); // chrome, firefox, ie
         }
     });
 });

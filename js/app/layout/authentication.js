@@ -7,7 +7,10 @@ $(function () {
         if ($this.hasClass('open')) {
             app.authenticated.find('> div > div').focus();
         } else {
+            var scrollTop = app.scrollTop();
             app.main.focus();
+            app.body.scrollTop(scrollTop); // edge, safari
+            app.html.scrollTop(scrollTop); // chrome, firefox, ie
         }
     });
 });

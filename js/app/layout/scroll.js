@@ -21,7 +21,7 @@ app.disableScroll = function () {
             app.checkModal();
             app.modal.focus();
         }
-        var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
+        var scrollTop = app.scrollTop()
         app.html.addClass('scroll-disabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
@@ -31,7 +31,7 @@ app.disableScroll = function () {
 app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        var scrollTop = Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
+        var scrollTop = app.scrollTop();
         app.html.removeClass('scroll-disabled modal');
         app.main.focus();
         app.body.scrollTop(scrollTop); // edge, safari

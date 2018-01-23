@@ -76,3 +76,7 @@ app.isAndroidSwipe = function () {
 app.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+app.scrollTop = function () {
+    return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
+}

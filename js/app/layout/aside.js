@@ -9,7 +9,7 @@ app.toggleAside = function (aside, pageChanged) {
         var currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
-                var scrollTop = app.html.scrollTop() || app.body.scrollTop() || app.main.scrollTop();
+                var scrollTop = app.scrollTop();
                 app.html.attr('data-aside', '');
                 app.main.focus();
                 app.body.scrollTop(scrollTop); // edge, safari
