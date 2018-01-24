@@ -74,7 +74,9 @@ a {
 header,
 footer,
 main,
-svg {
+svg,
+audio,
+video {
     display: block;
 }
 
@@ -102,4 +104,8 @@ pre {
     word-break: normal;
     word-wrap: break-word;
     white-space: pre-wrap;
+}
+
+video {
+    width: 100%;
 }
