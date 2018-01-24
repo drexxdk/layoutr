@@ -7,7 +7,7 @@ app.pageLoaded = function (initial) {
     app.html.animate({ scrollTop: 0 }, 0);
     setTimeout(function () {
         if (!initial && app.isCloseLeftPageChange()) {
-            app.toggleAside("", true);
+            app.toggleAside(undefined, true);
         }
     }, 200);
     app.contentHeader = app.content.children('.content-header:not(.full)');
