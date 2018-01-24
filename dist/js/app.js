@@ -856,7 +856,6 @@ app.pageLoaded = function (initial) {
     app.tooltip(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
     app.math(app.content.find('.math'));
-    app.mediaplayer(app.content.find('audio, video'));
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();
@@ -1719,18 +1718,6 @@ app.math = function (math) {
             });
         });
     }
-};
-var app = app || {};
-
-app.mediaplayer = function (mediaplayers) {
-    mediaplayers.each(function () {
-        var $this = $(this);
-        var type = $this.prop('nodeName').toLowerCase();
-        if (type === 'audio' || type === 'video') {
-            // work in progress
-            // trying different plugins
-        }
-    });
 };
 var app = app || {};
 
