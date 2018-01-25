@@ -38,6 +38,7 @@ $(function () {
                     if (dropdowns.length) {
                         dropdowns.removeClass('open');
                     }
+                    app.authenticated.removeClass('open');
                 }
             }
             if (e.which === 13) { // enter
