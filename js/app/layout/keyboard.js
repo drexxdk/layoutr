@@ -64,6 +64,9 @@ $(function () {
                 if (!target.parents('div.dropdown.open').length) {
                     $('div.dropdown.open').removeClass('open');
                 }
+                if (!target.parents('#authenticated.open').length || target.closest('#authenticated > button').length) {
+                    $('#authenticated.open').removeClass('open');
+                }
                 if (app.isModal()) {
                     if (!target.parents('#modal').length) {
                         app.closeModal();
