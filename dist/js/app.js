@@ -637,6 +637,7 @@ $(function () {
     app.modal = $('#modal');
     app.title = $('#title');
     app.authenticated = $('#authenticated');
+    app.authenticatedLinks = $('#authenticated-links');
 
     app.transitionTime = 400;
     app.fadeOutTime = 500;
@@ -1011,6 +1012,10 @@ $(function () {
             app.body.scrollTop(scrollTop); // edge, safari
             app.html.scrollTop(scrollTop); // chrome, firefox, ie
         }
+    });
+
+    app.authenticatedLinks.on('click', '> a', function (e) {
+        e.preventDefault();
     });
 });
 var app = app || {};

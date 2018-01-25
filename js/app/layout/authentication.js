@@ -13,4 +13,8 @@ $(function () {
             app.html.scrollTop(scrollTop); // chrome, firefox, ie
         }
     });
+
+    app.authenticatedLinks.on('click', '> a', function (e) {
+        e.preventDefault();
+    });
 });

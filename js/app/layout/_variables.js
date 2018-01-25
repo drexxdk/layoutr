@@ -15,6 +15,7 @@ $(function () {
     app.modal = $('#modal');
     app.title = $('#title');
     app.authenticated = $('#authenticated');
+    app.authenticatedLinks = $('#authenticated-links');
 
     app.transitionTime = 400;
     app.fadeOutTime = 500;

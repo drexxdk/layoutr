@@ -60,6 +60,7 @@
                 @include button-transition(all);
             }
 
+            &:focus,
             html.desktop &:hover {
                 overflow: unset;
 
@@ -136,6 +137,7 @@
                         color: $black;
                         text-decoration: none;
 
+                        &:focus,
                         .desktop &:hover {
                             @include theme-element($gray-200, false);
 
