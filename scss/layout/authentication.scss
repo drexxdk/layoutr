@@ -146,6 +146,7 @@
                             width: $font-size * $line-height;
                             height: $font-size * $line-height;
                             opacity: .5;
+                            flex-shrink: 0;
 
                             > svg {
                                 width: 100%;
