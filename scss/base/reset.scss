@@ -34,6 +34,7 @@ body {
     font-size: $font-size;
     font-weight: $font-weight;
     line-height: $line-height;
+    word-break: break-word;
 
     @media screen {
         position: absolute;

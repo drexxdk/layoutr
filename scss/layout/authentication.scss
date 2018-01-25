@@ -102,6 +102,7 @@
                         border-radius: 50%;
                         overflow: hidden;
                         position: relative;
+                        flex-shrink: 0;
 
                         > * {
                             position: absolute;
@@ -130,6 +131,7 @@
 
                     > a {
                         @include flex-display;
+                        @include align-items(center);
                         padding: 10px;
                         color: $black;
                         text-decoration: none;
@@ -160,7 +162,6 @@
 
                         > span {
                             flex-grow: 1;
-                            @include ellipsis;
                         }
                     }
 
