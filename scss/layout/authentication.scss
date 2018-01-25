@@ -94,6 +94,7 @@
                     @include align-items(center);
                     padding: $spacer;
                     background-color: $gray-200;
+                    border-bottom: $layout-border;
 
                     > i {
                         width: ($line-height * 2) + ($spacer / 2);
@@ -124,8 +125,50 @@
                     }
                 }
 
-                > ul {
-                    margin: $spacer;
+                #authenticated-links {
+                    margin: $spacer / 2;
+
+                    > a {
+                        @include flex-display;
+                        padding: 10px;
+                        color: $black;
+                        text-decoration: none;
+
+                        .desktop &:hover {
+                            @include theme-element($gray-200, false);
+
+                            > i {
+                                opacity: 1;
+                            }
+                        }
+
+                        > i {
+                            width: $font-size * $line-height;
+                            height: $font-size * $line-height;
+                            opacity: .5;
+
+                            > svg {
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+
+                        > i + span {
+                            margin-left: $spacer;
+                        }
+
+                        > span {
+                            flex-grow: 1;
+                            @include ellipsis;
+                        }
+                    }
+
+                    > hr {
+                        margin: $spacer / 2 0;
+                        border: none;
+                        height: $layout-border-width;
+                        background-color: $layout-border-color;
+                    }
                 }
             }
         }
