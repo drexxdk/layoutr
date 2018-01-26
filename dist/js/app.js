@@ -1022,7 +1022,7 @@ var app = app || {};
 
 $(function () {
     app.cookie.on('click', '#cookie-accept', function () {
-        localStorage.setItem('cookie', 'true');
+        localStorage.setItem('cookie', 'cookie');
         app.html.removeClass('cookie');
     });
 
@@ -1117,6 +1117,7 @@ app.applyNavigation = function (id, value, set) {
         app.left.find('#' + id).prop('checked', value);
     }
 };
+
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/navigation.html', function () {
         app.navigation = JSON.parse(localStorage.getItem("navigation"));
@@ -1219,6 +1220,11 @@ $(function () {
                 app.setHtmlScroll();
             }
         });
+    });
+
+    app.right.on('click', '.clear-localstorage', function () {
+        localStorage.clear();
+        location.reload();
     });
 });
 var app = app || {};

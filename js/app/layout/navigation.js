@@ -84,6 +84,7 @@ app.applyNavigation = function (id, value, set) {
         app.left.find('#' + id).prop('checked', value);
     }
 };
+
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/navigation.html', function () {
         app.navigation = JSON.parse(localStorage.getItem("navigation"));

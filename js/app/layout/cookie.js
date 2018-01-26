@@ -2,7 +2,7 @@
 
 $(function () {
     app.cookie.on('click', '#cookie-accept', function () {
-        localStorage.setItem('cookie', 'true');
+        localStorage.setItem('cookie', 'cookie');
         app.html.removeClass('cookie');
     });
 
