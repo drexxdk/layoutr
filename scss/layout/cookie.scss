@@ -1,0 +1,36 @@
+﻿/// <reference path="../references" />
+
+#cookie {
+    position: fixed;
+    z-index: $cookie-z-index;
+    background-color: $gray-800;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    html:not(.cookie) & {
+        display: none;
+    }
+
+    > p {
+        padding: $spacer $spacer / 2 $spacer $spacer;
+        text-align: center;
+
+        > * {
+            margin-right: $spacer / 2;
+        }
+
+        > button {
+            text-decoration: underline;
+
+            &:focus,
+            .desktop &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    p, button {
+        color: $white;
+    }
+}

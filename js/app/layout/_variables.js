@@ -16,6 +16,7 @@ $(function () {
     app.title = $('#title');
     app.authenticated = $('#authenticated');
     app.authenticatedLinks = $('#authenticated-links');
+    app.cookie = $('#cookie');
 
     app.transitionTime = 400;
     app.fadeOutTime = 500;
@@ -23,8 +24,7 @@ $(function () {
     app.smallBreakpoint = 732;
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
-
-    app.localStorage = typeof Storage !== "undefined";
+    
     app.navigation = [];
     app.settings = [];
 });

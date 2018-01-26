@@ -33,16 +33,24 @@
     </script>
 </head>
 <body>
-    <div id="loading">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
-    </div>
     <main tabindex="0">
+        <div id="loading">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+        <div id="modal" tabindex="0"></div>
+        <div id="cookie">
+            <p>
+                <span>layoutr uses cookies to improve your site experience.</span>
+                <button type="button" id="cookie-info">Find out more</button>
+                <button type="button" id="cookie-accept">Accept Cookies</button>
+            </p>
+        </div>
         <header class="header">
             <button type="button" class="expand aside left" aria-label="Toggle menu">
                 <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
@@ -85,7 +93,6 @@
                 <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
             </button>
         </header>
-        <div id="modal" tabindex="0"></div>
         <div id="container">
             <div>
                 <div id="content"><div></div></div>
@@ -118,6 +125,6 @@
         <footer></footer>
     </main>
     <script async src="dist/js/loadCSS.min.js"></script>
-    <script async src="dist/js/app.min.js"></script>
+    <script async src="dist/js/app.js"></script>
 </body>
 </html>

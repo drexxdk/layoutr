@@ -24,6 +24,7 @@
       "js/app/layout/loading.js",
       "js/app/layout/aside.js",
       "js/app/layout/authentication.js",
+      "js/app/layout/cookie.js",
       "js/app/layout/navigation.js",
       "js/app/layout/settings.js",
       "js/app/layout/keyboard.js",

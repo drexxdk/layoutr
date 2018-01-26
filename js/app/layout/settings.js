@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 app.applySettings = function (id, name, type, value, set) {
-    if (app.localStorage && set) {
+    if (set) {
         var entry = {
             "id": id,
             "name": name,
@@ -45,13 +45,11 @@ app.applySettings = function (id, name, type, value, set) {
 
 $(function () {
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
-        if (app.localStorage) {
-            app.settings = JSON.parse(localStorage.getItem("settings"));
-            if (app.settings === null) app.settings = [];
-            $.each(app.settings, function (i, entry) {
-                app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-            });
-        }
+        app.settings = JSON.parse(localStorage.getItem("settings"));
+        if (app.settings === null) app.settings = [];
+        $.each(app.settings, function (i, entry) {
+            app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
+        });
         app.header.find('.aside.right').addClass('loaded');
         $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this),

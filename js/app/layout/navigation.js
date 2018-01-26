@@ -66,7 +66,7 @@ window.onpopstate = function (event) {
 };
 
 app.applyNavigation = function (id, value, set) {
-    if (app.localStorage && set) {
+    if (set) {
         var entry = {
             "id": id,
             "value": value
@@ -86,19 +86,17 @@ app.applyNavigation = function (id, value, set) {
 };
 $(function () {
     app.left.find('> .content > div').load('ajax/layout/navigation.html', function () {
-        if (app.localStorage) {
-            app.navigation = JSON.parse(localStorage.getItem("navigation"));
-            if (app.navigation === null) app.navigation = [];
-            $.each(app.navigation, function (i, entry) {
-                app.applyNavigation(entry.id, entry.value, false);
-            });
-            app.left.on('change', '.tree input[type=checkbox]', function () {
-                var $this = $(this),
-                    id = $this.attr('id'),
-                    value = $this.is(':checked');
-                app.applyNavigation(id, value, true);
-            });
-        }
+        app.navigation = JSON.parse(localStorage.getItem("navigation"));
+        if (app.navigation === null) app.navigation = [];
+        $.each(app.navigation, function (i, entry) {
+            app.applyNavigation(entry.id, entry.value, false);
+        });
+        app.left.on('change', '.tree input[type=checkbox]', function () {
+            var $this = $(this),
+                id = $this.attr('id'),
+                value = $this.is(':checked');
+            app.applyNavigation(id, value, true);
+        });
         app.header.find('.aside.left').addClass('loaded');
         if (app.url && app.url.p) {
             app.left.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
