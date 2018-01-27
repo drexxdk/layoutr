@@ -5,10 +5,8 @@
         padding: ($spacer / 2) 0;
 
         .content {
-            min-width: rem(150px);
             border: $component-border;
             border-radius: $component-border-radius;
-            overflow: hidden;
             background-color: white;
             padding: $spacer / 2;
         }
