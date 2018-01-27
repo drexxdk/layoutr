@@ -12,6 +12,11 @@
             background-color: white;
             padding: $spacer / 2;
         }
+        
+        .container {
+            @include align-items(center);
+            @include justify-content(center);
+        }
 
         .item {
             @include theme-element($light);

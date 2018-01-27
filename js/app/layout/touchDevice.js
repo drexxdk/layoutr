@@ -1,11 +1,9 @@
 ﻿var app = app || {};
 
 var swipe = function () {
-
-    var xDown = null;
-    var yDown = null;
-
-    var offsetBefore;
+    var xDown = null,
+        yDown = null,
+        offsetBefore;
 
     var handleTouchStart = function (evt) {
         if (app.isAndroidSwipe()) {
@@ -22,11 +20,10 @@ var swipe = function () {
             if (!xDown || !yDown || offsetBefore !== offsetAfter) {
                 return;
             }
-            var xUp = evt.changedTouches[0].clientX;
-            var yUp = evt.changedTouches[0].clientY;
-
-            var xDiff = xDown - xUp;
-            var yDiff = yDown - yUp;
+            var xUp = evt.changedTouches[0].clientX,
+                yUp = evt.changedTouches[0].clientY,
+                xDiff = xDown - xUp,
+                yDiff = yDown - yUp;
             if (Math.abs(xDiff) > Math.abs(yDiff)) {
                 var distance = parseInt($(window).width() / 2);
                 if (yDiff > -100 || yDiff < 100) {

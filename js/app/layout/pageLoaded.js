@@ -1,6 +1,8 @@
 ﻿var app = app || {};
 
 app.pageLoaded = function (initial) {
+    $(window).off('debouncedresize.assignment');
+    $(window).off('throttledresize.assignment');
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');

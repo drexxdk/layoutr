@@ -13,6 +13,8 @@
       "js/vendors/jquery/validate/jquery.validate.min.js",
       "js/vendors/jquery/jquery.lazy.min.js",
       "js/vendors/jquery/tooltipster.min.js",
+      "js/vendors/jquery/jquery.debouncedresize.js",
+      "js/vendors/jquery/jquery.throttledresize.js",
       "js/vendors/bowser.js",
 
       // layout
