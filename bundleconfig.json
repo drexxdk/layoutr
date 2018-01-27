@@ -15,6 +15,7 @@
       "js/vendors/jquery/tooltipster.min.js",
       "js/vendors/bowser.js",
 
+      // layout
       "js/app/layout/_variables.js",
       "js/app/layout/_functions.js",
       "js/app/layout/_bowser.js",
@@ -32,9 +33,11 @@
       "js/app/layout/touchDevice.js",
       "js/app/layout/rb.js",
 
+      // inputs
       "js/app/inputs/dropdown.js",
       "js/app/inputs/form.js",
 
+      // components
       "js/app/components/accordion.js",
       "js/app/components/alert.js",
       "js/app/components/math.js",
@@ -42,8 +45,10 @@
       "js/app/components/popup.js",
       "js/app/components/tooltip.js",
 
+      // assignments
       "js/app/assignments/_assignments.js",
 
+      // site
       "js/app/site/form.js",
       "js/app/site/googleMaps.js",
       "js/app/site/youtube.js"
@@ -60,7 +65,8 @@
     "outputFileName": "dist/js/assignments.js",
     "inputFiles": [
       "js/vendors/sortable.min.js",
-      "js/app/assignments/dragAndDrop.js"
+      "js/app/assignments/dragAndDrop.js",
+      "js/app/assignments/sort.js"
     ]
   }
 ]

@@ -1,4 +1,6 @@
-﻿app.assignment.dragAndDrop = function (assignment) {
+﻿var app = app || {};
+
+app.assignment.dragAndDrop = function (assignment) {
     assignment.attr('data-moving', 0);
     var from = assignment.find('.from .container'),
         items = assignment.find('.item'),
@@ -59,6 +61,8 @@
             scroll: false,
             forceFallback: true,
             fallbackOnBody: true,
+            ghostClass: 'drag-and-drop-sortable-ghost',
+            chosenClass: 'drag-and-drop-sortable-chosen',
             onAdd: function () {
                 setTimeout(function () {
                     var checked = getChecked();

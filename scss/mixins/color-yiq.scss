@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 // Color contrast
-@mixin color-yiq($color) {
+@mixin color-yiq($color, $important: false) {
     $r: red($color);
     $g: green($color);
     $b: blue($color);
@@ -9,11 +9,23 @@
     $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
 
     @if ($yiq >= 150) {
-        fill: $color-dark;
-        color: $color-dark;
+        @if($important) {
+            fill: $color-dark !important;
+            color: $color-dark !important;
+        }
+        @else {
+            fill: $color-dark;
+            color: $color-dark;
+        }
     }
     @else {
-        fill: $color-light;
-        color: $color-light;
+        @if($important) {
+            fill: $color-light !important;
+            color: $color-light !important;
+        }
+        @else {
+            fill: $color-light;
+            color: $color-light;
+        }
     }
 }

@@ -16,23 +16,34 @@
     @include color-yiq($value);
 }
 
-@mixin theme-element($background, $includeBorder: true) {
-    @include color-yiq($background);
-    background: theme-gradient($background);
+@mixin theme-element($background, $includeBorder: true, $important: false) {
+    @include color-yiq($background, $important);
+
+    @if($important) {
+        background: theme-gradient($background) !important;
+    }
+    @else {
+        background: theme-gradient($background);
+    }
 
     @if $includeBorder == true {
-        border: $component-border-width solid theme-border($background);
+        @if($important) {
+            border: $component-border-width solid theme-border($background) !important;
+        }
+        @else {
+            border: $component-border-width solid theme-border($background);
+        }
     }
 }
 
-@mixin theme-element-darken($background, $includeBorder: true) {
-    @include theme-element(theme-darken($background), $includeBorder);
+@mixin theme-element-darken($background, $includeBorder: true, $important: false) {
+    @include theme-element(theme-darken($background), $includeBorder, $important);
 }
 
-@mixin theme-element-soft($background, $includeBorder: true) {
-    @include theme-element(theme-soft($background), $includeBorder);
+@mixin theme-element-soft($background, $includeBorder: true, $important: false) {
+    @include theme-element(theme-soft($background), $includeBorder, $important);
 }
 
-@mixin theme-element-soft-darken($background, $includeBorder: true) {
-    @include theme-element(theme-darken(theme-soft($background)), $includeBorder);
+@mixin theme-element-soft-darken($background, $includeBorder: true, $important: false) {
+    @include theme-element(theme-darken(theme-soft($background)), $includeBorder, $important);
 }

@@ -1,0 +1,31 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-sort {
+    .assignment.sort {
+        padding: ($spacer / 2) 0;
+
+        .content {
+            min-width: rem(150px);
+            border: $component-border;
+            border-radius: $component-border-radius;
+            overflow: hidden;
+            background-color: white;
+            padding: $spacer / 2;
+        }
+
+        .item {
+            @include theme-element($light);
+            padding: $padding-y $padding-x;
+            cursor: pointer;
+        }
+    }
+
+    .sort-sortable-chosen {
+        @include theme-element($secondary, true, true);
+        padding: $padding-y $padding-x;
+    }
+
+    .sort-sortable-ghost {
+        @include theme-element($secondary, true, true);
+    }
+}

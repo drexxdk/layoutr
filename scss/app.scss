@@ -9,7 +9,7 @@
 
 @import "site";
 
-// layout
+// inputs
 @include layoutr-btn;
 @include layoutr-dropdown;
 @include layoutr-form;
@@ -34,6 +34,7 @@
 
 // assignments
 @include layoutr-drag-and-drop;
+@include layoutr-sort;
 
 body {
     overflow: visible;

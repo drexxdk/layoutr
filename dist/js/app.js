@@ -1026,7 +1026,7 @@ $(function () {
         app.html.removeClass('cookie');
     });
 
-    var cookie = JSON.parse(localStorage.getItem("cookie"));
+    var cookie = localStorage.getItem("cookie");
     if (cookie === null) {
         app.html.addClass('cookie');
     }
@@ -1811,14 +1811,15 @@ app.tooltip = function (tooltips) {
 };
 var app = app || {};
 
-
 app.assignment = function (assignments) {
     if (assignments.length) {
         $.getScript('dist/js/assignments.min.js', function () {
             $(assignments).each(function (index, assignment) {
                 assignment = $(assignment);
                 if (assignment.hasClass('drag-and-drop')) {
-                    app.assignment.dragAndDrop(assignment); 
+                    app.assignment.dragAndDrop(assignment);
+                } else if (assignment.hasClass('sort')) {
+                    app.assignment.sort(assignment);
                 }
             });
         });

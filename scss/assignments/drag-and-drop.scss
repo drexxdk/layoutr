@@ -111,13 +111,9 @@
         }
     }
 
-    .item.checkbox.sortable-chosen {
-        &.sortable-fallback {
-            margin: $flex-space-base * 2;
-        }
-
+    .drag-and-drop-sortable-chosen {
         label {
-            @include theme-element-soft($secondary);
+            @include theme-element($secondary, true, true);
             padding: $padding-y $padding-x;
 
             i {
@@ -126,7 +122,7 @@
         }
     }
 
-    .item.checkbox.sortable-ghost label {
-        @include theme-element-soft($secondary);
+    .drag-and-drop-sortable-ghost label {
+        @include theme-element($secondary, true, true);
     }
 }
