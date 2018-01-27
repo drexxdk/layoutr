@@ -30,6 +30,7 @@ app.assignment.dragAndDrop = function (assignment) {
         }
         from.append(items);
         assignment.removeClass('validated moving');
+        items = items.shuffle();
     };
 
     var getCorrect = function () {

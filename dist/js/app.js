@@ -124,6 +124,30 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
     };
 
 })(jQuery);
+(function ($) {
+
+    $.fn.shuffle = function () {
+
+        var allElems = this.get(),
+            getRandom = function (max) {
+                return Math.floor(Math.random() * max);
+            },
+            shuffled = $.map(allElems, function () {
+                var random = getRandom(allElems.length),
+                    randEl = $(allElems[random]).clone(true)[0];
+                allElems.splice(random, 1);
+                return randEl;
+            });
+
+        this.each(function (i) {
+            $(this).replaceWith($(shuffled[i]));
+        });
+
+        return $(shuffled);
+
+    };
+
+})(jQuery);
 /*!
  * Bowser - a browser detector
  * https://github.com/ded/bowser

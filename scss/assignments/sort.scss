@@ -10,7 +10,7 @@
             background-color: white;
             padding: $spacer / 2;
         }
-        
+
         .container {
             @include align-items(center);
             @include justify-content(center);
@@ -20,6 +20,18 @@
             @include theme-element($light);
             padding: $padding-y $padding-x;
             cursor: pointer;
+
+            &.valid {
+                @include theme-element-soft($success);
+            }
+
+            &.invalid {
+                @include theme-element-soft($danger);
+            }
+        }
+
+        &.validated .container {
+            pointer-events: none;
         }
     }
 

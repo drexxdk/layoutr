@@ -15,6 +15,7 @@
       "js/vendors/jquery/tooltipster.min.js",
       "js/vendors/jquery/jquery.debouncedresize.js",
       "js/vendors/jquery/jquery.throttledresize.js",
+      "js/vendors/jquery/jquery.shuffle.js",
       "js/vendors/bowser.js",
 
       // layout
