@@ -114,10 +114,10 @@ app.assignment.dragAndDrop = function (assignment) {
                 container.children().each(function () {
                     var item = $(this);
                     if ($.inArray(item.attr('data-id'), data.items) !== -1) {
-                       item.addClass('valid');
-                   } else {
-                       item.addClass('invalid');
-                   }
+                        item.addClass('valid');
+                    } else {
+                        item.addClass('invalid');
+                    }
                 });
             });
         }
@@ -140,4 +140,4 @@ app.assignment.dragAndDrop = function (assignment) {
             });
         });
     });
-}
+};

@@ -79,4 +79,4 @@ app.capitalize = function (string) {
 
 app.scrollTop = function () {
     return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
-}
+};
