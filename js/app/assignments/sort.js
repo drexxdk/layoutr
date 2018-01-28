@@ -1,7 +1,8 @@
 ﻿var app = app || {};
 
 app.assignment.sort = function (assignment) {
-    var container = assignment.find('.container'),
+    var id = assignment.attr('data-id'),
+        container = assignment.find('.container'),
         items = assignment.find('.item');
 
     Sortable.create(container[0], {
@@ -14,21 +15,23 @@ app.assignment.sort = function (assignment) {
         chosenClass: 'sort-sortable-chosen'
     });
 
-    var checkWidth = function () {
-        container.removeClass('row').addClass('column');
-        var containerLeft = container[0].getBoundingClientRect().left;
-        var firstItem = container.find('> .item:first-child');
-        var firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
-        if (firstItemLeft < containerLeft) {
-            container.removeClass('column').addClass('row');
-        }
-    };
+    if (!container.hasClass('wrap')) {
+        var checkWidth = function () {
+            container.removeClass('row').addClass('column');
+            var containerLeft = container[0].getBoundingClientRect().left;
+            var firstItem = container.find('> .item:first-child');
+            var firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
+            if (firstItemLeft < containerLeft) {
+                container.removeClass('column').addClass('row');
+            }
+        };
 
-    checkWidth();
-
-    $(window).on("throttledresize.assignment", function () {
         checkWidth();
-    });
+
+        $(window).on("throttledresize.assignment", function () {
+            checkWidth();
+        });
+    }
 
     var getItem = function (id) {
         return $($.map(items, function (item) {
@@ -46,7 +49,11 @@ app.assignment.sort = function (assignment) {
 
     var getCorrect = function () {
         // this should be retrieved with api call
-        return ['3', '1', '2', '5', '4', '7', '6', '8', '9'];
+        if (id === '1') {
+            return ['3', '1', '2', '5', '4', '7', '6', '8', '9'];
+        } else if (id === '2') {
+            return ['4', '2', '1', '3'];
+        }
     };
 
     assignment.on('click', 'button[type="submit"]', function () {

@@ -5,7 +5,8 @@ var app = app || {};
 
 app.assignment.dragAndDrop = function (assignment) {
     assignment.attr('data-moving', 0);
-    var from = assignment.find('.from .container'),
+    var id = assignment.attr('data-id'),
+        from = assignment.find('.from .container'),
         items = assignment.find('.item'),
         checkboxes = items.find('input[type=checkbox]');
 
@@ -38,24 +39,26 @@ app.assignment.dragAndDrop = function (assignment) {
 
     var getCorrect = function () {
         // this should be retrieved with api call
-        return [
-            {
-                id: '1', // TV
-                items: ['5', '7']
-            },
-            {
-                id: '2', // Games
-                items: ['6', '8']
-            },
-            {
-                id: '3', // Music
-                items: ['2', '4']
-            },
-            {
-                id: '4', // Sport
-                items: ['1', '3']
-            }
-        ];
+        if (id === '1') {
+            return [
+                {
+                    id: '1', // TV
+                    items: ['5', '7']
+                },
+                {
+                    id: '2', // Games
+                    items: ['6', '8']
+                },
+                {
+                    id: '3', // Music
+                    items: ['2', '4']
+                },
+                {
+                    id: '4', // Sport
+                    items: ['1', '3']
+                }
+            ];
+        }
     };
 
     assignment.find('.container').each(function () {
@@ -148,7 +151,8 @@ app.assignment.dragAndDrop = function (assignment) {
 var app = app || {};
 
 app.assignment.sort = function (assignment) {
-    var container = assignment.find('.container'),
+    var id = assignment.attr('data-id'),
+        container = assignment.find('.container'),
         items = assignment.find('.item');
 
     Sortable.create(container[0], {
@@ -161,21 +165,23 @@ app.assignment.sort = function (assignment) {
         chosenClass: 'sort-sortable-chosen'
     });
 
-    var checkWidth = function () {
-        container.removeClass('row').addClass('column');
-        var containerLeft = container[0].getBoundingClientRect().left;
-        var firstItem = container.find('> .item:first-child');
-        var firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
-        if (firstItemLeft < containerLeft) {
-            container.removeClass('column').addClass('row');
-        }
-    };
+    if (!container.hasClass('wrap')) {
+        var checkWidth = function () {
+            container.removeClass('row').addClass('column');
+            var containerLeft = container[0].getBoundingClientRect().left;
+            var firstItem = container.find('> .item:first-child');
+            var firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
+            if (firstItemLeft < containerLeft) {
+                container.removeClass('column').addClass('row');
+            }
+        };
 
-    checkWidth();
-
-    $(window).on("throttledresize.assignment", function () {
         checkWidth();
-    });
+
+        $(window).on("throttledresize.assignment", function () {
+            checkWidth();
+        });
+    }
 
     var getItem = function (id) {
         return $($.map(items, function (item) {
@@ -193,7 +199,11 @@ app.assignment.sort = function (assignment) {
 
     var getCorrect = function () {
         // this should be retrieved with api call
-        return ['3', '1', '2', '5', '4', '7', '6', '8', '9'];
+        if (id === '1') {
+            return ['3', '1', '2', '5', '4', '7', '6', '8', '9'];
+        } else if (id === '2') {
+            return ['4', '2', '1', '3'];
+        }
     };
 
     assignment.on('click', 'button[type="submit"]', function () {
