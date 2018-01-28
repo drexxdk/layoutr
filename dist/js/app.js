@@ -1941,6 +1941,14 @@ app.tooltip = function (tooltips) {
 };
 var app = app || {};
 
+app.getItem = function (items, id) {
+    return $($.map(items, function (item) {
+        if (item.getAttribute("data-id") === id) {
+            return item;
+        }
+    }));
+};
+
 app.assignment = function (assignments) {
     if (assignments.length) {
         $.getScript('dist/js/assignments.min.js', function () {

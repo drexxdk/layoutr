@@ -20,6 +20,7 @@
             @include theme-element($light);
             padding: $padding-y $padding-x;
             cursor: pointer;
+            @include noselect;
 
             &.valid {
                 @include theme-element-soft($success);

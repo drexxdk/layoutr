@@ -33,14 +33,6 @@ app.assignment.sort = function (assignment) {
         });
     }
 
-    var getItem = function (id) {
-        return $($.map(items, function (item) {
-            if (item.getAttribute("data-id") === id) {
-                return item;
-            }
-        }));
-    };
-
     var reset = function () {
         items.removeClass('valid invalid');
         assignment.removeClass('validated');
@@ -58,14 +50,10 @@ app.assignment.sort = function (assignment) {
 
     assignment.on('click', 'button[type="submit"]', function () {
         if (!assignment.hasClass('validated')) {
-            //var checked = getChecked();
-            //if (checked.length) {
-            //    checked.prop('checked', false);
-            //}
             assignment.addClass('validated');
             var correct = getCorrect();
             $(correct).each(function (i, id) {
-                var item = getItem(id);
+                var item = app.getItem(items, id);
                 if (item.index() === i) {
                     item.addClass('valid');
                 } else {
@@ -92,7 +80,7 @@ app.assignment.sort = function (assignment) {
         assignment.addClass('validated');
         var correct = getCorrect();
         $(correct).each(function (i, id) {
-            var item = getItem(id);
+            var item = app.getItem(items, id);
             item.addClass('valid');
             insertAtIndex(i, item);
         });

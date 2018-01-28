@@ -14,15 +14,7 @@ app.assignment.dragAndDrop = function (assignment) {
             }
         }));
     };
-
-    var getItem = function (id) {
-        return $($.map(items, function (item) {
-            if (item.getAttribute("data-id") === id) {
-                return item;
-            }
-        }));
-    };
-
+    
     var reset = function () {
         items.removeClass('valid invalid');
         var checked = getChecked();
@@ -138,7 +130,7 @@ app.assignment.dragAndDrop = function (assignment) {
         $(correct).each(function (i, data) {
             var container = assignment.find('.to .container[data-id="' + data.id + '"]');
             $(data.items).each(function (j, id) {
-                var item = getItem(id);
+                var item = app.getItem(items, id);
                 item.addClass('valid');
                 item.appendTo(container);
             });
