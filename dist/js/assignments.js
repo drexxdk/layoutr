@@ -159,13 +159,19 @@ app.assignment.sort = function (assignment) {
 
     if (!container.hasClass('wrap')) {
         var checkWidth = function () {
-            container.removeClass('row').addClass('column');
-            var containerLeft = container[0].getBoundingClientRect().left;
-            var firstItem = container.find('> .item:first-child');
-            var firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
+            container
+                .css('height', container.height())
+                .removeClass('row')
+                .addClass('checking column');
+            var containerLeft = container[0].getBoundingClientRect().left,
+                firstItem = container.find('> .item:first-child'),
+                firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
             if (firstItemLeft < containerLeft) {
                 container.removeClass('column').addClass('row');
             }
+            container
+                .removeClass('checking')
+                .css('height', '');
         };
 
         checkWidth();

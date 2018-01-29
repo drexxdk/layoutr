@@ -24,6 +24,7 @@
             color: $link-color;
             border-radius: $component-border-radius;
             border: $component-border-width solid transparent;
+            white-space: nowrap;
 
             &:focus,
             html.desktop &:hover {
@@ -36,6 +37,7 @@
             margin: $spacer 0;
             width: $layout-border-width;
             background-color: $layout-border-color;
+            flex-shrink: 0;
         }
     }
 
