@@ -1,4 +1,5 @@
 ﻿/// <reference path="../references" />
+
 @mixin layoutr-accordion {
     .accordion {
         border-radius: $component-border-radius;
@@ -35,4 +36,3 @@
         }
     }
 }
-

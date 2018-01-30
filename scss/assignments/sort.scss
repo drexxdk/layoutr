@@ -2,8 +2,6 @@
 
 @mixin layoutr-sort {
     .assignment.sort {
-        padding: ($spacer / 2) 0;
-
         .content {
             border: $component-border;
             border-radius: $component-border-radius;
@@ -19,6 +17,10 @@
                 visibility: hidden;
                 opacity: 0;
             }
+        }
+
+        .wrap > .item {
+            text-align: center;
         }
 
         .item {

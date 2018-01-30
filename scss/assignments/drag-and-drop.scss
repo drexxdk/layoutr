@@ -2,8 +2,6 @@
 
 @mixin layoutr-drag-and-drop {
     .assignment.drag-and-drop {
-        padding: ($spacer / 2) 0;
-
         .header {
             @include theme-element($secondary, false);
             position: relative;
