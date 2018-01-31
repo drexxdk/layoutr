@@ -30,7 +30,7 @@ app.dropdown = function (dropdowns) {
         $this.children(':not([value=""])').each(function (index) {
             var $that = $(this),
                 text = $that.text();
-            if (text.indexOf('$$') == 0) {
+            if (text.indexOf('$$') === 0) {
                 $that.attr('data-math', text);
             }
 
