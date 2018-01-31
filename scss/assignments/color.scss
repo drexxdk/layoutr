@@ -2,15 +2,18 @@
 
 @mixin layoutr-color {
     .assignment.color {
-        .content {
-            border: $component-border;
-            border-radius: $component-border-radius;
-            background-color: white;
-            padding: $spacer / 2;
-        }
-
         .flex-table {
             margin: 0 auto;
+
+            @for $i from 1 through 10 {
+                &.cols-#{$i} {
+                    max-width: #{rem(100px) * $i};
+                }
+            }
+
+            > div {
+                @include theme-element($white, false);
+            }
         }
     }
 }

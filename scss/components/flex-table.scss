@@ -10,8 +10,6 @@
         @for $i from 1 through 10 {
             // loop to create all needed elements automatically
             &.cols-#{$i} {
-                max-width: #{rem(100px) * $i};
-
                 > div {
                     width: #{100% / $i};
 
@@ -53,7 +51,7 @@
 
             @each $color, $value in $theme-colors {
                 &.theme-#{$color} {
-                    @include theme-element($value, false);
+                    @include theme-element($value, false, true);
                 }
             }
         }

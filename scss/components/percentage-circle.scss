@@ -77,7 +77,6 @@
         }
 
         @for $j from 51 through 100 {
-            // loop to create all needed elements automatically
             &.p#{$j} .slice {
                 clip: rect(auto, auto, auto, auto);
             }
