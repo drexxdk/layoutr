@@ -17,15 +17,18 @@
 
     @for $i from 1 through 10 {
         // loop to create all needed elements automatically
-        &.cols-#{$i} > div {
-            width: #{100% / $i};
+        &.cols-#{$i} {
+            max-width:#{rem(100px) * $i};
+            > div {
+                width: #{100% / $i};
 
-            &:nth-child(#{$i}) {
-                border-top-right-radius: $component-border-radius;
-            }
+                &:nth-child(#{$i}) {
+                    border-top-right-radius: $component-border-radius;
+                }
 
-            &:nth-last-child(#{$i}) {
-                border-bottom-left-radius: $component-border-radius;
+                &:nth-last-child(#{$i}) {
+                    border-bottom-left-radius: $component-border-radius;
+                }
             }
         }
     }

@@ -66,28 +66,42 @@ html {
             height: 100vh;
         }
 
-        &[data-aside="left"].left-shrink {
-            header,
-            #content,
-            footer {
-                margin-left: $aside-width;
+        &[data-aside="left"] {
+            &.left-shrink {
+                header,
+                #content,
+                footer {
+                    margin-left: $aside-width;
+                }
+
+                .popup[data-position*="center"],
+                .popup[data-position*="left"] {
+                    left: $aside-width;
+                }
             }
 
-            .popup[data-position*="center"],
-            .popup[data-position*="left"] {
+            &.left-push .popup {
                 left: $aside-width;
+                right: -$aside-width;
             }
         }
 
-        &[data-aside="right"].right-shrink {
-            header,
-            #content,
-            footer {
-                margin-right: $aside-width;
+        &[data-aside="right"] {
+            &.right-shrink {
+                header,
+                #content,
+                footer {
+                    margin-right: $aside-width;
+                }
+
+                .popup[data-position*="center"],
+                .popup[data-position*="right"] {
+                    right: $aside-width;
+                }
             }
 
-            .popup[data-position*="center"],
-            .popup[data-position*="right"] {
+            &.right-push .popup {
+                left: -$aside-width;
                 right: $aside-width;
             }
         }
@@ -125,7 +139,7 @@ html {
                     left: 0;
                     width: 50% !important;
                     height: auto;
-                    min-height:inherit;
+                    min-height: inherit;
 
                     > div > div {
                         margin: 0;

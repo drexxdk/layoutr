@@ -1,0 +1,16 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-color {
+    .assignment.color {
+        .content {
+            border: $component-border;
+            border-radius: $component-border-radius;
+            background-color: white;
+            padding: $spacer / 2;
+        }
+
+        .flex-table {
+            margin: 0 auto;
+        }
+    }
+}
