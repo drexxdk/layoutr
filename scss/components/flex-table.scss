@@ -8,7 +8,6 @@
         border-radius: $component-border-radius;
 
         @for $i from 1 through 10 {
-            // loop to create all needed elements automatically
             &.cols-#{$i} {
                 > div {
                     width: #{100% / $i};
