@@ -71,7 +71,7 @@ app.assignment.dragAndDrop = function (assignment) {
         });
     });
 
-    assignment.on('click', '.item input[type=checkbox]', function () {
+    checkboxes.on('click', function () {
         var $this = $(this),
             item = $this.parents('.item'),
             moving = parseInt(assignment.attr('data-moving'));

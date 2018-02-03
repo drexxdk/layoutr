@@ -40,7 +40,7 @@ header {
             height: $spacer / 4;
             background-color: currentColor;
             border-radius: 50%;
-            opacity: .5;
+            opacity: $opacity-inactive;
         }
     }
 }
@@ -93,7 +93,7 @@ header {
             transform: translate(-50%, -50%);
             width: 50%;
             height: 50%;
-            opacity: .5;
+            opacity: $opacity-inactive;
             @include button-transition(all);
         }
     }

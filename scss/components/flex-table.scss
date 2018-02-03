@@ -46,13 +46,7 @@
                 display: block;
             }
 
-            @include theme-element($light, false);
-
-            @each $color, $value in $theme-colors {
-                &.theme-#{$color} {
-                    @include theme-element($value, false, true);
-                }
-            }
+            background-color: $white;
         }
     }
 }

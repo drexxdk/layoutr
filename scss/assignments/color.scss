@@ -2,6 +2,68 @@
 
 @mixin layoutr-color {
     .assignment.color {
+        &.validated {
+            .controls,
+            .flex-table {
+                pointer-events: none;
+            }
+
+            .controls > button {
+                @each $color, $value in $colors {
+                    &[data-id="#{$color}"] {
+                        @include theme-element($value, false);
+                    }
+                }
+            }
+        }
+
+        &:not(.validated) {
+            .controls > button {
+                > svg {
+                    opacity: $opacity-inactive;
+                }
+
+                &.active > svg {
+                    opacity: 1;
+                }
+
+                &:focus {
+                    @include focus;
+                }
+
+                @each $color, $value in $colors {
+                    &[data-id="#{$color}"] {
+                        @include theme-element-soft($value, false);
+
+                        &.active {
+                            @include theme-element($value, false);
+                        }
+                    }
+                }
+            }
+        }
+
+        .controls {
+            @include flex-display;
+            @include justify-content(center);
+            padding: $component-border-width;
+            border-radius: $component-border-radius;
+
+            > button {
+                width: $spacer * 3;
+                height: $spacer * 3;
+                border: $component-border;
+                margin: -$component-border-width;
+                @include flex-center;
+                background-color: $white;
+
+                > svg {
+                    width: 50%;
+                    height: 50%;
+                }
+            }
+        }
+
         .flex-table {
             margin: 0 auto;
 
@@ -12,7 +74,20 @@
             }
 
             > div {
-                @include theme-element($white, false);
+                > svg {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 25%;
+                    height: 25%;
+                }
+
+                @each $color, $value in $colors {
+                    &[data-id="#{$color}"] {
+                        @include theme-element($value, false);
+                    }
+                }
             }
         }
     }

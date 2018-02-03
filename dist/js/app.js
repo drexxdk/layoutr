@@ -1958,6 +1958,8 @@ app.assignment = function (assignments) {
                     app.assignment.dragAndDrop(assignment);
                 } else if (assignment.hasClass('sort')) {
                     app.assignment.sort(assignment);
+                } else if (assignment.hasClass('color')) {
+                    app.assignment.color(assignment);
                 }
             });
         });

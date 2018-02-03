@@ -68,6 +68,7 @@
     "outputFileName": "dist/js/assignments.js",
     "inputFiles": [
       "js/vendors/sortable.min.js",
+      "js/app/assignments/color.js",
       "js/app/assignments/dragAndDrop.js",
       "js/app/assignments/sort.js"
     ]
