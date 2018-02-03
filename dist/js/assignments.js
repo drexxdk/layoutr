@@ -24,16 +24,16 @@ app.assignment.color = function (assignment) {
         if (assignmentId === '1') {
             return [
                 {
-                    id: 'red',
-                    value: 4
-                },
-                {
                     id: 'blue',
                     value: 3
                 },
                 {
                     id: 'green',
                     value: 2
+                },
+                {
+                    id: 'red',
+                    value: 4
                 }
             ];
         }
