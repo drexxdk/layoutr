@@ -36,6 +36,17 @@ app.assignment.color = function (assignment) {
                     value: 4
                 }
             ];
+        } else if (assignmentId === '2') {
+            return [
+                {
+                    id: 'orange',
+                    value: 4
+                },
+                {
+                    id: 'teal',
+                    value: 2
+                }
+            ];
         }
     };
 
