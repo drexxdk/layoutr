@@ -149,7 +149,6 @@ app.assignment.dragAndDrop = function (assignment) {
             scroll: false,
             forceFallback: true,
             fallbackOnBody: true,
-            ghostClass: 'drag-and-drop-sortable-ghost',
             chosenClass: 'drag-and-drop-sortable-chosen',
             onAdd: function () {
                 setTimeout(function () {
@@ -242,7 +241,6 @@ app.assignment.sort = function (assignment) {
         scroll: false,
         forceFallback: true,
         fallbackOnBody: true,
-        ghostClass: 'sort-sortable-ghost',
         chosenClass: 'sort-sortable-chosen'
     });
 

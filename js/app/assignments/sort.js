@@ -11,7 +11,6 @@ app.assignment.sort = function (assignment) {
         scroll: false,
         forceFallback: true,
         fallbackOnBody: true,
-        ghostClass: 'sort-sortable-ghost',
         chosenClass: 'sort-sortable-chosen'
     });
 

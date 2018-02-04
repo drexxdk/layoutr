@@ -110,6 +110,10 @@
     }
 
     .drag-and-drop-sortable-chosen {
+        body > & {
+            margin: $spacer / 2;
+        }
+
         label {
             @include theme-element($secondary, true, true);
             padding: $padding-y $padding-x;
@@ -118,9 +122,5 @@
                 box-shadow: none !important;
             }
         }
-    }
-
-    .drag-and-drop-sortable-ghost label {
-        @include theme-element($secondary, true, true);
     }
 }

@@ -46,9 +46,9 @@
     .sort-sortable-chosen {
         @include theme-element($secondary, true, true);
         padding: $padding-y $padding-x;
-    }
 
-    .sort-sortable-ghost {
-        @include theme-element($secondary, true, true);
+        body > & {
+            margin: $spacer / 2;
+        }
     }
 }
