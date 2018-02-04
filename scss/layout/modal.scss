@@ -80,7 +80,7 @@ html {
                     border-radius: $component-border-radius;
                     background-color: $modal-background-color;
 
-                    > p {
+                    > .content {
                         padding: $spacer;
                     }
                 }

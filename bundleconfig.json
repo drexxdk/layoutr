@@ -32,6 +32,7 @@
       "js/app/layout/navigation.js",
       "js/app/layout/settings.js",
       "js/app/layout/keyboard.js",
+      "js/app/layout/login.js",
       "js/app/layout/modal.js",
       "js/app/layout/touchDevice.js",
       "js/app/layout/rb.js",
