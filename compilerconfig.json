@@ -12,7 +12,18 @@
   },
   {
     "outputFile": "dist/css/katex.css",
-    "inputFile": "scss/components/katex.scss",
+    "inputFile": "scss/vendors/katex.scss",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
+  },
+  {
+    "outputFile": "dist/css/plyr.css",
+    "inputFile": "scss/vendors/plyr.scss",
     "minify": {
       "enabled": true
     },

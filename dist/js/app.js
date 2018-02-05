@@ -988,6 +988,7 @@ app.pageLoaded = function (initial) {
     app.tooltip(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
     app.math(app.content.find('.math'));
+    app.media(app.content.find('audio, video, div[data-type="youtube"], div[data-type="vimeo"]'));
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();
@@ -1897,6 +1898,21 @@ app.math = function (math) {
                 setTimeout(function () {
                     $this.removeClass('math');
                 });
+            });
+        });
+    }
+};
+var app = app || {};
+
+app.media = function (media) {
+    if (media.length) {
+        if (!app.html.hasClass('media-loaded')) {
+            app.head.append($('<link rel="stylesheet" href="dist/css/plyr.min.css">'));
+        }
+
+        $.getScript('dist/js/plyr.min.js', function () {
+            media.each(function (i, item) {
+                plyr.setup(item);
             });
         });
     }

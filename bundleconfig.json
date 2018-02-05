@@ -45,6 +45,7 @@
       "js/app/components/accordion.js",
       "js/app/components/alert.js",
       "js/app/components/math.js",
+      "js/app/components/media.js",
       "js/app/components/lazy.js",
       "js/app/components/popup.js",
       "js/app/components/tooltip.js",
@@ -63,6 +64,12 @@
     "inputFiles": [
       "js/vendors/katex/katex.min.js",
       "js/vendors/katex/auto-render.min.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/js/plyr.js",
+    "inputFiles": [
+      "js/vendors/plyr/plyr.js"
     ]
   },
   {
