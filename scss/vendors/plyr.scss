@@ -1,6 +1,17 @@
-﻿#sprite-plyr {
+﻿// custom start
+#sprite-plyr {
     display: none;
 }
+
+.embed > .plyr--video,
+.embed > .plyr--video > .plyr__video-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+// custom end
 
 @-webkit-keyframes plyr-progress {
     to {

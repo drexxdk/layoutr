@@ -10,24 +10,25 @@
         </section>
         <section>
             <h4>Video</h4>
-            <video poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg?v1" controls crossorigin="">
-                <!-- Video files -->
-                <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
-                <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
-                <!-- Text track file -->
-                <track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
-                       default>
-                <!-- Fallback for browsers that don't support the <video> element -->
-                <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" download>Download</a>
-            </video>
+            <div class="embed aspect-ratio-16by9">
+                <video poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg?v1" controls crossorigin="">
+                    <!-- Video files -->
+                    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
+                    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
+                    <!-- Text track file -->
+                    <track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default>
+                </video>
+            </div>
         </section>
         <section>
             <h3>Youtube</h3>
-            <div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>
+            <div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div>
+            <!--<div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>-->
         </section>
         <section>
             <h3>Vimeo</h3>
-            <div data-type="vimeo" data-video-id="147865858"></div>
+            <div class="embed aspect-ratio-16by9"><iframe src="https://player.vimeo.com/video/216549173" allowfullscreen></iframe></div>
+            <!--<div data-type="vimeo" data-video-id="147865858"></div>-->
         </section>
     </div>
 </div>
