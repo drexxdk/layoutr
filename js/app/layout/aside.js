@@ -28,14 +28,12 @@ app.toggleAside = function (aside, pageChanged) {
         if (app.isTransitions()) {
             setTimeout(function () {
                 transitionLock = false;
-                app.checkGoogleMaps();
                 if (pageChanged) {
                     app.rb();
                 }
             }, app.transitionTime);
         } else {
             transitionLock = false;
-            app.checkGoogleMaps();
         }
         app.setHtmlScroll();
     }

@@ -45,7 +45,6 @@ $(window).click(function (e) {
         if ((left || right) && notTarget && !app.isLoading()) {
             app.enableScroll();
             app.html.attr('data-aside', '');
-            app.checkGoogleMaps();
         }
     }
 });

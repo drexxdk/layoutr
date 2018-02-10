@@ -58,9 +58,6 @@ $(function () {
                 type = $this.attr('type'),
                 value = $this.is(':checked');
             app.applySettings(id, name, type, value, true);
-            if (id === 'two-columns') {
-                app.checkGoogleMaps();
-            }
             if (id === 'left-shrink' || id === 'right-shrink' ||
                 id === 'left-push' || id === 'right-push' ||
                 id === 'left-overlay' || id === 'right-overlay') {

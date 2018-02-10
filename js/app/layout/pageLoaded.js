@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
 app.pageLoaded = function (initial) {
-    $(window).off('debouncedresize.assignment');
     $(window).off('throttledresize.assignment');
+    $(window).off('throttledresize.map');
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
@@ -21,6 +21,7 @@ app.pageLoaded = function (initial) {
     app.assignment(app.content.find('.assignment'));
     app.math(app.content.find('.math'));
     app.media(app.content.find('audio, video'));
+    app.map(app.content.find('.map'));
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();

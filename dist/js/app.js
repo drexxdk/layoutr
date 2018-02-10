@@ -861,6 +861,22 @@ app.capitalize = function (string) {
 app.scrollTop = function () {
     return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
 };
+
+app.tryParseInt = function (str, defaultValue) {
+    var retValue = defaultValue;
+    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+        retValue = parseInt(str);
+    }
+    return retValue;
+}
+
+app.tryParseFloat = function (str, defaultValue) {
+    var retValue = defaultValue;
+    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+        retValue = parseFloat(str);
+    }
+    return retValue;
+}
 var app = app || {};
 
 $(function () {
@@ -962,15 +978,14 @@ $(window).click(function (e) {
         if ((left || right) && notTarget && !app.isLoading()) {
             app.enableScroll();
             app.html.attr('data-aside', '');
-            app.checkGoogleMaps();
         }
     }
 });
 var app = app || {};
 
 app.pageLoaded = function (initial) {
-    $(window).off('debouncedresize.assignment');
     $(window).off('throttledresize.assignment');
+    $(window).off('throttledresize.map');
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
@@ -989,6 +1004,7 @@ app.pageLoaded = function (initial) {
     app.assignment(app.content.find('.assignment'));
     app.math(app.content.find('.math'));
     app.media(app.content.find('audio, video'));
+    app.map(app.content.find('.map'));
     app.youtube = undefined;
     app.google = undefined;
     app.hideLoading();
@@ -1108,14 +1124,12 @@ app.toggleAside = function (aside, pageChanged) {
         if (app.isTransitions()) {
             setTimeout(function () {
                 transitionLock = false;
-                app.checkGoogleMaps();
                 if (pageChanged) {
                     app.rb();
                 }
             }, app.transitionTime);
         } else {
             transitionLock = false;
-            app.checkGoogleMaps();
         }
         app.setHtmlScroll();
     }
@@ -1343,9 +1357,6 @@ $(function () {
                 type = $this.attr('type'),
                 value = $this.is(':checked');
             app.applySettings(id, name, type, value, true);
-            if (id === 'two-columns') {
-                app.checkGoogleMaps();
-            }
             if (id === 'left-shrink' || id === 'right-shrink' ||
                 id === 'left-push' || id === 'right-push' ||
                 id === 'left-overlay' || id === 'right-overlay') {
@@ -1884,6 +1895,33 @@ $(function () {
 });
 var app = app || {};
 
+app.map = function (maps) {
+    $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function () {
+        maps.each(function () {
+            var $this = $(this),
+                lat = app.tryParseFloat($this.attr('data-lat'), 37.4029937),
+                lng = app.tryParseFloat($this.attr('data-lng'), -122.1811793),
+                zoom = app.tryParseInt($this.attr('data-zoom'), 4),
+                cords = { lat: lat, lng: lng };
+
+            var map = new google.maps.Map($this[0], {
+                zoom: zoom,
+                center: cords
+            });
+
+            var marker = new google.maps.Marker({
+                position: cords,
+                map: map
+            });
+
+            $(window).on("throttledresize.map", function () {
+                google.maps.event.trigger($this[0], 'resize');
+            });
+        });
+    });
+};
+var app = app || {};
+
 app.math = function (math) {
     if (math.length) {
         if (!app.html.hasClass('math-loaded')) {
@@ -2083,57 +2121,3 @@ app.pageForm = function () {
         }
     );
 };
-var app = app || {};
-var google;
-
-app.checkGoogleMaps = function () {
-    if (app.google !== undefined && google !== undefined) {
-        if (app.isTransitions()) {
-            setTimeout(function () {
-                google.maps.event.trigger(app.google, 'resize');
-            }, app.transitionTime);
-        } else {
-            google.maps.event.trigger(app.google, 'resize');
-        }
-        return true;
-    } else {
-        return false;
-    }
-};
-
-$(function () {
-    app.content.on('click', '#toggle-google-maps', function () {
-        if (!app.checkGoogleMaps()) {
-            $('<div id="google-maps" class="full-width"><div class="embed aspect-ratio-16by9"></div></div>').insertAfter($(this));
-            app.google = document.getElementById('google-maps').children[0];
-            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng', function (data, textStatus, jqxhr) {
-                var uluru = { lat: -25.363, lng: 131.044 };
-                var map = new google.maps.Map(app.google, {
-                    zoom: 4,
-                    center: uluru
-                });
-                var marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map
-                });
-                $(window).resize('#google-maps', function () {
-                    google.maps.event.trigger(app.google, 'resize');
-                });
-            });
-        } else {
-            $(app.google).parent().toggle();
-        }
-    });
-});
-var app = app || {};
-
-$(function () {
-    app.content.on('click', '#toggle-youtube', function () {
-        if (app.youtube === undefined) {
-            $('<div id="youtube" class="full-width"><div class="embed aspect-ratio-16by9"><iframe src="https://www.youtube.com/embed/ue80QwXMRHg" allowfullscreen></iframe></div></div>').insertAfter($(this));
-            app.youtube = app.content.find('#youtube');
-        } else {
-            app.youtube.toggle();
-        }
-    });
-});

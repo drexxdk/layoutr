@@ -80,3 +80,19 @@ app.capitalize = function (string) {
 app.scrollTop = function () {
     return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
 };
+
+app.tryParseInt = function (str, defaultValue) {
+    var retValue = defaultValue;
+    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+        retValue = parseInt(str);
+    }
+    return retValue;
+}
+
+app.tryParseFloat = function (str, defaultValue) {
+    var retValue = defaultValue;
+    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+        retValue = parseFloat(str);
+    }
+    return retValue;
+}

@@ -44,6 +44,7 @@
       // components
       "js/app/components/accordion.js",
       "js/app/components/alert.js",
+      "js/app/components/map.js",
       "js/app/components/math.js",
       "js/app/components/media.js",
       "js/app/components/lazy.js",
@@ -54,9 +55,7 @@
       "js/app/assignments/_assignments.js",
 
       // site
-      "js/app/site/form.js",
-      "js/app/site/googleMaps.js",
-      "js/app/site/youtube.js"
+      "js/app/site/form.js"
     ]
   },
   {
