@@ -3,6 +3,7 @@
 app.pageLoaded = function (initial) {
     $(window).off('throttledresize.assignment');
     $(window).off('throttledresize.map');
+    app.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
