@@ -23,8 +23,6 @@ app.pageLoaded = function (initial) {
     app.math(app.content.find('.math'));
     app.media(app.content.find('audio, video'));
     app.map(app.content.find('.map'));
-    app.youtube = undefined;
-    app.google = undefined;
     app.hideLoading();
     if (initial) {
         app.html.addClass('site-loaded');
