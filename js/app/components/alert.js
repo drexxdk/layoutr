@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 $(function () {
-    app.main.on('click', '.alert .close', function () {
+    app.body.on('click', '.alert .close', function () {
         var $this = $(this).parent();
         $this.fadeOut(app.fadeOutTime, function () {
             var parent = $this.parent();

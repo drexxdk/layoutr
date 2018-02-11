@@ -28,7 +28,7 @@ $(function () {
                     if (app.isAside()) {
                         app.toggleAside(); // closes aside
                     }
-                    var popups = app.main.children('.popup');
+                    var popups = app.body.children('.popup');
                     if (popups.length) {
                         popups.fadeOut(app.fadeOutTime, function () {
                             popups.remove();

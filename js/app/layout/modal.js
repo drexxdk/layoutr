@@ -24,11 +24,11 @@ app.checkModal = function () {
         if (app.html.attr('data-aside') === 'right') {
             app.right.css('margin-right', app.scrollbarWidth);
         }
-        app.main.children('.popup').css('margin-right', app.scrollbarWidth);
+        app.body.children('.popup').css('margin-right', app.scrollbarWidth);
     } else {
         app.body.css('padding-right', 0);
         app.right.css('margin-right', 0);
-        app.main.children('.popup').css('margin-right', 0);
+        app.body.children('.popup').css('margin-right', 0);
     }
 
     if (app.contentHeader !== undefined) {
@@ -42,7 +42,7 @@ app.checkModal = function () {
 };
 
 $(function () {
-    app.main.on('click', '.modal', function () {
+    app.body.on('click', '.modal', function () {
         var $this = $(this),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
@@ -107,7 +107,7 @@ $(function () {
         }
     });
 
-    app.main.on('click', '#modal-toggle', function () {
+    app.body.on('click', '#modal-toggle', function () {
         app.modal.toggleClass('info-shown');
     });
 });

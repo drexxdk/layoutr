@@ -12,14 +12,14 @@ app.loadPage = function (url, pushState, initial) {
         url = tempUrl;
         if (url === '') {
             app.title.html('');
-            if (app.main.children('#svg-browser').length === 0) {
+            if (app.body.children('#svg-browser').length === 0) {
                 $.get('ajax/svg/browser.html', function (data) {
-                    $(data).prependTo(app.main);
+                    $(data).prependTo(app.body);
                 });
             }
-            if (app.main.children('#svg-os').length === 0) {
+            if (app.body.children('#svg-os').length === 0) {
                 $.get('ajax/svg/os.html', function (data) {
-                    $(data).prependTo(app.main);
+                    $(data).prependTo(app.body);
                 });
             }
         } else {

@@ -36,6 +36,10 @@ body {
     line-height: $line-height;
     word-break: break-word;
 
+    > svg {
+        display: none;
+    }
+
     @media screen {
         position: absolute;
         top: 0;

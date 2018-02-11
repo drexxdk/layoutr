@@ -943,7 +943,7 @@ $(function () {
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
     $.get('ajax/svg/base.html', function (data) {
-        $(data).prependTo(app.main);
+        $(data).prependTo(app.body);
     });
 });
 
@@ -1086,7 +1086,7 @@ app.hideLoading = function () {
 };
 
 $(function () {
-    app.main.on('click', '.toggle-loading', function () {
+    app.body.on('click', '.toggle-loading', function () {
         app.showLoading();
         setTimeout(function () {
             app.hideLoading();
@@ -1190,14 +1190,14 @@ app.loadPage = function (url, pushState, initial) {
         url = tempUrl;
         if (url === '') {
             app.title.html('');
-            if (app.main.children('#svg-browser').length === 0) {
+            if (app.body.children('#svg-browser').length === 0) {
                 $.get('ajax/svg/browser.html', function (data) {
-                    $(data).prependTo(app.main);
+                    $(data).prependTo(app.body);
                 });
             }
-            if (app.main.children('#svg-os').length === 0) {
+            if (app.body.children('#svg-os').length === 0) {
                 $.get('ajax/svg/os.html', function (data) {
-                    $(data).prependTo(app.main);
+                    $(data).prependTo(app.body);
                 });
             }
         } else {
@@ -1399,7 +1399,7 @@ $(function () {
                     if (app.isAside()) {
                         app.toggleAside(); // closes aside
                     }
-                    var popups = app.main.children('.popup');
+                    var popups = app.body.children('.popup');
                     if (popups.length) {
                         popups.fadeOut(app.fadeOutTime, function () {
                             popups.remove();
@@ -1508,11 +1508,11 @@ app.checkModal = function () {
         if (app.html.attr('data-aside') === 'right') {
             app.right.css('margin-right', app.scrollbarWidth);
         }
-        app.main.children('.popup').css('margin-right', app.scrollbarWidth);
+        app.body.children('.popup').css('margin-right', app.scrollbarWidth);
     } else {
         app.body.css('padding-right', 0);
         app.right.css('margin-right', 0);
-        app.main.children('.popup').css('margin-right', 0);
+        app.body.children('.popup').css('margin-right', 0);
     }
 
     if (app.contentHeader !== undefined) {
@@ -1526,7 +1526,7 @@ app.checkModal = function () {
 };
 
 $(function () {
-    app.main.on('click', '.modal', function () {
+    app.body.on('click', '.modal', function () {
         var $this = $(this),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
@@ -1591,7 +1591,7 @@ $(function () {
         }
     });
 
-    app.main.on('click', '#modal-toggle', function () {
+    app.body.on('click', '#modal-toggle', function () {
         app.modal.toggleClass('info-shown');
     });
 });
@@ -1880,7 +1880,7 @@ app.accordion = function (elements) {
 var app = app || {};
 
 $(function () {
-    app.main.on('click', '.alert .close', function () {
+    app.body.on('click', '.alert .close', function () {
         var $this = $(this).parent();
         $this.fadeOut(app.fadeOutTime, function () {
             var parent = $this.parent();
@@ -1980,14 +1980,14 @@ app.lazy = function (elements) {
 var app = app || {};
 
 $(function () {
-    app.main.on('click', '.show-popup', function () {
+    app.body.on('click', '.show-popup', function () {
         var $this = $(this),
             title = $this.attr('data-popup-title');
         if (title !== undefined) {
             var theme = $this.attr('data-popup-theme'),
                 alert = [],
                 position = $(this).attr('data-popup-position'),
-                popup = app.main.children('.popup[data-position="' + position + '"]');
+                popup = app.body.children('.popup[data-position="' + position + '"]');
             if (theme === undefined) {
                 theme = 'primary';
             }
@@ -2007,7 +2007,7 @@ $(function () {
                 html.push(alert);
                 html.push('</div>');
                 html = html.join("");
-                app.main.prepend(html);
+                app.body.prepend(html);
             }
         }
     });
