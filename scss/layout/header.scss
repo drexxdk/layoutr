@@ -28,7 +28,6 @@ header {
     #title:not(:empty) {
         display: none;
         position: relative;
-        margin-left: $spacer / 2;
         padding-left: ($spacer / 2) + ($spacer / 4);
         @include ellipsis;
 
@@ -52,9 +51,18 @@ header {
             @include align-items(center);
             height: $header-height-content;
             text-decoration: none;
+            padding: 0 $spacer / 2;
+
+            > svg {
+                transition: transform $transition-time $transition-timing;
+            }
 
             html.desktop &:hover {
                 color: $black;
+
+                > svg {
+                    transform: rotate(120deg);
+                }
             }
         }
     }
