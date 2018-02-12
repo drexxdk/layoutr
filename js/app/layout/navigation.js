@@ -37,6 +37,11 @@ app.loadPage = function (url, pushState, initial) {
     }
 };
 
+app.internalLinkClick = function (href, e) {
+    e.preventDefault();
+    app.loadPage(href, true, false);
+};
+
 (function (l) {
     if (l.search) {
         app.url = {};
@@ -113,8 +118,10 @@ $(function () {
     }
 
     app.left.on('click', '.tree a.label:not(.active)', function (e) {
-        e.preventDefault();
-        var $this = $(this);
-        app.loadPage($this.attr('href'), true, false);
+        app.internalLinkClick($(this).attr('href'), e);
+    });
+
+    app.header.on('click', 'h1 a', function (e) {
+        app.internalLinkClick($(this).attr('href'), e);
     });
 });

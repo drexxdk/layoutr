@@ -29,6 +29,7 @@ header {
         position: relative;
         margin-left: $spacer / 2;
         padding-left: ($spacer / 2) + ($spacer / 4);
+        @include ellipsis;
 
         &:before {
             content: '';
@@ -41,6 +42,17 @@ header {
             background-color: currentColor;
             border-radius: 50%;
             opacity: $opacity-inactive;
+        }
+    }
+
+    h1 {
+        > a {
+            @include flex-display;
+            text-decoration: none;
+
+            html.desktop &:hover {
+                color: $black;
+            }
         }
     }
 }
@@ -58,11 +70,23 @@ header {
 
     > .title {
         margin: 0;
-        font-size: 1rem;
+        font-size: $font-size;
         font-weight: bold;
-        line-height: $header-height;
         flex-grow: 1;
         @include ellipsis;
+        @include flex-display;
+        @include align-items(center);
+
+        svg + span,
+        span + svg {
+            margin-left: $spacer / 4;
+        }
+
+        svg {
+            width: $font-size;
+            height: $font-size;
+            fill: currentColor;
+        }
     }
 
     button.expand {
@@ -72,15 +96,12 @@ header {
         background-color: transparent;
         @include noselect;
         flex-shrink: 0;
+        overflow: hidden;
 
-        html.desktop &:hover {
-            overflow: hidden;
-
-            svg {
-                opacity: 1;
-                width: 65%;
-                height: 65%;
-            }
+        html.desktop &:hover svg {
+            opacity: 1;
+            width: 65%;
+            height: 65%;
         }
 
         &:focus > svg {
