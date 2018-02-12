@@ -6,6 +6,10 @@ html {
             background-color: $body-background-color;
         }
 
+        header #title:not(:empty) {
+            display: block;
+        }
+
         #content > div {
             > .content-header {
                 &:not(.full) > div > div {

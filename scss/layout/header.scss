@@ -26,6 +26,7 @@ header {
     }
 
     #title:not(:empty) {
+        display: none;
         position: relative;
         margin-left: $spacer / 2;
         padding-left: ($spacer / 2) + ($spacer / 4);
@@ -48,6 +49,8 @@ header {
     h1 {
         > a {
             @include flex-display;
+            @include align-items(center);
+            height: $header-height-content;
             text-decoration: none;
 
             html.desktop &:hover {
