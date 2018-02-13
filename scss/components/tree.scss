@@ -21,7 +21,7 @@
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                left: -($spacer / 2);
+                left: -($spacer / 2 + $component-border-width);
                 display: block;
                 width: 0;
                 border-left: 1px solid $component-border-color;
