@@ -5,6 +5,7 @@ app.showModal = function (type) {
     app.html.addClass('modal');
     if (app.isScrollDisabled()) {
         app.checkModal();
+        app.modal.focus();
     } else {
         app.setHtmlScroll();
     }
@@ -42,10 +43,10 @@ app.checkModal = function () {
 
 $(function () {
     app.body.on('click', '.modal', function () {
-        app.modal.focus();
         var $this = $(this),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
+            app.main.focus();
             var id = $this.attr('data-modal-id'),
                 html = [],
                 title = $this.attr('data-modal-title');
