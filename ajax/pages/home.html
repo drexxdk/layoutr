@@ -20,34 +20,25 @@
     <div>
         <section>
             <h3>Introduction</h3>
-            <div class="alert">
+            <div class="alert theme-info">
                 <div>
                     <ul class="list">
-                        <li>
-                            The goal with this website is to make a dynamic layout with all the features a modern website should have, that works in all browsers on all devices.
-                        </li>
-                        <li>
-                            Originally the website used <a href="http://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a> and <a href="http://fontawesome.io/" target="_blank" rel="noopener">FontAwesome</a>, but it bloated the website and effected performance,
-                            therefore I removed them after copying the parts from Bootstrap I needed and added it to my own SCSS files.
-                        </li>
-                        <li>
-                            FontAwesome made it easy to add icons for everything, but it was the biggest resource that had to be downloaded at page load,
-                            therefore I replaced it with svg icons, that got added directly to the DOM.
-                        </li>
+                        <li>The goal with this website is to make a dynamic layout, with all the features a modern website should have, that works in all browsers and on all devices.</li>
+                        <li>Inspired by <a href="http://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a> and <a href="https://foundation.zurb.com" target="_blank" rel="noopener">Foundation</a>.</li>
                     </ul>
                 </div>
             </div>
         </section>
         <section>
             <h3>Some of the features</h3>
-            <div class="alert theme-info">
+            <div class="alert">
                 <div>
                     <ul class="list">
                         <li>
                             <b>Keyboard controls</b> is disabled when loading is shown.
                             <ul>
-                                <li><b>Left arrow key</b> if modal isn't shown it will opens settings or closes navigation if it is open.</li>
-                                <li><b>Right arrow key</b> if modal isn't shown it will opens navigation or closes settings if it is open.</li>
+                                <li><b>Left arrow key</b> if modal isn't shown it opens settings or closes navigation if it is open.</li>
+                                <li><b>Right arrow key</b> if modal isn't shown it opens navigation or closes settings if it is open.</li>
                                 <li><b>ESC key</b> closes modal or aside, authenticated, popups and dropdowns.</li>
                                 <li><b>TAB</b> toggles authenticated, modal, aside, dropdown if focused element is within/outside of it.</li>
                                 <li><b>ENTER</b> toggles authenticated, checkbox, radio, dropdown, accordion item, navigation tree item if it has focus.</li>
@@ -77,22 +68,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <b>Visual Studio</b>
-                            <ul>
-                                <li><b>Web Compiler by Mads Kristensen</b> is used to convert SCSS to CSS with sourcemap and minified version.</li>
-                                <li><b>Bundler & Minifier by Mads Kristensen</b> is used to combine and minify JS.</li>
-                            </ul>
-                        </li>
-                        <li><b>SPA by Rafael Pedicini</b> is used to make the website into a Single-Page-Application.</li>
-                        <li><b>loadCSS.js by Filament Group</b> is used to load CSS.</li>
-                        <li><b>lazy.js by Eisbehr</b> is used to load images.</li>
-                        <li><b>bowser.js by Dustin Diaz</b> is used to determinate user browser and device.</li>
-                        <li><b>tooltipster.js by Caleb Jacob</b> is used to make tooltips.</li>
-                        <li><b>katex.js by Khan Academy</b> is used to display mathematics.</li>
-                        <li><b>jquery.validate.js by Jörn Zaefferer</b> is used for form validation.</li>
-                        <li><b>sortable.js by Lebedev Konstantin</b> is used for drag and drop.</li>
-                        <li><b>plyr.js by Sam Potts</b> is used to make audio/video players.</li>
                     </ul>
                 </div>
             </div>
@@ -160,6 +135,32 @@
                                 <li><b>Disabled</b>: Don't close aside when changing page.</li>
                             </ul>
                         </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Acknowledgement</h3>
+            <div class="alert">
+                <div>
+                    <ul class="list">
+                        <li>
+                            <b>Visual Studio</b>
+                            <ul>
+                                <li><b>Web Compiler by Mads Kristensen</b> is used to convert SCSS to CSS with sourcemap and minified version.</li>
+                                <li><b>Bundler & Minifier by Mads Kristensen</b> is used to combine and minify JS.</li>
+                            </ul>
+                        </li>
+                        <li><b>SPA by Rafael Pedicini</b> is used to make the website into a Single-Page-Application.</li>
+                        <li><b>Maps by Google</b> is used to make maps.</li>
+                        <li><b>loadCSS.js by Filament Group</b> is used to load CSS.</li>
+                        <li><b>lazy.js by Eisbehr</b> is used to load images.</li>
+                        <li><b>bowser.js by Dustin Diaz</b> is used to determinate user browser and device.</li>
+                        <li><b>tooltipster.js by Caleb Jacob</b> is used to make tooltips.</li>
+                        <li><b>katex.js by Khan Academy</b> is used to display mathematics.</li>
+                        <li><b>jquery.validate.js by Jörn Zaefferer</b> is used for form validation.</li>
+                        <li><b>sortable.js by Lebedev Konstantin</b> is used for drag and drop.</li>
+                        <li><b>plyr.js by Sam Potts</b> is used to make audio/video players.</li>
                     </ul>
                 </div>
             </div>
@@ -331,7 +332,7 @@
                 </div>
                 <ul class="list">
                     <li>
-                        <b>Progressive Web App</b>: would get a 100% score if the website used ServiceWorker, 
+                        <b>Progressive Web App</b>: would get a 100% score if the website used ServiceWorker,
                         but I could not get it to work correctly. The ServiceWorker cached everything forever and could only be refreshed by deleting it in the browser.
                     </li>
                     <li>
