@@ -21,7 +21,7 @@ app.disableScroll = function () {
             app.checkModal();
             app.modal.focus();
         }
-        var scrollTop = app.scrollTop()
+        var scrollTop = app.scrollTop();
         app.html.addClass('scroll-disabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
@@ -31,11 +31,15 @@ app.disableScroll = function () {
 app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        var scrollTop = app.scrollTop();
-        app.html.removeClass('scroll-disabled modal');
-        app.main.focus();
-        app.body.scrollTop(scrollTop); // edge, safari
-        app.html.scrollTop(scrollTop); // chrome, firefox, ie
+        if (app.isSiteLoaded()) {
+            var scrollTop = app.scrollTop();
+            app.html.removeClass('scroll-disabled modal');
+            app.main.focus();
+            app.body.scrollTop(scrollTop); // edge, safari
+            app.html.scrollTop(scrollTop); // chrome, firefox, ie
+        } else {
+            app.html.removeClass('scroll-disabled modal');
+        }
     }
 };
 

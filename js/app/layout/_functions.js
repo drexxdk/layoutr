@@ -73,6 +73,10 @@ app.isAndroidSwipe = function () {
     return app.html.hasClass('android-swipe');
 };
 
+app.isSiteLoaded = function () {
+    return app.html.hasClass('site-loaded');
+};
+
 app.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -83,16 +87,16 @@ app.scrollTop = function () {
 
 app.tryParseInt = function (str, defaultValue) {
     var retValue = defaultValue;
-    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseInt(str);
     }
     return retValue;
-}
+};
 
 app.tryParseFloat = function (str, defaultValue) {
     var retValue = defaultValue;
-    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseFloat(str);
     }
     return retValue;
-}
+};

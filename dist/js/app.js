@@ -854,6 +854,10 @@ app.isAndroidSwipe = function () {
     return app.html.hasClass('android-swipe');
 };
 
+app.isSiteLoaded = function () {
+    return app.html.hasClass('site-loaded');
+};
+
 app.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -864,19 +868,19 @@ app.scrollTop = function () {
 
 app.tryParseInt = function (str, defaultValue) {
     var retValue = defaultValue;
-    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseInt(str);
     }
     return retValue;
-}
+};
 
 app.tryParseFloat = function (str, defaultValue) {
     var retValue = defaultValue;
-    if (str != undefined && str !== null && str.length > 0 && !isNaN(str)) {
+    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseFloat(str);
     }
     return retValue;
-}
+};
 var app = app || {};
 
 $(function () {
@@ -1034,7 +1038,7 @@ app.disableScroll = function () {
             app.checkModal();
             app.modal.focus();
         }
-        var scrollTop = app.scrollTop()
+        var scrollTop = app.scrollTop();
         app.html.addClass('scroll-disabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
@@ -1044,11 +1048,15 @@ app.disableScroll = function () {
 app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
-        var scrollTop = app.scrollTop();
-        app.html.removeClass('scroll-disabled modal');
-        app.main.focus();
-        app.body.scrollTop(scrollTop); // edge, safari
-        app.html.scrollTop(scrollTop); // chrome, firefox, ie
+        if (app.isSiteLoaded()) {
+            var scrollTop = app.scrollTop();
+            app.html.removeClass('scroll-disabled modal');
+            app.main.focus();
+            app.body.scrollTop(scrollTop); // edge, safari
+            app.html.scrollTop(scrollTop); // chrome, firefox, ie
+        } else {
+            app.html.removeClass('scroll-disabled modal');
+        }
     }
 };
 
@@ -1537,7 +1545,6 @@ $(function () {
         var $this = $(this),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
-            app.main.focus();
             var id = $this.attr('data-modal-id'),
                 html = [],
                 title = $this.attr('data-modal-title');
