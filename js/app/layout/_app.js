@@ -12,12 +12,68 @@ $(function () {
     $.get('ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
+    
+    app.unauthenticated.register = app.addValidation(
+        app.body.find('#register > form'),
+        {
+            register_username: {
+                required: true,
+                minlength: 2
+            },
+            register_password: {
+                required: true,
+                password: true
+            },
+            register_confirm_password: {
+                required: true,
+                equalTo: "#password"
+            },
+            register_email: {
+                required: true,
+                email: true
+            },
+        },
+        {
+            register_username: {
+                required: "Please enter your username",
+            },
+            register_password: {
+                required: "Please enter your password"
+            },
+            register_confirm_password: {
+                required: "Please provide a password",
+                equalTo: "Please enter the same password as above"
+            },
+            register_email: "Please enter a valid email address"
+        }
+    );
+
+    app.unauthenticated.login = app.addValidation(
+        app.body.find('#login > form'),
+        {
+            username: {
+                required: true,
+                minlength: 2
+            },
+            password: {
+                required: true,
+                password: true
+            }
+        },
+        {
+            username: {
+                required: "Please enter your username",
+            },
+            password: {
+                required: "Please enter your password"
+            },
+        }
+    );
 });
 
 $(window).click(function (e) {
     var target = $(e.target),
-        modal = target.closest(app.modal[0]),
-        authenticated = target.closest(app.authenticated[0]);
+        modal = target.closest(app.modal[0]);
 
     if (bowser.ios) {
         // ios browsers doesn't apply :focus to buttons in many cases,
@@ -28,7 +84,15 @@ $(window).click(function (e) {
             target.focus();
         }
     }
-    if (!authenticated.length && !target.parents('#authenticated').length) {
+    if (app.unauthenticated.attr('data-type') !== '' && !target.closest('#unauthenticated').length && !target.parents('#unauthenticated').length) {
+        if (app.unauthenticated.attr('data-type') === 'register') {
+            app.unauthenticated.register.resetForm();
+        } else if (app.unauthenticated.attr('data-type') === 'login') {
+            app.unauthenticated.login.resetForm();
+        }
+        app.unauthenticated.attr('data-type', '');
+    }
+    if (!target.closest('#authenticated').length && !target.parents('#authenticated').length) {
         app.authenticated.removeClass('open');
     }
     if (modal.length || target.parents('#modal').length) {

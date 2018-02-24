@@ -14,6 +14,9 @@ $(function () {
     app.overflow = $('#overflow');
     app.modal = $('#modal');
     app.title = $('#title');
+    app.unauthenticated = $('#unauthenticated');
+    app.unauthenticated.register;
+    app.unauthenticated.login;
     app.authenticated = $('#authenticated');
     app.authenticatedLinks = $('#authenticated-links');
     app.cookie = $('#cookie');

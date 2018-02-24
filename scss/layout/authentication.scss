@@ -9,7 +9,36 @@
         @include flex-display;
     }
 
+    #unauthenticated,
+    #authenticated {
+        > div {
+            position: absolute;
+            top: $header-height;
+            left: 0;
+            right: 0;
+            padding: $spacer;
+            pointer-events: none;
+
+            > div {
+                pointer-events: all;
+                max-height: calc(100vh - #{$header-height + ($spacer * 2)});
+                overflow: auto;
+                margin-left: auto;
+                max-width: 300px;
+                background-color: $white;
+                border: $layout-border;
+                box-shadow: 0 0 $spacer / 2 0 rgba(0,0,0,0.5);
+            }
+        }
+    }
+
     #unauthenticated {
+        &[data-type=""] > div,
+        &[data-type="register"] #login,
+        &[data-type="login"] #register {
+            display: none;
+        }
+
         html:not(.signed-in) & {
             @include flex-display;
         }
@@ -38,6 +67,10 @@
             width: $layout-border-width;
             background-color: $layout-border-color;
             flex-shrink: 0;
+        }
+
+        form {
+            padding: $spacer;
         }
     }
 
@@ -80,108 +113,89 @@
             }
         }
 
-        > div {
-            position: absolute;
-            top: $header-height;
-            left: 0;
-            right: 0;
-            padding: $spacer;
-            pointer-events: none;
+        > div > div {
+            #authenticated-user {
+                @include flex-display;
+                @include align-items(center);
+                padding: $spacer;
+                background-color: $gray-200;
+                border-bottom: $layout-border;
 
-            > div {
-                pointer-events: all;
-                max-height: calc(100vh - #{$header-height + ($spacer * 2)});
-                overflow: auto;
-                margin-left: auto;
-                max-width: 300px;
-                background-color: $white;
-                border: $layout-border;
-                box-shadow: 0 0 $spacer / 2 0 rgba(0,0,0,0.5);
+                > i {
+                    width: ($line-height * 2) + ($spacer / 2);
+                    height: ($line-height * 2) + ($spacer / 2);
+                    border-radius: 50%;
+                    overflow: hidden;
+                    position: relative;
+                    flex-shrink: 0;
 
+                    > * {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
 
-                #authenticated-user {
+                > div {
+                    @include flex-display;
+                    @include flex-direction(column);
+                    margin-left: $spacer;
+
+                    #authenticated-username {
+                        font-weight: $font-weight-bold;
+                    }
+
+                    #authenticated-email {
+                        margin-top: $spacer / 2;
+                    }
+                }
+            }
+
+            #authenticated-links {
+                margin: $spacer / 2;
+
+                > a {
                     @include flex-display;
                     @include align-items(center);
-                    padding: $spacer;
-                    background-color: $gray-200;
-                    border-bottom: $layout-border;
+                    padding: 10px;
+                    color: $black;
+                    text-decoration: none;
+
+                    &:focus,
+                    .desktop &:hover {
+                        @include theme-element($gray-200, false);
+
+                        > i > svg {
+                            opacity: 1;
+                        }
+                    }
 
                     > i {
-                        width: ($line-height * 2) + ($spacer / 2);
-                        height: ($line-height * 2) + ($spacer / 2);
-                        border-radius: 50%;
-                        overflow: hidden;
-                        position: relative;
+                        width: $font-size * $line-height;
+                        height: $font-size * $line-height;
                         flex-shrink: 0;
 
-                        > * {
-                            position: absolute;
+                        > svg {
+                            opacity: $opacity-inactive;
                             width: 100%;
                             height: 100%;
                         }
                     }
 
-                    > div {
-                        @include flex-display;
-                        @include flex-direction(column);
+                    > i + span {
                         margin-left: $spacer;
+                    }
 
-                        #authenticated-username {
-                            font-weight: $font-weight-bold;
-                        }
-
-                        #authenticated-email {
-                            margin-top: $spacer / 2;
-                        }
+                    > span {
+                        flex-grow: 1;
                     }
                 }
 
-                #authenticated-links {
-                    margin: $spacer / 2;
-
-                    > a {
-                        @include flex-display;
-                        @include align-items(center);
-                        padding: 10px;
-                        color: $black;
-                        text-decoration: none;
-
-                        &:focus,
-                        .desktop &:hover {
-                            @include theme-element($gray-200, false);
-
-                            > i > svg {
-                                opacity: 1;
-                            }
-                        }
-
-                        > i {
-                            width: $font-size * $line-height;
-                            height: $font-size * $line-height;
-                            flex-shrink: 0;
-
-                            > svg {
-                                opacity: $opacity-inactive;
-                                width: 100%;
-                                height: 100%;
-                            }
-                        }
-
-                        > i + span {
-                            margin-left: $spacer;
-                        }
-
-                        > span {
-                            flex-grow: 1;
-                        }
-                    }
-
-                    > hr {
-                        margin: $spacer / 2 0;
-                        border: none;
-                        height: $layout-border-width;
-                        background-color: $layout-border-color;
-                    }
+                > hr {
+                    margin: $spacer / 2 0;
+                    border: none;
+                    height: $layout-border-width;
+                    background-color: $layout-border-color;
                 }
             }
         }

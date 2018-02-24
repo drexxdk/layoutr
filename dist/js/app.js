@@ -765,6 +765,9 @@ $(function () {
     app.overflow = $('#overflow');
     app.modal = $('#modal');
     app.title = $('#title');
+    app.unauthenticated = $('#unauthenticated');
+    app.unauthenticated.register;
+    app.unauthenticated.login;
     app.authenticated = $('#authenticated');
     app.authenticatedLinks = $('#authenticated-links');
     app.cookie = $('#cookie');
@@ -937,6 +940,44 @@ $(function () {
 });
 var app = app || {};
 
+$(function () {
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("Fake submitted!");
+        }
+    });
+
+    $.validator.addMethod('password', function (value) {
+        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
+    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
+});
+
+app.addValidation = function (form, rules, messages) {
+    var validator = form.validate({
+        rules: rules,
+        messages: messages,
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            element = element.parent();
+            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
+                element = element.parent();
+            }
+            element.append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").addClass("theme-danger");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").removeClass("theme-danger");
+        }
+    });
+    form.on('change', 'input, textarea, select', function () {
+        $(this).valid();
+    });
+    return validator;
+};
+var app = app || {};
+
 $.ajaxSetup({
     cache: true
 });
@@ -949,12 +990,68 @@ $(function () {
     $.get('ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
+    
+    app.unauthenticated.register = app.addValidation(
+        app.body.find('#register > form'),
+        {
+            register_username: {
+                required: true,
+                minlength: 2
+            },
+            register_password: {
+                required: true,
+                password: true
+            },
+            register_confirm_password: {
+                required: true,
+                equalTo: "#password"
+            },
+            register_email: {
+                required: true,
+                email: true
+            },
+        },
+        {
+            register_username: {
+                required: "Please enter your username",
+            },
+            register_password: {
+                required: "Please enter your password"
+            },
+            register_confirm_password: {
+                required: "Please provide a password",
+                equalTo: "Please enter the same password as above"
+            },
+            register_email: "Please enter a valid email address"
+        }
+    );
+
+    app.unauthenticated.login = app.addValidation(
+        app.body.find('#login > form'),
+        {
+            username: {
+                required: true,
+                minlength: 2
+            },
+            password: {
+                required: true,
+                password: true
+            }
+        },
+        {
+            username: {
+                required: "Please enter your username",
+            },
+            password: {
+                required: "Please enter your password"
+            },
+        }
+    );
 });
 
 $(window).click(function (e) {
     var target = $(e.target),
-        modal = target.closest(app.modal[0]),
-        authenticated = target.closest(app.authenticated[0]);
+        modal = target.closest(app.modal[0]);
 
     if (bowser.ios) {
         // ios browsers doesn't apply :focus to buttons in many cases,
@@ -965,7 +1062,15 @@ $(window).click(function (e) {
             target.focus();
         }
     }
-    if (!authenticated.length && !target.parents('#authenticated').length) {
+    if (app.unauthenticated.attr('data-type') !== '' && !target.closest('#unauthenticated').length && !target.parents('#unauthenticated').length) {
+        if (app.unauthenticated.attr('data-type') === 'register') {
+            app.unauthenticated.register.resetForm();
+        } else if (app.unauthenticated.attr('data-type') === 'login') {
+            app.unauthenticated.login.resetForm();
+        }
+        app.unauthenticated.attr('data-type', '');
+    }
+    if (!target.closest('#authenticated').length && !target.parents('#authenticated').length) {
         app.authenticated.removeClass('open');
     }
     if (modal.length || target.parents('#modal').length) {
@@ -1092,15 +1197,6 @@ app.hideLoading = function () {
         app.setHtmlScroll();
     }
 };
-
-$(function () {
-    app.body.on('click', '.toggle-loading', function () {
-        app.showLoading();
-        setTimeout(function () {
-            app.hideLoading();
-        }, 2000);
-    });
-});
 var app = app || {};
 
 var transitionLock = false;
@@ -1154,11 +1250,23 @@ $(function () {
 var app = app || {};
 
 $(function () {
+
+    app.unauthenticated.on('click', '> button', function () {
+        var $this = $(this);
+        var type = $this.attr('data-type');
+        if (app.unauthenticated.attr('data-type') === type) {
+            app.unauthenticated.attr('data-type', '');
+        } else {
+            app.unauthenticated.attr('data-type', type);
+            app.unauthenticated.find('> div').focus();
+        }
+    });
+
     app.authenticated.on('click', '> button', function () {
         var $this = $(this).parent();
         $this.toggleClass('open');
         if ($this.hasClass('open')) {
-            app.authenticated.find('> div > div').focus();
+            app.authenticated.find('> div').focus();
         } else {
             var scrollTop = app.scrollTop();
             app.main.focus();
@@ -1474,31 +1582,6 @@ $(function () {
 });
 var app = app || {};
 
-app.loginForm = function () {
-    app.addValidation(
-        app.modal.find('#login'),
-        {
-            username: {
-                required: true,
-                minlength: 2
-            },
-            password: {
-                required: true,
-                password: true
-            }
-        },
-        {
-            username: {
-                required: "Please enter your username",
-            },
-            password: {
-                required: "Please enter your password"
-            },
-        }
-    );
-};
-var app = app || {};
-
 app.showModal = function (type) {
     app.html.attr('data-modal', type);
     app.html.addClass('modal');
@@ -1588,13 +1671,7 @@ $(function () {
                 app.showLoading();
             } else {
                 var content = app.modal.find('#modal-content > .content');
-                if (id === 'login') {
-                    $.get('ajax/modal/login.html', function (data) {
-                        content.append(data);
-                        app.loginForm();
-                        app.showModal(type);
-                    });
-                } else if (id === 'register') {
+                if (id === 'policy') {
                     content.append('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis odio quis nunc porta tincidunt. Praesent in augue velit. Vivamus efficitur nisi eget convallis placerat. Quisque luctus nibh vitae mauris vehicula dignissim. Cras quis velit ac metus maximus luctus eget rutrum nisl. Nulla facilisi. Nullam gravida efficitur fringilla. Etiam pretium condimentum tempus. Sed feugiat tortor vitae est porttitor, eu pharetra arcu fringilla. Sed nec luctus enim, nec rhoncus velit. Fusce dolor sem, varius id rutrum in, efficitur sed magna.<br /><br />' +
                         'Maecenas ut lacinia orci.Phasellus sagittis nisi eu mauris tempus, sit amet lobortis justo dapibus.Nulla facilisi.Aenean venenatis faucibus gravida.Praesent et justo fringilla mauris convallis pretium.Maecenas egestas lectus non erat tincidunt, in egestas risus ultricies.Praesent erat felis, rutrum ac accumsan eget, accumsan ac nisi.Integer sollicitudin risus sed purus maximus porta.Nam maximus, leo at dapibus lobortis, nunc eros molestie justo, vel scelerisque est dolor non tellus.Integer fermentum mi malesuada, placerat mi ac, laoreet risus.<br /><br />' +
                         'Sed et felis a velit accumsan sollicitudin ut a dolor.Integer iaculis quam risus, ac placerat nibh fringilla non.Donec non diam nulla.Vestibulum pretium magna ac malesuada lobortis.Nam eleifend sapien sed efficitur fermentum.Ut magna sapien, mattis nec ligula sollicitudin, ultricies efficitur quam.Praesent vestibulum libero et lorem vulputate, sit amet sagittis velit bibendum.Morbi blandit quis nibh a rhoncus.Phasellus maximus justo ac varius dapibus.Mauris suscipit quam vitae augue ornare, eu rutrum elit tincidunt.Nam rutrum turpis ut bibendum iaculis.Nunc bibendum pretium turpis non ullamcorper.Morbi rhoncus tortor sit amet diam imperdiet luctus.Cras tempor interdum est, et sodales neque semper a.Aliquam imperdiet risus ex, id imperdiet urna egestas in. Vivamus eu suscipit augue.<br /><br />' +
@@ -1837,43 +1914,6 @@ $(window).click(function (e) {
     if (!target.closest(".dropdown").length) {
         $('div.dropdown').removeClass('open');
     }
-});
-var app = app || {};
-
-app.addValidation = function (form, rules, messages) {
-    form.validate({
-        rules: rules,
-        messages: messages,
-        errorElement: "em",
-        errorPlacement: function (error, element) {
-            element = element.parent();
-            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
-                element = element.parent();
-            }
-            element.append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-danger").removeClass("theme-success");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-success").removeClass("theme-danger");
-        }
-    });
-    form.on('change', 'input, textarea, select', function () {
-        $(this).valid();
-    });
-};
-
-$(function () {
-    $.validator.setDefaults({
-        submitHandler: function () {
-            alert("Submitted!");
-        }
-    });
-
-    $.validator.addMethod('password', function (value) {
-        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
-    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
 });
 var app = app || {};
 
