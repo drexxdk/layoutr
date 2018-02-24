@@ -13,7 +13,7 @@ $(function () {
         $(data).prependTo(app.body);
     });
     
-    app.unauthenticated.register = app.addValidation(
+    app.addValidation(
         app.body.find('#register > form'),
         {
             register_username: {
@@ -48,7 +48,7 @@ $(function () {
         }
     );
 
-    app.unauthenticated.login = app.addValidation(
+    app.addValidation(
         app.body.find('#login > form'),
         {
             username: {
@@ -85,14 +85,9 @@ $(window).click(function (e) {
         }
     }
     if (app.unauthenticated.attr('data-type') !== '' && !target.closest('#unauthenticated').length && !target.parents('#unauthenticated').length) {
-        if (app.unauthenticated.attr('data-type') === 'register') {
-            app.unauthenticated.register.resetForm();
-        } else if (app.unauthenticated.attr('data-type') === 'login') {
-            app.unauthenticated.login.resetForm();
-        }
         app.unauthenticated.attr('data-type', '');
     }
-    if (!target.closest('#authenticated').length && !target.parents('#authenticated').length) {
+    if (app.authenticated.hasClass('open') && !target.closest('#authenticated').length && !target.parents('#authenticated').length) {
         app.authenticated.removeClass('open');
     }
     if (modal.length || target.parents('#modal').length) {

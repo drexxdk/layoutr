@@ -13,7 +13,7 @@ $(function () {
 });
 
 app.addValidation = function (form, rules, messages) {
-    var validator = form.validate({
+    form.validate({
         rules: rules,
         messages: messages,
         errorElement: "em",
@@ -34,5 +34,4 @@ app.addValidation = function (form, rules, messages) {
     form.on('change', 'input, textarea, select', function () {
         $(this).valid();
     });
-    return validator;
 };

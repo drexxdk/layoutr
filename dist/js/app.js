@@ -766,8 +766,6 @@ $(function () {
     app.modal = $('#modal');
     app.title = $('#title');
     app.unauthenticated = $('#unauthenticated');
-    app.unauthenticated.register;
-    app.unauthenticated.login;
     app.authenticated = $('#authenticated');
     app.authenticatedLinks = $('#authenticated-links');
     app.cookie = $('#cookie');
@@ -953,7 +951,7 @@ $(function () {
 });
 
 app.addValidation = function (form, rules, messages) {
-    var validator = form.validate({
+    form.validate({
         rules: rules,
         messages: messages,
         errorElement: "em",
@@ -974,7 +972,6 @@ app.addValidation = function (form, rules, messages) {
     form.on('change', 'input, textarea, select', function () {
         $(this).valid();
     });
-    return validator;
 };
 var app = app || {};
 
@@ -991,7 +988,7 @@ $(function () {
         $(data).prependTo(app.body);
     });
     
-    app.unauthenticated.register = app.addValidation(
+    app.addValidation(
         app.body.find('#register > form'),
         {
             register_username: {
@@ -1026,7 +1023,7 @@ $(function () {
         }
     );
 
-    app.unauthenticated.login = app.addValidation(
+    app.addValidation(
         app.body.find('#login > form'),
         {
             username: {
@@ -1063,14 +1060,9 @@ $(window).click(function (e) {
         }
     }
     if (app.unauthenticated.attr('data-type') !== '' && !target.closest('#unauthenticated').length && !target.parents('#unauthenticated').length) {
-        if (app.unauthenticated.attr('data-type') === 'register') {
-            app.unauthenticated.register.resetForm();
-        } else if (app.unauthenticated.attr('data-type') === 'login') {
-            app.unauthenticated.login.resetForm();
-        }
         app.unauthenticated.attr('data-type', '');
     }
-    if (!target.closest('#authenticated').length && !target.parents('#authenticated').length) {
+    if (app.authenticated.hasClass('open') && !target.closest('#authenticated').length && !target.parents('#authenticated').length) {
         app.authenticated.removeClass('open');
     }
     if (modal.length || target.parents('#modal').length) {
