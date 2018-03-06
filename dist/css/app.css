@@ -1084,7 +1084,7 @@ html.desktop .modal.overlay-dark:hover:after {
           overflow: hidden; }
     html.modal[data-modal="form"] #modal > div {
       margin: 0 1rem;
-      max-width: 31.25rem; } }
+      max-width: 43.75rem; } }
 
 html.modal[data-modal=""] #modal > div {
   display: none !important; }

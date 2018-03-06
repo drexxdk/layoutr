@@ -13,11 +13,10 @@ app.pageLoaded = function (initial) {
             app.toggleAside(undefined, true);
         }
     }, 200);
-    app.contentHeader = app.content.children('.content-header:not(.full)');
+    app.rb();
     app.lazy(app.content.find('.lazy'));
     app.accordion(app.content.find('.accordion'));
     app.dropdown(app.content.find('select.dropdown'));
-    app.rb();
     app.tooltip(app.content.find('.tooltip'));
     app.assignment(app.content.find('.assignment'));
     app.math(app.content.find('.math'));
