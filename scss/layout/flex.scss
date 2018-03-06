@@ -1,6 +1,6 @@
 ﻿/// <reference path="../references" />
 
-.flex-items {
+.flex {
     @include flex-display;
     @include flex-direction(column);
 
@@ -52,7 +52,11 @@
         flex-grow: 1;
     }
 
-    &.center > * {
-        @include align-self(center);
+    &.center {
+        @include justify-content(center);
+
+        > * {
+            @include align-self(center);
+        }
     }
 }

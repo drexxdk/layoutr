@@ -5,10 +5,10 @@
     .radioboxes,
     .switches {
         padding-top: $flex-space-base * 2;
-        @extend .flex-items;
-        @extend .flex-items.column;
-        @extend .flex-items.wrap;
-        @extend .flex-items.space-2;
+        @extend .flex;
+        @extend .flex.column;
+        @extend .flex.wrap;
+        @extend .flex.space-2;
     }
 
     .radio,
