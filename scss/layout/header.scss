@@ -46,6 +46,9 @@ header {
     }
 
     h1 {
+        @include flex-display;
+        @include align-items(center);
+
         > a {
             @include flex-display;
             @include align-items(center);
@@ -76,7 +79,11 @@ header {
     @include theme-element($light, false);
 
     > .title:first-child {
-        padding: 0 $padding-x;
+        padding-left: $padding-x;
+    }
+
+    > .title:last-child {
+        padding-right: $padding-x;
     }
 
     > .title {
@@ -85,8 +92,7 @@ header {
         font-weight: bold;
         flex-grow: 1;
         @include ellipsis;
-        @include flex-display;
-        @include align-items(center);
+        line-height: $header-height-content;
 
         svg + span,
         span + svg {
