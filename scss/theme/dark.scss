@@ -1,0 +1,60 @@
+﻿/// <reference path="../references" />
+
+html.theme-dark {
+    body {
+        background-color: #0d0d0d;
+        color: #fff;
+    }
+
+    #authentication #authenticated > div > div #authenticated-links > a {
+        color: #fff;
+    }
+
+    #authentication #authenticated > div > div #authenticated-links > a:focus,
+    &.desktop #authentication #authenticated > div > div #authenticated-links > a:hover {
+        @include theme-element(#14110f, false);
+    }
+
+    .percentage-circle {
+        background-color: #302a24;
+    }
+
+    &.desktop .tree li .label:not(.active):hover {
+        background: theme-gradient(#14110f);
+    }
+
+    .percentage-circle:after,
+    #content .content > div,
+    aside,
+    #authentication #unauthenticated > div > div,
+    #authentication #authenticated > div > div {
+        background-color: #000;
+    }
+
+    #authentication #authenticated > div > div #authenticated-user,
+    #authentication #unauthenticated > div > div,
+    #authentication #authenticated > div > div,
+    aside#left,
+    aside#right,
+    .header,
+    footer {
+        border-color: #302a24;
+    }
+
+    #unauthenticated > span,
+    #authentication #authenticated > div > div #authenticated-links > hr {
+        background-color: #302a24;
+    }
+
+    #authentication #authenticated > div > div #authenticated-user {
+        background-color: #15120f;
+    }
+
+    .header {
+        @include theme-element(#060504, false);
+
+        a:hover {
+            color: #fff;
+        }
+    }
+}
