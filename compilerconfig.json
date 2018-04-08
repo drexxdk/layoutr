@@ -1,7 +1,18 @@
 ﻿[
   {
-    "outputFile": "dist/css/app.css",
-    "inputFile": "scss/app.scss",
+    "outputFile": "dist/css/theme/light.css",
+    "inputFile": "scss/theme/light/_light-theme.scss",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
+  },
+  {
+    "outputFile": "dist/css/theme/dark.css",
+    "inputFile": "scss/theme/dark/_dark-theme.scss",
     "minify": {
       "enabled": true
     },

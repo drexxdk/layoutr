@@ -139,15 +139,15 @@
 
                     &:first-child {
                         left: $component-border-width;
-                        border-top-left-radius: $component-border-radius;
-                        border-bottom-left-radius: $component-border-radius;
+                        border-top-left-radius: $component-border-radius - ($component-border-width * 2);
+                        border-bottom-left-radius: $component-border-radius - ($component-border-width * 2);
                         border-right: $component-border;
                     }
 
                     &:last-child {
                         right: $component-border-width;
-                        border-top-right-radius: $component-border-radius;
-                        border-bottom-right-radius: $component-border-radius;
+                        border-top-right-radius: $component-border-radius - ($component-border-width * 2);
+                        border-bottom-right-radius: $component-border-radius - ($component-border-width * 2);
                         border-left: $component-border;
                     }
 

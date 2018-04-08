@@ -27,5 +27,4 @@ $(function () {
     app.loadingCount = 0;
     
     app.navigation = [];
-    app.settings = [];
 });

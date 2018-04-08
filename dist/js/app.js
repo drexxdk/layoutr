@@ -778,7 +778,6 @@ $(function () {
     app.loadingCount = 0;
     
     app.navigation = [];
-    app.settings = [];
 });
 var app = app || {};
 
@@ -1444,6 +1443,24 @@ app.applySettings = function (id, name, type, value, set) {
                 app.html.removeClass($(radio).attr('id'));
             });
         }
+        if (name === 'theme') {
+            var stylesheet = app.body.children('link[rel="stylesheet"][href^="dist/css/theme/"]');
+            var href = stylesheet.attr('href');
+            var split1 = href.split('/');
+            var split2 = split1[split1.length - 1].split('.');
+            var href = [];
+            for (i = 0; i < split1.length - 1; i++) {
+                href.push(split1[i] + '/');
+            }
+            var theme = id.substring(id.indexOf("-") + 1);
+            href.push(theme);
+
+            for (i = 1; i < split2.length; i++) {
+                href.push('.' + split2[i]);
+            }
+            href = href.join("");
+            stylesheet.attr('href', href);
+        }
         if (value) {
             app.html.addClass(id);
         } else {
@@ -1457,8 +1474,6 @@ app.applySettings = function (id, name, type, value, set) {
 
 $(function () {
     app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
-        app.settings = JSON.parse(localStorage.getItem("settings"));
-        if (app.settings === null) app.settings = [];
         $.each(app.settings, function (i, entry) {
             app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
         });

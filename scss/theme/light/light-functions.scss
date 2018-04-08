@@ -1,0 +1,9 @@
+﻿/// <reference path="../../references" />
+
+@function theme-darken($value) {
+    @return darken($value, 7.5%);
+}
+
+@function theme-soft($value) {
+    @return theme-color-level($value, -10);
+}

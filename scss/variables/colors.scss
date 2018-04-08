@@ -1,15 +1,4 @@
-﻿
-$white: #fff;
-$gray-100: #f8f9fa;
-$gray-200: #e9ecef;
-$gray-300: #dee2e6;
-$gray-400: #ced4da;
-$gray-500: #adb5bd;
-$gray-600: #6F7780;
-$gray-700: #495057;
-$gray-800: #343a40;
-$gray-900: #212529;
-$black: #000;
+﻿/// <reference path="../references" />
 
 $grays: ( 100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $gray-500, 600: $gray-600, 700: $gray-700, 800: $gray-800, 900: $gray-900 );
 
@@ -41,8 +30,6 @@ $theme-validation-colors: ( danger: $danger ); // success: $success,
 
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8%;
-
-$body-background-color: #f1f1f1;
 $body-color: $gray-900;
 
 // layout
@@ -64,6 +51,3 @@ $component-overlay-light-background-color: rgba(255, 255, 255, 0.4);
 $component-overlay-dark-background-color: rgba(0, 0, 0, 0.4);
 
 $modal-background-color: $white;
-
-$color-light: $white;
-$color-dark: $gray-900;

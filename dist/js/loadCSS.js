@@ -87,4 +87,12 @@ var suffix = '.css';
 if (!app.isLocalhost) {
     suffix = ".min" + suffix;
 }
-loadCSS("dist/css/app" + suffix);
+var theme = 'light';
+app.settings = JSON.parse(localStorage.getItem("settings"));
+if (app.settings === null) app.settings = [];
+app.settings.forEach(function (entry) {
+    if (entry.name === 'theme') {
+        theme = entry.id.substring(entry.id.indexOf("-") + 1);
+    }
+});
+loadCSS("dist/css/theme/" + theme + suffix);
