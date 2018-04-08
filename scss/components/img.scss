@@ -4,6 +4,10 @@
     img,
     .img {
         background-color: $light;
+
+        .embed & {
+            background-color:transparent;
+        }
         @include noselect;
     }
 
