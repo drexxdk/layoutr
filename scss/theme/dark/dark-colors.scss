@@ -1,5 +1,5 @@
 ﻿
-$white: #000;
+$white: #fff;
 $gray-100: #21201F;
 $gray-200: #302D2A;
 $gray-300: #3B3733;
@@ -9,9 +9,12 @@ $gray-600: #AAA299;
 $gray-700: #D0C9C2;
 $gray-800: #E5DFD9;
 $gray-900: #F8F4F0;
-$black: #fff;
+$black: #000;
 
 $body-background-color: #0d0d0d;
 
 $color-light: $gray-900;
 $color-dark: $white;
+
+$layout-background-color: $black;
+$modal-background-color: $black;
