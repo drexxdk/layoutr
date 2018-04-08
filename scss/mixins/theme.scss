@@ -8,8 +8,8 @@
     @include color-yiq($value);
 }
 
-@mixin theme-element($background, $includeBorder: true, $important: false) {
-    @include color-yiq($background, $important);
+@mixin theme-element($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
+    @include color-yiq($background, $important, $textCorrection, $linkCorrection);
 
     @if($important) {
         background: theme-gradient($background) !important;
@@ -28,14 +28,14 @@
     }
 }
 
-@mixin theme-element-darken($background, $includeBorder: true, $important: false) {
-    @include theme-element(theme-darken($background), $includeBorder, $important);
+@mixin theme-element-darken($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
+    @include theme-element(theme-darken($background), $includeBorder, $important, $textCorrection, $linkCorrection);
 }
 
-@mixin theme-element-soft($background, $includeBorder: true, $important: false) {
-    @include theme-element(theme-soft($background), $includeBorder, $important);
+@mixin theme-element-soft($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
+    @include theme-element(theme-soft($background), $includeBorder, $important, $textCorrection, $linkCorrection);
 }
 
-@mixin theme-element-soft-darken($background, $includeBorder: true, $important: false) {
-    @include theme-element(theme-darken(theme-soft($background)), $includeBorder, $important);
+@mixin theme-element-soft-darken($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
+    @include theme-element(theme-darken(theme-soft($background)), $includeBorder, $important, $textCorrection, $linkCorrection);
 }
