@@ -59,7 +59,7 @@
             margin-right: ($spacer / 2);
             position: relative;
             overflow: hidden;
-            background-color: white;
+            background-color: $white;
             flex-shrink: 0;
         }
     }
@@ -81,7 +81,7 @@
                 border-radius: 50%;
                 height: $font-size - ($component-border-width * 4);
                 width: $font-size - ($component-border-width * 4);
-                border: ($component-border-width * 2) solid $white;
+                border: ($component-border-width * 2) solid currentColor;
             }
         }
     }
@@ -100,7 +100,6 @@
                 height: 100%;
                 z-index: 1;
                 position: relative;
-                fill: $white;
             }
         }
     }
