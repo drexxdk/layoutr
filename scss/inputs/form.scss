@@ -111,6 +111,7 @@
             width: 100%;
             font-size: $font-size;
             -webkit-appearance: none;
+            @include theme-element($white, false);
 
             &:focus {
                 box-shadow: $input-focus-box-shadow;
