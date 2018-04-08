@@ -6,14 +6,14 @@
         @include noselect;
         cursor: default;
         font-size: $font-size;
+        color: currentColor;
     }
 
     $tooltip-arrow-size: rem(10px);
-    $tooltip-border-color: black;
+    $tooltip-border-color: $black;
     $tooltip-border: $component-border-width solid $tooltip-border-color;
     $tooltip-arrow-fix: $tooltip-arrow-size - $component-border-width;
     $tooltip-background-color: $dark;
-    $tooltip-color: white;
 
     /* This is the core CSS of Tooltipster */
     /* GENERAL STRUCTURE RULES (do not edit this section) */
@@ -38,6 +38,7 @@
                 background: $tooltip-background-color;
                 border: $tooltip-border;
                 border-radius: $component-border-radius;
+                @include color-yiq($tooltip-background-color);
             }
 
             &.tooltipster-bottom {
@@ -154,7 +155,6 @@
             }
 
             .tooltipster-content {
-                color: $tooltip-color;
                 line-height: $component-line-height;
                 padding: $padding-y $padding-x;
             }

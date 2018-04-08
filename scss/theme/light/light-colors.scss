@@ -16,5 +16,8 @@ $body-background-color: #f1f1f1;
 $color-light: $white;
 $color-dark: $gray-900;
 
-$layout-background-color: $white;
-$modal-background-color: $white;
+$overlay-background-color-light: rgba($white, 0.6);
+$overlay-background-color-dark: rgba($black, 0.6);
+
+$component-overlay-light-background-color: rgba($white, 0.4);
+$component-overlay-dark-background-color: rgba($black, 0.4);
