@@ -106,7 +106,7 @@
 
         @if($darker-ratio > $lighter-ratio) {
             @if ($darker-ratio > $threshold) {
-                @return red;
+                @return $darker;
             }
         }
     }
