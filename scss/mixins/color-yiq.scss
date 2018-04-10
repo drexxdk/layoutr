@@ -16,13 +16,7 @@
         }
     }
     @else {
-        $r: red($color);
-        $g: green($color);
-        $b: blue($color);
-
-        $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
-
-        @if ($yiq >= 150) {
+        @if (yiq($color) >= 150) {
             @if($important) {
                 fill: $color-dark !important;
                 color: $color-dark !important;

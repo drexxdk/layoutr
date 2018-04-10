@@ -34,6 +34,14 @@
     @return $value linear-gradient(180deg, mix($body-background-color, $value, 15%), $value) repeat-x;
 }
 
+@function yiq($color) {
+    $r: red($color);
+    $g: green($color);
+    $b: blue($color);
+
+    @return (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+}
+
 @function luma($color) {
     $rgba: red($color), green($color), blue($color);
     $rgba2: ();
