@@ -73,8 +73,8 @@
     @each $percent in $list {
         $lighter: lighten($color, $percent);
         $darker: darken($color, $percent);
-        $darker-ratio: contrast_ratio($bgcolor, $darker);
-        $lighter-ratio: contrast_ratio($bgcolor, $lighter);
+        $darker-ratio: contrast_ratio($darker, $bgcolor);
+        $lighter-ratio: contrast_ratio($lighter, $bgcolor);
 
         @if($lighter-ratio > $darker-ratio) {
             @if ($lighter-ratio > $threshold) {
