@@ -4,7 +4,7 @@
 @mixin color-yiq($color, $important: false, $textCorrection: false, $linkCorrection: false) {
 
     @if($textCorrection) {
-        $corrected: text-contrast($color);
+        $corrected: text-contrast($color, $color);
 
         @if($important) {
             fill: $corrected !important;

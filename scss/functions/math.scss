@@ -1,0 +1,11 @@
+﻿/// <reference path="../references" />
+
+@function pow($base, $exponents) {
+    $raised: 1;
+
+    @for $i from 1 through $exponents {
+        $raised: $raised * $base;
+    }
+
+    @return $raised;
+}

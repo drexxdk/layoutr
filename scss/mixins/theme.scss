@@ -28,14 +28,26 @@
     }
 }
 
+@function get-theme-element-darken($background) {
+    @return theme-darken($background);
+}
+
+@function get-theme-element-soft($background) {
+    @return theme-soft($background);
+}
+
+@function get-theme-element-soft-darken($background) {
+    @return theme-darken(theme-soft($background));
+}
+
 @mixin theme-element-darken($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
-    @include theme-element(theme-darken($background), $includeBorder, $important, $textCorrection, $linkCorrection);
+    @include theme-element(get-theme-element-darken($background), $includeBorder, $important, $textCorrection, $linkCorrection);
 }
 
 @mixin theme-element-soft($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
-    @include theme-element(theme-soft($background), $includeBorder, $important, $textCorrection, $linkCorrection);
+    @include theme-element(get-theme-element-soft($background), $includeBorder, $important, $textCorrection, $linkCorrection);
 }
 
 @mixin theme-element-soft-darken($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
-    @include theme-element(theme-darken(theme-soft($background)), $includeBorder, $important, $textCorrection, $linkCorrection);
+    @include theme-element(get-theme-element-soft-darken($background), $includeBorder, $important, $textCorrection, $linkCorrection);
 }

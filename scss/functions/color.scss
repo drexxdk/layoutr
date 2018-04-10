@@ -1,23 +1,5 @@
 ﻿/// <reference path="../references" />
 
-@function strip-unit($number) {
-    @if type-of($number) == 'number' and not unitless($number) {
-        @return $number / ($number * 0 + 1);
-    }
-
-    @return $number;
-}
-
-@function rem($size) {
-    $value: strip-unit($size) / $rem-difference;
-    @return $value * 1rem;
-}
-
-@function px($size) {
-    $value: strip-unit($size) * $rem-difference;
-    @return $value * 1px;
-}
-
 @function theme-color-level($color, $level: 0) {
     $color-base: if($level > 0, #000, #fff);
 
@@ -52,16 +34,6 @@
     @return $value linear-gradient(180deg, mix($body-background-color, $value, 15%), $value) repeat-x;
 }
 
-@function pow($base, $exponents) {
-    $raised: 1;
-
-    @for $i from 1 through $exponents {
-        $raised: $raised * $base;
-    }
-
-    @return $raised;
-}
-
 @function luma($color) {
     $rgba: red($color), green($color), blue($color);
     $rgba2: ();
@@ -90,13 +62,19 @@
 
 @function text-contrast($color, $bgcolor: $color) {
     $threshold: 4.5; // 4.5 = WCAG AA,7= WCAG AAA
-    $list: 20 30 40 50 60 70 80 90 100;
+    $default-ratio: contrast_ratio($bgcolor, $color);
+
+    @if($default-ratio > $threshold) {
+        @return $color;
+    }
+
+    $list: 0 10 20 30 40 50 60 70 80 90 100;
 
     @each $percent in $list {
-        $lighter: lighten($bgcolor, $percent);
-        $darker: darken($bgcolor, $percent);
-        $darker-ratio: contrast_ratio($color, $darker);
-        $lighter-ratio: contrast_ratio($color, $lighter);
+        $lighter: lighten($color, $percent);
+        $darker: darken($color, $percent);
+        $darker-ratio: contrast_ratio($bgcolor, $darker);
+        $lighter-ratio: contrast_ratio($bgcolor, $lighter);
 
         @if($lighter-ratio > $darker-ratio) {
             @if ($lighter-ratio > $threshold) {

@@ -57,7 +57,7 @@
 
             &:focus,
             html.desktop &:hover {
-                @include theme-element-darken($primary);
+                @include theme-element-darken($link-color);
                 box-shadow: $box-shadow;
             }
         }

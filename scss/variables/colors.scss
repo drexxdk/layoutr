@@ -1,5 +1,17 @@
 ﻿/// <reference path="../references" />
 
+$white: #fff!default;
+$gray-100: #f8f9fa!default;
+$gray-200: #e9ecef!default;
+$gray-300: #dee2e6!default;
+$gray-400: #ced4da!default;
+$gray-500: #adb5bd!default;
+$gray-600: #6F7780!default;
+$gray-700: #495057!default;
+$gray-800: #343a40!default;
+$gray-900: #212529!default;
+$black: #000!default;
+
 $grays: ( 100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $gray-500, 600: $gray-600, 700: $gray-700, 800: $gray-800, 900: $gray-900 );
 
 $blue: #0072ED;
@@ -26,7 +38,21 @@ $dark: $gray-800;
 
 $theme-colors: ( primary: $primary, secondary: $secondary, success: $success, info: $info, warning: $warning, danger: $danger, light: $light, dark: $dark );
 
-$theme-validation-colors: ( danger: $danger ); // success: $success,
+
+$body-background-color: #f1f1f1!default;
+
+$color-light: $white!default;
+$color-dark: $gray-900!default;
+
+$overlay-background-color-light: rgba($white, 0.6)!default;
+$overlay-background-color-dark: rgba($black, 0.6)!default;
+
+$component-overlay-light-background-color: rgba($white, 0.4)!default;
+$component-overlay-dark-background-color: rgba($black, 0.4)!default;
+
+$theme-validation-colors: ( danger: $danger )!default; // success: $success,
+
+$link-color: $primary!default;
 
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8%;
