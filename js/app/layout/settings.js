@@ -33,7 +33,7 @@ app.applySettings = function (id, name, type, value, set) {
             });
         }
         if (name === 'theme') {
-            var stylesheet = app.body.children('link[rel="stylesheet"][href^="dist/css/theme/"]');
+            var stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]');
             var href = stylesheet.attr('href');
             var split1 = href.split('/');
             var split2 = split1[split1.length - 1].split('.');
