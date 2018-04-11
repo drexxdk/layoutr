@@ -9,7 +9,7 @@ $(function () {
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-    $.get('ajax/svg/base.html', function (data) {
+    $.get(app.host + 'ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
     

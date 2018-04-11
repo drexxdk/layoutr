@@ -983,7 +983,7 @@ $(function () {
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-    $.get('ajax/svg/base.html', function (data) {
+    $.get(app.host + 'ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
     
@@ -1290,19 +1290,20 @@ app.loadPage = function (url, pushState, initial) {
     var q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
     app.left.find('.tree a.label.active').removeClass('active');
+    url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     var tempUrl = url;
-    app.content.load('ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
         url = tempUrl;
         if (url === '') {
             app.title.html('');
             if (app.body.children('#svg-browser').length === 0) {
-                $.get('ajax/svg/browser.html', function (data) {
+                $.get(app.host + 'ajax/svg/browser.html', function (data) {
                     $(data).prependTo(app.body);
                 });
             }
             if (app.body.children('#svg-os').length === 0) {
-                $.get('ajax/svg/os.html', function (data) {
+                $.get(app.host + 'ajax/svg/os.html', function (data) {
                     $(data).prependTo(app.body);
                 });
             }
@@ -1375,7 +1376,7 @@ app.applyNavigation = function (id, value, set) {
 };
 
 $(function () {
-    app.left.find('> .content > div').load('ajax/layout/navigation.html', function () {
+    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
         app.navigation = JSON.parse(localStorage.getItem("navigation"));
         if (app.navigation === null) app.navigation = [];
         $.each(app.navigation, function (i, entry) {
@@ -1473,7 +1474,7 @@ app.applySettings = function (id, name, type, value, set) {
 };
 
 $(function () {
-    app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
+    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
         $.each(app.settings, function (i, entry) {
             app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
         });

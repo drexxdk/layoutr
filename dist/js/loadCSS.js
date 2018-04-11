@@ -80,7 +80,10 @@
 
 var app = app || {};
 
-app.isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+var l = window.location;
+app.isLocalhost = l.hostname === "localhost" || l.hostname === "127.0.0.1";
+var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
+app.host = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/';
 
 // source map is not generated for minified css
 var suffix = '.css';
@@ -95,4 +98,4 @@ app.settings.forEach(function (entry) {
         theme = entry.id.substring(entry.id.indexOf("-") + 1);
     }
 });
-loadCSS("dist/css/theme/" + theme + suffix);
+loadCSS(app.host + "dist/css/theme/" + theme + suffix);

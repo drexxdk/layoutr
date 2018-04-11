@@ -62,7 +62,7 @@ app.applySettings = function (id, name, type, value, set) {
 };
 
 $(function () {
-    app.right.find('> .content > div').load('ajax/layout/settings.html', function () {
+    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
         $.each(app.settings, function (i, entry) {
             app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
         });
