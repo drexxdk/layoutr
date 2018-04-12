@@ -25,7 +25,7 @@
                 @include theme-element($primary);
             }
 
-            html.desktop & + label:focus > i {
+            & + label:focus > i {
                 @include focus;
             }
         }

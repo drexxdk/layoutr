@@ -14,7 +14,7 @@
         background: theme-gradient($background-light);
         border-color: $border;
 
-        html.desktop &:focus {
+        &:focus {
             box-shadow: $box-shadow, 0 0 0 $component-focus-box-shadow-width $border;
         }
     }
@@ -113,7 +113,7 @@
             -webkit-appearance: none;
             @include theme-element($white, false);
 
-            html.desktop &:focus {
+            &:focus {
                 box-shadow: $input-focus-box-shadow;
                 z-index: $component-focus-z-index;
                 position: relative;

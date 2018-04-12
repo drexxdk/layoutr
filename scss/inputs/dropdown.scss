@@ -93,7 +93,7 @@
                     @include focus;
                     position: absolute;
 
-                    html.desktop & > li > div:focus {
+                    > li > div:focus {
                         @include theme-element-soft-darken($light);
                         box-shadow: none;
                     }
