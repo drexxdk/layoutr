@@ -25,6 +25,7 @@ $(function () {
     app.smallBreakpoint = 732;
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
+    app.document = document.documentElement;
     
     app.navigation = [];
 });

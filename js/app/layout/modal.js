@@ -16,6 +16,7 @@ app.closeModal = function () {
     app.modal.removeClass('info-shown').empty();
     app.checkModal();
     app.setHtmlScroll();
+    app.exitFullScreen();
 };
 
 app.checkModal = function () {
@@ -88,6 +89,7 @@ $(function () {
                 });
                 image.attr('src', $this.attr('data-modal-img'));
                 app.showLoading();
+                app.requestFullScreen();
             } else {
                 var content = app.modal.find('#modal-content > .content');
                 if (id === 'cookie-info') {

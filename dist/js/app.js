@@ -776,6 +776,7 @@ $(function () {
     app.smallBreakpoint = 732;
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
+    app.document = document.documentElement;
     
     app.navigation = [];
 });
@@ -1109,6 +1110,42 @@ app.pageLoaded = function (initial) {
     if (initial) {
         app.html.addClass('site-loaded');
     }
+};
+var app = app || {};
+
+app.isFullScreen = function () {
+    return document.fullScreenElement && document.fullScreenElement !== null
+        || document.mozFullScreen
+        || document.webkitIsFullScreen;
+};
+
+app.requestFullScreen = function () {
+    if (app.document.requestFullscreen)
+        app.document.requestFullscreen();
+    else if (app.document.msRequestFullscreen)
+        app.document.msRequestFullscreen();
+    else if (app.document.mozRequestFullScreen)
+        app.document.mozRequestFullScreen();
+    else if (app.document.webkitRequestFullscreen)
+        app.document.webkitRequestFullscreen();
+};
+
+app.exitFullScreen = function () {
+    if (document.exitFullscreen)
+        document.exitFullscreen();
+    else if (document.msExitFullscreen)
+        document.msExitFullscreen();
+    else if (document.mozCancelFullScreen)
+        document.mozCancelFullScreen();
+    else if (document.webkitExitFullscreen)
+        document.webkitExitFullscreen();
+};
+
+app.toggleFullScreen = function (element) {
+    if (isFullScreen())
+        exitFullScreen();
+    else
+        requestFullScreen(element);
 };
 var app = app || {};
 
@@ -1605,6 +1642,7 @@ app.closeModal = function () {
     app.modal.removeClass('info-shown').empty();
     app.checkModal();
     app.setHtmlScroll();
+    app.exitFullScreen();
 };
 
 app.checkModal = function () {
@@ -1677,6 +1715,7 @@ $(function () {
                 });
                 image.attr('src', $this.attr('data-modal-img'));
                 app.showLoading();
+                app.requestFullScreen();
             } else {
                 var content = app.modal.find('#modal-content > .content');
                 if (id === 'cookie-info') {
