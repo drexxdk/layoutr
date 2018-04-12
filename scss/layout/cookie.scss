@@ -23,8 +23,8 @@
         > button {
             text-decoration: underline;
 
-            &:focus,
-            .desktop &:hover {
+            html.desktop &:focus,
+            html.desktop &:hover {
                 text-decoration: none;
             }
         }

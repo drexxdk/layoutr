@@ -34,13 +34,16 @@
             }
         }
 
-        label.label > i {
-            @extend .btn;
-            overflow: hidden;
-        }
+        label.label {
 
-        label.label:focus > i {
-            @extend .btn:focus;
+            html.desktop &:focus > i {
+                @extend .btn:focus;
+            }
+
+            > i {
+                @extend .btn;
+                overflow: hidden;
+            }
         }
 
 

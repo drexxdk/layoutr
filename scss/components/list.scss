@@ -78,7 +78,7 @@
 
         li > button,
         li > a {
-            &:focus {
+            html.desktop &:focus {
                 @include theme-element-darken($list-background-color);
             }
 

@@ -27,7 +27,7 @@
                     opacity: 1;
                 }
 
-                &:focus {
+                html.desktop &:focus {
                     @include focus;
                 }
 

@@ -59,6 +59,7 @@ header {
                 transition: transform $transition-time $transition-timing;
             }
 
+            html.desktop &:focus,
             html.desktop &:hover {
                 color: $black;
 
@@ -98,6 +99,7 @@ header {
             margin-left: $spacer / 4;
         }
 
+        img,
         svg {
             width: $font-size;
             height: $font-size;
@@ -114,16 +116,23 @@ header {
         flex-shrink: 0;
         overflow: hidden;
 
-        html.desktop &:hover svg {
-            opacity: 1;
-            width: 65%;
-            height: 65%;
+        html.desktop &:hover {
+            > img,
+            > svg {
+                width: 65%;
+                height: 65%;
+            }
         }
 
-        &:focus > svg {
-            opacity: 1;
+        html.desktop &:hover,
+        html.desktop &:focus {
+            > img,
+            > svg {
+                opacity: 1;
+            }
         }
 
+        > img,
         > svg {
             margin-top: 50%;
             margin-left: 50%;

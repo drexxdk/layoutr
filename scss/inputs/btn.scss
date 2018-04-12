@@ -67,7 +67,7 @@
 
         @include theme-element($primary);
 
-        &:focus {
+        html.desktop &:focus {
             @include focus;
         }
     }

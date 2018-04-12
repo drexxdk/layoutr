@@ -55,7 +55,7 @@
             border: $component-border-width solid transparent;
             white-space: nowrap;
 
-            &:focus,
+            html.desktop &:focus,
             html.desktop &:hover {
                 @include theme-element-darken($link-color);
                 box-shadow: $box-shadow;
@@ -81,35 +81,13 @@
         }
 
         > button {
-            opacity: $opacity-inactive;
-
-            &:focus,
-            html.desktop &:hover {
-                opacity: 1;
+            > img + svg {
+                display: none;
             }
 
-            * {
-                border-radius: 50%;
-            }
-
-            > img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 65%;
-                height: 65%;
-                @include button-transition(all);
-            }
-
-            &:focus,
+            html.desktop &:focus,
             html.desktop &:hover {
                 overflow: unset;
-
-                > img {
-                    width: 75%;
-                    height: 75%;
-                }
             }
         }
 
@@ -124,7 +102,6 @@
                 > i {
                     width: ($line-height * 2) + ($spacer / 2);
                     height: ($line-height * 2) + ($spacer / 2);
-                    border-radius: 50%;
                     overflow: hidden;
                     position: relative;
                     flex-shrink: 0;
@@ -161,8 +138,8 @@
                     color: $black;
                     text-decoration: none;
 
-                    &:focus,
-                    .desktop &:hover {
+                    html.desktop &:focus,
+                    html.desktop &:hover {
                         @include theme-element($gray-200, false);
 
                         > i > svg {

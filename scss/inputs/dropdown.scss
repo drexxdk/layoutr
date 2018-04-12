@@ -4,9 +4,13 @@
     select.dropdown {
         @include hidden;
 
-        &:focus + div.dropdown > div {
+        /* 
+            outcommented, since it doesn't seem to do anything.
+            outcommented 2018-04-12
+        */
+        /*html.desktop &:focus + div.dropdown > div {
             @extend :focus;
-        }
+        }*/
     }
 
     div.dropdown {
@@ -89,7 +93,7 @@
                     @include focus;
                     position: absolute;
 
-                    > li > div:focus {
+                    html.desktop & > li > div:focus {
                         @include theme-element-soft-darken($light);
                         box-shadow: none;
                     }
