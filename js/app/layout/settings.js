@@ -80,6 +80,7 @@ $(function () {
                 app.setHtmlScroll();
             }
         });
+        app.responsiveHeader();
     });
 
     app.right.on('click', '.clear-localstorage', function () {

@@ -28,6 +28,10 @@
                 background-color: $white;
                 border: $layout-border;
                 box-shadow: 0 0 $spacer / 2 0 rgba(0,0,0,0.5);
+
+                .form-group > div {
+                    min-width: unset;
+                }
             }
         }
     }
@@ -47,18 +51,34 @@
             display: none;
         }
 
-        > button {
-            margin: ($spacer / 2);
-            padding: 0 $padding-x;
-            color: $link-color;
-            border-radius: $component-border-radius;
-            border: $component-border-width solid transparent;
-            white-space: nowrap;
+        &.icons {
+            > button {
+                @extend .expand;
 
-            html.desktop &:focus,
-            html.desktop &:hover {
-                @include theme-element-darken($link-color);
-                box-shadow: $box-shadow;
+                > span {
+                    display: none;
+                }
+            }
+        }
+
+        &:not(.icons) {
+            > button {
+                color: $link-color;
+                margin: ($spacer / 2);
+                padding: 0 $padding-x;
+                border-radius: $component-border-radius;
+                border: $component-border-width solid transparent;
+                white-space: nowrap;
+
+                > svg {
+                    display: none;
+                }
+
+                html.desktop &:focus,
+                html.desktop &:hover {
+                    @include theme-element-darken($link-color);
+                    box-shadow: $box-shadow;
+                }
             }
         }
 

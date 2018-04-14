@@ -37,6 +37,7 @@
       "js/app/layout/modal.js",
       "js/app/layout/touchDevice.js",
       "js/app/layout/rb.js",
+      "js/app/layout/responsiveHeader.js",
 
       // inputs
       "js/app/inputs/dropdown.js",

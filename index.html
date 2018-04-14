@@ -59,9 +59,15 @@
             </h1>
             <div id="authentication">
                 <div id="unauthenticated" data-type="">
-                    <button type="button" data-type="login">Login</button>
+                    <button type="button" data-type="login">
+                        <svg focusable="false"><use xlink:href="#svg-password" aria-label="Login"></use></svg>
+                        <span>Login</span>
+                    </button>
                     <span></span>
-                    <button type="button" data-type="register">Register</button>
+                    <button type="button" data-type="register">
+                        <svg focusable="false"><use xlink:href="#svg-user-add" aria-label="Register"></use></svg>
+                        <span>Register</span>
+                    </button>
                     <div tabindex="0">
                         <div id="register">
                             <div class="header">
@@ -208,6 +214,6 @@
         <footer></footer>
     </main>
     <script async src="dist/js/loadCSS.min.js"></script>
-    <script async src="dist/js/app.min.js"></script>
+    <script async src="dist/js/app.js"></script>
 </body>
 </html>
