@@ -114,9 +114,7 @@
             @include theme-element($white, false);
 
             &:focus {
-                box-shadow: $input-focus-box-shadow;
-                z-index: $component-focus-z-index;
-                position: relative;
+                @include focus;
             }
         }
 
