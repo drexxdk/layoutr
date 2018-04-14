@@ -913,8 +913,8 @@ header h1 {
     html.desktop .header button.expand:hover > svg,
     html.desktop .header #authentication #unauthenticated.icons > button:hover > svg, #authentication
     html.desktop .header #unauthenticated.icons > button:hover > svg {
-      width: 65%;
-      height: 65%; }
+      width: 64%;
+      height: 64%; }
     html.desktop .header button.expand:hover > img, html.desktop .header #authentication #unauthenticated.icons > button:hover > img, #authentication html.desktop .header #unauthenticated.icons > button:hover > img,
     html.desktop .header button.expand:hover > svg,
     html.desktop .header #authentication #unauthenticated.icons > button:hover > svg, #authentication
