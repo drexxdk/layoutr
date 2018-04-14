@@ -54,3 +54,12 @@
         }
     }
 }
+
+#navigation-toggle {
+    margin-bottom: -$spacer;
+
+    .btn {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

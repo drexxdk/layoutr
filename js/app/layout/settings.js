@@ -86,7 +86,7 @@ $(function () {
         app.responsiveHeader();
     });
 
-    app.right.on('click', '.clear-localstorage', function () {
+    app.right.on('click', '#clear-localstorage', function () {
         localStorage.clear();
         location.reload();
     });

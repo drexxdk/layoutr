@@ -1414,12 +1414,13 @@ app.applyNavigation = function (id, value, set) {
 
 $(function () {
     app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
+        app.navigationTree = app.left.find('.tree');
         app.navigation = JSON.parse(localStorage.getItem("navigation"));
         if (app.navigation === null) app.navigation = [];
         $.each(app.navigation, function (i, entry) {
             app.applyNavigation(entry.id, entry.value, false);
         });
-        app.left.on('change', '.tree input[type=checkbox]', function () {
+        app.navigationTree.on('change', 'input[type=checkbox]', function () {
             var $this = $(this),
                 id = $this.attr('id'),
                 value = $this.is(':checked');
@@ -1427,9 +1428,9 @@ $(function () {
         });
         app.header.find('.aside.left').addClass('loaded');
         if (app.url && app.url.p) {
-            app.left.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
+            app.navigationTree.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
         } else {
-            app.left.find('a.label[href=""]').addClass('active');
+            app.navigationTree.find('a.label[href=""]').addClass('active');
         }
     });
 
@@ -1445,6 +1446,14 @@ $(function () {
 
     app.header.on('click', 'h1 a', function (e) {
         app.internalLinkClick($(this).attr('href'), e);
+    });
+
+    app.left.on('click', '#navigation-expand', function () {
+        app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
+    });
+
+    app.left.on('click', '#navigation-collapse', function () {
+        app.navigationTree.find('input[type=checkbox]:checked').click();
     });
 });
 var app = app || {};
@@ -1535,7 +1544,7 @@ $(function () {
         app.responsiveHeader();
     });
 
-    app.right.on('click', '.clear-localstorage', function () {
+    app.right.on('click', '#clear-localstorage', function () {
         localStorage.clear();
         location.reload();
     });
