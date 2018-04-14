@@ -6,13 +6,13 @@
 
     @for $i from 1 through 10 {
         &.space-#{$i} {
-            margin-top: -($flex-space-base * $i);
-            margin-left: -($flex-space-base * $i);
+            margin-top: -($spacer-base * $i);
+            margin-left: -($spacer-base * $i);
 
             > * {
-                margin-top: ($flex-space-base * $i);
-                margin-left: ($flex-space-base * $i);
-                max-width: calc(100% - #{$flex-space-base * $i});
+                margin-top: ($spacer-base * $i);
+                margin-left: ($spacer-base * $i);
+                max-width: calc(100% - #{$spacer-base * $i});
             }
         }
     }

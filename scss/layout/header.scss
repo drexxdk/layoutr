@@ -119,8 +119,8 @@ header {
         html.desktop &:hover {
             > img,
             > svg {
-                width: 64%;
-                height: 64%;
+                width: $spacer * 2;
+                height: $spacer * 2;
             }
         }
 
@@ -137,8 +137,8 @@ header {
             margin-top: 50%;
             margin-left: 50%;
             transform: translate(-50%, -50%);
-            width: 50%;
-            height: 50%;
+            width: $spacer-base * 6;
+            height: $spacer-base * 6;
             opacity: $opacity-inactive;
             @include button-transition(all);
         }
