@@ -38,6 +38,7 @@
 
             html.desktop &:focus > i {
                 @extend .btn:focus;
+                position: absolute;
             }
 
             > i {
