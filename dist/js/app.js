@@ -1507,6 +1507,9 @@ app.applySettings = function (id, name, type, value, set) {
         if (id === 'two-columns') {
             app.rb();
         }
+        if (id === 'signed-in') {
+            app.responsiveHeader();
+        }
     }
 };
 
