@@ -24,7 +24,7 @@
       "js/app/layout/_bowser.js",
       "js/app/layout/_form.js",
       "js/app/layout/_app.js",
-      "js/app/layout/pageLoaded.js",
+      "js/app/layout/loaded.js",
       "js/app/layout/fullscreen.js",
       "js/app/layout/scroll.js",
       "js/app/layout/loading.js",

@@ -1,5 +1,16 @@
 ﻿var app = app || {};
 
+app.contentLoaded = function (elemenet) {
+    app.lazy(elemenet.find('.lazy'));
+    app.accordion(elemenet.find('.accordion'));
+    app.dropdown(elemenet.find('select.dropdown'));
+    app.tooltip(elemenet.find('.tooltip'));
+    app.assignment(elemenet.find('.assignment'));
+    app.math(elemenet.find('.math'));
+    app.media(elemenet.find('audio, video'));
+    app.map(elemenet.find('.map'));
+}
+
 app.pageLoaded = function (initial) {
     $(window).off('throttledresize.assignment');
     $(window).off('throttledresize.map');
@@ -14,14 +25,7 @@ app.pageLoaded = function (initial) {
         }
     }, 200);
     app.rb();
-    app.lazy(app.content.find('.lazy'));
-    app.accordion(app.content.find('.accordion'));
-    app.dropdown(app.content.find('select.dropdown'));
-    app.tooltip(app.content.find('.tooltip'));
-    app.assignment(app.content.find('.assignment'));
-    app.math(app.content.find('.math'));
-    app.media(app.content.find('audio, video'));
-    app.map(app.content.find('.map'));
+    app.contentLoaded(app.content);
     app.hideLoading();
     if (initial) {
         app.html.addClass('site-loaded');

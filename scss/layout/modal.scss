@@ -73,7 +73,7 @@ html {
                 width: 100%;
                 @include align-items(center);
 
-                > #modal-content {
+                > #modal-container {
                     width: 100%;
                     margin: $spacer 0;
                     border: $component-border;
@@ -90,7 +90,7 @@ html {
         &[data-modal="image"] #modal {
             &.has-info:not(.info-shown) {
                 #modal-title,
-                #modal-description {
+                #modal-content {
                     display: none;
                 }
             }
@@ -98,7 +98,7 @@ html {
             > div > div {
                 max-height: 100vh;
 
-                > #modal-content {
+                > #modal-container {
                     #modal-img {
                         max-width: 100%;
                         max-height: 100vh;
@@ -110,7 +110,7 @@ html {
                     }
 
                     #modal-title:not(:empty),
-                    #modal-description:not(:empty) {
+                    #modal-content:not(:empty) {
                         position: absolute;
                         left: 0;
                         right: 0;
@@ -129,7 +129,7 @@ html {
                         @include ellipsis;
                     }
 
-                    #modal-description:not(:empty) {
+                    #modal-content:not(:empty) {
                         bottom: 0;
                         padding: $spacer;
                         transition: bottom $transition-time $transition-timing;
