@@ -87,6 +87,10 @@ $(function () {
                 image.attr('src', $this.attr('data-modal-img'));
                 app.requestFullScreen();
             } else {
+                var dataSize = $this.attr('data-modal-size');
+                if (dataSize !== undefined) {
+                    app.modal.children('div').attr('data-modal-size', dataSize);
+                }
                 var content = app.modal.find('#modal-container > .content');
                 content.append(dataContent);
                 app.contentLoaded(content);

@@ -27,8 +27,8 @@
             flex-shrink: 1;
 
             .tooltipster-content {
-                max-height: $container-medium - ($component-border-width / 2);
-                max-width: $container-medium - ($component-border-width / 2);
+                max-height: $container-small - ($component-border-width / 2);
+                max-width: $container-small - ($component-border-width / 2);
                 overflow: auto;
             }
         }

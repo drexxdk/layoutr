@@ -54,9 +54,19 @@ html {
                 }
             }
 
-            &[data-modal="form"] #modal > div {
-                margin: 0 $spacer;
-                max-width: $container-large;
+            &[data-modal="form"] {
+                #modal > div {
+                    margin: 0 $spacer;
+                    max-width: $container-medium;
+
+                    &[data-modal-size="small"] {
+                        max-width: $container-small;
+                    }
+
+                    &[data-modal-size="large"] {
+                        max-width: $container-large;
+                    }
+                }
             }
         }
 

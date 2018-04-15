@@ -30,9 +30,9 @@ $breakpoint-main-min-width: px($main-min-width);
 $breakpoint-one-column: px($aside-width + $content-min-width);
 $breakpoint-two-columns: px($aside-width + $content-min-width + $content-min-width);
 
-$container-small: rem(300px);
-$container-medium: rem(500px);
-$container-large: rem(700px);
+$container-small: rem(500px);
+$container-medium: rem(750px);
+$container-large: rem(1000px);
 
 $transition-time: .4s;
 $transition-timing: ease-in-out;
