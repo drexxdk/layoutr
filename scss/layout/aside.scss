@@ -14,7 +14,8 @@ aside {
     @include flex-direction(column);
     @include flex-display;
 
-    html.ios & {
+    html.ios &,
+    html.android & {
         height: 100%;
     }
 

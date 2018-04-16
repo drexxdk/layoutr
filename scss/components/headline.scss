@@ -7,6 +7,10 @@
         font-weight: $headings-font-weight;
         line-height: $headings-line-height;
         color: $headings-color;
+    }
+
+    h1, h2, h3, h4, h5,
+    .h1, .h2, .h3, .h4, .h5 {
         margin-bottom: $spacer;
     }
 
@@ -32,5 +36,6 @@
 
     h6, .h6 {
         font-size: $h6-font-size;
+        margin-bottom: $spacer / 2;
     }
 }

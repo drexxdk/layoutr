@@ -6,11 +6,10 @@ main {
         @include flex-direction(column);
         height: 100vh;
 
-        html.android & {
+        html.scroll-disabled.android & {
             position: fixed;
             left: 0;
             right: 0;
-            overflow: auto;
         }
 
         html.scroll-disabled & {
