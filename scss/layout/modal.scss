@@ -56,7 +56,7 @@ html {
 
             &[data-modal="form"] {
                 #modal > div {
-                    margin: 0 $spacer;
+                    padding: 0 $spacer;
                     max-width: $container-medium;
 
                     &[data-modal-size="small"] {
@@ -89,6 +89,7 @@ html {
                     border: $component-border;
                     border-radius: $component-border-radius;
                     background-color: $modal-background-color;
+                    overflow: hidden;
 
                     > .content {
                         padding: $spacer;
