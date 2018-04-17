@@ -24,6 +24,9 @@
         // Otherwise, leave segmentCount as 0.
         
         var l = window.location;
+        String.prototype.endsWith = function (suffix) {
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
         var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
         var host = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/';
         
