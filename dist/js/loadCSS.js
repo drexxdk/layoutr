@@ -82,6 +82,9 @@ var app = app || {};
 
 var l = window.location;
 app.isLocalhost = l.hostname === "localhost" || l.hostname === "127.0.0.1";
+String.prototype.endsWith = function (suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
 var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
 app.host = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/';
 
