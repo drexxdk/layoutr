@@ -38,7 +38,7 @@ $(function () {
                     if (dropdowns.length) {
                         dropdowns.removeClass('open');
                     }
-                    app.authenticated.removeClass('open');
+                    app.html.attr('data-authentication', '');
                 }
             }
             if (e.which === 13) { // enter

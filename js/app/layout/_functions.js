@@ -53,6 +53,10 @@ app.isModalImage = function () {
     return app.html.attr('data-modal') === 'image';
 };
 
+app.isAuthentication = function () {
+    return app.html.attr('data-authentication') !== '';
+};
+
 app.isLoading = function () {
     return app.html.hasClass('loading');
 };

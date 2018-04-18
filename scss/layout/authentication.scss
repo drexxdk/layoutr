@@ -12,7 +12,7 @@
     #unauthenticated,
     #authenticated {
         > div {
-            position: absolute;
+            position: fixed;
             top: $header-height;
             left: 0;
             right: 0;
@@ -28,6 +28,7 @@
                 background-color: $white;
                 border: $layout-border;
                 box-shadow: 0 0 $spacer / 2 0 rgba(0,0,0,0.5);
+                display: none;
 
                 .form-group > div {
                     min-width: unset;
@@ -37,18 +38,17 @@
     }
 
     #unauthenticated {
-        &[data-type=""] > div,
-        &[data-type="register"] #login,
-        &[data-type="login"] #register {
-            display: none;
-        }
-
         html:not(.signed-in) & {
             @include flex-display;
         }
 
         html.signed-in & {
             display: none;
+        }
+
+        html[data-authentication="login"] & > div > #login,
+        html[data-authentication="register"] & > div > #register {
+            display: block;
         }
 
         &.icons {
@@ -95,7 +95,6 @@
     }
 
     #authenticated {
-        &:not(.open) > div,
         html:not(.signed-in) & {
             display: none;
         }
@@ -112,6 +111,9 @@
         }
 
         > div > div {
+            html[data-authentication="user"] & {
+                display:block;
+            }
             #authenticated-user {
                 @include flex-display;
                 @include align-items(center);

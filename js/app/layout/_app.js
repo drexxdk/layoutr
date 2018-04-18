@@ -12,7 +12,7 @@ $(function () {
     $.get(app.host + 'ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
-    
+
     app.addValidation(
         app.body.find('#register > form'),
         {
@@ -84,13 +84,10 @@ $(window).click(function (e) {
             target.focus();
         }
     }
-    if (app.unauthenticated.attr('data-type') !== '' && !target.closest('#unauthenticated').length && !target.parents('#unauthenticated').length) {
-        app.unauthenticated.attr('data-type', '');
+    if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
+        app.html.attr('data-authentication', '');
     }
-    if (app.authenticated.hasClass('open') && !target.closest('#authenticated').length && !target.parents('#authenticated').length) {
-        app.authenticated.removeClass('open');
-    }
-    if (modal.length || target.parents('#modal').length) {
+    else if (modal.length) {
         var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
             form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
         if (image || form || target.closest('#modal-close').length) {

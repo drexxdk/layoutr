@@ -67,8 +67,10 @@ body {
     }
 }
 
+.link,
 a {
     color: $link-color;
+    text-decoration: underline;
 
     html.desktop &:focus,
     html.desktop &:hover {

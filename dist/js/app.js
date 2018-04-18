@@ -765,6 +765,7 @@ $(function () {
     app.overflow = $('#overflow');
     app.modal = $('#modal');
     app.title = $('#title');
+    app.authentication = $('#authentication');
     app.unauthenticated = $('#unauthenticated');
     app.authenticated = $('#authenticated');
     app.authenticatedLinks = $('#authenticated-links');
@@ -833,6 +834,10 @@ app.isModalForm = function () {
 
 app.isModalImage = function () {
     return app.html.attr('data-modal') === 'image';
+};
+
+app.isAuthentication = function () {
+    return app.html.attr('data-authentication') !== '';
 };
 
 app.isLoading = function () {
@@ -987,7 +992,7 @@ $(function () {
     $.get(app.host + 'ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
-    
+
     app.addValidation(
         app.body.find('#register > form'),
         {
@@ -1059,13 +1064,10 @@ $(window).click(function (e) {
             target.focus();
         }
     }
-    if (app.unauthenticated.attr('data-type') !== '' && !target.closest('#unauthenticated').length && !target.parents('#unauthenticated').length) {
-        app.unauthenticated.attr('data-type', '');
+    if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
+        app.html.attr('data-authentication', '');
     }
-    if (app.authenticated.hasClass('open') && !target.closest('#authenticated').length && !target.parents('#authenticated').length) {
-        app.authenticated.removeClass('open');
-    }
-    if (modal.length || target.parents('#modal').length) {
+    else if (modal.length) {
         var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
             form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
         if (image || form || target.closest('#modal-close').length) {
@@ -1235,7 +1237,7 @@ var transitionLock = false;
 app.toggleAside = function (aside, pageChanged) {
     if (!transitionLock) {
         transitionLock = true;
-        app.authenticated.removeClass('open');
+        app.html.attr('data-authentication', '');
         var currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
@@ -1281,31 +1283,17 @@ $(function () {
 var app = app || {};
 
 $(function () {
-
-    app.unauthenticated.on('click', '> button', function () {
+    app.authentication.on('click', '> div > button', function () {
         var $this = $(this);
         var type = $this.attr('data-type');
-        if (app.unauthenticated.attr('data-type') === type) {
-            app.unauthenticated.attr('data-type', '');
+        if (app.html.attr('data-authentication') === type) {
+            app.html.attr('data-authentication', '');
         } else {
-            app.unauthenticated.attr('data-type', type);
+            app.html.attr('data-authentication', type);
             app.unauthenticated.find('> div').focus();
         }
     });
-
-    app.authenticated.on('click', '> button', function () {
-        var $this = $(this).parent();
-        $this.toggleClass('open');
-        if ($this.hasClass('open')) {
-            app.authenticated.find('> div').focus();
-        } else {
-            var scrollTop = app.scrollTop();
-            app.main.focus();
-            app.body.scrollTop(scrollTop); // edge, safari
-            app.html.scrollTop(scrollTop); // chrome, firefox, ie
-        }
-    });
-
+    
     app.authenticatedLinks.on('click', '> a', function (e) {
         e.preventDefault();
     });
@@ -1593,7 +1581,7 @@ $(function () {
                     if (dropdowns.length) {
                         dropdowns.removeClass('open');
                     }
-                    app.authenticated.removeClass('open');
+                    app.html.attr('data-authentication', '');
                 }
             }
             if (e.which === 13) { // enter

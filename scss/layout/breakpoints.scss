@@ -94,7 +94,8 @@ html {
             &.right-shrink {
                 header,
                 #content,
-                footer {
+                footer,
+                #authentication > div > div {
                     margin-right: $aside-width;
                 }
 
