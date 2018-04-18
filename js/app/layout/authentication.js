@@ -8,7 +8,7 @@ $(function () {
             app.html.attr('data-authentication', '');
         } else {
             app.html.attr('data-authentication', type);
-            app.unauthenticated.find('> div').focus();
+            app.authentication.children(':last-child').focus();
         }
     });
     

@@ -15,9 +15,9 @@ $(function () {
     app.modal = $('#modal');
     app.title = $('#title');
     app.authentication = $('#authentication');
-    app.unauthenticated = $('#unauthenticated');
-    app.authenticated = $('#authenticated');
-    app.authenticatedLinks = $('#authenticated-links');
+    app.unauthenticated = app.authentication.children('.unauthenticated');
+    app.authenticated = app.authentication.children('.authenticated');
+    app.authenticatedLinks = app.authenticated.find('.authenticated-links');
     app.cookie = $('#cookie');
 
     app.transitionTime = 400;

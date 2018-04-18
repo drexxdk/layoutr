@@ -30,7 +30,7 @@ html {
             }
 
             header,
-            #authentication > div > div,
+            #authentication > div:last-child,
             #cookie,
             &.footer-fixed footer {
                 overflow-y: scroll !important;
