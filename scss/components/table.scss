@@ -20,7 +20,6 @@
             white-space: nowrap;
             border-collapse: collapse;
             border-spacing: 0;
-            -webkit-overflow-scrolling: touch;
 
             thead th {
                 @include theme-element($primary, false);
@@ -64,7 +63,6 @@
                 }
 
                 tbody {
-                    -webkit-overflow-scrolling: touch;
                     @include flex-display();
                     position: relative;
                     overflow-x: auto;
