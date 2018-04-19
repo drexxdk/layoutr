@@ -72,7 +72,7 @@
     $threshold: 4.5; // 4.5 = WCAG AA,7= WCAG AAA
     $default-ratio: contrast_ratio($bgcolor, $color);
 
-    @if($default-ratio > $threshold) {
+    @if $default-ratio > $threshold {
         @return $color;
     }
 
@@ -84,18 +84,14 @@
         $darker-ratio: contrast_ratio($darker, $bgcolor);
         $lighter-ratio: contrast_ratio($lighter, $bgcolor);
 
-        @if($lighter-ratio > $darker-ratio) {
-            @if ($lighter-ratio > $threshold) {
-                @return $lighter;
-            }
+        @if $lighter-ratio > $darker-ratio and $lighter-ratio > $threshold {
+            @return $lighter;
         }
 
-        @if($darker-ratio > $lighter-ratio) {
-            @if ($darker-ratio > $threshold) {
-                @return $darker;
-            }
+        @if $darker-ratio > $lighter-ratio and $darker-ratio > $threshold {
+            @return $darker;
         }
     }
 
-    @return if(lightness($color) < 51, #FFF, #000)
+    @return if(lightness($color) < 51, $color-light, $color-dark)
 }

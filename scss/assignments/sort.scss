@@ -29,6 +29,10 @@
             cursor: pointer;
             @include noselect;
 
+            html.desktop &:hover {
+                @include theme-element-soft($secondary, false);
+            }
+
             &.valid {
                 @include theme-element-soft($success);
             }
@@ -44,7 +48,7 @@
     }
 
     .sort-sortable-chosen {
-        @include theme-element($secondary, true, true);
+        @include theme-element($secondary, true);
         padding: $padding-y $padding-x;
 
         body > & {

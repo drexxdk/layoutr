@@ -38,7 +38,6 @@
         }
 
         &.validated {
-
             .item > label > i {
                 display: none;
             }
@@ -58,6 +57,10 @@
             &.moving .place:focus {
                 pointer-events: all;
                 opacity: 1;
+            }
+
+            .item label:hover {
+                @include theme-element-soft($secondary, false);
             }
         }
 
@@ -115,7 +118,7 @@
         }
 
         label {
-            @include theme-element($secondary, true, true);
+            @include theme-element($secondary, true);
             padding: $padding-y $padding-x;
 
             i {

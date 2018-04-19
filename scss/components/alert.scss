@@ -9,11 +9,11 @@
         overflow: hidden;
 
         $value: $light;
-        @include theme-element-soft($value, true, false, false, true);
+        @include theme-element-soft($value);
 
         @each $color, $value in $theme-colors {
             &.theme-#{$color} {
-                @include theme-element-soft($value, true, false, false, true);
+                @include theme-element-soft($value);
 
                 .close {
                     html.desktop &:focus,

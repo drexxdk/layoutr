@@ -56,6 +56,10 @@
             }
 
             html.desktop & {
+                a.label:not(.active):hover {
+                    color: text-contrast($link-color, $tree-hover-background-color);
+                }
+
                 .label:not(.active):hover {
                     background: theme-gradient($tree-hover-background-color);
                 }

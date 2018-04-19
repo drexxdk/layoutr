@@ -8,23 +8,13 @@
     @include color-yiq($value);
 }
 
-@mixin theme-element($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
-    @include color-yiq($background, $important, $textCorrection, $linkCorrection);
+@mixin theme-element($background, $includeBorder: true) {
+    @include color-yiq($background);
+    background: theme-gradient($background);
 
-    @if($important) {
-        background: theme-gradient($background) !important;
-    }
-    @else {
-        background: theme-gradient($background);
-    }
 
-    @if $includeBorder == true {
-        @if($important) {
-            border: $component-border-width solid theme-border($background) !important;
-        }
-        @else {
-            border: $component-border-width solid theme-border($background);
-        }
+    @if $includeBorder {
+        border: $component-border-width solid theme-border($background);
     }
 }
 
@@ -40,14 +30,14 @@
     @return theme-darken(theme-soft($background));
 }
 
-@mixin theme-element-darken($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
-    @include theme-element(get-theme-element-darken($background), $includeBorder, $important, $textCorrection, $linkCorrection);
+@mixin theme-element-darken($background, $includeBorder: true) {
+    @include theme-element(theme-darken($background), $includeBorder);
 }
 
-@mixin theme-element-soft($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
-    @include theme-element(get-theme-element-soft($background), $includeBorder, $important, $textCorrection, $linkCorrection);
+@mixin theme-element-soft($background, $includeBorder: true) {
+    @include theme-element(get-theme-element-soft($background), $includeBorder);
 }
 
-@mixin theme-element-soft-darken($background, $includeBorder: true, $important: false, $textCorrection: false, $linkCorrection: false) {
-    @include theme-element(get-theme-element-soft-darken($background), $includeBorder, $important, $textCorrection, $linkCorrection);
+@mixin theme-element-soft-darken($background, $includeBorder: true) {
+    @include theme-element(get-theme-element-soft-darken($background), $includeBorder);
 }

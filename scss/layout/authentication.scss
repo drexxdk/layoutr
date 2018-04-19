@@ -154,7 +154,7 @@
 
         &:not(.icons) {
             > button {
-                color: $link-color;
+                color: text-contrast($link-color, $light);
                 margin: ($spacer / 2);
                 padding: 0 $padding-x;
                 border-radius: $component-border-radius;
