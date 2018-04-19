@@ -130,7 +130,6 @@
                 width: $font-size * 2;
                 height: $font-size;
                 @include theme-element($component-border-color);
-                transform: transition(.4s);
                 position: relative;
                 margin-right: ($spacer / 2);
 
@@ -143,7 +142,7 @@
                     bottom: 0;
                     left: 0;
                     background-color: white;
-                    transform: transition(.4s);
+                    transition: transform $transition-time;
                 }
             }
         }
