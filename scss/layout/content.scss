@@ -19,6 +19,7 @@
     > div {
         > .content-header {
             position: relative;
+            z-index: -1; /* ie overlay fix */
 
             &:not(.full) {
                 height: $content-header-height;

@@ -1,6 +1,14 @@
 ﻿/// <reference path="../references" />
 
 html.transitions {
+    header,
+    footer,
+    aside,
+    .popup,
+    #content > div > .content-header {
+        transform: translateZ(0); /* hardware acceleration */
+    }
+
     #left,
     .popup[data-position*="left"] {
         transition: left $transition-time $transition-timing;
@@ -16,7 +24,7 @@ html.transitions {
     }
 
     header,
-    #content,
+    #content, /* #content doesn't support hardware acceleration */
     footer {
         transition: margin $transition-time $transition-timing, left $transition-time $transition-timing, right $transition-time $transition-timing;
     }
