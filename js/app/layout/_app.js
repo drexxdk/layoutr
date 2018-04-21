@@ -12,63 +12,6 @@ $(function () {
     $.get(app.host + 'ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
-
-    app.addValidation(
-        app.body.find('#register > form'),
-        {
-            register_username: {
-                required: true,
-                minlength: 2
-            },
-            register_password: {
-                required: true,
-                password: true
-            },
-            register_confirm_password: {
-                required: true,
-                equalTo: "#password"
-            },
-            register_email: {
-                required: true,
-                email: true
-            },
-        },
-        {
-            register_username: {
-                required: "Please enter your username",
-            },
-            register_password: {
-                required: "Please enter your password"
-            },
-            register_confirm_password: {
-                required: "Please provide a password",
-                equalTo: "Please enter the same password as above"
-            },
-            register_email: "Please enter a valid email address"
-        }
-    );
-
-    app.addValidation(
-        app.body.find('#login > form'),
-        {
-            username: {
-                required: true,
-                minlength: 2
-            },
-            password: {
-                required: true,
-                password: true
-            }
-        },
-        {
-            username: {
-                required: "Please enter your username",
-            },
-            password: {
-                required: "Please enter your password"
-            },
-        }
-    );
 });
 
 $(window).click(function (e) {

@@ -955,7 +955,7 @@ $(function () {
         }
     });
 
-    $.validator.addMethod('password', function (value) {
+    $.validator.addMethod('password_regex', function (value) {
         return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
     }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
 });
@@ -997,63 +997,6 @@ $(function () {
     $.get(app.host + 'ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
-
-    app.addValidation(
-        app.body.find('#register > form'),
-        {
-            register_username: {
-                required: true,
-                minlength: 2
-            },
-            register_password: {
-                required: true,
-                password: true
-            },
-            register_confirm_password: {
-                required: true,
-                equalTo: "#password"
-            },
-            register_email: {
-                required: true,
-                email: true
-            },
-        },
-        {
-            register_username: {
-                required: "Please enter your username",
-            },
-            register_password: {
-                required: "Please enter your password"
-            },
-            register_confirm_password: {
-                required: "Please provide a password",
-                equalTo: "Please enter the same password as above"
-            },
-            register_email: "Please enter a valid email address"
-        }
-    );
-
-    app.addValidation(
-        app.body.find('#login > form'),
-        {
-            username: {
-                required: true,
-                minlength: 2
-            },
-            password: {
-                required: true,
-                password: true
-            }
-        },
-        {
-            username: {
-                required: "Please enter your username",
-            },
-            password: {
-                required: "Please enter your password"
-            },
-        }
-    );
 });
 
 $(window).click(function (e) {
@@ -1302,6 +1245,61 @@ $(function () {
     app.authenticatedLinks.on('click', '> a', function (e) {
         e.preventDefault();
     });
+
+    app.addValidation(
+        app.authentication.find('.register > form'),
+        {
+            register_username: {
+                required: true,
+                minlength: 2
+            },
+            register_password: {
+                required: true,
+                password_regex: true
+            },
+            register_confirm_password: {
+                required: true,
+                equalTo: "#register_password"
+            },
+            register_email: {
+                required: true,
+                email: true
+            },
+        },
+        {
+            register_username: {
+                required: "Please enter your username",
+            },
+            register_password: {
+                required: "Please enter your password"
+            },
+            register_confirm_password: {
+                required: "Please provide a password",
+                equalTo: "Please enter the same password as above"
+            },
+            register_email: "Please enter a valid email address"
+        }
+    );
+
+    app.addValidation(
+        app.authentication.find('.login > form'),
+        {
+            username: {
+                required: true
+            },
+            password: {
+                required: true
+            }
+        },
+        {
+            username: {
+                required: "Please enter your username",
+            },
+            password: {
+                required: "Please enter your password"
+            },
+        }
+    );
 });
 var app = app || {};
 
@@ -2217,7 +2215,7 @@ app.pageForm = function () {
             },
             password: {
                 required: true,
-                password: true
+                password_regex: true
             },
             confirm_password: {
                 required: true,

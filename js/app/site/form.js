@@ -18,7 +18,7 @@ app.pageForm = function () {
             },
             password: {
                 required: true,
-                password: true
+                password_regex: true
             },
             confirm_password: {
                 required: true,

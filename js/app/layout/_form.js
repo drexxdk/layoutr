@@ -7,7 +7,7 @@ $(function () {
         }
     });
 
-    $.validator.addMethod('password', function (value) {
+    $.validator.addMethod('password_regex', function (value) {
         return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
     }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
 });
