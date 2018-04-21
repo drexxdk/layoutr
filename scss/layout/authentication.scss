@@ -136,6 +136,7 @@
     .unauthenticated {
         &:not(.checked) {
             visibility: hidden;
+            opacity: 0;
         }
 
         html:not(.signed-in) & {

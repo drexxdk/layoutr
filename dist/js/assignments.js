@@ -246,7 +246,6 @@ app.assignment.sort = function (assignment) {
     var id = assignment.attr('data-id'),
         container = assignment.find('.container'),
         items = assignment.find('.item');
-
     Sortable.create(container[0], {
         draggable: ".item",
         animation: 0,
@@ -258,19 +257,14 @@ app.assignment.sort = function (assignment) {
 
     if (!container.hasClass('wrap')) {
         var checkWidth = function () {
-            container
-                .css('height', container.height())
-                .removeClass('row')
-                .addClass('checking column');
+            container.css('height', container.height()).removeClass('row').addClass('column');
             var containerLeft = container[0].getBoundingClientRect().left,
                 firstItem = container.find('> .item:first-child'),
                 firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
             if (firstItemLeft < containerLeft) {
                 container.removeClass('column').addClass('row');
             }
-            container
-                .removeClass('checking')
-                .css('height', '');
+            container.css('height', '').addClass('checked');
         };
 
         var awaitCSS = setInterval(function () {
