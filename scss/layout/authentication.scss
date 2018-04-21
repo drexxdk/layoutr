@@ -17,6 +17,10 @@
         padding: $spacer;
         pointer-events: none;
 
+        html[data-authentication=""] & {
+            display: none;
+        }
+
         > div {
             pointer-events: all;
             max-height: calc(100vh - #{$header-height + ($spacer * 2)});
