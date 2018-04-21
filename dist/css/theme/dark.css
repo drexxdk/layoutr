@@ -488,6 +488,7 @@ html.desktop #authentication .authenticated > button:hover {
 
 #content > div > .content-header {
   position: relative;
+  z-index: -1;
   /* ie overlay fix */
   min-height: 15.625rem;
   overflow: hidden; }
