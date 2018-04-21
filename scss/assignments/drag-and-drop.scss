@@ -59,7 +59,7 @@
                 opacity: 1;
             }
 
-            .item label:hover {
+            .item:not(.sortable-ghost) label:hover {
                 @include theme-element-soft($secondary, false);
             }
         }
@@ -112,13 +112,17 @@
         }
     }
 
+    .assignment.drag-and-drop .item.sortable-ghost label,
+    .drag-and-drop-sortable-chosen label {
+        @include theme-element($dark);
+    }
+
     .drag-and-drop-sortable-chosen {
         body > & {
             margin: $spacer / 2;
         }
 
         label {
-            @include theme-element($secondary, true);
             padding: $padding-y $padding-x;
 
             i {
