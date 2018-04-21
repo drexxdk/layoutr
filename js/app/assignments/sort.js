@@ -5,16 +5,14 @@ app.assignment.sort = function (assignment) {
         container = assignment.find('.container'),
         items = assignment.find('.item');
 
-    if (!bowser.mobile && !bowser.tablet) {
-        Sortable.create(container[0], {
-            draggable: ".item",
-            animation: 0,
-            scroll: false,
-            forceFallback: true,
-            fallbackOnBody: true,
-            chosenClass: 'sort-sortable-chosen'
-        });
-    }
+    Sortable.create(container[0], {
+        draggable: ".item",
+        animation: 0,
+        scroll: false,
+        forceFallback: true,
+        fallbackOnBody: true,
+        chosenClass: 'sort-sortable-chosen'
+    });
 
     if (!container.hasClass('wrap')) {
         var checkWidth = function () {
