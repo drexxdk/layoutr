@@ -104,3 +104,7 @@ app.tryParseFloat = function (str, defaultValue) {
     }
     return retValue;
 };
+
+app.cssLoaded = function() {
+    return app.body.css('visibility') !== 'hidden';
+}

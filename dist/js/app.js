@@ -771,6 +771,7 @@ $(function () {
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
     app.cookie = $('#cookie');
 
+    app.cssInterval = 100;
     app.transitionTime = 400;
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
@@ -887,6 +888,10 @@ app.tryParseFloat = function (str, defaultValue) {
     }
     return retValue;
 };
+
+app.cssLoaded = function() {
+    return app.body.css('visibility') !== 'hidden';
+}
 var app = app || {};
 
 $(function () {
@@ -1888,17 +1893,25 @@ app.responsiveHeader = function () {
         var link = h1.children('a');
 
         function check() {
-            app.unauthenticated.removeClass('icons');
+            app.unauthenticated.addClass('text');
+            var a = h1.outerWidth();
+            var b = link.outerWidth();
             if (h1.outerWidth() < link.outerWidth()) {
-                app.unauthenticated.addClass('icons');
+                app.unauthenticated.removeClass('text');
             }
         }
+        
+        var awaitCSS = setInterval(function () {
+            if (app.cssLoaded()) {
+                clearInterval(awaitCSS);
 
-        $(window).on('resize', function () {
-            check();
-        });
-        check();
+                $(window).on('resize', function () {
+                    check();
+                });
 
+                check();
+            }
+        }, app.cssInterval);
     });
 };
 var app = app || {};

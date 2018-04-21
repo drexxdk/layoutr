@@ -152,26 +152,27 @@ app.assignment.dragAndDrop = function (assignment) {
             ];
         }
     };
-
-    assignment.find('.container').each(function () {
-        Sortable.create($(this)[0], {
-            group: 'container', draggable: ".item",
-            animation: 0,
-            scroll: false,
-            forceFallback: true,
-            fallbackOnBody: true,
-            chosenClass: 'drag-and-drop-sortable-chosen',
-            onAdd: function () {
-                setTimeout(function () {
-                    var checked = getChecked();
-                    if (checked.length) {
-                        checked.prop('checked', false);
-                        assignment.removeClass('moving');
-                    }
-                });
-            }
+    if (!bowser.mobile && !bowser.tablet) {
+        assignment.find('.container').each(function () {
+            Sortable.create($(this)[0], {
+                group: 'container', draggable: ".item",
+                animation: 0,
+                scroll: false,
+                forceFallback: true,
+                fallbackOnBody: true,
+                chosenClass: 'drag-and-drop-sortable-chosen',
+                onAdd: function () {
+                    setTimeout(function () {
+                        var checked = getChecked();
+                        if (checked.length) {
+                            checked.prop('checked', false);
+                            assignment.removeClass('moving');
+                        }
+                    });
+                }
+            });
         });
-    });
+    }
 
     checkboxes.on('click', function () {
         var $this = $(this),
@@ -246,14 +247,16 @@ app.assignment.sort = function (assignment) {
         container = assignment.find('.container'),
         items = assignment.find('.item');
 
-    Sortable.create(container[0], {
-        draggable: ".item",
-        animation: 0,
-        scroll: false,
-        forceFallback: true,
-        fallbackOnBody: true,
-        chosenClass: 'sort-sortable-chosen'
-    });
+    if (!bowser.mobile && !bowser.tablet) {
+        Sortable.create(container[0], {
+            draggable: ".item",
+            animation: 0,
+            scroll: false,
+            forceFallback: true,
+            fallbackOnBody: true,
+            chosenClass: 'sort-sortable-chosen'
+        });
+    }
 
     if (!container.hasClass('wrap')) {
         var checkWidth = function () {
@@ -272,11 +275,17 @@ app.assignment.sort = function (assignment) {
                 .css('height', '');
         };
 
-        checkWidth();
+        var awaitCSS = setInterval(function () {
+            if (app.cssLoaded()) {
+                clearInterval(awaitCSS);
 
-        $(window).on("throttledresize.assignment", function () {
-            checkWidth();
-        });
+                checkWidth();
+
+                $(window).on("throttledresize.assignment", function () {
+                    checkWidth();
+                });
+            }
+        }, app.cssInterval);
     }
 
     var reset = function () {

@@ -5,14 +5,16 @@ app.assignment.sort = function (assignment) {
         container = assignment.find('.container'),
         items = assignment.find('.item');
 
-    Sortable.create(container[0], {
-        draggable: ".item",
-        animation: 0,
-        scroll: false,
-        forceFallback: true,
-        fallbackOnBody: true,
-        chosenClass: 'sort-sortable-chosen'
-    });
+    if (!bowser.mobile && !bowser.tablet) {
+        Sortable.create(container[0], {
+            draggable: ".item",
+            animation: 0,
+            scroll: false,
+            forceFallback: true,
+            fallbackOnBody: true,
+            chosenClass: 'sort-sortable-chosen'
+        });
+    }
 
     if (!container.hasClass('wrap')) {
         var checkWidth = function () {
@@ -31,11 +33,17 @@ app.assignment.sort = function (assignment) {
                 .css('height', '');
         };
 
-        checkWidth();
+        var awaitCSS = setInterval(function () {
+            if (app.cssLoaded()) {
+                clearInterval(awaitCSS);
 
-        $(window).on("throttledresize.assignment", function () {
-            checkWidth();
-        });
+                checkWidth();
+
+                $(window).on("throttledresize.assignment", function () {
+                    checkWidth();
+                });
+            }
+        }, app.cssInterval);
     }
 
     var reset = function () {

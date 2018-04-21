@@ -142,7 +142,7 @@
             display: none;
         }
 
-        &.icons {
+        &:not(.text) {
             > button {
                 @extend .expand;
 
@@ -152,7 +152,7 @@
             }
         }
 
-        &:not(.icons) {
+        &.text {
             > button {
                 color: text-contrast($link-color, $light);
                 margin: ($spacer / 2);
