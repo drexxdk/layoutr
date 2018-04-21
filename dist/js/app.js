@@ -771,7 +771,7 @@ $(function () {
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
     app.cookie = $('#cookie');
 
-    app.cssInterval = 100;
+    app.cssInterval = 50;
     app.transitionTime = 400;
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
@@ -1899,6 +1899,7 @@ app.responsiveHeader = function () {
             if (h1.outerWidth() < link.outerWidth()) {
                 app.unauthenticated.removeClass('text');
             }
+            app.unauthenticated.addClass('checked');
         }
         
         var awaitCSS = setInterval(function () {

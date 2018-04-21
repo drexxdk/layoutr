@@ -134,6 +134,10 @@
     }
 
     .unauthenticated {
+        &:not(.checked) {
+            visibility: hidden;
+        }
+
         html:not(.signed-in) & {
             @include flex-display;
         }

@@ -12,6 +12,7 @@ app.responsiveHeader = function () {
             if (h1.outerWidth() < link.outerWidth()) {
                 app.unauthenticated.removeClass('text');
             }
+            app.unauthenticated.addClass('checked');
         }
         
         var awaitCSS = setInterval(function () {

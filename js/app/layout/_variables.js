@@ -20,7 +20,7 @@ $(function () {
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
     app.cookie = $('#cookie');
 
-    app.cssInterval = 100;
+    app.cssInterval = 50;
     app.transitionTime = 400;
     app.fadeOutTime = 500;
     app.htmlOverflowEnabled = true;
