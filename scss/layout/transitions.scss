@@ -3,24 +3,14 @@
 html.transitions {
     header,
     footer,
-    aside,
     .popup,
     #content > div > .content-header {
-        transform: translateZ(0); /* hardware acceleration */
+        @include transform(translateZ(0)); /* hardware acceleration */
     }
 
     #left,
-    .popup[data-position*="left"] {
-        transition: left $transition-time $transition-timing;
-    }
-
-    #right,
-    .popup[data-position*="right"] {
-        transition: right $transition-time $transition-timing;
-    }
-
-    .popup[data-position*="center"] {
-        transition: left $transition-time $transition-timing, right $transition-time $transition-timing;
+    #right {
+        transition: transform $transition-time $transition-timing;
     }
 
     header,
@@ -31,5 +21,17 @@ html.transitions {
 
     #content > div > .content-header {
         transition: left $transition-time $transition-timing, margin-right $transition-time $transition-timing, padding-right $transition-time $transition-timing;
+    }
+
+    .popup[data-position*="left"] {
+        transition: left $transition-time $transition-timing;
+    }
+
+    .popup[data-position*="center"] {
+        transition: left $transition-time $transition-timing, right $transition-time $transition-timing;
+    }
+
+    .popup[data-position*="right"] {
+        transition: right $transition-time $transition-timing;
     }
 }

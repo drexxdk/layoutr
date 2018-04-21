@@ -1,3 +1,5 @@
-﻿@mixin button-transition($element) {
-    transition: $element 0.35s ease;
+﻿@mixin transform($transition) {
+    -webkit-transform: $transition; /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+    -ms-transform: $transition; /* IE 9 */
+    transform: $transition; /* IE 10, Fx 16+, Op 12.1+ */
 }

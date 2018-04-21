@@ -13,6 +13,8 @@ aside {
     overflow: auto;
     @include flex-direction(column);
     @include flex-display;
+    @include transform(0);
+    will-change: transform;
 
     html.ios &,
     html.android & {
@@ -33,7 +35,7 @@ aside {
         border-right: $layout-border;
 
         html[data-aside="left"] & {
-            left: 0;
+            @include transform(translateX(100%));
         }
     }
 
@@ -50,7 +52,7 @@ aside {
         }
 
         html[data-aside="right"] & {
-            right: 0;
+            @include transform(translateX(-100%));
         }
     }
 
