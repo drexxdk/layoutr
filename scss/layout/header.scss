@@ -3,7 +3,7 @@
 header {
     @media screen {
         position: fixed;
-        bottom: calc(100% - $header-height);
+        bottom: calc(100% - #{$header-height});
         right: 0;
         left: 0;
         z-index: $header-z-index;
