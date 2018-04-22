@@ -1815,16 +1815,17 @@ $(function () {
 
             var t = setInterval(function () {
                 timesCalled++;
-                if (timesCalled === 10) {
+                if (timesCalled === 20) {
                     clearInterval(t);
                 }
+                app.header.css('margin-top', '');
                 var top = app.header.offset().top;
                 if (top > 0) {
                     app.header.css('margin-top', -top);
                 } else {
-                    app.header.css('margin-top', top);
+                    app.header.css('margin-top', Math.abs(top));
                 }
-            }, 100);
+            }, 50);
         });
     }
 });
