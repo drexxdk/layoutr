@@ -49,26 +49,27 @@ app.assignment.dragAndDrop = function (assignment) {
             ];
         }
     };
-
-    assignment.find('.container').each(function () {
-        Sortable.create($(this)[0], {
-            group: 'container', draggable: ".item",
-            animation: 0,
-            scroll: false,
-            forceFallback: true,
-            fallbackOnBody: true,
-            chosenClass: 'drag-and-drop-sortable-chosen',
-            onAdd: function () {
-                setTimeout(function () {
-                    var checked = getChecked();
-                    if (checked.length) {
-                        checked.prop('checked', false);
-                        assignment.removeClass('moving');
-                    }
-                });
-            }
+    if (!bowser.mobile && !bowser.tablet) {
+        assignment.find('.container').each(function () {
+            Sortable.create($(this)[0], {
+                group: 'container', draggable: ".item",
+                animation: 0,
+                scroll: false,
+                forceFallback: true,
+                fallbackOnBody: true,
+                chosenClass: 'drag-and-drop-sortable-chosen',
+                onAdd: function () {
+                    setTimeout(function () {
+                        var checked = getChecked();
+                        if (checked.length) {
+                            checked.prop('checked', false);
+                            assignment.removeClass('moving');
+                        }
+                    });
+                }
+            });
         });
-    });
+    }
 
     checkboxes.on('click', function () {
         var $this = $(this),

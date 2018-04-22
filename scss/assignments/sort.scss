@@ -13,7 +13,7 @@
             @include align-items(center);
             @include justify-content(center);
 
-            &.checking {
+            &:not(.checked) {
                 visibility: hidden;
                 opacity: 0;
             }
@@ -29,7 +29,7 @@
             cursor: pointer;
             @include noselect;
 
-            html.desktop &:hover {
+            html.desktop &:not(.sortable-ghost):hover {
                 @include theme-element-soft($secondary, false);
             }
 
@@ -47,8 +47,12 @@
         }
     }
 
+    .assignment.sort .item.sortable-ghost,
     .sort-sortable-chosen {
-        @include theme-element($secondary, true);
+        @include theme-element($dark);
+    }
+
+    .sort-sortable-chosen {
         padding: $padding-y $padding-x;
 
         body > & {

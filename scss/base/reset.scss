@@ -21,6 +21,10 @@ html {
     @media screen {
         overflow-y: scroll;
         overflow-x: hidden;
+
+        &.scroll-disabled {
+            height: 0; /* ie/edge overflow fix */
+        }
     }
 
     box-sizing: border-box;

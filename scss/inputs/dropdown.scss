@@ -3,7 +3,6 @@
 @mixin layoutr-dropdown {
     select.dropdown {
         @include hidden;
-
         /* 
             outcommented, since it doesn't seem to do anything.
             outcommented 2018-04-12
@@ -54,13 +53,13 @@
                     border-radius: 0 0 $component-border-radius $component-border-radius;
 
                     > svg {
-                        transform: rotate(90deg);
+                        @include transform(rotate(90deg));
                     }
                 }
             }
 
             > div > svg {
-                transform: rotate(270deg);
+                @include transform(rotate(270deg));
             }
 
             > ul {
@@ -84,7 +83,7 @@
                     @include focus;
 
                     > svg {
-                        transform: rotate(270deg);
+                        @include transform(rotate(270deg));
                     }
                 }
 
@@ -114,7 +113,7 @@
             }
 
             > svg {
-                transform: rotate(90deg);
+                @include transform(rotate(90deg));
             }
         }
 

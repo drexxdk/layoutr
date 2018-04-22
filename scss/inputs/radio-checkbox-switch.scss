@@ -82,7 +82,7 @@
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, - 50%);
+                @include transform(translate(-50%, - 50%));
                 border-radius: 50%;
                 height: $font-size - ($component-border-width * 4);
                 width: $font-size - ($component-border-width * 4);
@@ -118,7 +118,7 @@
         }
 
         > input:checked + label > i:before {
-            transform: translateX($font-size);
+            @include transform(translateX($font-size));
         }
 
         > label > i {

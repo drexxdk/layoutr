@@ -6,16 +6,25 @@ app.responsiveHeader = function () {
         var link = h1.children('a');
 
         function check() {
-            app.unauthenticated.removeClass('icons');
+            app.unauthenticated.addClass('text');
+            var a = h1.outerWidth();
+            var b = link.outerWidth();
             if (h1.outerWidth() < link.outerWidth()) {
-                app.unauthenticated.addClass('icons');
+                app.unauthenticated.removeClass('text');
             }
+            app.unauthenticated.addClass('checked');
         }
+        
+        var awaitCSS = setInterval(function () {
+            if (app.cssLoaded()) {
+                clearInterval(awaitCSS);
 
-        $(window).on('resize', function () {
-            check();
-        });
-        check();
+                $(window).on('resize', function () {
+                    check();
+                });
 
+                check();
+            }
+        }, app.cssInterval);
     });
 };

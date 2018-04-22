@@ -13,7 +13,7 @@
                 position: absolute;
                 top: #{$component-line-height / 2}rem;
                 left: 0;
-                transform: translateY(-50%);
+                @include transform(translateY(-50%));
                 width: $list-bullet-width;
                 height: $list-bullet-width;
                 border-radius: 50%;
@@ -93,7 +93,7 @@
                 top: $list-number-width / 2;
                 left: -$spacer;
                 border: ($spacer / 2) solid transparent;
-                transform: translateY(-50%);
+                @include transform(translateY(-50%));
                 transition: all $transition-time $transition-timing;
             }
         }

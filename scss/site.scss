@@ -49,7 +49,7 @@
         > svg {
             width: $font-size;
             height: $font-size;
-            transform: rotate(270deg);
+            @include transform(rotate(270deg));
             fill: $success;
         }
     }

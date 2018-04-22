@@ -17,6 +17,10 @@
         padding: $spacer;
         pointer-events: none;
 
+        html[data-authentication=""] & {
+            display: none;
+        }
+
         > div {
             pointer-events: all;
             max-height: calc(100vh - #{$header-height + ($spacer * 2)});
@@ -134,6 +138,11 @@
     }
 
     .unauthenticated {
+        &:not(.checked) {
+            visibility: hidden;
+            opacity: 0;
+        }
+
         html:not(.signed-in) & {
             @include flex-display;
         }
@@ -142,7 +151,7 @@
             display: none;
         }
 
-        &.icons {
+        &:not(.text) {
             > button {
                 @extend .expand;
 
@@ -152,7 +161,7 @@
             }
         }
 
-        &:not(.icons) {
+        &.text {
             > button {
                 color: text-contrast($link-color, $light);
                 margin: ($spacer / 2);
