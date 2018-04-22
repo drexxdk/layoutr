@@ -1809,8 +1809,12 @@ $(function () {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
             setTimeout(function () {
-                app.header.css('top', '100px');
-                app.header.css('top', '50px');
+                var top = app.header.offset().top;
+                if (top > 0) {
+                    app.header.css('margin-top', -top);
+                } else {
+                    app.header.css('margin-top', '');
+                }
             }, 500);
         });
     }
