@@ -69,14 +69,23 @@ $(function () {
             if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
-            setTimeout(function () {
+
+
+
+            var timesCalled = 0;
+
+            var t = setInterval(function () {
+                timesCalled++;
+                if (timesCalled === 10) {
+                    clearInterval(t);
+                }
                 var top = app.header.offset().top;
                 if (top > 0) {
                     app.header.css('margin-top', -top);
                 } else {
-                    app.header.css('margin-top', '');
+                    app.header.css('margin-top', top);
                 }
-            }, 500);
+            }, 100);
         });
     }
 });
