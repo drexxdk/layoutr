@@ -1808,9 +1808,6 @@ $(function () {
             if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
-
-            app.header.css('position', 'static');
-            app.header.css('position', '');
         });
     }
 });

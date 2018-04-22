@@ -1,13 +1,6 @@
 ﻿/// <reference path="../references" />
 
 html.transitions {
-    header,
-    footer,
-    .popup,
-    #content > div > .content-header {
-        @include transform(translateZ(0)); /* hardware acceleration */
-    }
-
     #left,
     #right {
         transition: transform $transition-time $transition-timing;
