@@ -70,23 +70,8 @@ $(function () {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
 
-
-
-            var timesCalled = 0;
-
-            var t = setInterval(function () {
-                timesCalled++;
-                if (timesCalled === 20) {
-                    clearInterval(t);
-                }
-                app.header.css('margin-top', '');
-                var top = app.header.offset().top;
-                if (top > 0) {
-                    app.header.css('margin-top', -top);
-                } else {
-                    app.header.css('margin-top', Math.abs(top));
-                }
-            }, 50);
+            app.header.css('position', 'static');
+            app.header.css('position', '');
         });
     }
 });
