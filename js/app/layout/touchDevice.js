@@ -69,6 +69,14 @@ $(function () {
             if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
+
+            if (bowser.android && bowser.chrome) {
+
+                var top = app.header.offset().top;
+                if (top > 0) {
+                    alert('xd');
+                }
+            }
         });
     }
 });
