@@ -69,19 +69,10 @@ $(function () {
             if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
-            var top = app.header.offset().top;
-            alert('top1: ' + top);
-            if (top > 0) {
-                alert('1above 0');
-            }
-            if (bowser.android && bowser.chrome) {
-
-                var top = app.header.offset().top;
-                alert('2top: ' + top);
-                if (top > 0) {
-                    alert('2above 0');
-                }
-            }
+            app.header.css('top', '0').css('top', '');
+            setTimeout(function () {
+                app.header.css('top', '0').css('top', '');
+            }, 100);
         });
     }
 });
