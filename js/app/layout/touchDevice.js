@@ -69,10 +69,10 @@ $(function () {
             if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
-            app.header.css('top', '0').css('top', '');
             setTimeout(function () {
-                app.header.css('top', '0').css('top', '');
-            }, 100);
+                app.header.css('top', '100px');
+                app.header.css('top', '50px');
+            }, 500);
         });
     }
 });
