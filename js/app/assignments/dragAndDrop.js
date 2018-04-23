@@ -49,7 +49,7 @@ app.assignment.dragAndDrop = function (assignment) {
             ];
         }
     };
-    if (!bowser.mobile && !bowser.tablet) {
+    if (bowser.desktop) {
         assignment.find('.container').each(function () {
             Sortable.create($(this)[0], {
                 group: 'container', draggable: ".item",

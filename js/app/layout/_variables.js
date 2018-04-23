@@ -30,4 +30,6 @@ $(function () {
     app.document = document.documentElement;
     
     app.navigation = [];
+
+    bowser.desktop = !bowser.mobile && !bowser.tablet;
 });
