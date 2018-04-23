@@ -13,7 +13,7 @@
             @include align-items(center);
             @include justify-content(center);
 
-            &:not(.checked) {
+            &:not(.wrap):not(.checked) {
                 visibility: hidden;
                 opacity: 0;
             }
