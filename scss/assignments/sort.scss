@@ -19,15 +19,12 @@
             }
         }
 
-        .wrap > .item {
-            text-align: center;
-        }
-
         .item {
             @include theme-element($light);
             padding: $padding-y $padding-x;
             cursor: pointer;
             @include noselect;
+            text-align: center;
 
             html.desktop &:not(.sortable-ghost):hover {
                 @include theme-element-soft($secondary, false);
@@ -54,6 +51,7 @@
 
     .sort-sortable-chosen {
         padding: $padding-y $padding-x;
+        text-align: center;
 
         body > & {
             margin: $spacer / 2;
