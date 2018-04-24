@@ -1078,7 +1078,7 @@ app.isFullScreen = function () {
 var fullscreenScrollTop;
 
 app.requestFullScreen = function () {
-    if (app.desktop) {
+    if (bowser.desktop) {
         fullscreenScrollTop = app.scrollTop();
         if (app.document.requestFullscreen)
             app.document.requestFullscreen();
@@ -1091,14 +1091,14 @@ app.requestFullScreen = function () {
     }
 };
 
-if (app.desktop && document.addEventListener) {
+if (document.addEventListener) {
     document.addEventListener('webkitfullscreenchange', fullscreenEnded, false);
     document.addEventListener('mozfullscreenchange', fullscreenEnded, false);
     document.addEventListener('fullscreenchange', fullscreenEnded, false);
     document.addEventListener('MSFullscreenChange', fullscreenEnded, false);
 
     function fullscreenEnded() {
-        if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {
+        if (bowser.desktop && (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null)) {
             app.body.scrollTop(fullscreenScrollTop);
             app.html.scrollTop(fullscreenScrollTop);
         }
@@ -1106,7 +1106,7 @@ if (app.desktop && document.addEventListener) {
 }
 
 app.exitFullScreen = function () {
-    if (app.desktop) {
+    if (bowser.desktop) {
         if (document.exitFullscreen)
             document.exitFullscreen();
         else if (document.msExitFullscreen)
