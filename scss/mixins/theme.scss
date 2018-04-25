@@ -8,8 +8,8 @@
     @include color-yiq($value);
 }
 
-@mixin theme-element($background, $includeBorder: true) {
-    @include color-yiq($background);
+@mixin theme-element($background, $includeBorder: true, $best: false) {
+    @include color-yiq($background, $best);
     background: theme-gradient($background);
 
 
@@ -30,14 +30,14 @@
     @return theme-darken(theme-soft($background));
 }
 
-@mixin theme-element-darken($background, $includeBorder: true) {
-    @include theme-element(theme-darken($background), $includeBorder);
+@mixin theme-element-darken($background, $includeBorder: true, $best: false) {
+    @include theme-element(theme-darken($background), $includeBorder, $best);
 }
 
-@mixin theme-element-soft($background, $includeBorder: true) {
-    @include theme-element(get-theme-element-soft($background), $includeBorder);
+@mixin theme-element-soft($background, $includeBorder: true, $best: false) {
+    @include theme-element(get-theme-element-soft($background), $includeBorder, $best);
 }
 
-@mixin theme-element-soft-darken($background, $includeBorder: true) {
-    @include theme-element(get-theme-element-soft-darken($background), $includeBorder);
+@mixin theme-element-soft-darken($background, $includeBorder: true, $best: false) {
+    @include theme-element(get-theme-element-soft-darken($background), $includeBorder, $best);
 }

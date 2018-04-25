@@ -95,3 +95,14 @@
 
     @return if(lightness($color) < 51, $color-light, $color-dark)
 }
+
+@function background-percentage($background, $percentage) {
+    @if yiq($background) >= 150 {
+        // dark
+        @return darken($background, $percentage);
+    }
+    @else {
+        // light
+        @return lighten($background, $percentage);
+    }
+}

@@ -1,16 +1,17 @@
 ﻿/// <reference path="../references" />
 
 // Color contrast
-@mixin color-yiq($color) {
+@mixin color-yiq($color, $best: false) {
+    $result-color: $color-light;
+    @if($best) {
+        $result-color: text-contrast($color);
+    }
+    @else if yiq($color) >= 150 {
+        $result-color: $color-dark;
+    }
 
-    @if yiq($color) >= 150 {
-        fill: $color-dark;
-        color: $color-dark;
-    }
-    @else {
-        fill: $color-light;
-        color: $color-light;
-    }
+    fill: $result-color;
+    color: $result-color;
 
     a {
         color: text-contrast($link-color, $color);

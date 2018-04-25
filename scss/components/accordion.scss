@@ -14,7 +14,32 @@
                 @extend .btn.theme-light;
                 border: none !important;
 
+                &.badge {
+                    &:not(.align-left):not(.align-right) > span:first-child {
+                        text-align: center;
+                    }
+
+                    &.align-right > span:first-child {
+                        text-align: right;
+                    }
+
+                    > span:first-child {
+                        flex-grow: 1;
+                    }
+
+                    > span:last-child {
+                        margin-left: $spacer;
+                        padding: 0 $padding-y;
+                        border-radius: $spacer-base * 2;
+                        @include theme-element(background-percentage($light, 20%), true, true);
+                    }
+                }
+
                 @each $color, $value in $theme-colors {
+                    &.btn.theme-#{$color}.badge > span:last-child {
+                        @include theme-element(background-percentage($value, 20%), true, true);
+                    }
+
                     html.desktop &.btn.theme-#{$color}:focus {
                         $active-background: darken($value, 7.5%);
                         @include color-yiq($active-background);
