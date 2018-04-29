@@ -15,6 +15,12 @@
                 max-width: calc(100% - #{$spacer-base * $i});
             }
         }
+
+        $width: $i * 100;
+
+        .basis-#{$width} {
+            @include flex-basis(rem($width));
+        }
     }
 
     &.no-spacing {
