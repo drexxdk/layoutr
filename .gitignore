@@ -4,6 +4,5 @@ obj/
 *.sln
 packages/
 Properties/
-*.config
 *.csproj
 *.csproj.user

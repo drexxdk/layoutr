@@ -1706,7 +1706,8 @@ $(function () {
             var id = $this.attr('data-modal-id'),
                 html = [],
                 dataTitle = $this.attr('data-modal-title'),
-                dataContent = $this.attr('data-modal-content');
+                dataContent = $this.attr('data-modal-content'),
+                dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
             html.push('<div><div><div id="modal-container">');
             if (type === 'image' && $this.attr('data-modal-img').length) {
                 if (dataTitle !== undefined || dataContent !== undefined) {
@@ -1742,7 +1743,6 @@ $(function () {
                     app.showModal(type);
                 });
                 image.attr('src', $this.attr('data-modal-img'));
-                app.requestFullScreen();
             } else {
                 var dataSize = $this.attr('data-modal-size');
                 if (dataSize !== undefined) {
@@ -1752,6 +1752,9 @@ $(function () {
                 content.append(dataContent);
                 app.contentLoaded(content);
                 app.showModal(type);
+            }
+            if (dataFullscreen) {
+                app.requestFullScreen();
             }
         }
     });
