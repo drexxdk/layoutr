@@ -28,6 +28,7 @@ $(function () {
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
     app.document = document.documentElement;
+    app.fullscreen = false;
     
     app.navigation = [];
 

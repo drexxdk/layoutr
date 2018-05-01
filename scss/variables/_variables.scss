@@ -17,10 +17,8 @@ $component-border-color: $gray-400;
 $component-border-width: rem(1px);
 $component-border: $component-border-width solid $component-border-color;
 $component-border-radius: .5rem;
-
-// components
-$tree-hover-background-color: $gray-200;
-$tree-highlight-background-color: $gray-100;
+$component-focus-box-shadow-width: rem(3px);
+$component-focus-box-shadow-color: theme-soft-border-color($primary);
 
 $form-label-width: rem(200px);
 $form-input-min-width: rem(250px);
@@ -28,15 +26,13 @@ $form-input-min-width: rem(250px);
 $height: $line-height + ($padding-y * 2);
 $box-shadow: inset 0 rem(1px) 0 rgba($white,.15), 0 rem(1px) rem(1px) rgba($black,.075);
 
-
-$component-focus-box-shadow-width: rem(3px);
-$component-focus-box-shadow-color: theme-soft-border-color($primary);
-
 $input-box-shadow: inset 0 rem(1px) rem(1px) rgba($black,.075);
 $input-focus-box-shadow: $input-box-shadow, 0 0 0 $component-focus-box-shadow-width rgba($primary, .25);
 
-$slider-line-height: 1.5rem;
-$slider-track-background-color: $gray-200;
+
+// components
+$tree-hover-background-color: $gray-200;
+$tree-highlight-background-color: $gray-100;
 
 $quote-img-width: rem(100px);
 
@@ -52,3 +48,5 @@ $percentage-circle-primary-color: $primary;
 $percentage-circle-bg-color: $white;
 
 $opacity-inactive: .5;
+
+$badge-percentage: 20%;

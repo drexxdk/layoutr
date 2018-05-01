@@ -779,6 +779,7 @@ $(function () {
     app.scrollbarWidth = 0;
     app.loadingCount = 0;
     app.document = document.documentElement;
+    app.fullscreen = false;
     
     app.navigation = [];
 
@@ -1069,57 +1070,61 @@ app.pageLoaded = function (initial) {
 };
 var app = app || {};
 
-app.isFullScreen = function () {
-    return document.fullScreenElement && document.fullScreenElement !== null
-        || document.mozFullScreen
-        || document.webkitIsFullScreen;
-};
-
 var fullscreenScrollTop;
 
 app.requestFullScreen = function () {
-    if (bowser.desktop) {
+    if (!app.fullscreen && bowser.desktop) {
         fullscreenScrollTop = app.scrollTop();
-        if (app.document.requestFullscreen)
+        if (app.document.requestFullscreen) {
             app.document.requestFullscreen();
-        else if (app.document.msRequestFullscreen)
+        }
+        else if (app.document.msRequestFullscreen) {
             app.document.msRequestFullscreen();
-        else if (app.document.mozRequestFullScreen)
+        }
+        else if (app.document.mozRequestFullScreen) {
             app.document.mozRequestFullScreen();
-        else if (app.document.webkitRequestFullscreen)
+        }
+        else if (app.document.webkitRequestFullscreen) {
             app.document.webkitRequestFullscreen();
+        }
     }
 };
 
-if (document.addEventListener) {
-    document.addEventListener('webkitfullscreenchange', fullscreenEnded, false);
-    document.addEventListener('mozfullscreenchange', fullscreenEnded, false);
-    document.addEventListener('fullscreenchange', fullscreenEnded, false);
-    document.addEventListener('MSFullscreenChange', fullscreenEnded, false);
+document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
+document.addEventListener('mozfullscreenchange', fullscreenChange, false);
+document.addEventListener('fullscreenchange', fullscreenChange, false);
+document.addEventListener('MSFullscreenChange', fullscreenChange, false);
 
-    function fullscreenEnded() {
-        if (bowser.desktop && (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null)) {
-            app.body.scrollTop(fullscreenScrollTop);
-            app.html.scrollTop(fullscreenScrollTop);
+function fullscreenChange(e) {
+    app.fullscreen = !app.fullscreen;
+    if (!app.fullscreen && bowser.desktop) {
+        if (app.isModal()) {
+            app.closeModal();
         }
-    };
-}
+        app.body.scrollTop(fullscreenScrollTop);
+        app.html.scrollTop(fullscreenScrollTop);
+    }
+};
 
 app.exitFullScreen = function () {
-    if (bowser.desktop) {
-        if (document.exitFullscreen)
+    if (app.fullscreen && bowser.desktop) {
+        if (document.exitFullscreen) {
             document.exitFullscreen();
-        else if (document.msExitFullscreen)
+        }
+        else if (document.msExitFullscreen) {
             document.msExitFullscreen();
-        else if (document.mozCancelFullScreen)
+        }
+        else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
-        else if (document.webkitExitFullscreen)
+        }
+        else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
+        }
     }
 };
 
 app.toggleFullScreen = function (element) {
-    if (isFullScreen())
+    if (app.fullscreen)
         exitFullScreen();
     else
         requestFullScreen(element);
@@ -1666,11 +1671,14 @@ app.showModal = function (type) {
 };
 
 app.closeModal = function () {
-    app.html.removeClass('modal').attr('data-modal', '');
-    app.modal.removeClass('info-shown').empty();
-    app.checkModal();
-    app.setHtmlScroll();
-    app.exitFullScreen();
+    if (app.fullscreen) {
+        app.exitFullScreen();
+    } else {
+        app.html.removeClass('modal').attr('data-modal', '');
+        app.modal.removeClass('info-shown').empty();
+        app.checkModal();
+        app.setHtmlScroll();
+    }
 };
 
 app.checkModal = function () {

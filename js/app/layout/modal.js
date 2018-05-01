@@ -9,11 +9,14 @@ app.showModal = function (type) {
 };
 
 app.closeModal = function () {
-    app.html.removeClass('modal').attr('data-modal', '');
-    app.modal.removeClass('info-shown').empty();
-    app.checkModal();
-    app.setHtmlScroll();
-    app.exitFullScreen();
+    if (app.fullscreen) {
+        app.exitFullScreen();
+    } else {
+        app.html.removeClass('modal').attr('data-modal', '');
+        app.modal.removeClass('info-shown').empty();
+        app.checkModal();
+        app.setHtmlScroll();
+    }
 };
 
 app.checkModal = function () {

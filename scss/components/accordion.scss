@@ -31,13 +31,13 @@
                         margin-left: $spacer;
                         padding: 0 $padding-y;
                         border-radius: $spacer-base * 2;
-                        @include theme-element(background-percentage($light, 20%), true, true);
+                        @include theme-element(background-percentage($light, $badge-percentage), true, true);
                     }
                 }
 
                 @each $color, $value in $theme-colors {
                     &.btn.theme-#{$color}.badge > span:last-child {
-                        @include theme-element(background-percentage($value, 20%), true, true);
+                        @include theme-element(background-percentage($value, $badge-percentage), true, true);
                     }
 
                     html.desktop &.btn.theme-#{$color}:focus {
