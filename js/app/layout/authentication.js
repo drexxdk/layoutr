@@ -5,8 +5,14 @@ $(function () {
         var $this = $(this);
         var type = $this.attr('data-type');
         if (app.html.attr('data-authentication') === type) {
+            if (bowser.ios) {
+                 app.enableScroll();
+            }
             app.html.attr('data-authentication', '');
         } else {
+            if (bowser.ios) {
+                app.disableScroll();
+            }
             app.html.attr('data-authentication', type);
             app.authentication.children(':last-child').focus();
         }
