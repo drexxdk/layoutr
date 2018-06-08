@@ -1,4 +1,5 @@
 ﻿var app = app || {};
+
 $.ajaxSetup({
     cache: true
 });
@@ -20,15 +21,13 @@ $(window).click(function (e) {
     if (bowser.ios) {
         // ios browsers doesn't apply :focus to buttons in many cases,
         // this forces :focus to be applied correctly.
-        var button = target.closest('button');
-        if (button.length) {
-            button.focus();
+        if (target.parents('button').length) {
+            target.parents('button').focus();
+        } else if (target.closest('button').length) {
+            target.focus();
         }
     }
     if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
-        if (bowser.ios) {
-            app.enableScroll();
-        }
         app.html.attr('data-authentication', '');
     }
     else if (modal.length) {
@@ -43,9 +42,7 @@ $(window).click(function (e) {
             right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
             notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
         if ((left || right) && notTarget && !app.isLoading()) {
-            if (!(target.closest('#authentication').length && bowser.ios)) {
-                app.enableScroll();
-            }
+            app.enableScroll();
             app.html.attr('data-aside', '');
         }
     }
