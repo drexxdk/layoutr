@@ -1037,15 +1037,16 @@ $(window).click(function (e) {
 });
 var app = app || {};
 
-app.contentLoaded = function (elemenet) {
-    app.lazy(elemenet.find('.lazy'));
-    app.accordion(elemenet.find('.accordion'));
-    app.dropdown(elemenet.find('select.dropdown'));
-    app.tooltip(elemenet.find('.tooltip'));
-    app.assignment(elemenet.find('.assignment'));
-    app.math(elemenet.find('.math'));
-    app.media(elemenet.find('audio, video'));
-    app.map(elemenet.find('.map'));
+app.contentLoaded = function (element) {
+    app.lazy(element.find('.lazy'));
+    app.accordion(element.find('.accordion'));
+    app.dropdown(element.find('select.dropdown'));
+    app.tooltip(element.find('.tooltip'));
+    app.assignment(element.find('.assignment'));
+    app.math(element.find('.math'));
+    app.media(element.find('audio, video'));
+    app.map(element.find('.map'));
+    app.datatables(element.find('.datatables'));
 }
 
 app.pageLoaded = function (initial) {
@@ -2202,6 +2203,23 @@ app.tooltip = function (tooltips) {
             }
         });
     });
+};
+var app = app || {};
+
+app.datatables = function (tables) {
+    if (tables.length) {
+        if (!app.html.hasClass('datatables-loaded')) {
+            app.head.append($('<link rel="stylesheet"href="dist/css/datatables.min.css">'));
+            app.html.addClass('datatables-loaded');
+        }
+
+        $.getScript('dist/js/datatables.min.js', function () {
+            tables.each(function () {
+                var $this = $(this);
+                $this.DataTable();
+            });
+        });
+    }
 };
 var app = app || {};
 
