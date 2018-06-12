@@ -10,7 +10,19 @@ app.datatables = function (tables) {
         $.getScript('dist/js/datatables.min.js', function () {
             tables.each(function () {
                 var $this = $(this);
-                $this.DataTable();
+                $this
+                    .addClass('display nowrap dataTable dtr-inline')
+                    .dataTable({
+                        responsive: true,
+                        columnDefs: [
+                            {
+                                // -1 = last
+                                // -3 = third last
+                                targets: [-1, -3],
+                                className: 'dt-body-right' // text align right
+                            }
+                        ]
+                    });
             });
         });
     }

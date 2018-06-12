@@ -37,6 +37,10 @@
 @include layoutr-drag-and-drop;
 @include layoutr-sort;
 
+table.datatables:not(.dataTable) {
+    display: none;
+}
+
 body {
     overflow: visible;
     visibility: visible;

@@ -76,7 +76,10 @@
   {
     "outputFileName": "dist/js/datatables.js",
     "inputFiles": [
-      "js/vendors/datatables.min.js"
+      "js/vendors/datatables/datatables.js",
+      "js/vendors/datatables/buttons.js",
+      "js/vendors/datatables/buttons.html5.js",
+      "js/vendors/datatables/responsive.js"
     ]
   },
   {

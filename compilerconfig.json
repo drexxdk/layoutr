@@ -45,7 +45,7 @@
   },
   {
     "outputFile": "dist/css/datatables.css",
-    "inputFile": "scss/vendors/datatables.scss",
+    "inputFile": "scss/vendors/datatables/_datatables.scss",
     "minify": {
       "enabled": true
     },
