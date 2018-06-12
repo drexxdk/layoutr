@@ -21,7 +21,13 @@ app.datatables = function (tables) {
                                 targets: [-1, -3],
                                 className: 'dt-body-right' // text align right
                             }
-                        ]
+                        ],
+                        "initComplete": function (settings, json) {
+                            var dropdown = $(settings.nTableWrapper).find('select');
+                            dropdown.addClass('dropdown').attr('data-width', 100);
+                            app.dropdown(dropdown);
+                            //alert('DataTables has finished its initialisation.');
+                        }
                     });
             });
         });

@@ -1956,7 +1956,8 @@ app.dropdown = function (dropdowns) {
             selected = $this.children('option:selected'),
             html = [],
             attr = $this.attr('class'),
-            theme = '';
+            theme = '',
+            width = $this.attr('data-width');
         if (selected.length !== 1) {
             selected = $this.children().first();
         }
@@ -1965,7 +1966,10 @@ app.dropdown = function (dropdowns) {
             ($this.hasClass('align-left') ? ' align-left' : '') +
             ($this.hasClass('align-right') ? ' align-right' : '') +
             ($this.hasClass('direction-up') ? ' direction-up' : '') +
-            '">');
+            '"' +
+            (width !== undefined ? ' style="width:' + width + 'px"' : '')
+            + '> ');
+        
         if (typeof attr !== typeof undefined && attr !== false) {
             var temp = attr.split(' ');
             temp = $.grep(temp, function (item, index) {
@@ -2227,7 +2231,13 @@ app.datatables = function (tables) {
                                 targets: [-1, -3],
                                 className: 'dt-body-right' // text align right
                             }
-                        ]
+                        ],
+                        "initComplete": function (settings, json) {
+                            var dropdown = $(settings.nTableWrapper).find('select');
+                            dropdown.addClass('dropdown').attr('data-width', 100);
+                            app.dropdown(dropdown);
+                            //alert('DataTables has finished its initialisation.');
+                        }
                     });
             });
         });

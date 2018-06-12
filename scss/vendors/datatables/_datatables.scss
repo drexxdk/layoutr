@@ -1,9 +1,19 @@
-﻿@import "base";
+﻿@import "../../variables/variables";
+@import "../../mixins/flexbox";
+
+@import "base";
 @import "buttons";
 @import "responsive";
 
-// custom start
 table.datatables {
     width: 100%!important;
 }
-// custom end
+
+.dataTables_length > label {
+    @include flex-display;
+    @include align-items(center);
+
+    div.dropdown {
+        margin: 0 $spacer / 2
+    }
+}
