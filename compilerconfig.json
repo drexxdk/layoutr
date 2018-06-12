@@ -42,5 +42,16 @@
     "options": {
       "sourceMap": true
     }
+  },
+  {
+    "outputFile": "dist/css/datatables.css",
+    "inputFile": "scss/vendors/datatables.scss",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
   }
 ]

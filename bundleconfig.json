@@ -51,6 +51,7 @@
       "js/app/components/lazy.js",
       "js/app/components/popup.js",
       "js/app/components/tooltip.js",
+      "js/app/components/datatables.js",
 
       // assignments
       "js/app/assignments/_assignments.js",
@@ -70,6 +71,12 @@
     "outputFileName": "dist/js/plyr.js",
     "inputFiles": [
       "js/vendors/plyr/plyr.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/js/datatables.js",
+    "inputFiles": [
+      "js/vendors/datatables.min.js"
     ]
   },
   {
