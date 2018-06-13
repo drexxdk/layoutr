@@ -2219,10 +2219,16 @@ app.datatables = function (tables) {
 
         $.getScript('dist/js/datatables.min.js', function () {
             tables.each(function () {
-                var $this = $(this);
-                $this
+                debugger;
+                var table = $(this);
+                table
                     .addClass('display nowrap dataTable dtr-inline')
                     .dataTable({
+                        "dom": 'lBfrtip',
+                        buttons: [
+                            //'copy', 'csv', 'excel', 'pdf'
+                            'copyHtml5', 'excelHtml5', 'pdfHtml5', 'csvHtml5'
+                        ],
                         responsive: true,
                         columnDefs: [
                             {
@@ -2233,12 +2239,20 @@ app.datatables = function (tables) {
                             }
                         ],
                         "initComplete": function (settings, json) {
-                            var dropdown = $(settings.nTableWrapper).find('select');
+                            var id = settings.sTableId;
+
+
+                            var wrapper = $(settings.nTableWrapper);
+                            //wrapper.prepend('<div class="dataTables_buttons"></div>');
+
+
+                            var dropdown = wrapper.find('select');
                             dropdown.addClass('dropdown').attr('data-width', 100);
                             app.dropdown(dropdown);
                             //alert('DataTables has finished its initialisation.');
                         }
                     });
+                
             });
         });
     }
