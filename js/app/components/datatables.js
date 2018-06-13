@@ -15,8 +15,8 @@ app.datatables = function (tables) {
                     .dataTable({
                         "dom": 'lBfrtip',
                         buttons: [
-                            //'copy', 'excel', 'csv', 'pdf'
-                            'copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5'
+                            //'copy', 'excel', 'csv'
+                            'copyHtml5', 'excelHtml5', 'csvHtml5'
                         ],
                         responsive: true,
                         //columnDefs: [

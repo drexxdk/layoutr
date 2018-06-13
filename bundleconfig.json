@@ -80,8 +80,6 @@
 
       "js/vendors/datatables/extensions/buttons/buttons.js",
       "js/vendors/datatables/extensions/buttons/jszip.min.js",
-      "js/vendors/datatables/extensions/buttons/pdfmake.min.js",
-      "js/vendors/datatables/extensions/buttons/vfs_fonts.js",
       "js/vendors/datatables/extensions/buttons/buttons.html5.js",
 
       "js/vendors/datatables/extensions/responsive.js"
