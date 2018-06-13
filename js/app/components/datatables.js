@@ -9,37 +9,31 @@ app.datatables = function (tables) {
 
         $.getScript('dist/js/datatables.min.js', function () {
             tables.each(function () {
-                debugger;
                 var table = $(this);
                 table
                     .addClass('display nowrap dataTable dtr-inline')
                     .dataTable({
                         "dom": 'lBfrtip',
                         buttons: [
-                            //'copy', 'csv', 'excel', 'pdf'
-                            'copyHtml5', 'excelHtml5', 'pdfHtml5', 'csvHtml5'
+                            //'copy', 'excel', 'csv', 'pdf'
+                            'copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5'
                         ],
                         responsive: true,
-                        columnDefs: [
-                            {
-                                // -1 = last
-                                // -3 = third last
-                                targets: [-1, -3],
-                                className: 'dt-body-right' // text align right
-                            }
-                        ],
+                        //columnDefs: [
+                        //    {
+                        //        // -1 = last
+                        //        // -3 = third last
+                        //        targets: [-1, -3],
+                        //        className: 'dt-body-right' // text align right
+                        //    }
+                        //],
                         "initComplete": function (settings, json) {
-                            var id = settings.sTableId;
+                            var id = settings.sTableId,
+                                wrapper = $(settings.nTableWrapper),
+                                dropdown = wrapper.find('select');
 
-
-                            var wrapper = $(settings.nTableWrapper);
-                            //wrapper.prepend('<div class="dataTables_buttons"></div>');
-
-
-                            var dropdown = wrapper.find('select');
                             dropdown.addClass('dropdown').attr('data-width', 100);
                             app.dropdown(dropdown);
-                            //alert('DataTables has finished its initialisation.');
                         }
                     });
                 
