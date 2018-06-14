@@ -12,6 +12,8 @@ app.dropdown = function (dropdowns) {
             selected = $this.children().first();
         }
         html.push('<div class="dropdown' +
+            ($this.hasClass('nowrap') ? ' nowrap' : '') +
+            ($this.hasClass('check') ? ' check' : '') +
             ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
             ($this.hasClass('align-left') ? ' align-left' : '') +
             ($this.hasClass('align-right') ? ' align-right' : '') +
@@ -31,9 +33,12 @@ app.dropdown = function (dropdowns) {
         }
         html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul class="' + theme + '">');
-        $this.children(':not([value=""])').each(function (index) {
+        $this.children().each(function (index) { /* ':not([value=""])' */
             var $that = $(this),
                 text = $that.text();
+            if (!text.length) {
+                text = '&nbsp;';
+            }
             if (text.indexOf('$$') === 0) {
                 $that.attr('data-math', text);
             }
@@ -45,6 +50,19 @@ app.dropdown = function (dropdowns) {
         var dropdown = html.join("");
         $this.after(dropdown);
         dropdown = $this.next();
+
+
+        if ($this.hasClass('nowrap')) {
+            var top = dropdown.children().eq(0),
+                bottom = dropdown.children().eq(1);
+            var topWidth = top.width();
+            var bottomWidth = bottom.width();
+            if (bottomWidth > topWidth) {
+                top.css('min-width', bottomWidth);
+                //debugger;
+            }
+        }
+
         dropdown.on('click', '> div', function () {
             var $that = $(this);
             $that.parent().toggleClass('open');

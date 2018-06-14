@@ -4,6 +4,7 @@
 
     @media screen {
         overflow: hidden;
+        height: 100%;
 
         html[data-aside="left"].left-push & {
             margin-left: $aside-width;

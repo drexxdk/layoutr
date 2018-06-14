@@ -9,34 +9,75 @@ app.datatables = function (tables) {
 
         $.getScript('dist/js/datatables.min.js', function () {
             tables.each(function () {
-                var table = $(this);
-                table
-                    .addClass('display nowrap dataTable dtr-inline')
-                    .dataTable({
-                        "dom": 'lBfrtip',
-                        buttons: [
-                            //'copy', 'excel', 'csv'
-                            'copyHtml5', 'excelHtml5', 'csvHtml5'
-                        ],
-                        responsive: true,
-                        //columnDefs: [
-                        //    {
-                        //        // -1 = last
-                        //        // -3 = third last
-                        //        targets: [-1, -3],
-                        //        className: 'dt-body-right' // text align right
-                        //    }
-                        //],
-                        "initComplete": function (settings, json) {
-                            var id = settings.sTableId,
-                                wrapper = $(settings.nTableWrapper),
-                                dropdown = wrapper.find('select');
+                var $this = $(this);
+                $this.addClass('display nowrap dataTable dtr-inline');
+                var table = $this.DataTable({
+                    "dom": 'lBfrtip',
+                    "bSortCellsTop": true,
+                    buttons: [
+                        //'copy', 'excel', 'csv'
+                        'copyHtml5', 'excelHtml5', 'csvHtml5'
+                    ],
+                    responsive: true,
+                    initComplete: function (settings, json) {
+                        var tableHeader = settings.aoHeader[settings.aoHeader.length - 1];
+                        this.api().columns().every(function () {
+                            let column = this,
+                                index = $(column.header()).index(),
+                                select = $('<select class="dropdown align-left nowrap"><option value=""></option></select>')
+                                    .appendTo($(column.header()))
+                                    .on('change', function () {
+                                        let $this = $(this),
+                                            val = $.fn.dataTable.util.escapeRegex(
+                                                $this.val()
+                                            );
 
-                            dropdown.addClass('dropdown').attr('data-width', 100);
-                            app.dropdown(dropdown);
-                        }
-                    });
-                
+                                        table.column(index)
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+
+                        });
+
+                        let wrapper = $(settings.nTableWrapper),
+                            dropdown = wrapper.find('.dataTables_length select');
+
+                        dropdown.addClass('dropdown').attr('data-width', 100);
+                        var dropdowns = wrapper.find('select.dropdown');
+
+                        app.dropdown(dropdowns);
+
+                        wrapper.find('thead th').each(function (index, th) {
+                            $(th).unbind('click');
+                            $(th).append('<button class="sort-btn"></button>');
+                            //$(th).append('<button class="sort-btn btn-desc">&#9660;</button>');
+
+                            $(th).find('.sort-btn').click(function () {
+                                var parent = $(this).parent();
+                                if (parent.hasClass('sorting_asc')) {
+                                    table.column(index).order('desc').draw();
+
+                                } else {
+                                    table.column(index).order('asc').draw();
+                                }
+                            });
+                        });  
+
+                        //$(tableHeader).each(function (i, e) {
+                        //    var th = $(e.cell);
+                        //    var index = th.index();
+                        //    var dropdown = th.children('div.dropdown');
+                        //    if (dropdown.length) {
+                        //        var minWidth = dropdown.width();
+                        //        debugger;
+                        //    }
+                        //});
+                    }
+                });
             });
         });
     }

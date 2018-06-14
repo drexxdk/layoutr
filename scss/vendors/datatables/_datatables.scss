@@ -6,14 +6,41 @@
 @import "responsive";
 
 table.datatables {
-    width: 100%!important;
+    width: 100% !important;
 }
 
-.dataTables_length > label {
-    @include flex-display;
-    @include align-items(center);
+.dataTables_wrapper {
 
-    div.dropdown {
-        margin: 0 $spacer / 2
+    table thead th {
+        cursor: auto!important;
+
+        &.sorting .sort-btn {
+            background-color: red;
+        }
+
+        &.sorting_asc .sort-btn {
+            background-color: green;
+        }
+
+        &.sorting_desc .sort-btn {
+            background-color: blue;
+        }
+
+        .sort-btn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    }
+
+
+
+    .dataTables_length > label {
+        @include flex-display;
+        @include align-items(center);
+
+        div.dropdown {
+            margin: 0 $spacer / 2
+        }
     }
 }
