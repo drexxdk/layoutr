@@ -62,7 +62,7 @@
 @mixin layoutr-form {
     .form-group,
     .form-group > div,
-    .form-group > div > .input-group {
+    .input-group {
         @include flex-display;
         @include flex-wrap(wrap);
         flex-grow: 1;
@@ -73,19 +73,8 @@
         @include align-items(flex-start);
     }
 
-    .form-group {
-        > .control-label {
-            padding-right: $spacer;
-            width: $form-label-width;
-            line-height: $line-height + ($padding-y * 2);
-
-            &.required:after {
-                content: '*';
-                color: $danger;
-                margin-left: $spacer / 3;
-            }
-        }
-
+    .form-group,
+    .input-group {
         textarea {
             resize: none; /* Safari */
             resize: vertical; /* Chrome */
@@ -101,6 +90,7 @@
 
         textarea,
         input[type=text],
+        input[type=search],
         input[type=password],
         input[type=email] {
             padding: $padding-y $padding-x;
@@ -117,50 +107,26 @@
                 @include focus;
             }
         }
+    }
+
+    .form-group {
+        > .control-label {
+            padding-right: $spacer;
+            width: $form-label-width;
+            line-height: $line-height + ($padding-y * 2);
+
+            &.required:after {
+                content: '*';
+                color: $danger;
+                margin-left: $spacer / 3;
+            }
+        }
+
+
 
         > div {
             min-width: $form-input-min-width;
             width: calc(100% - #{$form-label-width});
-
-            > .input-group {
-                position: relative;
-                width: 100%;
-
-                > .input-group-addon {
-                    position: absolute;
-                    top: $component-border-width;
-                    bottom: $component-border-width;
-                    @include flex-display;
-                    @include align-items(center);
-                    z-index: $input-group-addon;
-                    padding: 0 $padding-x;
-                    @include theme-element-soft($light, false);
-
-                    &:first-child {
-                        left: $component-border-width;
-                        border-top-left-radius: $component-border-radius - ($component-border-width * 2);
-                        border-bottom-left-radius: $component-border-radius - ($component-border-width * 2);
-                        border-right: $component-border;
-                    }
-
-                    &:last-child {
-                        right: $component-border-width;
-                        border-top-right-radius: $component-border-radius - ($component-border-width * 2);
-                        border-bottom-right-radius: $component-border-radius - ($component-border-width * 2);
-                        border-left: $component-border;
-                    }
-
-                    > svg {
-                        width: $font-size;
-                        height: $font-size;
-                        flex-shrink: 0;
-                    }
-
-                    & + .form-control {
-                        padding-left: ($padding-x * 3) + $font-size;
-                    }
-                }
-            }
         }
 
         &.theme-danger em {
@@ -172,6 +138,46 @@
         @each $color, $value in $theme-validation-colors {
             &.theme-#{$color} {
                 @include validation-variant($value, theme-soft-border-color($value), theme-soft-color($value));
+            }
+        }
+    }
+
+    .input-group {
+        position: relative;
+        width: 100%;
+
+        > .input-group-addon {
+            position: absolute;
+            top: $component-border-width;
+            bottom: $component-border-width;
+            @include flex-display;
+            @include align-items(center);
+            z-index: $input-group-addon;
+            padding: 0 $padding-x;
+            @include theme-element-soft($light, false);
+
+            &:first-child {
+                left: $component-border-width;
+                border-top-left-radius: $component-border-radius - ($component-border-width * 2);
+                border-bottom-left-radius: $component-border-radius - ($component-border-width * 2);
+                border-right: $component-border;
+            }
+
+            &:last-child {
+                right: $component-border-width;
+                border-top-right-radius: $component-border-radius - ($component-border-width * 2);
+                border-bottom-right-radius: $component-border-radius - ($component-border-width * 2);
+                border-left: $component-border;
+            }
+
+            > svg {
+                width: $font-size;
+                height: $font-size;
+                flex-shrink: 0;
+            }
+
+            & + .form-control {
+                padding-left: ($padding-x * 3) + $font-size;
             }
         }
     }

@@ -97,6 +97,10 @@ table.datatables {
         }
     }
 
+    .dataTables_filter {
+        max-width: 300px;
+    }
+
     .dt-buttons {
         margin-left: 10px;
     }

@@ -2282,12 +2282,18 @@ app.datatables = function (tables) {
                         });
 
                         let wrapper = $(settings.nTableWrapper),
-                            dropdown = wrapper.find('.dataTables_length select');
+                            dropdown = wrapper.find('.dataTables_length select'),
+                            search = wrapper.find('.dataTables_filter');
 
                         dropdown.addClass('dropdown').attr('data-width', 100);
                         var dropdowns = wrapper.find('select.dropdown');
 
                         app.dropdown(dropdowns);
+
+                        search.addClass('input-group');
+                        search.find('input').appendTo(search);
+                        search.append('<div class="input-group-addon"><svg focusable="false"><use xlink:href="#svg-search"></use></svg></div>');
+                        search.find('label').remove();
 
                         wrapper.find('thead th').each(function (index, th) {
                             th = $(th);
