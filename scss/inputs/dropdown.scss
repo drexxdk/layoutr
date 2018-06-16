@@ -147,10 +147,8 @@
             z-index: $dropdown-z-index;
             border-radius: 0 0 $component-border-radius $component-border-radius;
             overflow: auto;
-            max-height: ($height * 4) + ($component-border-width * 4);
-            /*width: 100%;
-            left: 50%;
-            @include transform(translateX(-50%));*/
+            max-height: ($height * 4) + ($component-border-width * 5);
+
             > li {
                 > div {
                     border-radius: 0;
