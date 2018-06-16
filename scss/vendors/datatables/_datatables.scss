@@ -54,6 +54,10 @@ table.datatables {
             border-top-color: $primary;
         }
 
+        &.sorting_asc_disabled,
+        &.sorting_desc_disabled {
+        }
+
         .sort-btn {
             width: 20px;
             height: 20px;
@@ -83,8 +87,6 @@ table.datatables {
             }
         }
     }
-
-
 
     .dataTables_length > label {
         @include flex-display;
