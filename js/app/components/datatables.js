@@ -9,6 +9,12 @@ app.datatables = function (tables) {
 
         $.getScript('dist/js/datatables.min.js', function () {
 
+            var spacing = 'space-3';
+
+            function search(instance, index, element) {
+                instance.column(index).search(element.value).draw();
+            }
+
             function table_header_input(instance) {
                 instance.columns().every(function () {
                     let header = this.header(),
@@ -19,10 +25,7 @@ app.datatables = function (tables) {
                         let select = $('<select class="dropdown theme-light align-left nowrap"><option value=""></option></select>')
                             .appendTo(column.find('> div > div:last-child'))
                             .on('change', function () {
-                                let val = $(this).val();
-                                instance.column(index)
-                                    .search(val)
-                                    .draw();
+                                search(instance, index, this);
                             });
 
                         this.data().unique().sort().each(function (d, j) {
@@ -32,10 +35,7 @@ app.datatables = function (tables) {
                         let input = $('<input type="text" />')
                             .appendTo(column.find('> div > div:last-child'))
                             .on('keyup change', function () {
-                                let val = $(this).val();
-                                instance.column(index)
-                                    .search(val)
-                                    .draw();
+                                search(instance, index, this);
                             });
                         input.parent().addClass('form-group');
                     }
@@ -74,7 +74,7 @@ app.datatables = function (tables) {
             function table_header_buttons(wrapper, header) {
                 let container = wrapper.find('.dt-buttons');
 
-                container.append('<div class="flex inline column wrap space-3"></div>');
+                container.append('<div class="flex column wrap ' + spacing + '"></div>');
 
                 let div = container.children('div'),
                     buttons = container.children('button');
@@ -124,12 +124,11 @@ app.datatables = function (tables) {
                     initComplete: function (settings, json) {
                         var instance = this.api();
                         let wrapper = $(settings.nTableWrapper);
-
-                        wrapper.addClass('flex space-3');
-                        wrapper.prepend('<div class="dataTables_header"><div class="flex column space-3 wrap"></div></div>');
+                        
+                        wrapper.prepend('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
                         let header = wrapper.find('> .dataTables_header > div');
 
-                        wrapper.append('<div class="dataTables_footer"><div class="flex column space-3 wrap vertical-center"></div></div>');
+                        wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + spacing + '"></div></div>');
                         let footer = wrapper.find('> .dataTables_footer > div');
 
                         table_header_input(instance);

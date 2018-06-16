@@ -12,101 +12,84 @@ table.datatables {
 
 .dataTables_wrapper {
 
-    table thead th {
-        padding: 8px 10px;
-        background-image: none !important;
-        box-sizing: border-box;
+    table thead {
+        background-color: orange;
 
-        > div {
-            @include flex-display;
-            @include flex-direction(column);
-            flex-grow: 1;
+        th {
+            padding: 8px 10px;
+            background-image: none !important;
+            box-sizing: border-box;
 
             > div {
                 @include flex-display;
-            }
+                @include flex-direction(column);
+                flex-grow: 1;
 
-            > div:first-child {
-                @include align-items(center);
-
-                > span {
-                    flex-grow: 1;
+                > div {
+                    @include flex-display;
                 }
 
-                > * + * {
-                    margin-left: 10px;
+                > div:first-child {
+                    @include align-items(center);
+
+                    > span {
+                        flex-grow: 1;
+                    }
+
+                    > * + * {
+                        margin-left: 10px;
+                    }
+                }
+
+                > div:last-child {
+                    margin-top: 8px;
+                    height: 42px;
+                    @include align-items(center);
+                    @include justify-content(flex-end);
                 }
             }
 
-            > div:last-child {
-                margin-top: 8px;
-                height: 42px;
-                @include align-items(center);
-                @include justify-content(flex-end);
-            }
-        }
-
-        &.sorting_asc .sort-btn:before {
-            border-bottom-color: $primary;
-        }
-
-        &.sorting_desc .sort-btn:after {
-            border-top-color: $primary;
-        }
-
-        &.sorting_asc_disabled,
-        &.sorting_desc_disabled {
-        }
-
-        .sort-btn {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            position: relative;
-
-            &:before,
-            &:after {
-                content: '';
-                width: 0;
-                height: 0;
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                position: absolute;
-                left: 50%;
-                @include transform(translateX(-50%));
+            &.sorting_asc .sort-btn:before {
+                border-bottom-color: $primary;
             }
 
-            &:before {
-                border-bottom: 9px solid #dcdcdc;
-                top: 0;
+            &.sorting_desc .sort-btn:after {
+                border-top-color: $primary;
             }
 
-            &:after {
-                border-top: 9px solid #dcdcdc;
-                bottom: 0;
+            &.sorting_asc_disabled,
+            &.sorting_desc_disabled {
+            }
+
+            .sort-btn {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                position: relative;
+
+                &:before,
+                &:after {
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    border-left: 6px solid transparent;
+                    border-right: 6px solid transparent;
+                    position: absolute;
+                    left: 50%;
+                    @include transform(translateX(-50%));
+                }
+
+                &:before {
+                    border-bottom: 9px solid #dcdcdc;
+                    top: 0;
+                }
+
+                &:after {
+                    border-top: 9px solid #dcdcdc;
+                    bottom: 0;
+                }
             }
         }
-    }
-
-    .dataTables_length > label {
-        @include flex-display;
-        @include align-items(center);
-
-        div.dropdown {
-            margin: 0 $spacer / 2
-        }
-    }
-
-    .dataTables_filter {
-        max-width: 300px !important;
-
-        input {
-            margin: 0;
-        }
-    }
-
-    .dt-buttons {
-        flex-grow: 1;
     }
 
     .dataTables_info,
@@ -117,5 +100,35 @@ table.datatables {
 
     .dataTables_paginate {
         flex-grow: 1;
+    }
+
+    .dataTables_header,
+    .dataTables_footer {
+        padding: 12px;
+        background-color: yellow;
+    }
+
+    .dataTables_header {
+
+        .dataTables_length > label {
+            @include flex-display;
+            @include align-items(center);
+
+            div.dropdown {
+                margin: 0 $spacer / 2
+            }
+        }
+
+        .dt-buttons {
+            flex-grow: 1;
+        }
+
+        .dataTables_filter {
+            max-width: 300px !important;
+
+            input {
+                margin: 0;
+            }
+        }
     }
 }
