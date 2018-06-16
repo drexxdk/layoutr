@@ -6,6 +6,7 @@
 
     textarea,
     input[type=text],
+    input[type=search],
     input[type=password],
     input[type=email],
     div.dropdown > div {
@@ -83,6 +84,7 @@
         }
 
         input[type=text],
+        input[type=search],
         input[type=password],
         input[type=email] {
             min-height: $line-height + ($padding-y * 2) + ($component-border-width * 2);

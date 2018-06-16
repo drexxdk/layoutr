@@ -54,8 +54,12 @@ app.datatables = function (tables) {
                         });
 
                         let wrapper = $(settings.nTableWrapper),
-                            dropdown = wrapper.find('.dataTables_length select'),
+                            amount = wrapper.find('.dataTables_length'),
+                            dropdown = amount.find('select'),
                             search = wrapper.find('.dataTables_filter');
+
+                        amount.append(dropdown);
+                        amount.children('label').remove();
 
                         dropdown.addClass('dropdown').attr('data-width', 100);
                         var dropdowns = wrapper.find('select.dropdown');
