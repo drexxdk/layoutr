@@ -1,9 +1,6 @@
 ﻿/// <reference path="../references" />
 
 .flex {
-    @include flex-display;
-    @include flex-direction(column);
-
     @for $i from 1 through 10 {
         &.space-#{$i} {
             margin-top: -($spacer-base * $i);
@@ -34,8 +31,20 @@
         }
     }
 
+    &.inline {
+        @include flex-display(inline-flex);
+    }
+
+    &:not(.inline) {
+        @include flex-display;
+    }
+
     &.vertical-center {
         @include align-items(center);
+    }
+
+    &:not(.column) {
+        @include flex-direction(column);
     }
 
     &.column {

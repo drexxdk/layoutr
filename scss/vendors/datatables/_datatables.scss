@@ -98,10 +98,24 @@ table.datatables {
     }
 
     .dataTables_filter {
-        max-width: 300px;
+        max-width: 300px !important;
+
+        input {
+            margin: 0;
+        }
     }
 
     .dt-buttons {
-        margin-left: 10px;
+        flex-grow: 1;
+    }
+
+    .dataTables_info,
+    .dataTables_paginate {
+        padding-top: 0;
+        float: none;
+    }
+
+    .dataTables_paginate {
+        flex-grow: 1;
     }
 }
