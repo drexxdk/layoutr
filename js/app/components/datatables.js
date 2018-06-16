@@ -21,7 +21,7 @@ app.datatables = function (tables) {
                             .on('change', function () {
                                 let val = $(this).val();
                                 instance.column(index)
-                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .search(val)
                                     .draw();
                             });
 
