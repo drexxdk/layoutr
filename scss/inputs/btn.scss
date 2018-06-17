@@ -50,15 +50,6 @@
             flex-shrink: 0;
         }
 
-        @each $color, $value in $theme-colors {
-            &.theme-#{$color} {
-                @include theme-element($value);
-
-                html.desktop &:hover {
-                    @include theme-element-darken($value);
-                }
-            }
-        }
 
         $theme: $light;
 
@@ -70,6 +61,16 @@
 
         html.desktop &:focus {
             @include focus;
+        }
+
+        @each $color, $value in $theme-colors {
+            &.theme-#{$color} {
+                @include theme-element($value);
+
+                html.desktop &:hover {
+                    @include theme-element-darken($value);
+                }
+            }
         }
     }
 

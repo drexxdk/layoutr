@@ -1,11 +1,4 @@
-﻿/// <reference path="../../references" />
-
-@import "buttons";
-@import "responsive";
-
-table.datatables {
-    width: 100% !important;
-}
+﻿/// <reference path="../references" />
 
 .dataTables_wrapper {
 
@@ -70,7 +63,7 @@ table.datatables {
                         }
 
                         > div:last-child {
-                            margin-top: $spacer-3;
+                            margin-top: $padding-y;
                             height: 42px;
                             @include align-items(center);
                             @include justify-content(flex-end);
@@ -115,6 +108,56 @@ table.datatables {
                         &:after {
                             border-top: 9px solid $white;
                             bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            &.dtr-inline.collapsed {
+                > tbody > tr {
+                    &[role="row"] {
+                        > th:first-child,
+                        > td:first-child {
+                            position: relative;
+                            padding-left: 30px;
+                            cursor: pointer;
+                        }
+
+                        > th:first-child:before,
+                        > td:first-child:before {
+                            content: '+';
+                            position: absolute;
+                            z-index: 1;
+                            border-radius: 50%;
+                            text-align: center;
+                            color: $white;
+                            margin-top: 0;
+                            left: $spacer / 2;
+                            width: $font-size;
+                            height: $font-size;
+                            min-height: 0;
+                            padding: 0;
+                            @include flex-center;
+                            @include button-transition(all);
+                            @include theme-element($success);
+                        }
+                    }
+
+                    &.parent {
+                        > th:first-child:before,
+                        > td:first-child:before {
+                            content: '-';
+                            @include theme-element($danger);
+                        }
+                    }
+
+                    &.child > td {
+                        .dtr-details {
+                            @extend ul.list;
+
+                            .dtr-title {
+                                font-weight: $font-weight-bold;
+                            }
                         }
                     }
                 }
@@ -167,5 +210,32 @@ table.datatables {
                 }
             }
         }
+    }
+}
+
+div.dt-button-info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    margin-top: -100px;
+    margin-left: -200px;
+    background-color: white;
+    border: 2px solid #111;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    text-align: center;
+    z-index: 21;
+
+    h2 {
+        padding: 0.5em;
+        margin: 0;
+        font-weight: normal;
+        border-bottom: 1px solid #ddd;
+        background-color: #f3f3f3;
+    }
+
+    > div {
+        padding: 1em;
     }
 }
