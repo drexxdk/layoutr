@@ -157,6 +157,7 @@
             z-index: $input-group-addon;
             padding: 0 $padding-x;
             @include theme-element-soft($light, false);
+            pointer-events: none;
 
             &:first-child {
                 left: $component-border-width;
