@@ -190,6 +190,7 @@
     > .dataTables_footer {
         .dataTables_info {
             flex-grow: 1;
+            padding: 0 $spacer-3;
         }
 
         .dataTables_paginate_container {
