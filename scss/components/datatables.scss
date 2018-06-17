@@ -9,6 +9,7 @@
     }
 
     > .dataTables_header {
+        border-radius: $component-border-radius $component-border-radius 0 0;
 
         .dataTables_length > label {
             @include flex-display;
@@ -62,7 +63,7 @@
                             }
                         }
 
-                        > div:last-child {
+                        > div:nth-child(2) {
                             margin-top: $padding-y;
                             height: 42px;
                             @include align-items(center);
@@ -188,6 +189,8 @@
     }
 
     > .dataTables_footer {
+        border-radius: 0 0 $component-border-radius $component-border-radius;
+
         .dataTables_info {
             flex-grow: 1;
             padding: 0 $spacer-3;

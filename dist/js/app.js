@@ -2232,21 +2232,22 @@ app.datatables = function (tables) {
     if (tables.length) {
         $.getScript('dist/js/datatables.min.js', function () {
 
-            let instance,
-                wrapper,
-                spacing = 'space-3',
-                paginate,
-                header,
-                content,
-                footer;
-            
-            function table_header_input() {
+            let spacing = 'space-3';
+
+            function table_header_input(instance) {
+                var columns = instance.columns().header();
+                let elements = jQuery.grep(columns, function (e) {
+                    let column = $(e);
+                    return column.hasClass('dropdown') || column.hasClass('text');
+                });
                 instance.columns().every(function () {
                     let th = this.header(),
                         text = th.innerText,
-                        column = $(th).empty().append('<div><div><span>' + text + '</span></div><div></div></div>'),
-                        index = column.index();
+                        column = $(th);
                     
+                    column.empty().append('<div><div><span>' + text + '</span></div>' + (elements.length ? '<div></div>' : '') + '</div>');
+                    let index = column.index();
+
                     if (column.hasClass('dropdown')) {
                         let select = $('<select class="dropdown align-left nowrap"><option value=""></option></select>')
                             .appendTo(column.find('> div > div:last-child'))
@@ -2267,8 +2268,8 @@ app.datatables = function (tables) {
                     }
                 });
             }
-            function table_header_sort() {
-                let th = $(instance.table).find('thead th');
+            function table_header_sort(instance, wrapper) {
+                let th = wrapper.find('thead th');
                 th.unbind('click');
                 th.find('> div > div:first-child').append('<button class="sort-btn"></button>');
                 th.click(function (e) {
@@ -2285,7 +2286,7 @@ app.datatables = function (tables) {
                     }
                 });
             }
-            function table_header_length() {
+            function table_header_length(wrapper, header) {
                 let length = wrapper.find('.dataTables_length'),
                     dropdown = length.find('select');
 
@@ -2294,7 +2295,7 @@ app.datatables = function (tables) {
                 dropdown.addClass('dropdown').attr('data-width', 100);
                 header.append(length);
             }
-            function table_header_buttons() {
+            function table_header_buttons(wrapper, header) {
                 let container = wrapper.find('.dt-buttons');
 
                 container.append('<div class="flex column wrap ' + spacing + '"></div>');
@@ -2307,7 +2308,7 @@ app.datatables = function (tables) {
                 div.append(buttons);
                 header.append(container);
             }
-            function table_header_filter() {
+            function table_header_filter(wrapper, header) {
                 let filter = wrapper.find('.dataTables_filter');
 
                 filter.addClass('input-group');
@@ -2316,34 +2317,27 @@ app.datatables = function (tables) {
                 filter.find('label').remove();
                 header.append(filter);
             }
-
-            function table_content() {
+            function table_content(wrapper, content) {
                 let table = wrapper.find('table');
                 content.append(table);
             }
-
-            function table_footer_info() {
+            function table_footer_info(wrapper, footer) {
                 let info = wrapper.find('.dataTables_info');
                 footer.append(info);
             }
-
-            function paginateFix() {
+            function paginateFix(paginate) {
                 let span = paginate.children('span');
                 paginate.find('.paginate_button.previous').prependTo(span);
                 paginate.find('.paginate_button.next').appendTo(span);
             }
-
-            function table_footer_paginate() {
-                paginate = wrapper.find('.dataTables_paginate');
+            function table_footer_paginate(wrapper, footer, paginate) {
                 paginate.addClass('flex column wrap');
-
                 footer.append('<div class="dataTables_paginate_container"></div>');
                 let container = footer.find('.dataTables_paginate_container');
-                paginateFix();
+                paginateFix(paginate);
                 container.append(paginate);
             }
-
-            function table_dropdowns() {
+            function table_dropdowns(wrapper) {
                 let dropdowns = wrapper.find('select.dropdown');
                 app.dropdown(dropdowns);
             }
@@ -2360,33 +2354,37 @@ app.datatables = function (tables) {
                     ],
                     responsive: true,
                     initComplete: function (settings, json) {
-                        instance = this.api();
-                        wrapper = $(settings.nTableWrapper);
-                        
+                        let instance = this.api();
+                        let wrapper = $(settings.nTableWrapper);
+
                         wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
-                        header = wrapper.find('> .dataTables_header > div');
+                        let header = wrapper.find('> .dataTables_header > div');
 
                         wrapper.append('<div class="dataTables_content table"></div>');
-                        content = wrapper.find('> .dataTables_content');
+                        let content = wrapper.find('> .dataTables_content');
 
                         wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + spacing + '"></div></div>');
-                        footer = wrapper.find('> .dataTables_footer > div');
+                        let footer = wrapper.find('> .dataTables_footer > div');
 
-                        table_header_input();
-                        table_header_sort();
-                        table_header_length();
-                        table_header_buttons();
-                        table_header_filter();
+                        table_header_input(instance);
+                        table_header_sort(instance, wrapper);
+                        table_header_length(wrapper, header);
+                        table_header_buttons(wrapper, header);
+                        table_header_filter(wrapper, header);
 
-                        table_content();
+                        table_content(wrapper, content);
 
-                        table_footer_info();
-                        table_footer_paginate();
+                        table_footer_info(wrapper, footer);
 
-                        table_dropdowns();
+                        let paginate = wrapper.find('.dataTables_paginate');
+                        table_footer_paginate(wrapper, footer, paginate);
+
+                        table_dropdowns(wrapper);
+
+                        $this.on('draw.dt', function () {
+                            paginateFix(paginate);
+                        });
                     }
-                }).on('draw.dt', function () {
-                    paginateFix();
                 });
             });
         });
