@@ -15,11 +15,6 @@
         z-index: $component-z-index;
         box-shadow: $box-shadow;
 
-        html.desktop &:hover {
-            $value: $primary;
-            @include theme-element-darken($value);
-        }
-
         > span {
             max-width: 100%;
         }
@@ -65,7 +60,13 @@
             }
         }
 
-        @include theme-element($primary);
+        $theme: $light;
+
+        html.desktop &:hover {
+            @include theme-element-darken($theme);
+        }
+
+        @include theme-element($theme);
 
         html.desktop &:focus {
             @include focus;

@@ -1,6 +1,4 @@
-﻿@import "../../variables/variables";
-@import "../../mixins/flexbox";
-@import "../../mixins/transform";
+﻿/// <reference path="../../references" />
 
 @import "buttons";
 @import "responsive";
@@ -13,8 +11,8 @@ table.datatables {
 
     .dataTables_header,
     .dataTables_footer {
-        padding: 12px;
-        background-color: yellow;
+        padding: $spacer-3;
+        @include theme-element($secondary);
     }
 
     > .dataTables_header {
@@ -42,7 +40,7 @@ table.datatables {
     }
 
     > .dataTables_content {
-        overflow: hidden;
+        overflow: visible;
 
         table.dataTable {
             display: table;
@@ -72,7 +70,7 @@ table.datatables {
                         }
 
                         > div:last-child {
-                            margin-top: 8px;
+                            margin-top: $spacer-3;
                             height: 42px;
                             @include align-items(center);
                             @include justify-content(flex-end);
@@ -80,11 +78,11 @@ table.datatables {
                     }
 
                     &.sorting_asc .sort-btn:before {
-                        border-bottom-color: $primary;
+                        border-bottom-color: $secondary;
                     }
 
                     &.sorting_desc .sort-btn:after {
-                        border-top-color: $primary;
+                        border-top-color: $secondary;
                     }
 
                     &.sorting_asc_disabled,
@@ -110,12 +108,12 @@ table.datatables {
                         }
 
                         &:before {
-                            border-bottom: 9px solid #dcdcdc;
+                            border-bottom: 9px solid $white;
                             top: 0;
                         }
 
                         &:after {
-                            border-top: 9px solid #dcdcdc;
+                            border-top: 9px solid $white;
                             bottom: 0;
                         }
                     }
@@ -135,8 +133,8 @@ table.datatables {
             flex-grow: 1;
 
             .dataTables_paginate {
-                margin-top: -10px;
-                margin-left: -10px;
+                margin-top: -$spacer-3;
+                margin-left: -$spacer-3;
                 @include justify-content(flex-end);
 
                 .disabled {
@@ -153,14 +151,17 @@ table.datatables {
                 }
 
                 a {
-                    background-color: orange;
+                    @extend .btn;
                 }
 
                 a,
                 span.ellipsis {
-                    margin-top: 10px;
-                    margin-left: 10px;
-                    padding: 10px;
+                    margin-top: $spacer-3;
+                    margin-left: $spacer-3;
+                }
+
+                span.ellipsis {
+                    padding: $padding-y;
                 }
             }
         }

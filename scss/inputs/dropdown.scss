@@ -23,7 +23,7 @@
             ul {
                 left: auto;
                 right: auto;
-                min-width: calc(100% - #{$component-border-width * 2});
+                min-width: 100%;
             }
         }
 

@@ -22,7 +22,7 @@
             border-spacing: 0;
 
             thead th {
-                @include theme-element($primary, false);
+                @include theme-element-darken($light, false);
             }
 
             tbody tr:nth-child(even) th,

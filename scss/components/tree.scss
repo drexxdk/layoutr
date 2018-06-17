@@ -43,6 +43,7 @@
 
             > i {
                 @extend .btn;
+                @extend .btn.theme-primary;
                 overflow: hidden;
             }
         }

@@ -2230,11 +2230,6 @@ var app = app || {};
 
 app.datatables = function (tables) {
     if (tables.length) {
-        if (!app.html.hasClass('datatables-loaded')) {
-            app.head.append($('<link rel="stylesheet"href="dist/css/datatables.min.css">'));
-            app.html.addClass('datatables-loaded');
-        }
-
         $.getScript('dist/js/datatables.min.js', function () {
 
             var spacing = 'space-3';
@@ -2250,7 +2245,7 @@ app.datatables = function (tables) {
                         column = $(header).empty().append('<div><div><span>' + text + '</span></div><div></div></div>'),
                         index = column.index();
                     if (column.hasClass('dropdown')) {
-                        let select = $('<select class="dropdown theme-light align-left nowrap"><option value=""></option></select>')
+                        let select = $('<select class="dropdown align-left nowrap"><option value=""></option></select>')
                             .appendTo(column.find('> div > div:last-child'))
                             .on('change', function () {
                                 search(instance, index, this);
@@ -2293,7 +2288,7 @@ app.datatables = function (tables) {
 
                 length.append(dropdown);
                 length.children('label').remove();
-                dropdown.addClass('dropdown theme-light').attr('data-width', 100);
+                dropdown.addClass('dropdown').attr('data-width', 100);
                 header.append(length);
             }
             function table_header_buttons(wrapper, header) {
@@ -2305,7 +2300,7 @@ app.datatables = function (tables) {
                     buttons = container.children('button');
 
                 container.append(div);
-                buttons.addClass('btn theme-light');
+                buttons.addClass('btn');
                 div.append(buttons);
                 header.append(container);
             }
@@ -2361,7 +2356,7 @@ app.datatables = function (tables) {
                         wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
                         let header = wrapper.find('> .dataTables_header > div');
 
-                        wrapper.append('<div class="dataTables_content table theme-secondary"></div>');
+                        wrapper.append('<div class="dataTables_content table"></div>');
                         let content = wrapper.find('> .dataTables_content');
 
                         wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + spacing + '"></div></div>');
