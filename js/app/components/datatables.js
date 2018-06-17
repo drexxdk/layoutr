@@ -18,6 +18,7 @@ app.datatables = function (tables) {
                         text = th.innerText,
                         column = $(th).empty().append('<div><div><span>' + text + '</span></div><div></div></div>'),
                         index = column.index();
+                    
                     if (column.hasClass('dropdown')) {
                         let select = $('<select class="dropdown align-left nowrap"><option value=""></option></select>')
                             .appendTo(column.find('> div > div:last-child'))
