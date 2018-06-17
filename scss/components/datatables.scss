@@ -188,28 +188,17 @@
     }
 
     > .dataTables_footer {
-        .dataTables_info,
-        .dataTables_paginate {
-            padding-top: 0;
-            float: none;
-        }
-
         .dataTables_info {
             flex-grow: 1;
         }
 
         .dataTables_paginate_container {
-
             .dataTables_paginate {
                 margin-top: -$spacer-3;
                 margin-left: -$spacer-3;
 
                 .disabled {
                     display: none;
-                }
-
-                .current {
-                    background-color: red;
                 }
 
                 span:not(.ellipsis) {
@@ -219,6 +208,15 @@
 
                 a {
                     @extend .btn;
+                    @extend .btn.theme-dark;
+                }
+
+                .current {
+                    @include theme-element($light);
+
+                    html.desktop &:hover {
+                        @include theme-element-darken($light);
+                    }
                 }
 
                 a,
