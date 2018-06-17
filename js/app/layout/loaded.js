@@ -9,7 +9,7 @@ app.contentLoaded = function (element) {
     app.math(element.find('.math'));
     app.media(element.find('audio, video'));
     app.map(element.find('.map'));
-    app.datatables(element.find('.datatables'));
+    app.datatables(element.find('.dataTable'));
 }
 
 app.pageLoaded = function (initial) {

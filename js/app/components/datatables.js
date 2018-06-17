@@ -41,7 +41,6 @@ app.datatables = function (tables) {
                     }
                 });
             }
-
             function table_header_sort(instance) {
                 var th = $(instance.table).find('thead th');
                 th.unbind('click');
@@ -60,7 +59,6 @@ app.datatables = function (tables) {
                     }
                 });
             }
-
             function table_header_length(wrapper, header) {
                 let length = wrapper.find('.dataTables_length'),
                     dropdown = length.find('select');
@@ -70,7 +68,6 @@ app.datatables = function (tables) {
                 dropdown.addClass('dropdown theme-light').attr('data-width', 100);
                 header.append(length);
             }
-
             function table_header_buttons(wrapper, header) {
                 let container = wrapper.find('.dt-buttons');
 
@@ -84,7 +81,6 @@ app.datatables = function (tables) {
                 div.append(buttons);
                 header.append(container);
             }
-
             function table_header_filter(wrapper, header) {
                 let filter = wrapper.find('.dataTables_filter');
 
@@ -95,14 +91,23 @@ app.datatables = function (tables) {
                 header.append(filter);
             }
 
+            function table_content(wrapper, content) {
+                let table = wrapper.find('table');
+                content.append(table);
+            }
+
             function table_footer_info(wrapper, footer) {
                 let info = wrapper.find('.dataTables_info');
                 footer.append(info);
             }
-
             function table_footer_paginate(wrapper, footer) {
                 let paginate = wrapper.find('.dataTables_paginate');
-                footer.append(paginate);
+                paginate.addClass('flex column wrap');
+
+                footer.append('<div class="dataTables_paginate_container"></div>');
+                let container = footer.find('.dataTables_paginate_container');
+
+                container.append(paginate);
             }
 
             function table_dropdowns(wrapper) {
@@ -112,8 +117,8 @@ app.datatables = function (tables) {
 
             tables.each(function () {
                 var $this = $(this);
-                $this.addClass('display cell-border nowrap dataTable dtr-inline');
-                var table = $this.DataTable({
+                $this.addClass('nowrap');
+                $this.DataTable({
                     "dom": 'lBfrtip',
                     "bSortCellsTop": true,
                     buttons: [
@@ -125,8 +130,11 @@ app.datatables = function (tables) {
                         var instance = this.api();
                         let wrapper = $(settings.nTableWrapper);
                         
-                        wrapper.prepend('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
+                        wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
                         let header = wrapper.find('> .dataTables_header > div');
+
+                        wrapper.append('<div class="dataTables_content table theme-secondary"></div>');
+                        let content = wrapper.find('> .dataTables_content');
 
                         wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + spacing + '"></div></div>');
                         let footer = wrapper.find('> .dataTables_footer > div');
@@ -136,8 +144,12 @@ app.datatables = function (tables) {
                         table_header_length(wrapper, header);
                         table_header_buttons(wrapper, header);
                         table_header_filter(wrapper, header);
+
+                        table_content(wrapper, content);
+
                         table_footer_info(wrapper, footer);
                         table_footer_paginate(wrapper, footer);
+
                         table_dropdowns(wrapper);
                     }
                 });

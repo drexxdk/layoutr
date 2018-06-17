@@ -2,7 +2,6 @@
 @import "../../mixins/flexbox";
 @import "../../mixins/transform";
 
-@import "base";
 @import "buttons";
 @import "responsive";
 
@@ -12,103 +11,13 @@ table.datatables {
 
 .dataTables_wrapper {
 
-    table thead {
-        background-color: orange;
-
-        th {
-            padding: 8px 10px;
-            background-image: none !important;
-            box-sizing: border-box;
-
-            > div {
-                @include flex-display;
-                @include flex-direction(column);
-                flex-grow: 1;
-
-                > div {
-                    @include flex-display;
-                }
-
-                > div:first-child {
-                    @include align-items(center);
-
-                    > span {
-                        flex-grow: 1;
-                    }
-
-                    > * + * {
-                        margin-left: 10px;
-                    }
-                }
-
-                > div:last-child {
-                    margin-top: 8px;
-                    height: 42px;
-                    @include align-items(center);
-                    @include justify-content(flex-end);
-                }
-            }
-
-            &.sorting_asc .sort-btn:before {
-                border-bottom-color: $primary;
-            }
-
-            &.sorting_desc .sort-btn:after {
-                border-top-color: $primary;
-            }
-
-            &.sorting_asc_disabled,
-            &.sorting_desc_disabled {
-            }
-
-            .sort-btn {
-                width: 20px;
-                height: 20px;
-                cursor: pointer;
-                position: relative;
-
-                &:before,
-                &:after {
-                    content: '';
-                    width: 0;
-                    height: 0;
-                    border-left: 6px solid transparent;
-                    border-right: 6px solid transparent;
-                    position: absolute;
-                    left: 50%;
-                    @include transform(translateX(-50%));
-                }
-
-                &:before {
-                    border-bottom: 9px solid #dcdcdc;
-                    top: 0;
-                }
-
-                &:after {
-                    border-top: 9px solid #dcdcdc;
-                    bottom: 0;
-                }
-            }
-        }
-    }
-
-    .dataTables_info,
-    .dataTables_paginate {
-        padding-top: 0;
-        float: none;
-    }
-
-    .dataTables_paginate {
-        flex-grow: 1;
-    }
-
     .dataTables_header,
     .dataTables_footer {
         padding: 12px;
         background-color: yellow;
     }
 
-    .dataTables_header {
+    > .dataTables_header {
 
         .dataTables_length > label {
             @include flex-display;
@@ -128,6 +37,131 @@ table.datatables {
 
             input {
                 margin: 0;
+            }
+        }
+    }
+
+    > .dataTables_content {
+        overflow: hidden;
+
+        table.dataTable {
+            display: table;
+            width: 100% !important;
+
+            thead {
+                th {
+                    > div {
+                        @include flex-display;
+                        @include flex-direction(column);
+                        flex-grow: 1;
+
+                        > div {
+                            @include flex-display;
+                        }
+
+                        > div:first-child {
+                            @include align-items(center);
+
+                            > span {
+                                flex-grow: 1;
+                            }
+
+                            > * + * {
+                                margin-left: 10px;
+                            }
+                        }
+
+                        > div:last-child {
+                            margin-top: 8px;
+                            height: 42px;
+                            @include align-items(center);
+                            @include justify-content(flex-end);
+                        }
+                    }
+
+                    &.sorting_asc .sort-btn:before {
+                        border-bottom-color: $primary;
+                    }
+
+                    &.sorting_desc .sort-btn:after {
+                        border-top-color: $primary;
+                    }
+
+                    &.sorting_asc_disabled,
+                    &.sorting_desc_disabled {
+                    }
+
+                    .sort-btn {
+                        width: 20px;
+                        height: 20px;
+                        cursor: pointer;
+                        position: relative;
+
+                        &:before,
+                        &:after {
+                            content: '';
+                            width: 0;
+                            height: 0;
+                            border-left: 6px solid transparent;
+                            border-right: 6px solid transparent;
+                            position: absolute;
+                            left: 50%;
+                            @include transform(translateX(-50%));
+                        }
+
+                        &:before {
+                            border-bottom: 9px solid #dcdcdc;
+                            top: 0;
+                        }
+
+                        &:after {
+                            border-top: 9px solid #dcdcdc;
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    > .dataTables_footer {
+        .dataTables_info,
+        .dataTables_paginate {
+            padding-top: 0;
+            float: none;
+        }
+
+        .dataTables_paginate_container {
+            flex-grow: 1;
+
+            .dataTables_paginate {
+                margin-top: -10px;
+                margin-left: -10px;
+                @include justify-content(flex-end);
+
+                .disabled {
+                    display: none;
+                }
+
+                .current {
+                    background-color: red;
+                }
+
+                span:not(.ellipsis) {
+                    @include flex-display;
+                    @include flex-wrap(wrap);
+                }
+
+                a {
+                    background-color: orange;
+                }
+
+                a,
+                span.ellipsis {
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    padding: 10px;
+                }
             }
         }
     }
