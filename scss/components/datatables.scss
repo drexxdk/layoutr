@@ -42,6 +42,11 @@
 
             thead {
                 th {
+
+                    &:focus {
+                        @include focus;
+                    }
+
                     > div {
                         @include flex-display;
                         @include flex-direction(column);
@@ -54,7 +59,7 @@
                         > div:first-child {
                             @include align-items(center);
 
-                            > span {
+                            > span:first-child {
                                 flex-grow: 1;
                             }
 
@@ -86,7 +91,6 @@
                     .sort-btn {
                         width: 20px;
                         height: 20px;
-                        cursor: pointer;
                         position: relative;
 
                         &:before,

@@ -21,13 +21,18 @@
             border-collapse: collapse;
             border-spacing: 0;
 
-            thead th {
-                @include theme-element-darken($light, false);
+            thead,
+            tfoot {
+                th {
+                    @include theme-element-darken($light, false);
+                }
             }
 
-            tbody tr:nth-child(even) th,
-            tbody tr:nth-child(even) td {
-                background-color: $table-td-background-color;
+            tbody tr:nth-child(even) {
+                th, 
+                td {
+                    background-color: $table-td-background-color;
+                }
             }
 
             th {

@@ -43,7 +43,7 @@ app.datatables = function (tables) {
             function table_header_sort(instance, wrapper) {
                 let th = wrapper.find('thead th');
                 th.unbind('click');
-                th.find('> div > div:first-child').append('<button class="sort-btn"></button>');
+                th.find('> div > div:first-child').append('<span class="sort-btn"></span>');
                 th.click(function (e) {
                     let $this = $(e.target);
                     if (!$this.closest('div.dropdown').length && !$this.closest('input').length) {
