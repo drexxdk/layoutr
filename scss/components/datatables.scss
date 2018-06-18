@@ -245,25 +245,22 @@ div.dt-button-info {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 400px;
-    margin-top: -100px;
-    margin-left: -200px;
-    background-color: white;
-    border: 2px solid #111;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
-    text-align: center;
-    z-index: 21;
+    @include transform(translate(-50%, -50%));
+    width: $container-small;
+    border-radius: $component-border-radius;
+    border: $component-border;
+    background-color: $white;
+    z-index: $modal-z-index;
+    overflow: hidden;
 
     h2 {
-        padding: 0.5em;
-        margin: 0;
-        font-weight: normal;
-        border-bottom: 1px solid #ddd;
-        background-color: #f3f3f3;
+        @include theme-element($light, false);
+        border-bottom: $component-border;
+        padding: $padding-y $padding-x;
+        margin-bottom: 0;
     }
 
     > div {
-        padding: 1em;
+        padding: $padding-y $padding-x;
     }
 }
