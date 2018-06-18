@@ -77,11 +77,11 @@
                     }
 
                     &.sorting_asc .sort-btn:before {
-                        border-bottom-color: $secondary;
+                        border-bottom-color: $dark;
                     }
 
                     &.sorting_desc .sort-btn:after {
-                        border-top-color: $secondary;
+                        border-top-color: $dark;
                     }
 
                     &.sorting_asc_disabled,
@@ -106,12 +106,12 @@
                         }
 
                         &:before {
-                            border-bottom: 9px solid $white;
+                            border-bottom: 9px solid $gray-500;
                             top: 0;
                         }
 
                         &:after {
-                            border-top: 9px solid $white;
+                            border-top: 9px solid $gray-500;
                             bottom: 0;
                         }
                     }
