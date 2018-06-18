@@ -236,6 +236,10 @@
                 span.ellipsis {
                     padding: $padding-y;
                 }
+
+                .previous svg {
+                    @include transform(rotate(180deg));
+                }
             }
         }
     }

@@ -2326,9 +2326,15 @@ app.datatables = function (tables) {
                 footer.append(info);
             }
             function paginateFix(paginate) {
-                let span = paginate.children('span');
-                paginate.find('.paginate_button.previous').prependTo(span);
-                paginate.find('.paginate_button.next').appendTo(span);
+                let span = paginate.children('span'),
+                    prev = paginate.find('.paginate_button.previous'),
+                    next = paginate.find('.paginate_button.next');
+
+                prev.html('<svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>');
+                next.html('<svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>');
+
+                prev.prependTo(span);
+                next.appendTo(span);
             }
             function table_footer_paginate(wrapper, footer, paginate) {
                 paginate.addClass('flex column wrap');
@@ -2354,8 +2360,8 @@ app.datatables = function (tables) {
                     ],
                     responsive: true,
                     initComplete: function (settings, json) {
-                        let instance = this.api();
-                        let wrapper = $(settings.nTableWrapper);
+                        let instance = this.api(),
+                            wrapper = $(settings.nTableWrapper);
 
                         wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
                         let header = wrapper.find('> .dataTables_header > div');
