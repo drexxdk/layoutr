@@ -50,14 +50,24 @@
             flex-shrink: 0;
         }
 
+        $default: $light;
 
-        $theme: $light;
+        @include theme-element($default);
 
         html.desktop &:hover {
-            @include theme-element-darken($theme);
+            @include theme-element-darken($default);
         }
 
-        @include theme-element($theme);
+        &[type="submit"] {
+
+            $submit: $primary;
+
+            @include theme-element($submit);
+
+            html.desktop &:hover {
+                @include theme-element-darken($submit);
+            }
+        }
 
         html.desktop &:focus {
             @include focus;
