@@ -1,0 +1,186 @@
+﻿<div id="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<div id="modal" tabindex="0"></div>
+<div id="cookie">
+    <p>
+        <span>layoutr uses cookies to improve your site experience.</span>
+        <button type="button" class="modal" data-modal="form" data-modal-title="Cookie info" data-modal-content="&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis odio quis nunc porta tincidunt. Praesent in augue velit. Vivamus efficitur nisi eget convallis placerat. Quisque luctus nibh vitae mauris vehicula dignissim. Cras quis velit ac metus maximus luctus eget rutrum nisl. Nulla facilisi. Nullam gravida efficitur fringilla. Etiam pretium condimentum tempus. Sed feugiat tortor vitae est porttitor, eu pharetra arcu fringilla. Sed nec luctus enim, nec rhoncus velit. Fusce dolor sem, varius id rutrum in, efficitur sed magna.&#x3C;br /&#x3E;&#x3C;br /&#x3E; Maecenas ut lacinia orci.Phasellus sagittis nisi eu mauris tempus, sit amet lobortis justo dapibus.Nulla facilisi.Aenean venenatis faucibus gravida.Praesent et justo fringilla mauris convallis pretium.Maecenas egestas lectus non erat tincidunt, in egestas risus ultricies.Praesent erat felis, rutrum ac accumsan eget, accumsan ac nisi.Integer sollicitudin risus sed purus maximus porta.Nam maximus, leo at dapibus lobortis, nunc eros molestie justo, vel scelerisque est dolor non tellus.Integer fermentum mi malesuada, placerat mi ac, laoreet risus.&#x3C;br /&#x3E;&#x3C;br /&#x3E; Sed et felis a velit accumsan sollicitudin ut a dolor.Integer iaculis quam risus, ac placerat nibh fringilla non.Donec non diam nulla.Vestibulum pretium magna ac malesuada lobortis.Nam eleifend sapien sed efficitur fermentum.Ut magna sapien, mattis nec ligula sollicitudin, ultricies efficitur quam.Praesent vestibulum libero et lorem vulputate, sit amet sagittis velit bibendum.Morbi blandit quis nibh a rhoncus.Phasellus maximus justo ac varius dapibus.Mauris suscipit quam vitae augue ornare, eu rutrum elit tincidunt.Nam rutrum turpis ut bibendum iaculis.Nunc bibendum pretium turpis non ullamcorper.Morbi rhoncus tortor sit amet diam imperdiet luctus.Cras tempor interdum est, et sodales neque semper a.Aliquam imperdiet risus ex, id imperdiet urna egestas in. Vivamus eu suscipit augue.&#x3C;br /&#x3E;&#x3C;br /&#x3E; Maecenas nec mauris diam.Aenean lobortis mauris sit amet ligula imperdiet tincidunt.Suspendisse ornare nisl metus, id sagittis ligula feugiat vitae.Nullam viverra velit non augue maximus, quis vulputate nisi tincidunt.Maecenas pretium mi sed tellus placerat molestie.Duis laoreet purus eu lectus accumsan faucibus.Donec cursus odio turpis, ac maximus lacus euismod finibus.Nunc blandit ultricies ultrices.Etiam vitae auctor quam.Ut sem libero, aliquam ut erat vitae, dapibus lacinia erat.Donec nec erat commodo, tincidunt arcu nec, tincidunt ligula.Maecenas id facilisis neque.In sollicitudin ligula non congue convallis.Sed et varius odio.Mauris scelerisque nisl ac ipsum sodales, ut lacinia nisi tempus.&#x3C;br /&#x3E;&#x3C;br /&#x3E; Maecenas orci magna, convallis vel blandit id, tincidunt tempus lorem.Duis in purus velit.Vivamus elit urna, congue a congue ut, porttitor id orci.Vestibulum mattis, nisi in eleifend aliquet, lectus velit imperdiet est, at gravida quam erat et lectus.Aliquam vehicula nisi sed turpis posuere pretium.Integer a enim nec nisl faucibus varius.Cras pharetra viverra magna id finibus.Donec aliquet blandit est eu venenatis.Nunc et quam imperdiet, pellentesque neque at, malesuada lorem.Vivamus ut elementum ipsum.Vivamus mauris est, malesuada ut lacinia eu, porta id mauris.Suspendisse potenti.Nulla vel libero ac nunc porta mollis nec ac ligula.&#x3C;/p&#x3E;">Find out more</button>
+        <button type="button" id="cookie-accept">Accept Cookies</button>
+    </p>
+</div>
+<main tabindex="0">
+    <header class="header">
+        <button type="button" class="expand aside left" aria-label="Toggle menu">
+            <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
+        </button>
+        <h1 class="title">
+            <a href="">
+                <svg focusable="false"><use xlink:href="#svg-logo"></use></svg>
+                <span>layoutr</span>
+            </a>
+            <span id="title"></span>
+        </h1>
+        <div id="authentication">
+            <div class="unauthenticated">
+                <button type="button" data-type="login">
+                    <svg focusable="false"><use xlink:href="#svg-password" aria-label="Login"></use></svg>
+                    <span>Login</span>
+                </button>
+                <span></span>
+                <button type="button" data-type="register">
+                    <svg focusable="false"><use xlink:href="#svg-user-add" aria-label="Register"></use></svg>
+                    <span>Register</span>
+                </button>
+            </div>
+            <div class="authenticated">
+                <button type="button" data-type="user" class="expand" aria-label="Toggle user menu">
+                    <img src="dist/img/avatar-60-60.jpg" alt="Avatar" />
+                    <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                </button>
+            </div>
+            <div tabindex="0">
+                <div class="register">
+                    <div class="header">
+                        <h2 class="title">Register</h2>
+                    </div>
+                    <form method="post" class="flex space-3">
+                        <div class="form-group">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                                    </div>
+                                    <input type="text" class="form-control" id="register_username" name="register_username" placeholder="Username" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <svg focusable="false"><use xlink:href="#svg-email"></use></svg>
+                                    </div>
+                                    <input id="register_email" name="register_email" class="form-control" type="text" placeholder="Email address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
+                                    </div>
+                                    <input id="register_password" name="register_password" class="form-control" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
+                                    </div>
+                                    <input type="password" class="form-control" id="register_confirm_password" name="register_confirm_password" placeholder="Confirm password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p>By clicking Register, you agree to our <button type="button" class="modal link" data-modal="form" data-modal-title="Terms" data-modal-content="&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#x3C;/p&#x3E;">Terms</button> and that you have read our <button type="button" class="modal link" data-modal="form" data-modal-title="Data Use Policy" data-modal-content="&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#x3C;/p&#x3E;">Data Use Policy</button>, including our <button type="button" class="modal link" data-modal="form" data-modal-title="Cookie Use" data-modal-content="&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#x3C;/p&#x3E;">Cookie Use</button>.</p>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn">Register</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="login">
+                    <div class="header">
+                        <h2 class="title">Login</h2>
+                    </div>
+                    <form method="post" class="flex space-3">
+                        <div class="form-group">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                                    </div>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
+                                    </div>
+                                    <input id="password" name="password" class="form-control" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="user">
+                    <div class="info">
+                        <i>
+                            <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                            <img src="dist/img/avatar-60-60.jpg" alt="Avatar" />
+                        </i>
+                        <div>
+                            <p id="authenticated-username">fake username</p>
+                            <p id="authenticated-email">fake@email.com</p>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="#"><i><svg focusable="false"><use xlink:href="#svg-user"></use></svg></i><span>Profile</span></a>
+                        <a href="#"><i><svg focusable="false"><use xlink:href="#svg-settings"></use></svg></i><span>Settings</span></a>
+                        <hr />
+                        <a href="#"><i><svg focusable="false"><use xlink:href="#svg-sign-out"></use></svg></i><span>Sign out</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="expand aside right" aria-label="Toggle settings">
+            <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
+        </button>
+    </header>
+    <div id="container">
+        <div>
+            <div id="content"><div></div></div>
+            <aside id="left" tabindex="0">
+                <div class="header">
+                    <h2 class="title">Navigation</h2>
+                    <button type="button" class="expand aside left close" aria-label="Toggle settings">
+                        <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
+                    </button>
+                </div>
+                <div class="content">
+                    <div>
+                    </div>
+                </div>
+            </aside>
+            <aside id="right" tabindex="0">
+                <div class="header">
+                    <button type="button" class="expand aside right close" aria-label="Toggle settings">
+                        <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
+                    </button>
+                    <h2 class="title">Settings</h2>
+                </div>
+                <div class="content">
+                    <div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <footer></footer>
+</main>

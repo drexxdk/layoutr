@@ -18,6 +18,9 @@
       "js/vendors/jquery/jquery.shuffle.js",
       "js/vendors/bowser.js",
 
+      "js/vendors/backbone/require.js",
+      "js/backbone/app.js",
+
       // layout
       "js/app/layout/_variables.js",
       "js/app/layout/_functions.js",
@@ -58,6 +61,7 @@
 
       // site
       "js/app/site/form.js"
+
     ]
   },
   {
@@ -92,6 +96,12 @@
       "js/app/assignments/color.js",
       "js/app/assignments/dragAndDrop.js",
       "js/app/assignments/sort.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/js/handlebars.js",
+    "inputFiles": [
+      "js/vendors/backbone/handlebars.js"
     ]
   }
 ]
