@@ -2895,49 +2895,46 @@ var requirejs, require, define;
     req(cfg);
 }(this, (typeof setTimeout === 'undefined' ? undefined : setTimeout)));
 
-var app = app || {};
-
 require(['/js/backbone/config.js'], function () {
-    require(['backbone', 'marionette', 'router', 'views/shared/layoutView'],
-        function (Backbone, Marionette, Router, LayoutView) {
-
-            Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTemplate) {
-                return Handlebars.compile(rawTemplate);
-            };
-
-            app.router = new Router();
-
-            function start() {
-                this.layout = new LayoutView();
-                this.layout.render();
-
-                Backbone.history.start({ pushState: true });
-            }
-            
-            start();
+    require(['backbone', 'marionette', 'router', 'views/rootView'],
+        function (Backbone, Marionette, Router, RootView) {
+            const App = Marionette.Application.extend({
+                region: '#root',
+                onStart() {
+                    const rootView = new RootView();
+                    const router = new Router({ rootView: rootView });
+                    this.showView(rootView);
+                    Backbone.history.start();
+                }
+            });
+            const app = new App();
+            app.start();
         }
     );
 });
 var app = app || {};
 
-$(function () {
-    app.html = $('html');
-    app.head = $('head');
-    app.body = $('body');
+app.variables = function () {
     app.main = $('main');
     app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
     app.left = $('#left');
     app.right = $('#right');
-    app.loading = $('#loading');
     app.overflow = $('#overflow');
-    app.modal = $('#modal');
     app.title = $('#title');
     app.authentication = $('#authentication');
     app.unauthenticated = app.authentication.children('.unauthenticated');
     app.authenticated = app.authentication.children('.authenticated');
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
+};
+
+$(function () {
+    app.html = $('html');
+    app.head = $('head');
+    app.body = $('body');
+    app.loading = $('#loading');
+    app.modal = $('#modal');
     app.cookie = $('#cookie');
 
     app.cssInterval = 50;
@@ -2949,7 +2946,8 @@ $(function () {
     app.loadingCount = 0;
     app.document = document.documentElement;
     app.fullscreen = false;
-    
+    app.initial = true;
+
     app.navigation = [];
 
     bowser.desktop = !bowser.mobile && !bowser.tablet;
@@ -3162,7 +3160,7 @@ $.ajaxSetup({
 });
 
 $(function () {
-    app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
+    //app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
@@ -3236,6 +3234,7 @@ app.pageLoaded = function (initial) {
     app.hideLoading();
     if (initial) {
         app.html.addClass('site-loaded');
+        app.initial = false;
     }
 };
 var app = app || {};
@@ -3514,76 +3513,76 @@ $(function () {
 });
 var app = app || {};
 
-app.loadPage = function (url, pushState, initial) {
-    app.showLoading();
-    url = url.replace(/^\/+/g, '');
-    var q = url.indexOf('?');
-    url = url.substring(0, q !== -1 ? q : url.length);
-    app.left.find('.tree a.label.active').removeClass('active');
-    url = url.replace('/', '');
-    app.left.find('a.label[href="' + url + '"]').addClass('active');
-    var tempUrl = url;
-    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
-        url = tempUrl;
-        if (url === '') {
-            app.title.html('');
-            if (app.body.children('#svg-browser').length === 0) {
-                $.get(app.host + 'ajax/svg/browser.html', function (data) {
-                    $(data).prependTo(app.body);
-                });
-            }
-            if (app.body.children('#svg-os').length === 0) {
-                $.get(app.host + 'ajax/svg/os.html', function (data) {
-                    $(data).prependTo(app.body);
-                });
-            }
-        } else {
-            app.title.html(app.capitalize(url.replace('-', ' ')));
-            if (url === 'form') {
-                app.pageForm();
-            }
-        }
-        app.pageLoaded(initial);
-    });
-    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
-    if (pushState) {
-        window.history.pushState(null, null, url);
-        loadPage = true;
-    }
-};
+//app.loadPage = function (url, pushState, initial) {
+//    app.showLoading();
+//    url = url.replace(/^\/+/g, '');
+//    var q = url.indexOf('?');
+//    url = url.substring(0, q !== -1 ? q : url.length);
+//    app.left.find('.tree a.label.active').removeClass('active');
+//    url = url.replace('/', '');
+//    app.left.find('a.label[href="' + url + '"]').addClass('active');
+//    var tempUrl = url;
+//    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+//        url = tempUrl;
+//        if (url === '') {
+//            app.title.html('');
+//            if (app.body.children('#svg-browser').length === 0) {
+//                $.get(app.host + 'ajax/svg/browser.html', function (data) {
+//                    $(data).prependTo(app.body);
+//                });
+//            }
+//            if (app.body.children('#svg-os').length === 0) {
+//                $.get(app.host + 'ajax/svg/os.html', function (data) {
+//                    $(data).prependTo(app.body);
+//                });
+//            }
+//        } else {
+//            app.title.html(app.capitalize(url.replace('-', ' ')));
+//            if (url === 'form') {
+//                app.pageForm();
+//            }
+//        }
+//        app.pageLoaded(initial);
+//    });
+//    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
+//    if (pushState) {
+//        window.history.pushState(null, null, url);
+//        loadPage = true;
+//    }
+//};
 
-app.internalLinkClick = function (href, e) {
-    e.preventDefault();
-    app.loadPage(href, true, false);
-};
+//app.internalLinkClick = function (href, e) {
+//    e.preventDefault();
+//    app.loadPage(href, true, false);
+//};
 
-(function (l) {
-    if (l.search) {
-        app.url = {};
-        l.search.slice(1).split('&').forEach(function (v) {
-            var a = v.split('=');
-            app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-        });
-        if (app.url.p !== undefined) {
-            window.history.replaceState(null, null,
-                l.pathname.slice(0, -1) + app.url.p +
-                (app.url.q ? '?' + app.url.q : '') +
-                l.hash
-            );
-        }
-    }
-}(window.location));
+//(function (l) {
+//    if (l.search) {
+//        app.url = {};
+//        l.search.slice(1).split('&').forEach(function (v) {
+//            var a = v.split('=');
+//            app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+//        });
+//        if (app.url.p !== undefined) {
+//            window.history.replaceState(null, null,
+//                l.pathname.slice(0, -1) + app.url.p +
+//                (app.url.q ? '?' + app.url.q : '') +
+//                l.hash
+//            );
+//        }
+//    }
+//}(window.location));
 
-var loadPage = window.history.state;
-window.onpopstate = function (event) {
-    if (loadPage) {
-        var url = location.pathname;
-        if (!app.isLocalhost) {
-            url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
-        }
-        app.loadPage(url, false, true);
-    }
-};
+//var loadPage = window.history.state;
+//window.onpopstate = function (event) {
+//    if (loadPage) {
+//        var url = location.pathname;
+//        if (!app.isLocalhost) {
+//            url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
+//        }
+//        app.loadPage(url, false, true);
+//    }
+//};
 
 app.applyNavigation = function (id, value, set) {
     if (set) {
@@ -3605,50 +3604,50 @@ app.applyNavigation = function (id, value, set) {
     }
 };
 
-$(function () {
-    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
-        app.navigationTree = app.left.find('.tree');
-        app.navigation = JSON.parse(localStorage.getItem("navigation"));
-        if (app.navigation === null) app.navigation = [];
-        $.each(app.navigation, function (i, entry) {
-            app.applyNavigation(entry.id, entry.value, false);
-        });
-        app.navigationTree.on('change', 'input[type=checkbox]', function () {
-            var $this = $(this),
-                id = $this.attr('id'),
-                value = $this.is(':checked');
-            app.applyNavigation(id, value, true);
-        });
-        app.header.find('.aside.left').addClass('loaded');
-        if (app.url && app.url.p) {
-            app.navigationTree.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
-        } else {
-            app.navigationTree.find('a.label[href=""]').addClass('active');
-        }
-    });
+//$(function () {
+//    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
+//        app.navigationTree = app.left.find('.tree');
+//        app.navigation = JSON.parse(localStorage.getItem("navigation"));
+//        if (app.navigation === null) app.navigation = [];
+//        $.each(app.navigation, function (i, entry) {
+//            app.applyNavigation(entry.id, entry.value, false);
+//        });
+//        app.navigationTree.on('change', 'input[type=checkbox]', function () {
+//            var $this = $(this),
+//                id = $this.attr('id'),
+//                value = $this.is(':checked');
+//            app.applyNavigation(id, value, true);
+//        });
+//        app.header.find('.aside.left').addClass('loaded');
+//        if (app.url && app.url.p) {
+//            app.navigationTree.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
+//        } else {
+//            app.navigationTree.find('a.label[href=""]').addClass('active');
+//        }
+//    });
 
-    if (app.url && app.url.p) {
-        app.loadPage(app.url.p, true, true);
-    } else {
-        app.loadPage('', false, true);
-    }
+//    if (app.url && app.url.p) {
+//        app.loadPage(app.url.p, true, true);
+//    } else {
+//        app.loadPage('', false, true);
+//    }
 
-    app.left.on('click', '.tree a.label:not(.active)', function (e) {
-        app.internalLinkClick($(this).attr('href'), e);
-    });
+//    app.left.on('click', '.tree a.label:not(.active)', function (e) {
+//        app.internalLinkClick($(this).attr('href'), e);
+//    });
 
-    app.header.on('click', 'h1 a', function (e) {
-        app.internalLinkClick($(this).attr('href'), e);
-    });
+//    app.header.on('click', 'h1 a', function (e) {
+//        app.internalLinkClick($(this).attr('href'), e);
+//    });
 
-    app.left.on('click', '#navigation-expand', function () {
-        app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
-    });
+//    app.left.on('click', '#navigation-expand', function () {
+//        app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
+//    });
 
-    app.left.on('click', '#navigation-collapse', function () {
-        app.navigationTree.find('input[type=checkbox]:checked').click();
-    });
-});
+//    app.left.on('click', '#navigation-collapse', function () {
+//        app.navigationTree.find('input[type=checkbox]:checked').click();
+//    });
+//});
 var app = app || {};
 
 app.applySettings = function (id, name, type, value, set) {
@@ -3716,31 +3715,31 @@ app.applySettings = function (id, name, type, value, set) {
 };
 
 $(function () {
-    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
-        $.each(app.settings, function (i, entry) {
-            app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-        });
-        app.header.find('.aside.right').addClass('loaded');
-        $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
-            var $this = $(this),
-                id = $this.attr('id'),
-                name = $this.attr('name'),
-                type = $this.attr('type'),
-                value = $this.is(':checked');
-            app.applySettings(id, name, type, value, true);
-            if (id === 'left-shrink' || id === 'right-shrink' ||
-                id === 'left-push' || id === 'right-push' ||
-                id === 'left-overlay' || id === 'right-overlay') {
-                app.setHtmlScroll();
-            }
-        });
-        app.responsiveHeader();
-    });
+    //app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
+    //    $.each(app.settings, function (i, entry) {
+    //        app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
+    //    });
+    //    app.header.find('.aside.right').addClass('loaded');
+    //    $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
+    //        var $this = $(this),
+    //            id = $this.attr('id'),
+    //            name = $this.attr('name'),
+    //            type = $this.attr('type'),
+    //            value = $this.is(':checked');
+    //        app.applySettings(id, name, type, value, true);
+    //        if (id === 'left-shrink' || id === 'right-shrink' ||
+    //            id === 'left-push' || id === 'right-push' ||
+    //            id === 'left-overlay' || id === 'right-overlay') {
+    //            app.setHtmlScroll();
+    //        }
+    //    });
+    //    app.responsiveHeader();
+    //});
 
-    app.right.on('click', '#clear-localstorage', function () {
-        localStorage.clear();
-        location.reload();
-    });
+    //app.right.on('click', '#clear-localstorage', function () {
+    //    localStorage.clear();
+    //    location.reload();
+    //});
 });
 var app = app || {};
 

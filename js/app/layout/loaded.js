@@ -30,5 +30,6 @@ app.pageLoaded = function (initial) {
     app.hideLoading();
     if (initial) {
         app.html.addClass('site-loaded');
+        app.initial = false;
     }
 };

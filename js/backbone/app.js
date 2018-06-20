@@ -1,23 +1,17 @@
-﻿var app = app || {};
-
-require(['/js/backbone/config.js'], function () {
-    require(['backbone', 'marionette', 'router', 'views/shared/layoutView'],
-        function (Backbone, Marionette, Router, LayoutView) {
-
-            Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTemplate) {
-                return Handlebars.compile(rawTemplate);
-            };
-
-            app.router = new Router();
-
-            function start() {
-                this.layout = new LayoutView();
-                this.layout.render();
-
-                Backbone.history.start({ pushState: true });
-            }
-            
-            start();
+﻿require(['/js/backbone/config.js'], function () {
+    require(['backbone', 'marionette', 'router', 'views/rootView'],
+        function (Backbone, Marionette, Router, RootView) {
+            const App = Marionette.Application.extend({
+                region: '#root',
+                onStart() {
+                    const rootView = new RootView();
+                    const router = new Router({ rootView: rootView });
+                    this.showView(rootView);
+                    Backbone.history.start();
+                }
+            });
+            const app = new App();
+            app.start();
         }
     );
 });

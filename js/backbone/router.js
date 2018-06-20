@@ -1,6 +1,4 @@
-﻿var app = app || {};
-
-define(['marionette', 'controller', 'backbone'],
+﻿define(['marionette', 'controller', 'backbone'],
     function (Marionette, Controller, Backbone) {
         return Marionette.AppRouter.extend({
             controller: Controller,
@@ -10,8 +8,8 @@ define(['marionette', 'controller', 'backbone'],
                 'page/:id/:id': 'page',
                 'page/:id/:id/:id': 'page'
             },
-            initialize: function () {
-                this.controller = new Controller();
+            initialize: function (options) {
+                this.controller = new Controller(options);
             }
         });
     }

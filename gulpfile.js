@@ -14,7 +14,7 @@ gulp.task('templates', function () {
         .pipe(handlebars())
         .pipe(wrap('Handlebars.template(<%= contents %>)'))
         .pipe(declare({
-            namespace: '.templates',
+            namespace: 'templates',
             noRedeclare: true, // Avoid duplicate declarations
         }))
         .pipe(concat('templates.js'))

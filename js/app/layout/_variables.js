@@ -1,23 +1,26 @@
 ﻿var app = app || {};
 
-$(function () {
-    app.html = $('html');
-    app.head = $('head');
-    app.body = $('body');
+app.variables = function () {
     app.main = $('main');
     app.content = $('#content > div');
     app.header = $('header');
     app.footer = $('footer');
     app.left = $('#left');
     app.right = $('#right');
-    app.loading = $('#loading');
     app.overflow = $('#overflow');
-    app.modal = $('#modal');
     app.title = $('#title');
     app.authentication = $('#authentication');
     app.unauthenticated = app.authentication.children('.unauthenticated');
     app.authenticated = app.authentication.children('.authenticated');
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
+};
+
+$(function () {
+    app.html = $('html');
+    app.head = $('head');
+    app.body = $('body');
+    app.loading = $('#loading');
+    app.modal = $('#modal');
     app.cookie = $('#cookie');
 
     app.cssInterval = 50;
@@ -29,7 +32,8 @@ $(function () {
     app.loadingCount = 0;
     app.document = document.documentElement;
     app.fullscreen = false;
-    
+    app.initial = true;
+
     app.navigation = [];
 
     bowser.desktop = !bowser.mobile && !bowser.tablet;

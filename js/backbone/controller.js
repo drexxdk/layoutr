@@ -1,14 +1,14 @@
-﻿var app = app || {};
-
-define(['marionette'],
+﻿define(['marionette'],
     function (Marionette) {
 
         return Marionette.Object.extend({
             home: function () {
-                debugger;
+                const rootView = this.getOption('rootView');
+                rootView.showHome();
             },
             page: function (id) {
-                debugger;
+                const rootView = this.getOption('rootView');
+                rootView.showPage(id);
             }
         });
     }
