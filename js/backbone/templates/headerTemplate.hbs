@@ -1,0 +1,135 @@
+﻿<button type="button" class="expand aside left" aria-label="Toggle menu">
+    <svg focusable="false"><use xlink:href="#svg-menu"></use></svg>
+</button>
+<h1 class="title">
+    <a href="">
+        <svg focusable="false"><use xlink:href="#svg-logo"></use></svg>
+        <span>layoutr</span>
+    </a>
+    <span id="title"></span>
+</h1>
+<div id="authentication">
+    <div class="unauthenticated">
+        <button type="button" data-type="login">
+            <svg focusable="false"><use xlink:href="#svg-password" aria-label="Login"></use></svg>
+            <span>Login</span>
+        </button>
+        <span></span>
+        <button type="button" data-type="register">
+            <svg focusable="false"><use xlink:href="#svg-user-add" aria-label="Register"></use></svg>
+            <span>Register</span>
+        </button>
+    </div>
+    <div class="authenticated">
+        <button type="button" data-type="user" class="expand" aria-label="Toggle user menu">
+            <img src="dist/img/avatar-60-60.jpg" alt="Avatar" />
+            <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+        </button>
+    </div>
+    <div tabindex="0">
+        <div class="register">
+            <div class="header">
+                <h2 class="title">Register</h2>
+            </div>
+            <form method="post" class="flex space-3">
+                <div class="form-group">
+                    <div>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                            </div>
+                            <input type="text" class="form-control" id="register_username" name="register_username" placeholder="Username" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <svg focusable="false"><use xlink:href="#svg-email"></use></svg>
+                            </div>
+                            <input id="register_email" name="register_email" class="form-control" type="text" placeholder="Email address">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
+                            </div>
+                            <input id="register_password" name="register_password" class="form-control" type="password" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
+                            </div>
+                            <input type="password" class="form-control" id="register_confirm_password" name="register_confirm_password" placeholder="Confirm password" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>By clicking Register, you agree to our <button type="button" class="modal link" data-modal="form" data-modal-title="Terms" data-modal-content="&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#x3C;/p&#x3E;">Terms</button> and that you have read our <button type="button" class="modal link" data-modal="form" data-modal-title="Data Use Policy" data-modal-content="&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#x3C;/p&#x3E;">Data Use Policy</button>, including our <button type="button" class="modal link" data-modal="form" data-modal-title="Cookie Use" data-modal-content="&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#x3C;/p&#x3E;">Cookie Use</button>.</p>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Register</button>
+                </div>
+            </form>
+        </div>
+        <div class="login">
+            <div class="header">
+                <h2 class="title">Login</h2>
+            </div>
+            <form method="post" class="flex space-3">
+                <div class="form-group">
+                    <div>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                            </div>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <svg focusable="false"><use xlink:href="#svg-password"></use></svg>
+                            </div>
+                            <input id="password" name="password" class="form-control" type="password" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn">Login</button>
+                </div>
+            </form>
+        </div>
+        <div class="user">
+            <div class="info">
+                <i>
+                    <svg focusable="false"><use xlink:href="#svg-user"></use></svg>
+                    <img src="dist/img/avatar-60-60.jpg" alt="Avatar" />
+                </i>
+                <div>
+                    <p id="authenticated-username">fake username</p>
+                    <p id="authenticated-email">fake@email.com</p>
+                </div>
+            </div>
+            <div class="links">
+                <a href="#"><i><svg focusable="false"><use xlink:href="#svg-user"></use></svg></i><span>Profile</span></a>
+                <a href="#"><i><svg focusable="false"><use xlink:href="#svg-settings"></use></svg></i><span>Settings</span></a>
+                <hr />
+                <a href="#"><i><svg focusable="false"><use xlink:href="#svg-sign-out"></use></svg></i><span>Sign out</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="expand aside right" aria-label="Toggle settings">
+    <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
+</button>

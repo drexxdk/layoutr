@@ -749,6 +749,1704 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 
     return bowser
 });
+var app = app || {};
+
+app.variables = function () {
+    app.main = $('main');
+    app.content = $('#content > div');
+    app.header = $('header');
+    app.footer = $('footer');
+    app.left = $('#left');
+    app.right = $('#right');
+    app.overflow = $('#overflow');
+    app.title = $('#title');
+    app.authentication = $('#authentication');
+    app.unauthenticated = app.authentication.children('.unauthenticated');
+    app.authenticated = app.authentication.children('.authenticated');
+    app.authenticatedLinks = app.authenticated.find('.authenticated-links');
+};
+
+$(function () {
+    app.html = $('html');
+    app.head = $('head');
+    app.body = $('body');
+
+    app.cssInterval = 50;
+    app.transitionTime = 400;
+    app.fadeOutTime = 500;
+    app.htmlOverflowEnabled = true;
+    app.smallBreakpoint = 732;
+    app.scrollbarWidth = 0;
+    app.loadingCount = 0;
+    app.document = document.documentElement;
+    app.fullscreen = false;
+    app.initial = true;
+
+    app.navigation = [];
+
+    bowser.desktop = !bowser.mobile && !bowser.tablet;
+});
+var app = app || {};
+
+app.guid = function () {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+};
+
+app.isSmallBreakpoint = function () {
+    return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftShrink() || app.isAsideRight() && !app.isAsideRightShrink();
+};
+
+app.isAside = function () {
+    return app.html.attr('data-aside').length;
+};
+
+app.isAsideLeft = function () {
+    return app.html.attr('data-aside') === 'left';
+};
+
+app.isAsideRight = function () {
+    return app.html.attr('data-aside') === 'right';
+};
+
+app.isAsideLeftShrink = function () {
+    return app.html.hasClass('left-shrink') && app.isAsideLeft();
+};
+
+app.isAsideRightShrink = function () {
+    return app.html.hasClass('right-shrink') && app.isAsideRight();
+};
+
+app.isAsideLeftCloseOnClickOutside = function () {
+    return app.html.hasClass('close-left-click-outside');
+};
+app.isAsideRightCloseOnClickOutside = function () {
+    return app.html.hasClass('close-right-click-outside');
+};
+
+app.isModal = function () {
+    return app.html.hasClass('modal');
+};
+
+app.isModalForm = function () {
+    return app.html.attr('data-modal') === 'form';
+};
+
+app.isModalImage = function () {
+    return app.html.attr('data-modal') === 'image';
+};
+
+app.isAuthentication = function () {
+    return app.html.attr('data-authentication') !== '';
+};
+
+app.isLoading = function () {
+    return app.html.hasClass('loading');
+};
+
+app.isScrollDisabled = function () {
+    return app.html.hasClass('scroll-disabled');
+};
+
+app.isCloseLeftPageChange = function () {
+    return app.html.hasClass('close-left-page-change');
+};
+
+app.isTransitions = function () {
+    return app.html.hasClass('transitions');
+};
+
+app.isAndroidSwipe = function () {
+    return app.html.hasClass('android-swipe');
+};
+
+app.isSiteLoaded = function () {
+    return app.html.hasClass('site-loaded');
+};
+
+app.capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+app.scrollTop = function () {
+    return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
+};
+
+app.tryParseInt = function (str, defaultValue) {
+    var retValue = defaultValue;
+    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
+        retValue = parseInt(str);
+    }
+    return retValue;
+};
+
+app.tryParseFloat = function (str, defaultValue) {
+    var retValue = defaultValue;
+    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
+        retValue = parseFloat(str);
+    }
+    return retValue;
+};
+
+app.cssLoaded = function() {
+    return app.body.css('visibility') !== 'hidden';
+}
+var app = app || {};
+
+$(function () {
+    if (bowser.msedge) {
+        app.html.addClass('msedge'); // used by app.enableScroll()
+    } else if (bowser.msie) {
+        app.html.addClass('msie'); // not currently used for anything
+    }
+    if (bowser.mobile) {
+        app.html.addClass('mobile'); // disables fixed footer
+    } else if (bowser.tablet) {
+        app.html.addClass('tablet'); // does nothing currently
+    } else {
+        app.html.addClass('desktop'); // enables hover effects
+    }
+
+    if (bowser.android) {
+        app.html.addClass('android'); // used by modal
+    } else if (bowser.ios) {
+        app.html.addClass('ios'); // used to apply focus
+    }
+
+    if (bowser.msie || bowser.msedge) {
+        // disable smooth scrolling, since it causes element jumping/lagging on scroll
+        // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
+        app.body.on("mousewheel", function (e) {
+            var target = $(e.target);
+            if (!app.isModal() && event.ctrlKey !== true) {
+                e.preventDefault();
+                var aside = target.closest('aside > .content') || target.parents('aside .content'),
+                    wheelDelta = e.originalEvent.wheelDelta,
+                    currentScrollPosition;
+                if (aside.length) {
+                    currentScrollPosition = aside.scrollTop();
+                    aside.scrollTop(currentScrollPosition - wheelDelta);
+                } else {
+                    currentScrollPosition = window.pageYOffset;
+                    window.scrollTo(0, currentScrollPosition - wheelDelta);
+                }
+            }
+        });
+
+        // at some zoom levels edge/ie makes $(window) heigher than $(document)
+        // it causes a gap between footer and the bottom of $(window).
+        $(window).scroll(function () {
+            var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            if (scrollTop + $(window).height() >= $(document).height()) {
+                app.html.addClass('subpixel');
+            } else {
+                app.html.removeClass('subpixel');
+            }
+        });
+    }
+});
+var app = app || {};
+
+$(function () {
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("Fake submitted!");
+        }
+    });
+
+    $.validator.addMethod('password_regex', function (value) {
+        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
+    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
+});
+
+app.addValidation = function (form, rules, messages) {
+    form.validate({
+        rules: rules,
+        messages: messages,
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            element = element.parent();
+            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
+                element = element.parent();
+            }
+            element.append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").addClass("theme-danger");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").removeClass("theme-danger");
+        }
+    });
+    form.on('change', 'input, textarea, select', function () {
+        $(this).valid();
+    });
+};
+var app = app || {};
+
+$.ajaxSetup({
+    cache: true
+});
+
+$(function () {
+    //app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
+
+    //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
+
+    $.get(app.host + 'ajax/svg/base.html', function (data) {
+        $(data).prependTo(app.body);
+    });
+});
+
+$(window).click(function (e) {
+    var target = $(e.target),
+        modal = target.closest(app.modal[0]);
+
+    if (bowser.ios) {
+        // ios browsers doesn't apply :focus to buttons in many cases,
+        // this forces :focus to be applied correctly.
+        if (target.parents('button').length) {
+            target.parents('button').focus();
+        } else if (target.closest('button').length) {
+            target.focus();
+        }
+    }
+    if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
+        app.html.attr('data-authentication', '');
+    }
+    else if (modal.length) {
+        var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
+            form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
+        if (image || form || target.closest('#modal-close').length) {
+            app.closeModal();
+        }
+    } else {
+        var isSmallBreakpoint = app.isSmallBreakpoint(),
+            left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
+            right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
+            notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
+        if ((left || right) && notTarget && !app.isLoading()) {
+            app.enableScroll();
+            app.html.attr('data-aside', '');
+        }
+    }
+});
+var app = app || {};
+
+app.contentLoaded = function (element) {
+    app.lazy(element.find('.lazy'));
+    app.accordion(element.find('.accordion'));
+    app.dropdown(element.find('select.dropdown'));
+    app.tooltip(element.find('.tooltip'));
+    app.assignment(element.find('.assignment'));
+    app.math(element.find('.math'));
+    app.media(element.find('audio, video'));
+    app.map(element.find('.map'));
+    app.datatables(element.find('.dataTable'));
+}
+
+app.pageLoaded = function (initial) {
+    $(window).off('throttledresize.assignment');
+    $(window).off('throttledresize.map');
+    app.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
+    app.main.css('overflow', 'auto');
+    app.main.scrollTop(0);
+    app.main.css('overflow', '');
+    app.html.animate({ scrollTop: 0 }, 0);
+    setTimeout(function () {
+        if (!initial && app.isCloseLeftPageChange()) {
+            app.toggleAside(undefined, true);
+        }
+    }, 200);
+    app.rb();
+    app.contentLoaded(app.content);
+    app.hideLoading();
+    if (initial) {
+        app.html.addClass('site-loaded');
+        app.initial = false;
+    }
+};
+var app = app || {};
+
+var fullscreenScrollTop;
+
+app.requestFullScreen = function () {
+    if (!app.fullscreen && bowser.desktop) {
+        fullscreenScrollTop = app.scrollTop();
+        if (app.document.requestFullscreen) {
+            app.document.requestFullscreen();
+        }
+        else if (app.document.msRequestFullscreen) {
+            app.document.msRequestFullscreen();
+        }
+        else if (app.document.mozRequestFullScreen) {
+            app.document.mozRequestFullScreen();
+        }
+        else if (app.document.webkitRequestFullscreen) {
+            app.document.webkitRequestFullscreen();
+        }
+    }
+};
+
+document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
+document.addEventListener('mozfullscreenchange', fullscreenChange, false);
+document.addEventListener('fullscreenchange', fullscreenChange, false);
+document.addEventListener('MSFullscreenChange', fullscreenChange, false);
+
+function fullscreenChange(e) {
+    app.fullscreen = !app.fullscreen;
+    if (!app.fullscreen && bowser.desktop) {
+        if (app.isModal()) {
+            app.closeModal();
+        }
+        app.body.scrollTop(fullscreenScrollTop);
+        app.html.scrollTop(fullscreenScrollTop);
+    }
+};
+
+app.exitFullScreen = function () {
+    if (app.fullscreen && bowser.desktop) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+        else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        }
+        else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+};
+
+app.toggleFullScreen = function (element) {
+    if (app.fullscreen)
+        exitFullScreen();
+    else
+        requestFullScreen(element);
+};
+var app = app || {};
+
+var scrollbarWidth = function () {
+    app.body.append('<div id="scrollbar-width"></div>');
+    var element = app.body.children('#scrollbar-width');
+    element.css({
+        'overflow': "scroll",
+        'visibility': "hidden",
+        'position': 'absolute',
+        'width': '100px',
+        'height': '100px'
+    });
+    app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
+    element.remove();
+};
+
+app.disableScroll = function () {
+    if (app.htmlOverflowEnabled) {
+        app.htmlOverflowEnabled = false;
+        if (app.isModal()) {
+            app.checkModal();
+            app.modal.focus();
+        }
+        var scrollTop = app.scrollTop();
+        app.html.addClass('scroll-disabled');
+        app.body.scrollTop(scrollTop);
+        app.main.scrollTop(scrollTop);
+    }
+};
+
+app.enableScroll = function () {
+    if (!app.htmlOverflowEnabled) {
+        app.htmlOverflowEnabled = true;
+        if (app.isSiteLoaded()) {
+            var scrollTop = app.scrollTop();
+            app.html.removeClass('scroll-disabled modal');
+            app.main.focus();
+            app.body.scrollTop(scrollTop); // edge, safari
+            app.html.scrollTop(scrollTop); // chrome, firefox, ie
+        } else {
+            app.html.removeClass('scroll-disabled modal');
+        }
+    }
+};
+
+app.setHtmlScroll = function () {
+    if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isAsideLeft() && !app.isAsideRight())) {
+        app.enableScroll();
+    } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.isAsideLeft() || app.isAsideRight())) {
+        app.disableScroll();
+    }
+};
+
+$(window).resize(function () {
+    app.checkModal();
+    app.setHtmlScroll();
+    scrollbarWidth();
+});
+
+$(function () {
+    scrollbarWidth();
+});
+var app = app || {};
+
+app.showLoading = function () {
+    app.loadingCount++;
+    app.disableScroll();
+    app.html.addClass('loading');
+};
+
+app.hideLoading = function () {
+    app.loadingCount--;
+    if (app.loadingCount === 0) {
+        app.html.removeClass('loading');
+        app.setHtmlScroll();
+    }
+};
+var app = app || {};
+
+var transitionLock = false;
+
+app.toggleAside = function (aside, pageChanged) {
+    if (!transitionLock) {
+        transitionLock = true;
+        app.html.attr('data-authentication', '');
+        var currentAside = app.html.attr('data-aside');
+        if (currentAside.length) {
+            if (aside === undefined || currentAside === aside) {
+                var scrollTop = app.scrollTop();
+                app.html.attr('data-aside', '');
+                app.main.focus();
+                app.body.scrollTop(scrollTop); // edge, safari
+                app.html.scrollTop(scrollTop); // chrome, firefox, ie
+            } else {
+                app.html.attr('data-aside', aside);
+            }
+        } else {
+            app.html.attr('data-aside', aside);
+        }
+        if (aside === 'left') {
+            app.left.focus();
+        } else if (aside === 'right') {
+            app.right.focus();
+        }
+        if (app.isTransitions()) {
+            setTimeout(function () {
+                transitionLock = false;
+                if (pageChanged) {
+                    app.rb();
+                }
+            }, app.transitionTime);
+        } else {
+            transitionLock = false;
+        }
+        app.setHtmlScroll();
+    }
+};
+var app = app || {};
+
+$(function () {
+    //app.authentication.on('click', '> div > button', function () {
+    //    var $this = $(this);
+    //    var type = $this.attr('data-type');
+    //    if (app.html.attr('data-authentication') === type) {
+    //        app.html.attr('data-authentication', '');
+    //    } else {
+    //        app.html.attr('data-authentication', type);
+    //        app.authentication.children(':last-child').focus();
+    //    }
+    //});
+    
+    //app.authenticatedLinks.on('click', '> a', function (e) {
+    //    e.preventDefault();
+    //});
+
+    //app.addValidation(
+    //    app.authentication.find('.register > form'),
+    //    {
+    //        register_username: {
+    //            required: true,
+    //            minlength: 2
+    //        },
+    //        register_password: {
+    //            required: true,
+    //            password_regex: true
+    //        },
+    //        register_confirm_password: {
+    //            required: true,
+    //            equalTo: "#register_password"
+    //        },
+    //        register_email: {
+    //            required: true,
+    //            email: true
+    //        },
+    //    },
+    //    {
+    //        register_username: {
+    //            required: "Please enter your username",
+    //        },
+    //        register_password: {
+    //            required: "Please enter your password"
+    //        },
+    //        register_confirm_password: {
+    //            required: "Please provide a password",
+    //            equalTo: "Please enter the same password as above"
+    //        },
+    //        register_email: "Please enter a valid email address"
+    //    }
+    //);
+
+    //app.addValidation(
+    //    app.authentication.find('.login > form'),
+    //    {
+    //        username: {
+    //            required: true
+    //        },
+    //        password: {
+    //            required: true
+    //        }
+    //    },
+    //    {
+    //        username: {
+    //            required: "Please enter your username",
+    //        },
+    //        password: {
+    //            required: "Please enter your password"
+    //        },
+    //    }
+    //);
+});
+var app = app || {};
+
+//app.loadPage = function (url, pushState, initial) {
+//    app.showLoading();
+//    url = url.replace(/^\/+/g, '');
+//    var q = url.indexOf('?');
+//    url = url.substring(0, q !== -1 ? q : url.length);
+//    app.left.find('.tree a.label.active').removeClass('active');
+//    url = url.replace('/', '');
+//    app.left.find('a.label[href="' + url + '"]').addClass('active');
+//    var tempUrl = url;
+//    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
+//        url = tempUrl;
+//        if (url === '') {
+//            app.title.html('');
+//            if (app.body.children('#svg-browser').length === 0) {
+//                $.get(app.host + 'ajax/svg/browser.html', function (data) {
+//                    $(data).prependTo(app.body);
+//                });
+//            }
+//            if (app.body.children('#svg-os').length === 0) {
+//                $.get(app.host + 'ajax/svg/os.html', function (data) {
+//                    $(data).prependTo(app.body);
+//                });
+//            }
+//        } else {
+//            app.title.html(app.capitalize(url.replace('-', ' ')));
+//            if (url === 'form') {
+//                app.pageForm();
+//            }
+//        }
+//        app.pageLoaded(initial);
+//    });
+//    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
+//    if (pushState) {
+//        window.history.pushState(null, null, url);
+//        loadPage = true;
+//    }
+//};
+
+//app.internalLinkClick = function (href, e) {
+//    e.preventDefault();
+//    app.loadPage(href, true, false);
+//};
+
+//(function (l) {
+//    if (l.search) {
+//        app.url = {};
+//        l.search.slice(1).split('&').forEach(function (v) {
+//            var a = v.split('=');
+//            app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+//        });
+//        if (app.url.p !== undefined) {
+//            window.history.replaceState(null, null,
+//                l.pathname.slice(0, -1) + app.url.p +
+//                (app.url.q ? '?' + app.url.q : '') +
+//                l.hash
+//            );
+//        }
+//    }
+//}(window.location));
+
+//var loadPage = window.history.state;
+//window.onpopstate = function (event) {
+//    if (loadPage) {
+//        var url = location.pathname;
+//        if (!app.isLocalhost) {
+//            url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
+//        }
+//        app.loadPage(url, false, true);
+//    }
+//};
+
+app.applyNavigation = function (id, value, set) {
+    if (set) {
+        var entry = {
+            "id": id,
+            "value": value
+        };
+        var exists = $.grep(app.navigation, function (e) { return e.name === name; });
+        if (exists.length === 0) {
+            // not found
+            app.navigation.push(entry);
+        } else if (exists.length === 1) {
+            // found
+            exists[0].value = value;
+        }
+        localStorage.setItem('navigation', JSON.stringify(app.navigation));
+    } else {
+        app.left.find('#' + id).prop('checked', value);
+    }
+};
+
+//$(function () {
+//    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
+//        app.navigationTree = app.left.find('.tree');
+//        app.navigation = JSON.parse(localStorage.getItem("navigation"));
+//        if (app.navigation === null) app.navigation = [];
+//        $.each(app.navigation, function (i, entry) {
+//            app.applyNavigation(entry.id, entry.value, false);
+//        });
+//        app.navigationTree.on('change', 'input[type=checkbox]', function () {
+//            var $this = $(this),
+//                id = $this.attr('id'),
+//                value = $this.is(':checked');
+//            app.applyNavigation(id, value, true);
+//        });
+//        app.header.find('.aside.left').addClass('loaded');
+//        if (app.url && app.url.p) {
+//            app.navigationTree.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
+//        } else {
+//            app.navigationTree.find('a.label[href=""]').addClass('active');
+//        }
+//    });
+
+//    if (app.url && app.url.p) {
+//        app.loadPage(app.url.p, true, true);
+//    } else {
+//        app.loadPage('', false, true);
+//    }
+
+//    app.left.on('click', '.tree a.label:not(.active)', function (e) {
+//        app.internalLinkClick($(this).attr('href'), e);
+//    });
+
+//    app.header.on('click', 'h1 a', function (e) {
+//        app.internalLinkClick($(this).attr('href'), e);
+//    });
+
+//    app.left.on('click', '#navigation-expand', function () {
+//        app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
+//    });
+
+//    app.left.on('click', '#navigation-collapse', function () {
+//        app.navigationTree.find('input[type=checkbox]:checked').click();
+//    });
+//});
+var app = app || {};
+
+app.applySettings = function (id, name, type, value, set) {
+    if (set) {
+        var entry = {
+            "id": id,
+            "name": name,
+            "type": type,
+            "value": value
+        },
+            exists = $.grep(app.settings, function (e) { return e.name === name; });
+        if (exists.length === 0) {
+            // not found
+            app.settings.push(entry);
+        } else if (exists.length === 1) {
+            // found
+            exists[0].id = id;
+            exists[0].value = value;
+        }
+        localStorage.setItem('settings', JSON.stringify(app.settings));
+    } else {
+        if (type === "checkbox" || type === "radio") {
+            app.right.find('#' + id).prop('checked', value);
+        } else if (type === "slider") {
+            app.right.find('#' + id).slider('setValue', value);
+        }
+    }
+
+    if (type === 'checkbox' || type === "radio") {
+        if (type === 'radio') {
+            $.each(app.right.find('input[type=radio][name=' + name + ']:not(#' + id + ')'), function (i, radio) {
+                app.html.removeClass($(radio).attr('id'));
+            });
+        }
+        if (name === 'theme') {
+            var stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]');
+            var href = stylesheet.attr('href');
+            var split1 = href.split('/');
+            var split2 = split1[split1.length - 1].split('.');
+            href = [];
+            for (i = 0; i < split1.length - 1; i++) {
+                href.push(split1[i] + '/');
+            }
+            var theme = id.substring(id.indexOf("-") + 1);
+            href.push(theme);
+
+            for (i = 1; i < split2.length; i++) {
+                href.push('.' + split2[i]);
+            }
+            href = href.join("");
+            stylesheet.attr('href', href);
+        }
+        if (value) {
+            app.html.addClass(id);
+        } else {
+            app.html.removeClass(id);
+        }
+        if (id === 'two-columns') {
+            app.rb();
+        }
+        if (id === 'signed-in') {
+            app.responsiveHeader();
+        }
+    }
+};
+var app = app || {};
+
+$(function () {
+    app.body.on("keydown", function (e) {
+        var target = $(e.target),
+            parent = target.parent();
+        if (app.isLoading()) {
+            if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
+                e.preventDefault();
+            }
+        } else {
+            if (e.which === 37 && !app.isModal()) { // left
+                if (app.isAsideLeft()) {
+                    app.toggleAside(); // closes right
+                } else if (!app.isAsideRight()) {
+                    app.toggleAside('right'); // opens right
+                }
+            } else if (e.which === 39 && !app.isModal()) { // right
+                if (app.isAsideRight()) {
+                    app.toggleAside(); // closes left
+                } else if (!app.isAsideLeft()) {
+                    app.toggleAside('left'); // opens left
+                }
+            } else if (e.which === 27) { // esc
+                if (app.isModal()) {
+                    app.closeModal();
+                } else {
+                    if (app.isAside()) {
+                        app.toggleAside(); // closes aside
+                    }
+                    var popups = app.body.children('.popup');
+                    if (popups.length) {
+                        popups.fadeOut(app.fadeOutTime, function () {
+                            popups.remove();
+                        });
+                    }
+                    var dropdowns = app.content.find('div.dropdown.open');
+                    if (dropdowns.length) {
+                        dropdowns.removeClass('open');
+                    }
+                    app.html.attr('data-authentication', '');
+                }
+            }
+            if (e.which === 13) { // enter
+                var dropdown = target.parents('div.dropdown');
+                if (dropdown.length || parent.parent().hasClass('accordion')) {
+                    target.click();
+                    e.preventDefault();
+                    if (dropdown.length) {
+                        dropdown.children('div').focus();
+                    }
+                } else if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch') || target.hasClass('toggle')) {
+                    target.siblings('input').click();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+
+    app.body.on('keyup', function (e) {
+        if (!app.isLoading()) {
+            if (e.which === 9) { // tab
+                var target = $(e.target);
+                if (!target.parents('div.dropdown.open').length) {
+                    $('div.dropdown.open').removeClass('open');
+                }
+                if (!target.parents('#authenticated.open').length || target.closest('#authenticated > button').length) {
+                    $('#authenticated.open').removeClass('open');
+                }
+                if (app.isModal()) {
+                    if (!target.parents('#modal').length) {
+                        app.closeModal();
+                    }
+                } else {
+                    var aside = target.parents('aside');
+                    if (aside.length === 0 && target.is('aside')) {
+                        aside = target;
+                    }
+                    if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
+                        app.toggleAside(aside.attr('id'));
+                    } else if (!aside.length && app.isAside()) {
+                        app.toggleAside();
+                    }
+                }
+            }
+        }
+    });
+});
+var app = app || {};
+
+app.showModal = function (type) {
+    app.html.attr('data-modal', type);
+    app.html.addClass('modal');
+    app.hideLoading();
+    app.checkModal();
+    app.modal.focus();
+};
+
+app.closeModal = function () {
+    if (app.fullscreen) {
+        app.exitFullScreen();
+    } else {
+        app.html.removeClass('modal').attr('data-modal', '');
+        app.modal.removeClass('info-shown').empty();
+        app.checkModal();
+        app.setHtmlScroll();
+    }
+};
+
+app.checkModal = function () {
+    if (app.isModal()) {
+        app.body.css('padding-right', app.scrollbarWidth);
+        if (app.html.attr('data-aside') === 'right') {
+            app.right.css('margin-right', app.scrollbarWidth);
+        }
+        app.body.children('.popup').css('margin-right', app.scrollbarWidth);
+    } else {
+        app.body.css('padding-right', 0);
+        app.right.css('margin-right', 0);
+        app.body.children('.popup').css('margin-right', 0);
+    }
+
+    var contentHeader = app.content.children('.content-header:not(.full)');
+    if (contentHeader.length) {
+        if (app.isModal() && contentHeader.css('position') === 'fixed') {
+            var halfOverflowY = app.scrollbarWidth / 2;
+            contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+        } else {
+            contentHeader.children().css('width', '');
+        }
+    }
+};
+
+$(function () {
+    app.body.on('click', '.modal', function () {
+        var $this = $(this),
+            type = $this.attr('data-modal');
+        if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
+            app.showLoading();
+            var id = $this.attr('data-modal-id'),
+                html = [],
+                dataTitle = $this.attr('data-modal-title'),
+                dataContent = $this.attr('data-modal-content'),
+                dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
+            html.push('<div><div><div id="modal-container">');
+            if (type === 'image' && $this.attr('data-modal-img').length) {
+                if (dataTitle !== undefined || dataContent !== undefined) {
+                    app.modal.addClass('has-info');
+                    html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
+                    html.push('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
+                    html.push('</button>');
+                }
+                if (dataTitle !== undefined) {
+                    html.push('<div id="modal-title">' + dataTitle + '</div>');
+                }
+                if (dataContent !== undefined) {
+                    html.push('<div id="modal-content">' + dataContent + '</div>');
+                }
+                html.push('<img id="modal-img" />');
+            } else if (type === 'form') {
+                html.push('<div class="header">');
+                if (dataTitle !== undefined) {
+                    html.push('<span class="title">' + dataTitle + '</span>');
+                }
+                html.push('<button id="modal-close" class="close expand" aria-label="Close ' + (dataTitle !== undefined ? dataTitle : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
+                html.push('</div><div class="content">');
+            }
+            html.push('</div></div></div></div>');
+            var div = html.join("");
+            app.modal.html(div);
+            if (type === 'image') {
+                var image = app.modal.find('#modal-img');
+                image.on('load', function () {
+                    if (bowser.android) {
+                        image.css('max-height', window.innerHeight);
+                    }
+                    app.showModal(type);
+                });
+                image.attr('src', $this.attr('data-modal-img'));
+            } else {
+                var dataSize = $this.attr('data-modal-size');
+                if (dataSize !== undefined) {
+                    app.modal.children('div').attr('data-modal-size', dataSize);
+                }
+                var content = app.modal.find('#modal-container > .content');
+                content.append(dataContent);
+                app.contentLoaded(content);
+                app.showModal(type);
+            }
+            if (dataFullscreen) {
+                app.requestFullScreen();
+            }
+        }
+    });
+
+    app.body.on('click', '#modal-toggle', function () {
+        app.modal.toggleClass('info-shown');
+    });
+});
+var app = app || {};
+
+var swipe = function () {
+    var xDown = null,
+        yDown = null,
+        offsetBefore;
+
+    var handleTouchStart = function (evt) {
+        if (app.isAndroidSwipe()) {
+            xDown = evt.touches[0].clientX;
+            yDown = evt.touches[0].clientY;
+
+            offsetBefore = $(evt.target).offset().left;
+        }
+    };
+
+    var handleTouchMove = function (evt) {
+        if (app.isAndroidSwipe()) {
+            var offsetAfter = $(evt.target).offset().left;
+            if (!xDown || !yDown || offsetBefore !== offsetAfter) {
+                return;
+            }
+            var xUp = evt.changedTouches[0].clientX,
+                yUp = evt.changedTouches[0].clientY,
+                xDiff = xDown - xUp,
+                yDiff = yDown - yUp;
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
+                var distance = parseInt($(window).width() / 2);
+                if (yDiff > -100 || yDiff < 100) {
+                    var currentAside;
+                    if (xDiff > distance) {
+                        /* left swipe */
+                        if (!app.isModal() && !app.isLoading()) {
+                            currentAside = app.html.attr('data-aside');
+                            if (currentAside === 'left' && currentAside !== 'right') {
+                                app.toggleAside();
+                            } else if (currentAside !== 'right') {
+                                app.toggleAside('right');
+                            }
+                        }
+                    } else if (xDiff < -distance) {
+                        /* right swipe */
+                        if (!app.isModal() && !app.isLoading()) {
+                            currentAside = app.html.attr('data-aside');
+                            if (currentAside === 'right' && currentAside !== 'left') {
+                                app.toggleAside();
+                            } else if (currentAside !== 'left') {
+                                app.toggleAside('left');
+                            }
+                        }
+                    }
+                }
+
+            }
+            /* reset values */
+            xDown = null;
+            yDown = null;
+        }
+    };
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchend', handleTouchMove, false);
+};
+
+$(function () {
+    if (bowser.android) {
+        swipe();
+        // android doesn't handle vh correctly, so it gets converted to px
+        $(window).resize(function () {
+            if (app.isModal() && app.isModalImage()) {
+                app.modal.find('#modal-img').css('max-height', window.innerHeight);
+            }
+        });
+    }
+});
+var app = app || {};
+
+// responsive-background
+app.rb = function () {
+    app.content.find('.rb').each(function () {
+        var $this = $(this),
+            image = $this.attr('data-rb-image'),
+            filetype = $this.attr('data-rb-image-filetype'),
+            sizesWidth = $this.attr('data-rb-sizes'),
+            current = $this.attr('data-rb-current'),
+            aspectRatio = $this.attr('data-rb-aspect-ratio');
+        if (image !== undefined && image.length &&
+            filetype !== undefined && filetype.length &&
+            sizesWidth !== undefined && sizesWidth.length &&
+            aspectRatio !== undefined && aspectRatio.length) {
+            if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
+                (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
+                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort(function (a, b) { return a - b; });
+                var goalWidth = $this.width(),
+                    goalHeight = $this.height(),
+                    closestWidth,
+                    closestHeight,
+                    heightPercentage;
+
+                var getHeightInPercentage = function (num, amount) {
+                    return num * 100 / amount;
+                };
+
+                if (aspectRatio === '21by9') {
+                    heightPercentage = getHeightInPercentage(9, 21);
+                } else if (aspectRatio === '16by9') {
+                    heightPercentage = getHeightInPercentage(9, 16);
+
+                } else if (aspectRatio === '4by3') {
+                    heightPercentage = getHeightInPercentage(3, 4);
+
+                } else if (aspectRatio === '1by1') {
+                    heightPercentage = 100;
+                }
+
+                var getHeightInPixels = function (num, amount) {
+                    return num * amount / 100;
+                };
+
+                $.each(sizesWidth, function (index) {
+                    var width = parseInt(this),
+                        height = getHeightInPixels(heightPercentage, width);
+                    if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
+                        closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
+                        closestWidth = width;
+                        closestHeight = height;
+                    }
+                });
+
+                if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
+                    app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
+                    var tempImage = app.body.children('#rb');
+                    tempImage.on('load', function () {
+                        tempImage.remove();
+                        var src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
+                        $this.css('background-image', src);
+                        $this.attr('data-rb-current', closestWidth);
+                    });
+                }
+            }
+        }
+    });
+};
+
+$(window).resize(function () {
+    app.rb();
+});
+var app = app || {};
+
+app.responsiveHeader = function () {
+    $(function () {
+        var h1 = app.header.find('h1');
+        var link = h1.children('a');
+
+        function check() {
+            app.unauthenticated.addClass('text');
+            var a = h1.outerWidth();
+            var b = link.outerWidth();
+            if (h1.outerWidth() < link.outerWidth()) {
+                app.unauthenticated.removeClass('text');
+            }
+            app.unauthenticated.addClass('checked');
+        }
+        
+        var awaitCSS = setInterval(function () {
+            if (app.cssLoaded()) {
+                clearInterval(awaitCSS);
+
+                $(window).on('resize', function () {
+                    check();
+                });
+
+                check();
+            }
+        }, app.cssInterval);
+    });
+};
+var app = app || {};
+
+app.dropdown = function (dropdowns) {
+    dropdowns.each(function () {
+        var $this = $(this),
+            selected = $this.children('option:selected'),
+            html = [],
+            attr = $this.attr('class'),
+            theme = '',
+            width = $this.attr('data-width');
+        if (selected.length !== 1) {
+            selected = $this.children().first();
+        }
+        html.push('<div class="dropdown' +
+            ($this.hasClass('nowrap') ? ' nowrap' : '') +
+            ($this.hasClass('check') ? ' check' : '') +
+            ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
+            ($this.hasClass('align-left') ? ' align-left' : '') +
+            ($this.hasClass('align-right') ? ' align-right' : '') +
+            ($this.hasClass('direction-up') ? ' direction-up' : '') +
+            '"' +
+            (width !== undefined ? ' style="width:' + width + 'px"' : '')
+            + '> ');
+        
+        if (typeof attr !== typeof undefined && attr !== false) {
+            var temp = attr.split(' ');
+            temp = $.grep(temp, function (item, index) {
+                return item.trim().match(/^theme-/);
+            });
+            if (temp.length === 1) {
+                theme = temp[0];
+            }
+        }
+        html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
+        html.push('<ul class="' + theme + '">');
+        $this.children().each(function (index) { /* ':not([value=""])' */
+            var $that = $(this),
+                text = $that.text();
+            if (!text.length) {
+                text = '&nbsp;';
+            }
+            if (text.indexOf('$$') === 0) {
+                $that.attr('data-math', text);
+            }
+
+            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
+        });
+        html.push('</ul>');
+        html.push('</div>');
+        var dropdown = html.join("");
+        $this.after(dropdown);
+        dropdown = $this.next();
+
+
+        if ($this.hasClass('nowrap')) {
+            var top = dropdown.children().eq(0),
+                bottom = dropdown.children().eq(1);
+            var topWidth = top.width();
+            var bottomWidth = bottom.width();
+            if (bottomWidth > topWidth) {
+                top.css('min-width', bottomWidth);
+                //debugger;
+            }
+        }
+
+        dropdown.on('click', '> div', function () {
+            var $that = $(this);
+            $that.parent().toggleClass('open');
+        });
+        dropdown.on('click', 'li', function () {
+            var $that = $(this);
+            if (!$that.hasClass('selected')) {
+                $that.siblings('.selected').removeClass('selected');
+                $that.addClass('selected');
+                var option = $this.children('[value="' + $that.attr('data-id') + '"]'),
+                    text = $that.text(),
+                    math = option.attr('data-math');
+                if (math !== undefined) {
+                    text = math;
+                }
+                var label = dropdown.children('div').children('label');
+                label.text(text);
+                if (math !== undefined) {
+                    renderMathInElement(label[0]);
+                }
+                $this.children(':selected').removeAttr('selected');
+                option.attr('selected', 'selected');
+                $this.change();
+            }
+            dropdown.removeClass('open');
+        });
+    });
+};
+
+$(window).click(function (e) {
+    var target = $(e.target);
+    if (target.closest("div.dropdown").length) {
+        $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
+    }
+
+    if (!target.closest(".dropdown").length) {
+        $('div.dropdown').removeClass('open');
+    }
+});
+var app = app || {};
+
+app.accordion = function (elements) {
+    elements.on("click", ".headline", function () {
+        var content = $(this).next();
+        if (content.hasClass('open')) {
+            content
+                .removeClass('open')
+                .slideUp("800");
+        } else {
+            content
+                .addClass("open")
+                .slideToggle("800")
+                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
+        }
+    });
+};
+var app = app || {};
+
+$(function () {
+    app.body.on('click', '.alert .close', function () {
+        var $this = $(this).parent();
+        $this.fadeOut(app.fadeOutTime, function () {
+            var parent = $this.parent();
+            if (parent.hasClass('popup') && parent.children().length === 1) {
+                parent.remove();
+            } else {
+                $this.remove();
+            }
+        });
+    });
+});
+var app = app || {};
+var google;
+app.map = function (maps) {
+    if (maps.length) {
+        if (!app.html.hasClass('map-loaded')) {
+            app.head.append($('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>'));
+            app.html.addClass('map-loaded');
+        }
+
+        var timeout = 100;
+        var checkGoogle = function () {
+            if (google !== undefined) {
+                maps.each(function () {
+                    var $this = $(this),
+                        lat = app.tryParseFloat($this.attr('data-lat'), 37.4029937),
+                        lng = app.tryParseFloat($this.attr('data-lng'), -122.1811793),
+                        zoom = app.tryParseInt($this.attr('data-zoom'), 4),
+                        cords = { lat: lat, lng: lng };
+
+                    var map = new google.maps.Map($this[0], {
+                        zoom: zoom,
+                        center: cords
+                    });
+
+                    var marker = new google.maps.Marker({
+                        position: cords,
+                        map: map
+                    });
+
+                    $(window).on("throttledresize.map", function () {
+                        google.maps.event.trigger($this[0], 'resize');
+                    });
+                });
+                return;
+            }
+            setTimeout(checkGoogle, timeout);
+        };
+        checkGoogle();
+    }
+};
+var app = app || {};
+
+app.math = function (math) {
+    if (math.length) {
+        if (!app.html.hasClass('math-loaded')) {
+            app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
+            app.html.addClass('math-loaded');
+        }
+
+        $.getScript('dist/js/katex.min.js', function () {
+            math.each(function () {
+                var $this = $(this);
+                renderMathInElement($this[0]);
+                setTimeout(function () {
+                    $this.removeClass('math');
+                });
+            });
+        });
+    }
+};
+var app = app || {};
+
+app.media = function (media) {
+    if (media.length) {
+        if (!app.html.hasClass('media-loaded')) {
+            app.head.append($('<link rel="stylesheet" href="dist/css/plyr.min.css">'));
+            app.html.addClass('media-loaded');
+        }
+
+        $.getScript('dist/js/plyr.min.js', function () {
+            media.each(function (i, item) {
+                plyr.setup(item);
+            });
+        });
+    }
+};
+var app = app || {};
+
+app.lazy = function (elements) {
+    elements.lazy({
+        afterLoad: function (element) {
+            element.removeClass('lazy');
+        }
+    });
+};
+var app = app || {};
+
+$(function () {
+    app.body.on('click', '.show-popup', function () {
+        var $this = $(this),
+            title = $this.attr('data-popup-title');
+        if (title !== undefined) {
+            var theme = $this.attr('data-popup-theme'),
+                alert = [],
+                position = $(this).attr('data-popup-position'),
+                popup = app.body.children('.popup[data-position="' + position + '"]');
+            if (theme === undefined) {
+                theme = 'primary';
+            }
+            alert.push('<div class="alert theme-' + theme + '">');
+            alert.push('<div><p>' + title + '</p></div>');
+            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
+            alert.push('</div>');
+            alert = alert.join('');
+            if (position === undefined) {
+                position = 'top left';
+            }
+            if (popup.length) {
+                popup.append(alert);
+            } else {
+                var html = [];
+                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
+                html.push(alert);
+                html.push('</div>');
+                html = html.join("");
+                app.body.prepend(html);
+            }
+        }
+    });
+});
+var app = app || {};
+
+app.tooltip = function (tooltips) {
+    tooltips.each(function () {
+        var $this = $(this),
+            interactive = $this.hasClass('interactive');
+        $this.tooltipster({
+            animationDuration: 0,
+            interactive: interactive,
+            trigger: 'custom',
+            triggerOpen: {
+                mouseenter: true,
+                touchstart: true
+            },
+            triggerClose: {
+                mouseleave: true,
+                tap: true,
+                scroll: true
+            }
+        });
+    });
+};
+var app = app || {};
+
+app.datatables = function (tables) {
+    if (tables.length) {
+        $.getScript('dist/js/datatables.min.js', function () {
+
+            let spacing = 'space-3';
+
+            function table_header_input(instance) {
+                var columns = instance.columns().header();
+                let elements = jQuery.grep(columns, function (e) {
+                    let column = $(e);
+                    return column.hasClass('dropdown') || column.hasClass('text');
+                });
+                instance.columns().every(function () {
+                    let th = this.header(),
+                        text = th.innerText,
+                        column = $(th);
+                    
+                    column.empty().append('<div><div><span>' + text + '</span></div>' + (elements.length ? '<div></div>' : '') + '</div>');
+                    let index = column.index();
+
+                    if (column.hasClass('dropdown')) {
+                        let select = $('<select class="dropdown align-left nowrap"><option value=""></option></select>')
+                            .appendTo(column.find('> div > div:last-child'))
+                            .on('change', function () {
+                                instance.column(index).search(this.value).draw();
+                            });
+
+                        this.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                    } else if (column.hasClass('text')) {
+                        let input = $('<input type="text" />')
+                            .appendTo(column.find('> div > div:last-child'))
+                            .on('keyup change', function () {
+                                instance.column(index).search(this.value).draw();
+                            });
+                        input.parent().addClass('form-group');
+                    }
+                });
+            }
+            function table_header_sort(instance, wrapper) {
+                let th = wrapper.find('thead th');
+                th.unbind('click');
+                th.find('> div > div:first-child').append('<span class="sort-btn"></span>');
+                th.click(function (e) {
+                    let $this = $(e.target);
+                    if (!$this.closest('div.dropdown').length && !$this.closest('input').length) {
+                        let parent = $this.parents('th'),
+                            index = parent.index();
+                        if (parent.hasClass('sorting_asc')) {
+                            instance.column(index).order('desc').draw();
+
+                        } else {
+                            instance.column(index).order('asc').draw();
+                        }
+                    }
+                });
+            }
+            function table_header_length(wrapper, header) {
+                let length = wrapper.find('.dataTables_length'),
+                    dropdown = length.find('select');
+
+                length.append(dropdown);
+                length.children('label').remove();
+                dropdown.addClass('dropdown').attr('data-width', 100);
+                header.append(length);
+            }
+            function table_header_buttons(wrapper, header) {
+                let container = wrapper.find('.dt-buttons');
+
+                container.append('<div class="flex column wrap ' + spacing + '"></div>');
+
+                let div = container.children('div'),
+                    buttons = container.children('button');
+
+                container.append(div);
+                buttons.addClass('btn');
+                div.append(buttons);
+                header.append(container);
+            }
+            function table_header_filter(wrapper, header) {
+                let filter = wrapper.find('.dataTables_filter');
+
+                filter.addClass('input-group');
+                filter.find('input').appendTo(filter);
+                filter.append('<div class="input-group-addon"><svg focusable="false"><use xlink:href="#svg-search"></use></svg></div>');
+                filter.find('label').remove();
+                header.append(filter);
+            }
+            function table_content(wrapper, content) {
+                let table = wrapper.find('table');
+                content.append(table);
+            }
+            function table_footer_info(wrapper, footer) {
+                let info = wrapper.find('.dataTables_info');
+                footer.append(info);
+            }
+            function paginateFix(paginate) {
+                let span = paginate.children('span'),
+                    prev = paginate.find('.paginate_button.previous'),
+                    next = paginate.find('.paginate_button.next');
+
+                prev.html('<svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>');
+                next.html('<svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>');
+
+                prev.prependTo(span);
+                next.appendTo(span);
+            }
+            function table_footer_paginate(wrapper, footer, paginate) {
+                paginate.addClass('flex column wrap');
+                footer.append('<div class="dataTables_paginate_container"></div>');
+                let container = footer.find('.dataTables_paginate_container');
+                paginateFix(paginate);
+                container.append(paginate);
+            }
+            function table_dropdowns(wrapper) {
+                let dropdowns = wrapper.find('select.dropdown');
+                app.dropdown(dropdowns);
+            }
+
+            tables.each(function () {
+                var $this = $(this);
+                $this.addClass('nowrap');
+                $this.DataTable({
+                    "dom": 'lBfrtip',
+                    "bSortCellsTop": true,
+                    buttons: [
+                        //'copy', 'excel', 'csv'
+                        'copyHtml5', 'excelHtml5', 'csvHtml5'
+                    ],
+                    responsive: true,
+                    initComplete: function (settings, json) {
+                        let instance = this.api(),
+                            wrapper = $(settings.nTableWrapper);
+
+                        wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
+                        let header = wrapper.find('> .dataTables_header > div');
+
+                        wrapper.append('<div class="dataTables_content table"></div>');
+                        let content = wrapper.find('> .dataTables_content');
+
+                        wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + spacing + '"></div></div>');
+                        let footer = wrapper.find('> .dataTables_footer > div');
+
+                        table_header_input(instance);
+                        table_header_sort(instance, wrapper);
+                        table_header_length(wrapper, header);
+                        table_header_buttons(wrapper, header);
+                        table_header_filter(wrapper, header);
+
+                        table_content(wrapper, content);
+
+                        table_footer_info(wrapper, footer);
+
+                        let paginate = wrapper.find('.dataTables_paginate');
+                        table_footer_paginate(wrapper, footer, paginate);
+
+                        table_dropdowns(wrapper);
+
+                        $this.on('draw.dt', function () {
+                            paginateFix(paginate);
+                        });
+                    }
+                });
+            });
+        });
+    }
+};
+var app = app || {};
+
+app.getItem = function (items, id) {
+    return $($.map(items, function (item) {
+        if (item.getAttribute("data-id") === id) {
+            return item;
+        }
+    }));
+};
+
+app.assignment = function (assignments) {
+    if (assignments.length) {
+        $.getScript('dist/js/assignments.min.js', function () {
+            $(assignments).each(function (index, assignment) {
+                assignment = $(assignment);
+                if (assignment.hasClass('drag-and-drop')) {
+                    app.assignment.dragAndDrop(assignment);
+                } else if (assignment.hasClass('sort')) {
+                    app.assignment.sort(assignment);
+                } else if (assignment.hasClass('color')) {
+                    app.assignment.color(assignment);
+                }
+            });
+        });
+    }
+};
+var app = app || {};
+
+app.pageForm = function () {
+    app.addValidation(
+        app.content.find('#form'),
+        {
+            firstName: {
+                required: true,
+                minlength: 2
+            },
+            lastName: {
+                required: true,
+                minlength: 2
+            },
+            username: {
+                required: true,
+                minlength: 2
+            },
+            password: {
+                required: true,
+                password_regex: true
+            },
+            confirm_password: {
+                required: true,
+                equalTo: "#password"
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            dropdown_1: "required",
+            dropdown_2: "required",
+            dropdown_3: "required",
+            dropdown_4: "required",
+            dropdown_5: "required",
+            dropdown_6: "required",
+            gender: "required",
+            interests: "required",
+            agree: "required",
+            font_size: "required"
+        },
+        {
+            firstName: {
+                required: "Please enter your first name",
+                minlength: "Your first name must consist of at least 2 characters"
+            },
+            lastName: {
+                required: "Please enter your last name",
+                minlength: "Your last name must consist of at least 2 characters"
+            },
+            username: {
+                required: "Please enter a username",
+                minlength: "Your username must consist of at least 2 characters"
+            },
+            password: {
+                required: "Please provide a password"
+            },
+            confirm_password: {
+                required: "Please provide a password",
+                equalTo: "Please enter the same password as above"
+            },
+            email: "Please enter a valid email address",
+            dropdown_1: "Please select an option",
+            dropdown_2: "Please select an option",
+            dropdown_3: "Please select an option",
+            dropdown_4: "Please select an option",
+            dropdown_5: "Please select an option",
+            dropdown_6: "Please select an option",
+            gender: "Please select your gender",
+            interests: "Please select at least one interest",
+            agree: "Please accept our policy"
+        }
+    );
+};
 /** vim: et:ts=4:sw=4:sts=4
  * @license RequireJS 2.3.5 Copyright jQuery Foundation and other contributors.
  * Released under MIT license, https://github.com/requirejs/requirejs/blob/master/LICENSE
@@ -2895,1772 +4593,22 @@ var requirejs, require, define;
     req(cfg);
 }(this, (typeof setTimeout === 'undefined' ? undefined : setTimeout)));
 
+var layoutr = layoutr || {};
+
 require(['/js/backbone/config.js'], function () {
     require(['backbone', 'marionette', 'router', 'views/rootView'],
         function (Backbone, Marionette, Router, RootView) {
             const App = Marionette.Application.extend({
                 region: '#root',
-                onStart() {
-                    const rootView = new RootView();
-                    const router = new Router({ rootView: rootView });
-                    this.showView(rootView);
+                onStart: function () {
+                    layoutr.rootView = new RootView();
+                    layoutr.router = new Router({ rootView: layoutr.rootView });
+                    this.showView(layoutr.rootView);
                     Backbone.history.start();
                 }
             });
-            const app = new App();
-            app.start();
+            layoutr.app = new App();
+            layoutr.app.start();
         }
     );
 });
-var app = app || {};
-
-app.variables = function () {
-    app.main = $('main');
-    app.content = $('#content > div');
-    app.header = $('header');
-    app.footer = $('footer');
-    app.left = $('#left');
-    app.right = $('#right');
-    app.overflow = $('#overflow');
-    app.title = $('#title');
-    app.authentication = $('#authentication');
-    app.unauthenticated = app.authentication.children('.unauthenticated');
-    app.authenticated = app.authentication.children('.authenticated');
-    app.authenticatedLinks = app.authenticated.find('.authenticated-links');
-};
-
-$(function () {
-    app.html = $('html');
-    app.head = $('head');
-    app.body = $('body');
-    app.loading = $('#loading');
-    app.modal = $('#modal');
-    app.cookie = $('#cookie');
-
-    app.cssInterval = 50;
-    app.transitionTime = 400;
-    app.fadeOutTime = 500;
-    app.htmlOverflowEnabled = true;
-    app.smallBreakpoint = 732;
-    app.scrollbarWidth = 0;
-    app.loadingCount = 0;
-    app.document = document.documentElement;
-    app.fullscreen = false;
-    app.initial = true;
-
-    app.navigation = [];
-
-    bowser.desktop = !bowser.mobile && !bowser.tablet;
-});
-var app = app || {};
-
-app.guid = function () {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-};
-
-app.isSmallBreakpoint = function () {
-    return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftShrink() || app.isAsideRight() && !app.isAsideRightShrink();
-};
-
-app.isAside = function () {
-    return app.html.attr('data-aside').length;
-};
-
-app.isAsideLeft = function () {
-    return app.html.attr('data-aside') === 'left';
-};
-
-app.isAsideRight = function () {
-    return app.html.attr('data-aside') === 'right';
-};
-
-app.isAsideLeftShrink = function () {
-    return app.html.hasClass('left-shrink') && app.isAsideLeft();
-};
-
-app.isAsideRightShrink = function () {
-    return app.html.hasClass('right-shrink') && app.isAsideRight();
-};
-
-app.isAsideLeftCloseOnClickOutside = function () {
-    return app.html.hasClass('close-left-click-outside');
-};
-app.isAsideRightCloseOnClickOutside = function () {
-    return app.html.hasClass('close-right-click-outside');
-};
-
-app.isModal = function () {
-    return app.html.hasClass('modal');
-};
-
-app.isModalForm = function () {
-    return app.html.attr('data-modal') === 'form';
-};
-
-app.isModalImage = function () {
-    return app.html.attr('data-modal') === 'image';
-};
-
-app.isAuthentication = function () {
-    return app.html.attr('data-authentication') !== '';
-};
-
-app.isLoading = function () {
-    return app.html.hasClass('loading');
-};
-
-app.isScrollDisabled = function () {
-    return app.html.hasClass('scroll-disabled');
-};
-
-app.isCloseLeftPageChange = function () {
-    return app.html.hasClass('close-left-page-change');
-};
-
-app.isTransitions = function () {
-    return app.html.hasClass('transitions');
-};
-
-app.isAndroidSwipe = function () {
-    return app.html.hasClass('android-swipe');
-};
-
-app.isSiteLoaded = function () {
-    return app.html.hasClass('site-loaded');
-};
-
-app.capitalize = function (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-app.scrollTop = function () {
-    return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
-};
-
-app.tryParseInt = function (str, defaultValue) {
-    var retValue = defaultValue;
-    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
-        retValue = parseInt(str);
-    }
-    return retValue;
-};
-
-app.tryParseFloat = function (str, defaultValue) {
-    var retValue = defaultValue;
-    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
-        retValue = parseFloat(str);
-    }
-    return retValue;
-};
-
-app.cssLoaded = function() {
-    return app.body.css('visibility') !== 'hidden';
-}
-var app = app || {};
-
-$(function () {
-    if (bowser.msedge) {
-        app.html.addClass('msedge'); // used by app.enableScroll()
-    } else if (bowser.msie) {
-        app.html.addClass('msie'); // not currently used for anything
-    }
-    if (bowser.mobile) {
-        app.html.addClass('mobile'); // disables fixed footer
-    } else if (bowser.tablet) {
-        app.html.addClass('tablet'); // does nothing currently
-    } else {
-        app.html.addClass('desktop'); // enables hover effects
-    }
-
-    if (bowser.android) {
-        app.html.addClass('android'); // used by modal
-    } else if (bowser.ios) {
-        app.html.addClass('ios'); // used to apply focus
-    }
-
-    if (bowser.msie || bowser.msedge) {
-        // disable smooth scrolling, since it causes element jumping/lagging on scroll
-        // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
-        app.body.on("mousewheel", function (e) {
-            var target = $(e.target);
-            if (!app.isModal() && event.ctrlKey !== true) {
-                e.preventDefault();
-                var aside = target.closest('aside > .content') || target.parents('aside .content'),
-                    wheelDelta = e.originalEvent.wheelDelta,
-                    currentScrollPosition;
-                if (aside.length) {
-                    currentScrollPosition = aside.scrollTop();
-                    aside.scrollTop(currentScrollPosition - wheelDelta);
-                } else {
-                    currentScrollPosition = window.pageYOffset;
-                    window.scrollTo(0, currentScrollPosition - wheelDelta);
-                }
-            }
-        });
-
-        // at some zoom levels edge/ie makes $(window) heigher than $(document)
-        // it causes a gap between footer and the bottom of $(window).
-        $(window).scroll(function () {
-            var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-            if (scrollTop + $(window).height() >= $(document).height()) {
-                app.html.addClass('subpixel');
-            } else {
-                app.html.removeClass('subpixel');
-            }
-        });
-    }
-});
-var app = app || {};
-
-$(function () {
-    $.validator.setDefaults({
-        submitHandler: function () {
-            alert("Fake submitted!");
-        }
-    });
-
-    $.validator.addMethod('password_regex', function (value) {
-        return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
-    }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
-});
-
-app.addValidation = function (form, rules, messages) {
-    form.validate({
-        rules: rules,
-        messages: messages,
-        errorElement: "em",
-        errorPlacement: function (error, element) {
-            element = element.parent();
-            if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
-                element = element.parent();
-            }
-            element.append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").addClass("theme-danger");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).parents(".form-group").removeClass("theme-danger");
-        }
-    });
-    form.on('change', 'input, textarea, select', function () {
-        $(this).valid();
-    });
-};
-var app = app || {};
-
-$.ajaxSetup({
-    cache: true
-});
-
-$(function () {
-    //app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
-
-    //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
-
-    $.get(app.host + 'ajax/svg/base.html', function (data) {
-        $(data).prependTo(app.body);
-    });
-});
-
-$(window).click(function (e) {
-    var target = $(e.target),
-        modal = target.closest(app.modal[0]);
-
-    if (bowser.ios) {
-        // ios browsers doesn't apply :focus to buttons in many cases,
-        // this forces :focus to be applied correctly.
-        if (target.parents('button').length) {
-            target.parents('button').focus();
-        } else if (target.closest('button').length) {
-            target.focus();
-        }
-    }
-    if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
-        app.html.attr('data-authentication', '');
-    }
-    else if (modal.length) {
-        var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
-            form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
-        if (image || form || target.closest('#modal-close').length) {
-            app.closeModal();
-        }
-    } else {
-        var isSmallBreakpoint = app.isSmallBreakpoint(),
-            left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
-            right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
-            notTarget = !target.closest('.modal').length && !target.closest("#loading").length && !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
-        if ((left || right) && notTarget && !app.isLoading()) {
-            app.enableScroll();
-            app.html.attr('data-aside', '');
-        }
-    }
-});
-var app = app || {};
-
-app.contentLoaded = function (element) {
-    app.lazy(element.find('.lazy'));
-    app.accordion(element.find('.accordion'));
-    app.dropdown(element.find('select.dropdown'));
-    app.tooltip(element.find('.tooltip'));
-    app.assignment(element.find('.assignment'));
-    app.math(element.find('.math'));
-    app.media(element.find('audio, video'));
-    app.map(element.find('.map'));
-    app.datatables(element.find('.dataTable'));
-}
-
-app.pageLoaded = function (initial) {
-    $(window).off('throttledresize.assignment');
-    $(window).off('throttledresize.map');
-    app.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
-    app.main.css('overflow', 'auto');
-    app.main.scrollTop(0);
-    app.main.css('overflow', '');
-    app.html.animate({ scrollTop: 0 }, 0);
-    setTimeout(function () {
-        if (!initial && app.isCloseLeftPageChange()) {
-            app.toggleAside(undefined, true);
-        }
-    }, 200);
-    app.rb();
-    app.contentLoaded(app.content);
-    app.hideLoading();
-    if (initial) {
-        app.html.addClass('site-loaded');
-        app.initial = false;
-    }
-};
-var app = app || {};
-
-var fullscreenScrollTop;
-
-app.requestFullScreen = function () {
-    if (!app.fullscreen && bowser.desktop) {
-        fullscreenScrollTop = app.scrollTop();
-        if (app.document.requestFullscreen) {
-            app.document.requestFullscreen();
-        }
-        else if (app.document.msRequestFullscreen) {
-            app.document.msRequestFullscreen();
-        }
-        else if (app.document.mozRequestFullScreen) {
-            app.document.mozRequestFullScreen();
-        }
-        else if (app.document.webkitRequestFullscreen) {
-            app.document.webkitRequestFullscreen();
-        }
-    }
-};
-
-document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
-document.addEventListener('mozfullscreenchange', fullscreenChange, false);
-document.addEventListener('fullscreenchange', fullscreenChange, false);
-document.addEventListener('MSFullscreenChange', fullscreenChange, false);
-
-function fullscreenChange(e) {
-    app.fullscreen = !app.fullscreen;
-    if (!app.fullscreen && bowser.desktop) {
-        if (app.isModal()) {
-            app.closeModal();
-        }
-        app.body.scrollTop(fullscreenScrollTop);
-        app.html.scrollTop(fullscreenScrollTop);
-    }
-};
-
-app.exitFullScreen = function () {
-    if (app.fullscreen && bowser.desktop) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
-        else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
-        else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        }
-        else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
-    }
-};
-
-app.toggleFullScreen = function (element) {
-    if (app.fullscreen)
-        exitFullScreen();
-    else
-        requestFullScreen(element);
-};
-var app = app || {};
-
-var scrollbarWidth = function () {
-    app.body.append('<div id="scrollbar-width"></div>');
-    var element = app.body.children('#scrollbar-width');
-    element.css({
-        'overflow': "scroll",
-        'visibility': "hidden",
-        'position': 'absolute',
-        'width': '100px',
-        'height': '100px'
-    });
-    app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
-    element.remove();
-};
-
-app.disableScroll = function () {
-    if (app.htmlOverflowEnabled) {
-        app.htmlOverflowEnabled = false;
-        if (app.isModal()) {
-            app.checkModal();
-            app.modal.focus();
-        }
-        var scrollTop = app.scrollTop();
-        app.html.addClass('scroll-disabled');
-        app.body.scrollTop(scrollTop);
-        app.main.scrollTop(scrollTop);
-    }
-};
-
-app.enableScroll = function () {
-    if (!app.htmlOverflowEnabled) {
-        app.htmlOverflowEnabled = true;
-        if (app.isSiteLoaded()) {
-            var scrollTop = app.scrollTop();
-            app.html.removeClass('scroll-disabled modal');
-            app.main.focus();
-            app.body.scrollTop(scrollTop); // edge, safari
-            app.html.scrollTop(scrollTop); // chrome, firefox, ie
-        } else {
-            app.html.removeClass('scroll-disabled modal');
-        }
-    }
-};
-
-app.setHtmlScroll = function () {
-    if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isAsideLeft() && !app.isAsideRight())) {
-        app.enableScroll();
-    } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.isAsideLeft() || app.isAsideRight())) {
-        app.disableScroll();
-    }
-};
-
-$(window).resize(function () {
-    app.checkModal();
-    app.setHtmlScroll();
-    scrollbarWidth();
-});
-
-$(function () {
-    scrollbarWidth();
-});
-var app = app || {};
-
-app.showLoading = function () {
-    app.loadingCount++;
-    app.disableScroll();
-    app.html.addClass('loading');
-};
-
-app.hideLoading = function () {
-    app.loadingCount--;
-    if (app.loadingCount === 0) {
-        app.html.removeClass('loading');
-        app.setHtmlScroll();
-    }
-};
-var app = app || {};
-
-var transitionLock = false;
-
-app.toggleAside = function (aside, pageChanged) {
-    if (!transitionLock) {
-        transitionLock = true;
-        app.html.attr('data-authentication', '');
-        var currentAside = app.html.attr('data-aside');
-        if (currentAside.length) {
-            if (aside === undefined || currentAside === aside) {
-                var scrollTop = app.scrollTop();
-                app.html.attr('data-aside', '');
-                app.main.focus();
-                app.body.scrollTop(scrollTop); // edge, safari
-                app.html.scrollTop(scrollTop); // chrome, firefox, ie
-            } else {
-                app.html.attr('data-aside', aside);
-            }
-        } else {
-            app.html.attr('data-aside', aside);
-        }
-        if (aside === 'left') {
-            app.left.focus();
-        } else if (aside === 'right') {
-            app.right.focus();
-        }
-        if (app.isTransitions()) {
-            setTimeout(function () {
-                transitionLock = false;
-                if (pageChanged) {
-                    app.rb();
-                }
-            }, app.transitionTime);
-        } else {
-            transitionLock = false;
-        }
-        app.setHtmlScroll();
-    }
-};
-
-$(function () {
-    $('.aside.left').click(function () {
-        app.toggleAside('left');
-    });
-
-    $('.aside.right').click(function () {
-        app.toggleAside('right');
-    });
-});
-var app = app || {};
-
-$(function () {
-    app.authentication.on('click', '> div > button', function () {
-        var $this = $(this);
-        var type = $this.attr('data-type');
-        if (app.html.attr('data-authentication') === type) {
-            app.html.attr('data-authentication', '');
-        } else {
-            app.html.attr('data-authentication', type);
-            app.authentication.children(':last-child').focus();
-        }
-    });
-    
-    app.authenticatedLinks.on('click', '> a', function (e) {
-        e.preventDefault();
-    });
-
-    app.addValidation(
-        app.authentication.find('.register > form'),
-        {
-            register_username: {
-                required: true,
-                minlength: 2
-            },
-            register_password: {
-                required: true,
-                password_regex: true
-            },
-            register_confirm_password: {
-                required: true,
-                equalTo: "#register_password"
-            },
-            register_email: {
-                required: true,
-                email: true
-            },
-        },
-        {
-            register_username: {
-                required: "Please enter your username",
-            },
-            register_password: {
-                required: "Please enter your password"
-            },
-            register_confirm_password: {
-                required: "Please provide a password",
-                equalTo: "Please enter the same password as above"
-            },
-            register_email: "Please enter a valid email address"
-        }
-    );
-
-    app.addValidation(
-        app.authentication.find('.login > form'),
-        {
-            username: {
-                required: true
-            },
-            password: {
-                required: true
-            }
-        },
-        {
-            username: {
-                required: "Please enter your username",
-            },
-            password: {
-                required: "Please enter your password"
-            },
-        }
-    );
-});
-var app = app || {};
-
-$(function () {
-    app.cookie.on('click', '#cookie-accept', function () {
-        localStorage.setItem('cookie', 'cookie');
-        app.html.removeClass('cookie');
-    });
-
-    var cookie = localStorage.getItem("cookie");
-    if (cookie === null) {
-        app.html.addClass('cookie');
-    }
-});
-var app = app || {};
-
-//app.loadPage = function (url, pushState, initial) {
-//    app.showLoading();
-//    url = url.replace(/^\/+/g, '');
-//    var q = url.indexOf('?');
-//    url = url.substring(0, q !== -1 ? q : url.length);
-//    app.left.find('.tree a.label.active').removeClass('active');
-//    url = url.replace('/', '');
-//    app.left.find('a.label[href="' + url + '"]').addClass('active');
-//    var tempUrl = url;
-//    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
-//        url = tempUrl;
-//        if (url === '') {
-//            app.title.html('');
-//            if (app.body.children('#svg-browser').length === 0) {
-//                $.get(app.host + 'ajax/svg/browser.html', function (data) {
-//                    $(data).prependTo(app.body);
-//                });
-//            }
-//            if (app.body.children('#svg-os').length === 0) {
-//                $.get(app.host + 'ajax/svg/os.html', function (data) {
-//                    $(data).prependTo(app.body);
-//                });
-//            }
-//        } else {
-//            app.title.html(app.capitalize(url.replace('-', ' ')));
-//            if (url === 'form') {
-//                app.pageForm();
-//            }
-//        }
-//        app.pageLoaded(initial);
-//    });
-//    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
-//    if (pushState) {
-//        window.history.pushState(null, null, url);
-//        loadPage = true;
-//    }
-//};
-
-//app.internalLinkClick = function (href, e) {
-//    e.preventDefault();
-//    app.loadPage(href, true, false);
-//};
-
-//(function (l) {
-//    if (l.search) {
-//        app.url = {};
-//        l.search.slice(1).split('&').forEach(function (v) {
-//            var a = v.split('=');
-//            app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-//        });
-//        if (app.url.p !== undefined) {
-//            window.history.replaceState(null, null,
-//                l.pathname.slice(0, -1) + app.url.p +
-//                (app.url.q ? '?' + app.url.q : '') +
-//                l.hash
-//            );
-//        }
-//    }
-//}(window.location));
-
-//var loadPage = window.history.state;
-//window.onpopstate = function (event) {
-//    if (loadPage) {
-//        var url = location.pathname;
-//        if (!app.isLocalhost) {
-//            url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
-//        }
-//        app.loadPage(url, false, true);
-//    }
-//};
-
-app.applyNavigation = function (id, value, set) {
-    if (set) {
-        var entry = {
-            "id": id,
-            "value": value
-        };
-        var exists = $.grep(app.navigation, function (e) { return e.name === name; });
-        if (exists.length === 0) {
-            // not found
-            app.navigation.push(entry);
-        } else if (exists.length === 1) {
-            // found
-            exists[0].value = value;
-        }
-        localStorage.setItem('navigation', JSON.stringify(app.navigation));
-    } else {
-        app.left.find('#' + id).prop('checked', value);
-    }
-};
-
-//$(function () {
-//    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
-//        app.navigationTree = app.left.find('.tree');
-//        app.navigation = JSON.parse(localStorage.getItem("navigation"));
-//        if (app.navigation === null) app.navigation = [];
-//        $.each(app.navigation, function (i, entry) {
-//            app.applyNavigation(entry.id, entry.value, false);
-//        });
-//        app.navigationTree.on('change', 'input[type=checkbox]', function () {
-//            var $this = $(this),
-//                id = $this.attr('id'),
-//                value = $this.is(':checked');
-//            app.applyNavigation(id, value, true);
-//        });
-//        app.header.find('.aside.left').addClass('loaded');
-//        if (app.url && app.url.p) {
-//            app.navigationTree.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
-//        } else {
-//            app.navigationTree.find('a.label[href=""]').addClass('active');
-//        }
-//    });
-
-//    if (app.url && app.url.p) {
-//        app.loadPage(app.url.p, true, true);
-//    } else {
-//        app.loadPage('', false, true);
-//    }
-
-//    app.left.on('click', '.tree a.label:not(.active)', function (e) {
-//        app.internalLinkClick($(this).attr('href'), e);
-//    });
-
-//    app.header.on('click', 'h1 a', function (e) {
-//        app.internalLinkClick($(this).attr('href'), e);
-//    });
-
-//    app.left.on('click', '#navigation-expand', function () {
-//        app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
-//    });
-
-//    app.left.on('click', '#navigation-collapse', function () {
-//        app.navigationTree.find('input[type=checkbox]:checked').click();
-//    });
-//});
-var app = app || {};
-
-app.applySettings = function (id, name, type, value, set) {
-    if (set) {
-        var entry = {
-            "id": id,
-            "name": name,
-            "type": type,
-            "value": value
-        },
-            exists = $.grep(app.settings, function (e) { return e.name === name; });
-        if (exists.length === 0) {
-            // not found
-            app.settings.push(entry);
-        } else if (exists.length === 1) {
-            // found
-            exists[0].id = id;
-            exists[0].value = value;
-        }
-        localStorage.setItem('settings', JSON.stringify(app.settings));
-    } else {
-        if (type === "checkbox" || type === "radio") {
-            app.right.find('#' + id).prop('checked', value);
-        } else if (type === "slider") {
-            app.right.find('#' + id).slider('setValue', value);
-        }
-    }
-
-    if (type === 'checkbox' || type === "radio") {
-        if (type === 'radio') {
-            $.each(app.right.find('input[type=radio][name=' + name + ']:not(#' + id + ')'), function (i, radio) {
-                app.html.removeClass($(radio).attr('id'));
-            });
-        }
-        if (name === 'theme') {
-            var stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]');
-            var href = stylesheet.attr('href');
-            var split1 = href.split('/');
-            var split2 = split1[split1.length - 1].split('.');
-            var href = [];
-            for (i = 0; i < split1.length - 1; i++) {
-                href.push(split1[i] + '/');
-            }
-            var theme = id.substring(id.indexOf("-") + 1);
-            href.push(theme);
-
-            for (i = 1; i < split2.length; i++) {
-                href.push('.' + split2[i]);
-            }
-            href = href.join("");
-            stylesheet.attr('href', href);
-        }
-        if (value) {
-            app.html.addClass(id);
-        } else {
-            app.html.removeClass(id);
-        }
-        if (id === 'two-columns') {
-            app.rb();
-        }
-        if (id === 'signed-in') {
-            app.responsiveHeader();
-        }
-    }
-};
-
-$(function () {
-    //app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
-    //    $.each(app.settings, function (i, entry) {
-    //        app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-    //    });
-    //    app.header.find('.aside.right').addClass('loaded');
-    //    $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
-    //        var $this = $(this),
-    //            id = $this.attr('id'),
-    //            name = $this.attr('name'),
-    //            type = $this.attr('type'),
-    //            value = $this.is(':checked');
-    //        app.applySettings(id, name, type, value, true);
-    //        if (id === 'left-shrink' || id === 'right-shrink' ||
-    //            id === 'left-push' || id === 'right-push' ||
-    //            id === 'left-overlay' || id === 'right-overlay') {
-    //            app.setHtmlScroll();
-    //        }
-    //    });
-    //    app.responsiveHeader();
-    //});
-
-    //app.right.on('click', '#clear-localstorage', function () {
-    //    localStorage.clear();
-    //    location.reload();
-    //});
-});
-var app = app || {};
-
-$(function () {
-    app.body.on("keydown", function (e) {
-        var target = $(e.target),
-            parent = target.parent();
-        if (app.isLoading()) {
-            if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
-                e.preventDefault();
-            }
-        } else {
-            if (e.which === 37 && !app.isModal()) { // left
-                if (app.isAsideLeft()) {
-                    app.toggleAside(); // closes right
-                } else if (!app.isAsideRight()) {
-                    app.toggleAside('right'); // opens right
-                }
-            } else if (e.which === 39 && !app.isModal()) { // right
-                if (app.isAsideRight()) {
-                    app.toggleAside(); // closes left
-                } else if (!app.isAsideLeft()) {
-                    app.toggleAside('left'); // opens left
-                }
-            } else if (e.which === 27) { // esc
-                if (app.isModal()) {
-                    app.closeModal();
-                } else {
-                    if (app.isAside()) {
-                        app.toggleAside(); // closes aside
-                    }
-                    var popups = app.body.children('.popup');
-                    if (popups.length) {
-                        popups.fadeOut(app.fadeOutTime, function () {
-                            popups.remove();
-                        });
-                    }
-                    var dropdowns = app.content.find('div.dropdown.open');
-                    if (dropdowns.length) {
-                        dropdowns.removeClass('open');
-                    }
-                    app.html.attr('data-authentication', '');
-                }
-            }
-            if (e.which === 13) { // enter
-                var dropdown = target.parents('div.dropdown');
-                if (dropdown.length || parent.parent().hasClass('accordion')) {
-                    target.click();
-                    e.preventDefault();
-                    if (dropdown.length) {
-                        dropdown.children('div').focus();
-                    }
-                } else if (parent.hasClass('checkbox') || parent.hasClass('radio') || parent.hasClass('switch') || target.hasClass('toggle')) {
-                    target.siblings('input').click();
-                    e.preventDefault();
-                }
-            }
-        }
-    });
-
-    app.body.on('keyup', function (e) {
-        if (!app.isLoading()) {
-            if (e.which === 9) { // tab
-                var target = $(e.target);
-                if (!target.parents('div.dropdown.open').length) {
-                    $('div.dropdown.open').removeClass('open');
-                }
-                if (!target.parents('#authenticated.open').length || target.closest('#authenticated > button').length) {
-                    $('#authenticated.open').removeClass('open');
-                }
-                if (app.isModal()) {
-                    if (!target.parents('#modal').length) {
-                        app.closeModal();
-                    }
-                } else {
-                    var aside = target.parents('aside');
-                    if (aside.length === 0 && target.is('aside')) {
-                        aside = target;
-                    }
-                    if (aside.length && aside.attr('id') !== app.html.attr('data-aside')) {
-                        app.toggleAside(aside.attr('id'));
-                    } else if (!aside.length && app.isAside()) {
-                        app.toggleAside();
-                    }
-                }
-            }
-        }
-    });
-});
-var app = app || {};
-
-app.showModal = function (type) {
-    app.html.attr('data-modal', type);
-    app.html.addClass('modal');
-    app.hideLoading();
-    app.checkModal();
-    app.modal.focus();
-};
-
-app.closeModal = function () {
-    if (app.fullscreen) {
-        app.exitFullScreen();
-    } else {
-        app.html.removeClass('modal').attr('data-modal', '');
-        app.modal.removeClass('info-shown').empty();
-        app.checkModal();
-        app.setHtmlScroll();
-    }
-};
-
-app.checkModal = function () {
-    if (app.isModal()) {
-        app.body.css('padding-right', app.scrollbarWidth);
-        if (app.html.attr('data-aside') === 'right') {
-            app.right.css('margin-right', app.scrollbarWidth);
-        }
-        app.body.children('.popup').css('margin-right', app.scrollbarWidth);
-    } else {
-        app.body.css('padding-right', 0);
-        app.right.css('margin-right', 0);
-        app.body.children('.popup').css('margin-right', 0);
-    }
-
-    var contentHeader = app.content.children('.content-header:not(.full)');
-    if (contentHeader.length) {
-        if (app.isModal() && contentHeader.css('position') === 'fixed') {
-            var halfOverflowY = app.scrollbarWidth / 2;
-            contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
-        } else {
-            contentHeader.children().css('width', '');
-        }
-    }
-};
-
-$(function () {
-    app.body.on('click', '.modal', function () {
-        var $this = $(this),
-            type = $this.attr('data-modal');
-        if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
-            app.showLoading();
-            var id = $this.attr('data-modal-id'),
-                html = [],
-                dataTitle = $this.attr('data-modal-title'),
-                dataContent = $this.attr('data-modal-content'),
-                dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
-            html.push('<div><div><div id="modal-container">');
-            if (type === 'image' && $this.attr('data-modal-img').length) {
-                if (dataTitle !== undefined || dataContent !== undefined) {
-                    app.modal.addClass('has-info');
-                    html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
-                    html.push('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
-                    html.push('</button>');
-                }
-                if (dataTitle !== undefined) {
-                    html.push('<div id="modal-title">' + dataTitle + '</div>');
-                }
-                if (dataContent !== undefined) {
-                    html.push('<div id="modal-content">' + dataContent + '</div>');
-                }
-                html.push('<img id="modal-img" />');
-            } else if (type === 'form') {
-                html.push('<div class="header">');
-                if (dataTitle !== undefined) {
-                    html.push('<span class="title">' + dataTitle + '</span>');
-                }
-                html.push('<button id="modal-close" class="close expand" aria-label="Close ' + (dataTitle !== undefined ? dataTitle : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
-                html.push('</div><div class="content">');
-            }
-            html.push('</div></div></div></div>');
-            var div = html.join("");
-            app.modal.html(div);
-            if (type === 'image') {
-                var image = app.modal.find('#modal-img');
-                image.on('load', function () {
-                    if (bowser.android) {
-                        image.css('max-height', window.innerHeight);
-                    }
-                    app.showModal(type);
-                });
-                image.attr('src', $this.attr('data-modal-img'));
-            } else {
-                var dataSize = $this.attr('data-modal-size');
-                if (dataSize !== undefined) {
-                    app.modal.children('div').attr('data-modal-size', dataSize);
-                }
-                var content = app.modal.find('#modal-container > .content');
-                content.append(dataContent);
-                app.contentLoaded(content);
-                app.showModal(type);
-            }
-            if (dataFullscreen) {
-                app.requestFullScreen();
-            }
-        }
-    });
-
-    app.body.on('click', '#modal-toggle', function () {
-        app.modal.toggleClass('info-shown');
-    });
-});
-var app = app || {};
-
-var swipe = function () {
-    var xDown = null,
-        yDown = null,
-        offsetBefore;
-
-    var handleTouchStart = function (evt) {
-        if (app.isAndroidSwipe()) {
-            xDown = evt.touches[0].clientX;
-            yDown = evt.touches[0].clientY;
-
-            offsetBefore = $(evt.target).offset().left;
-        }
-    };
-
-    var handleTouchMove = function (evt) {
-        if (app.isAndroidSwipe()) {
-            var offsetAfter = $(evt.target).offset().left;
-            if (!xDown || !yDown || offsetBefore !== offsetAfter) {
-                return;
-            }
-            var xUp = evt.changedTouches[0].clientX,
-                yUp = evt.changedTouches[0].clientY,
-                xDiff = xDown - xUp,
-                yDiff = yDown - yUp;
-            if (Math.abs(xDiff) > Math.abs(yDiff)) {
-                var distance = parseInt($(window).width() / 2);
-                if (yDiff > -100 || yDiff < 100) {
-                    var currentAside;
-                    if (xDiff > distance) {
-                        /* left swipe */
-                        if (!app.isModal() && !app.isLoading()) {
-                            currentAside = app.html.attr('data-aside');
-                            if (currentAside === 'left' && currentAside !== 'right') {
-                                app.toggleAside();
-                            } else if (currentAside !== 'right') {
-                                app.toggleAside('right');
-                            }
-                        }
-                    } else if (xDiff < -distance) {
-                        /* right swipe */
-                        if (!app.isModal() && !app.isLoading()) {
-                            currentAside = app.html.attr('data-aside');
-                            if (currentAside === 'right' && currentAside !== 'left') {
-                                app.toggleAside();
-                            } else if (currentAside !== 'left') {
-                                app.toggleAside('left');
-                            }
-                        }
-                    }
-                }
-
-            }
-            /* reset values */
-            xDown = null;
-            yDown = null;
-        }
-    };
-    document.addEventListener('touchstart', handleTouchStart, false);
-    document.addEventListener('touchend', handleTouchMove, false);
-};
-
-$(function () {
-    if (bowser.android) {
-        swipe();
-        // android doesn't handle vh correctly, so it gets converted to px
-        $(window).resize(function () {
-            if (app.isModal() && app.isModalImage()) {
-                app.modal.find('#modal-img').css('max-height', window.innerHeight);
-            }
-        });
-    }
-});
-var app = app || {};
-
-// responsive-background
-app.rb = function () {
-    app.content.find('.rb').each(function () {
-        var $this = $(this),
-            image = $this.attr('data-rb-image'),
-            filetype = $this.attr('data-rb-image-filetype'),
-            sizesWidth = $this.attr('data-rb-sizes'),
-            current = $this.attr('data-rb-current'),
-            aspectRatio = $this.attr('data-rb-aspect-ratio');
-        if (image !== undefined && image.length &&
-            filetype !== undefined && filetype.length &&
-            sizesWidth !== undefined && sizesWidth.length &&
-            aspectRatio !== undefined && aspectRatio.length) {
-            if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
-                (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
-                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort(function (a, b) { return a - b; });
-                var goalWidth = $this.width(),
-                    goalHeight = $this.height(),
-                    closestWidth,
-                    closestHeight,
-                    heightPercentage;
-
-                var getHeightInPercentage = function (num, amount) {
-                    return num * 100 / amount;
-                };
-
-                if (aspectRatio === '21by9') {
-                    heightPercentage = getHeightInPercentage(9, 21);
-                } else if (aspectRatio === '16by9') {
-                    heightPercentage = getHeightInPercentage(9, 16);
-
-                } else if (aspectRatio === '4by3') {
-                    heightPercentage = getHeightInPercentage(3, 4);
-
-                } else if (aspectRatio === '1by1') {
-                    heightPercentage = 100;
-                }
-
-                var getHeightInPixels = function (num, amount) {
-                    return num * amount / 100;
-                };
-
-                $.each(sizesWidth, function (index) {
-                    var width = parseInt(this),
-                        height = getHeightInPixels(heightPercentage, width);
-                    if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
-                        closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
-                        closestWidth = width;
-                        closestHeight = height;
-                    }
-                });
-
-                if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
-                    app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
-                    var tempImage = app.body.children('#rb');
-                    tempImage.on('load', function () {
-                        tempImage.remove();
-                        var src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
-                        $this.css('background-image', src);
-                        $this.attr('data-rb-current', closestWidth);
-                    });
-                }
-            }
-        }
-    });
-};
-
-$(window).resize(function () {
-    app.rb();
-});
-var app = app || {};
-
-app.responsiveHeader = function () {
-    $(function () {
-        var h1 = app.header.find('h1');
-        var link = h1.children('a');
-
-        function check() {
-            app.unauthenticated.addClass('text');
-            var a = h1.outerWidth();
-            var b = link.outerWidth();
-            if (h1.outerWidth() < link.outerWidth()) {
-                app.unauthenticated.removeClass('text');
-            }
-            app.unauthenticated.addClass('checked');
-        }
-        
-        var awaitCSS = setInterval(function () {
-            if (app.cssLoaded()) {
-                clearInterval(awaitCSS);
-
-                $(window).on('resize', function () {
-                    check();
-                });
-
-                check();
-            }
-        }, app.cssInterval);
-    });
-};
-var app = app || {};
-
-app.dropdown = function (dropdowns) {
-    dropdowns.each(function () {
-        var $this = $(this),
-            selected = $this.children('option:selected'),
-            html = [],
-            attr = $this.attr('class'),
-            theme = '',
-            width = $this.attr('data-width');
-        if (selected.length !== 1) {
-            selected = $this.children().first();
-        }
-        html.push('<div class="dropdown' +
-            ($this.hasClass('nowrap') ? ' nowrap' : '') +
-            ($this.hasClass('check') ? ' check' : '') +
-            ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
-            ($this.hasClass('align-left') ? ' align-left' : '') +
-            ($this.hasClass('align-right') ? ' align-right' : '') +
-            ($this.hasClass('direction-up') ? ' direction-up' : '') +
-            '"' +
-            (width !== undefined ? ' style="width:' + width + 'px"' : '')
-            + '> ');
-        
-        if (typeof attr !== typeof undefined && attr !== false) {
-            var temp = attr.split(' ');
-            temp = $.grep(temp, function (item, index) {
-                return item.trim().match(/^theme-/);
-            });
-            if (temp.length === 1) {
-                theme = temp[0];
-            }
-        }
-        html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
-        html.push('<ul class="' + theme + '">');
-        $this.children().each(function (index) { /* ':not([value=""])' */
-            var $that = $(this),
-                text = $that.text();
-            if (!text.length) {
-                text = '&nbsp;';
-            }
-            if (text.indexOf('$$') === 0) {
-                $that.attr('data-math', text);
-            }
-
-            html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
-        });
-        html.push('</ul>');
-        html.push('</div>');
-        var dropdown = html.join("");
-        $this.after(dropdown);
-        dropdown = $this.next();
-
-
-        if ($this.hasClass('nowrap')) {
-            var top = dropdown.children().eq(0),
-                bottom = dropdown.children().eq(1);
-            var topWidth = top.width();
-            var bottomWidth = bottom.width();
-            if (bottomWidth > topWidth) {
-                top.css('min-width', bottomWidth);
-                //debugger;
-            }
-        }
-
-        dropdown.on('click', '> div', function () {
-            var $that = $(this);
-            $that.parent().toggleClass('open');
-        });
-        dropdown.on('click', 'li', function () {
-            var $that = $(this);
-            if (!$that.hasClass('selected')) {
-                $that.siblings('.selected').removeClass('selected');
-                $that.addClass('selected');
-                var option = $this.children('[value="' + $that.attr('data-id') + '"]'),
-                    text = $that.text(),
-                    math = option.attr('data-math');
-                if (math !== undefined) {
-                    text = math;
-                }
-                var label = dropdown.children('div').children('label');
-                label.text(text);
-                if (math !== undefined) {
-                    renderMathInElement(label[0]);
-                }
-                $this.children(':selected').removeAttr('selected');
-                option.attr('selected', 'selected');
-                $this.change();
-            }
-            dropdown.removeClass('open');
-        });
-    });
-};
-
-$(window).click(function (e) {
-    var target = $(e.target);
-    if (target.closest("div.dropdown").length) {
-        $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
-    }
-
-    if (!target.closest(".dropdown").length) {
-        $('div.dropdown').removeClass('open');
-    }
-});
-var app = app || {};
-
-app.accordion = function (elements) {
-    elements.on("click", ".headline", function () {
-        var content = $(this).next();
-        if (content.hasClass('open')) {
-            content
-                .removeClass('open')
-                .slideUp("800");
-        } else {
-            content
-                .addClass("open")
-                .slideToggle("800")
-                .parents('.accordion').find(".content.open").not(content).removeClass('open').slideUp("800");
-        }
-    });
-};
-var app = app || {};
-
-$(function () {
-    app.body.on('click', '.alert .close', function () {
-        var $this = $(this).parent();
-        $this.fadeOut(app.fadeOutTime, function () {
-            var parent = $this.parent();
-            if (parent.hasClass('popup') && parent.children().length === 1) {
-                parent.remove();
-            } else {
-                $this.remove();
-            }
-        });
-    });
-});
-var app = app || {};
-var google;
-app.map = function (maps) {
-    if (maps.length) {
-        if (!app.html.hasClass('map-loaded')) {
-            app.head.append($('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>'));
-            app.html.addClass('map-loaded');
-        }
-
-        var timeout = 100;
-        var checkGoogle = function () {
-            if (google !== undefined) {
-                maps.each(function () {
-                    var $this = $(this),
-                        lat = app.tryParseFloat($this.attr('data-lat'), 37.4029937),
-                        lng = app.tryParseFloat($this.attr('data-lng'), -122.1811793),
-                        zoom = app.tryParseInt($this.attr('data-zoom'), 4),
-                        cords = { lat: lat, lng: lng };
-
-                    var map = new google.maps.Map($this[0], {
-                        zoom: zoom,
-                        center: cords
-                    });
-
-                    var marker = new google.maps.Marker({
-                        position: cords,
-                        map: map
-                    });
-
-                    $(window).on("throttledresize.map", function () {
-                        google.maps.event.trigger($this[0], 'resize');
-                    });
-                });
-                return;
-            }
-            setTimeout(checkGoogle, timeout);
-        };
-        checkGoogle();
-    }
-};
-var app = app || {};
-
-app.math = function (math) {
-    if (math.length) {
-        if (!app.html.hasClass('math-loaded')) {
-            app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
-            app.html.addClass('math-loaded');
-        }
-
-        $.getScript('dist/js/katex.min.js', function () {
-            math.each(function () {
-                var $this = $(this);
-                renderMathInElement($this[0]);
-                setTimeout(function () {
-                    $this.removeClass('math');
-                });
-            });
-        });
-    }
-};
-var app = app || {};
-
-app.media = function (media) {
-    if (media.length) {
-        if (!app.html.hasClass('media-loaded')) {
-            app.head.append($('<link rel="stylesheet" href="dist/css/plyr.min.css">'));
-            app.html.addClass('media-loaded');
-        }
-
-        $.getScript('dist/js/plyr.min.js', function () {
-            media.each(function (i, item) {
-                plyr.setup(item);
-            });
-        });
-    }
-};
-var app = app || {};
-
-app.lazy = function (elements) {
-    elements.lazy({
-        afterLoad: function (element) {
-            element.removeClass('lazy');
-        }
-    });
-};
-var app = app || {};
-
-$(function () {
-    app.body.on('click', '.show-popup', function () {
-        var $this = $(this),
-            title = $this.attr('data-popup-title');
-        if (title !== undefined) {
-            var theme = $this.attr('data-popup-theme'),
-                alert = [],
-                position = $(this).attr('data-popup-position'),
-                popup = app.body.children('.popup[data-position="' + position + '"]');
-            if (theme === undefined) {
-                theme = 'primary';
-            }
-            alert.push('<div class="alert theme-' + theme + '">');
-            alert.push('<div><p>' + title + '</p></div>');
-            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
-            alert.push('</div>');
-            alert = alert.join('');
-            if (position === undefined) {
-                position = 'top left';
-            }
-            if (popup.length) {
-                popup.append(alert);
-            } else {
-                var html = [];
-                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
-                html.push(alert);
-                html.push('</div>');
-                html = html.join("");
-                app.body.prepend(html);
-            }
-        }
-    });
-});
-var app = app || {};
-
-app.tooltip = function (tooltips) {
-    tooltips.each(function () {
-        var $this = $(this),
-            interactive = $this.hasClass('interactive');
-        $this.tooltipster({
-            animationDuration: 0,
-            interactive: interactive,
-            trigger: 'custom',
-            triggerOpen: {
-                mouseenter: true,
-                touchstart: true
-            },
-            triggerClose: {
-                mouseleave: true,
-                tap: true,
-                scroll: true
-            }
-        });
-    });
-};
-var app = app || {};
-
-app.datatables = function (tables) {
-    if (tables.length) {
-        $.getScript('dist/js/datatables.min.js', function () {
-
-            let spacing = 'space-3';
-
-            function table_header_input(instance) {
-                var columns = instance.columns().header();
-                let elements = jQuery.grep(columns, function (e) {
-                    let column = $(e);
-                    return column.hasClass('dropdown') || column.hasClass('text');
-                });
-                instance.columns().every(function () {
-                    let th = this.header(),
-                        text = th.innerText,
-                        column = $(th);
-                    
-                    column.empty().append('<div><div><span>' + text + '</span></div>' + (elements.length ? '<div></div>' : '') + '</div>');
-                    let index = column.index();
-
-                    if (column.hasClass('dropdown')) {
-                        let select = $('<select class="dropdown align-left nowrap"><option value=""></option></select>')
-                            .appendTo(column.find('> div > div:last-child'))
-                            .on('change', function () {
-                                instance.column(index).search(this.value).draw();
-                            });
-
-                        this.data().unique().sort().each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>');
-                        });
-                    } else if (column.hasClass('text')) {
-                        let input = $('<input type="text" />')
-                            .appendTo(column.find('> div > div:last-child'))
-                            .on('keyup change', function () {
-                                instance.column(index).search(this.value).draw();
-                            });
-                        input.parent().addClass('form-group');
-                    }
-                });
-            }
-            function table_header_sort(instance, wrapper) {
-                let th = wrapper.find('thead th');
-                th.unbind('click');
-                th.find('> div > div:first-child').append('<span class="sort-btn"></span>');
-                th.click(function (e) {
-                    let $this = $(e.target);
-                    if (!$this.closest('div.dropdown').length && !$this.closest('input').length) {
-                        let parent = $this.parents('th'),
-                            index = parent.index();
-                        if (parent.hasClass('sorting_asc')) {
-                            instance.column(index).order('desc').draw();
-
-                        } else {
-                            instance.column(index).order('asc').draw();
-                        }
-                    }
-                });
-            }
-            function table_header_length(wrapper, header) {
-                let length = wrapper.find('.dataTables_length'),
-                    dropdown = length.find('select');
-
-                length.append(dropdown);
-                length.children('label').remove();
-                dropdown.addClass('dropdown').attr('data-width', 100);
-                header.append(length);
-            }
-            function table_header_buttons(wrapper, header) {
-                let container = wrapper.find('.dt-buttons');
-
-                container.append('<div class="flex column wrap ' + spacing + '"></div>');
-
-                let div = container.children('div'),
-                    buttons = container.children('button');
-
-                container.append(div);
-                buttons.addClass('btn');
-                div.append(buttons);
-                header.append(container);
-            }
-            function table_header_filter(wrapper, header) {
-                let filter = wrapper.find('.dataTables_filter');
-
-                filter.addClass('input-group');
-                filter.find('input').appendTo(filter);
-                filter.append('<div class="input-group-addon"><svg focusable="false"><use xlink:href="#svg-search"></use></svg></div>');
-                filter.find('label').remove();
-                header.append(filter);
-            }
-            function table_content(wrapper, content) {
-                let table = wrapper.find('table');
-                content.append(table);
-            }
-            function table_footer_info(wrapper, footer) {
-                let info = wrapper.find('.dataTables_info');
-                footer.append(info);
-            }
-            function paginateFix(paginate) {
-                let span = paginate.children('span'),
-                    prev = paginate.find('.paginate_button.previous'),
-                    next = paginate.find('.paginate_button.next');
-
-                prev.html('<svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>');
-                next.html('<svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>');
-
-                prev.prependTo(span);
-                next.appendTo(span);
-            }
-            function table_footer_paginate(wrapper, footer, paginate) {
-                paginate.addClass('flex column wrap');
-                footer.append('<div class="dataTables_paginate_container"></div>');
-                let container = footer.find('.dataTables_paginate_container');
-                paginateFix(paginate);
-                container.append(paginate);
-            }
-            function table_dropdowns(wrapper) {
-                let dropdowns = wrapper.find('select.dropdown');
-                app.dropdown(dropdowns);
-            }
-
-            tables.each(function () {
-                var $this = $(this);
-                $this.addClass('nowrap');
-                $this.DataTable({
-                    "dom": 'lBfrtip',
-                    "bSortCellsTop": true,
-                    buttons: [
-                        //'copy', 'excel', 'csv'
-                        'copyHtml5', 'excelHtml5', 'csvHtml5'
-                    ],
-                    responsive: true,
-                    initComplete: function (settings, json) {
-                        let instance = this.api(),
-                            wrapper = $(settings.nTableWrapper);
-
-                        wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
-                        let header = wrapper.find('> .dataTables_header > div');
-
-                        wrapper.append('<div class="dataTables_content table"></div>');
-                        let content = wrapper.find('> .dataTables_content');
-
-                        wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + spacing + '"></div></div>');
-                        let footer = wrapper.find('> .dataTables_footer > div');
-
-                        table_header_input(instance);
-                        table_header_sort(instance, wrapper);
-                        table_header_length(wrapper, header);
-                        table_header_buttons(wrapper, header);
-                        table_header_filter(wrapper, header);
-
-                        table_content(wrapper, content);
-
-                        table_footer_info(wrapper, footer);
-
-                        let paginate = wrapper.find('.dataTables_paginate');
-                        table_footer_paginate(wrapper, footer, paginate);
-
-                        table_dropdowns(wrapper);
-
-                        $this.on('draw.dt', function () {
-                            paginateFix(paginate);
-                        });
-                    }
-                });
-            });
-        });
-    }
-};
-var app = app || {};
-
-app.getItem = function (items, id) {
-    return $($.map(items, function (item) {
-        if (item.getAttribute("data-id") === id) {
-            return item;
-        }
-    }));
-};
-
-app.assignment = function (assignments) {
-    if (assignments.length) {
-        $.getScript('dist/js/assignments.min.js', function () {
-            $(assignments).each(function (index, assignment) {
-                assignment = $(assignment);
-                if (assignment.hasClass('drag-and-drop')) {
-                    app.assignment.dragAndDrop(assignment);
-                } else if (assignment.hasClass('sort')) {
-                    app.assignment.sort(assignment);
-                } else if (assignment.hasClass('color')) {
-                    app.assignment.color(assignment);
-                }
-            });
-        });
-    }
-};
-var app = app || {};
-
-app.pageForm = function () {
-    app.addValidation(
-        app.content.find('#form'),
-        {
-            firstName: {
-                required: true,
-                minlength: 2
-            },
-            lastName: {
-                required: true,
-                minlength: 2
-            },
-            username: {
-                required: true,
-                minlength: 2
-            },
-            password: {
-                required: true,
-                password_regex: true
-            },
-            confirm_password: {
-                required: true,
-                equalTo: "#password"
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            dropdown_1: "required",
-            dropdown_2: "required",
-            dropdown_3: "required",
-            dropdown_4: "required",
-            dropdown_5: "required",
-            dropdown_6: "required",
-            gender: "required",
-            interests: "required",
-            agree: "required",
-            font_size: "required"
-        },
-        {
-            firstName: {
-                required: "Please enter your first name",
-                minlength: "Your first name must consist of at least 2 characters"
-            },
-            lastName: {
-                required: "Please enter your last name",
-                minlength: "Your last name must consist of at least 2 characters"
-            },
-            username: {
-                required: "Please enter a username",
-                minlength: "Your username must consist of at least 2 characters"
-            },
-            password: {
-                required: "Please provide a password"
-            },
-            confirm_password: {
-                required: "Please provide a password",
-                equalTo: "Please enter the same password as above"
-            },
-            email: "Please enter a valid email address",
-            dropdown_1: "Please select an option",
-            dropdown_2: "Please select an option",
-            dropdown_3: "Please select an option",
-            dropdown_4: "Please select an option",
-            dropdown_5: "Please select an option",
-            dropdown_6: "Please select an option",
-            gender: "Please select your gender",
-            interests: "Please select at least one interest",
-            agree: "Please accept our policy"
-        }
-    );
-};

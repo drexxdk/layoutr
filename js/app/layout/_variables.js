@@ -19,9 +19,6 @@ $(function () {
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');
-    app.loading = $('#loading');
-    app.modal = $('#modal');
-    app.cookie = $('#cookie');
 
     app.cssInterval = 50;
     app.transitionTime = 400;

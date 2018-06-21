@@ -19,7 +19,8 @@ header {
         }
     }
 
-    .aside:not(.loaded) {
+    html:not(.navigation-loaded) & .aside.left,
+    html:not(.settings-loaded) & .aside.right {
         opacity: 0;
         pointer-events: none;
     }
@@ -68,6 +69,11 @@ header {
                 }
             }
         }
+    }
+
+    > div {
+        flex-grow: 1;
+        @extend .header;
     }
 }
 

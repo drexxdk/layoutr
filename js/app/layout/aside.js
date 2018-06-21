@@ -38,13 +38,3 @@ app.toggleAside = function (aside, pageChanged) {
         app.setHtmlScroll();
     }
 };
-
-$(function () {
-    $('.aside.left').click(function () {
-        app.toggleAside('left');
-    });
-
-    $('.aside.right').click(function () {
-        app.toggleAside('right');
-    });
-});
