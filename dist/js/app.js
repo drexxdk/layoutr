@@ -4596,7 +4596,7 @@ var requirejs, require, define;
 var layoutr = layoutr || {};
 
 require(['/js/backbone/config.js'], function () {
-    require(['backbone', 'marionette', 'router', 'views/rootView', 'helpers'],
+    require(['backbone', 'marionette', 'router', 'views/layout/rootView', 'helpers'],
         function (Backbone, Marionette, Router, RootView, Helpers) {
             const App = Marionette.Application.extend({
                 region: '#root',

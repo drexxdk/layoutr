@@ -1,10 +1,10 @@
 ﻿var app = app || {};
 var layoutr = layoutr || {};
 
-define(['marionette', 'views/headerView', 'views/footerView', 'views/navigationView', 'views/settingsView'],
+define(['marionette', 'views/layout/headerView', 'views/layout/footerView', 'views/layout/navigationView', 'views/layout/settingsView'],
     function (Marionette, HeaderView, FooterView, NavigationView, SettingsView) {
         return Marionette.View.extend({
-            template: templates['rootTemplate'],
+            template: templates['layout/rootTemplate'],
             regions: {
                 header: {
                     el: 'header > div',

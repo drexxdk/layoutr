@@ -3,7 +3,7 @@ var layoutr = layoutr || {};
 
 define(['marionette'], function (Marionette) {
     return Marionette.View.extend({
-        template: templates['navigationTemplate'],
+        template: templates['layout/navigationTemplate'],
         onRender: function () {
             app.navigationTree = this.$el.find('.tree');
             app.navigation = JSON.parse(localStorage.getItem("navigation"));

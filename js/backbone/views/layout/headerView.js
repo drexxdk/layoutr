@@ -1,6 +1,6 @@
 ﻿define(['marionette'], function (Marionette) {
     return Marionette.View.extend({
-        template: templates['headerTemplate'],
+        template: templates['layout/headerTemplate'],
         events: {
             'click .aside.left': 'toggleNavigation',
             'click .aside.right': 'toggleSettings'

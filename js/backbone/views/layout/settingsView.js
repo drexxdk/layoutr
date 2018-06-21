@@ -1,6 +1,6 @@
 ﻿define(['marionette'], function (Marionette) {
     return Marionette.View.extend({
-        template: templates['settingsTemplate'],
+        template: templates['layout/settingsTemplate'],
         onRender: function () {
             $.each(app.settings, function (i, entry) {
                 app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
