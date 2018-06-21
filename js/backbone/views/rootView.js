@@ -1,4 +1,5 @@
 ﻿var app = app || {};
+var layoutr = layoutr || {};
 
 define(['marionette', 'views/headerView', 'views/footerView', 'views/navigationView', 'views/settingsView'],
     function (Marionette, HeaderView, FooterView, NavigationView, SettingsView) {
@@ -45,18 +46,30 @@ define(['marionette', 'views/headerView', 'views/footerView', 'views/navigationV
             events: {
                 'click #cookie-accept': 'cookieAccept'
             },
-            showHome() {
-                var $this = this;
-                require(['views/homeView'],
-                    function (HomeView) {
-                        $this.showChildView('content', new HomeView());
-                        app.pageLoaded(app.initial);
-                    }
-                );
-            },
+            //showHome() {
+            //    var $this = this;
+            //    require(['views/homeView'],
+            //        function (View) {
+            //            $this.showChildView('content', new View());
+            //            app.pageLoaded(app.initial);
+            //        }
+            //    );
+            //},
             showPage(page) {
-                debugger;
-                //this.showChildView('main', new IndexView(page));
+                require(['views/pageView', 'models/pageModel'], function (View, Model) {
+                    var data = { };
+                    if (page === null) {
+                        data['title'] = 'Home';
+                    } else {
+                        data['title'] = page;
+                    }
+                    
+                    var model = new Model(data);
+                    var view = new View({ model: model });
+
+                    layoutr.rootView.showChildView('content', view);
+                    app.pageLoaded(app.initial);
+                });
             },
             checkCookie() {
                 var cookie = localStorage.getItem("cookie");
