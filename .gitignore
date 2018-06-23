@@ -1,3 +1,4 @@
+.gitignore
 bin/
 obj/
 .vs/
@@ -7,4 +8,4 @@ Properties/
 *.csproj
 *.csproj.user
 dist/css/theme/light.css
-node_modules/
+node_modules

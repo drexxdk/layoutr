@@ -753,7 +753,7 @@ var app = app || {};
 
 app.variables = function () {
     app.main = $('main');
-    app.content = $('#content > div');
+    app.content = $('#content');
     app.header = $('header');
     app.footer = $('footer');
     app.left = $('#left');
@@ -1646,7 +1646,7 @@ app.checkModal = function () {
         app.body.children('.popup').css('margin-right', 0);
     }
 
-    var contentHeader = app.content.children('.content-header:not(.full)');
+    var contentHeader = app.content.find('> div > .content-header:not(.full)');
     if (contentHeader.length) {
         if (app.isModal() && contentHeader.css('position') === 'fixed') {
             var halfOverflowY = app.scrollbarWidth / 2;

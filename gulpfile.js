@@ -43,7 +43,9 @@ gulp.task('templates', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(config.templatesDir, ['templates'])
+    //gulp.watch(config.templatesDir, ['templates'])
+
+    gulp.watch(config.templatesDir, ['templates']);
 });
 
 gulp.task('default', ['templates', 'watch']);

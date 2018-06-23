@@ -3,7 +3,7 @@
 define(['marionette'], function (Marionette) {
     return Marionette.View.extend({
         template: templates['pageTemplate'],
-        onRender() {
+        onAttach() {
             app.pageLoaded(app.initial);
         }
     });

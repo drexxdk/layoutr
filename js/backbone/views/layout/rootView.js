@@ -51,7 +51,7 @@ define([
                     replaceElement: true
                 }
             },
-            onRender() {
+            onAttach() {
                 app.variables();
 
                 app.loading = this.$el.find('#loading');
@@ -89,19 +89,19 @@ define([
                                 value: 'dist/img/rb/wonder-woman'
                             },
                             {
-                                name: 'rb-image-filetype',
+                                name: 'data-rb-image-filetype',
                                 value: 'jpg'
                             },
                             {
-                                name: 'rb-sizes',
+                                name: 'data-rb-sizes',
                                 value: '800,1024,1200,1920,3840'
                             },
                             {
-                                name: 'rb-aspect-ratio',
+                                name: 'data-rb-aspect-ratio',
                                 value: '16by9'
                             },
                             {
-                                name: 'rb-current',
+                                name: 'data-rb-current',
                                 value: '800'
                             },
                             {

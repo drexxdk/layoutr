@@ -32,7 +32,7 @@ app.checkModal = function () {
         app.body.children('.popup').css('margin-right', 0);
     }
 
-    var contentHeader = app.content.children('.content-header:not(.full)');
+    var contentHeader = app.content.find('> div > .content-header:not(.full)');
     if (contentHeader.length) {
         if (app.isModal() && contentHeader.css('position') === 'fixed') {
             var halfOverflowY = app.scrollbarWidth / 2;

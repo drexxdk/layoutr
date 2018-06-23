@@ -2,7 +2,7 @@
 
 app.variables = function () {
     app.main = $('main');
-    app.content = $('#content > div');
+    app.content = $('#content');
     app.header = $('header');
     app.footer = $('footer');
     app.left = $('#left');
