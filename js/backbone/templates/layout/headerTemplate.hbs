@@ -6,7 +6,9 @@
         <svg focusable="false"><use xlink:href="#svg-logo"></use></svg>
         <span>layoutr</span>
     </a>
-    <span id="title"></span>
+    {{#if title}}
+    <span id="title">{{title}}</span>
+    {{/if}}
 </h1>
 <div id="authentication">
     <div class="unauthenticated">

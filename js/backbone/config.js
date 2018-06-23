@@ -31,9 +31,3 @@ define("jquery", [],
         return window.$;
     }
 );
-
-//define("handlebars", [],
-//    function () {
-//        return Handlebars;
-//    }
-//);

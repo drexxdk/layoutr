@@ -1,8 +1,32 @@
 ﻿var app = app || {};
 var layoutr = layoutr || {};
 
-define(['marionette', 'views/layout/headerView', 'views/layout/footerView', 'views/layout/navigationView', 'views/layout/settingsView'],
-    function (Marionette, HeaderView, FooterView, NavigationView, SettingsView) {
+define([
+    'marionette',
+    'views/layout/headerView',
+    'models/layout/headerModel',
+    'views/layout/footerView',
+    'models/layout/footerModel',
+    'views/layout/navigationView',
+    'models/layout/navigationModel',
+    'views/layout/settingsView',
+    'models/layout/settingsModel',
+    'views/pageView',
+    'models/pageModel'
+],
+    function (
+        Marionette,
+        HeaderView,
+        HeaderModel,
+        FooterView,
+        FooterModel,
+        NavigationView,
+        NavigationModel,
+        SettingsView,
+        SettingsModel,
+        PageView,
+        PageModel
+    ) {
         return Marionette.View.extend({
             template: templates['layout/rootTemplate'],
             regions: {
@@ -38,38 +62,100 @@ define(['marionette', 'views/layout/headerView', 'views/layout/footerView', 'vie
 
                 this.checkCookie();
 
-                this.showChildView('header', new HeaderView());
-                this.showChildView('footer', new FooterView());
-                this.showChildView('navigation', new NavigationView());
-                this.showChildView('settings', new SettingsView());
+                layoutr.header = new HeaderView({ model: new HeaderModel() });
+                this.showChildView('header', layoutr.header);
+
+                layoutr.footer = new FooterView({ model: new FooterModel() });
+                this.showChildView('footer', layoutr.footer);
+                
+                layoutr.navigation = new NavigationView({ model: new NavigationModel(api.navigation) });
+                this.showChildView('navigation', layoutr.navigation);
+
+                layoutr.settings = new SettingsView({ model: new SettingsModel() });
+                this.showChildView('settings', layoutr.settings);
             },
             events: {
                 'click #cookie-accept': 'cookieAccept'
             },
-            //showHome() {
-            //    var $this = this;
-            //    require(['views/homeView'],
-            //        function (View) {
-            //            $this.showChildView('content', new View());
-            //            app.pageLoaded(app.initial);
-            //        }
-            //    );
-            //},
             showPage(page) {
-                require(['views/pageView', 'models/pageModel'], function (View, Model) {
-                    var data = { };
-                    if (page === null) {
-                        data['title'] = 'Home';
-                    } else {
-                        data['title'] = page;
+                var data = {};
+                if (page === null) {
+                    data['title'] = 'Home';
+                    data['contentHeader'] = {
+                        class: 'overlay-dark rb',
+                        'attributes': [
+                            {
+                                name: 'data-rb-image',
+                                value: 'dist/img/rb/wonder-woman'
+                            },
+                            {
+                                name: 'rb-image-filetype',
+                                value: 'jpg'
+                            },
+                            {
+                                name: 'rb-sizes',
+                                value: '800,1024,1200,1920,3840'
+                            },
+                            {
+                                name: 'rb-aspect-ratio',
+                                value: '16by9'
+                            },
+                            {
+                                name: 'rb-current',
+                                value: '800'
+                            },
+                            {
+                                name: 'style',
+                                value: 'background-position: center 36%; background-image:url(dist/img/rb/wonder-woman-800.jpg)'
+                            },
+                        ],
+                        title: 'Wonder Woman',
+                        author: 'DC Comics',
+                        position: [
+                            {
+                                class: 'bottom left',
+                                children: [
+                                    {
+                                        class: '',
+                                        text: 'test'
+                                    }
+                                ]
+                            },
+                            {
+                                class: 'bottom right',
+                                children: [
+                                    {
+                                        class: '',
+                                        text: 'test'
+                                    }
+                                ]
+                            },
+                            {
+                                class: 'top left',
+                                children: [
+                                    {
+                                        class: '',
+                                        text: 'test'
+                                    }
+                                ]
+                            },
+                            {
+                                class: 'top right',
+                                children: [
+                                    {
+                                        class: '',
+                                        text: 'test'
+                                    }
+                                ]
+                            }
+                        ]
                     }
-                    
-                    var model = new Model(data);
-                    var view = new View({ model: model });
-
-                    layoutr.rootView.showChildView('content', view);
-                    app.pageLoaded(app.initial);
-                });
+                } else {
+                    data['title'] = page;
+                }
+                layoutr.header.model.set('title', data.title);
+                
+                layoutr.rootView.showChildView('content', new PageView({ model: new PageModel(data) }));
             },
             checkCookie() {
                 var cookie = localStorage.getItem("cookie");

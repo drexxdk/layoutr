@@ -4,6 +4,9 @@ var layoutr = layoutr || {};
 define(['marionette'], function (Marionette) {
     return Marionette.View.extend({
         template: templates['layout/navigationTemplate'],
+        modelEvents: {
+            'change': 'render'
+        },
         onRender: function () {
             app.navigationTree = this.$el.find('.tree');
             app.navigation = JSON.parse(localStorage.getItem("navigation"));

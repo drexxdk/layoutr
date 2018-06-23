@@ -4,39 +4,26 @@
 </section>
 <section>
     <ul class="tree">
-        <li><a href="" class="label">Home</a></li>
-        <li><a href="page/cover-and-two-content" class="label">Cover + two content</a></li>
-        <li><a href="page/cover" class="label">Cover</a></li>
-        <li><a href="page/two-content" class="label">Two content</a></li>
-        <li><a href="page/full-width-content" class="label">Full width content</a></li>
+        {{#each this}}
+        {{> "layout/navigation/_linkTemplate" this }}
+        {{#if (eq type 'list')}}
         <li>
-            <input type="checkbox" id="c1" />
-            <label class="label toggle" tabindex="0" for="c1">
+            <input type="checkbox" id="c{{@index}}" />
+            <label class="label toggle" tabindex="0" for="c{{@index}}">
                 <i>
                     <svg focusable="false"><use xlink:href="#svg-plus"></use></svg>
                     <svg focusable="false"><use xlink:href="#svg-minus"></use></svg>
                 </i>
-                <span>Components</span>
+                <span>{{title}}</span>
             </label>
             <ul>
-                <li><a href="accordion" class="label">Accordion</a></li>
-                <li><a href="alert" class="label">Alert</a></li>
-                <li><a href="datatables" class="label">DataTables</a></li>
-                <li><a href="headline" class="label">Headline</a></li>
-                <li><a href="img" class="label">Img</a></li>
-                <li><a href="map" class="label">Map</a></li>
-                <li><a href="math" class="label">Math</a></li>
-                <li><a href="media" class="label">Media</a></li>
-                <li><a href="modal" class="label">Modal</a></li>
-                <li><a href="list" class="label">List</a></li>
-                <li><a href="percentage" class="label">Percentage</a></li>
-                <li><a href="popup" class="label">Popup</a></li>
-                <li><a href="progress" class="label">Progress</a></li>
-                <li><a href="quote" class="label">Quote</a></li>
-                <li><a href="table" class="label">Table</a></li>
-                <li><a href="tooltip" class="label">Tooltip</a></li>
+                {{#each list}}
+                {{> "layout/navigation/_linkTemplate" this }}
+                {{/each}}
             </ul>
         </li>
+        {{/if}}
+        {{/each}}
         <li>
             <input type="checkbox" id="c11" />
             <label class="label toggle" tabindex="0" for="c11">

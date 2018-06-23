@@ -58,6 +58,9 @@
       // site
       "js/app/site/form.js",
 
+      // fake api
+      "js/app/api/navigation.js",
+
       "js/vendors/backbone/require.js",
       "js/backbone/app.js"
 
