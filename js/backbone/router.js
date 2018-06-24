@@ -24,6 +24,9 @@ define(['marionette', 'controller', 'backbone'],
             appRoutes: {
                 '': 'page',
                 'page/:id': 'page',
+                'assignment/:id': 'page',
+                'component/:id': 'page',
+                'input/:id': 'page'
             },
             initialize: function (options) {
                 this.controller = new Controller(options);
