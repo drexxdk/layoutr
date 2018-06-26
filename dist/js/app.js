@@ -2396,7 +2396,7 @@ app.datatables = function (tables) {
 
                         table_dropdowns(wrapper);
                         responsiveFix(table);
-
+                        
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
                             responsiveFix(table);

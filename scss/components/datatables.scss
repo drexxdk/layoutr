@@ -40,10 +40,14 @@
             display: table;
             width: 100% !important;
 
+            thead tr > * {
+                padding: 0;
+            }
+
             thead {
                 th {
 
-                    &:focus {
+                    &:focus > div {
                         @include focus;
                     }
 
@@ -51,6 +55,7 @@
                         @include flex-display;
                         @include flex-direction(column);
                         flex-grow: 1;
+                        padding: $padding-y $padding-x;
 
                         > div {
                             @include flex-display;
@@ -189,6 +194,7 @@
 
             &.dtr-inline:not(.collapsed) > tbody tr i {
                 display: none;
+                tab-index: none; // chrome
             }
         }
     }
