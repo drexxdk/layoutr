@@ -1962,6 +1962,7 @@ app.dropdown = function (dropdowns) {
             selected = $this.children().first();
         }
         html.push('<div class="dropdown' +
+            ($this.hasClass('not-first') ? ' not-first' : '') +
             ($this.hasClass('nowrap') ? ' nowrap' : '') +
             ($this.hasClass('check') ? ' check' : '') +
             ($this.hasClass('ellipsis') ? ' ellipsis' : '') +

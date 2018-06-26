@@ -69,7 +69,7 @@
             }
         }
 
-        html.desktop &:focus {
+        &:focus {
             @include focus;
         }
 

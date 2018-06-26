@@ -58,10 +58,12 @@
             }
         }
 
-        &:not(.check) {
-            ul svg {
-                display: none;
-            }
+        &:not(.check) ul svg {
+            display: none;
+        }
+
+        &.not-first > ul > li:first-child {
+            display: none;
         }
 
         &.direction-up {
@@ -173,14 +175,9 @@
                     }
                 }
 
-                &.selected > div {
-                    background-color: white;
-                    cursor: default;
-
-                    > svg {
-                        fill: $success;
-                        opacity: 1 !important;
-                    }
+                &.selected > div > svg {
+                    fill: $success;
+                    opacity: 1 !important;
                 }
 
                 & + li {
