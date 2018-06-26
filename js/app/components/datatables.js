@@ -91,7 +91,9 @@ app.datatables = function (tables) {
             }
             function table_content(wrapper, content) {
                 let table = wrapper.find('table');
+
                 content.append(table);
+                return table;
             }
             function table_footer_info(wrapper, footer) {
                 let info = wrapper.find('.dataTables_info');
@@ -118,6 +120,12 @@ app.datatables = function (tables) {
             function table_dropdowns(wrapper) {
                 let dropdowns = wrapper.find('select.dropdown');
                 app.dropdown(dropdowns);
+            }
+            function responsiveFix(table) {
+                let elements = table.find('tbody tr > *:first-child');
+                if (!elements.children('i').length) {
+                    elements.removeAttr('tabindex').prepend('<i tabindex="0"><svg focusable="false"><use xlink:href="#svg-plus"></use></svg><svg focusable="false"><use xlink:href="#svg-minus"></use></svg></i>');
+                }
             }
 
             tables.each(function () {
@@ -150,7 +158,7 @@ app.datatables = function (tables) {
                         table_header_buttons(wrapper, header);
                         table_header_filter(wrapper, header);
 
-                        table_content(wrapper, content);
+                        let table = table_content(wrapper, content);
 
                         table_footer_info(wrapper, footer);
 
@@ -158,9 +166,11 @@ app.datatables = function (tables) {
                         table_footer_paginate(wrapper, footer, paginate);
 
                         table_dropdowns(wrapper);
+                        responsiveFix(table);
 
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
+                            responsiveFix(table);
                         });
                     }
                 });
