@@ -177,6 +177,7 @@
                 width: $font-size;
                 height: $font-size;
                 flex-shrink: 0;
+                opacity: $opacity-inactive;
             }
 
             & + .form-control {
