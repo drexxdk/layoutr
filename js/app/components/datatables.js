@@ -162,6 +162,8 @@ app.datatables = function (tables) {
 
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
+                            var columns = instance.columns().responsiveHidden();
+                            $this.trigger('responsive-resize.dt', [this, columns]);
                         });
 
 
