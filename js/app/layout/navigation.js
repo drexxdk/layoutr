@@ -39,8 +39,10 @@ app.loadPage = function (url, pushState, initial) {
 };
 
 app.internalLinkClick = function (href, e) {
-    e.preventDefault();
-    app.loadPage(href, true, false);
+    if (!e.ctrlKey) {
+        e.preventDefault();
+        app.loadPage(href, true, false);
+    }
 };
 
 (function (l) {
