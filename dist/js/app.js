@@ -2320,7 +2320,6 @@ app.datatables = function (tables) {
             }
             function table_content(wrapper, content) {
                 let table = wrapper.find('table');
-
                 content.append(table);
                 return table;
             }
@@ -2352,8 +2351,9 @@ app.datatables = function (tables) {
             }
             function responsiveFix(table) {
                 let elements = table.find('tbody tr > *:first-child');
+                elements.removeAttr('tabindex');
                 if (!elements.children('i').length) {
-                    elements.removeAttr('tabindex').prepend('<i tabindex="0"><svg focusable="false"><use xlink:href="#svg-plus"></use></svg><svg focusable="false"><use xlink:href="#svg-minus"></use></svg></i>');
+                    elements.prepend('<i tabindex="0"><svg focusable="false"><use xlink:href="#svg-plus"></use></svg><svg focusable="false"><use xlink:href="#svg-minus"></use></svg></i>');
                 }
             }
 
@@ -2401,6 +2401,7 @@ app.datatables = function (tables) {
                             paginateFix(paginate);
                             responsiveFix(table);
                         });
+
                     }
                 });
             });
