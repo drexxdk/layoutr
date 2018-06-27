@@ -191,11 +191,6 @@
                     }
                 }
             }
-
-            &.dtr-inline:not(.collapsed) > tbody tr i {
-                display: none;
-                tab-index: none; // chrome
-            }
         }
     }
 

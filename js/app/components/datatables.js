@@ -16,7 +16,7 @@ app.datatables = function (tables) {
                     let th = this.header(),
                         text = th.innerText,
                         column = $(th);
-                    
+
                     column.empty().append('<div><div><span>' + text + '</span></div>' + (elements.length ? '<div></div>' : '') + '</div>');
                     let index = column.index();
 
@@ -120,13 +120,6 @@ app.datatables = function (tables) {
                 let dropdowns = wrapper.find('select.dropdown');
                 app.dropdown(dropdowns);
             }
-            function responsiveFix(table) {
-                let elements = table.find('tbody tr > *:first-child');
-                elements.removeAttr('tabindex');
-                if (!elements.children('i').length) {
-                    elements.prepend('<i tabindex="0"><svg focusable="false"><use xlink:href="#svg-plus"></use></svg><svg focusable="false"><use xlink:href="#svg-minus"></use></svg></i>');
-                }
-            }
 
             tables.each(function () {
                 var $this = $(this);
@@ -166,11 +159,25 @@ app.datatables = function (tables) {
                         table_footer_paginate(wrapper, footer, paginate);
 
                         table_dropdowns(wrapper);
-                        responsiveFix(table);
-                        
+
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
-                            responsiveFix(table);
+                        });
+
+
+                        $this.on('responsive-resize.dt', function (e, datatable, columns) {
+                            var count = columns.reduce(function (a, b) {
+                                return b === false ? a + 1 : a;
+                            }, 0);
+
+                            let elements = table.find('tbody tr:not(.child) > *:first-child');
+                            elements.removeAttr('tabindex');
+
+                            if (count) {
+                                elements.prepend('<i tabindex="0"><svg focusable="false"><use xlink:href="#svg-plus"></use></svg><svg focusable="false"><use xlink:href="#svg-minus"></use></svg></i>');
+                            } else {
+                                elements.children('i').remove();
+                            }
                         });
 
                     }
