@@ -2022,7 +2022,6 @@ app.dropdown = function (dropdowns) {
             var bottomWidth = bottom.width();
             if (bottomWidth > topWidth) {
                 top.css('min-width', bottomWidth);
-                //debugger;
             }
         }
 
