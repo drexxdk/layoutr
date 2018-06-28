@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="transitions two-columns close-left-page-change left-overlay right-overlay" data-aside="" data-modal="" data-authentication="">
+<html lang="en" class="transitions two-columns close-left-page-change left-overlay right-overlay" data-aside="" data-modal="" data-authentication="" data-reading-ruler="">
 <head>
     <title>layoutr</title>
     <meta charset="utf-8" />
@@ -36,6 +36,12 @@
             <div class="rect4"></div>
             <div class="rect5"></div>
         </div>
+    </div>
+    <div id="reading-ruler">
+        <div class="component"><div></div></div>
+        <button type="button" class="btn theme-light close square circle small" aria-label="Close reading ruler">
+            <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
+        </button>
     </div>
     <div id="modal" tabindex="0"></div>
     <div id="cookie">
@@ -215,6 +221,6 @@
         <footer></footer>
     </main>
     <script async src="dist/js/loadCSS.min.js"></script>
-    <script async src="dist/js/app.min.js"></script>
+    <script async src="dist/js/app.js"></script>
 </body>
 </html>

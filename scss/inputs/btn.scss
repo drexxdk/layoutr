@@ -15,6 +15,29 @@
         z-index: $component-z-index;
         box-shadow: $box-shadow;
 
+        &.square {
+            padding: $padding-y;
+        }
+
+        &.circle {
+            border-radius: 50%;
+
+
+            &.small {
+                > i,
+                > svg {
+                    margin: 0;
+                }
+            }
+
+            &:not(.small) {
+                > i,
+                > svg {
+                    margin: #{(($component-line-height * $font-size) - $font-size) / 2};
+                }
+            }
+        }
+
         > span {
             max-width: 100%;
         }

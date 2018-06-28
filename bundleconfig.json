@@ -52,6 +52,7 @@
       "js/app/components/popup.js",
       "js/app/components/tooltip.js",
       "js/app/components/datatables.js",
+      "js/app/components/reading-ruler.js",
 
       // assignments
       "js/app/assignments/_assignments.js",
@@ -92,6 +93,13 @@
       "js/app/assignments/color.js",
       "js/app/assignments/dragAndDrop.js",
       "js/app/assignments/sort.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/js/reading-ruler.js",
+    "inputFiles": [
+      "js/vendors/jquery/ui/jquery-ui.min.js",
+      "js/vendors/jquery/ui/touch-punch.min.js"
     ]
   }
 ]

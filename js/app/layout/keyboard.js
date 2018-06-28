@@ -22,7 +22,9 @@ $(function () {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.isModal()) {
+                if (app.isReadingRuler()) {
+                    app.hideReadingRuler();
+                } else if (app.isModal()) {
                     app.closeModal();
                 } else {
                     if (app.isAside()) {

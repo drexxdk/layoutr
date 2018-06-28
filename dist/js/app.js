@@ -840,6 +840,10 @@ app.isModalImage = function () {
     return app.html.attr('data-modal') === 'image';
 };
 
+app.isReadingRuler = function () {
+    return app.html.hasClass('reading-ruler');
+}
+
 app.isAuthentication = function () {
     return app.html.attr('data-authentication') !== '';
 };
@@ -1504,12 +1508,11 @@ app.applySettings = function (id, name, type, value, set) {
         localStorage.setItem('settings', JSON.stringify(app.settings));
     } else {
         if (type === "checkbox" || type === "radio") {
-            app.right.find('#' + id).prop('checked', value);
+            app.right.find('#settings-' + id).prop('checked', value);
         } else if (type === "slider") {
-            app.right.find('#' + id).slider('setValue', value);
+            app.right.find('#settings-' + id).slider('setValue', value);
         }
     }
-
     if (type === 'checkbox' || type === "radio") {
         if (type === 'radio') {
             $.each(app.right.find('input[type=radio][name=' + name + ']:not(#' + id + ')'), function (i, radio) {
@@ -1521,7 +1524,7 @@ app.applySettings = function (id, name, type, value, set) {
             var href = stylesheet.attr('href');
             var split1 = href.split('/');
             var split2 = split1[split1.length - 1].split('.');
-            var href = [];
+            href = [];
             for (i = 0; i < split1.length - 1; i++) {
                 href.push(split1[i] + '/');
             }
@@ -1533,6 +1536,11 @@ app.applySettings = function (id, name, type, value, set) {
             }
             href = href.join("");
             stylesheet.attr('href', href);
+        }
+        if (name === 'reading-ruler') {
+            if (value) {
+                app.readingRuler();
+            }
         }
         if (value) {
             app.html.addClass(id);
@@ -1556,8 +1564,8 @@ $(function () {
         app.header.find('.aside.right').addClass('loaded');
         $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
             var $this = $(this),
-                id = $this.attr('id'),
-                name = $this.attr('name'),
+                id = $this.attr('id').replace('settings-', ''),
+                name = $this.attr('name').replace('settings-', ''),
                 type = $this.attr('type'),
                 value = $this.is(':checked');
             app.applySettings(id, name, type, value, true);
@@ -1570,7 +1578,7 @@ $(function () {
         app.responsiveHeader();
     });
 
-    app.right.on('click', '#clear-localstorage', function () {
+    app.right.on('click', '#settings-clear-localstorage', function () {
         localStorage.clear();
         location.reload();
     });
@@ -1599,7 +1607,9 @@ $(function () {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.isModal()) {
+                if (app.isReadingRuler()) {
+                    app.hideReadingRuler();
+                } else if (app.isModal()) {
                     app.closeModal();
                 } else {
                     if (app.isAside()) {
@@ -2418,6 +2428,30 @@ app.datatables = function (tables) {
             });
         });
     }
+};
+var app = app || {};
+
+app.readingRuler = function () {
+    $.getScript('dist/js/reading-ruler.min.js', function () {
+        var readingRuler = $("#reading-ruler");
+        readingRuler.find('> .component > div')
+            .draggable({
+                axis: "y",
+                containment: "parent"
+            })
+            .resizable({ handles: "n, s", containment: "parent" });
+
+        readingRuler.on('click', '.close', function () {
+            app.hideReadingRuler();
+        });
+    });
+};
+
+app.showReadingRuler = function () {
+    app.html.attr('data-reading-ruler', true);
+};
+app.hideReadingRuler = function () {
+    app.html.attr('data-reading-ruler', false);
 };
 var app = app || {};
 

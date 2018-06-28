@@ -1,0 +1,94 @@
+﻿/// <reference path="../references" />
+
+#reading-ruler {
+    $reading-line-spacer: rem(50px);
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $reading-ruler-z-index;
+    display: none;
+
+    html[data-reading-ruler="true"].reading-ruler & {
+        display: block;
+    }
+
+    > .component {
+        position: absolute;
+        top: $reading-line-spacer;
+        bottom: $reading-line-spacer;
+        left: 0;
+        right: 0;
+
+        > div {
+            position: absolute;
+            top: calc(50% - #{$reading-line-spacer});
+            left: 0;
+            right: 0;
+            flex-shrink: 0;
+            min-height: 50px;
+            height: 100px;
+            max-height: 50vh;
+            cursor: move;
+
+            &:before,
+            &:after {
+                content: "";
+                position: absolute;
+                height: 100vh;
+                left: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.8);
+                pointer-events: none;
+            }
+
+            &:before {
+                bottom: 100%;
+            }
+
+            &:after {
+                top: 100%;
+            }
+        }
+    }
+
+    > .close {
+        position: absolute;
+        top: $reading-line-spacer / 2;
+        right: $reading-line-spacer / 2;
+        @include transform(translate(50%, -50%));
+    }
+
+    .ui-resizable-handle {
+        position: absolute;
+        cursor: row-resize;
+        height: 40px;
+        width: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            @include transform(translate(-50%, -50%));
+            width: 20px;
+            height: 20px;
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4gIDxwYXRoIGZpbGw9IndoaXRlIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xLDQgTDE5LDQgQzE5LjU1MjI4NDcsNCAyMCw0LjQ0NzcxNTI1IDIwLDUgQzIwLDUuNTUyMjg0NzUgMTkuNTUyMjg0Nyw2IDE5LDYgTDEsNiBDMC40NDc3MTUyNSw2IDYuNzYzNTM3NTFlLTE3LDUuNTUyMjg0NzUgMCw1IEMtNi43NjM1Mzc1MWUtMTcsNC40NDc3MTUyNSAwLjQ0NzcxNTI1LDQgMSw0IFogTTEsOSBMMTksOSBDMTkuNTUyMjg0Nyw5IDIwLDkuNDQ3NzE1MjUgMjAsMTAgQzIwLDEwLjU1MjI4NDcgMTkuNTUyMjg0NywxMSAxOSwxMSBMMSwxMSBDMC40NDc3MTUyNSwxMSA2Ljc2MzUzNzUxZS0xNywxMC41NTIyODQ3IDAsMTAgQy02Ljc2MzUzNzUxZS0xNyw5LjQ0NzcxNTI1IDAuNDQ3NzE1MjUsOSAxLDkgWiBNMSwxNCBMMTksMTQgQzE5LjU1MjI4NDcsMTQgMjAsMTQuNDQ3NzE1MyAyMCwxNSBDMjAsMTUuNTUyMjg0NyAxOS41NTIyODQ3LDE2IDE5LDE2IEwxLDE2IEMwLjQ0NzcxNTI1LDE2IDYuNzYzNTM3NTFlLTE3LDE1LjU1MjI4NDcgMCwxNSBDLTYuNzYzNTM3NTFlLTE3LDE0LjQ0NzcxNTMgMC40NDc3MTUyNSwxNCAxLDE0IFoiLz48L3N2Zz4=);
+            background-size: 20px 20px;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        &.ui-resizable-n {
+            bottom: 100%;
+        }
+
+        &.ui-resizable-s {
+            top: 100%;
+        }
+    }
+}
