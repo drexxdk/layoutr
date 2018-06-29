@@ -54,7 +54,7 @@ app.isModalImage = function () {
 };
 
 app.isReadingRuler = function () {
-    return app.html.hasClass('reading-ruler');
+    return app.html.hasClass('reading-ruler') && app.html.attr('data-reading-ruler') === 'true';
 }
 
 app.isAuthentication = function () {
