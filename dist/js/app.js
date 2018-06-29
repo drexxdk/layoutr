@@ -770,6 +770,7 @@ $(function () {
     app.authenticated = app.authentication.children('.authenticated');
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
     app.cookie = $('#cookie');
+    app.readingRuler = $('#reading-ruler');
 
     app.cssInterval = 50;
     app.transitionTime = 400;
@@ -1541,7 +1542,7 @@ app.applySettings = function (id, name, type, value, set) {
         }
         if (name === 'reading-ruler') {
             if (value) {
-                app.readingRuler();
+                app.enableReadingRuler();
             }
         }
         if (value) {
@@ -1647,7 +1648,7 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (!app.isLoading()) {
+        if (!app.isLoading() && !app.isReadingRuler()) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {
@@ -2432,9 +2433,8 @@ app.datatables = function (tables) {
 };
 var app = app || {};
 
-app.readingRuler = function () {
-    let readingRuler = $("#reading-ruler"),
-        component = readingRuler.find('> .component > div');
+app.enableReadingRuler = function () {
+    let component = app.readingRuler.find('> .component > div');
 
     $.getScript('dist/js/reading-ruler.min.js', function () {
         component
@@ -2453,7 +2453,7 @@ app.readingRuler = function () {
                 e.stopPropagation();
             });
 
-        readingRuler.on('click', '.close', function () {
+        app.readingRuler.on('click', '.close', function () {
             app.hideReadingRuler();
         });
 
@@ -2473,9 +2473,11 @@ app.readingRuler = function () {
 
 app.showReadingRuler = function () {
     app.html.attr('data-reading-ruler', true);
+    app.readingRuler.focus();
 };
 app.hideReadingRuler = function () {
     app.html.attr('data-reading-ruler', false);
+    app.main.focus();
 };
 var app = app || {};
 

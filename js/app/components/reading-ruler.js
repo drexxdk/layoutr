@@ -1,8 +1,7 @@
 ﻿var app = app || {};
 
-app.readingRuler = function () {
-    let readingRuler = $("#reading-ruler"),
-        component = readingRuler.find('> .component > div');
+app.enableReadingRuler = function () {
+    let component = app.readingRuler.find('> .component > div');
 
     $.getScript('dist/js/reading-ruler.min.js', function () {
         component
@@ -21,7 +20,7 @@ app.readingRuler = function () {
                 e.stopPropagation();
             });
 
-        readingRuler.on('click', '.close', function () {
+        app.readingRuler.on('click', '.close', function () {
             app.hideReadingRuler();
         });
 
@@ -41,7 +40,9 @@ app.readingRuler = function () {
 
 app.showReadingRuler = function () {
     app.html.attr('data-reading-ruler', true);
+    app.readingRuler.focus();
 };
 app.hideReadingRuler = function () {
     app.html.attr('data-reading-ruler', false);
+    app.main.focus();
 };

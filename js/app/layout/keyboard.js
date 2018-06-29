@@ -60,7 +60,7 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (!app.isLoading()) {
+        if (!app.isLoading() && !app.isReadingRuler()) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {

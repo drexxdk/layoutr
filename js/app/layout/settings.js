@@ -51,7 +51,7 @@ app.applySettings = function (id, name, type, value, set) {
         }
         if (name === 'reading-ruler') {
             if (value) {
-                app.readingRuler();
+                app.enableReadingRuler();
             }
         }
         if (value) {
