@@ -2433,7 +2433,7 @@ app.datatables = function (tables) {
 var app = app || {};
 
 app.readingRuler = function () {
-    var readingRuler = $("#reading-ruler"),
+    let readingRuler = $("#reading-ruler"),
         component = readingRuler.find('> .component > div');
 
     $.getScript('dist/js/reading-ruler.min.js', function () {
@@ -2461,7 +2461,11 @@ app.readingRuler = function () {
             app.showReadingRuler();
         });
 
+        let height = $(window).height(); 
         $(window).resize(function () {
+            // do nothing if the height is the same
+            if ($(window).height() == height) return;
+            height = $(window).height();
             component.removeAttr('style');
         });
     });
