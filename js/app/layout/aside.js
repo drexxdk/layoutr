@@ -40,11 +40,11 @@ app.toggleAside = function (aside, pageChanged) {
 };
 
 $(function () {
-    $('.aside.left').click(function () {
+    app.main.find('.aside.left').click(function () {
         app.toggleAside('left');
     });
 
-    $('.aside.right').click(function () {
+    app.main.find('.aside.right').click(function () {
         app.toggleAside('right');
     });
 });

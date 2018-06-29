@@ -1,5 +1,33 @@
 ﻿/// <reference path="../references" />
 
+
+html.reading-ruler {
+
+    &[data-reading-ruler="true"] {
+        body,
+        aside .content > div * {
+            pointer-events: none;
+        }
+
+        aside .content {
+            pointer-events: all;
+        }
+
+        #reading-ruler {
+            display: block;
+        }
+    }
+
+    header .reading-ruler {
+        display: block;
+    }
+}
+
+header .reading-ruler,
+#reading-ruler {
+    display: none;
+}
+
 #reading-ruler {
     $reading-line-spacer: rem(50px);
 
@@ -9,7 +37,7 @@
     left: 0;
     right: 0;
     z-index: $reading-ruler-z-index;
-    display: none;
+    pointer-events: none;
 
     html[data-reading-ruler="true"].reading-ruler & {
         display: block;
@@ -31,7 +59,6 @@
             min-height: 50px;
             height: 100px;
             max-height: 50vh;
-            cursor: move;
 
             &:before,
             &:after {
@@ -40,7 +67,7 @@
                 height: 100vh;
                 left: 0;
                 right: 0;
-                background-color: rgba(0, 0, 0, 0.8);
+                background-color: rgba($black, 0.8);
                 pointer-events: none;
             }
 
@@ -54,41 +81,39 @@
         }
     }
 
-    > .close {
+    .close {
         position: absolute;
         top: $reading-line-spacer / 2;
         right: $reading-line-spacer / 2;
         @include transform(translate(50%, -50%));
+        pointer-events: all;
     }
 
-    .ui-resizable-handle {
+    .move {
         position: absolute;
-        cursor: row-resize;
-        height: 40px;
-        width: 60px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: $reading-line-spacer / 2;
+        bottom: calc(100% + #{$reading-line-spacer / 2});
+        @include transform(translate(-50%, 50%));
+        pointer-events: all;
+    }
 
-        &:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            @include transform(translate(-50%, -50%));
-            width: 20px;
-            height: 20px;
-            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4gIDxwYXRoIGZpbGw9IndoaXRlIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xLDQgTDE5LDQgQzE5LjU1MjI4NDcsNCAyMCw0LjQ0NzcxNTI1IDIwLDUgQzIwLDUuNTUyMjg0NzUgMTkuNTUyMjg0Nyw2IDE5LDYgTDEsNiBDMC40NDc3MTUyNSw2IDYuNzYzNTM3NTFlLTE3LDUuNTUyMjg0NzUgMCw1IEMtNi43NjM1Mzc1MWUtMTcsNC40NDc3MTUyNSAwLjQ0NzcxNTI1LDQgMSw0IFogTTEsOSBMMTksOSBDMTkuNTUyMjg0Nyw5IDIwLDkuNDQ3NzE1MjUgMjAsMTAgQzIwLDEwLjU1MjI4NDcgMTkuNTUyMjg0NywxMSAxOSwxMSBMMSwxMSBDMC40NDc3MTUyNSwxMSA2Ljc2MzUzNzUxZS0xNywxMC41NTIyODQ3IDAsMTAgQy02Ljc2MzUzNzUxZS0xNyw5LjQ0NzcxNTI1IDAuNDQ3NzE1MjUsOSAxLDkgWiBNMSwxNCBMMTksMTQgQzE5LjU1MjI4NDcsMTQgMjAsMTQuNDQ3NzE1MyAyMCwxNSBDMjAsMTUuNTUyMjg0NyAxOS41NTIyODQ3LDE2IDE5LDE2IEwxLDE2IEMwLjQ0NzcxNTI1LDE2IDYuNzYzNTM3NTFlLTE3LDE1LjU1MjI4NDcgMCwxNSBDLTYuNzYzNTM3NTFlLTE3LDE0LjQ0NzcxNTMgMC40NDc3MTUyNSwxNCAxLDE0IFoiLz48L3N2Zz4=);
-            background-size: 20px 20px;
-            background-position: center center;
-            background-repeat: no-repeat;
-        }
+    .resize {
+        position: absolute;
+        left: 50%;
+        @include transform(translateX(-50%));
+        pointer-events: all;
+        z-index: 1;
 
         &.ui-resizable-n {
             bottom: 100%;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
         }
 
         &.ui-resizable-s {
             top: 100%;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
     }
 }

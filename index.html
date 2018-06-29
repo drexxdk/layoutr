@@ -23,7 +23,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'UA-99633521-2');
     </script>
 </head>
@@ -38,7 +37,19 @@
         </div>
     </div>
     <div id="reading-ruler">
-        <div class="component"><div></div></div>
+        <div class="component">
+            <div>
+                <div tabindex="0" class="btn theme-light move square circle small" aria-label="Move reading ruler">
+                    <svg focusable="false"><use xlink:href="#svg-move"></use></svg>
+                </div>
+                <div class="btn theme-light resize small ui-resizable-n">
+                    <svg focusable="false"><use xlink:href="#svg-row-resize-n"></use></svg>
+                </div>
+                <div class="btn theme-light resize small ui-resizable-s">
+                    <svg focusable="false"><use xlink:href="#svg-row-resize-s"></use></svg>
+                </div>
+            </div>
+        </div>
         <button type="button" class="btn theme-light close square circle small" aria-label="Close reading ruler">
             <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
         </button>
@@ -185,6 +196,9 @@
                     </div>
                 </div>
             </div>
+            <button type="button" class="expand reading-ruler" aria-label="Reading ruler">
+                <svg focusable="false"><use xlink:href="#svg-reading-ruler"></use></svg>
+            </button>
             <button type="button" class="expand aside right" aria-label="Toggle settings">
                 <svg focusable="false"><use xlink:href="#svg-settings"></use></svg>
             </button>
