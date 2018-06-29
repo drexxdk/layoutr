@@ -27,8 +27,8 @@ app.applySettings = function (id, name, type, value, set) {
     }
     if (type === 'checkbox' || type === "radio") {
         if (type === 'radio') {
-            $.each(app.right.find('input[type=radio][name=' + name + ']:not(#' + id + ')'), function (i, radio) {
-                app.html.removeClass($(radio).attr('id'));
+            $.each(app.right.find('input[type=radio][name="settings-' + name + '"]:not(#settings-' + id + ')'), function (i, radio) {
+                app.html.removeClass($(radio).attr('id').replace('settings-', ''));
             });
         }
         if (name === 'theme') {
