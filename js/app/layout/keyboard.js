@@ -23,7 +23,7 @@ $(function () {
                 }
             } else if (e.which === 27) { // esc
                 if (app.tts !== undefined && app.tts.IsSpeaking()) {
-                    app.tts.ShutUp();
+                    app.stopTTS();
                 } else if (app.isFocus()) {
                     app.hideFocus();
                 } else if (app.isModal()) {
