@@ -1,9 +1,9 @@
 ﻿var app = app || {};
 
-app.enableReadingRuler = function () {
-    let component = app.readingRuler.find('> .component > div');
+app.enableFocus = function () {
+    let component = app.Focus.find('> .component > div');
 
-    $.getScript('dist/js/reading-ruler.min.js', function () {
+    $.getScript('dist/js/focus.min.js', function () {
         component
             .draggable({
                 axis: "y",
@@ -20,12 +20,12 @@ app.enableReadingRuler = function () {
                 e.stopPropagation();
             });
 
-        app.readingRuler.on('click', '.close', function () {
-            app.hideReadingRuler();
+        app.Focus.on('click', '.close', function () {
+            app.hideFocus();
         });
 
-        app.main.find('.reading-ruler').click(function () {
-            app.showReadingRuler();
+        app.main.find('.focus').click(function () {
+            app.showFocus();
         });
 
         let height = $(window).height(); 
@@ -38,11 +38,11 @@ app.enableReadingRuler = function () {
     });
 };
 
-app.showReadingRuler = function () {
-    app.html.attr('data-reading-ruler', true);
-    app.readingRuler.focus();
+app.showFocus = function () {
+    app.html.attr('data-focus', true);
+    app.Focus.focus();
 };
-app.hideReadingRuler = function () {
-    app.html.attr('data-reading-ruler', false);
+app.hideFocus = function () {
+    app.html.attr('data-focus', false);
     app.main.focus();
 };

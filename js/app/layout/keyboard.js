@@ -9,21 +9,21 @@ $(function () {
                 e.preventDefault();
             }
         } else {
-            if (e.which === 37 && !app.isModal()) { // left
+            if (e.which === 37 && !app.isFocus() && !app.isModal()) { // left
                 if (app.isAsideLeft()) {
                     app.toggleAside(); // closes right
                 } else if (!app.isAsideRight()) {
                     app.toggleAside('right'); // opens right
                 }
-            } else if (e.which === 39 && !app.isModal()) { // right
+            } else if (e.which === 39 && !app.isFocus() && !app.isModal()) { // right
                 if (app.isAsideRight()) {
                     app.toggleAside(); // closes left
                 } else if (!app.isAsideLeft()) {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.isReadingRuler()) {
-                    app.hideReadingRuler();
+                if (app.isFocus()) {
+                    app.hideFocus();
                 } else if (app.isModal()) {
                     app.closeModal();
                 } else {
@@ -60,7 +60,7 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (!app.isLoading() && !app.isReadingRuler()) {
+        if (!app.isLoading() && !app.isFocus()) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {

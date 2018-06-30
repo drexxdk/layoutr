@@ -19,7 +19,7 @@ $(function () {
     app.authenticated = app.authentication.children('.authenticated');
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
     app.cookie = $('#cookie');
-    app.readingRuler = $('#reading-ruler');
+    app.Focus = $('#focus');
 
     app.cssInterval = 50;
     app.transitionTime = 400;

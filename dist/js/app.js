@@ -770,7 +770,7 @@ $(function () {
     app.authenticated = app.authentication.children('.authenticated');
     app.authenticatedLinks = app.authenticated.find('.authenticated-links');
     app.cookie = $('#cookie');
-    app.readingRuler = $('#reading-ruler');
+    app.Focus = $('#focus');
 
     app.cssInterval = 50;
     app.transitionTime = 400;
@@ -841,8 +841,8 @@ app.isModalImage = function () {
     return app.html.attr('data-modal') === 'image';
 };
 
-app.isReadingRuler = function () {
-    return app.html.hasClass('reading-ruler') && app.html.attr('data-reading-ruler') === 'true';
+app.isFocus = function () {
+    return app.html.hasClass('focus') && app.html.attr('data-focus') === 'true';
 }
 
 app.isAuthentication = function () {
@@ -1011,7 +1011,7 @@ $(window).click(function (e) {
     var target = $(e.target),
         modal = target.closest(app.modal[0]);
 
-    if (!app.isLoading() && !app.isReadingRuler()) {
+    if (!app.isLoading() && !app.isFocus()) {
         if (bowser.ios) {
             // ios browsers doesn't apply :focus to buttons in many cases,
             // this forces :focus to be applied correctly.
@@ -1540,9 +1540,9 @@ app.applySettings = function (id, name, type, value, set) {
             href = href.join("");
             stylesheet.attr('href', href);
         }
-        if (name === 'reading-ruler') {
+        if (name === 'focus') {
             if (value) {
-                app.enableReadingRuler();
+                app.enableFocus();
             }
         }
         if (value) {
@@ -1597,21 +1597,21 @@ $(function () {
                 e.preventDefault();
             }
         } else {
-            if (e.which === 37 && !app.isModal()) { // left
+            if (e.which === 37 && !app.isFocus() && !app.isModal()) { // left
                 if (app.isAsideLeft()) {
                     app.toggleAside(); // closes right
                 } else if (!app.isAsideRight()) {
                     app.toggleAside('right'); // opens right
                 }
-            } else if (e.which === 39 && !app.isModal()) { // right
+            } else if (e.which === 39 && !app.isFocus() && !app.isModal()) { // right
                 if (app.isAsideRight()) {
                     app.toggleAside(); // closes left
                 } else if (!app.isAsideLeft()) {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
-                if (app.isReadingRuler()) {
-                    app.hideReadingRuler();
+                if (app.isFocus()) {
+                    app.hideFocus();
                 } else if (app.isModal()) {
                     app.closeModal();
                 } else {
@@ -1648,7 +1648,7 @@ $(function () {
     });
 
     app.body.on('keyup', function (e) {
-        if (!app.isLoading() && !app.isReadingRuler()) {
+        if (!app.isLoading() && !app.isFocus()) {
             if (e.which === 9) { // tab
                 var target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {
@@ -1962,6 +1962,54 @@ app.responsiveHeader = function () {
             }
         }, app.cssInterval);
     });
+};
+var app = app || {};
+
+app.enableFocus = function () {
+    let component = app.Focus.find('> .component > div');
+
+    $.getScript('dist/js/focus.min.js', function () {
+        component
+            .draggable({
+                axis: "y",
+                containment: "parent",
+                handle: ".move"
+            })
+            .resizable({
+                handles: {
+                    n: '.ui-resizable-n',
+                    s: '.ui-resizable-s'
+                },
+                containment: "parent"
+            }).on('resize', function (e) {
+                e.stopPropagation();
+            });
+
+        app.Focus.on('click', '.close', function () {
+            app.hideFocus();
+        });
+
+        app.main.find('.focus').click(function () {
+            app.showFocus();
+        });
+
+        let height = $(window).height(); 
+        $(window).resize(function () {
+            // do nothing if the height is the same
+            if ($(window).height() == height) return;
+            height = $(window).height();
+            component.removeAttr('style');
+        });
+    });
+};
+
+app.showFocus = function () {
+    app.html.attr('data-focus', true);
+    app.Focus.focus();
+};
+app.hideFocus = function () {
+    app.html.attr('data-focus', false);
+    app.main.focus();
 };
 var app = app || {};
 
@@ -2430,54 +2478,6 @@ app.datatables = function (tables) {
             });
         });
     }
-};
-var app = app || {};
-
-app.enableReadingRuler = function () {
-    let component = app.readingRuler.find('> .component > div');
-
-    $.getScript('dist/js/reading-ruler.min.js', function () {
-        component
-            .draggable({
-                axis: "y",
-                containment: "parent",
-                handle: ".move"
-            })
-            .resizable({
-                handles: {
-                    n: '.ui-resizable-n',
-                    s: '.ui-resizable-s'
-                },
-                containment: "parent"
-            }).on('resize', function (e) {
-                e.stopPropagation();
-            });
-
-        app.readingRuler.on('click', '.close', function () {
-            app.hideReadingRuler();
-        });
-
-        app.main.find('.reading-ruler').click(function () {
-            app.showReadingRuler();
-        });
-
-        let height = $(window).height(); 
-        $(window).resize(function () {
-            // do nothing if the height is the same
-            if ($(window).height() == height) return;
-            height = $(window).height();
-            component.removeAttr('style');
-        });
-    });
-};
-
-app.showReadingRuler = function () {
-    app.html.attr('data-reading-ruler', true);
-    app.readingRuler.focus();
-};
-app.hideReadingRuler = function () {
-    app.html.attr('data-reading-ruler', false);
-    app.main.focus();
 };
 var app = app || {};
 

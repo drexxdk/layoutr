@@ -1,9 +1,8 @@
 ﻿/// <reference path="../references" />
 
 
-html.reading-ruler {
-
-    &[data-reading-ruler="true"] {
+html.focus {
+    &[data-focus="true"] {
         body,
         aside .content > div * {
             pointer-events: none;
@@ -14,22 +13,22 @@ html.reading-ruler {
             pointer-events: all;
         }
 
-        #reading-ruler {
+        #focus {
             display: block;
         }
     }
 
-    header .reading-ruler {
+    header .focus {
         display: block;
     }
 }
 
-header .reading-ruler,
-#reading-ruler {
+header .focus,
+#focus {
     display: none;
 }
 
-#reading-ruler {
+#focus {
     $reading-line-spacer: rem(50px);
 
     position: fixed;
@@ -37,10 +36,10 @@ header .reading-ruler,
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: $reading-ruler-z-index;
+    z-index: $focus-z-index;
     pointer-events: none;
 
-    html[data-reading-ruler="true"].reading-ruler & {
+    html[data-focus="true"].focus & {
         display: block;
     }
 

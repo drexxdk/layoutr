@@ -53,8 +53,8 @@ app.isModalImage = function () {
     return app.html.attr('data-modal') === 'image';
 };
 
-app.isReadingRuler = function () {
-    return app.html.hasClass('reading-ruler') && app.html.attr('data-reading-ruler') === 'true';
+app.isFocus = function () {
+    return app.html.hasClass('focus') && app.html.attr('data-focus') === 'true';
 }
 
 app.isAuthentication = function () {

@@ -37,9 +37,9 @@
                         <li>
                             <b>Keyboard controls</b> is disabled when loading is shown.
                             <ul>
-                                <li><b>Left arrow key</b> if modal isn't shown it opens settings or closes navigation if it is open.</li>
-                                <li><b>Right arrow key</b> if modal isn't shown it opens navigation or closes settings if it is open.</li>
-                                <li><b>ESC key</b> closes modal or aside, authentication, popups and dropdowns.</li>
+                                <li><b>Left arrow key</b> if focus and modal isn't shown it opens settings or closes navigation if it is open.</li>
+                                <li><b>Right arrow key</b> if focus and modal isn't shown it opens navigation or closes settings if it is open.</li>
+                                <li><b>ESC key</b> closes focus, modal or aside, authentication, popups and dropdowns.</li>
                                 <li><b>TAB</b> toggles authentication, modal, aside, dropdown if focused element is within/outside of it.</li>
                                 <li><b>ENTER</b> toggles authentication, checkbox, radio, dropdown, accordion item, navigation tree item if it has focus.</li>
                             </ul>
@@ -67,6 +67,9 @@
                                     </ul>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <b>Focus</b> is a overlay, to help read multiple lines of text easier.
                         </li>
                     </ul>
                 </div>
@@ -114,7 +117,7 @@
                             </ul>
                         </li>
                         <li>
-                            <b>Theme</b> can be switched between light and dark. 
+                            <b>Theme</b> can be switched between light and dark.
                             Only the selected theme will be loaded at initial page load, before the page gets displayed.
                         </li>
                         <li>
@@ -166,6 +169,18 @@
                         <li><b>sortable by Lebedev Konstantin</b> is used for drag and drop.</li>
                         <li><b>Plyr by Sam Potts</b> is used to make audio/video players.</li>
                         <li><b>DataTables by Allan Jardine</b> is used to make advanced tables.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Known issues</h3>
+            <div class="alert">
+                <div>
+                    <ul class="list">
+                        <li>
+                            <b>Android Chrome</b> doesn't always display aside with correct height, because the browser thinks it is displaying the browser navigation bar, when it is not being displayed.
+                        </li>
                     </ul>
                 </div>
             </div>

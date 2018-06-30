@@ -18,7 +18,7 @@ $(window).click(function (e) {
     var target = $(e.target),
         modal = target.closest(app.modal[0]);
 
-    if (!app.isLoading() && !app.isReadingRuler()) {
+    if (!app.isLoading() && !app.isFocus()) {
         if (bowser.ios) {
             // ios browsers doesn't apply :focus to buttons in many cases,
             // this forces :focus to be applied correctly.

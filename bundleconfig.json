@@ -38,6 +38,7 @@
       "js/app/layout/touchDevice.js",
       "js/app/layout/rb.js",
       "js/app/layout/responsiveHeader.js",
+      "js/app/layout/focus.js",
 
       // inputs
       "js/app/inputs/dropdown.js",
@@ -52,7 +53,6 @@
       "js/app/components/popup.js",
       "js/app/components/tooltip.js",
       "js/app/components/datatables.js",
-      "js/app/components/reading-ruler.js",
 
       // assignments
       "js/app/assignments/_assignments.js",
@@ -96,7 +96,7 @@
     ]
   },
   {
-    "outputFileName": "dist/js/reading-ruler.js",
+    "outputFileName": "dist/js/focus.js",
     "inputFiles": [
       "js/vendors/jquery/ui/jquery-ui.min.js",
       "js/vendors/jquery/ui/touch-punch.min.js"

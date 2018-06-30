@@ -49,9 +49,9 @@ app.applySettings = function (id, name, type, value, set) {
             href = href.join("");
             stylesheet.attr('href', href);
         }
-        if (name === 'reading-ruler') {
+        if (name === 'focus') {
             if (value) {
-                app.enableReadingRuler();
+                app.enableFocus();
             }
         }
         if (value) {
