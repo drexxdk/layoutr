@@ -1,8 +1,6 @@
 ﻿var app = app || {};
 
 app.enableTTS = function () {
-    let kathy;
-
     function snapSelectionToWord() {
         let selection = window.getSelection();
         if (!selection.isCollapsed) {
@@ -53,8 +51,8 @@ app.enableTTS = function () {
 
     function stopTTS() {
         clearSelection();
-        if (kathy.IsSpeaking()) {
-            kathy.ShutUp();
+        if (app.tts.IsSpeaking()) {
+            app.tts.ShutUp();
         }
     }
 
@@ -74,7 +72,7 @@ app.enableTTS = function () {
             pollyVoiceId: 'Russell'
         };
 
-        kathy = ChattyKathy(settings);
+        app.tts = ChattyKathy(settings);
 
         app.html.attr('data-tts', true);
 
@@ -89,7 +87,7 @@ app.enableTTS = function () {
                     snapSelectionToWord();
                     let selection = $.selection();
                     if (selection.length) {
-                        kathy.SpeakWithPromise(selection).then(function () {
+                        app.tts.SpeakWithPromise(selection).then(function () {
                             clearSelection();
                         });
                     } else {
