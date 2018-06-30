@@ -77,7 +77,9 @@ app.enableTTS = function () {
             app.html.attr('data-tts', true);
 
             $(window).on('mousedown touchstart', function (e) {
-                app.clearSelection();
+                if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
+                    app.clearSelection();
+                }
             });
 
             $(window).on('mouseup touchend', function (e) {
