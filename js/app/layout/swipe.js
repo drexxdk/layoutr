@@ -1,12 +1,12 @@
 ﻿var app = app || {};
 
-var swipe = function () {
+app.enableSwipe = function () {
     var xDown = null,
         yDown = null,
         offsetBefore;
 
     var handleTouchStart = function (evt) {
-        if (app.isAndroidSwipe()) {
+        if (app.isSwipe()) {
             xDown = evt.touches[0].clientX;
             yDown = evt.touches[0].clientY;
 
@@ -15,7 +15,7 @@ var swipe = function () {
     };
 
     var handleTouchMove = function (evt) {
-        if (app.isAndroidSwipe()) {
+        if (app.isSwipe()) {
             var offsetAfter = $(evt.target).offset().left;
             if (!xDown || !yDown || offsetBefore !== offsetAfter) {
                 return;
@@ -60,15 +60,3 @@ var swipe = function () {
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchend', handleTouchMove, false);
 };
-
-$(function () {
-    if (bowser.android) {
-        swipe();
-        // android doesn't handle vh correctly, so it gets converted to px
-        $(window).resize(function () {
-            if (app.isModal() && app.isModalImage()) {
-                app.modal.find('#modal-img').css('max-height', window.innerHeight);
-            }
-        });
-    }
-});

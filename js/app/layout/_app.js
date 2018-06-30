@@ -12,6 +12,15 @@ $(function () {
     $.get(app.host + 'ajax/svg/base.html', function (data) {
         $(data).prependTo(app.body);
     });
+
+    if (bowser.android) {
+        // android doesn't handle vh correctly, so it gets converted to px
+        $(window).resize(function () {
+            if (app.isModal() && app.isModalImage()) {
+                app.modal.find('#modal-img').css('max-height', window.innerHeight);
+            }
+        });
+    }
 });
 
 $(window).click(function (e) {

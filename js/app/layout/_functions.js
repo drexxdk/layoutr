@@ -84,8 +84,8 @@ app.isTransitions = function () {
     return app.html.hasClass('transitions');
 };
 
-app.isAndroidSwipe = function () {
-    return app.html.hasClass('android-swipe');
+app.isSwipe = function () {
+    return app.html.hasClass('swipe');
 };
 
 app.isSiteLoaded = function () {

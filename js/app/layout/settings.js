@@ -53,6 +53,8 @@ app.applySettings = function (id, name, type, value, set) {
             app.enableFocus();
         } else if (name === 'tts' && value) {
             app.enableTTS();
+        } else if (name === 'swipe' && value) {
+            app.enableSwipe();
         }
         if (value) {
             app.html.addClass(id);
