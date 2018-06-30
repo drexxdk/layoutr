@@ -22,6 +22,7 @@ $(function () {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
+                e.stopPropagation();
                 if (app.tts !== undefined && app.tts.IsSpeaking()) {
                     app.stopTTS();
                 } else if (app.isFocus()) {

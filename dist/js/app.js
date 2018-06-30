@@ -1628,6 +1628,7 @@ $(function () {
                     app.toggleAside('left'); // opens left
                 }
             } else if (e.which === 27) { // esc
+                e.stopPropagation();
                 if (app.tts !== undefined && app.tts.IsSpeaking()) {
                     app.stopTTS();
                 } else if (app.isFocus()) {
@@ -1954,8 +1955,11 @@ app.showFocus = function () {
     app.Focus.focus();
 };
 app.hideFocus = function () {
+    var scrollTop = app.scrollTop();
     app.html.attr('data-focus', false);
     app.main.focus();
+    app.body.scrollTop(scrollTop); // edge, safari
+    app.html.scrollTop(scrollTop); // chrome, firefox, ie
 };
 var app = app || {};
 

@@ -43,6 +43,9 @@ app.showFocus = function () {
     app.Focus.focus();
 };
 app.hideFocus = function () {
+    var scrollTop = app.scrollTop();
     app.html.attr('data-focus', false);
     app.main.focus();
+    app.body.scrollTop(scrollTop); // edge, safari
+    app.html.scrollTop(scrollTop); // chrome, firefox, ie
 };
