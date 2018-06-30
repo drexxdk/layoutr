@@ -57,6 +57,13 @@ app.isFocus = function () {
     return app.html.hasClass('focus') && app.html.attr('data-focus') === 'true';
 }
 
+app.isTTS = function () {
+    return app.html.hasClass('tts');
+}
+
+app.isTTSEnabled = function () {
+    return app.html.hasClass('tts') && app.html.attr('data-tts') === 'true';
+}
 app.isAuthentication = function () {
     return app.html.attr('data-authentication') !== '';
 };

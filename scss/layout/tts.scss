@@ -1,0 +1,5 @@
+﻿html:not(.tts) header .tts,
+html:not([data-tts="true"]) header .tts > svg:first-child,
+html[data-tts="true"] header .tts > svg:last-child {
+    display: none;
+}

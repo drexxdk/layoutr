@@ -49,10 +49,10 @@ app.applySettings = function (id, name, type, value, set) {
             href = href.join("");
             stylesheet.attr('href', href);
         }
-        if (name === 'focus') {
-            if (value) {
-                app.enableFocus();
-            }
+        if (name === 'focus' && value) {
+            app.enableFocus();
+        } else if (name === 'tts' && value) {
+            app.enableTTS();
         }
         if (value) {
             app.html.addClass(id);

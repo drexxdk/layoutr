@@ -39,6 +39,7 @@
       "js/app/layout/rb.js",
       "js/app/layout/responsiveHeader.js",
       "js/app/layout/focus.js",
+      "js/app/layout/tts.js",
 
       // inputs
       "js/app/inputs/dropdown.js",
@@ -100,6 +101,20 @@
     "inputFiles": [
       "js/vendors/jquery/ui/jquery-ui.min.js",
       "js/vendors/jquery/ui/touch-punch.min.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/js/tts.js",
+    "inputFiles": [
+      "js/vendors/tts/aws-sdk.min.js",
+      "js/vendors/tts/chattykathy.js",
+      "js/vendors/tts/jquery.selection.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/js/polyfills/promise.js",
+    "inputFiles": [
+      "js/vendors/polyfills/promise.js"
     ]
   }
 ]
