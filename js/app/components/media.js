@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.media = function (media) {
+app.checkMedia = function (media) {
     if (media.length) {
         if (!app.html.hasClass('media-loaded')) {
             app.head.append($('<link rel="stylesheet" href="dist/css/plyr.min.css">'));

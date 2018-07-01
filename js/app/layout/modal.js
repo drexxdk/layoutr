@@ -31,25 +31,24 @@ app.checkModal = function () {
         app.right.css('margin-right', 0);
         app.body.children('.popup').css('margin-right', 0);
     }
-
-    var contentHeader = app.content.children('.content-header:not(.full)');
-    if (contentHeader.length) {
-        if (app.isModal() && contentHeader.css('position') === 'fixed') {
-            var halfOverflowY = app.scrollbarWidth / 2;
-            contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+    
+    if (app.contentHeader.length) {
+        if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
+            let halfOverflowY = app.scrollbarWidth / 2;
+            app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
         } else {
-            contentHeader.children().css('width', '');
+            app.contentHeader.children().css('width', '');
         }
     }
 };
 
 $(function () {
     app.body.on('click', '.modal', function () {
-        var $this = $(this),
+        let $this = $(this),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
             app.showLoading();
-            var id = $this.attr('data-modal-id'),
+            let id = $this.attr('data-modal-id'),
                 html = [],
                 dataTitle = $this.attr('data-modal-title'),
                 dataContent = $this.attr('data-modal-content'),
@@ -78,10 +77,10 @@ $(function () {
                 html.push('</div><div class="content">');
             }
             html.push('</div></div></div></div>');
-            var div = html.join("");
+            let div = html.join("");
             app.modal.html(div);
             if (type === 'image') {
-                var image = app.modal.find('#modal-img');
+                let image = app.modal.find('#modal-img');
                 image.on('load', function () {
                     if (bowser.android) {
                         image.css('max-height', window.innerHeight);
@@ -90,11 +89,11 @@ $(function () {
                 });
                 image.attr('src', $this.attr('data-modal-img'));
             } else {
-                var dataSize = $this.attr('data-modal-size');
+                let dataSize = $this.attr('data-modal-size');
                 if (dataSize !== undefined) {
                     app.modal.children('div').attr('data-modal-size', dataSize);
                 }
-                var content = app.modal.find('#modal-container > .content');
+                let content = app.modal.find('#modal-container > .content');
                 content.append(dataContent);
                 app.contentLoaded(content);
                 app.showModal(type);

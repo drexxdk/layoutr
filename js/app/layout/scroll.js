@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
-var scrollbarWidth = function () {
+function scrollbarWidth() {
     app.body.append('<div id="scrollbar-width"></div>');
-    var element = app.body.children('#scrollbar-width');
+    let element = app.body.children('#scrollbar-width');
     element.css({
         'overflow': "scroll",
         'visibility': "hidden",
@@ -21,7 +21,7 @@ app.disableScroll = function () {
             app.checkModal();
             app.modal.focus();
         }
-        var scrollTop = app.scrollTop();
+        let scrollTop = app.scrollTop();
         app.html.addClass('scroll-disabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
@@ -32,7 +32,7 @@ app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         if (app.isSiteLoaded()) {
-            var scrollTop = app.scrollTop();
+            let scrollTop = app.scrollTop();
             app.html.removeClass('scroll-disabled modal');
             app.main.focus();
             app.body.scrollTop(scrollTop); // edge, safari

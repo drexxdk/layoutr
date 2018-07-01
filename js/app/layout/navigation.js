@@ -3,12 +3,12 @@
 app.loadPage = function (url, pushState, initial) {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
-    var q = url.indexOf('?');
+    let q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
     app.left.find('.tree a.label.active').removeClass('active');
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
-    var tempUrl = url;
+    let tempUrl = url;
     app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
         url = tempUrl;
         if (url === '') {
@@ -49,7 +49,7 @@ app.internalLinkClick = function (href, e) {
     if (l.search) {
         app.url = {};
         l.search.slice(1).split('&').forEach(function (v) {
-            var a = v.split('=');
+            let a = v.split('=');
             app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
         if (app.url.p !== undefined) {
@@ -62,10 +62,10 @@ app.internalLinkClick = function (href, e) {
     }
 }(window.location));
 
-var loadPage = window.history.state;
+let loadPage = window.history.state;
 window.onpopstate = function (event) {
     if (loadPage) {
-        var url = location.pathname;
+        let url = location.pathname;
         if (!app.isLocalhost) {
             url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
         }
@@ -75,11 +75,11 @@ window.onpopstate = function (event) {
 
 app.applyNavigation = function (id, value, set) {
     if (set) {
-        var entry = {
+        let entry = {
             "id": id,
             "value": value
-        };
-        var exists = $.grep(app.navigation, function (e) { return e.name === name; });
+        },
+            exists = $.grep(app.navigation, function (e) { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.navigation.push(entry);
@@ -102,7 +102,7 @@ $(function () {
             app.applyNavigation(entry.id, entry.value, false);
         });
         app.navigationTree.on('change', 'input[type=checkbox]', function () {
-            var $this = $(this),
+            let $this = $(this),
                 id = $this.attr('id'),
                 value = $this.is(':checked');
             app.applyNavigation(id, value, true);

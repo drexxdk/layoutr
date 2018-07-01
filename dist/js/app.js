@@ -889,7 +889,7 @@ app.scrollTop = function () {
 };
 
 app.tryParseInt = function (str, defaultValue) {
-    var retValue = defaultValue;
+    let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseInt(str);
     }
@@ -897,7 +897,7 @@ app.tryParseInt = function (str, defaultValue) {
 };
 
 app.tryParseFloat = function (str, defaultValue) {
-    var retValue = defaultValue;
+    let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseFloat(str);
     }
@@ -933,10 +933,10 @@ $(function () {
         // disable smooth scrolling, since it causes element jumping/lagging on scroll
         // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
         app.body.on("mousewheel", function (e) {
-            var target = $(e.target);
+            let target = $(e.target);
             if (!app.isModal() && event.ctrlKey !== true) {
                 e.preventDefault();
-                var aside = target.closest('aside > .content') || target.parents('aside .content'),
+                let aside = target.closest('aside > .content') || target.parents('aside .content'),
                     wheelDelta = e.originalEvent.wheelDelta,
                     currentScrollPosition;
                 if (aside.length) {
@@ -952,7 +952,7 @@ $(function () {
         // at some zoom levels edge/ie makes $(window) heigher than $(document)
         // it causes a gap between footer and the bottom of $(window).
         $(window).scroll(function () {
-            var scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            let scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop + $(window).height() >= $(document).height()) {
                 app.html.addClass('subpixel');
             } else {
@@ -1024,7 +1024,7 @@ $(function () {
 });
 
 $(window).click(function (e) {
-    var target = $(e.target),
+    let target = $(e.target),
         modal = target.closest(app.modal[0]);
 
     if (!app.isLoading() && !app.isFocus()) {
@@ -1041,13 +1041,13 @@ $(window).click(function (e) {
         if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
             app.html.attr('data-authentication', '');
         } else if (modal.length) {
-            var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
+            let image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
                 form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
             if (image || form || target.closest('#modal-close').length) {
                 app.closeModal();
             }
         } else {
-            var isSmallBreakpoint = app.isSmallBreakpoint(),
+            let isSmallBreakpoint = app.isSmallBreakpoint(),
                 left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
                 right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
                 notTarget = !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
@@ -1061,31 +1061,30 @@ $(window).click(function (e) {
 var app = app || {};
 
 app.contentLoaded = function (element) {
-    app.lazy(element.find('.lazy'));
-    app.accordion(element.find('.accordion'));
-    app.dropdown(element.find('select.dropdown'));
-    app.tooltip(element.find('.tooltip'));
-    app.assignment(element.find('.assignment'));
-    app.math(element.find('.math'));
-    app.media(element.find('audio, video'));
-    app.map(element.find('.map'));
-    app.datatables(element.find('.dataTable'));
+    app.checkRb(element.find('.rb'));
+    app.checkContentHeader();
+    app.checkLazy(element.find('.lazy'));
+    app.checkAccordion(element.find('.accordion'));
+    app.checkDropdown(element.find('select.dropdown'));
+    app.checkTooltip(element.find('.tooltip'));
+    app.checkAssignment(element.find('.assignment'));
+    app.checkMath(element.find('.math'));
+    app.checkMedia(element.find('audio, video'));
+    app.checkMap(element.find('.map'));
+    app.checkDatatables(element.find('.dataTable'));
 }
 
 app.pageLoaded = function (initial) {
-    $(window).off('throttledresize.assignment');
-    $(window).off('throttledresize.map');
-    app.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
     app.html.animate({ scrollTop: 0 }, 0);
+    app.contentHeader = app.content.children('.content-header:not(.full)');
     setTimeout(function () {
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
         }
     }, 200);
-    app.rb();
     app.contentLoaded(app.content);
     app.hideLoading();
     if (initial) {
@@ -1093,8 +1092,7 @@ app.pageLoaded = function (initial) {
     }
 };
 var app = app || {};
-
-var fullscreenScrollTop;
+let fullscreenScrollTop;
 
 app.requestFullScreen = function () {
     if (!app.fullscreen && bowser.desktop) {
@@ -1155,9 +1153,9 @@ app.toggleFullScreen = function (element) {
 };
 var app = app || {};
 
-var scrollbarWidth = function () {
+function scrollbarWidth() {
     app.body.append('<div id="scrollbar-width"></div>');
-    var element = app.body.children('#scrollbar-width');
+    let element = app.body.children('#scrollbar-width');
     element.css({
         'overflow': "scroll",
         'visibility': "hidden",
@@ -1176,7 +1174,7 @@ app.disableScroll = function () {
             app.checkModal();
             app.modal.focus();
         }
-        var scrollTop = app.scrollTop();
+        let scrollTop = app.scrollTop();
         app.html.addClass('scroll-disabled');
         app.body.scrollTop(scrollTop);
         app.main.scrollTop(scrollTop);
@@ -1187,7 +1185,7 @@ app.enableScroll = function () {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         if (app.isSiteLoaded()) {
-            var scrollTop = app.scrollTop();
+            let scrollTop = app.scrollTop();
             app.html.removeClass('scroll-disabled modal');
             app.main.focus();
             app.body.scrollTop(scrollTop); // edge, safari
@@ -1231,17 +1229,16 @@ app.hideLoading = function () {
     }
 };
 var app = app || {};
-
-var transitionLock = false;
+let transitionLock = false;
 
 app.toggleAside = function (aside, pageChanged) {
     if (!transitionLock) {
         transitionLock = true;
         app.html.attr('data-authentication', '');
-        var currentAside = app.html.attr('data-aside');
+        let currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
-                var scrollTop = app.scrollTop();
+                let scrollTop = app.scrollTop();
                 app.html.attr('data-aside', '');
                 app.main.focus();
                 app.body.scrollTop(scrollTop); // edge, safari
@@ -1260,12 +1257,11 @@ app.toggleAside = function (aside, pageChanged) {
         if (app.isTransitions()) {
             setTimeout(function () {
                 transitionLock = false;
-                if (pageChanged) {
-                    app.rb();
-                }
+                app.html.trigger('aside-changed');
             }, app.transitionTime);
         } else {
             transitionLock = false;
+            app.html.trigger('aside-changed');
         }
         app.setHtmlScroll();
     }
@@ -1284,8 +1280,8 @@ var app = app || {};
 
 $(function () {
     app.authentication.on('click', '> div > button', function () {
-        var $this = $(this);
-        var type = $this.attr('data-type');
+        let $this = $(this),
+            type = $this.attr('data-type');
         if (app.html.attr('data-authentication') === type) {
             app.html.attr('data-authentication', '');
         } else {
@@ -1361,7 +1357,7 @@ $(function () {
         app.html.removeClass('cookie');
     });
 
-    var cookie = localStorage.getItem("cookie");
+    let cookie = localStorage.getItem("cookie");
     if (cookie === null) {
         app.html.addClass('cookie');
     }
@@ -1371,12 +1367,12 @@ var app = app || {};
 app.loadPage = function (url, pushState, initial) {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
-    var q = url.indexOf('?');
+    let q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
     app.left.find('.tree a.label.active').removeClass('active');
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
-    var tempUrl = url;
+    let tempUrl = url;
     app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
         url = tempUrl;
         if (url === '') {
@@ -1417,7 +1413,7 @@ app.internalLinkClick = function (href, e) {
     if (l.search) {
         app.url = {};
         l.search.slice(1).split('&').forEach(function (v) {
-            var a = v.split('=');
+            let a = v.split('=');
             app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
         if (app.url.p !== undefined) {
@@ -1430,10 +1426,10 @@ app.internalLinkClick = function (href, e) {
     }
 }(window.location));
 
-var loadPage = window.history.state;
+let loadPage = window.history.state;
 window.onpopstate = function (event) {
     if (loadPage) {
-        var url = location.pathname;
+        let url = location.pathname;
         if (!app.isLocalhost) {
             url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
         }
@@ -1443,11 +1439,11 @@ window.onpopstate = function (event) {
 
 app.applyNavigation = function (id, value, set) {
     if (set) {
-        var entry = {
+        let entry = {
             "id": id,
             "value": value
-        };
-        var exists = $.grep(app.navigation, function (e) { return e.name === name; });
+        },
+            exists = $.grep(app.navigation, function (e) { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.navigation.push(entry);
@@ -1470,7 +1466,7 @@ $(function () {
             app.applyNavigation(entry.id, entry.value, false);
         });
         app.navigationTree.on('change', 'input[type=checkbox]', function () {
-            var $this = $(this),
+            let $this = $(this),
                 id = $this.attr('id'),
                 value = $this.is(':checked');
             app.applyNavigation(id, value, true);
@@ -1509,7 +1505,7 @@ var app = app || {};
 
 app.applySettings = function (id, name, type, value, set) {
     if (set) {
-        var entry = {
+        let entry = {
             "id": id,
             "name": name,
             "type": type,
@@ -1539,15 +1535,15 @@ app.applySettings = function (id, name, type, value, set) {
             });
         }
         if (name === 'theme') {
-            var stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]');
-            var href = stylesheet.attr('href');
-            var split1 = href.split('/');
-            var split2 = split1[split1.length - 1].split('.');
+            let stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]'),
+                href = stylesheet.attr('href'),
+                split1 = href.split('/'),
+                split2 = split1[split1.length - 1].split('.');
             href = [];
             for (i = 0; i < split1.length - 1; i++) {
                 href.push(split1[i] + '/');
             }
-            var theme = id.substring(id.indexOf("-") + 1);
+            let theme = id.substring(id.indexOf("-") + 1);
             href.push(theme);
 
             for (i = 1; i < split2.length; i++) {
@@ -1569,7 +1565,7 @@ app.applySettings = function (id, name, type, value, set) {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.rb();
+            app.checkRb(app.content.find('.rb'));
         }
         if (id === 'signed-in') {
             app.responsiveHeader();
@@ -1584,7 +1580,7 @@ $(function () {
         });
         app.header.find('.aside.right').addClass('loaded');
         $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
-            var $this = $(this),
+            let $this = $(this),
                 id = $this.attr('id').replace('settings-', ''),
                 name = $this.attr('name').replace('settings-', ''),
                 type = $this.attr('type'),
@@ -1608,10 +1604,11 @@ var app = app || {};
 
 $(function () {
     app.body.on("keydown", function (e) {
-        var target = $(e.target),
+        let target = $(e.target),
             parent = target.parent();
         if (app.isLoading()) {
             if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
+                debugger;
                 e.preventDefault();
             }
         } else {
@@ -1639,13 +1636,13 @@ $(function () {
                     if (app.isAside()) {
                         app.toggleAside(); // closes aside
                     }
-                    var popups = app.body.children('.popup');
+                    let popups = app.body.children('.popup');
                     if (popups.length) {
                         popups.fadeOut(app.fadeOutTime, function () {
                             popups.remove();
                         });
                     }
-                    var dropdowns = app.content.find('div.dropdown.open');
+                    let dropdowns = app.content.find('div.dropdown.open');
                     if (dropdowns.length) {
                         dropdowns.removeClass('open');
                     }
@@ -1653,7 +1650,7 @@ $(function () {
                 }
             }
             if (e.which === 13) { // enter
-                var dropdown = target.parents('div.dropdown');
+                let dropdown = target.parents('div.dropdown');
                 if (dropdown.length || parent.parent().hasClass('accordion')) {
                     target.click();
                     e.preventDefault();
@@ -1671,7 +1668,7 @@ $(function () {
     app.body.on('keyup', function (e) {
         if (!app.isLoading() && !app.isFocus()) {
             if (e.which === 9) { // tab
-                var target = $(e.target);
+                let target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {
                     $('div.dropdown.open').removeClass('open');
                 }
@@ -1683,7 +1680,7 @@ $(function () {
                         app.closeModal();
                     }
                 } else {
-                    var aside = target.parents('aside');
+                    let aside = target.parents('aside');
                     if (aside.length === 0 && target.is('aside')) {
                         aside = target;
                     }
@@ -1730,25 +1727,24 @@ app.checkModal = function () {
         app.right.css('margin-right', 0);
         app.body.children('.popup').css('margin-right', 0);
     }
-
-    var contentHeader = app.content.children('.content-header:not(.full)');
-    if (contentHeader.length) {
-        if (app.isModal() && contentHeader.css('position') === 'fixed') {
-            var halfOverflowY = app.scrollbarWidth / 2;
-            contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+    
+    if (app.contentHeader.length) {
+        if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
+            let halfOverflowY = app.scrollbarWidth / 2;
+            app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
         } else {
-            contentHeader.children().css('width', '');
+            app.contentHeader.children().css('width', '');
         }
     }
 };
 
 $(function () {
     app.body.on('click', '.modal', function () {
-        var $this = $(this),
+        let $this = $(this),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
             app.showLoading();
-            var id = $this.attr('data-modal-id'),
+            let id = $this.attr('data-modal-id'),
                 html = [],
                 dataTitle = $this.attr('data-modal-title'),
                 dataContent = $this.attr('data-modal-content'),
@@ -1777,10 +1773,10 @@ $(function () {
                 html.push('</div><div class="content">');
             }
             html.push('</div></div></div></div>');
-            var div = html.join("");
+            let div = html.join("");
             app.modal.html(div);
             if (type === 'image') {
-                var image = app.modal.find('#modal-img');
+                let image = app.modal.find('#modal-img');
                 image.on('load', function () {
                     if (bowser.android) {
                         image.css('max-height', window.innerHeight);
@@ -1789,11 +1785,11 @@ $(function () {
                 });
                 image.attr('src', $this.attr('data-modal-img'));
             } else {
-                var dataSize = $this.attr('data-modal-size');
+                let dataSize = $this.attr('data-modal-size');
                 if (dataSize !== undefined) {
                     app.modal.children('div').attr('data-modal-size', dataSize);
                 }
-                var content = app.modal.find('#modal-container > .content');
+                let content = app.modal.find('#modal-container > .content');
                 content.append(dataContent);
                 app.contentLoaded(content);
                 app.showModal(type);
@@ -1811,14 +1807,13 @@ $(function () {
 var app = app || {};
 
 // responsive-background
-app.rb = function () {
-    app.content.find('.rb').each(function () {
-        var $this = $(this),
-            image = $this.attr('data-rb-image'),
-            filetype = $this.attr('data-rb-image-filetype'),
-            sizesWidth = $this.attr('data-rb-sizes'),
-            current = $this.attr('data-rb-current'),
-            aspectRatio = $this.attr('data-rb-aspect-ratio');
+app.checkRb = function (elements) {
+    function setRb(element) {
+        let image = element.attr('data-rb-image'),
+            filetype = element.attr('data-rb-image-filetype'),
+            sizesWidth = element.attr('data-rb-sizes'),
+            current = element.attr('data-rb-current'),
+            aspectRatio = element.attr('data-rb-aspect-ratio');
         if (image !== undefined && image.length &&
             filetype !== undefined && filetype.length &&
             sizesWidth !== undefined && sizesWidth.length &&
@@ -1826,13 +1821,13 @@ app.rb = function () {
             if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
                 (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
                 sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort(function (a, b) { return a - b; });
-                var goalWidth = $this.width(),
-                    goalHeight = $this.height(),
+                let goalWidth = element.width(),
+                    goalHeight = element.height(),
                     closestWidth,
                     closestHeight,
                     heightPercentage;
 
-                var getHeightInPercentage = function (num, amount) {
+                function getHeightInPercentage(num, amount) {
                     return num * 100 / amount;
                 };
 
@@ -1848,12 +1843,12 @@ app.rb = function () {
                     heightPercentage = 100;
                 }
 
-                var getHeightInPixels = function (num, amount) {
+                function getHeightInPixels(num, amount) {
                     return num * amount / 100;
                 };
 
                 $.each(sizesWidth, function (index) {
-                    var width = parseInt(this),
+                    let width = parseInt(this),
                         height = getHeightInPixels(heightPercentage, width);
                     if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
                         closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
@@ -1864,40 +1859,54 @@ app.rb = function () {
 
                 if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
                     app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
-                    var tempImage = app.body.children('#rb');
+                    let tempImage = app.body.children('#rb');
                     tempImage.on('load', function () {
                         tempImage.remove();
-                        var src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
-                        $this.css('background-image', src);
-                        $this.attr('data-rb-current', closestWidth);
+                        let src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
+                        element.css('background-image', src);
+                        element.attr('data-rb-current', closestWidth);
                     });
                 }
             }
         }
-    });
-};
+    }
 
-$(window).resize(function () {
-    app.rb();
-});
+    if(elements.length) {
+        elements.each(function (i, e) {
+            let element = $(e);
+            setRb(element);
+            $(window).on('resize.rb', function () {
+                setRb(element);
+            });
+
+            app.html.on('aside-changed', function () {
+                setRb(element);
+            });
+        });
+
+    } else {
+        $(window).off('resize.rb');
+    }
+    
+};
 var app = app || {};
 
 app.responsiveHeader = function () {
-    $(function () {
-        var h1 = app.header.find('h1');
-        var link = h1.children('a');
+    let h1 = app.header.find('h1'),
+        link = h1.children('a');
 
-        function check() {
-            app.unauthenticated.addClass('text');
-            var a = h1.outerWidth();
-            var b = link.outerWidth();
-            if (h1.outerWidth() < link.outerWidth()) {
-                app.unauthenticated.removeClass('text');
-            }
-            app.unauthenticated.addClass('checked');
+    function check() {
+        app.unauthenticated.addClass('text');
+        let a = h1.outerWidth(),
+            b = link.outerWidth();
+        if (h1.outerWidth() < link.outerWidth()) {
+            app.unauthenticated.removeClass('text');
         }
+        app.unauthenticated.addClass('checked');
+    }
         
-        var awaitCSS = setInterval(function () {
+    function awaitCSS() {
+        setInterval(function () {
             if (app.cssLoaded()) {
                 clearInterval(awaitCSS);
 
@@ -1908,7 +1917,8 @@ app.responsiveHeader = function () {
                 check();
             }
         }, app.cssInterval);
-    });
+    }
+    awaitCSS();
 };
 var app = app || {};
 
@@ -1955,7 +1965,7 @@ app.showFocus = function () {
     app.Focus.focus();
 };
 app.hideFocus = function () {
-    var scrollTop = app.scrollTop();
+    let scrollTop = app.scrollTop();
     app.html.attr('data-focus', false);
     app.main.focus();
     app.body.scrollTop(scrollTop); // edge, safari
@@ -1964,11 +1974,11 @@ app.hideFocus = function () {
 var app = app || {};
 
 app.enableSwipe = function () {
-    var xDown = null,
+    let xDown = null,
         yDown = null,
         offsetBefore;
 
-    var handleTouchStart = function (evt) {
+    function handleTouchStart(evt) {
         if (app.isSwipe()) {
             xDown = evt.touches[0].clientX;
             yDown = evt.touches[0].clientY;
@@ -1977,20 +1987,20 @@ app.enableSwipe = function () {
         }
     };
 
-    var handleTouchMove = function (evt) {
+    function handleTouchMove(evt) {
         if (app.isSwipe()) {
-            var offsetAfter = $(evt.target).offset().left;
+            let offsetAfter = $(evt.target).offset().left;
             if (!xDown || !yDown || offsetBefore !== offsetAfter) {
                 return;
             }
-            var xUp = evt.changedTouches[0].clientX,
+            let xUp = evt.changedTouches[0].clientX,
                 yUp = evt.changedTouches[0].clientY,
                 xDiff = xDown - xUp,
                 yDiff = yDown - yUp;
             if (Math.abs(xDiff) > Math.abs(yDiff)) {
-                var distance = parseInt($(window).width() / 2);
+                let distance = parseInt($(window).width() / 2);
                 if (yDiff > -100 || yDiff < 100) {
-                    var currentAside;
+                    let currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
                         if (!app.isModal() && !app.isLoading()) {
@@ -2024,7 +2034,6 @@ app.enableSwipe = function () {
     document.addEventListener('touchend', handleTouchMove, false);
 };
 var app = app || {};
-
 
 app.clearSelection = function () {
     let selection = window.getSelection();
@@ -2108,19 +2117,20 @@ app.enableTTS = function () {
             });
 
             $(window).on('mouseup touchend', function (e) {
-                if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
-                    e.stopPropagation();
-                    setTimeout(function () {
-                        snapSelectionToWord();
-                        let selection = $.selection();
-                        if (selection.length) {
-                            app.tts.SpeakWithPromise(selection).then(function () {
-                                app.clearSelection();
-                            });
-                        } else {
-                            app.stopTTS();
-                        }
-                    });
+                if (!$(document.activeElement).is('input, textarea, button, select, .dropdown')) {
+                    if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
+                        setTimeout(function () {
+                            snapSelectionToWord();
+                            let selection = $.selection();
+                            if (selection.length) {
+                                app.tts.SpeakWithPromise(selection).then(function () {
+                                    app.clearSelection();
+                                });
+                            } else {
+                                app.stopTTS();
+                            }
+                        });
+                    }
                 }
             });
 
@@ -2137,9 +2147,20 @@ app.enableTTS = function () {
 };
 var app = app || {};
 
-app.dropdown = function (dropdowns) {
+app.checkContentHeader = function() {
+    if(app.contentHeader.length) {
+        $(window).on('scroll.contentHeader', function() {
+            debugger;
+        });
+    } else {
+        $(window).off('scroll.contentHeader');
+    }
+};
+var app = app || {};
+
+app.checkDropdown = function (dropdowns) {
     dropdowns.each(function () {
-        var $this = $(this),
+        let $this = $(this),
             selected = $this.children('option:selected'),
             html = [],
             attr = $this.attr('class'),
@@ -2161,7 +2182,7 @@ app.dropdown = function (dropdowns) {
             + '> ');
         
         if (typeof attr !== typeof undefined && attr !== false) {
-            var temp = attr.split(' ');
+            let temp = attr.split(' ');
             temp = $.grep(temp, function (item, index) {
                 return item.trim().match(/^theme-/);
             });
@@ -2172,7 +2193,7 @@ app.dropdown = function (dropdowns) {
         html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul class="' + theme + '">');
         $this.children().each(function (index) { /* ':not([value=""])' */
-            var $that = $(this),
+            let $that = $(this),
                 text = $that.text();
             if (!text.length) {
                 text = '&nbsp;';
@@ -2185,37 +2206,37 @@ app.dropdown = function (dropdowns) {
         });
         html.push('</ul>');
         html.push('</div>');
-        var dropdown = html.join("");
+        let dropdown = html.join("");
         $this.after(dropdown);
         dropdown = $this.next();
 
 
         if ($this.hasClass('nowrap')) {
-            var top = dropdown.children().eq(0),
-                bottom = dropdown.children().eq(1);
-            var topWidth = top.width();
-            var bottomWidth = bottom.width();
+            let top = dropdown.children().eq(0),
+                bottom = dropdown.children().eq(1),
+                topWidth = top.width(),
+                bottomWidth = bottom.width();
             if (bottomWidth > topWidth) {
                 top.css('min-width', bottomWidth);
             }
         }
 
         dropdown.on('click', '> div', function () {
-            var $that = $(this);
+            let $that = $(this);
             $that.parent().toggleClass('open');
         });
         dropdown.on('click', 'li', function () {
-            var $that = $(this);
+            let $that = $(this);
             if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
-                var option = $this.children('[value="' + $that.attr('data-id') + '"]'),
+                let option = $this.children('[value="' + $that.attr('data-id') + '"]'),
                     text = $that.text(),
                     math = option.attr('data-math');
                 if (math !== undefined) {
                     text = math;
                 }
-                var label = dropdown.children('div').children('label');
+                let label = dropdown.children('div').children('label');
                 label.text(text);
                 if (math !== undefined) {
                     renderMathInElement(label[0]);
@@ -2230,7 +2251,7 @@ app.dropdown = function (dropdowns) {
 };
 
 $(window).click(function (e) {
-    var target = $(e.target);
+    let target = $(e.target);
     if (target.closest("div.dropdown").length) {
         $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
     }
@@ -2241,9 +2262,9 @@ $(window).click(function (e) {
 });
 var app = app || {};
 
-app.accordion = function (elements) {
+app.checkAccordion = function (elements) {
     elements.on("click", ".headline", function () {
-        var content = $(this).next();
+        let content = $(this).next();
         if (content.hasClass('open')) {
             content
                 .removeClass('open')
@@ -2260,9 +2281,9 @@ var app = app || {};
 
 $(function () {
     app.body.on('click', '.alert .close', function () {
-        var $this = $(this).parent();
+        let $this = $(this).parent();
         $this.fadeOut(app.fadeOutTime, function () {
-            var parent = $this.parent();
+            let parent = $this.parent();
             if (parent.hasClass('popup') && parent.children().length === 1) {
                 parent.remove();
             } else {
@@ -2271,31 +2292,33 @@ $(function () {
         });
     });
 });
-var app = app || {};
-var google;
-app.map = function (maps) {
+var app = app || {},
+    google;
+
+app.checkMap = function (maps) {
+    app.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
     if (maps.length) {
         if (!app.html.hasClass('map-loaded')) {
             app.head.append($('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEcomDjRS4Nu3RQCkkSIQ0nrBhuQM0gng"></script>'));
             app.html.addClass('map-loaded');
         }
 
-        var timeout = 100;
-        var checkGoogle = function () {
+        let timeout = 100;
+        function checkGoogle() {
             if (google !== undefined) {
                 maps.each(function () {
-                    var $this = $(this),
+                    let $this = $(this),
                         lat = app.tryParseFloat($this.attr('data-lat'), 37.4029937),
                         lng = app.tryParseFloat($this.attr('data-lng'), -122.1811793),
                         zoom = app.tryParseInt($this.attr('data-zoom'), 4),
                         cords = { lat: lat, lng: lng };
 
-                    var map = new google.maps.Map($this[0], {
+                    let map = new google.maps.Map($this[0], {
                         zoom: zoom,
                         center: cords
                     });
 
-                    var marker = new google.maps.Marker({
+                    let marker = new google.maps.Marker({
                         position: cords,
                         map: map
                     });
@@ -2309,11 +2332,13 @@ app.map = function (maps) {
             setTimeout(checkGoogle, timeout);
         };
         checkGoogle();
+    } else {
+        $(window).off('throttledresize.map');
     }
 };
 var app = app || {};
 
-app.math = function (math) {
+app.checkMath = function (math) {
     if (math.length) {
         if (!app.html.hasClass('math-loaded')) {
             app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
@@ -2322,7 +2347,7 @@ app.math = function (math) {
 
         $.getScript('dist/js/katex.min.js', function () {
             math.each(function () {
-                var $this = $(this);
+                let $this = $(this);
                 renderMathInElement($this[0]);
                 setTimeout(function () {
                     $this.removeClass('math');
@@ -2333,7 +2358,7 @@ app.math = function (math) {
 };
 var app = app || {};
 
-app.media = function (media) {
+app.checkMedia = function (media) {
     if (media.length) {
         if (!app.html.hasClass('media-loaded')) {
             app.head.append($('<link rel="stylesheet" href="dist/css/plyr.min.css">'));
@@ -2349,7 +2374,7 @@ app.media = function (media) {
 };
 var app = app || {};
 
-app.lazy = function (elements) {
+app.checkLazy = function (elements) {
     elements.lazy({
         afterLoad: function (element) {
             element.removeClass('lazy');
@@ -2360,10 +2385,10 @@ var app = app || {};
 
 $(function () {
     app.body.on('click', '.show-popup', function () {
-        var $this = $(this),
+        let $this = $(this),
             title = $this.attr('data-popup-title');
         if (title !== undefined) {
-            var theme = $this.attr('data-popup-theme'),
+            let theme = $this.attr('data-popup-theme'),
                 alert = [],
                 position = $(this).attr('data-popup-position'),
                 popup = app.body.children('.popup[data-position="' + position + '"]');
@@ -2381,7 +2406,7 @@ $(function () {
             if (popup.length) {
                 popup.append(alert);
             } else {
-                var html = [];
+                let html = [];
                 html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
                 html.push(alert);
                 html.push('</div>');
@@ -2393,9 +2418,9 @@ $(function () {
 });
 var app = app || {};
 
-app.tooltip = function (tooltips) {
+app.checkTooltip = function (tooltips) {
     tooltips.each(function () {
-        var $this = $(this),
+        let $this = $(this),
             interactive = $this.hasClass('interactive');
         $this.tooltipster({
             animationDuration: 0,
@@ -2415,14 +2440,13 @@ app.tooltip = function (tooltips) {
 };
 var app = app || {};
 
-app.datatables = function (tables) {
+app.checkDatatables = function (tables) {
     if (tables.length) {
         $.getScript('dist/js/datatables.min.js', function () {
-
             let spacing = 'space-3';
 
             function table_header_input(instance) {
-                var columns = instance.columns().header();
+                let columns = instance.columns().header();
                 let elements = jQuery.grep(columns, function (e) {
                     let column = $(e);
                     return column.hasClass('dropdown') || column.hasClass('text');
@@ -2533,11 +2557,11 @@ app.datatables = function (tables) {
             }
             function table_dropdowns(wrapper) {
                 let dropdowns = wrapper.find('select.dropdown');
-                app.dropdown(dropdowns);
+                app.checkDropdown(dropdowns);
             }
 
             tables.each(function () {
-                var $this = $(this);
+                let $this = $(this);
                 $this.addClass('nowrap');
                 $this.DataTable({
                     "dom": 'lBfrtip',
@@ -2577,17 +2601,20 @@ app.datatables = function (tables) {
 
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
-                            var columns = instance.columns().responsiveHidden();
+                            let columns = instance.columns().responsiveHidden();
                             $this.trigger('responsive-resize.dt', [this, columns]);
                         });
 
+                        app.html.on('aside-changed', function () {
+                            instance.responsive.recalc();
+                        });
 
                         $this.on('responsive-resize.dt', function (e, datatable, columns) {
-                            var count = columns.reduce(function (a, b) {
+                            let count = columns.reduce(function (a, b) {
                                 return b === false ? a + 1 : a;
                             }, 0);
 
-                            let elements = table.find('tbody tr:not(.child) > *:first-child');
+                            let elements = table.find('tbody tr:not(.child) > *:first-child:not(.dataTables_empty)');
                             elements.removeAttr('tabindex');
 
                             if (count) {
@@ -2605,7 +2632,7 @@ app.datatables = function (tables) {
 };
 var app = app || {};
 
-app.getItem = function (items, id) {
+app.getAssignmentItem = function (items, id) {
     return $($.map(items, function (item) {
         if (item.getAttribute("data-id") === id) {
             return item;
@@ -2613,20 +2640,18 @@ app.getItem = function (items, id) {
     }));
 };
 
-app.assignment = function (assignments) {
+app.checkAssignment = function (assignments) {
     if (assignments.length) {
-        $.getScript('dist/js/assignments.min.js', function () {
+        $.getScript('dist/js/assignments.js', function () {
             $(assignments).each(function (index, assignment) {
                 assignment = $(assignment);
-                if (assignment.hasClass('drag-and-drop')) {
-                    app.assignment.dragAndDrop(assignment);
-                } else if (assignment.hasClass('sort')) {
-                    app.assignment.sort(assignment);
-                } else if (assignment.hasClass('color')) {
-                    app.assignment.color(assignment);
-                }
+                app.checkAssignmentSort(assignment);
+                app.checkAssignmentDragAndDrop(assignment);
+                app.checkAssignmentColor(assignment);
             });
         });
+    } else {
+        $(window).off('throttledresize.assignment');
     }
 };
 var app = app || {};

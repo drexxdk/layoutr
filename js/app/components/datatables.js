@@ -1,13 +1,12 @@
 ﻿var app = app || {};
 
-app.datatables = function (tables) {
+app.checkDatatables = function (tables) {
     if (tables.length) {
         $.getScript('dist/js/datatables.min.js', function () {
-
             let spacing = 'space-3';
 
             function table_header_input(instance) {
-                var columns = instance.columns().header();
+                let columns = instance.columns().header();
                 let elements = jQuery.grep(columns, function (e) {
                     let column = $(e);
                     return column.hasClass('dropdown') || column.hasClass('text');
@@ -118,11 +117,11 @@ app.datatables = function (tables) {
             }
             function table_dropdowns(wrapper) {
                 let dropdowns = wrapper.find('select.dropdown');
-                app.dropdown(dropdowns);
+                app.checkDropdown(dropdowns);
             }
 
             tables.each(function () {
-                var $this = $(this);
+                let $this = $(this);
                 $this.addClass('nowrap');
                 $this.DataTable({
                     "dom": 'lBfrtip',
@@ -162,17 +161,20 @@ app.datatables = function (tables) {
 
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
-                            var columns = instance.columns().responsiveHidden();
+                            let columns = instance.columns().responsiveHidden();
                             $this.trigger('responsive-resize.dt', [this, columns]);
                         });
 
+                        app.html.on('aside-changed', function () {
+                            instance.responsive.recalc();
+                        });
 
                         $this.on('responsive-resize.dt', function (e, datatable, columns) {
-                            var count = columns.reduce(function (a, b) {
+                            let count = columns.reduce(function (a, b) {
                                 return b === false ? a + 1 : a;
                             }, 0);
 
-                            let elements = table.find('tbody tr:not(.child) > *:first-child');
+                            let elements = table.find('tbody tr:not(.child) > *:first-child:not(.dataTables_empty)');
                             elements.removeAttr('tabindex');
 
                             if (count) {

@@ -1,11 +1,11 @@
 ﻿var app = app || {};
 
 app.enableSwipe = function () {
-    var xDown = null,
+    let xDown = null,
         yDown = null,
         offsetBefore;
 
-    var handleTouchStart = function (evt) {
+    function handleTouchStart(evt) {
         if (app.isSwipe()) {
             xDown = evt.touches[0].clientX;
             yDown = evt.touches[0].clientY;
@@ -14,20 +14,20 @@ app.enableSwipe = function () {
         }
     };
 
-    var handleTouchMove = function (evt) {
+    function handleTouchMove(evt) {
         if (app.isSwipe()) {
-            var offsetAfter = $(evt.target).offset().left;
+            let offsetAfter = $(evt.target).offset().left;
             if (!xDown || !yDown || offsetBefore !== offsetAfter) {
                 return;
             }
-            var xUp = evt.changedTouches[0].clientX,
+            let xUp = evt.changedTouches[0].clientX,
                 yUp = evt.changedTouches[0].clientY,
                 xDiff = xDown - xUp,
                 yDiff = yDown - yUp;
             if (Math.abs(xDiff) > Math.abs(yDiff)) {
-                var distance = parseInt($(window).width() / 2);
+                let distance = parseInt($(window).width() / 2);
                 if (yDiff > -100 || yDiff < 100) {
-                    var currentAside;
+                    let currentAside;
                     if (xDiff > distance) {
                         /* left swipe */
                         if (!app.isModal() && !app.isLoading()) {

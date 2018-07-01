@@ -1407,7 +1407,7 @@ html.modal[data-modal="image"] #modal > div > div {
     position: absolute;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
     fill: #F8F4F0;
     color: #F8F4F0; }
     html.modal[data-modal="image"] #modal > div > div > #modal-container #modal-title:not(:empty) a,
@@ -3314,7 +3314,7 @@ html.desktop ol.list li > a:hover {
   fill: #F8F4F0;
   color: #F8F4F0; }
   .overlay-dark:not(.lazy):after {
-    background-color: rgba(0, 0, 0, 0.2); }
+    background-color: rgba(0, 0, 0, 0.4); }
   .overlay-dark:not(.lazy) a {
     color: #218cff; }
 
@@ -3322,7 +3322,7 @@ html.desktop ol.list li > a:hover {
   fill: #000;
   color: #000; }
   .overlay-light:not(.lazy):after {
-    background-color: rgba(255, 255, 255, 0.2); }
+    background-color: rgba(255, 255, 255, 0.4); }
   .overlay-light:not(.lazy) a {
     color: #0072ED; }
 

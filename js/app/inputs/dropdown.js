@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
-app.dropdown = function (dropdowns) {
+app.checkDropdown = function (dropdowns) {
     dropdowns.each(function () {
-        var $this = $(this),
+        let $this = $(this),
             selected = $this.children('option:selected'),
             html = [],
             attr = $this.attr('class'),
@@ -24,7 +24,7 @@ app.dropdown = function (dropdowns) {
             + '> ');
         
         if (typeof attr !== typeof undefined && attr !== false) {
-            var temp = attr.split(' ');
+            let temp = attr.split(' ');
             temp = $.grep(temp, function (item, index) {
                 return item.trim().match(/^theme-/);
             });
@@ -35,7 +35,7 @@ app.dropdown = function (dropdowns) {
         html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul class="' + theme + '">');
         $this.children().each(function (index) { /* ':not([value=""])' */
-            var $that = $(this),
+            let $that = $(this),
                 text = $that.text();
             if (!text.length) {
                 text = '&nbsp;';
@@ -48,37 +48,37 @@ app.dropdown = function (dropdowns) {
         });
         html.push('</ul>');
         html.push('</div>');
-        var dropdown = html.join("");
+        let dropdown = html.join("");
         $this.after(dropdown);
         dropdown = $this.next();
 
 
         if ($this.hasClass('nowrap')) {
-            var top = dropdown.children().eq(0),
-                bottom = dropdown.children().eq(1);
-            var topWidth = top.width();
-            var bottomWidth = bottom.width();
+            let top = dropdown.children().eq(0),
+                bottom = dropdown.children().eq(1),
+                topWidth = top.width(),
+                bottomWidth = bottom.width();
             if (bottomWidth > topWidth) {
                 top.css('min-width', bottomWidth);
             }
         }
 
         dropdown.on('click', '> div', function () {
-            var $that = $(this);
+            let $that = $(this);
             $that.parent().toggleClass('open');
         });
         dropdown.on('click', 'li', function () {
-            var $that = $(this);
+            let $that = $(this);
             if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
-                var option = $this.children('[value="' + $that.attr('data-id') + '"]'),
+                let option = $this.children('[value="' + $that.attr('data-id') + '"]'),
                     text = $that.text(),
                     math = option.attr('data-math');
                 if (math !== undefined) {
                     text = math;
                 }
-                var label = dropdown.children('div').children('label');
+                let label = dropdown.children('div').children('label');
                 label.text(text);
                 if (math !== undefined) {
                     renderMathInElement(label[0]);
@@ -93,7 +93,7 @@ app.dropdown = function (dropdowns) {
 };
 
 $(window).click(function (e) {
-    var target = $(e.target);
+    let target = $(e.target);
     if (target.closest("div.dropdown").length) {
         $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
     }

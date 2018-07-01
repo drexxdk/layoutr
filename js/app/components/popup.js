@@ -2,10 +2,10 @@
 
 $(function () {
     app.body.on('click', '.show-popup', function () {
-        var $this = $(this),
+        let $this = $(this),
             title = $this.attr('data-popup-title');
         if (title !== undefined) {
-            var theme = $this.attr('data-popup-theme'),
+            let theme = $this.attr('data-popup-theme'),
                 alert = [],
                 position = $(this).attr('data-popup-position'),
                 popup = app.body.children('.popup[data-position="' + position + '"]');
@@ -23,7 +23,7 @@ $(function () {
             if (popup.length) {
                 popup.append(alert);
             } else {
-                var html = [];
+                let html = [];
                 html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
                 html.push(alert);
                 html.push('</div>');

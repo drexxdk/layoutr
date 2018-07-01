@@ -2,8 +2,8 @@
 
 $(function () {
     app.authentication.on('click', '> div > button', function () {
-        var $this = $(this);
-        var type = $this.attr('data-type');
+        let $this = $(this),
+            type = $this.attr('data-type');
         if (app.html.attr('data-authentication') === type) {
             app.html.attr('data-authentication', '');
         } else {

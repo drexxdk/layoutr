@@ -6,7 +6,7 @@ $(function () {
         app.html.removeClass('cookie');
     });
 
-    var cookie = localStorage.getItem("cookie");
+    let cookie = localStorage.getItem("cookie");
     if (cookie === null) {
         app.html.addClass('cookie');
     }

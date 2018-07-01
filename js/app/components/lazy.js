@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.lazy = function (elements) {
+app.checkLazy = function (elements) {
     elements.lazy({
         afterLoad: function (element) {
             element.removeClass('lazy');

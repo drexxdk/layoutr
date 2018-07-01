@@ -1,6 +1,5 @@
 ﻿var app = app || {};
 
-
 app.clearSelection = function () {
     let selection = window.getSelection();
     selection.removeAllRanges();
@@ -83,19 +82,20 @@ app.enableTTS = function () {
             });
 
             $(window).on('mouseup touchend', function (e) {
-                if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
-                    e.stopPropagation();
-                    setTimeout(function () {
-                        snapSelectionToWord();
-                        let selection = $.selection();
-                        if (selection.length) {
-                            app.tts.SpeakWithPromise(selection).then(function () {
-                                app.clearSelection();
-                            });
-                        } else {
-                            app.stopTTS();
-                        }
-                    });
+                if (!$(document.activeElement).is('input, textarea, button, select, .dropdown')) {
+                    if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
+                        setTimeout(function () {
+                            snapSelectionToWord();
+                            let selection = $.selection();
+                            if (selection.length) {
+                                app.tts.SpeakWithPromise(selection).then(function () {
+                                    app.clearSelection();
+                                });
+                            } else {
+                                app.stopTTS();
+                            }
+                        });
+                    }
                 }
             });
 

@@ -1,14 +1,13 @@
 ﻿var app = app || {};
 
 // responsive-background
-app.rb = function () {
-    app.content.find('.rb').each(function () {
-        var $this = $(this),
-            image = $this.attr('data-rb-image'),
-            filetype = $this.attr('data-rb-image-filetype'),
-            sizesWidth = $this.attr('data-rb-sizes'),
-            current = $this.attr('data-rb-current'),
-            aspectRatio = $this.attr('data-rb-aspect-ratio');
+app.checkRb = function (elements) {
+    function setRb(element) {
+        let image = element.attr('data-rb-image'),
+            filetype = element.attr('data-rb-image-filetype'),
+            sizesWidth = element.attr('data-rb-sizes'),
+            current = element.attr('data-rb-current'),
+            aspectRatio = element.attr('data-rb-aspect-ratio');
         if (image !== undefined && image.length &&
             filetype !== undefined && filetype.length &&
             sizesWidth !== undefined && sizesWidth.length &&
@@ -16,13 +15,13 @@ app.rb = function () {
             if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
                 (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
                 sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort(function (a, b) { return a - b; });
-                var goalWidth = $this.width(),
-                    goalHeight = $this.height(),
+                let goalWidth = element.width(),
+                    goalHeight = element.height(),
                     closestWidth,
                     closestHeight,
                     heightPercentage;
 
-                var getHeightInPercentage = function (num, amount) {
+                function getHeightInPercentage(num, amount) {
                     return num * 100 / amount;
                 };
 
@@ -38,12 +37,12 @@ app.rb = function () {
                     heightPercentage = 100;
                 }
 
-                var getHeightInPixels = function (num, amount) {
+                function getHeightInPixels(num, amount) {
                     return num * amount / 100;
                 };
 
                 $.each(sizesWidth, function (index) {
-                    var width = parseInt(this),
+                    let width = parseInt(this),
                         height = getHeightInPixels(heightPercentage, width);
                     if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
                         closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
@@ -54,19 +53,33 @@ app.rb = function () {
 
                 if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
                     app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
-                    var tempImage = app.body.children('#rb');
+                    let tempImage = app.body.children('#rb');
                     tempImage.on('load', function () {
                         tempImage.remove();
-                        var src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
-                        $this.css('background-image', src);
-                        $this.attr('data-rb-current', closestWidth);
+                        let src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
+                        element.css('background-image', src);
+                        element.attr('data-rb-current', closestWidth);
                     });
                 }
             }
         }
-    });
-};
+    }
 
-$(window).resize(function () {
-    app.rb();
-});
+    if(elements.length) {
+        elements.each(function (i, e) {
+            let element = $(e);
+            setRb(element);
+            $(window).on('resize.rb', function () {
+                setRb(element);
+            });
+
+            app.html.on('aside-changed', function () {
+                setRb(element);
+            });
+        });
+
+    } else {
+        $(window).off('resize.rb');
+    }
+    
+};

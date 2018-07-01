@@ -1,139 +1,141 @@
 ﻿var app = app || {};
 
-app.assignment.dragAndDrop = function (assignment) {
-    assignment.attr('data-moving', 0);
-    var id = assignment.attr('data-id'),
-        from = assignment.find('.from .container'),
-        items = assignment.find('.item'),
-        checkboxes = items.find('input[type=checkbox]');
+app.checkAssignmentDragAndDrop = function (assignment) {
+    if (assignment.hasClass('drag-and-drop')) {
+        assignment.attr('data-moving', 0);
+        let id = assignment.attr('data-id'),
+            from = assignment.find('.from .container'),
+            items = assignment.find('.item'),
+            checkboxes = items.find('input[type=checkbox]');
 
-    var getChecked = function () {
-        return $($.map(checkboxes, function (item) {
-            if (item.checked) {
-                return item;
-            }
-        }));
-    };
+        function getChecked() {
+            return $($.map(checkboxes, function (item) {
+                if (item.checked) {
+                    return item;
+                }
+            }));
+        };
     
-    var reset = function () {
-        items.removeClass('valid invalid');
-        var checked = getChecked();
-        if (checked.length) {
-            checked.prop('checked', false);
-        }
-        from.append(items);
-        assignment.removeClass('validated moving');
-        items = items.shuffle();
-    };
-
-    var getCorrect = function () {
-        // this should be retrieved with api call
-        if (id === '1') {
-            return [
-                {
-                    id: '1', // TV
-                    items: ['5', '7']
-                },
-                {
-                    id: '2', // Games
-                    items: ['6', '8']
-                },
-                {
-                    id: '3', // Music
-                    items: ['2', '4']
-                },
-                {
-                    id: '4', // Sport
-                    items: ['1', '3']
-                }
-            ];
-        }
-    };
-    if (bowser.desktop) {
-        assignment.find('.container').each(function () {
-            Sortable.create($(this)[0], {
-                group: 'container', draggable: ".item",
-                animation: 0,
-                scroll: false,
-                forceFallback: true,
-                fallbackOnBody: true,
-                chosenClass: 'drag-and-drop-sortable-chosen',
-                onAdd: function () {
-                    setTimeout(function () {
-                        var checked = getChecked();
-                        if (checked.length) {
-                            checked.prop('checked', false);
-                            assignment.removeClass('moving');
-                        }
-                    });
-                }
-            });
-        });
-    }
-
-    checkboxes.on('click', function () {
-        var $this = $(this),
-            item = $this.parents('.item'),
-            moving = parseInt(assignment.attr('data-moving'));
-        if ($this.is(':checked')) {
-            moving++;
-            assignment.attr('data-moving', moving);
-            assignment.addClass('moving');
-        } else {
-            moving--;
-            assignment.attr('data-moving', moving);
-            if (moving === 0) {
-                assignment.removeClass('moving');
-            }
-        }
-    });
-
-    assignment.on('click', '.place', function () {
-        assignment.removeClass('moving');
-        var checked = getChecked();
-        if (checked.length) {
-            checked.prop('checked', false);
-            $(this).parent('.header').next().children('.container').append(checked.parent());
-        }
-    });
-
-    assignment.on('click', 'button[type="submit"]', function () {
-        if (!assignment.hasClass('validated')) {
-            var checked = getChecked();
+        function reset() {
+            items.removeClass('valid invalid');
+            let checked = getChecked();
             if (checked.length) {
                 checked.prop('checked', false);
             }
-            assignment.addClass('validated');
-            var correct = getCorrect();
-            $(correct).each(function (i, data) {
-                var container = assignment.find('.to .container[data-id="' + data.id + '"]');
-                container.children().each(function () {
-                    var item = $(this);
-                    if ($.inArray(item.attr('data-id'), data.items) !== -1) {
-                        item.addClass('valid');
-                    } else {
-                        item.addClass('invalid');
+            from.append(items);
+            assignment.removeClass('validated moving');
+            items = items.shuffle();
+        };
+
+        function getCorrect() {
+            // this should be retrieved with api call
+            if (id === '1') {
+                return [
+                    {
+                        id: '1', // TV
+                        items: ['5', '7']
+                    },
+                    {
+                        id: '2', // Games
+                        items: ['6', '8']
+                    },
+                    {
+                        id: '3', // Music
+                        items: ['2', '4']
+                    },
+                    {
+                        id: '4', // Sport
+                        items: ['1', '3']
+                    }
+                ];
+            }
+        };
+        if (bowser.desktop) {
+            assignment.find('.container').each(function () {
+                Sortable.create($(this)[0], {
+                    group: 'container', draggable: ".item",
+                    animation: 0,
+                    scroll: false,
+                    forceFallback: true,
+                    fallbackOnBody: true,
+                    chosenClass: 'drag-and-drop-sortable-chosen',
+                    onAdd: function () {
+                        setTimeout(function () {
+                            let checked = getChecked();
+                            if (checked.length) {
+                                checked.prop('checked', false);
+                                assignment.removeClass('moving');
+                            }
+                        });
                     }
                 });
             });
         }
-    });
 
-    assignment.on('click', 'button[type="reset"]', function () {
-        reset();
-    });
+        checkboxes.on('click', function () {
+            let $this = $(this),
+                item = $this.parents('.item'),
+                moving = parseInt(assignment.attr('data-moving'));
+            if ($this.is(':checked')) {
+                moving++;
+                assignment.attr('data-moving', moving);
+                assignment.addClass('moving');
+            } else {
+                moving--;
+                assignment.attr('data-moving', moving);
+                if (moving === 0) {
+                    assignment.removeClass('moving');
+                }
+            }
+        });
 
-    assignment.on('click', 'button.correct', function () {
-        reset();
-        assignment.addClass('validated');
-        var correct = getCorrect();
-        $(correct).each(function (i, data) {
-            var container = assignment.find('.to .container[data-id="' + data.id + '"]');
-            $(data.items).each(function (j, id) {
-                var item = app.getItem(items, id);
-                item.addClass('valid');
-                item.appendTo(container);
+        assignment.on('click', '.place', function () {
+            assignment.removeClass('moving');
+            let checked = getChecked();
+            if (checked.length) {
+                checked.prop('checked', false);
+                $(this).parent('.header').next().children('.container').append(checked.parent());
+            }
+        });
+
+        assignment.on('click', 'button[type="submit"]', function () {
+            if (!assignment.hasClass('validated')) {
+                let checked = getChecked();
+                if (checked.length) {
+                    checked.prop('checked', false);
+                }
+                assignment.addClass('validated');
+                let correct = getCorrect();
+                $(correct).each(function (i, data) {
+                    let container = assignment.find('.to .container[data-id="' + data.id + '"]');
+                    container.children().each(function () {
+                        let item = $(this);
+                        if ($.inArray(item.attr('data-id'), data.items) !== -1) {
+                            item.addClass('valid');
+                        } else {
+                            item.addClass('invalid');
+                        }
+                    });
+                });
+            }
+        });
+
+        assignment.on('click', 'button[type="reset"]', function () {
+            reset();
+        });
+
+        assignment.on('click', 'button.correct', function () {
+            reset();
+            assignment.addClass('validated');
+            let correct = getCorrect();
+            $(correct).each(function (i, data) {
+                let container = assignment.find('.to .container[data-id="' + data.id + '"]');
+                $(data.items).each(function (j, id) {
+                    let item = app.getAssignmentItem(items, id);
+                    item.addClass('valid');
+                    item.appendTo(container);
+                });
             });
         });
-    });
+    }
 };

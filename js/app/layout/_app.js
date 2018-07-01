@@ -24,7 +24,7 @@ $(function () {
 });
 
 $(window).click(function (e) {
-    var target = $(e.target),
+    let target = $(e.target),
         modal = target.closest(app.modal[0]);
 
     if (!app.isLoading() && !app.isFocus()) {
@@ -41,13 +41,13 @@ $(window).click(function (e) {
         if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
             app.html.attr('data-authentication', '');
         } else if (modal.length) {
-            var image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
+            let image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
                 form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
             if (image || form || target.closest('#modal-close').length) {
                 app.closeModal();
             }
         } else {
-            var isSmallBreakpoint = app.isSmallBreakpoint(),
+            let isSmallBreakpoint = app.isSmallBreakpoint(),
                 left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
                 right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
                 notTarget = !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;

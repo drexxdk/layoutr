@@ -1,15 +1,14 @@
 ﻿var app = app || {};
-
-var transitionLock = false;
+let transitionLock = false;
 
 app.toggleAside = function (aside, pageChanged) {
     if (!transitionLock) {
         transitionLock = true;
         app.html.attr('data-authentication', '');
-        var currentAside = app.html.attr('data-aside');
+        let currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
-                var scrollTop = app.scrollTop();
+                let scrollTop = app.scrollTop();
                 app.html.attr('data-aside', '');
                 app.main.focus();
                 app.body.scrollTop(scrollTop); // edge, safari
@@ -28,12 +27,11 @@ app.toggleAside = function (aside, pageChanged) {
         if (app.isTransitions()) {
             setTimeout(function () {
                 transitionLock = false;
-                if (pageChanged) {
-                    app.rb();
-                }
+                app.html.trigger('aside-changed');
             }, app.transitionTime);
         } else {
             transitionLock = false;
+            app.html.trigger('aside-changed');
         }
         app.setHtmlScroll();
     }

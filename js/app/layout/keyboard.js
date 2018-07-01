@@ -2,10 +2,11 @@
 
 $(function () {
     app.body.on("keydown", function (e) {
-        var target = $(e.target),
+        let target = $(e.target),
             parent = target.parent();
         if (app.isLoading()) {
             if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
+                debugger;
                 e.preventDefault();
             }
         } else {
@@ -33,13 +34,13 @@ $(function () {
                     if (app.isAside()) {
                         app.toggleAside(); // closes aside
                     }
-                    var popups = app.body.children('.popup');
+                    let popups = app.body.children('.popup');
                     if (popups.length) {
                         popups.fadeOut(app.fadeOutTime, function () {
                             popups.remove();
                         });
                     }
-                    var dropdowns = app.content.find('div.dropdown.open');
+                    let dropdowns = app.content.find('div.dropdown.open');
                     if (dropdowns.length) {
                         dropdowns.removeClass('open');
                     }
@@ -47,7 +48,7 @@ $(function () {
                 }
             }
             if (e.which === 13) { // enter
-                var dropdown = target.parents('div.dropdown');
+                let dropdown = target.parents('div.dropdown');
                 if (dropdown.length || parent.parent().hasClass('accordion')) {
                     target.click();
                     e.preventDefault();
@@ -65,7 +66,7 @@ $(function () {
     app.body.on('keyup', function (e) {
         if (!app.isLoading() && !app.isFocus()) {
             if (e.which === 9) { // tab
-                var target = $(e.target);
+                let target = $(e.target);
                 if (!target.parents('div.dropdown.open').length) {
                     $('div.dropdown.open').removeClass('open');
                 }
@@ -77,7 +78,7 @@ $(function () {
                         app.closeModal();
                     }
                 } else {
-                    var aside = target.parents('aside');
+                    let aside = target.parents('aside');
                     if (aside.length === 0 && target.is('aside')) {
                         aside = target;
                     }

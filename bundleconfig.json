@@ -40,6 +40,7 @@
       "js/app/layout/focus.js",
       "js/app/layout/swipe.js",
       "js/app/layout/tts.js",
+      "js/app/layout/contentHeader.js",
 
       // inputs
       "js/app/inputs/dropdown.js",

@@ -2,7 +2,7 @@
 
 app.applySettings = function (id, name, type, value, set) {
     if (set) {
-        var entry = {
+        let entry = {
             "id": id,
             "name": name,
             "type": type,
@@ -32,15 +32,15 @@ app.applySettings = function (id, name, type, value, set) {
             });
         }
         if (name === 'theme') {
-            var stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]');
-            var href = stylesheet.attr('href');
-            var split1 = href.split('/');
-            var split2 = split1[split1.length - 1].split('.');
+            let stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]'),
+                href = stylesheet.attr('href'),
+                split1 = href.split('/'),
+                split2 = split1[split1.length - 1].split('.');
             href = [];
             for (i = 0; i < split1.length - 1; i++) {
                 href.push(split1[i] + '/');
             }
-            var theme = id.substring(id.indexOf("-") + 1);
+            let theme = id.substring(id.indexOf("-") + 1);
             href.push(theme);
 
             for (i = 1; i < split2.length; i++) {
@@ -62,7 +62,7 @@ app.applySettings = function (id, name, type, value, set) {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.rb();
+            app.checkRb(app.content.find('.rb'));
         }
         if (id === 'signed-in') {
             app.responsiveHeader();
@@ -77,7 +77,7 @@ $(function () {
         });
         app.header.find('.aside.right').addClass('loaded');
         $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
-            var $this = $(this),
+            let $this = $(this),
                 id = $this.attr('id').replace('settings-', ''),
                 name = $this.attr('name').replace('settings-', ''),
                 type = $this.attr('type'),

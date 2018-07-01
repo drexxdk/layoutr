@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
-app.accordion = function (elements) {
+app.checkAccordion = function (elements) {
     elements.on("click", ".headline", function () {
-        var content = $(this).next();
+        let content = $(this).next();
         if (content.hasClass('open')) {
             content
                 .removeClass('open')

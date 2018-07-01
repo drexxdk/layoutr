@@ -101,7 +101,7 @@ app.scrollTop = function () {
 };
 
 app.tryParseInt = function (str, defaultValue) {
-    var retValue = defaultValue;
+    let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseInt(str);
     }
@@ -109,7 +109,7 @@ app.tryParseInt = function (str, defaultValue) {
 };
 
 app.tryParseFloat = function (str, defaultValue) {
-    var retValue = defaultValue;
+    let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseFloat(str);
     }
