@@ -6,7 +6,6 @@ $(function () {
             parent = target.parent();
         if (app.isLoading()) {
             if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
-                debugger;
                 e.preventDefault();
             }
         } else {

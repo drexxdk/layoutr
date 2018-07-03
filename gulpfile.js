@@ -6,12 +6,11 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
     sass = require("gulp-sass"),
-    cleanCSS = require("gulp-clean-css"),
-    //cssmin = require("gulp-cssmin"),
-    rename = require("gulp-rename"); 
+    cleanCSS = require("gulp-clean-css"); 
 
 const config = {
     js: {
+        prefix: '$js',
         dist: 'dist/js',
         bundles: [
             {
@@ -136,6 +135,7 @@ const config = {
         ]
     },
     css: {
+        prefix: '$css',
         bundles: [
             {
                 name: 'light',
@@ -166,13 +166,13 @@ const config = {
 };
 
 function generateJSTask(task) {
-    gulp.task('js$' + task.name, function () {
+    gulp.task(config.js.prefix + task.name, function () {
         return gulp
             .src(task.files)
             .pipe(concat(task.name + '.js'))
             .pipe(gulp.dest(config.js.dist));
     });
-    gulp.task('js$' + task.name + '.min', function () {
+    gulp.task(config.js.prefix + task.name + '.min', function () {
         return gulp
             .src([config.js.dist + '/' + task.name + '.js'])
             .pipe(babel())
@@ -183,14 +183,14 @@ function generateJSTask(task) {
 }
 
 function generateCSSTask(task) {
-    gulp.task('css$' + task.name, function () {
+    gulp.task(config.css.prefix + task.name, function () {
         return gulp
             .src(task.src)
             .pipe(concat(task.name + '.css'))
             .pipe(sass())
             .pipe(gulp.dest(task.dist))
     });
-    gulp.task('css$' + task.name + '.min', function () {
+    gulp.task(config.css.prefix + task.name + '.min', function () {
         return gulp
             .src(task.dist + '/' + task.name + '.css')
             .pipe(concat(task.name + '.min.css'))
@@ -199,33 +199,37 @@ function generateCSSTask(task) {
     });
 }
 
-for (var i = 0; i < config.js.bundles.length; i++) {
+for (let i = 0; i < config.js.bundles.length; i++) {
     generateJSTask(config.js.bundles[i]);
 }
 
-for (var i = 0; i < config.css.bundles.length; i++) {
+for (let i = 0; i < config.css.bundles.length; i++) {
     generateCSSTask(config.css.bundles[i]);
 }
 
 gulp.task('_watch', () => {
     for (var i = 0; i < config.js.bundles.length; i++) {
         gulp.watch(config.js.bundles[i].files, gulp.series(
-            'js$' + config.js.bundles[i].name,
-            'js$' + config.js.bundles[i].name + '.min'
+            config.js.prefix + config.js.bundles[i].name,
+            config.js.prefix + config.js.bundles[i].name + '.min'
         ));
     }
     for (var i = 0; i < config.css.bundles.length; i++) {
         gulp.watch('scss/**/*.scss', gulp.series(
-            'css$' + config.css.bundles[i].name,
-            'css$' + config.css.bundles[i].name + '.min'
+            config.css.prefix + config.css.bundles[i].name,
+            config.css.prefix + config.css.bundles[i].name + '.min'
         ));
     }
 });
 
-gulp.task('_bundleCSS', gulp.series(config.css.bundles.map(function (elem) { return "css$" + elem.name; }), config.css.bundles.map(function (elem) { return "css$" + elem.name + '.min'; })));
+gulp.task('_bundleCSS', gulp.series(
+    config.css.bundles.map(function (elem) { return config.css.prefix + elem.name; }),
+    config.css.bundles.map(function (elem) { return config.css.prefix + elem.name + '.min'; })
+));
 
-gulp.task('_bundleJS', gulp.series(config.js.bundles.map(function (elem) { return "js$" + elem.name; })));
-
-gulp.task('_optimizeJS', gulp.series(config.js.bundles.map(function (elem) { return "js$" + elem.name + '.min'; })));
+gulp.task('_bundleJS', gulp.series(
+    config.js.bundles.map(function (elem) { return config.js.prefix + elem.name; }),
+    config.js.bundles.map(function (elem) { return config.js.prefix + elem.name + '.min'; })
+));
 
 gulp.task('_default', gulp.series('_watch'));

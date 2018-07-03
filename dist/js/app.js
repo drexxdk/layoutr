@@ -1585,13 +1585,13 @@ app.applySettings = function (id, name, type, value, set) {
                 split1 = href.split('/'),
                 split2 = split1[split1.length - 1].split('.');
             href = [];
-            for (i = 0; i < split1.length - 1; i++) {
+            for (let i = 0; i < split1.length - 1; i++) {
                 href.push(split1[i] + '/');
             }
             let theme = id.substring(id.indexOf("-") + 1);
             href.push(theme);
 
-            for (i = 1; i < split2.length; i++) {
+            for (let i = 1; i < split2.length; i++) {
                 href.push('.' + split2[i]);
             }
             href = href.join("");
@@ -1653,7 +1653,6 @@ $(function () {
             parent = target.parent();
         if (app.isLoading()) {
             if (e.which === 9 || e.ctrlKey && e.keyCode === 65) { // tab ||  ctrl + a
-                debugger;
                 e.preventDefault();
             }
         } else {
@@ -2195,7 +2194,7 @@ var app = app || {};
 app.checkContentHeader = function() {
     if(app.contentHeader.length) {
         $(window).on('scroll.contentHeader', function() {
-            debugger;
+            //debugger;
         });
     } else {
         $(window).off('scroll.contentHeader');

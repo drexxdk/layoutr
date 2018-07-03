@@ -3,7 +3,7 @@
 app.checkContentHeader = function() {
     if(app.contentHeader.length) {
         $(window).on('scroll.contentHeader', function() {
-            debugger;
+            //debugger;
         });
     } else {
         $(window).off('scroll.contentHeader');
