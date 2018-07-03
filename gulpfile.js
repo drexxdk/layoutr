@@ -6,7 +6,9 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
     sass = require("gulp-sass"),
-    cleanCSS = require("gulp-clean-css"); 
+    cleanCSS = require("gulp-clean-css"),
+    autoprefixer = require("gulp-autoprefixer"),
+    sourcemaps = require("gulp-sourcemaps");
 
 const config = {
     js: {
@@ -186,15 +188,21 @@ function generateCSSTask(task) {
     gulp.task(config.css.prefix + task.name, function () {
         return gulp
             .src(task.src)
+            .pipe(sourcemaps.init())
             .pipe(concat(task.name + '.css'))
             .pipe(sass())
+            .pipe(autoprefixer({
+                browsers: ['last 2 versions'],
+                cascade: false
+            }))
+            .pipe(sourcemaps.write())
             .pipe(gulp.dest(task.dist))
     });
     gulp.task(config.css.prefix + task.name + '.min', function () {
         return gulp
             .src(task.dist + '/' + task.name + '.css')
             .pipe(concat(task.name + '.min.css'))
-            .pipe(cleanCSS({ compatibility: 'ie11' }))
+            .pipe(cleanCSS())
             .pipe(gulp.dest(task.dist))
     });
 }

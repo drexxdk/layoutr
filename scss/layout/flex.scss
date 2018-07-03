@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
 .flex {
-    @include flex-display;
+    display:flex;
 
     @for $i from 1 through 10 {
         &.space-#{$i} {
