@@ -4,7 +4,7 @@ $.ajaxSetup({
     cache: true
 });
 
-$(function () {
+$(() => {
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
@@ -21,7 +21,7 @@ $(function () {
             }
         });
     }
-});
+}); 
 
 $(window).click(function (e) {
     let target = $(e.target),

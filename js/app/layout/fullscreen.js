@@ -1,5 +1,5 @@
 ﻿var app = app || {};
-let fullscreenScrollTop;
+var fullscreenScrollTop;
 
 app.requestFullScreen = function () {
     if (!app.fullscreen && bowser.desktop) {

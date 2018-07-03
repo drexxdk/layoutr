@@ -76,4 +76,4 @@
 	else {
 		w.loadCSS = loadCSS;
 	}
-}( typeof global !== "undefined" ? global : this ));
+}( typeof window !== "undefined" ? window : this ));

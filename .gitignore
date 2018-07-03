@@ -7,3 +7,4 @@ Properties/
 *.csproj
 *.csproj.user
 dist/css/theme/light.css
+node_modules/

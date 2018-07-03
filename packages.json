@@ -1,0 +1,15 @@
+﻿{
+  "name": "layoutr",
+  "version": "1.0.0",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^5.0.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-wrap": "^0.14.0",
+    "merge-stream": "^1.0.1"
+  },
+  "dependencies": {}
+}

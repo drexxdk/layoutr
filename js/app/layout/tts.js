@@ -56,9 +56,9 @@ app.enableTTS = function () {
         }
 
         if (bowser.msie) {
-            if (!app.html.hasClass('selection-loaded')) {
-                app.head.append($('<script src="dist/js/polyfills/promise.min.js"></script>'));
-                app.html.addClass('selection-loaded')
+            if (!app.html.hasClass('polyfills-loaded')) {
+                app.head.append($('<script src="dist/js/polyfills.min.js"></script>'));
+                app.html.addClass('polyfills-loaded')
             }
         }
 

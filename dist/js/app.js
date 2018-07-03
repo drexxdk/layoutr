@@ -153,11 +153,13 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
  * https://github.com/ded/bowser
  * MIT License | (c) Dustin Diaz 2015
  */
-
+  
 !function (root, name, definition) {
-    if (typeof module !== 'undefined' && module.exports) module.exports = definition()
-    else if (typeof define === 'function' && define.amd) define(name, definition)
-    else root[name] = definition()
+    if (typeof module != 'undefined' && module.exports) module.exports = definition()
+    else if (typeof define == 'function' && define.amd) define(name, definition)
+    else {
+        window[name] = definition()
+    }
 }(this, 'bowser', function () {
     /**
       * See useragents.js for examples of navigator.userAgent
@@ -186,13 +188,13 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
             , silk = /silk/i.test(ua)
             , sailfish = /sailfish/i.test(ua)
             , tizen = /tizen/i.test(ua)
-            , webos = /(web|hpw)os/i.test(ua)
+            , webos = /(web|hpw)(o|0)s/i.test(ua)
             , windowsphone = /windows phone/i.test(ua)
             , samsungBrowser = /SamsungBrowser/i.test(ua)
             , windows = !windowsphone && /windows/i.test(ua)
             , mac = !iosdevice && !silk && /macintosh/i.test(ua)
             , linux = !android && !sailfish && !tizen && !webos && /linux/i.test(ua)
-            , edgeVersion = getFirstMatch(/edge\/(\d+(\.\d+)?)/i)
+            , edgeVersion = getSecondMatch(/edg([ea]|ios)\/(\d+(\.\d+)?)/i)
             , versionIdentifier = getFirstMatch(/version\/(\d+(\.\d+)?)/i)
             , tablet = /tablet/i.test(ua) && !/tablet pc/i.test(ua)
             , mobile = !tablet && /[^-]mobi/i.test(ua)
@@ -206,7 +208,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
                 , opera: t
                 , version: versionIdentifier || getFirstMatch(/(?:opera|opr|opios)[\s\/](\d+(\.\d+)?)/i)
             }
-        } else if (/opr|opios/i.test(ua)) {
+        } else if (/opr\/|opios/i.test(ua)) {
             // a new Opera
             result = {
                 name: 'Opera'
@@ -221,11 +223,32 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
                 , version: versionIdentifier || getFirstMatch(/(?:SamsungBrowser)[\s\/](\d+(\.\d+)?)/i)
             }
         }
+        else if (/Whale/i.test(ua)) {
+            result = {
+                name: 'NAVER Whale browser'
+                , whale: t
+                , version: getFirstMatch(/(?:whale)[\s\/](\d+(?:\.\d+)+)/i)
+            }
+        }
+        else if (/MZBrowser/i.test(ua)) {
+            result = {
+                name: 'MZ Browser'
+                , mzbrowser: t
+                , version: getFirstMatch(/(?:MZBrowser)[\s\/](\d+(?:\.\d+)+)/i)
+            }
+        }
         else if (/coast/i.test(ua)) {
             result = {
                 name: 'Opera Coast'
                 , coast: t
                 , version: versionIdentifier || getFirstMatch(/(?:coast)[\s\/](\d+(\.\d+)?)/i)
+            }
+        }
+        else if (/focus/i.test(ua)) {
+            result = {
+                name: 'Focus'
+                , focus: t
+                , version: getFirstMatch(/(?:focus)[\s\/](\d+(?:\.\d+)+)/i)
             }
         }
         else if (/yabrowser/i.test(ua)) {
@@ -280,6 +303,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         else if (windowsphone) {
             result = {
                 name: 'Windows Phone'
+                , osname: 'Windows Phone'
                 , windowsphone: t
             }
             if (edgeVersion) {
@@ -300,12 +324,13 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         } else if (chromeos) {
             result = {
                 name: 'Chrome'
+                , osname: 'Chrome OS'
                 , chromeos: t
                 , chromeBook: t
                 , chrome: t
                 , version: getFirstMatch(/(?:chrome|crios|crmo)\/(\d+(\.\d+)?)/i)
             }
-        } else if (/chrome.+? edge/i.test(ua)) {
+        } else if (/edg([ea]|ios)/i.test(ua)) {
             result = {
                 name: 'Microsoft Edge'
                 , msedge: t
@@ -322,6 +347,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         else if (sailfish) {
             result = {
                 name: 'Sailfish'
+                , osname: 'Sailfish OS'
                 , sailfish: t
                 , version: getFirstMatch(/sailfish\s?browser\/(\d+(\.\d+)?)/i)
             }
@@ -341,6 +367,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
             }
             if (/\((mobile|tablet);[^\)]*rv:[\d\.]+\)/i.test(ua)) {
                 result.firefoxos = t
+                result.osname = 'Firefox OS'
             }
         }
         else if (silk) {
@@ -367,6 +394,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         else if (/blackberry|\bbb\d+/i.test(ua) || /rim\stablet/i.test(ua)) {
             result = {
                 name: 'BlackBerry'
+                , osname: 'BlackBerry OS'
                 , blackberry: t
                 , version: versionIdentifier || getFirstMatch(/blackberry[\d]+\/(\d+(\.\d+)?)/i)
             }
@@ -374,6 +402,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         else if (webos) {
             result = {
                 name: 'WebOS'
+                , osname: 'WebOS'
                 , webos: t
                 , version: versionIdentifier || getFirstMatch(/w(?:eb)?osbrowser\/(\d+(\.\d+)?)/i)
             };
@@ -382,6 +411,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         else if (/bada/i.test(ua)) {
             result = {
                 name: 'Bada'
+                , osname: 'Bada'
                 , bada: t
                 , version: getFirstMatch(/dolfin\/(\d+(\.\d+)?)/i)
             };
@@ -389,6 +419,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         else if (tizen) {
             result = {
                 name: 'Tizen'
+                , osname: 'Tizen'
                 , tizen: t
                 , version: getFirstMatch(/(?:tizen\s?)?browser\/(\d+(\.\d+)?)/i) || versionIdentifier
             };
@@ -431,7 +462,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         }
         else if (iosdevice) {
             result = {
-                name: iosdevice === 'iphone' ? 'iPhone' : iosdevice === 'ipad' ? 'iPad' : 'iPod'
+                name: iosdevice == 'iphone' ? 'iPhone' : iosdevice == 'ipad' ? 'iPad' : 'iPod'
             }
             // WTF: version is not part of user agent in web apps
             if (versionIdentifier) {
@@ -471,19 +502,25 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         }
 
         // set OS flags for platforms that have multiple browsers
-        if (!result.windowsphone && !result.msedge && (android || result.silk)) {
+        if (!result.windowsphone && (android || result.silk)) {
             result.android = t
-        } else if (!result.windowsphone && !result.msedge && iosdevice) {
+            result.osname = 'Android'
+        } else if (!result.windowsphone && iosdevice) {
             result[iosdevice] = t
             result.ios = t
+            result.osname = 'iOS'
         } else if (mac) {
             result.mac = t
+            result.osname = 'macOS'
         } else if (xbox) {
             result.xbox = t
+            result.osname = 'Xbox'
         } else if (windows) {
             result.windows = t
+            result.osname = 'Windows'
         } else if (linux) {
             result.linux = t
+            result.osname = 'Linux'
         }
 
         function getWindowsVersion(s) {
@@ -534,15 +571,15 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
         if (
             tablet
             || nexusTablet
-            || iosdevice === 'ipad'
-            || (android && (osMajorVersion === 3 || (osMajorVersion >= 4 && !mobile)))
+            || iosdevice == 'ipad'
+            || (android && (osMajorVersion == 3 || (osMajorVersion >= 4 && !mobile)))
             || result.silk
         ) {
             result.tablet = t
         } else if (
             mobile
-            || iosdevice === 'iphone'
-            || iosdevice === 'ipod'
+            || iosdevice == 'iphone'
+            || iosdevice == 'ipod'
             || android
             || nexusMobile
             || result.blackberry
@@ -560,6 +597,9 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
             (result.vivaldi && result.version >= 1.0) ||
             (result.chrome && result.version >= 20) ||
             (result.samsungBrowser && result.version >= 4) ||
+            (result.whale && compareVersions([result.version, '1.0']) === 1) ||
+            (result.mzbrowser && compareVersions([result.version, '6.0']) === 1) ||
+            (result.focus && compareVersions([result.version, '1.0']) === 1) ||
             (result.firefox && result.version >= 20.0) ||
             (result.safari && result.version >= 6) ||
             (result.opera && result.version >= 10.0) ||
@@ -747,6 +787,11 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
      */
     bowser._detect = detect;
 
+    /*
+     * Set our detect public method to the main bowser object
+     * This is needed to implement bowser in server side
+     */
+    bowser.detect = detect;
     return bowser
 });
 var app = app || {};
@@ -1004,7 +1049,7 @@ $.ajaxSetup({
     cache: true
 });
 
-$(function () {
+$(() => {
     app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
@@ -1021,7 +1066,7 @@ $(function () {
             }
         });
     }
-});
+}); 
 
 $(window).click(function (e) {
     let target = $(e.target),
@@ -1092,7 +1137,7 @@ app.pageLoaded = function (initial) {
     }
 };
 var app = app || {};
-let fullscreenScrollTop;
+var fullscreenScrollTop;
 
 app.requestFullScreen = function () {
     if (!app.fullscreen && bowser.desktop) {
@@ -1235,7 +1280,7 @@ app.toggleAside = function (aside, pageChanged) {
     if (!transitionLock) {
         transitionLock = true;
         app.html.attr('data-authentication', '');
-        let currentAside = app.html.attr('data-aside');
+        let currentAside = app.html.attr('data-aside'); 
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
                 let scrollTop = app.scrollTop();
@@ -1266,7 +1311,7 @@ app.toggleAside = function (aside, pageChanged) {
         app.setHtmlScroll();
     }
 };
-
+ 
 $(function () {
     app.main.find('.aside.left').click(function () {
         app.toggleAside('left');
@@ -2091,9 +2136,9 @@ app.enableTTS = function () {
         }
 
         if (bowser.msie) {
-            if (!app.html.hasClass('selection-loaded')) {
-                app.head.append($('<script src="dist/js/polyfills/promise.min.js"></script>'));
-                app.html.addClass('selection-loaded')
+            if (!app.html.hasClass('polyfills-loaded')) {
+                app.head.append($('<script src="dist/js/polyfills.min.js"></script>'));
+                app.html.addClass('polyfills-loaded')
             }
         }
 

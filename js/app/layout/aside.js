@@ -5,7 +5,7 @@ app.toggleAside = function (aside, pageChanged) {
     if (!transitionLock) {
         transitionLock = true;
         app.html.attr('data-authentication', '');
-        let currentAside = app.html.attr('data-aside');
+        let currentAside = app.html.attr('data-aside'); 
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
                 let scrollTop = app.scrollTop();
@@ -36,7 +36,7 @@ app.toggleAside = function (aside, pageChanged) {
         app.setHtmlScroll();
     }
 };
-
+ 
 $(function () {
     app.main.find('.aside.left').click(function () {
         app.toggleAside('left');
