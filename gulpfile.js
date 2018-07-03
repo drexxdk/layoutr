@@ -139,12 +139,12 @@ const config = {
         bundles: [
             {
                 name: 'light',
-                src: 'scss/theme/light/_theme.scss',
+                src: 'scss/theme/light/_light-theme.scss',
                 dist: 'dist/css/theme'
             },
             {
                 name: 'dark',
-                src: 'scss/theme/dark/_theme.scss',
+                src: 'scss/theme/dark/_dark-theme.scss',
                 dist: 'dist/css/theme'
             },
             {
