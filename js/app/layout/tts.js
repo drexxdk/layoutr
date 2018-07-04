@@ -1,20 +1,20 @@
 ﻿var app = app || {};
 
-app.clearSelection = function () {
+app.clearSelection = () => {
     let selection = window.getSelection();
     selection.removeAllRanges();
     selection.addRange(document.createRange());
 }
-app.stopTTS = function () {
+app.stopTTS = () => {
     app.clearSelection();
     if (app.tts && app.tts.IsSpeaking()) {
         app.tts.ShutUp();
     }
 };
 
-app.enableTTS = function () {
+app.enableTTS = () => {
     if (bowser.desktop) {
-        function snapSelectionToWord() {
+        let snapSelectionToWord = () => {
             let selection = window.getSelection();
             if (!selection.isCollapsed) {
                 let range = selection.getRangeAt(0);
@@ -62,7 +62,7 @@ app.enableTTS = function () {
             }
         }
 
-        $.getScript('dist/js/tts.min.js', function () {
+        $.getScript('dist/js/tts.min.js', () => {
             let awsCredentials = new AWS.Credentials('AKIAIUIGJHORPPUHXYXA', 'jmVeV3yty4koyYVydkjQEz0EBjsR/IeSVmVwknyw');
 
             let settings = {
@@ -75,20 +75,20 @@ app.enableTTS = function () {
 
             app.html.attr('data-tts', true);
 
-            $(window).on('mousedown touchstart', function (e) {
+            $(window).on('mousedown touchstart', (e) => {
                 if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
                     app.clearSelection();
                 }
             });
 
-            $(window).on('mouseup touchend', function (e) {
+            $(window).on('mouseup touchend', (e) => {
                 if (!$(document.activeElement).is('input, textarea, button, select, .dropdown')) {
                     if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
-                        setTimeout(function () {
+                        setTimeout(() => {
                             snapSelectionToWord();
                             let selection = $.selection();
                             if (selection.length) {
-                                app.tts.SpeakWithPromise(selection).then(function () {
+                                app.tts.SpeakWithPromise(selection).then(() => {
                                     app.clearSelection();
                                 });
                             } else {
@@ -99,7 +99,7 @@ app.enableTTS = function () {
                 }
             });
 
-            app.header.find('.tts').click(function () {
+            app.header.find('.tts').click(() => {
                 if (app.html.attr('data-tts') === 'true') {
                     app.html.attr('data-tts', false);
                     app.stopTTS();

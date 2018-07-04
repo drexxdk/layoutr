@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
-app.guid = function () {
-    function s4() {
+app.guid = () => {
+    let s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
             .substring(1);
@@ -10,97 +10,97 @@ app.guid = function () {
         s4() + '-' + s4() + s4() + s4();
 };
 
-app.isSmallBreakpoint = function () {
+app.isSmallBreakpoint = () => {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftShrink() || app.isAsideRight() && !app.isAsideRightShrink();
 };
 
-app.isAside = function () {
+app.isAside = () => {
     return app.html.attr('data-aside').length;
 };
 
-app.isAsideLeft = function () {
+app.isAsideLeft = () => {
     return app.html.attr('data-aside') === 'left';
 };
 
-app.isAsideRight = function () {
+app.isAsideRight = () => {
     return app.html.attr('data-aside') === 'right';
 };
 
-app.isAsideLeftShrink = function () {
+app.isAsideLeftShrink = () => {
     return app.html.hasClass('left-shrink') && app.isAsideLeft();
 };
 
-app.isAsideRightShrink = function () {
+app.isAsideRightShrink = () => {
     return app.html.hasClass('right-shrink') && app.isAsideRight();
 };
 
-app.isAsideLeftCloseOnClickOutside = function () {
+app.isAsideLeftCloseOnClickOutside = () => {
     return app.html.hasClass('close-left-click-outside');
 };
-app.isAsideRightCloseOnClickOutside = function () {
+app.isAsideRightCloseOnClickOutside = () => {
     return app.html.hasClass('close-right-click-outside');
 };
 
-app.isModal = function () {
+app.isModal = () => {
     return app.html.hasClass('modal');
 };
 
-app.isModalForm = function () {
+app.isModalForm = () => {
     return app.html.attr('data-modal') === 'form';
 };
 
-app.isModalImage = function () {
+app.isModalImage = () => {
     return app.html.attr('data-modal') === 'image';
 };
 
-app.isFocus = function () {
+app.isFocus = () => {
     return app.html.hasClass('focus') && app.html.attr('data-focus') === 'true';
 }
 
-app.isTTS = function () {
+app.isTTS = () => {
     return app.html.hasClass('tts');
 }
 
-app.isTTSEnabled = function () {
+app.isTTSEnabled = () => {
     return app.html.hasClass('tts') && app.html.attr('data-tts') === 'true';
 }
-app.isAuthentication = function () {
+app.isAuthentication = () => {
     return app.html.attr('data-authentication') !== '';
 };
 
-app.isLoading = function () {
+app.isLoading = () => {
     return app.html.hasClass('loading');
 };
 
-app.isScrollDisabled = function () {
+app.isScrollDisabled = () => {
     return app.html.hasClass('scroll-disabled');
 };
 
-app.isCloseLeftPageChange = function () {
+app.isCloseLeftPageChange = () => {
     return app.html.hasClass('close-left-page-change');
 };
 
-app.isTransitions = function () {
+app.isTransitions = () => {
     return app.html.hasClass('transitions');
 };
 
-app.isSwipe = function () {
+app.isSwipe = () => {
     return app.html.hasClass('swipe');
 };
 
-app.isSiteLoaded = function () {
+app.isSiteLoaded = () => {
     return app.html.hasClass('site-loaded');
 };
 
-app.capitalize = function (string) {
+app.capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-app.scrollTop = function () {
+app.scrollTop = () => {
     return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
 };
 
-app.tryParseInt = function (str, defaultValue) {
+app.tryParseInt = (str, defaultValue) => {
     let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseInt(str);
@@ -108,7 +108,7 @@ app.tryParseInt = function (str, defaultValue) {
     return retValue;
 };
 
-app.tryParseFloat = function (str, defaultValue) {
+app.tryParseFloat = (str, defaultValue) => {
     let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseFloat(str);
@@ -116,6 +116,6 @@ app.tryParseFloat = function (str, defaultValue) {
     return retValue;
 };
 
-app.cssLoaded = function() {
+app.cssLoaded = () => {
     return app.body.css('visibility') !== 'hidden';
 }

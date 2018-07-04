@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
-app.checkDropdown = function (dropdowns) {
-    dropdowns.each(function () {
-        let $this = $(this),
+app.checkDropdown = (dropdowns) => {
+    dropdowns.each((i, e) => {
+        let $this = $(e),
             selected = $this.children('option:selected'),
             html = [],
             attr = $this.attr('class'),
@@ -34,8 +34,8 @@ app.checkDropdown = function (dropdowns) {
         }
         html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul class="' + theme + '">');
-        $this.children().each(function (index) { /* ':not([value=""])' */
-            let $that = $(this),
+        $this.children().each((i, e) => { /* ':not([value=""])' */
+            let $that = $(e),
                 text = $that.text();
             if (!text.length) {
                 text = '&nbsp;';
@@ -63,12 +63,12 @@ app.checkDropdown = function (dropdowns) {
             }
         }
 
-        dropdown.on('click', '> div', function () {
-            let $that = $(this);
+        dropdown.on('click', '> div', (e) => {
+            let $that = $(e.currentTarget);
             $that.parent().toggleClass('open');
         });
-        dropdown.on('click', 'li', function () {
-            let $that = $(this);
+        dropdown.on('click', 'li', (e) => {
+            let $that = $(e.currentTarget);
             if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
@@ -92,7 +92,7 @@ app.checkDropdown = function (dropdowns) {
     });
 };
 
-$(window).click(function (e) {
+$(window).click((e) => {
     let target = $(e.target);
     if (target.closest("div.dropdown").length) {
         $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');

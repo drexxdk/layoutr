@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 var fullscreenScrollTop;
 
-app.requestFullScreen = function () {
+app.requestFullScreen = () => {
     if (!app.fullscreen && bowser.desktop) {
         fullscreenScrollTop = app.scrollTop();
         if (app.document.requestFullscreen) {
@@ -35,7 +35,7 @@ function fullscreenChange(e) {
     }
 };
 
-app.exitFullScreen = function () {
+app.exitFullScreen = () => {
     if (app.fullscreen && bowser.desktop) {
         if (document.exitFullscreen) {
             document.exitFullscreen();
@@ -52,7 +52,7 @@ app.exitFullScreen = function () {
     }
 };
 
-app.toggleFullScreen = function (element) {
+app.toggleFullScreen = (element) => {
     if (app.fullscreen)
         exitFullScreen();
     else

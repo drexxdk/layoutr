@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.loadPage = function (url, pushState, initial) {
+app.loadPage = (url, pushState, initial) => {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
     let q = url.indexOf('?');
@@ -8,18 +8,16 @@ app.loadPage = function (url, pushState, initial) {
     app.left.find('.tree a.label.active').removeClass('active');
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
-    let tempUrl = url;
-    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
-        url = tempUrl;
-        if (url === '') {
+    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', () => {
+        if (url === '/') {
             app.title.html('');
             if (app.body.children('#svg-browser').length === 0) {
-                $.get(app.host + 'ajax/svg/browser.html', function (data) {
+                $.get(app.host + 'ajax/svg/browser.html', (data) => {
                     $(data).prependTo(app.body);
                 });
             }
             if (app.body.children('#svg-os').length === 0) {
-                $.get(app.host + 'ajax/svg/os.html', function (data) {
+                $.get(app.host + 'ajax/svg/os.html', (data) => {
                     $(data).prependTo(app.body);
                 });
             }
@@ -38,7 +36,7 @@ app.loadPage = function (url, pushState, initial) {
     }
 };
 
-app.internalLinkClick = function (href, e) {
+app.internalLinkClick = (href, e) => {
     if (!e.ctrlKey) {
         e.preventDefault();
         app.loadPage(href, true, false);
@@ -48,7 +46,7 @@ app.internalLinkClick = function (href, e) {
 (function (l) {
     if (l.search) {
         app.url = {};
-        l.search.slice(1).split('&').forEach(function (v) {
+        l.search.slice(1).split('&').forEach((v) => {
             let a = v.split('=');
             app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
@@ -63,7 +61,7 @@ app.internalLinkClick = function (href, e) {
 }(window.location));
 
 let loadPage = window.history.state;
-window.onpopstate = function (event) {
+window.onpopstate = (e) => {
     if (loadPage) {
         let url = location.pathname;
         if (!app.isLocalhost) {
@@ -73,13 +71,13 @@ window.onpopstate = function (event) {
     }
 };
 
-app.applyNavigation = function (id, value, set) {
+app.applyNavigation = (id, value, set) => {
     if (set) {
         let entry = {
             "id": id,
             "value": value
         },
-            exists = $.grep(app.navigation, function (e) { return e.name === name; });
+            exists = $.grep(app.navigation, (e) => { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.navigation.push(entry);
@@ -94,15 +92,15 @@ app.applyNavigation = function (id, value, set) {
 };
 
 $(function () {
-    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
+    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', () => {
         app.navigationTree = app.left.find('.tree');
         app.navigation = JSON.parse(localStorage.getItem("navigation"));
         if (app.navigation === null) app.navigation = [];
         $.each(app.navigation, function (i, entry) {
             app.applyNavigation(entry.id, entry.value, false);
         });
-        app.navigationTree.on('change', 'input[type=checkbox]', function () {
-            let $this = $(this),
+        app.navigationTree.on('change', 'input[type=checkbox]', (e) => {
+            let $this = $(e.currentTarget),
                 id = $this.attr('id'),
                 value = $this.is(':checked');
             app.applyNavigation(id, value, true);
@@ -121,19 +119,19 @@ $(function () {
         app.loadPage('', false, true);
     }
 
-    app.left.on('click', '.tree a.label:not(.active)', function (e) {
-        app.internalLinkClick($(this).attr('href'), e);
+    app.left.on('click', '.tree a.label:not(.active)', (e) => {
+        app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 
-    app.header.on('click', 'h1 a', function (e) {
-        app.internalLinkClick($(this).attr('href'), e);
+    app.header.on('click', 'h1 a', (e) => {
+        app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 
-    app.left.on('click', '#navigation-expand', function () {
+    app.left.on('click', '#navigation-expand', () => {
         app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
     });
 
-    app.left.on('click', '#navigation-collapse', function () {
+    app.left.on('click', '#navigation-collapse', () => {
         app.navigationTree.find('input[type=checkbox]:checked').click();
     });
 });

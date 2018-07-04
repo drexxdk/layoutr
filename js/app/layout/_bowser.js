@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-$(function () {
+$(() => {
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
     } else if (bowser.msie) {
@@ -23,7 +23,7 @@ $(function () {
     if (bowser.msie || bowser.msedge) {
         // disable smooth scrolling, since it causes element jumping/lagging on scroll
         // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
-        app.body.on("mousewheel", function (e) {
+        app.body.on("mousewheel", (e) => {
             let target = $(e.target);
             if (!app.isModal() && event.ctrlKey !== true) {
                 e.preventDefault();
@@ -42,7 +42,7 @@ $(function () {
 
         // at some zoom levels edge/ie makes $(window) heigher than $(document)
         // it causes a gap between footer and the bottom of $(window).
-        $(window).scroll(function () {
+        $(window).scroll(() => {
             let scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop + $(window).height() >= $(document).height()) {
                 app.html.addClass('subpixel');

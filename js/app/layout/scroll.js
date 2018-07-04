@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-function scrollbarWidth() {
+var scrollbarWidth = () => {
     app.body.append('<div id="scrollbar-width"></div>');
     let element = app.body.children('#scrollbar-width');
     element.css({
@@ -14,7 +14,7 @@ function scrollbarWidth() {
     element.remove();
 };
 
-app.disableScroll = function () {
+app.disableScroll = () => {
     if (app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = false;
         if (app.isModal()) {
@@ -28,7 +28,7 @@ app.disableScroll = function () {
     }
 };
 
-app.enableScroll = function () {
+app.enableScroll = () => {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         if (app.isSiteLoaded()) {
@@ -43,7 +43,7 @@ app.enableScroll = function () {
     }
 };
 
-app.setHtmlScroll = function () {
+app.setHtmlScroll = () => {
     if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isAsideLeft() && !app.isAsideRight())) {
         app.enableScroll();
     } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.isAsideLeft() || app.isAsideRight())) {
@@ -51,12 +51,12 @@ app.setHtmlScroll = function () {
     }
 };
 
-$(window).resize(function () {
+$(window).resize(() => {
     app.checkModal();
     app.setHtmlScroll();
     scrollbarWidth();
 });
 
-$(function () {
+$(() => {
     scrollbarWidth();
 });

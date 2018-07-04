@@ -1,17 +1,17 @@
 ﻿var app = app || {};
 
-app.checkMath = function (math) {
+app.checkMath = (math) => {
     if (math.length) {
         if (!app.html.hasClass('math-loaded')) {
             app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
             app.html.addClass('math-loaded');
         }
 
-        $.getScript('dist/js/katex.min.js', function () {
-            math.each(function () {
-                let $this = $(this);
+        $.getScript('dist/js/katex.min.js', () => {
+            math.each((i, e) => {
+                let $this = $(e);
                 renderMathInElement($this[0]);
-                setTimeout(function () {
+                setTimeout(() => {
                     $this.removeClass('math');
                 });
             });

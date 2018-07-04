@@ -1,10 +1,10 @@
 ﻿var app = app || {};
 
-app.checkContentHeader = function() {
+app.checkContentHeader = () => {
     if(app.contentHeader.length) {
-        $(window).on('scroll.contentHeader', function() {
-            //debugger;
-        });
+        //$(window).on('scroll.contentHeader', () => {
+        //    //debugger;
+        //});
     } else {
         $(window).off('scroll.contentHeader');
     }

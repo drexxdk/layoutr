@@ -180,7 +180,7 @@ function generateJSTask(task) {
             .src([config.js.dist + '/' + task.name + '.js'])
             .pipe(babel())
             .pipe(concat(task.name + '.min.js'))
-            //.pipe(uglify())
+            .pipe(uglify())
             .pipe(gulp.dest(config.js.dist));
     });
 }

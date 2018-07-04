@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 $(function () {
-    app.body.on("keydown", function (e) {
+    app.body.on("keydown", (e) => {
         let target = $(e.target),
             parent = target.parent();
         if (app.isLoading()) {
@@ -35,7 +35,7 @@ $(function () {
                     }
                     let popups = app.body.children('.popup');
                     if (popups.length) {
-                        popups.fadeOut(app.fadeOutTime, function () {
+                        popups.fadeOut(app.fadeOutTime, () => {
                             popups.remove();
                         });
                     }
@@ -62,7 +62,7 @@ $(function () {
         }
     });
 
-    app.body.on('keyup', function (e) {
+    app.body.on('keyup', (e) => {
         if (!app.isLoading() && !app.isFocus()) {
             if (e.which === 9) { // tab
                 let target = $(e.target);

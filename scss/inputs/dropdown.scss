@@ -64,6 +64,10 @@
 
         &.not-first > ul > li:first-child {
             display: none;
+
+            & + li {
+                border-top: none;
+            }
         }
 
         &.direction-up {

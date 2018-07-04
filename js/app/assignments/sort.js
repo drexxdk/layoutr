@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.checkAssignmentSort = function (assignment) {
+app.checkAssignmentSort = (assignment) => {
     if (assignment.hasClass('sort')) {
         let id = assignment.attr('data-id'),
             container = assignment.find('.container'),
@@ -15,7 +15,7 @@ app.checkAssignmentSort = function (assignment) {
         });
 
         if (!container.hasClass('wrap')) {
-            function checkWidth() {
+            let checkWidth = () => {
                 container.css('height', container.height()).removeClass('row').addClass('column');
                 let containerLeft = container[0].getBoundingClientRect().left,
                     firstItem = container.find('> .item:first-child'),
@@ -26,14 +26,14 @@ app.checkAssignmentSort = function (assignment) {
                 container.css('height', '').addClass('checked');
             };
 
-            function awaitCSS() {
-                setInterval(function () {
+            let awaitCSS = () => {
+                setInterval(() => {
                     if (app.cssLoaded()) {
                         clearInterval(awaitCSS);
 
                         checkWidth();
 
-                        $(window).on("throttledresize.assignment", function () {
+                        $(window).on("throttledresize.assignment", () => {
                             checkWidth();
                         });
                     }
@@ -42,13 +42,13 @@ app.checkAssignmentSort = function (assignment) {
             awaitCSS();
         }
 
-        function reset() {
+        let reset = () => {
             items.removeClass('valid invalid');
             assignment.removeClass('validated');
             items = items.shuffle();
         };
 
-        function getCorrect() {
+        let getCorrect = () => {
             // this should be retrieved with api call
             if (id === '1') {
                 return ['3', '1', '2', '5', '4', '7', '6', '8', '9'];
@@ -57,12 +57,12 @@ app.checkAssignmentSort = function (assignment) {
             }
         };
 
-        assignment.on('click', 'button[type="submit"]', function () {
+        assignment.on('click', 'button[type="submit"]', () => {
             if (!assignment.hasClass('validated')) {
                 assignment.addClass('validated');
                 let correct = getCorrect();
-                $(correct).each(function (i, id) {
-                    let item = app.getItem(items, id);
+                $(correct).each((i, id) => {
+                    let item = app.getAssignmentItem(items, id);
                     if (item.index() === i) {
                         item.addClass('valid');
                     } else {
@@ -72,7 +72,7 @@ app.checkAssignmentSort = function (assignment) {
             }
         });
 
-        assignment.on('click', 'button[type="reset"]', function () {
+        assignment.on('click', 'button[type="reset"]', () => {
             reset();
         });
 
@@ -84,11 +84,11 @@ app.checkAssignmentSort = function (assignment) {
             }
         };
 
-        assignment.on('click', 'button.correct', function () {
+        assignment.on('click', 'button.correct', () => {
             reset();
             assignment.addClass('validated');
             let correct = getCorrect();
-            $(correct).each(function (i, id) {
+            $(correct).each((i, id) => {
                 let item = app.getAssignmentItem(items, id);
                 item.addClass('valid');
                 insertAtIndex(i, item);

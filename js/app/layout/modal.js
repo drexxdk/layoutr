@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.showModal = function (type) {
+app.showModal = (type) => {
     app.html.attr('data-modal', type);
     app.html.addClass('modal');
     app.hideLoading();
@@ -8,7 +8,7 @@ app.showModal = function (type) {
     app.modal.focus();
 };
 
-app.closeModal = function () {
+app.closeModal = () => {
     if (app.fullscreen) {
         app.exitFullScreen();
     } else {
@@ -19,7 +19,7 @@ app.closeModal = function () {
     }
 };
 
-app.checkModal = function () {
+app.checkModal = () => {
     if (app.isModal()) {
         app.body.css('padding-right', app.scrollbarWidth);
         if (app.html.attr('data-aside') === 'right') {
@@ -43,8 +43,8 @@ app.checkModal = function () {
 };
 
 $(function () {
-    app.body.on('click', '.modal', function () {
-        let $this = $(this),
+    app.body.on('click', '.modal', (e) => {
+        let $this = $(e.currentTarget),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
             app.showLoading();
@@ -81,7 +81,7 @@ $(function () {
             app.modal.html(div);
             if (type === 'image') {
                 let image = app.modal.find('#modal-img');
-                image.on('load', function () {
+                image.on('load', () => {
                     if (bowser.android) {
                         image.css('max-height', window.innerHeight);
                     }
@@ -104,7 +104,7 @@ $(function () {
         }
     });
 
-    app.body.on('click', '#modal-toggle', function () {
+    app.body.on('click', '#modal-toggle', () => {
         app.modal.toggleClass('info-shown');
     });
 });

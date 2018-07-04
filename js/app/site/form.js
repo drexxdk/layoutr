@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.pageForm = function () {
+app.pageForm = () => {
     app.addValidation(
         app.content.find('#form'),
         {

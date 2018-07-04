@@ -1,9 +1,9 @@
 ﻿var app = app || {};
 
-app.enableFocus = function () {
+app.enableFocus = () => {
     let component = app.Focus.find('> .component > div');
 
-    $.getScript('dist/js/focus.min.js', function () {
+    $.getScript('dist/js/focus.min.js', () => {
         component
             .draggable({
                 axis: "y",
@@ -20,16 +20,16 @@ app.enableFocus = function () {
                 e.stopPropagation();
             });
 
-        app.Focus.on('click', '.close', function () {
+        app.Focus.on('click', '.close', () => {
             app.hideFocus();
         });
 
-        app.main.find('.focus').click(function () {
+        app.main.find('.focus').click(() => {
             app.showFocus();
         });
 
         let height = $(window).height(); 
-        $(window).resize(function () {
+        $(window).resize(() => {
             // do nothing if the height is the same
             if ($(window).height() == height) return;
             height = $(window).height();
@@ -38,11 +38,11 @@ app.enableFocus = function () {
     });
 };
 
-app.showFocus = function () {
+app.showFocus = () => {
     app.html.attr('data-focus', true);
     app.Focus.focus();
 };
-app.hideFocus = function () {
+app.hideFocus = () => {
     let scrollTop = app.scrollTop();
     app.html.attr('data-focus', false);
     app.main.focus();

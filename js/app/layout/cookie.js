@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
-$(function () {
-    app.cookie.on('click', '#cookie-accept', function () {
+$(() => {
+    app.cookie.on('click', '#cookie-accept', () => {
         localStorage.setItem('cookie', 'cookie');
         app.html.removeClass('cookie');
     });

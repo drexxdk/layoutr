@@ -1,17 +1,17 @@
 ﻿var app = app || {};
 
-app.getAssignmentItem = function (items, id) {
-    return $($.map(items, function (item) {
+app.getAssignmentItem = (items, id) => {
+    return $($.map(items, (item) => {
         if (item.getAttribute("data-id") === id) {
             return item;
         }
     }));
 };
 
-app.checkAssignment = function (assignments) {
+app.checkAssignment = (assignments) => {
     if (assignments.length) {
-        $.getScript('dist/js/assignments.js', function () {
-            $(assignments).each(function (index, assignment) {
+        $.getScript('dist/js/assignments.js', () => {
+            $(assignments).each((i, assignment) => {
                 assignment = $(assignment);
                 app.checkAssignmentSort(assignment);
                 app.checkAssignmentDragAndDrop(assignment);

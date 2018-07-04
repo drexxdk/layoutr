@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
-$(function () {
-    app.authentication.on('click', '> div > button', function () {
-        let $this = $(this),
+$(() => {
+    app.authentication.on('click', '> div > button', (e) => {
+        let $this = $(e.currentTarget),
             type = $this.attr('data-type');
         if (app.html.attr('data-authentication') === type) {
             app.html.attr('data-authentication', '');
@@ -12,7 +12,7 @@ $(function () {
         }
     });
     
-    app.authenticatedLinks.on('click', '> a', function (e) {
+    app.authenticatedLinks.on('click', '> a', (e) => {
         e.preventDefault();
     });
 

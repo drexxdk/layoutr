@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 let transitionLock = false;
 
-app.toggleAside = function (aside, pageChanged) {
+app.toggleAside = (aside, pageChanged) => {
     if (!transitionLock) {
         transitionLock = true;
         app.html.attr('data-authentication', '');
@@ -37,12 +37,12 @@ app.toggleAside = function (aside, pageChanged) {
     }
 };
  
-$(function () {
-    app.main.find('.aside.left').click(function () {
+$(() => {
+    app.main.find('.aside.left').click(() => {
         app.toggleAside('left');
     });
 
-    app.main.find('.aside.right').click(function () {
+    app.main.find('.aside.right').click(() => {
         app.toggleAside('right');
     });
 });

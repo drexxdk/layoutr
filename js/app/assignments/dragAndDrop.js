@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.checkAssignmentDragAndDrop = function (assignment) {
+app.checkAssignmentDragAndDrop = (assignment) => {
     if (assignment.hasClass('drag-and-drop')) {
         assignment.attr('data-moving', 0);
         let id = assignment.attr('data-id'),
@@ -8,15 +8,15 @@ app.checkAssignmentDragAndDrop = function (assignment) {
             items = assignment.find('.item'),
             checkboxes = items.find('input[type=checkbox]');
 
-        function getChecked() {
-            return $($.map(checkboxes, function (item) {
+        let getChecked = () => {
+            return $($.map(checkboxes, (item) => {
                 if (item.checked) {
                     return item;
                 }
             }));
         };
     
-        function reset() {
+        let reset = () => {
             items.removeClass('valid invalid');
             let checked = getChecked();
             if (checked.length) {
@@ -27,7 +27,7 @@ app.checkAssignmentDragAndDrop = function (assignment) {
             items = items.shuffle();
         };
 
-        function getCorrect() {
+        let getCorrect = () => {
             // this should be retrieved with api call
             if (id === '1') {
                 return [
@@ -51,16 +51,16 @@ app.checkAssignmentDragAndDrop = function (assignment) {
             }
         };
         if (bowser.desktop) {
-            assignment.find('.container').each(function () {
-                Sortable.create($(this)[0], {
+            assignment.find('.container').each((i, e) => {
+                Sortable.create(e, {
                     group: 'container', draggable: ".item",
                     animation: 0,
                     scroll: false,
                     forceFallback: true,
                     fallbackOnBody: true,
                     chosenClass: 'drag-and-drop-sortable-chosen',
-                    onAdd: function () {
-                        setTimeout(function () {
+                    onAdd: () => {
+                        setTimeout(() => {
                             let checked = getChecked();
                             if (checked.length) {
                                 checked.prop('checked', false);
@@ -72,8 +72,8 @@ app.checkAssignmentDragAndDrop = function (assignment) {
             });
         }
 
-        checkboxes.on('click', function () {
-            let $this = $(this),
+        checkboxes.on('click', (e) => {
+            let $this = $(e.currentTarget),
                 item = $this.parents('.item'),
                 moving = parseInt(assignment.attr('data-moving'));
             if ($this.is(':checked')) {
@@ -89,16 +89,17 @@ app.checkAssignmentDragAndDrop = function (assignment) {
             }
         });
 
-        assignment.on('click', '.place', function () {
+        assignment.on('click', '.place', (e) => {
+            let $this = $(e.currentTarget)
             assignment.removeClass('moving');
             let checked = getChecked();
             if (checked.length) {
                 checked.prop('checked', false);
-                $(this).parent('.header').next().children('.container').append(checked.parent());
+                $this.parent('.header').next().children('.container').append(checked.parent());
             }
         });
 
-        assignment.on('click', 'button[type="submit"]', function () {
+        assignment.on('click', 'button[type="submit"]', () => {
             if (!assignment.hasClass('validated')) {
                 let checked = getChecked();
                 if (checked.length) {
@@ -106,10 +107,10 @@ app.checkAssignmentDragAndDrop = function (assignment) {
                 }
                 assignment.addClass('validated');
                 let correct = getCorrect();
-                $(correct).each(function (i, data) {
+                $(correct).each((i, data) => {
                     let container = assignment.find('.to .container[data-id="' + data.id + '"]');
-                    container.children().each(function () {
-                        let item = $(this);
+                    container.children().each((i, child) => {
+                        let item = $(child);
                         if ($.inArray(item.attr('data-id'), data.items) !== -1) {
                             item.addClass('valid');
                         } else {
@@ -120,17 +121,17 @@ app.checkAssignmentDragAndDrop = function (assignment) {
             }
         });
 
-        assignment.on('click', 'button[type="reset"]', function () {
+        assignment.on('click', 'button[type="reset"]', () => {
             reset();
         });
 
-        assignment.on('click', 'button.correct', function () {
+        assignment.on('click', 'button.correct', () => {
             reset();
             assignment.addClass('validated');
             let correct = getCorrect();
-            $(correct).each(function (i, data) {
+            $(correct).each((i, data) => {
                 let container = assignment.find('.to .container[data-id="' + data.id + '"]');
-                $(data.items).each(function (j, id) {
+                $(data.items).each((j, id) => {
                     let item = app.getAssignmentItem(items, id);
                     item.addClass('valid');
                     item.appendTo(container);

@@ -1,27 +1,27 @@
 ﻿var app = app || {};
 
-app.enableSwipe = function () {
+app.enableSwipe = () => {
     let xDown = null,
         yDown = null,
         offsetBefore;
 
-    function handleTouchStart(evt) {
+    let handleTouchStart = (e) => {
         if (app.isSwipe()) {
-            xDown = evt.touches[0].clientX;
-            yDown = evt.touches[0].clientY;
+            xDown = e.touches[0].clientX;
+            yDown = e.touches[0].clientY;
 
-            offsetBefore = $(evt.target).offset().left;
+            offsetBefore = $(e.target).offset().left;
         }
     };
 
-    function handleTouchMove(evt) {
+    let handleTouchMove = (e) => {
         if (app.isSwipe()) {
-            let offsetAfter = $(evt.target).offset().left;
+            let offsetAfter = $(e.target).offset().left;
             if (!xDown || !yDown || offsetBefore !== offsetAfter) {
                 return;
             }
-            let xUp = evt.changedTouches[0].clientX,
-                yUp = evt.changedTouches[0].clientY,
+            let xUp = e.changedTouches[0].clientX,
+                yUp = e.changedTouches[0].clientY,
                 xDiff = xDown - xUp,
                 yDiff = yDown - yUp;
             if (Math.abs(xDiff) > Math.abs(yDiff)) {

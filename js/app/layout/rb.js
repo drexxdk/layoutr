@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
 // responsive-background
-app.checkRb = function (elements) {
-    function setRb(element) {
+app.checkRb = (elements) => {
+    let setRb = (element) => {
         let image = element.attr('data-rb-image'),
             filetype = element.attr('data-rb-image-filetype'),
             sizesWidth = element.attr('data-rb-sizes'),
@@ -14,7 +14,7 @@ app.checkRb = function (elements) {
             aspectRatio !== undefined && aspectRatio.length) {
             if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
                 (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
-                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort(function (a, b) { return a - b; });
+                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort((a, b) => { return a - b; });
                 let goalWidth = element.width(),
                     goalHeight = element.height(),
                     closestWidth,
@@ -41,8 +41,8 @@ app.checkRb = function (elements) {
                     return num * amount / 100;
                 };
 
-                $.each(sizesWidth, function (index) {
-                    let width = parseInt(this),
+                $.each(sizesWidth, (i, e) => {
+                    let width = parseInt(e),
                         height = getHeightInPixels(heightPercentage, width);
                     if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
                         closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
@@ -54,7 +54,7 @@ app.checkRb = function (elements) {
                 if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
                     app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
                     let tempImage = app.body.children('#rb');
-                    tempImage.on('load', function () {
+                    tempImage.on('load', () => {
                         tempImage.remove();
                         let src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
                         element.css('background-image', src);
@@ -66,14 +66,14 @@ app.checkRb = function (elements) {
     }
 
     if(elements.length) {
-        elements.each(function (i, e) {
+        elements.each((i, e) => {
             let element = $(e);
             setRb(element);
-            $(window).on('resize.rb', function () {
+            $(window).on('resize.rb', () => {
                 setRb(element);
             });
 
-            app.html.on('aside-changed', function () {
+            app.html.on('aside-changed', () => {
                 setRb(element);
             });
         });

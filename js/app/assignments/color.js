@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.checkAssignmentColor = function(assignment) {
+app.checkAssignmentColor = (assignment) => {
     if(assignment.hasClass('color')) {
         let assignmentId = assignment.attr('data-id'),
             controls = assignment.find('.controls > button'),
@@ -10,14 +10,14 @@ app.checkAssignmentColor = function(assignment) {
             correctSvg = '<svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>',
             wrongSvg = '<svg focusable="false"><use xlink:href="#svg-close"></use></svg>';
 
-        function reset() {
+        let reset = () => {
             controls.filter('.eraser').addClass('active');
             controls.filter(':not(.eraser)').removeClass('active').empty();
             items.removeAttr('data-id');
             assignment.removeClass('validated');
         };
 
-        function getCorrect() {
+        let getCorrect = () => {
             // this should be retrieved with api call
             if (assignmentId === '1') {
                 return [
@@ -48,10 +48,10 @@ app.checkAssignmentColor = function(assignment) {
             }
         };
 
-        function getItems(id) {
+        let getItems = (id) => {
             let result = 0;
-            items.each(function () {
-                let $this = $(this),
+            items.each((i, data) => {
+                let $this = $(data),
                     itemId = $this.attr('data-id');
                 if (itemId !== undefined && id === itemId) {
                     result++;
@@ -60,11 +60,11 @@ app.checkAssignmentColor = function(assignment) {
             return result;
         };
 
-        assignment.on('click', 'button[type="submit"]', function () {
+        assignment.on('click', 'button[type="submit"]', () => {
             if (!assignment.hasClass('validated')) {
                 assignment.addClass('validated');
                 let correct = getCorrect();
-                $(correct).each(function (i, data) {
+                $(correct).each((i, data) => {
                     let selected = getItems(data.id),
                         append = (data.value === selected) ? correctSvg : wrongSvg;
                     controls.filter('[data-id="' + data.id + '"]').append(append);
@@ -72,15 +72,15 @@ app.checkAssignmentColor = function(assignment) {
             }
         });
 
-        assignment.on('click', 'button[type="reset"]', function () {
+        assignment.on('click', 'button[type="reset"]', () => {
             reset();
         });
 
-        assignment.on('click', 'button.correct', function () {
+        assignment.on('click', 'button.correct', () => {
             reset();
             assignment.addClass('validated');
             let correct = getCorrect();
-            $(correct).each(function (i, data) {
+            $(correct).each((i, data) => {
                 for (i = 0; i < data.value; i++) {
                     $(items.filter(':not([data-id])')[0]).attr('data-id', data.id);
                 }
@@ -88,14 +88,14 @@ app.checkAssignmentColor = function(assignment) {
             });
         });
 
-        controls.on('click', function () {
-            let $this = $(this);
+        controls.on('click', (e) => {
+            let $this = $(e.currentTarget);
             $this.addClass('active').siblings('.active').removeClass('active');
             activeId = $this.attr('data-id');
         });
 
-        items.on('click', function () {
-            let $this = $(this);
+        items.on('click', (e) => {
+            let $this = $(e.currentTarget);
             $this.attr('data-id', activeId);
         });
     };

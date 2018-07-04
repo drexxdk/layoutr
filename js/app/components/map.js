@@ -1,7 +1,7 @@
 ﻿var app = app || {},
     google;
 
-app.checkMap = function (maps) {
+app.checkMap = (maps) => {
     app.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
     if (maps.length) {
         if (!app.html.hasClass('map-loaded')) {
@@ -10,10 +10,10 @@ app.checkMap = function (maps) {
         }
 
         let timeout = 100;
-        function checkGoogle() {
+        let checkGoogle = () => {
             if (google !== undefined) {
-                maps.each(function () {
-                    let $this = $(this),
+                maps.each((i, e) => {
+                    let $this = $(e),
                         lat = app.tryParseFloat($this.attr('data-lat'), 37.4029937),
                         lng = app.tryParseFloat($this.attr('data-lng'), -122.1811793),
                         zoom = app.tryParseInt($this.attr('data-zoom'), 4),
@@ -29,7 +29,7 @@ app.checkMap = function (maps) {
                         map: map
                     });
 
-                    $(window).on("throttledresize.map", function () {
+                    $(window).on("throttledresize.map", () => {
                         google.maps.event.trigger($this[0], 'resize');
                     });
                 });

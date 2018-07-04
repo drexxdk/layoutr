@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-$(function () {
+$(() => {
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');

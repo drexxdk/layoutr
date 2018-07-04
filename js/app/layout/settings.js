@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.applySettings = function (id, name, type, value, set) {
+app.applySettings = (id, name, type, value, set) => {
     if (set) {
         let entry = {
             "id": id,
@@ -8,7 +8,7 @@ app.applySettings = function (id, name, type, value, set) {
             "type": type,
             "value": value
         },
-            exists = $.grep(app.settings, function (e) { return e.name === name; });
+            exists = $.grep(app.settings, (e) => { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.settings.push(entry);
@@ -27,7 +27,7 @@ app.applySettings = function (id, name, type, value, set) {
     }
     if (type === 'checkbox' || type === "radio") {
         if (type === 'radio') {
-            $.each(app.right.find('input[type=radio][name="settings-' + name + '"]:not(#settings-' + id + ')'), function (i, radio) {
+            $.each(app.right.find('input[type=radio][name="settings-' + name + '"]:not(#settings-' + id + ')'), (i, radio) => {
                 app.html.removeClass($(radio).attr('id').replace('settings-', ''));
             });
         }
@@ -70,14 +70,14 @@ app.applySettings = function (id, name, type, value, set) {
     }
 };
 
-$(function () {
-    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
-        $.each(app.settings, function (i, entry) {
+$(() => {
+    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', () => {
+        $.each(app.settings, (i, entry) => {
             app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
         });
         app.header.find('.aside.right').addClass('loaded');
-        $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
-            let $this = $(this),
+        $(this).on('change', 'input[type=checkbox], input[type=radio]', (e) => {
+            let $this = $(e.currentTarget),
                 id = $this.attr('id').replace('settings-', ''),
                 name = $this.attr('name').replace('settings-', ''),
                 type = $this.attr('type'),
@@ -92,7 +92,7 @@ $(function () {
         app.responsiveHeader();
     });
 
-    app.right.on('click', '#settings-clear-localstorage', function () {
+    app.right.on('click', '#settings-clear-localstorage', () => {
         localStorage.clear();
         location.reload();
     });

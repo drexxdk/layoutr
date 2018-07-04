@@ -1,8 +1,8 @@
 ﻿var app = app || {};
 
-app.checkTooltip = function (tooltips) {
-    tooltips.each(function () {
-        let $this = $(this),
+app.checkTooltip = (tooltips) => {
+    tooltips.each((i, e) => {
+        let $this = $(e),
             interactive = $this.hasClass('interactive');
         $this.tooltipster({
             animationDuration: 0,

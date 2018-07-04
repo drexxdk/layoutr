@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.contentLoaded = function (element) {
+app.contentLoaded = (element) => {
     app.checkRb(element.find('.rb'));
     app.checkContentHeader();
     app.checkLazy(element.find('.lazy'));
@@ -14,13 +14,13 @@ app.contentLoaded = function (element) {
     app.checkDatatables(element.find('.dataTable'));
 }
 
-app.pageLoaded = function (initial) {
+app.pageLoaded = (initial) => {
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
     app.html.animate({ scrollTop: 0 }, 0);
     app.contentHeader = app.content.children('.content-header:not(.full)');
-    setTimeout(function () {
+    setTimeout(() => {
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
         }

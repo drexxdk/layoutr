@@ -1,10 +1,10 @@
 ﻿var app = app || {};
 
-app.responsiveHeader = function () {
+app.responsiveHeader = () => {
     let h1 = app.header.find('h1'),
         link = h1.children('a');
 
-    function check() {
+    let check = () => {
         app.unauthenticated.addClass('text');
         let a = h1.outerWidth(),
             b = link.outerWidth();
@@ -14,12 +14,12 @@ app.responsiveHeader = function () {
         app.unauthenticated.addClass('checked');
     }
         
-    function awaitCSS() {
-        setInterval(function () {
+    let awaitCSS = () => {
+        setInterval(() => {
             if (app.cssLoaded()) {
                 clearInterval(awaitCSS);
 
-                $(window).on('resize', function () {
+                $(window).on('resize', () => {
                     check();
                 });
 

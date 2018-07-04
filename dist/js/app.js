@@ -796,7 +796,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 });
 var app = app || {};
 
-$(function () {
+$(() => {
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');
@@ -833,8 +833,8 @@ $(function () {
 });
 var app = app || {};
 
-app.guid = function () {
-    function s4() {
+app.guid = () => {
+    let s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
             .substring(1);
@@ -843,97 +843,97 @@ app.guid = function () {
         s4() + '-' + s4() + s4() + s4();
 };
 
-app.isSmallBreakpoint = function () {
+app.isSmallBreakpoint = () => {
     return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftShrink() || app.isAsideRight() && !app.isAsideRightShrink();
 };
 
-app.isAside = function () {
+app.isAside = () => {
     return app.html.attr('data-aside').length;
 };
 
-app.isAsideLeft = function () {
+app.isAsideLeft = () => {
     return app.html.attr('data-aside') === 'left';
 };
 
-app.isAsideRight = function () {
+app.isAsideRight = () => {
     return app.html.attr('data-aside') === 'right';
 };
 
-app.isAsideLeftShrink = function () {
+app.isAsideLeftShrink = () => {
     return app.html.hasClass('left-shrink') && app.isAsideLeft();
 };
 
-app.isAsideRightShrink = function () {
+app.isAsideRightShrink = () => {
     return app.html.hasClass('right-shrink') && app.isAsideRight();
 };
 
-app.isAsideLeftCloseOnClickOutside = function () {
+app.isAsideLeftCloseOnClickOutside = () => {
     return app.html.hasClass('close-left-click-outside');
 };
-app.isAsideRightCloseOnClickOutside = function () {
+app.isAsideRightCloseOnClickOutside = () => {
     return app.html.hasClass('close-right-click-outside');
 };
 
-app.isModal = function () {
+app.isModal = () => {
     return app.html.hasClass('modal');
 };
 
-app.isModalForm = function () {
+app.isModalForm = () => {
     return app.html.attr('data-modal') === 'form';
 };
 
-app.isModalImage = function () {
+app.isModalImage = () => {
     return app.html.attr('data-modal') === 'image';
 };
 
-app.isFocus = function () {
+app.isFocus = () => {
     return app.html.hasClass('focus') && app.html.attr('data-focus') === 'true';
 }
 
-app.isTTS = function () {
+app.isTTS = () => {
     return app.html.hasClass('tts');
 }
 
-app.isTTSEnabled = function () {
+app.isTTSEnabled = () => {
     return app.html.hasClass('tts') && app.html.attr('data-tts') === 'true';
 }
-app.isAuthentication = function () {
+app.isAuthentication = () => {
     return app.html.attr('data-authentication') !== '';
 };
 
-app.isLoading = function () {
+app.isLoading = () => {
     return app.html.hasClass('loading');
 };
 
-app.isScrollDisabled = function () {
+app.isScrollDisabled = () => {
     return app.html.hasClass('scroll-disabled');
 };
 
-app.isCloseLeftPageChange = function () {
+app.isCloseLeftPageChange = () => {
     return app.html.hasClass('close-left-page-change');
 };
 
-app.isTransitions = function () {
+app.isTransitions = () => {
     return app.html.hasClass('transitions');
 };
 
-app.isSwipe = function () {
+app.isSwipe = () => {
     return app.html.hasClass('swipe');
 };
 
-app.isSiteLoaded = function () {
+app.isSiteLoaded = () => {
     return app.html.hasClass('site-loaded');
 };
 
-app.capitalize = function (string) {
+app.capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-app.scrollTop = function () {
+app.scrollTop = () => {
     return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
 };
 
-app.tryParseInt = function (str, defaultValue) {
+app.tryParseInt = (str, defaultValue) => {
     let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseInt(str);
@@ -941,7 +941,7 @@ app.tryParseInt = function (str, defaultValue) {
     return retValue;
 };
 
-app.tryParseFloat = function (str, defaultValue) {
+app.tryParseFloat = (str, defaultValue) => {
     let retValue = defaultValue;
     if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
         retValue = parseFloat(str);
@@ -949,12 +949,12 @@ app.tryParseFloat = function (str, defaultValue) {
     return retValue;
 };
 
-app.cssLoaded = function() {
+app.cssLoaded = () => {
     return app.body.css('visibility') !== 'hidden';
 }
 var app = app || {};
 
-$(function () {
+$(() => {
     if (bowser.msedge) {
         app.html.addClass('msedge'); // used by app.enableScroll()
     } else if (bowser.msie) {
@@ -977,7 +977,7 @@ $(function () {
     if (bowser.msie || bowser.msedge) {
         // disable smooth scrolling, since it causes element jumping/lagging on scroll
         // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
-        app.body.on("mousewheel", function (e) {
+        app.body.on("mousewheel", (e) => {
             let target = $(e.target);
             if (!app.isModal() && event.ctrlKey !== true) {
                 e.preventDefault();
@@ -996,7 +996,7 @@ $(function () {
 
         // at some zoom levels edge/ie makes $(window) heigher than $(document)
         // it causes a gap between footer and the bottom of $(window).
-        $(window).scroll(function () {
+        $(window).scroll(() => {
             let scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop + $(window).height() >= $(document).height()) {
                 app.html.addClass('subpixel');
@@ -1008,39 +1008,39 @@ $(function () {
 });
 var app = app || {};
 
-$(function () {
+$(() => {
     $.validator.setDefaults({
-        submitHandler: function () {
+        submitHandler: () => {
             alert("Fake submitted!");
         }
     });
 
-    $.validator.addMethod('password_regex', function (value) {
+    $.validator.addMethod('password_regex', (value) => {
         return /^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\d).{8,}$/.test(value);
     }, 'Password must contain at least eight characters, one uppercase letter, one lowercase letter and one number');
 });
 
-app.addValidation = function (form, rules, messages) {
+app.addValidation = (form, rules, messages) => {
     form.validate({
         rules: rules,
         messages: messages,
         errorElement: "em",
-        errorPlacement: function (error, element) {
+        errorPlacement: (error, element) => {
             element = element.parent();
             if (element.hasClass('checkbox') || element.hasClass('radio') || element.hasClass('input-group')) {
                 element = element.parent();
             }
             element.append(error);
         },
-        highlight: function (element, errorClass, validClass) {
+        highlight: (element, errorClass, validClass) => {
             $(element).parents(".form-group").addClass("theme-danger");
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: (element, errorClass, validClass) => {
             $(element).parents(".form-group").removeClass("theme-danger");
         }
     });
-    form.on('change', 'input, textarea, select', function () {
-        $(this).valid();
+    form.on('change', 'input, textarea, select', (e) => {
+        $(e.currentTarget).valid();
     });
 };
 var app = app || {};
@@ -1054,13 +1054,13 @@ $(() => {
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-    $.get(app.host + 'ajax/svg/base.html', function (data) {
+    $.get(app.host + 'ajax/svg/base.html', (data) => {
         $(data).prependTo(app.body);
     });
 
     if (bowser.android) {
         // android doesn't handle vh correctly, so it gets converted to px
-        $(window).resize(function () {
+        $(window).resize(() => {
             if (app.isModal() && app.isModalImage()) {
                 app.modal.find('#modal-img').css('max-height', window.innerHeight);
             }
@@ -1068,7 +1068,7 @@ $(() => {
     }
 }); 
 
-$(window).click(function (e) {
+$(window).click((e) => {
     let target = $(e.target),
         modal = target.closest(app.modal[0]);
 
@@ -1105,7 +1105,7 @@ $(window).click(function (e) {
 });
 var app = app || {};
 
-app.contentLoaded = function (element) {
+app.contentLoaded = (element) => {
     app.checkRb(element.find('.rb'));
     app.checkContentHeader();
     app.checkLazy(element.find('.lazy'));
@@ -1119,13 +1119,13 @@ app.contentLoaded = function (element) {
     app.checkDatatables(element.find('.dataTable'));
 }
 
-app.pageLoaded = function (initial) {
+app.pageLoaded = (initial) => {
     app.main.css('overflow', 'auto');
     app.main.scrollTop(0);
     app.main.css('overflow', '');
     app.html.animate({ scrollTop: 0 }, 0);
     app.contentHeader = app.content.children('.content-header:not(.full)');
-    setTimeout(function () {
+    setTimeout(() => {
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
         }
@@ -1139,7 +1139,7 @@ app.pageLoaded = function (initial) {
 var app = app || {};
 var fullscreenScrollTop;
 
-app.requestFullScreen = function () {
+app.requestFullScreen = () => {
     if (!app.fullscreen && bowser.desktop) {
         fullscreenScrollTop = app.scrollTop();
         if (app.document.requestFullscreen) {
@@ -1173,7 +1173,7 @@ function fullscreenChange(e) {
     }
 };
 
-app.exitFullScreen = function () {
+app.exitFullScreen = () => {
     if (app.fullscreen && bowser.desktop) {
         if (document.exitFullscreen) {
             document.exitFullscreen();
@@ -1190,7 +1190,7 @@ app.exitFullScreen = function () {
     }
 };
 
-app.toggleFullScreen = function (element) {
+app.toggleFullScreen = (element) => {
     if (app.fullscreen)
         exitFullScreen();
     else
@@ -1198,7 +1198,7 @@ app.toggleFullScreen = function (element) {
 };
 var app = app || {};
 
-function scrollbarWidth() {
+var scrollbarWidth = () => {
     app.body.append('<div id="scrollbar-width"></div>');
     let element = app.body.children('#scrollbar-width');
     element.css({
@@ -1212,7 +1212,7 @@ function scrollbarWidth() {
     element.remove();
 };
 
-app.disableScroll = function () {
+app.disableScroll = () => {
     if (app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = false;
         if (app.isModal()) {
@@ -1226,7 +1226,7 @@ app.disableScroll = function () {
     }
 };
 
-app.enableScroll = function () {
+app.enableScroll = () => {
     if (!app.htmlOverflowEnabled) {
         app.htmlOverflowEnabled = true;
         if (app.isSiteLoaded()) {
@@ -1241,7 +1241,7 @@ app.enableScroll = function () {
     }
 };
 
-app.setHtmlScroll = function () {
+app.setHtmlScroll = () => {
     if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isAsideLeft() && !app.isAsideRight())) {
         app.enableScroll();
     } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.isAsideLeft() || app.isAsideRight())) {
@@ -1249,24 +1249,24 @@ app.setHtmlScroll = function () {
     }
 };
 
-$(window).resize(function () {
+$(window).resize(() => {
     app.checkModal();
     app.setHtmlScroll();
     scrollbarWidth();
 });
 
-$(function () {
+$(() => {
     scrollbarWidth();
 });
 var app = app || {};
 
-app.showLoading = function () {
+app.showLoading = () => {
     app.loadingCount++;
     app.disableScroll();
     app.html.addClass('loading');
 };
 
-app.hideLoading = function () {
+app.hideLoading = () => {
     app.loadingCount--;
     if (app.loadingCount === 0) {
         app.html.removeClass('loading');
@@ -1276,7 +1276,7 @@ app.hideLoading = function () {
 var app = app || {};
 let transitionLock = false;
 
-app.toggleAside = function (aside, pageChanged) {
+app.toggleAside = (aside, pageChanged) => {
     if (!transitionLock) {
         transitionLock = true;
         app.html.attr('data-authentication', '');
@@ -1312,20 +1312,20 @@ app.toggleAside = function (aside, pageChanged) {
     }
 };
  
-$(function () {
-    app.main.find('.aside.left').click(function () {
+$(() => {
+    app.main.find('.aside.left').click(() => {
         app.toggleAside('left');
     });
 
-    app.main.find('.aside.right').click(function () {
+    app.main.find('.aside.right').click(() => {
         app.toggleAside('right');
     });
 });
 var app = app || {};
 
-$(function () {
-    app.authentication.on('click', '> div > button', function () {
-        let $this = $(this),
+$(() => {
+    app.authentication.on('click', '> div > button', (e) => {
+        let $this = $(e.currentTarget),
             type = $this.attr('data-type');
         if (app.html.attr('data-authentication') === type) {
             app.html.attr('data-authentication', '');
@@ -1335,7 +1335,7 @@ $(function () {
         }
     });
     
-    app.authenticatedLinks.on('click', '> a', function (e) {
+    app.authenticatedLinks.on('click', '> a', (e) => {
         e.preventDefault();
     });
 
@@ -1396,8 +1396,8 @@ $(function () {
 });
 var app = app || {};
 
-$(function () {
-    app.cookie.on('click', '#cookie-accept', function () {
+$(() => {
+    app.cookie.on('click', '#cookie-accept', () => {
         localStorage.setItem('cookie', 'cookie');
         app.html.removeClass('cookie');
     });
@@ -1409,7 +1409,7 @@ $(function () {
 });
 var app = app || {};
 
-app.loadPage = function (url, pushState, initial) {
+app.loadPage = (url, pushState, initial) => {
     app.showLoading();
     url = url.replace(/^\/+/g, '');
     let q = url.indexOf('?');
@@ -1417,18 +1417,16 @@ app.loadPage = function (url, pushState, initial) {
     app.left.find('.tree a.label.active').removeClass('active');
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
-    let tempUrl = url;
-    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', function () {
-        url = tempUrl;
-        if (url === '') {
+    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', () => {
+        if (url === '/') {
             app.title.html('');
             if (app.body.children('#svg-browser').length === 0) {
-                $.get(app.host + 'ajax/svg/browser.html', function (data) {
+                $.get(app.host + 'ajax/svg/browser.html', (data) => {
                     $(data).prependTo(app.body);
                 });
             }
             if (app.body.children('#svg-os').length === 0) {
-                $.get(app.host + 'ajax/svg/os.html', function (data) {
+                $.get(app.host + 'ajax/svg/os.html', (data) => {
                     $(data).prependTo(app.body);
                 });
             }
@@ -1447,7 +1445,7 @@ app.loadPage = function (url, pushState, initial) {
     }
 };
 
-app.internalLinkClick = function (href, e) {
+app.internalLinkClick = (href, e) => {
     if (!e.ctrlKey) {
         e.preventDefault();
         app.loadPage(href, true, false);
@@ -1457,7 +1455,7 @@ app.internalLinkClick = function (href, e) {
 (function (l) {
     if (l.search) {
         app.url = {};
-        l.search.slice(1).split('&').forEach(function (v) {
+        l.search.slice(1).split('&').forEach((v) => {
             let a = v.split('=');
             app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
         });
@@ -1472,7 +1470,7 @@ app.internalLinkClick = function (href, e) {
 }(window.location));
 
 let loadPage = window.history.state;
-window.onpopstate = function (event) {
+window.onpopstate = (e) => {
     if (loadPage) {
         let url = location.pathname;
         if (!app.isLocalhost) {
@@ -1482,13 +1480,13 @@ window.onpopstate = function (event) {
     }
 };
 
-app.applyNavigation = function (id, value, set) {
+app.applyNavigation = (id, value, set) => {
     if (set) {
         let entry = {
             "id": id,
             "value": value
         },
-            exists = $.grep(app.navigation, function (e) { return e.name === name; });
+            exists = $.grep(app.navigation, (e) => { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.navigation.push(entry);
@@ -1503,15 +1501,15 @@ app.applyNavigation = function (id, value, set) {
 };
 
 $(function () {
-    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', function () {
+    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', () => {
         app.navigationTree = app.left.find('.tree');
         app.navigation = JSON.parse(localStorage.getItem("navigation"));
         if (app.navigation === null) app.navigation = [];
         $.each(app.navigation, function (i, entry) {
             app.applyNavigation(entry.id, entry.value, false);
         });
-        app.navigationTree.on('change', 'input[type=checkbox]', function () {
-            let $this = $(this),
+        app.navigationTree.on('change', 'input[type=checkbox]', (e) => {
+            let $this = $(e.currentTarget),
                 id = $this.attr('id'),
                 value = $this.is(':checked');
             app.applyNavigation(id, value, true);
@@ -1530,25 +1528,25 @@ $(function () {
         app.loadPage('', false, true);
     }
 
-    app.left.on('click', '.tree a.label:not(.active)', function (e) {
-        app.internalLinkClick($(this).attr('href'), e);
+    app.left.on('click', '.tree a.label:not(.active)', (e) => {
+        app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 
-    app.header.on('click', 'h1 a', function (e) {
-        app.internalLinkClick($(this).attr('href'), e);
+    app.header.on('click', 'h1 a', (e) => {
+        app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 
-    app.left.on('click', '#navigation-expand', function () {
+    app.left.on('click', '#navigation-expand', () => {
         app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
     });
 
-    app.left.on('click', '#navigation-collapse', function () {
+    app.left.on('click', '#navigation-collapse', () => {
         app.navigationTree.find('input[type=checkbox]:checked').click();
     });
 });
 var app = app || {};
 
-app.applySettings = function (id, name, type, value, set) {
+app.applySettings = (id, name, type, value, set) => {
     if (set) {
         let entry = {
             "id": id,
@@ -1556,7 +1554,7 @@ app.applySettings = function (id, name, type, value, set) {
             "type": type,
             "value": value
         },
-            exists = $.grep(app.settings, function (e) { return e.name === name; });
+            exists = $.grep(app.settings, (e) => { return e.name === name; });
         if (exists.length === 0) {
             // not found
             app.settings.push(entry);
@@ -1575,7 +1573,7 @@ app.applySettings = function (id, name, type, value, set) {
     }
     if (type === 'checkbox' || type === "radio") {
         if (type === 'radio') {
-            $.each(app.right.find('input[type=radio][name="settings-' + name + '"]:not(#settings-' + id + ')'), function (i, radio) {
+            $.each(app.right.find('input[type=radio][name="settings-' + name + '"]:not(#settings-' + id + ')'), (i, radio) => {
                 app.html.removeClass($(radio).attr('id').replace('settings-', ''));
             });
         }
@@ -1618,14 +1616,14 @@ app.applySettings = function (id, name, type, value, set) {
     }
 };
 
-$(function () {
-    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
-        $.each(app.settings, function (i, entry) {
+$(() => {
+    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', () => {
+        $.each(app.settings, (i, entry) => {
             app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
         });
         app.header.find('.aside.right').addClass('loaded');
-        $(this).on('change', 'input[type=checkbox], input[type=radio]', function () {
-            let $this = $(this),
+        $(this).on('change', 'input[type=checkbox], input[type=radio]', (e) => {
+            let $this = $(e.currentTarget),
                 id = $this.attr('id').replace('settings-', ''),
                 name = $this.attr('name').replace('settings-', ''),
                 type = $this.attr('type'),
@@ -1640,7 +1638,7 @@ $(function () {
         app.responsiveHeader();
     });
 
-    app.right.on('click', '#settings-clear-localstorage', function () {
+    app.right.on('click', '#settings-clear-localstorage', () => {
         localStorage.clear();
         location.reload();
     });
@@ -1648,7 +1646,7 @@ $(function () {
 var app = app || {};
 
 $(function () {
-    app.body.on("keydown", function (e) {
+    app.body.on("keydown", (e) => {
         let target = $(e.target),
             parent = target.parent();
         if (app.isLoading()) {
@@ -1682,7 +1680,7 @@ $(function () {
                     }
                     let popups = app.body.children('.popup');
                     if (popups.length) {
-                        popups.fadeOut(app.fadeOutTime, function () {
+                        popups.fadeOut(app.fadeOutTime, () => {
                             popups.remove();
                         });
                     }
@@ -1709,7 +1707,7 @@ $(function () {
         }
     });
 
-    app.body.on('keyup', function (e) {
+    app.body.on('keyup', (e) => {
         if (!app.isLoading() && !app.isFocus()) {
             if (e.which === 9) { // tab
                 let target = $(e.target);
@@ -1740,7 +1738,7 @@ $(function () {
 });
 var app = app || {};
 
-app.showModal = function (type) {
+app.showModal = (type) => {
     app.html.attr('data-modal', type);
     app.html.addClass('modal');
     app.hideLoading();
@@ -1748,7 +1746,7 @@ app.showModal = function (type) {
     app.modal.focus();
 };
 
-app.closeModal = function () {
+app.closeModal = () => {
     if (app.fullscreen) {
         app.exitFullScreen();
     } else {
@@ -1759,7 +1757,7 @@ app.closeModal = function () {
     }
 };
 
-app.checkModal = function () {
+app.checkModal = () => {
     if (app.isModal()) {
         app.body.css('padding-right', app.scrollbarWidth);
         if (app.html.attr('data-aside') === 'right') {
@@ -1783,8 +1781,8 @@ app.checkModal = function () {
 };
 
 $(function () {
-    app.body.on('click', '.modal', function () {
-        let $this = $(this),
+    app.body.on('click', '.modal', (e) => {
+        let $this = $(e.currentTarget),
             type = $this.attr('data-modal');
         if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
             app.showLoading();
@@ -1821,7 +1819,7 @@ $(function () {
             app.modal.html(div);
             if (type === 'image') {
                 let image = app.modal.find('#modal-img');
-                image.on('load', function () {
+                image.on('load', () => {
                     if (bowser.android) {
                         image.css('max-height', window.innerHeight);
                     }
@@ -1844,15 +1842,15 @@ $(function () {
         }
     });
 
-    app.body.on('click', '#modal-toggle', function () {
+    app.body.on('click', '#modal-toggle', () => {
         app.modal.toggleClass('info-shown');
     });
 });
 var app = app || {};
 
 // responsive-background
-app.checkRb = function (elements) {
-    function setRb(element) {
+app.checkRb = (elements) => {
+    let setRb = (element) => {
         let image = element.attr('data-rb-image'),
             filetype = element.attr('data-rb-image-filetype'),
             sizesWidth = element.attr('data-rb-sizes'),
@@ -1864,7 +1862,7 @@ app.checkRb = function (elements) {
             aspectRatio !== undefined && aspectRatio.length) {
             if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
                 (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
-                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort(function (a, b) { return a - b; });
+                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort((a, b) => { return a - b; });
                 let goalWidth = element.width(),
                     goalHeight = element.height(),
                     closestWidth,
@@ -1891,8 +1889,8 @@ app.checkRb = function (elements) {
                     return num * amount / 100;
                 };
 
-                $.each(sizesWidth, function (index) {
-                    let width = parseInt(this),
+                $.each(sizesWidth, (i, e) => {
+                    let width = parseInt(e),
                         height = getHeightInPixels(heightPercentage, width);
                     if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
                         closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
@@ -1904,7 +1902,7 @@ app.checkRb = function (elements) {
                 if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
                     app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
                     let tempImage = app.body.children('#rb');
-                    tempImage.on('load', function () {
+                    tempImage.on('load', () => {
                         tempImage.remove();
                         let src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
                         element.css('background-image', src);
@@ -1916,14 +1914,14 @@ app.checkRb = function (elements) {
     }
 
     if(elements.length) {
-        elements.each(function (i, e) {
+        elements.each((i, e) => {
             let element = $(e);
             setRb(element);
-            $(window).on('resize.rb', function () {
+            $(window).on('resize.rb', () => {
                 setRb(element);
             });
 
-            app.html.on('aside-changed', function () {
+            app.html.on('aside-changed', () => {
                 setRb(element);
             });
         });
@@ -1935,11 +1933,11 @@ app.checkRb = function (elements) {
 };
 var app = app || {};
 
-app.responsiveHeader = function () {
+app.responsiveHeader = () => {
     let h1 = app.header.find('h1'),
         link = h1.children('a');
 
-    function check() {
+    let check = () => {
         app.unauthenticated.addClass('text');
         let a = h1.outerWidth(),
             b = link.outerWidth();
@@ -1949,12 +1947,12 @@ app.responsiveHeader = function () {
         app.unauthenticated.addClass('checked');
     }
         
-    function awaitCSS() {
-        setInterval(function () {
+    let awaitCSS = () => {
+        setInterval(() => {
             if (app.cssLoaded()) {
                 clearInterval(awaitCSS);
 
-                $(window).on('resize', function () {
+                $(window).on('resize', () => {
                     check();
                 });
 
@@ -1966,10 +1964,10 @@ app.responsiveHeader = function () {
 };
 var app = app || {};
 
-app.enableFocus = function () {
+app.enableFocus = () => {
     let component = app.Focus.find('> .component > div');
 
-    $.getScript('dist/js/focus.min.js', function () {
+    $.getScript('dist/js/focus.min.js', () => {
         component
             .draggable({
                 axis: "y",
@@ -1986,16 +1984,16 @@ app.enableFocus = function () {
                 e.stopPropagation();
             });
 
-        app.Focus.on('click', '.close', function () {
+        app.Focus.on('click', '.close', () => {
             app.hideFocus();
         });
 
-        app.main.find('.focus').click(function () {
+        app.main.find('.focus').click(() => {
             app.showFocus();
         });
 
         let height = $(window).height(); 
-        $(window).resize(function () {
+        $(window).resize(() => {
             // do nothing if the height is the same
             if ($(window).height() == height) return;
             height = $(window).height();
@@ -2004,11 +2002,11 @@ app.enableFocus = function () {
     });
 };
 
-app.showFocus = function () {
+app.showFocus = () => {
     app.html.attr('data-focus', true);
     app.Focus.focus();
 };
-app.hideFocus = function () {
+app.hideFocus = () => {
     let scrollTop = app.scrollTop();
     app.html.attr('data-focus', false);
     app.main.focus();
@@ -2017,28 +2015,28 @@ app.hideFocus = function () {
 };
 var app = app || {};
 
-app.enableSwipe = function () {
+app.enableSwipe = () => {
     let xDown = null,
         yDown = null,
         offsetBefore;
 
-    function handleTouchStart(evt) {
+    let handleTouchStart = (e) => {
         if (app.isSwipe()) {
-            xDown = evt.touches[0].clientX;
-            yDown = evt.touches[0].clientY;
+            xDown = e.touches[0].clientX;
+            yDown = e.touches[0].clientY;
 
-            offsetBefore = $(evt.target).offset().left;
+            offsetBefore = $(e.target).offset().left;
         }
     };
 
-    function handleTouchMove(evt) {
+    let handleTouchMove = (e) => {
         if (app.isSwipe()) {
-            let offsetAfter = $(evt.target).offset().left;
+            let offsetAfter = $(e.target).offset().left;
             if (!xDown || !yDown || offsetBefore !== offsetAfter) {
                 return;
             }
-            let xUp = evt.changedTouches[0].clientX,
-                yUp = evt.changedTouches[0].clientY,
+            let xUp = e.changedTouches[0].clientX,
+                yUp = e.changedTouches[0].clientY,
                 xDiff = xDown - xUp,
                 yDiff = yDown - yUp;
             if (Math.abs(xDiff) > Math.abs(yDiff)) {
@@ -2079,21 +2077,21 @@ app.enableSwipe = function () {
 };
 var app = app || {};
 
-app.clearSelection = function () {
+app.clearSelection = () => {
     let selection = window.getSelection();
     selection.removeAllRanges();
     selection.addRange(document.createRange());
 }
-app.stopTTS = function () {
+app.stopTTS = () => {
     app.clearSelection();
     if (app.tts && app.tts.IsSpeaking()) {
         app.tts.ShutUp();
     }
 };
 
-app.enableTTS = function () {
+app.enableTTS = () => {
     if (bowser.desktop) {
-        function snapSelectionToWord() {
+        let snapSelectionToWord = () => {
             let selection = window.getSelection();
             if (!selection.isCollapsed) {
                 let range = selection.getRangeAt(0);
@@ -2141,7 +2139,7 @@ app.enableTTS = function () {
             }
         }
 
-        $.getScript('dist/js/tts.min.js', function () {
+        $.getScript('dist/js/tts.min.js', () => {
             let awsCredentials = new AWS.Credentials('AKIAIUIGJHORPPUHXYXA', 'jmVeV3yty4koyYVydkjQEz0EBjsR/IeSVmVwknyw');
 
             let settings = {
@@ -2154,20 +2152,20 @@ app.enableTTS = function () {
 
             app.html.attr('data-tts', true);
 
-            $(window).on('mousedown touchstart', function (e) {
+            $(window).on('mousedown touchstart', (e) => {
                 if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
                     app.clearSelection();
                 }
             });
 
-            $(window).on('mouseup touchend', function (e) {
+            $(window).on('mouseup touchend', (e) => {
                 if (!$(document.activeElement).is('input, textarea, button, select, .dropdown')) {
                     if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
-                        setTimeout(function () {
+                        setTimeout(() => {
                             snapSelectionToWord();
                             let selection = $.selection();
                             if (selection.length) {
-                                app.tts.SpeakWithPromise(selection).then(function () {
+                                app.tts.SpeakWithPromise(selection).then(() => {
                                     app.clearSelection();
                                 });
                             } else {
@@ -2178,7 +2176,7 @@ app.enableTTS = function () {
                 }
             });
 
-            app.header.find('.tts').click(function () {
+            app.header.find('.tts').click(() => {
                 if (app.html.attr('data-tts') === 'true') {
                     app.html.attr('data-tts', false);
                     app.stopTTS();
@@ -2191,20 +2189,20 @@ app.enableTTS = function () {
 };
 var app = app || {};
 
-app.checkContentHeader = function() {
+app.checkContentHeader = () => {
     if(app.contentHeader.length) {
-        $(window).on('scroll.contentHeader', function() {
-            //debugger;
-        });
+        //$(window).on('scroll.contentHeader', () => {
+        //    //debugger;
+        //});
     } else {
         $(window).off('scroll.contentHeader');
     }
 };
 var app = app || {};
 
-app.checkDropdown = function (dropdowns) {
-    dropdowns.each(function () {
-        let $this = $(this),
+app.checkDropdown = (dropdowns) => {
+    dropdowns.each((i, e) => {
+        let $this = $(e),
             selected = $this.children('option:selected'),
             html = [],
             attr = $this.attr('class'),
@@ -2236,8 +2234,8 @@ app.checkDropdown = function (dropdowns) {
         }
         html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
         html.push('<ul class="' + theme + '">');
-        $this.children().each(function (index) { /* ':not([value=""])' */
-            let $that = $(this),
+        $this.children().each((i, e) => { /* ':not([value=""])' */
+            let $that = $(e),
                 text = $that.text();
             if (!text.length) {
                 text = '&nbsp;';
@@ -2265,12 +2263,12 @@ app.checkDropdown = function (dropdowns) {
             }
         }
 
-        dropdown.on('click', '> div', function () {
-            let $that = $(this);
+        dropdown.on('click', '> div', (e) => {
+            let $that = $(e.currentTarget);
             $that.parent().toggleClass('open');
         });
-        dropdown.on('click', 'li', function () {
-            let $that = $(this);
+        dropdown.on('click', 'li', (e) => {
+            let $that = $(e.currentTarget);
             if (!$that.hasClass('selected')) {
                 $that.siblings('.selected').removeClass('selected');
                 $that.addClass('selected');
@@ -2294,7 +2292,7 @@ app.checkDropdown = function (dropdowns) {
     });
 };
 
-$(window).click(function (e) {
+$(window).click((e) => {
     let target = $(e.target);
     if (target.closest("div.dropdown").length) {
         $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
@@ -2306,9 +2304,9 @@ $(window).click(function (e) {
 });
 var app = app || {};
 
-app.checkAccordion = function (elements) {
-    elements.on("click", ".headline", function () {
-        let content = $(this).next();
+app.checkAccordion = (elements) => {
+    elements.on("click", ".headline", (e) => {
+        let content = $(e.currentTarget).next();
         if (content.hasClass('open')) {
             content
                 .removeClass('open')
@@ -2324,9 +2322,9 @@ app.checkAccordion = function (elements) {
 var app = app || {};
 
 $(function () {
-    app.body.on('click', '.alert .close', function () {
-        let $this = $(this).parent();
-        $this.fadeOut(app.fadeOutTime, function () {
+    app.body.on('click', '.alert .close', (e) => {
+        let $this = $(e.currentTarget).parent();
+        $this.fadeOut(app.fadeOutTime, () => {
             let parent = $this.parent();
             if (parent.hasClass('popup') && parent.children().length === 1) {
                 parent.remove();
@@ -2339,7 +2337,7 @@ $(function () {
 var app = app || {},
     google;
 
-app.checkMap = function (maps) {
+app.checkMap = (maps) => {
     app.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
     if (maps.length) {
         if (!app.html.hasClass('map-loaded')) {
@@ -2348,10 +2346,10 @@ app.checkMap = function (maps) {
         }
 
         let timeout = 100;
-        function checkGoogle() {
+        let checkGoogle = () => {
             if (google !== undefined) {
-                maps.each(function () {
-                    let $this = $(this),
+                maps.each((i, e) => {
+                    let $this = $(e),
                         lat = app.tryParseFloat($this.attr('data-lat'), 37.4029937),
                         lng = app.tryParseFloat($this.attr('data-lng'), -122.1811793),
                         zoom = app.tryParseInt($this.attr('data-zoom'), 4),
@@ -2367,7 +2365,7 @@ app.checkMap = function (maps) {
                         map: map
                     });
 
-                    $(window).on("throttledresize.map", function () {
+                    $(window).on("throttledresize.map", () => {
                         google.maps.event.trigger($this[0], 'resize');
                     });
                 });
@@ -2382,18 +2380,18 @@ app.checkMap = function (maps) {
 };
 var app = app || {};
 
-app.checkMath = function (math) {
+app.checkMath = (math) => {
     if (math.length) {
         if (!app.html.hasClass('math-loaded')) {
             app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
             app.html.addClass('math-loaded');
         }
 
-        $.getScript('dist/js/katex.min.js', function () {
-            math.each(function () {
-                let $this = $(this);
+        $.getScript('dist/js/katex.min.js', () => {
+            math.each((i, e) => {
+                let $this = $(e);
                 renderMathInElement($this[0]);
-                setTimeout(function () {
+                setTimeout(() => {
                     $this.removeClass('math');
                 });
             });
@@ -2402,14 +2400,14 @@ app.checkMath = function (math) {
 };
 var app = app || {};
 
-app.checkMedia = function (media) {
+app.checkMedia = (media) => {
     if (media.length) {
         if (!app.html.hasClass('media-loaded')) {
             app.head.append($('<link rel="stylesheet" href="dist/css/plyr.min.css">'));
             app.html.addClass('media-loaded');
         }
 
-        $.getScript('dist/js/plyr.min.js', function () {
+        $.getScript('dist/js/plyr.min.js', () => {
             media.each(function (i, item) {
                 new Plyr(item);
             });
@@ -2418,23 +2416,23 @@ app.checkMedia = function (media) {
 };
 var app = app || {};
 
-app.checkLazy = function (elements) {
+app.checkLazy = (elements) => {
     elements.lazy({
-        afterLoad: function (element) {
+        afterLoad: (element) => {
             element.removeClass('lazy');
         }
     });
 };
 var app = app || {};
 
-$(function () {
-    app.body.on('click', '.show-popup', function () {
-        let $this = $(this),
+$(() => {
+    app.body.on('click', '.show-popup', (e) => {
+        let $this = $(e.currentTarget),
             title = $this.attr('data-popup-title');
         if (title !== undefined) {
             let theme = $this.attr('data-popup-theme'),
                 alert = [],
-                position = $(this).attr('data-popup-position'),
+                position = $this.attr('data-popup-position'),
                 popup = app.body.children('.popup[data-position="' + position + '"]');
             if (theme === undefined) {
                 theme = 'primary';
@@ -2462,9 +2460,9 @@ $(function () {
 });
 var app = app || {};
 
-app.checkTooltip = function (tooltips) {
-    tooltips.each(function () {
-        let $this = $(this),
+app.checkTooltip = (tooltips) => {
+    tooltips.each((i, e) => {
+        let $this = $(e),
             interactive = $this.hasClass('interactive');
         $this.tooltipster({
             animationDuration: 0,
@@ -2484,14 +2482,14 @@ app.checkTooltip = function (tooltips) {
 };
 var app = app || {};
 
-app.checkDatatables = function (tables) {
+app.checkDatatables = (tables) => {
     if (tables.length) {
-        $.getScript('dist/js/datatables.min.js', function () {
+        $.getScript('dist/js/datatables.min.js', () => {
             let spacing = 'space-3';
 
-            function table_header_input(instance) {
+            let table_header_input = (instance) => {
                 let columns = instance.columns().header();
-                let elements = jQuery.grep(columns, function (e) {
+                let elements = jQuery.grep(columns, (e) => {
                     let column = $(e);
                     return column.hasClass('dropdown') || column.hasClass('text');
                 });
@@ -2506,28 +2504,28 @@ app.checkDatatables = function (tables) {
                     if (column.hasClass('dropdown')) {
                         let select = $('<select class="dropdown align-left nowrap"><option value=""></option></select>')
                             .appendTo(column.find('> div > div:last-child'))
-                            .on('change', function () {
-                                instance.column(index).search(this.value).draw();
+                            .on('change', (e) => {
+                                instance.column(index).search(e.currentTarget.value).draw();
                             });
 
-                        this.data().unique().sort().each(function (d, j) {
+                        this.data().unique().sort().each((d, j) => {
                             select.append('<option value="' + d + '">' + d + '</option>');
                         });
                     } else if (column.hasClass('text')) {
                         let input = $('<input type="text" />')
                             .appendTo(column.find('> div > div:last-child'))
-                            .on('keyup change', function () {
-                                instance.column(index).search(this.value).draw();
+                            .on('keyup change', (e) => {
+                                instance.column(index).search(e.currentTarget.value).draw();
                             });
                         input.parent().addClass('form-group');
                     }
                 });
             }
-            function table_header_sort(instance, wrapper) {
+            let table_header_sort = (instance, wrapper) => {
                 let th = wrapper.find('thead th');
                 th.unbind('click');
                 th.find('> div > div:first-child').append('<span class="sort-btn"></span>');
-                th.click(function (e) {
+                th.click((e) => {
                     let $this = $(e.target);
                     if (!$this.closest('div.dropdown').length && !$this.closest('input').length) {
                         let parent = $this.parents('th'),
@@ -2541,7 +2539,7 @@ app.checkDatatables = function (tables) {
                     }
                 });
             }
-            function table_header_length(wrapper, header) {
+            let table_header_length = (wrapper, header) => {
                 let length = wrapper.find('.dataTables_length'),
                     dropdown = length.find('select');
 
@@ -2550,7 +2548,7 @@ app.checkDatatables = function (tables) {
                 dropdown.addClass('dropdown').attr('data-width', 100);
                 header.append(length);
             }
-            function table_header_buttons(wrapper, header) {
+            let table_header_buttons = (wrapper, header) => {
                 let container = wrapper.find('.dt-buttons');
 
                 container.append('<div class="flex column wrap ' + spacing + '"></div>');
@@ -2563,7 +2561,7 @@ app.checkDatatables = function (tables) {
                 div.append(buttons);
                 header.append(container);
             }
-            function table_header_filter(wrapper, header) {
+            let table_header_filter = (wrapper, header) => {
                 let filter = wrapper.find('.dataTables_filter');
 
                 filter.addClass('input-group');
@@ -2572,16 +2570,16 @@ app.checkDatatables = function (tables) {
                 filter.find('label').remove();
                 header.append(filter);
             }
-            function table_content(wrapper, content) {
+            let table_content = (wrapper, content) => {
                 let table = wrapper.find('table');
                 content.append(table);
                 return table;
             }
-            function table_footer_info(wrapper, footer) {
+            let table_footer_info = (wrapper, footer) => {
                 let info = wrapper.find('.dataTables_info');
                 footer.append(info);
             }
-            function paginateFix(paginate) {
+            let paginateFix = (paginate) => {
                 let span = paginate.children('span'),
                     prev = paginate.find('.paginate_button.previous'),
                     next = paginate.find('.paginate_button.next');
@@ -2592,20 +2590,20 @@ app.checkDatatables = function (tables) {
                 prev.prependTo(span);
                 next.appendTo(span);
             }
-            function table_footer_paginate(wrapper, footer, paginate) {
+            let table_footer_paginate = (wrapper, footer, paginate) => {
                 paginate.addClass('flex column wrap');
                 footer.append('<div class="dataTables_paginate_container"></div>');
                 let container = footer.find('.dataTables_paginate_container');
                 paginateFix(paginate);
                 container.append(paginate);
             }
-            function table_dropdowns(wrapper) {
+            let table_dropdowns = (wrapper) => {
                 let dropdowns = wrapper.find('select.dropdown');
                 app.checkDropdown(dropdowns);
             }
 
-            tables.each(function () {
-                let $this = $(this);
+            tables.each((i, e) => {
+                let $this = $(e);
                 $this.addClass('nowrap');
                 $this.DataTable({
                     "dom": 'lBfrtip',
@@ -2642,19 +2640,18 @@ app.checkDatatables = function (tables) {
                         table_footer_paginate(wrapper, footer, paginate);
 
                         table_dropdowns(wrapper);
-
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
                             let columns = instance.columns().responsiveHidden();
                             $this.trigger('responsive-resize.dt', [this, columns]);
                         });
 
-                        app.html.on('aside-changed', function () {
+                        app.html.on('aside-changed', () => {
                             instance.responsive.recalc();
                         });
 
-                        $this.on('responsive-resize.dt', function (e, datatable, columns) {
-                            let count = columns.reduce(function (a, b) {
+                        $this.on('responsive-resize.dt', (e, datatable, columns) => {
+                            let count = columns.reduce((a, b) => {
                                 return b === false ? a + 1 : a;
                             }, 0);
 
@@ -2676,18 +2673,18 @@ app.checkDatatables = function (tables) {
 };
 var app = app || {};
 
-app.getAssignmentItem = function (items, id) {
-    return $($.map(items, function (item) {
+app.getAssignmentItem = (items, id) => {
+    return $($.map(items, (item) => {
         if (item.getAttribute("data-id") === id) {
             return item;
         }
     }));
 };
 
-app.checkAssignment = function (assignments) {
+app.checkAssignment = (assignments) => {
     if (assignments.length) {
-        $.getScript('dist/js/assignments.js', function () {
-            $(assignments).each(function (index, assignment) {
+        $.getScript('dist/js/assignments.js', () => {
+            $(assignments).each((i, assignment) => {
                 assignment = $(assignment);
                 app.checkAssignmentSort(assignment);
                 app.checkAssignmentDragAndDrop(assignment);
@@ -2700,7 +2697,7 @@ app.checkAssignment = function (assignments) {
 };
 var app = app || {};
 
-app.pageForm = function () {
+app.pageForm = () => {
     app.addValidation(
         app.content.find('#form'),
         {

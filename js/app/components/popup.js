@@ -1,13 +1,13 @@
 ﻿var app = app || {};
 
-$(function () {
-    app.body.on('click', '.show-popup', function () {
-        let $this = $(this),
+$(() => {
+    app.body.on('click', '.show-popup', (e) => {
+        let $this = $(e.currentTarget),
             title = $this.attr('data-popup-title');
         if (title !== undefined) {
             let theme = $this.attr('data-popup-theme'),
                 alert = [],
-                position = $(this).attr('data-popup-position'),
+                position = $this.attr('data-popup-position'),
                 popup = app.body.children('.popup[data-position="' + position + '"]');
             if (theme === undefined) {
                 theme = 'primary';
