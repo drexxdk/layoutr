@@ -4,11 +4,11 @@
     .progress {
         padding: $spacer 0;
         position: relative;
-        @include flex-display;
+        display: flex;
 
         > div {
             width: 100%;
-            @include flex-display;
+            display: flex;
             position: relative;
 
             > .line {
@@ -23,13 +23,13 @@
                 width: $spacer * 3;
                 height: $spacer * 3;
                 border-radius: 50%;
-                @include flex-display;
-                @include justify-content(center);
-                @include align-items(center);
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 @include theme-element($light);
                 position: absolute;
                 top: 50%;
-                @include transform(translateY(-50%));
+                transform: translateY(-50%);
                 z-index: 1;
             }
 

@@ -35,7 +35,7 @@ header {
             position: absolute;
             top: 50%;
             left: 0;
-            @include transform(translateY(-50%));
+            transform: translateY(-50%);
             width: $spacer / 4;
             height: $spacer / 4;
             background-color: currentColor;
@@ -45,12 +45,12 @@ header {
     }
 
     h1 {
-        @include flex-display;
-        @include align-items(center);
+        display: flex;
+        align-items: center;
 
         > a {
-            @include flex-display;
-            @include align-items(center);
+            display: flex;
+            align-items: center;
             height: $header-height-content;
             text-decoration: none;
             padding: 0 $spacer / 2;
@@ -64,7 +64,7 @@ header {
                 color: $black;
 
                 > svg {
-                    @include transform(rotate(120deg));
+                    transform: rotate(120deg);
                 }
             }
         }
@@ -74,7 +74,7 @@ header {
 .header {
     height: $header-height;
     border-bottom: $layout-border;
-    @include flex-display;
+    display: flex;
     flex-shrink: 0;
     @include theme-element($light, false);
 
@@ -112,7 +112,7 @@ header {
         width: $header-height-content;
         height: $header-height-content;
         background-color: transparent;
-        @include noselect;
+        user-select: none;
         flex-shrink: 0;
         overflow: hidden;
 
@@ -136,7 +136,7 @@ header {
         > svg {
             margin-top: 50%;
             margin-left: 50%;
-            @include transform(translate(-50%, -50%));
+            transform: translate(-50%, -50%);
             width: $spacer-base * 6;
             height: $spacer-base * 6;
             opacity: $opacity-inactive;

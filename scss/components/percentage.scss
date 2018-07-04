@@ -11,7 +11,7 @@
     }
 
     .percentage {
-        @include flex-display;
+        display: flex;
         overflow: hidden;
         border-radius: $component-border-radius;
         @include theme-element($light);

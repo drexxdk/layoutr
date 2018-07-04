@@ -51,12 +51,14 @@
                 > div {
                     z-index: 2;
                     position: absolute;
-                    @include flex-center;
-                    @include flex-direction(column);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
                     top: 0;
                     bottom: 0;
                     left: 50%;
-                    @include transform(translateX(-50%));
+                    transform: translateX(-50%);
                     text-align: center;
                     width: 100%;
 
@@ -85,9 +87,9 @@
             position: relative;
 
             @media screen {
-                @include flex-display;
-                @include flex-direction(column);
-                @include justify-content(center);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
             > div {
@@ -97,7 +99,7 @@
 
                 z-index: 1;
                 background-color: $layout-background-color;
-                @include align-self(center);
+                align-self: center;
                 width: 100%;
 
                 &:not(.full-width) {

@@ -18,7 +18,7 @@
         $width: $i * 100;
 
         .basis-#{$width} {
-            @include flex-basis(rem($width));
+            flex-basis: rem($width);
         }
     }
 
@@ -34,23 +34,23 @@
     }
 
     &.vertical-center {
-        @include align-items(center);
+        align-items: center;
     }
 
     &:not(.column) {
-        @include flex-direction(column);
+        flex-direction: column;
     }
 
     &.column {
-        @include flex-direction(row);
+        flex-direction: row;
 
         &:not(.vertical-center) {
-            @include align-items(flex-start);
+            align-items: flex-start;
         }
     }
 
     &.wrap {
-        @include flex-wrap(wrap);
+        flex-wrap: wrap;
     }
 
     &.grow > * {
@@ -62,10 +62,10 @@
     }
 
     &.center {
-        @include justify-content(center);
+        justify-content: center;
 
         > * {
-            @include align-self(center);
+            align-self: center;
         }
     }
 }

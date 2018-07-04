@@ -72,13 +72,13 @@
                     border-radius: 0 0 $component-border-radius $component-border-radius;
 
                     > svg {
-                        @include transform(rotate(90deg));
+                        transform: rotate(90deg);
                     }
                 }
             }
 
             > div > svg {
-                @include transform(rotate(270deg));
+                transform: rotate(270deg);
             }
 
             > ul {
@@ -102,7 +102,7 @@
                     @include focus;
 
                     > svg {
-                        @include transform(rotate(270deg));
+                        transform: rotate(270deg);
                     }
                 }
 
@@ -120,7 +120,7 @@
         }
 
         > div {
-            @include flex-display();
+            display: flex;
             @extend .btn;
 
             > label {
@@ -132,7 +132,7 @@
             }
 
             > svg {
-                @include transform(rotate(90deg));
+                transform: rotate(90deg);
             }
         }
 
@@ -155,7 +155,7 @@
                 > div {
                     border-radius: 0;
                     display: block;
-                    @include flex-display();
+                    display: flex;
                     @extend .btn;
                     border: none !important;
 

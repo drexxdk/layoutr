@@ -1,5 +1,0 @@
-﻿@mixin transform($transform) {
-    -webkit-transform: $transform; /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
-    -ms-transform: $transform; /* IE 9 */
-    transform: $transform; /* IE 10, Fx 16+, Op 12.1+ */
-}

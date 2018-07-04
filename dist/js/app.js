@@ -2411,7 +2411,7 @@ app.checkMedia = function (media) {
 
         $.getScript('dist/js/plyr.min.js', function () {
             media.each(function (i, item) {
-                plyr.setup(item);
+                new Plyr(item);
             });
         });
     }

@@ -6,7 +6,7 @@ html.focus {
         body,
         aside .content > div * {
             pointer-events: none;
-            @include noselect;
+            user-select: none;
         }
 
         aside .content {
@@ -85,7 +85,7 @@ header .focus,
         position: absolute;
         top: $reading-line-spacer / 2;
         right: $reading-line-spacer / 2;
-        @include transform(translate(50%, -50%));
+        transform: translate(50%, -50%);
         pointer-events: all;
     }
 
@@ -93,14 +93,14 @@ header .focus,
         position: absolute;
         left: $reading-line-spacer / 2;
         bottom: calc(100% + #{$reading-line-spacer / 2});
-        @include transform(translate(-50%, 50%));
+        transform: translate(-50%, 50%);
         pointer-events: all;
     }
 
     .resize {
         position: absolute;
         left: 50%;
-        @include transform(translateX(-50%));
+        transform: translateX(-50%);
         pointer-events: all;
         z-index: 1;
 

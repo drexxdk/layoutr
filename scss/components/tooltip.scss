@@ -3,7 +3,7 @@
 @mixin layoutr-tooltip {
     button.tooltip {
         border-bottom: $component-border-width dotted currentColor;
-        @include noselect;
+        user-select: none;
         cursor: default;
         font-size: $font-size;
         color: currentColor;
@@ -18,7 +18,7 @@
     /* This is the core CSS of Tooltipster */
     /* GENERAL STRUCTURE RULES (do not edit this section) */
     .tooltipster-base {
-        @include flex-display;
+        display: flex;
         pointer-events: none;
         position: absolute;
 

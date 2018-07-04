@@ -1,4 +1,6 @@
-﻿@mixin hidden {
+﻿/// <reference path="../references" />
+
+@mixin hidden {
     font-size: 0;
     visibility: hidden;
     opacity: 0;

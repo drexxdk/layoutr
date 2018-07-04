@@ -25,7 +25,7 @@
 
         &.middle {
             top: calc(#{$header-height / 2} + 50%) !important;
-            @include transform(translateY(-50%));
+            transform: translateY(-50%);
         }
     }
 }

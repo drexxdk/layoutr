@@ -11,9 +11,9 @@ aside {
     flex-shrink: 0;
     flex-grow: 1;
     overflow: auto;
-    @include flex-direction(column);
-    @include flex-display;
-    @include transform(0);
+    flex-direction: column;
+    display: flex;
+    transform: none;
     will-change: transform;
 
     html.ios &,
@@ -35,7 +35,7 @@ aside {
         border-right: $layout-border;
 
         html[data-aside="left"] & {
-            @include transform(translateX(100%));
+            transform: translateX(100%);
         }
     }
 
@@ -52,7 +52,7 @@ aside {
         }
 
         html[data-aside="right"] & {
-            @include transform(translateX(-100%));
+            transform: translateX(-100%);
         }
     }
 

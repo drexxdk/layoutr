@@ -64,14 +64,14 @@
     .form-group,
     .form-group > div,
     .input-group {
-        @include flex-display;
-        @include flex-wrap(wrap);
+        display: flex;
+        flex-wrap: wrap;
         flex-grow: 1;
     }
 
     .form-group,
     .form-group > div {
-        @include align-items(flex-start);
+        align-items: flex-start;
     }
 
     .form-group,
@@ -152,8 +152,8 @@
             position: absolute;
             top: $component-border-width;
             bottom: $component-border-width;
-            @include flex-display;
-            @include align-items(center);
+            display: flex;
+            align-items: center;
             z-index: $input-group-addon;
             padding: 0 $padding-x;
             @include theme-element-soft($light, false);

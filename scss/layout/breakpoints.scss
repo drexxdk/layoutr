@@ -39,7 +39,7 @@ html {
     @include breakpoint-small-one-column {
         &[data-aside="left"] #content,
         &[data-aside="right"] #content {
-            @include noselect;
+            user-select: none;
 
             &:before {
                 @include overlay;
@@ -54,7 +54,7 @@ html {
     @include breakpoint-medium-one-column {
         &:not(.left-shrink)[data-aside="left"] #content,
         &:not(.right-shrink)[data-aside="right"] #content {
-            @include noselect;
+            user-select: none;
 
             &:before {
                 @include overlay;
@@ -162,7 +162,7 @@ html {
 
                 > .content:first-child {
                     width: 100%;
-                    @include flex-direction(row);
+                    flex-direction: row;
                 }
             }
         }

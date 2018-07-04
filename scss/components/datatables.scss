@@ -12,8 +12,8 @@
         border-radius: $component-border-radius $component-border-radius 0 0;
 
         .dataTables_length > label {
-            @include flex-display;
-            @include align-items(center);
+            display: flex;
+            align-items: center;
 
             div.dropdown {
                 margin: 0 $spacer / 2
@@ -52,17 +52,17 @@
                     }
 
                     > div {
-                        @include flex-display;
-                        @include flex-direction(column);
+                        display: flex;
+                        flex-direction: column;
                         flex-grow: 1;
                         padding: $padding-y $padding-x;
 
                         > div {
-                            @include flex-display;
+                            display: flex;
                         }
 
                         > div:first-child {
-                            @include align-items(center);
+                            align-items: center;
 
                             > span:first-child {
                                 flex-grow: 1;
@@ -76,8 +76,8 @@
                         > div:nth-child(2) {
                             margin-top: $padding-y;
                             height: 42px;
-                            @include align-items(center);
-                            @include justify-content(flex-end);
+                            align-items: center;
+                            justify-content: flex-end;
                         }
                     }
 
@@ -107,7 +107,7 @@
                             border-right: 6px solid transparent;
                             position: absolute;
                             left: 50%;
-                            @include transform(translateX(-50%));
+                            transform: translateX(-50%);
                         }
 
                         &:before {
@@ -139,10 +139,12 @@
                             width: $font-size;
                             height: $font-size;
                             @include button-transition(all);
-                            @include transform(translateY(-50%));
+                            transform: translateY(-50%);
                             border-radius: 50%;
                             @include theme-element($primary);
-                            @include flex-center;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
                             @include button-transition(all);
 
                             &:focus {
@@ -212,8 +214,8 @@
                 }
 
                 span:not(.ellipsis) {
-                    @include flex-display;
-                    @include flex-wrap(wrap);
+                    display: flex;
+                    flex-wrap: wrap;
                 }
 
                 a {
@@ -240,7 +242,7 @@
                 }
 
                 .previous svg {
-                    @include transform(rotate(180deg));
+                    transform: rotate(180deg);
                 }
             }
         }
@@ -251,7 +253,7 @@ div.dt-button-info {
     position: fixed;
     top: 50%;
     left: 50%;
-    @include transform(translate(-50%, -50%));
+    transform: translate(-50%, -50%);
     width: $container-small;
     border-radius: $component-border-radius;
     border: $component-border;

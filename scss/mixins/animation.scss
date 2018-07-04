@@ -1,9 +1,5 @@
-﻿@mixin animation ($name, $duration: 300ms, $delay: 0, $ease: ease) {
-    -webkit-animation: $name $duration $delay $ease;
-    animation: $name $duration $delay $ease;
-}
+﻿/// <reference path="../references" />
 
-@mixin animation-delay ($delay) {
-    -animation-delay: $delay;
-    animation-delay: $delay;
+@mixin animation ($name, $duration: 300ms, $delay: 0, $ease: ease) {
+    animation: $name $duration $delay $ease;
 }

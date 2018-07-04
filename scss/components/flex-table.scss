@@ -2,8 +2,8 @@
 
 @mixin layoutr-flex-table {
     .flex-table {
-        @include flex-display;
-        @include flex-wrap(wrap);
+        display: flex;
+        flex-wrap: wrap;
         padding: $component-border-width;
         border-radius: $component-border-radius;
 

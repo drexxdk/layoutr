@@ -8,7 +8,8 @@ var gulp = require("gulp"),
     sass = require("gulp-sass"),
     cleanCSS = require("gulp-clean-css"),
     autoprefixer = require("gulp-autoprefixer"),
-    sourcemaps = require("gulp-sourcemaps");
+    sourcemaps = require("gulp-sourcemaps"),
+    gulpif = require("gulp-if");
 
 const config = {
     js: {
@@ -179,7 +180,7 @@ function generateJSTask(task) {
             .src([config.js.dist + '/' + task.name + '.js'])
             .pipe(babel())
             .pipe(concat(task.name + '.min.js'))
-            .pipe(uglify())
+            //.pipe(uglify())
             .pipe(gulp.dest(config.js.dist));
     });
 }

@@ -37,19 +37,21 @@ html {
             }
 
             #modal {
-                @include flex-center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 @include overlay;
                 height: 100%;
                 overflow-y: scroll;
                 z-index: $modal-z-index;
 
                 > div {
-                    @include flex-display;
+                    display: flex;
                     position: relative;
                     max-height: 100%;
 
                     > div {
-                        @include align-self(flex-start);
+                        align-self: flex-start;
                         overflow: hidden;
                     }
                 }
@@ -79,10 +81,10 @@ html {
             width: 100%;
 
             > div {
-                @include flex-display;
-                @include flex-direction(column);
+                display: flex;
+                flex-direction: column;
                 width: 100%;
-                @include align-items(center);
+                align-items: center;
 
                 > #modal-container {
                     width: 100%;
@@ -161,6 +163,6 @@ html {
 
     .modal {
         cursor: pointer;
-        @include noselect;
+        user-select: none;
     }
 }

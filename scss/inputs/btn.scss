@@ -2,9 +2,9 @@
 
 @mixin layoutr-btn {
     .btn {
-        @include flex-display;
-        @include align-items(center);
-        @include noselect;
+        display: flex;
+        align-items: center;
+        user-select: none;
         font-size: $font-size;
         padding: $padding-y $padding-x;
         border-radius: $component-border-radius;
@@ -43,11 +43,11 @@
         }
 
         &:not(.align-left):not(.align-right) {
-            @include justify-content(center);
+            justify-content: center;
         }
 
         &.align-right {
-            @include justify-content(flex-end);
+            justify-content: flex-end;
         }
 
         > * {

@@ -2,8 +2,8 @@
 
 main {
     @media screen {
-        @include flex-display;
-        @include flex-direction(column);
+        display: flex;
+        flex-direction: column;
         height: 100vh;
 
         html.scroll-disabled.android & {

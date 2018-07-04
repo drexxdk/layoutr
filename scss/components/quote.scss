@@ -2,7 +2,7 @@
 
 @mixin layoutr-quote {
     .quote {
-        @include flex-display();
+        display: flex;
 
         &.large > .text {
             > p {

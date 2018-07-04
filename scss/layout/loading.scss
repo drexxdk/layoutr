@@ -3,11 +3,11 @@
 #loading {
     @keyframes sk-stretchdelay {
         0%, 40%, 100% {
-            @include transform(scaleY(0.4));
+            transform: scaleY(0.4);
         }
 
         20% {
-            @include transform(scaleY(1));
+            transform: scaleY(1);
         }
     }
 
@@ -15,11 +15,13 @@
         display: none;
     }
 
-    @include flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     @include overlay;
     height: 100%;
     z-index: $loading-z-index;
-    @include noselect;
+    user-select: none;
 
     &:before {
         content: '';
@@ -30,7 +32,7 @@
     > .spinner {
         position: relative;
         height: $font-size * 4;
-        @include flex-display;
+        display: flex;
 
         &:before {
             content: '';
@@ -53,19 +55,19 @@
         }
 
         > .rect2 {
-            @include animation-delay(-1.1s);
+            animation-delay: -1.1s;
         }
 
         > .rect3 {
-            @include animation-delay(-1.0s);
+            animation-delay: -1.0s;
         }
 
         > .rect4 {
-            @include animation-delay(-0.9s);
+            animation-delay: -0.9s;
         }
 
         > .rect5 {
-            @include animation-delay(-0.8s);
+            animation-delay: -0.8s;
         }
     }
 }

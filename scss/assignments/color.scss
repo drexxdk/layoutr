@@ -44,8 +44,8 @@
         }
 
         .controls {
-            @include flex-display;
-            @include justify-content(center);
+            display: flex;
+            justify-content: center;
             padding: $component-border-width;
             border-radius: $component-border-radius;
 
@@ -54,7 +54,9 @@
                 height: $spacer * 3;
                 border: $component-border;
                 margin: -$component-border-width;
-                @include flex-center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 background-color: $white;
 
                 > svg {
@@ -78,7 +80,7 @@
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    @include transform(translate(-50%, -50%));
+                    transform: translate(-50%, -50%);
                     width: 25%;
                     height: 25%;
                 }

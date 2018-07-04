@@ -4,8 +4,8 @@
     .alert {
         font-size: $font-size;
         border-radius: $component-border-radius;
-        @include flex-display();
-        @include align-items(flex-start);
+        display: flex;
+        align-items: flex-start;
         overflow: hidden;
 
         $value: $light;
@@ -39,7 +39,9 @@
         }
 
         > .close {
-            @include flex-center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: $line-height + ($padding-y * 2);
             height: $line-height + ($padding-y * 2);
             background-color: transparent;

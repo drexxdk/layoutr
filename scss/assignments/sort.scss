@@ -10,8 +10,8 @@
         }
 
         .container {
-            @include align-items(center);
-            @include justify-content(center);
+            align-items: center;
+            justify-content: center;
 
             &:not(.wrap):not(.checked) {
                 visibility: hidden;
@@ -23,7 +23,7 @@
             @include theme-element($light);
             padding: $padding-y $padding-x;
             cursor: pointer;
-            @include noselect;
+            user-select: none;
             text-align: center;
 
             html.desktop &:not(.sortable-ghost):hover {

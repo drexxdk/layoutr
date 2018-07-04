@@ -29,7 +29,7 @@
             height: 1em;
             clip: rect(0em, 0.5em, 1em, 0em);
             border-radius: 50%;
-            @include transform(rotate(0deg));
+            transform: rotate(0deg);
         }
 
         > span {
@@ -82,18 +82,18 @@
             }
 
             &.p#{$j} .bar:after {
-                @include transform(rotate(180deg));
+                transform: rotate(180deg);
             }
 
             &.p#{$j} .fill {
-                @include transform(rotate(180deg));
+                transform: rotate(180deg);
             }
         }
 
         @for $j from 1 through 100 {
             // loop to rotate all 100 circles
             &.p#{$j} .bar {
-                @include transform(rotate(#{360/100*$j}deg));
+                transform: rotate(#{360/100*$j}deg);
             }
         }
     }

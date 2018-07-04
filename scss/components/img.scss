@@ -8,7 +8,7 @@
         .embed & {
             background-color:transparent;
         }
-        @include noselect;
+        user-select: none;
     }
 
     .img {

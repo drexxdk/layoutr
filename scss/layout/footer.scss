@@ -10,8 +10,8 @@ footer {
     background-color: $footer-background-color;
     color: $footer-color;
     flex-shrink: 0;
-    @include flex-display;
-    @include align-items(center);
+    display: flex;
+    align-items: center;
 
     html[data-aside="left"].left-push & {
         left: $aside-width;

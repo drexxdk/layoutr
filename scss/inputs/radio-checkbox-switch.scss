@@ -16,7 +16,7 @@
     .switch {
         position: relative;
         line-height: $line-height;
-        @include noselect;
+        user-select: none;
 
         > input {
             @include hidden;
@@ -31,8 +31,8 @@
         }
 
         > label {
-            @include flex-display;
-            @include align-items(center);
+            display: flex;
+            align-items: center;
             font-size: $font-size;
             z-index: $component-z-index;
             cursor: pointer;
@@ -82,7 +82,7 @@
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                @include transform(translate(-50%, - 50%));
+                transform: translate(-50%, - 50%);
                 border-radius: 50%;
                 height: $font-size - ($component-border-width * 4);
                 width: $font-size - ($component-border-width * 4);
@@ -118,7 +118,7 @@
         }
 
         > input:checked + label > i:before {
-            @include transform(translateX($font-size));
+            transform: translateX($font-size);
         }
 
         > label > i {

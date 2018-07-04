@@ -3,7 +3,7 @@
 @mixin layoutr-tree {
     .tree {
         margin-left: $spacer * 1.5;
-        @include noselect;
+        user-select: none;
         list-style-type: none;
         z-index: $component-z-index;
 
@@ -134,7 +134,9 @@
                 height: $font-size;
                 min-height: 0;
                 padding: 0;
-                @include flex-center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 @include button-transition(all);
 
                 > svg {

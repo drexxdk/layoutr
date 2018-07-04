@@ -1,4 +1,6 @@
-﻿@mixin background-cover {
+﻿/// <reference path="../references" />
+
+@mixin background-cover {
     background-size: cover;
     background-position: center;
 }

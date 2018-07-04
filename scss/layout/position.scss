@@ -6,8 +6,8 @@
     left: 0;
     right: 0;
     pointer-events: none;
-    @include flex-display;
-    @include flex-direction(column);
+    display: flex;
+    flex-direction: column;
 
     @media screen {
         padding: 0 $spacer;
@@ -30,7 +30,7 @@
 
     &.middle {
         top: 50%;
-        @include transform(translateY(-50%));
+        transform: translateY(-50%);
     }
 
     &.bottom {
@@ -38,14 +38,14 @@
     }
 
     &.left > * {
-        @include align-self(flex-start);
+        align-self: flex-start;
     }
 
     &.center > * {
-        @include align-self(center);
+        align-self: center;
     }
 
     &.right > * {
-        @include align-self(flex-end);
+        align-self: flex-end;
     }
 }
