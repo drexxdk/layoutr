@@ -9,6 +9,7 @@ app.loadPage = (url, pushState, initial) => {
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', () => {
+        debugger;
         if (url === '/') {
             app.title.html('');
             if (app.body.children('#svg-browser').length === 0) {
