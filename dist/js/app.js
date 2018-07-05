@@ -1417,9 +1417,10 @@ app.loadPage = (url, pushState, initial) => {
     app.left.find('.tree a.label.active').removeClass('active');
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
+    let tempUrl = url;
     app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', () => {
-        debugger;
-        if (url === '/') {
+        url = tempUrl;
+        if (url === '') {
             app.title.html('');
             if (app.body.children('#svg-browser').length === 0) {
                 $.get(app.host + 'ajax/svg/browser.html', (data) => {
