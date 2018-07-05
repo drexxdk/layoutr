@@ -1,7 +1,6 @@
 ﻿/// <binding ProjectOpened='_default' />
 
 var gulp = require("gulp"),
-    babel = require("babel-preset-env"),
     babel = require("gulp-babel"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
@@ -10,6 +9,8 @@ var gulp = require("gulp"),
     autoprefixer = require("gulp-autoprefixer"),
     sourcemaps = require("gulp-sourcemaps"),
     gulpif = require("gulp-if");
+
+// i cant get babel promise polyfill to work.  
 
 const config = {
     js: {

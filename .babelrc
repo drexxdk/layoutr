@@ -1,5 +1,15 @@
 {
   "presets": [
-    [ "env" ]
+    [
+      "env",
+      {
+        "targets": {
+          // browserlist combined by OR clause
+          // https://github.com/ai/browserslist
+          "browsers": [ "last 2 versions", "not ie <= 10" ]
+        },
+        "useBuiltIns": true
+      }
+    ]
   ]
 }
