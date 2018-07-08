@@ -91,19 +91,21 @@ app.enableTTS = () => {
                             } else {
                                 text[0] = text[0].substring(selection.baseOffset);
                             }
-                            if (text[0] === '' || text[0] === '. ') {
-                                text = []
+                            if (text[0] === '. ' || text[0] === ' ') {
+                                text[0] = '';
                             }
                         }
                     } else {
-                        for (let i = 0, len = node.childNodes.length; i < len; ++i) {
+                        for (let i = 0; i < node.childNodes.length; i++) {
                             getTextNodes(node.childNodes[i]);
                         }
                     }
                 }
 
             getTextNodes(node);
-
+            if (text.length && text.length > 1) {
+                text[text.length - 1] = text[text.length - 1].substring(0, selection.focusOffset);
+            }
             text = text.join(' ').replace(/(?:\r\n|\r|\n)/g, ' ').replace(/ +\./g, '. ').replace(/\s\s+/g, ' ').replace(',.', '.').trim();
             return text;
         }
