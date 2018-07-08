@@ -8,7 +8,8 @@ app.showLoading = () => {
 
 app.hideLoading = () => {
     app.loadingCount--;
-    if (app.loadingCount === 0) {
+    if (app.loadingCount <= 0) {
+        app.loadingCount = 0;
         app.html.removeClass('loading');
         app.setHtmlScroll();
     }
