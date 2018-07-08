@@ -1107,7 +1107,6 @@ var app = app || {};
 
 app.contentLoaded = (element) => {
     app.checkRb(element.find('.rb'));
-    app.checkContentHeader();
     app.checkLazy(element.find('.lazy'));
     app.checkAccordion(element.find('.accordion'));
     app.checkDropdown(element.find('select.dropdown'));
@@ -1124,7 +1123,6 @@ app.pageLoaded = (initial) => {
     app.main.scrollTop(0);
     app.main.css('overflow', '');
     app.html.animate({ scrollTop: 0 }, 0);
-    app.contentHeader = app.content.children('.content-header:not(.full)');
     setTimeout(() => {
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);
@@ -1580,22 +1578,7 @@ app.applySettings = (id, name, type, value, set) => {
             });
         }
         if (name === 'theme') {
-            let stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]'),
-                href = stylesheet.attr('href'),
-                split1 = href.split('/'),
-                split2 = split1[split1.length - 1].split('.');
-            href = [];
-            for (let i = 0; i < split1.length - 1; i++) {
-                href.push(split1[i] + '/');
-            }
-            let theme = id.substring(id.indexOf("-") + 1);
-            href.push(theme);
-
-            for (let i = 1; i < split2.length; i++) {
-                href.push('.' + split2[i]);
-            }
-            href = href.join("");
-            stylesheet.attr('href', href);
+            app.loadTheme(id);
         }
         if (name === 'focus' && value) {
             app.enableFocus();
@@ -1619,7 +1602,7 @@ app.applySettings = (id, name, type, value, set) => {
 };
 
 $(() => {
-    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function() {
+    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
         $.each(app.settings, (i, entry) => {
             app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
         });
@@ -1771,15 +1754,7 @@ app.checkModal = () => {
         app.right.css('margin-right', 0);
         app.body.children('.popup').css('margin-right', 0);
     }
-    
-    if (app.contentHeader.length) {
-        if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
-            let halfOverflowY = app.scrollbarWidth / 2;
-            app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
-        } else {
-            app.contentHeader.children().css('width', '');
-        }
-    }
+    app.html.trigger('model-check');
 };
 
 $(function () {
@@ -2191,15 +2166,90 @@ app.enableTTS = () => {
 };
 var app = app || {};
 
-app.checkContentHeader = () => {
-    if(app.contentHeader.length) {
-        //$(window).on('scroll.contentHeader', () => {
-        //    //debugger;
-        //});
-    } else {
-        $(window).off('scroll.contentHeader');
+$(() => {
+    app.html.on('model-check', () => {
+        let contentHeader = app.content.children('.content-header:not(.full)');
+        if (contentHeader.length) {
+            if (app.isModal() && contentHeader.css('position') === 'fixed') {
+                let halfOverflowY = app.scrollbarWidth / 2;
+                contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+            } else {
+                contentHeader.children().css('width', '');
+            }
+        }
+    });
+});
+var app = app || {};
+
+app.loadTheme = (id) => {
+
+    let loadStyleSheet = (path, fn, scope) => {
+        var body = app.body[0],
+            link = document.createElement('link');
+
+        link.setAttribute('href', path);
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+
+        var sheet, cssRules;
+
+        // get the correct properties to check for depending on the browser
+        if ('sheet' in link) {
+            sheet = 'sheet';
+            cssRules = 'cssRules';
+        }
+        else {
+            sheet = 'styleSheet';
+            cssRules = 'rules';
+        }
+
+        let interval_id = setInterval(function () {
+            try {
+                if (link[sheet] && link[sheet][cssRules].length) {
+                    clearInterval(interval_id);
+                    clearTimeout(timeout_id);
+                    fn.call(scope || window, true, link);
+                }
+            } catch (e) { } finally { }
+        }, 10),
+            timeout_id = setTimeout(function () {
+                clearInterval(interval_id);
+                clearTimeout(timeout_id);
+                body.removeChild(link);
+                fn.call(scope || window, false, link);
+            }, 15000);
+
+        body.appendChild(link);
+
+        return link;
     }
-};
+
+    app.showLoading();
+    let stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]'),
+        href = stylesheet.attr('href'),
+        split1 = href.split('/'),
+        split2 = split1[split1.length - 1].split('.');
+    href = [];
+    for (let i = 0; i < split1.length - 1; i++) {
+        href.push(split1[i] + '/');
+    }
+    let theme = id.substring(id.indexOf("-") + 1);
+    href.push(theme);
+
+    for (let i = 1; i < split2.length; i++) {
+        href.push('.' + split2[i]);
+    }
+    href = href.join("");
+    loadStyleSheet(href, (success, link) => {
+        if (success) {
+            stylesheet.remove();
+        }
+        else {
+            app.showPopupAlert('Failed to load theme', 'danger');
+        }
+        app.hideLoading();
+    });
+}
 var app = app || {};
 
 app.checkDropdown = (dropdowns) => {
@@ -2428,38 +2478,36 @@ app.checkLazy = (elements) => {
 var app = app || {};
 
 $(() => {
-    app.body.on('click', '.show-popup', (e) => {
+    app.body.on('click', '.show-popup-alert', (e) => {
         let $this = $(e.currentTarget),
-            title = $this.attr('data-popup-title');
-        if (title !== undefined) {
-            let theme = $this.attr('data-popup-theme'),
-                alert = [],
-                position = $this.attr('data-popup-position'),
-                popup = app.body.children('.popup[data-position="' + position + '"]');
-            if (theme === undefined) {
-                theme = 'primary';
-            }
-            alert.push('<div class="alert theme-' + theme + '">');
-            alert.push('<div><p>' + title + '</p></div>');
-            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
-            alert.push('</div>');
-            alert = alert.join('');
-            if (position === undefined) {
-                position = 'top left';
-            }
-            if (popup.length) {
-                popup.append(alert);
-            } else {
-                let html = [];
-                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
-                html.push(alert);
-                html.push('</div>');
-                html = html.join("");
-                app.body.prepend(html);
-            }
-        }
+            title = $this.attr('data-popup-title'),
+            theme = $this.attr('data-popup-theme'),
+            position = $this.attr('data-popup-position');
+        app.showPopupAlert(title, theme, position);
     });
 });
+
+app.showPopupAlert = (title, theme = 'light', position = 'top left') => {
+    if (title !== undefined) {
+        let alert = [],
+            popup = app.body.children('.popup[data-position="' + position + '"]');
+        alert.push('<div class="alert theme-' + theme + '">');
+        alert.push('<div><p>' + title + '</p></div>');
+        alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
+        alert.push('</div>');
+        alert = alert.join('');
+        if (popup.length) {
+            popup.append(alert);
+        } else {
+            let html = [];
+            html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
+            html.push(alert);
+            html.push('</div>');
+            html = html.join("");
+            app.body.prepend(html);
+        }
+    }
+}
 var app = app || {};
 
 app.checkTooltip = (tooltips) => {

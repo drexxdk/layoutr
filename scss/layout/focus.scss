@@ -33,11 +33,16 @@ header .focus,
 
     position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
     z-index: $focus-z-index;
     pointer-events: none;
+    height: 100vh;
+
+    html.ios &,
+    html.android & {
+        height: 100%;
+    }
 
     html[data-focus="true"].focus & {
         display: block;

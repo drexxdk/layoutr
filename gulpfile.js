@@ -14,7 +14,7 @@ var gulp = require("gulp"),
 
 const config = {
     js: {
-        prefix: '$js',
+        prefix: 'js$',
         dist: 'dist/js',
         bundles: [
             {
@@ -52,6 +52,7 @@ const config = {
                     'js/app/layout/swipe.js',
                     'js/app/layout/tts.js',
                     'js/app/layout/contentHeader.js',
+                    'js/app/layout/theme.js',
 
                     // inputs
                     'js/app/inputs/dropdown.js',
@@ -139,7 +140,7 @@ const config = {
         ]
     },
     css: {
-        prefix: '$css',
+        prefix: 'css$',
         bundles: [
             {
                 name: 'light',

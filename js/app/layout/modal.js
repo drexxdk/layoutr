@@ -31,15 +31,7 @@ app.checkModal = () => {
         app.right.css('margin-right', 0);
         app.body.children('.popup').css('margin-right', 0);
     }
-    
-    if (app.contentHeader.length) {
-        if (app.isModal() && app.contentHeader.css('position') === 'fixed') {
-            let halfOverflowY = app.scrollbarWidth / 2;
-            app.contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
-        } else {
-            app.contentHeader.children().css('width', '');
-        }
-    }
+    app.html.trigger('model-check');
 };
 
 $(function () {

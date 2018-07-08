@@ -2,7 +2,6 @@
 
 app.contentLoaded = (element) => {
     app.checkRb(element.find('.rb'));
-    app.checkContentHeader();
     app.checkLazy(element.find('.lazy'));
     app.checkAccordion(element.find('.accordion'));
     app.checkDropdown(element.find('select.dropdown'));
@@ -19,7 +18,6 @@ app.pageLoaded = (initial) => {
     app.main.scrollTop(0);
     app.main.css('overflow', '');
     app.html.animate({ scrollTop: 0 }, 0);
-    app.contentHeader = app.content.children('.content-header:not(.full)');
     setTimeout(() => {
         if (!initial && app.isCloseLeftPageChange()) {
             app.toggleAside(undefined, true);

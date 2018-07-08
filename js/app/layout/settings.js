@@ -32,22 +32,7 @@ app.applySettings = (id, name, type, value, set) => {
             });
         }
         if (name === 'theme') {
-            let stylesheet = app.body.children('link[rel="stylesheet"][href^="' + app.host + 'dist/css/theme/"]'),
-                href = stylesheet.attr('href'),
-                split1 = href.split('/'),
-                split2 = split1[split1.length - 1].split('.');
-            href = [];
-            for (let i = 0; i < split1.length - 1; i++) {
-                href.push(split1[i] + '/');
-            }
-            let theme = id.substring(id.indexOf("-") + 1);
-            href.push(theme);
-
-            for (let i = 1; i < split2.length; i++) {
-                href.push('.' + split2[i]);
-            }
-            href = href.join("");
-            stylesheet.attr('href', href);
+            app.loadTheme(id);
         }
         if (name === 'focus' && value) {
             app.enableFocus();
@@ -71,7 +56,7 @@ app.applySettings = (id, name, type, value, set) => {
 };
 
 $(() => {
-    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function() {
+    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
         $.each(app.settings, (i, entry) => {
             app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
         });
