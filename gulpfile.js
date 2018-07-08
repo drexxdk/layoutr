@@ -127,8 +127,7 @@ const config = {
                 name: 'tts',
                 files: [
                     'js/vendors/tts/aws-sdk.min.js',
-                    'js/vendors/tts/chattykathy.js',
-                    'js/vendors/tts/jquery.selection.js'
+                    'js/vendors/tts/chattykathy.js'
                 ]
             },
             {

@@ -12,6 +12,54 @@ app.stopTTS = () => {
     }
 };
 
+function getText(node, selection, target) {
+    var text = [],
+        nonWhitespaceMatcher = /\S/;
+
+    function getTextNodes(node) {
+        var parent = $(node.parentNode);
+        var special = false;
+        
+        if (selection.containsNode(node, true) && (node.nodeName.toLowerCase() === 'input' ||
+            node.nodeName.toLowerCase() === 'textarea') && nonWhitespaceMatcher.test(node.value)) {
+
+            special = true;
+        }
+
+        if (!special &&
+            selection.containsNode(node, true) &&
+            node.nodeType === 3 &&
+            nonWhitespaceMatcher.test(node.nodeValue) &&
+            parent.is(':visible') &&
+            parent.css('user-select') !== 'none' &&
+            parent.parents().css('user-select') !== 'none' &&
+            node.parentNode.tagName !== 'SCRIPT'
+        ) {
+            if (!node.nodeValue.match(/\.\s*$/) && node.nextElementSibling === null && parent.is('h1, h2, h3, h4, h5, h6, p, th, td, .dataTable th span')) {
+                text.push(node.nodeValue + '. ');
+            } else {
+                text.push(node.nodeValue);
+            }
+            if (text.length === 1) {
+                if ($(selection.anchorNode).is(selection.focusNode)) {
+                    text[0] = text[0].substring(0, selection.focusOffset).substring(selection.baseOffset);
+                } else {
+                    text[0] = text[0].substring(selection.baseOffset);
+                }
+            }
+        } else {
+            for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+                getTextNodes(node.childNodes[i]);
+            }
+        }
+    }
+    getTextNodes(node);
+    
+    text = text.join(' ').replace(/(?:\r\n|\r|\n)/g, ' ').replace(/ +\./g, '. ').replace(/\s\s+/g, ' ').replace(',.', '.').trim();
+    return text;
+}
+
+
 app.enableTTS = () => {
     if (bowser.desktop) {
         let snapSelectionToWord = () => {
@@ -53,6 +101,7 @@ app.enableTTS = () => {
                 selection.removeAllRanges();
                 selection.addRange(range);
             }
+            return selection;
         }
 
         if (bowser.msie) {
@@ -83,12 +132,13 @@ app.enableTTS = () => {
 
             $(window).on('mouseup touchend', (e) => {
                 if (!$(document.activeElement).is('input, textarea, button, select, .dropdown')) {
-                    if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled()) {
+                    if (!app.isLoading() && !app.isFocus() && app.isTTS() && app.isTTSEnabled() && e.originalEvent.detail < 3) {
                         setTimeout(() => {
-                            snapSelectionToWord();
-                            let selection = $.selection();
-                            if (selection.length) {
-                                app.tts.SpeakWithPromise(selection).then(() => {
+                            let selection = snapSelectionToWord();
+                            let text = getText(selection.getRangeAt(0).commonAncestorContainer, selection, e.target);
+
+                            if (text.length) {
+                                app.tts.SpeakWithPromise(text).then(() => {
                                     app.clearSelection();
                                 });
                             } else {
