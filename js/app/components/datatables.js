@@ -2,6 +2,8 @@
 
 app.checkDatatables = (tables) => {
     if (tables.length) {
+        let count = 0;
+        app.showLoading();
         $.getScript('dist/js/datatables.min.js', () => {
             let spacing = 'space-3';
 
@@ -158,6 +160,12 @@ app.checkDatatables = (tables) => {
                         table_footer_paginate(wrapper, footer, paginate);
 
                         table_dropdowns(wrapper);
+
+                        count++;
+                        if (count = tables.length) {
+                            app.hideLoading();
+                        }
+
                         $this.on('draw.dt', function () {
                             paginateFix(paginate);
                             let columns = instance.columns().responsiveHidden();
