@@ -14,7 +14,7 @@ app.stopTTS = () => {
 };
 
 app.enableTTS = () => {
-    if (bowser.desktop) {
+    if (bowser.desktop && !bowser.msie) {
         let snapSelectionToWord = () => {
             let selection = window.getSelection();
             if (!selection.isCollapsed) {

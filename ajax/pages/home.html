@@ -120,7 +120,7 @@
                                 <li><b>Disabled</b>: Hides "Focus" button in header</li>
                             </ul>
                         <li>
-                            <b>Text-to-speech (desktop)</b>
+                            <b>Text-to-speech (desktop, not msie)</b>
                             <ul>
                                 <li><b>Enabled</b>: Displays "Text to speech" toggle in header, that when enabled plays the text the user selects</li>
                                 <li><b>Disabled</b>: Hides "Text to speech" button in header</li>
@@ -177,7 +177,7 @@
                         <li><a href="https://datatables.net/" rel="noreferrer noopener">DataTables</a> is used to make advanced tables.</li>
                         <li><a href="https://aws.amazon.com/" rel="noreferrer noopener">Amazon AWS</a> is used for text-to-speech.</li>
                         <li><a href="https://github.com/ejbeaty/ChattyKathy" rel="noreferrer noopener">ChattyKathy</a> is used for text-to-speech.</li>
-                        <li><a href="https://github.com/taylorhakes/promise-polyfill" rel="noreferrer noopener">Promise Polyfill</a> is used for text-to-speech for Internet Explorer 11.</li>
+                        <li><a href="https://github.com/taylorhakes/promise-polyfill" rel="noreferrer noopener">Promise Polyfill</a> is used to add Promise support for Internet Explorer 11.</li>
                         <li>
                             <b>Gulp</b>
                             <ul>
@@ -204,8 +204,10 @@
             <div class="alert">
                 <div>
                     <ul class="list">
+                        <li><b>Android Chrome</b> doesn't always display aside with correct height, because the browser sometimes calculates window height without adding the browser navigation bar to the calculation.</li>
                         <li>
-                            <b>Android Chrome</b> doesn't always display aside with correct height, because the browser thinks it is displaying the browser navigation bar, when it is not being displayed.
+                            <b>Internet Explorer 11</b> doesn't support containsNode and doesn't respect "-ms-user-select: none" if you select from an element without it to an element with it.<br />
+                            TTS is therefore disabled for that browser
                         </li>
                     </ul>
                 </div>
