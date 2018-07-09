@@ -2123,9 +2123,9 @@ app.enableTTS = () => {
                         node.nodeName.toLowerCase() === 'textarea') && nonWhitespaceMatcher.test(node.value)) {
                         special = true;
                     }
-
+                    
                     if (!special &&
-                        selection.containsNode(node, false) &&
+                        selection.containsNode(node, true) &&
                         node.nodeType === 3 &&
                         nonWhitespaceMatcher.test(node.nodeValue) &&
                         parent.is(':visible') &&

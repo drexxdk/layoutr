@@ -2,6 +2,14 @@
 html:not(.tablet) .tablet-only,
 html:not(.mobile) .mobile-only,
 html:not(.android) .android-only,
-html:not(.ios) .ios-only {
+html:not(.ios) .ios-only,
+
+html.desktop .not-desktop,
+html.tablet .not-tablet,
+html.mobile .not-mobile,
+html.android .not-android,
+html.ios .not-ios,
+
+html.msie .not-msie {
     display: none !important;
 }
