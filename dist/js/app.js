@@ -2606,9 +2606,16 @@ app.checkDatatables = (tables) => {
                 instance.columns().every(function () {
                     let th = this.header(),
                         text = th.innerText,
-                        column = $(th);
+                        column = $(th),
+                        style = '';
 
-                    column.empty().append('<div><div><span>' + text + '</span></div>' + (elements.length ? '<div></div>' : '') + '</div>');
+                    
+                    let minWidth = column.attr('data-min-width');
+                    if (minWidth) {
+                        style += 'min-width: ' + minWidth + 'px;';
+                    }
+
+                    column.empty().append('<div style="' + style + '"><div><span>' + text + '</span></div>' + (elements.length ? '<div></div>' : '') + '</div>');
                     let index = column.index();
 
                     if (column.hasClass('dropdown')) {
@@ -2774,10 +2781,9 @@ app.checkDatatables = (tables) => {
                             let elements = table.find('tbody tr:not(.child) > *:first-child:not(.dataTables_empty)');
                             elements.removeAttr('tabindex');
 
+                            elements.children('i').remove();
                             if (count) {
                                 elements.prepend('<i tabindex="0"><svg focusable="false"><use xlink:href="#svg-plus"></use></svg><svg focusable="false"><use xlink:href="#svg-minus"></use></svg></i>');
-                            } else {
-                                elements.children('i').remove();
                             }
                         });
 

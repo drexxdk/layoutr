@@ -8,7 +8,7 @@
         @include theme-element($secondary);
     }
 
-    > .dataTables_header {
+    .dataTables_header {
         border-radius: $component-border-radius $component-border-radius 0 0;
 
         .dataTables_length > label {
@@ -33,7 +33,7 @@
         }
     }
 
-    > .dataTables_content {
+    .dataTables_content {
         overflow: visible;
 
         table.dataTable {
@@ -123,15 +123,26 @@
                 }
             }
 
-            &.dtr-inline.collapsed > tbody > tr {
+            tbody tr {
+                th,
+                td {
+                    max-width: 1px;
+                    width: 100%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            &.dtr-inline.collapsed tbody tr {
                 &[role="row"] {
-                    > th:first-child,
-                    > td:first-child {
+                    th:first-child,
+                    td:first-child {
                         position: relative;
                         padding-left: $padding-x+ $padding-x / 2 + $font-size;
                         cursor: pointer;
 
-                        > i {
+                        i {
                             position: absolute;
                             top: 50%;
                             left: $padding-x;
@@ -169,8 +180,8 @@
                 }
 
                 &.parent {
-                    > th:first-child,
-                    > td:first-child {
+                    th:first-child,
+                    td:first-child {
                         i svg {
                             &:first-child {
                                 display: none;
@@ -183,7 +194,7 @@
                     }
                 }
 
-                &.child > td {
+                &.child td {
                     .dtr-details {
                         @extend ul.list;
 
@@ -196,7 +207,7 @@
         }
     }
 
-    > .dataTables_footer {
+    .dataTables_footer {
         border-radius: 0 0 $component-border-radius $component-border-radius;
 
         .dataTables_info {
