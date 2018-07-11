@@ -47,10 +47,13 @@ app.applySettings = (id, name, type, value, set) => {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.checkRb(app.content.find('.rb'));
+            app.html.trigger('columns-changed.rb');
         }
         if (id === 'signed-in') {
-            app.responsiveHeader();
+            app.html.trigger('header-changed.responsiveHeader');
+        }
+        if (name === 'aside-left' || 'aside-right') {
+            app.asideChanged();
         }
     }
 };

@@ -273,20 +273,17 @@ app.checkAssignmentSort = (assignment) => {
                 container.css('height', '').addClass('checked');
             };
 
-            let awaitCSS = () => {
-                setInterval(() => {
-                    if (app.cssLoaded()) {
-                        clearInterval(awaitCSS);
+            let awaitCSS = setInterval(() => {
+                if (app.cssLoaded()) {
+                    clearInterval(awaitCSS);
 
+                    checkWidth();
+
+                    $(window).on("throttledresize.assignment", () => {
                         checkWidth();
-
-                        $(window).on("throttledresize.assignment", () => {
-                            checkWidth();
-                        });
-                    }
-                }, app.cssInterval);
-            }
-            awaitCSS();
+                    });
+                }
+            }, app.cssInterval);
         }
 
         let reset = () => {

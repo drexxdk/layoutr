@@ -21,7 +21,7 @@ $(() => {
             }
         });
     }
-}); 
+});
 
 $(window).click((e) => {
     let target = $(e.target),
@@ -53,7 +53,7 @@ $(window).click((e) => {
                 notTarget = !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
             if ((left || right) && notTarget && !app.isLoading()) {
                 app.enableScroll();
-                app.html.attr('data-aside', '');
+                app.toggleAside(undefined, false);
             }
         }
     }

@@ -1066,7 +1066,7 @@ $(() => {
             }
         });
     }
-}); 
+});
 
 $(window).click((e) => {
     let target = $(e.target),
@@ -1098,7 +1098,7 @@ $(window).click((e) => {
                 notTarget = !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
             if ((left || right) && notTarget && !app.isLoading()) {
                 app.enableScroll();
-                app.html.attr('data-aside', '');
+                app.toggleAside(undefined, false);
             }
         }
     }
@@ -1106,7 +1106,7 @@ $(window).click((e) => {
 var app = app || {};
 
 app.contentLoaded = (element) => {
-    app.checkRb(element.find('.rb'));
+    app.checkResponsiveBackground(element.find('.rb'));
     app.checkLazy(element.find('.lazy'));
     app.checkAccordion(element.find('.accordion'));
     app.checkDropdown(element.find('select.dropdown'));
@@ -1115,7 +1115,8 @@ app.contentLoaded = (element) => {
     app.checkMath(element.find('.math'));
     app.checkMedia(element.find('audio, video'));
     app.checkMap(element.find('.map'));
-    app.checkDatatables(element.find('.dataTable'));
+    app.checkDatatable(element.find('.dataTable'));
+    app.checkFixedImg(element.find('.fixed-img'))
 }
 
 app.pageLoaded = (initial) => {
@@ -1275,6 +1276,29 @@ app.hideLoading = () => {
 var app = app || {};
 let transitionLock = false;
 
+app.asideChanged = () => {
+    let trigger = () => {
+        app.html.trigger('aside-changed.datatables');
+        app.html.trigger('aside-changed.rb');
+    }
+
+    if (app.isTransitions()) {
+        let awaitTransition = setInterval(() => {
+            if (!transitionLock) {
+                clearInterval(awaitTransition);
+            } else {
+                trigger();
+            }
+        }, app.cssInterval);
+        setTimeout(function () {
+            transitionLock = false;
+        }, app.transitionTime);
+    } else {
+        transitionLock = false;
+        trigger();
+    }
+}
+
 app.toggleAside = (aside, pageChanged) => {
     if (!transitionLock) {
         transitionLock = true;
@@ -1298,15 +1322,8 @@ app.toggleAside = (aside, pageChanged) => {
         } else if (aside === 'right') {
             app.right.focus();
         }
-        if (app.isTransitions()) {
-            setTimeout(function () {
-                transitionLock = false;
-                app.html.trigger('aside-changed');
-            }, app.transitionTime);
-        } else {
-            transitionLock = false;
-            app.html.trigger('aside-changed');
-        }
+
+        app.asideChanged();
         app.setHtmlScroll();
     }
 };
@@ -1594,10 +1611,13 @@ app.applySettings = (id, name, type, value, set) => {
             app.html.removeClass(id);
         }
         if (id === 'two-columns') {
-            app.checkRb(app.content.find('.rb'));
+            app.html.trigger('columns-changed.rb');
         }
         if (id === 'signed-in') {
-            app.responsiveHeader();
+            app.html.trigger('header-changed.responsiveHeader');
+        }
+        if (name === 'aside-left' || 'aside-right') {
+            app.asideChanged();
         }
     }
 };
@@ -1826,91 +1846,6 @@ $(function () {
 });
 var app = app || {};
 
-// responsive-background
-app.checkRb = (elements) => {
-    let setRb = (element) => {
-        let image = element.attr('data-rb-image'),
-            filetype = element.attr('data-rb-image-filetype'),
-            sizesWidth = element.attr('data-rb-sizes'),
-            current = element.attr('data-rb-current'),
-            aspectRatio = element.attr('data-rb-aspect-ratio');
-        if (image !== undefined && image.length &&
-            filetype !== undefined && filetype.length &&
-            sizesWidth !== undefined && sizesWidth.length &&
-            aspectRatio !== undefined && aspectRatio.length) {
-            if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
-                (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
-                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort((a, b) => { return a - b; });
-                let goalWidth = element.width(),
-                    goalHeight = element.height(),
-                    closestWidth,
-                    closestHeight,
-                    heightPercentage;
-
-                function getHeightInPercentage(num, amount) {
-                    return num * 100 / amount;
-                };
-
-                if (aspectRatio === '21by9') {
-                    heightPercentage = getHeightInPercentage(9, 21);
-                } else if (aspectRatio === '16by9') {
-                    heightPercentage = getHeightInPercentage(9, 16);
-
-                } else if (aspectRatio === '4by3') {
-                    heightPercentage = getHeightInPercentage(3, 4);
-
-                } else if (aspectRatio === '1by1') {
-                    heightPercentage = 100;
-                }
-
-                function getHeightInPixels(num, amount) {
-                    return num * amount / 100;
-                };
-
-                $.each(sizesWidth, (i, e) => {
-                    let width = parseInt(e),
-                        height = getHeightInPixels(heightPercentage, width);
-                    if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
-                        closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
-                        closestWidth = width;
-                        closestHeight = height;
-                    }
-                });
-
-                if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
-                    app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
-                    let tempImage = app.body.children('#rb');
-                    tempImage.on('load', () => {
-                        tempImage.remove();
-                        let src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
-                        element.css('background-image', src);
-                        element.attr('data-rb-current', closestWidth);
-                    });
-                }
-            }
-        }
-    }
-
-    if(elements.length) {
-        elements.each((i, e) => {
-            let element = $(e);
-            setRb(element);
-            $(window).on('resize.rb', () => {
-                setRb(element);
-            });
-
-            app.html.on('aside-changed', () => {
-                setRb(element);
-            });
-        });
-
-    } else {
-        $(window).off('resize.rb');
-    }
-    
-};
-var app = app || {};
-
 app.responsiveHeader = () => {
     let h1 = app.header.find('h1'),
         link = h1.children('a');
@@ -1924,21 +1859,23 @@ app.responsiveHeader = () => {
         }
         app.unauthenticated.addClass('checked');
     }
-        
-    let awaitCSS = () => {
-        setInterval(() => {
-            if (app.cssLoaded()) {
-                clearInterval(awaitCSS);
 
-                $(window).on('resize', () => {
-                    check();
-                });
+    let awaitCSS = setInterval(() => {
+        if (app.cssLoaded()) {
+            clearInterval(awaitCSS);
 
+            $(window).on('resize', () => {
                 check();
-            }
-        }, app.cssInterval);
-    }
-    awaitCSS();
+            });
+
+            check();
+        }
+    }, app.cssInterval);
+
+    app.html.on('header-changed.responsiveHeader', () => {
+        app.html.trigger('aside-changed.datatables');
+        app.html.trigger('aside-changed.rb');
+    });
 };
 var app = app || {};
 
@@ -2568,6 +2505,99 @@ app.showPopupAlert = (title, theme = 'light', position = 'top left') => {
 }
 var app = app || {};
 
+// responsive-background
+app.checkResponsiveBackground = (elements) => {
+    let setRb = (element) => {
+        let image = element.attr('data-rb-image'),
+            filetype = element.attr('data-rb-image-filetype'),
+            sizesWidth = element.attr('data-rb-sizes'),
+            current = element.attr('data-rb-current'),
+            aspectRatio = element.attr('data-rb-aspect-ratio');
+        if (image !== undefined && image.length &&
+            filetype !== undefined && filetype.length &&
+            sizesWidth !== undefined && sizesWidth.length &&
+            aspectRatio !== undefined && aspectRatio.length) {
+            if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
+                (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
+                sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort((a, b) => { return a - b; });
+                let goalWidth = element.width(),
+                    goalHeight = element.height(),
+                    closestWidth,
+                    closestHeight,
+                    heightPercentage;
+
+                function getHeightInPercentage(num, amount) {
+                    return num * 100 / amount;
+                };
+
+                if (aspectRatio === '21by9') {
+                    heightPercentage = getHeightInPercentage(9, 21);
+                } else if (aspectRatio === '16by9') {
+                    heightPercentage = getHeightInPercentage(9, 16);
+
+                } else if (aspectRatio === '4by3') {
+                    heightPercentage = getHeightInPercentage(3, 4);
+
+                } else if (aspectRatio === '1by1') {
+                    heightPercentage = 100;
+                }
+
+                function getHeightInPixels(num, amount) {
+                    return num * amount / 100;
+                };
+
+                $.each(sizesWidth, (i, e) => {
+                    let width = parseInt(e),
+                        height = getHeightInPixels(heightPercentage, width);
+                    if (closestWidth === undefined || width < goalWidth || closestWidth < goalWidth ||
+                        closestHeight === undefined || height < goalHeight || closestHeight < goalHeight) {
+                        closestWidth = width;
+                        closestHeight = height;
+                    }
+                });
+
+                if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
+                    app.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
+                    let tempImage = app.body.children('#rb');
+                    tempImage.on('load', () => {
+                        tempImage.remove();
+                        let src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
+                        element.css('background-image', src);
+                        element.attr('data-rb-current', closestWidth);
+                    });
+                }
+            }
+        }
+    }
+
+    if(elements.length) {
+        elements.each((i, e) => {
+            let element = $(e);
+
+            setRb(element);
+
+            $(window).on('resize.rb', () => {
+                setRb(element);
+            });
+
+            app.html.on('columns-changed.rb', () => {
+                setRb(element);
+            });
+
+            app.html.on('aside-changed.rb', () => {
+                setRb(element);
+            });
+        });
+
+    } else {
+        $(window).off('resize.rb');
+        app.html.off('columns-changed.rb');
+        app.html.off('aside-changed.rb');
+    }
+    
+};
+var app = app || {};
+
 app.checkTooltip = (tooltips) => {
     tooltips.each((i, e) => {
         let $this = $(e),
@@ -2590,7 +2620,7 @@ app.checkTooltip = (tooltips) => {
 };
 var app = app || {};
 
-app.checkDatatables = (tables) => {
+app.checkDatatable = (tables) => {
     if (tables.length) {
         let count = 0;
         app.showLoading();
@@ -2609,7 +2639,7 @@ app.checkDatatables = (tables) => {
                         column = $(th),
                         style = '';
 
-                    
+
                     let minWidth = column.attr('data-min-width');
                     if (minWidth) {
                         style += 'min-width: ' + minWidth + 'px;';
@@ -2769,7 +2799,7 @@ app.checkDatatables = (tables) => {
                             $this.trigger('responsive-resize.dt', [this, columns]);
                         });
 
-                        app.html.on('aside-changed', () => {
+                        app.html.on('aside-changed.datatables', () => {
                             instance.responsive.recalc();
                         });
 
@@ -2791,6 +2821,41 @@ app.checkDatatables = (tables) => {
                 });
             });
         });
+    } else {
+        app.html.off('aside-changed.datatables');
+    }
+};
+var app = app || {};
+
+app.checkFixedImg = (elements) => {
+    if (elements.length) {
+        let awaitCSS = setInterval(() => {
+            if (app.cssLoaded()) {
+                clearInterval(awaitCSS);
+
+                let setPosition = (parent, child) => {
+                    child.css('margin-top', -parent.offset().top + app.scrollTop());
+                };
+
+                elements.each((i, e) => {
+                    let child = $(e),
+                        parent = child.parent();
+
+                    $(window).on('scroll.fixed-img', () => {
+                        setPosition(parent, child);
+                    });
+
+                    $(window).on('resize.fixed-img', () => {
+                        setPosition(parent, child);
+                    });
+
+                    setPosition(parent, child);
+                });
+            }
+        }, app.cssInterval);
+    } else {
+        $(window).off('scroll.fixed-img');
+        $(window).off('resize.fixed-img');
     }
 };
 var app = app || {};

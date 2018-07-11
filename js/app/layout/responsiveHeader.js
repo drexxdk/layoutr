@@ -13,19 +13,21 @@ app.responsiveHeader = () => {
         }
         app.unauthenticated.addClass('checked');
     }
-        
-    let awaitCSS = () => {
-        setInterval(() => {
-            if (app.cssLoaded()) {
-                clearInterval(awaitCSS);
 
-                $(window).on('resize', () => {
-                    check();
-                });
+    let awaitCSS = setInterval(() => {
+        if (app.cssLoaded()) {
+            clearInterval(awaitCSS);
 
+            $(window).on('resize', () => {
                 check();
-            }
-        }, app.cssInterval);
-    }
-    awaitCSS();
+            });
+
+            check();
+        }
+    }, app.cssInterval);
+
+    app.html.on('header-changed.responsiveHeader', () => {
+        app.html.trigger('aside-changed.datatables');
+        app.html.trigger('aside-changed.rb');
+    });
 };

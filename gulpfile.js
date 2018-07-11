@@ -46,7 +46,6 @@ const config = {
                     'js/app/layout/settings.js',
                     'js/app/layout/keyboard.js',
                     'js/app/layout/modal.js',
-                    'js/app/layout/rb.js',
                     'js/app/layout/responsiveHeader.js',
                     'js/app/layout/focus.js',
                     'js/app/layout/swipe.js',
@@ -65,8 +64,10 @@ const config = {
                     'js/app/components/media.js',
                     'js/app/components/lazy.js',
                     'js/app/components/popup.js',
+                    'js/app/components/responsiveBackground.js',
                     'js/app/components/tooltip.js',
                     'js/app/components/datatables.js',
+                    'js/app/components/fixedImg.js',
 
                     // assignments
                     'js/app/assignments/_assignments.js',

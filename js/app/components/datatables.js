@@ -1,6 +1,6 @@
 ﻿var app = app || {};
 
-app.checkDatatables = (tables) => {
+app.checkDatatable = (tables) => {
     if (tables.length) {
         let count = 0;
         app.showLoading();
@@ -19,7 +19,7 @@ app.checkDatatables = (tables) => {
                         column = $(th),
                         style = '';
 
-                    
+
                     let minWidth = column.attr('data-min-width');
                     if (minWidth) {
                         style += 'min-width: ' + minWidth + 'px;';
@@ -179,7 +179,7 @@ app.checkDatatables = (tables) => {
                             $this.trigger('responsive-resize.dt', [this, columns]);
                         });
 
-                        app.html.on('aside-changed', () => {
+                        app.html.on('aside-changed.datatables', () => {
                             instance.responsive.recalc();
                         });
 
@@ -201,5 +201,7 @@ app.checkDatatables = (tables) => {
                 });
             });
         });
+    } else {
+        app.html.off('aside-changed.datatables');
     }
 };

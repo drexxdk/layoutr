@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 // responsive-background
-app.checkRb = (elements) => {
+app.checkResponsiveBackground = (elements) => {
     let setRb = (element) => {
         let image = element.attr('data-rb-image'),
             filetype = element.attr('data-rb-image-filetype'),
@@ -68,18 +68,26 @@ app.checkRb = (elements) => {
     if(elements.length) {
         elements.each((i, e) => {
             let element = $(e);
+
             setRb(element);
+
             $(window).on('resize.rb', () => {
                 setRb(element);
             });
 
-            app.html.on('aside-changed', () => {
+            app.html.on('columns-changed.rb', () => {
+                setRb(element);
+            });
+
+            app.html.on('aside-changed.rb', () => {
                 setRb(element);
             });
         });
 
     } else {
         $(window).off('resize.rb');
+        app.html.off('columns-changed.rb');
+        app.html.off('aside-changed.rb');
     }
     
 };

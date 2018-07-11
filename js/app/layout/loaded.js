@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 app.contentLoaded = (element) => {
-    app.checkRb(element.find('.rb'));
+    app.checkResponsiveBackground(element.find('.rb'));
     app.checkLazy(element.find('.lazy'));
     app.checkAccordion(element.find('.accordion'));
     app.checkDropdown(element.find('select.dropdown'));
@@ -10,7 +10,8 @@ app.contentLoaded = (element) => {
     app.checkMath(element.find('.math'));
     app.checkMedia(element.find('audio, video'));
     app.checkMap(element.find('.map'));
-    app.checkDatatables(element.find('.dataTable'));
+    app.checkDatatable(element.find('.dataTable'));
+    app.checkFixedImg(element.find('.fixed-img'))
 }
 
 app.pageLoaded = (initial) => {

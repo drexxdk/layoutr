@@ -1,6 +1,29 @@
 ﻿var app = app || {};
 let transitionLock = false;
 
+app.asideChanged = () => {
+    let trigger = () => {
+        app.html.trigger('aside-changed.datatables');
+        app.html.trigger('aside-changed.rb');
+    }
+
+    if (app.isTransitions()) {
+        let awaitTransition = setInterval(() => {
+            if (!transitionLock) {
+                clearInterval(awaitTransition);
+            } else {
+                trigger();
+            }
+        }, app.cssInterval);
+        setTimeout(function () {
+            transitionLock = false;
+        }, app.transitionTime);
+    } else {
+        transitionLock = false;
+        trigger();
+    }
+}
+
 app.toggleAside = (aside, pageChanged) => {
     if (!transitionLock) {
         transitionLock = true;
@@ -24,15 +47,8 @@ app.toggleAside = (aside, pageChanged) => {
         } else if (aside === 'right') {
             app.right.focus();
         }
-        if (app.isTransitions()) {
-            setTimeout(function () {
-                transitionLock = false;
-                app.html.trigger('aside-changed');
-            }, app.transitionTime);
-        } else {
-            transitionLock = false;
-            app.html.trigger('aside-changed');
-        }
+
+        app.asideChanged();
         app.setHtmlScroll();
     }
 };

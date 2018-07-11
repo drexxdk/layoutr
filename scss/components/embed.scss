@@ -39,6 +39,12 @@
             }
         }
 
+        &.aspect-ratio-4by1 {
+            &::before {
+                padding-top: percentage(1 / 4);
+            }
+        }
+
         &.aspect-ratio-1by1 {
             &::before {
                 padding-top: percentage(1 / 1);
