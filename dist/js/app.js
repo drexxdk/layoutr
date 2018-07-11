@@ -2834,7 +2834,11 @@ app.checkFixedImg = (elements) => {
                 clearInterval(awaitCSS);
 
                 let setPosition = (parent, child) => {
-                    child.css('margin-top', -parent.offset().top + app.scrollTop());
+                    let marginTop = -parent.offset().top;
+                    if (app.htmlOverflowEnabled) {
+                        marginTop = marginTop + app.scrollTop();
+                    }
+                    child.css('margin-top', marginTop);
                 };
 
                 elements.each((i, e) => {
