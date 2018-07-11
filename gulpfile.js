@@ -243,3 +243,5 @@ gulp.task('_bundleJS', gulp.series(
 ));
 
 gulp.task('_default', gulp.series('_watch'));
+
+gulp.task('_build', gulp.series('_bundleCSS', '_bundleJS'));
