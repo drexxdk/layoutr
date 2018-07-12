@@ -948,10 +948,6 @@ app.tryParseFloat = (str, defaultValue) => {
     }
     return retValue;
 };
-
-app.cssLoaded = () => {
-    return app.body.css('visibility') !== 'hidden';
-}
 var app = app || {};
 
 $(() => {
@@ -1133,6 +1129,7 @@ app.pageLoaded = (initial) => {
     app.hideLoading();
     if (initial) {
         app.html.addClass('site-loaded');
+        app.responsiveHeader();
     }
 };
 var app = app || {};
@@ -1454,7 +1451,13 @@ app.loadPage = (url, pushState, initial) => {
                 app.pageForm();
             }
         }
-        app.pageLoaded(initial);
+        app.html.trigger('header-changed.responsiveHeader');
+        let awaitCSS = setInterval(() => {
+            if (app.cssLoaded) {
+                clearInterval(awaitCSS);
+                app.pageLoaded(initial);
+            }
+        }, app.cssInterval);
     });
     url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
     if (pushState) {
@@ -1613,7 +1616,7 @@ app.applySettings = (id, name, type, value, set) => {
         if (id === 'two-columns') {
             app.html.trigger('columns-changed.rb');
         }
-        if (id === 'signed-in') {
+        if (id === 'signed-in' || id === 'focus' || id === 'tts') {
             app.html.trigger('header-changed.responsiveHeader');
         }
         if (name === 'aside-left' || 'aside-right') {
@@ -1624,24 +1627,28 @@ app.applySettings = (id, name, type, value, set) => {
 
 $(() => {
     app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
-        $.each(app.settings, (i, entry) => {
-            app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-        });
-        app.header.find('.aside.right').addClass('loaded');
-        $(this).on('change', 'input[type=checkbox], input[type=radio]', (e) => {
-            let $this = $(e.currentTarget),
-                id = $this.attr('id').replace('settings-', ''),
-                name = $this.attr('name').replace('settings-', ''),
-                type = $this.attr('type'),
-                value = $this.is(':checked');
-            app.applySettings(id, name, type, value, true);
-            if (id === 'left-shrink' || id === 'right-shrink' ||
-                id === 'left-push' || id === 'right-push' ||
-                id === 'left-overlay' || id === 'right-overlay') {
-                app.setHtmlScroll();
+        let awaitCSS = setInterval(() => {
+            if (app.cssLoaded) {
+                clearInterval(awaitCSS);
+                $.each(app.settings, (i, entry) => {
+                    app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
+                });
+                app.header.find('.aside.right').addClass('loaded');
+                $(this).on('change', 'input[type=checkbox], input[type=radio]', (e) => {
+                    let $this = $(e.currentTarget),
+                        id = $this.attr('id').replace('settings-', ''),
+                        name = $this.attr('name').replace('settings-', ''),
+                        type = $this.attr('type'),
+                        value = $this.is(':checked');
+                    app.applySettings(id, name, type, value, true);
+                    if (id === 'left-shrink' || id === 'right-shrink' ||
+                        id === 'left-push' || id === 'right-push' ||
+                        id === 'left-overlay' || id === 'right-overlay') {
+                        app.setHtmlScroll();
+                    }
+                });
             }
-        });
-        app.responsiveHeader();
+        }, app.cssInterval);
     });
 
     app.right.on('click', '#settings-clear-localstorage', () => {
@@ -1852,29 +1859,20 @@ app.responsiveHeader = () => {
 
     let check = () => {
         app.unauthenticated.addClass('text');
-        let a = h1.outerWidth(),
-            b = link.outerWidth();
         if (h1.outerWidth() < link.outerWidth()) {
             app.unauthenticated.removeClass('text');
         }
         app.unauthenticated.addClass('checked');
     }
 
-    let awaitCSS = setInterval(() => {
-        if (app.cssLoaded()) {
-            clearInterval(awaitCSS);
+    $(window).on('resize', () => {
+        check();
+    });
 
-            $(window).on('resize', () => {
-                check();
-            });
-
-            check();
-        }
-    }, app.cssInterval);
+    check();
 
     app.html.on('header-changed.responsiveHeader', () => {
-        app.html.trigger('aside-changed.datatables');
-        app.html.trigger('aside-changed.rb');
+        check();
     });
 };
 var app = app || {};
@@ -2829,34 +2827,28 @@ var app = app || {};
 
 app.checkFixedImg = (elements) => {
     if (elements.length) {
-        let awaitCSS = setInterval(() => {
-            if (app.cssLoaded()) {
-                clearInterval(awaitCSS);
-
-                let setPosition = (parent, child) => {
-                    let marginTop = -parent.offset().top;
-                    if (app.htmlOverflowEnabled) {
-                        marginTop = marginTop + app.scrollTop();
-                    }
-                    child.css('margin-top', marginTop);
-                };
-
-                elements.each((i, e) => {
-                    let child = $(e),
-                        parent = child.parent();
-
-                    $(window).on('scroll.fixed-img', () => {
-                        setPosition(parent, child);
-                    });
-
-                    $(window).on('resize.fixed-img', () => {
-                        setPosition(parent, child);
-                    });
-
-                    setPosition(parent, child);
-                });
+        let setPosition = (parent, child) => {
+            let marginTop = -parent.offset().top;
+            if (app.htmlOverflowEnabled) {
+                marginTop = marginTop + app.scrollTop();
             }
-        }, app.cssInterval);
+            child.css('margin-top', marginTop);
+        };
+
+        elements.each((i, e) => {
+            let child = $(e),
+                parent = child.parent();
+
+            $(window).on('scroll.fixed-img', () => {
+                setPosition(parent, child);
+            });
+
+            $(window).on('resize.fixed-img', () => {
+                setPosition(parent, child);
+            });
+
+            setPosition(parent, child);
+        });
     } else {
         $(window).off('scroll.fixed-img');
         $(window).off('resize.fixed-img');

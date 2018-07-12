@@ -29,7 +29,13 @@ app.loadPage = (url, pushState, initial) => {
                 app.pageForm();
             }
         }
-        app.pageLoaded(initial);
+        app.html.trigger('header-changed.responsiveHeader');
+        let awaitCSS = setInterval(() => {
+            if (app.cssLoaded) {
+                clearInterval(awaitCSS);
+                app.pageLoaded(initial);
+            }
+        }, app.cssInterval);
     });
     url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
     if (pushState) {

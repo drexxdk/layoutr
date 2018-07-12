@@ -79,6 +79,7 @@ const config = {
             {
                 name: "loadCSS",
                 files: [
+                    'js/vendors/loadCSS/onloadCSS.js',
                     'js/vendors/loadCSS/loadCSS.js',
                     'js/app/layout/loadCSS.js'
                 ]

@@ -49,7 +49,7 @@ app.applySettings = (id, name, type, value, set) => {
         if (id === 'two-columns') {
             app.html.trigger('columns-changed.rb');
         }
-        if (id === 'signed-in') {
+        if (id === 'signed-in' || id === 'focus' || id === 'tts') {
             app.html.trigger('header-changed.responsiveHeader');
         }
         if (name === 'aside-left' || 'aside-right') {
@@ -60,24 +60,28 @@ app.applySettings = (id, name, type, value, set) => {
 
 $(() => {
     app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
-        $.each(app.settings, (i, entry) => {
-            app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-        });
-        app.header.find('.aside.right').addClass('loaded');
-        $(this).on('change', 'input[type=checkbox], input[type=radio]', (e) => {
-            let $this = $(e.currentTarget),
-                id = $this.attr('id').replace('settings-', ''),
-                name = $this.attr('name').replace('settings-', ''),
-                type = $this.attr('type'),
-                value = $this.is(':checked');
-            app.applySettings(id, name, type, value, true);
-            if (id === 'left-shrink' || id === 'right-shrink' ||
-                id === 'left-push' || id === 'right-push' ||
-                id === 'left-overlay' || id === 'right-overlay') {
-                app.setHtmlScroll();
+        let awaitCSS = setInterval(() => {
+            if (app.cssLoaded) {
+                clearInterval(awaitCSS);
+                $.each(app.settings, (i, entry) => {
+                    app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
+                });
+                app.header.find('.aside.right').addClass('loaded');
+                $(this).on('change', 'input[type=checkbox], input[type=radio]', (e) => {
+                    let $this = $(e.currentTarget),
+                        id = $this.attr('id').replace('settings-', ''),
+                        name = $this.attr('name').replace('settings-', ''),
+                        type = $this.attr('type'),
+                        value = $this.is(':checked');
+                    app.applySettings(id, name, type, value, true);
+                    if (id === 'left-shrink' || id === 'right-shrink' ||
+                        id === 'left-push' || id === 'right-push' ||
+                        id === 'left-overlay' || id === 'right-overlay') {
+                        app.setHtmlScroll();
+                    }
+                });
             }
-        });
-        app.responsiveHeader();
+        }, app.cssInterval);
     });
 
     app.right.on('click', '#settings-clear-localstorage', () => {

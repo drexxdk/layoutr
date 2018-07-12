@@ -28,5 +28,6 @@ app.pageLoaded = (initial) => {
     app.hideLoading();
     if (initial) {
         app.html.addClass('site-loaded');
+        app.responsiveHeader();
     }
 };

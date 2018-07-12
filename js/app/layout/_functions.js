@@ -115,7 +115,3 @@ app.tryParseFloat = (str, defaultValue) => {
     }
     return retValue;
 };
-
-app.cssLoaded = () => {
-    return app.body.css('visibility') !== 'hidden';
-}

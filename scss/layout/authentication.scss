@@ -1,13 +1,7 @@
 ﻿/// <reference path="../references" />
 
 #authentication {
-    html:not(.site-loaded) & {
-        display: none;
-    }
-
-    html.site-loaded & {
-        display: flex;
-    }
+    display: flex;
 
     > div:last-child {
         position: fixed;
