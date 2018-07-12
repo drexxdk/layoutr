@@ -48,6 +48,10 @@ header {
         display: flex;
         align-items: center;
 
+        &:not(.show-title) > a > span {
+            display: none;
+        }
+
         > a {
             display: flex;
             align-items: center;

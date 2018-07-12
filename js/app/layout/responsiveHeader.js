@@ -5,11 +5,14 @@ app.responsiveHeader = () => {
         link = h1.children('a');
 
     let check = () => {
-        app.unauthenticated.addClass('text');
+        h1.addClass('show-title');
+        app.unauthenticated.addClass('show-text');
         if (h1.outerWidth() < link.outerWidth()) {
-            app.unauthenticated.removeClass('text');
+            app.unauthenticated.removeClass('show-text');
+            if (h1.outerWidth() < link.outerWidth()) {
+                h1.removeClass('show-title');
+            }
         }
-        app.unauthenticated.addClass('checked');
     }
 
     $(window).on('resize', () => {
