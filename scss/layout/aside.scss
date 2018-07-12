@@ -16,8 +16,7 @@ aside {
     transform: none;
     will-change: transform;
 
-    html.ios &,
-    html.android & {
+    html.ios & {
         height: 100%;
     }
 
