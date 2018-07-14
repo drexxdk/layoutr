@@ -10,12 +10,7 @@ html {
     }
 
     body {
-        @include breakpoint-main-min-width {
-            body {
-                background-color: $body-background-color;
-            }
-        }
-
+        background-color: $layout-background-color;
 
         > svg {
             display: none;

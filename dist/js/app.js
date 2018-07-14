@@ -1928,7 +1928,6 @@ app.enableFocus = () => {
 };
 
 app.showFocus = () => {
-    debugger;
     app.html.attr('data-authentication', '');
     app.html.attr('data-focus', true);
     app.Focus.focus();

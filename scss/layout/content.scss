@@ -20,9 +20,9 @@
     > div {
         > .content-header {
             position: relative;
+            overflow: hidden;
 
             &:not(.full) {
-                height: $content-header-height;
 
                 @media screen {
                     html[data-aside="left"].left-shrink &,
@@ -33,16 +33,19 @@
                 }
 
                 > div > div {
+                    position: relative;
+                    padding: ($spacer * 5) $spacer;
                     max-width: $content-max-width - ($spacer * 2);
                 }
             }
 
             &.full {
                 height: calc(100vh - #{$header-height + $footer-height});
-            }
 
-            min-height: $content-header-min-height;
-            overflow: hidden;
+                > div > div {
+                    position: absolute;
+                }
+            }
 
             > div {
                 width: 100%;
@@ -50,7 +53,6 @@
 
                 > div {
                     z-index: 2;
-                    position: absolute;
                     display: flex;
                     justify-content: center;
                     align-items: center;
