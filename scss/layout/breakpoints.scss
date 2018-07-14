@@ -2,10 +2,6 @@
 
 html {
     @include breakpoint-main-min-width {
-        body {
-            background-color: $body-background-color;
-        }
-
         header #title:not(:empty) {
             display: block;
         }

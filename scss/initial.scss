@@ -1,5 +1,6 @@
 ﻿/// <reference path="references" />
 
+@import "functions/functions";
 @import "mixins/mixins";
 @import "variables/variables";
 
@@ -11,6 +12,10 @@ html {
 
     body {
         background-color: $layout-background-color;
+
+        @include breakpoint-main-min-width {
+            background-color: $body-background-color;
+        }
 
         > svg {
             display: none;
