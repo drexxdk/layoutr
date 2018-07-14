@@ -1125,7 +1125,6 @@ app.pageLoaded = (initial) => {
             app.toggleAside(undefined, true);
         }
     }, 200);
-    app.contentLoaded(app.content);
     
     if (initial) {
         let awaitFonts = setInterval(() => {
@@ -1134,10 +1133,12 @@ app.pageLoaded = (initial) => {
                 app.hideLoading();
                 app.html.addClass('site-loaded');
                 app.responsiveHeader();
+                app.contentLoaded(app.content);
             }
         }, app.cssInterval);
     } else {
         app.hideLoading();
+        app.contentLoaded(app.content);
     }
 };
 var app = app || {};
