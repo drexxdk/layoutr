@@ -34,11 +34,11 @@ $(() => {
             register_email: {
                 required: true,
                 email: true
-            },
+            }
         },
         {
             register_username: {
-                required: "Please enter your username",
+                required: "Please enter your username"
             },
             register_password: {
                 required: "Please enter your password"
@@ -63,11 +63,11 @@ $(() => {
         },
         {
             username: {
-                required: "Please enter your username",
+                required: "Please enter your username"
             },
             password: {
                 required: "Please enter your password"
-            },
+            }
         }
     );
 });

@@ -31,7 +31,7 @@ app.enableFocus = () => {
         let height = $(window).height(); 
         $(window).resize(() => {
             // do nothing if the height is the same
-            if ($(window).height() == height) return;
+            if ($(window).height() === height) return;
             height = $(window).height();
             component.removeAttr('style');
         });
@@ -39,6 +39,7 @@ app.enableFocus = () => {
 };
 
 app.showFocus = () => {
+    app.html.attr('data-authentication', '');
     app.html.attr('data-focus', true);
     app.Focus.focus();
 };

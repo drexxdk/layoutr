@@ -213,14 +213,14 @@ function generateCSSTask(task) {
                 cascade: false
             }))
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest(task.dist))
+            .pipe(gulp.dest(task.dist));
     });
     gulp.task(config.css.prefix + task.name + '.min', function () {
         return gulp
             .src(task.dist + '/' + task.name + '.css')
             .pipe(concat(task.name + '.min.css'))
             .pipe(cleanCSS())
-            .pipe(gulp.dest(task.dist))
+            .pipe(gulp.dest(task.dist));
     });
 }
 
@@ -259,4 +259,4 @@ gulp.task('_bundleJS', gulp.series(
 
 gulp.task('_default', gulp.series('_watch'));
 
-gulp.task('_build', gulp.series('_bundleCSS', '_bundleJS'));
+//gulp.task('_build', gulp.series('_bundleCSS', '_bundleJS'));

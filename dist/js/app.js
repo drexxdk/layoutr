@@ -1379,11 +1379,11 @@ $(() => {
             register_email: {
                 required: true,
                 email: true
-            },
+            }
         },
         {
             register_username: {
-                required: "Please enter your username",
+                required: "Please enter your username"
             },
             register_password: {
                 required: "Please enter your password"
@@ -1408,11 +1408,11 @@ $(() => {
         },
         {
             username: {
-                required: "Please enter your username",
+                required: "Please enter your username"
             },
             password: {
                 required: "Please enter your password"
-            },
+            }
         }
     );
 });
@@ -1920,7 +1920,7 @@ app.enableFocus = () => {
         let height = $(window).height(); 
         $(window).resize(() => {
             // do nothing if the height is the same
-            if ($(window).height() == height) return;
+            if ($(window).height() === height) return;
             height = $(window).height();
             component.removeAttr('style');
         });
@@ -1928,6 +1928,8 @@ app.enableFocus = () => {
 };
 
 app.showFocus = () => {
+    debugger;
+    app.html.attr('data-authentication', '');
     app.html.attr('data-focus', true);
     app.Focus.focus();
 };
