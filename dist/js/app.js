@@ -2839,7 +2839,7 @@ app.checkDatatable = (tables) => {
 var app = app || {};
 
 app.checkFixedImg = (elements) => {
-    if (elements.length) {
+    if (bowser.desktop && elements.length) {
         let setPosition = (parent, child) => {
             let marginTop = -parent.offset().top;
             if (app.htmlOverflowEnabled) {
