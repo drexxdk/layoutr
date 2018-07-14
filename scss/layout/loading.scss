@@ -1,73 +1,14 @@
 ﻿/// <reference path="../references" />
 
 #loading {
-    @keyframes sk-stretchdelay {
-        0%, 40%, 100% {
-            transform: scaleY(0.4);
-        }
-
-        20% {
-            transform: scaleY(1);
-        }
-    }
-
-    html:not(.loading) & {
-        display: none;
-    }
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @include overlay;
-    height: 100%;
-    z-index: $loading-z-index;
-    user-select: none;
-
-    &:before {
-        content: '';
-        @include overlay;
-        height: 100vh;
-    }
-
     > .spinner {
-        position: relative;
-        height: $font-size * 4;
-        display: flex;
-
         &:before {
-            content: '';
-            position: absolute;
-            top: -$spacer;
-            bottom: -$spacer;
-            left: -($spacer * 2);
-            right: -($spacer * 2);
             background-color: $overlay-background-color-light;
-            border-radius: $component-border-radius * 2;
             border: (($font-size * 3) / 5) solid $loader-background-color;
         }
 
         > div {
             background-color: $loader-background-color;
-            height: 100%;
-            margin: 0 ($font-size / 4);
-            width: ($font-size * 3) / 5;
-            @include animation(sk-stretchdelay, 1.2s, infinite, ease-in-out);
-        }
-
-        > .rect2 {
-            animation-delay: -1.1s;
-        }
-
-        > .rect3 {
-            animation-delay: -1.0s;
-        }
-
-        > .rect4 {
-            animation-delay: -0.9s;
-        }
-
-        > .rect5 {
-            animation-delay: -0.8s;
         }
     }
 }

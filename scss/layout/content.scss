@@ -69,16 +69,27 @@
 
                 .title {
                     display: block;
-                    font-size: 3rem;
-                    line-height: 3.5rem;
+                    font-size: $content-header-title-font-size;
+                    line-height: $content-header-line-height;
                     max-width: 100%;
+
+                    html.wf-active & {
+                        font-family: $font-bebas-neue;
+                        letter-spacing: $content-header-title-font-size / 10;
+                    }
                 }
 
                 .author {
                     display: block;
-                    font-size: 1.5rem;
+                    font-size: $content-header-author-font-size;
+                    line-height: $content-header-line-height;
                     font-weight: normal;
                     max-width: 100%;
+
+                    html.wf-active & {
+                        font-family: $font-bebas-neue;
+                        letter-spacing: $content-header-author-font-size / 10;
+                    }
                 }
             }
         }

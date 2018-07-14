@@ -25,9 +25,17 @@ app.pageLoaded = (initial) => {
         }
     }, 200);
     app.contentLoaded(app.content);
-    app.hideLoading();
+    
     if (initial) {
-        app.html.addClass('site-loaded');
-        app.responsiveHeader();
+        let awaitFonts = setInterval(() => {
+            if (app.fonts) {
+                clearInterval(awaitFonts);
+                app.hideLoading();
+                app.html.addClass('site-loaded');
+                app.responsiveHeader();
+            }
+        }, app.cssInterval);
+    } else {
+        app.hideLoading();
     }
 };

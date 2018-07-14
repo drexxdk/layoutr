@@ -18,6 +18,13 @@ const config = {
         dist: 'dist/js',
         bundles: [
             {
+                name: "fonts",
+                files: [
+                    'js/vendors/webfontloader.min.js',
+                    'js/app/layout/fonts.js'
+                ]
+            },
+            {
                 name: "app",
                 files: [
                     'js/vendors/jquery/jquery-3.1.1.min.js',
@@ -28,6 +35,7 @@ const config = {
                     'js/vendors/jquery/jquery.throttledresize.js',
                     'js/vendors/jquery/jquery.shuffle.js',
                     'js/vendors/bowser.js',
+                    
 
                     // layout
                     'js/app/layout/_variables.js',
@@ -143,6 +151,11 @@ const config = {
     css: {
         prefix: 'css$',
         bundles: [
+            {
+                name: 'initial',
+                src: 'scss/initial.scss',
+                dist: 'dist/css'
+            },
             {
                 name: 'light',
                 src: 'scss/theme/light/_light-theme.scss',

@@ -42,7 +42,15 @@ table.dataTable {
     display: none;
 }
 
-body {
-    overflow: visible;
-    visibility: visible;
+html {
+    &.wf-active.site-loaded,
+    &.wf-inactive.site-loaded {
+        body {
+            overflow: visible;
+        }
+
+        #site {
+            display: block;
+        }
+    }
 }
