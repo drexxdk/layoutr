@@ -59,7 +59,7 @@ app.applySettings = (id, name, type, value, set) => {
 };
 
 $(() => {
-    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
+    app.right.find('> .content > div').load(app.host + app.ajax + 'layout/settings.html', function () {
         let awaitCSS = setInterval(() => {
             if (app.cssLoaded) {
                 clearInterval(awaitCSS);

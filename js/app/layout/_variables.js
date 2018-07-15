@@ -30,6 +30,7 @@ $(() => {
     app.loadingCount = 0;
     app.document = document.documentElement;
     app.fullscreen = false;
+    app.ajax = 'dist/ajax/';
     
     app.navigation = [];
 

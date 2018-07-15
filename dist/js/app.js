@@ -826,6 +826,7 @@ $(() => {
     app.loadingCount = 0;
     app.document = document.documentElement;
     app.fullscreen = false;
+    app.ajax = 'dist/ajax/';
     
     app.navigation = [];
 
@@ -1050,7 +1051,7 @@ $(() => {
 
     //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-    $.get(app.host + 'ajax/svg/base.html', (data) => {
+    $.get(app.host + app.ajax + 'svg/base.html', (data) => {
         $(data).prependTo(app.body);
     });
 
@@ -1440,17 +1441,17 @@ app.loadPage = (url, pushState, initial) => {
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     let tempUrl = url;
-    app.content.load(app.host + 'ajax/pages/' + (url === '' ? 'home' : url) + '.html', () => {
+    app.content.load(app.host + app.ajax + 'pages/' + (url === '' ? 'home' : url) + '.html', () => {
         url = tempUrl;
         if (url === '') {
             app.title.html('');
             if (app.body.children('#svg-browser').length === 0) {
-                $.get(app.host + 'ajax/svg/browser.html', (data) => {
+                $.get(app.host + app.ajax + 'svg/browser.html', (data) => {
                     $(data).prependTo(app.body);
                 });
             }
             if (app.body.children('#svg-os').length === 0) {
-                $.get(app.host + 'ajax/svg/os.html', (data) => {
+                $.get(app.host + app.ajax + 'svg/os.html', (data) => {
                     $(data).prependTo(app.body);
                 });
             }
@@ -1531,7 +1532,7 @@ app.applyNavigation = (id, value, set) => {
 };
 
 $(function () {
-    app.left.find('> .content > div').load(app.host + 'ajax/layout/navigation.html', () => {
+    app.left.find('> .content > div').load(app.host + app.ajax + 'layout/navigation.html', () => {
         app.navigationTree = app.left.find('.tree');
         app.navigation = JSON.parse(localStorage.getItem("navigation"));
         if (app.navigation === null) app.navigation = [];
@@ -1635,7 +1636,7 @@ app.applySettings = (id, name, type, value, set) => {
 };
 
 $(() => {
-    app.right.find('> .content > div').load(app.host + 'ajax/layout/settings.html', function () {
+    app.right.find('> .content > div').load(app.host + app.ajax + 'layout/settings.html', function () {
         let awaitCSS = setInterval(() => {
             if (app.cssLoaded) {
                 clearInterval(awaitCSS);
