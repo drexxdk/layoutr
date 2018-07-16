@@ -1,6 +1,8 @@
 ﻿var app = app || {};
 
 $(() => {
+    app.siteName = 'layoutr';
+
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');

@@ -13,6 +13,7 @@ app.loadPage = (url, pushState, initial) => {
         url = tempUrl;
         if (url === '') {
             app.title.html('');
+            document.title = app.siteName;
             if (app.body.children('#svg-browser').length === 0) {
                 $.get(app.host + app.ajax + 'svg/browser.html', (data) => {
                     $(data).prependTo(app.body);
@@ -24,7 +25,9 @@ app.loadPage = (url, pushState, initial) => {
                 });
             }
         } else {
-            app.title.html(app.capitalize(url.replace('-', ' ')));
+            let title = app.capitalize(url.replace('-', ' '));
+            app.title.html(title);
+            document.title = title + ' - ' + app.siteName;
             if (url === 'form') {
                 app.pageForm();
             }

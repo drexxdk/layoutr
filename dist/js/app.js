@@ -797,6 +797,8 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 var app = app || {};
 
 $(() => {
+    app.siteName = 'layoutr';
+
     app.html = $('html');
     app.head = $('head');
     app.body = $('body');
@@ -1113,7 +1115,8 @@ app.contentLoaded = (element) => {
     app.checkMedia(element.find('audio, video'));
     app.checkMap(element.find('.map'));
     app.checkDatatable(element.find('.dataTable'));
-    app.checkFixedImg(element.find('.fixed-img'))
+    app.checkFixedImg(element.find('.fixed-img'));
+    app.checkSwiper(element.find('.swiper'));
 }
 
 app.pageLoaded = (initial) => {
@@ -1445,6 +1448,7 @@ app.loadPage = (url, pushState, initial) => {
         url = tempUrl;
         if (url === '') {
             app.title.html('');
+            document.title = app.siteName;
             if (app.body.children('#svg-browser').length === 0) {
                 $.get(app.host + app.ajax + 'svg/browser.html', (data) => {
                     $(data).prependTo(app.body);
@@ -1456,7 +1460,9 @@ app.loadPage = (url, pushState, initial) => {
                 });
             }
         } else {
-            app.title.html(app.capitalize(url.replace('-', ' ')));
+            let title = app.capitalize(url.replace('-', ' '));
+            app.title.html(title);
+            document.title = title + ' - ' + app.siteName;
             if (url === 'form') {
                 app.pageForm();
             }
@@ -2866,6 +2872,69 @@ app.checkFixedImg = (elements) => {
     } else {
         $(window).off('scroll.fixed-img');
         $(window).off('resize.fixed-img');
+    }
+};
+var app = app || {};
+
+app.checkSwiper = (swiper) => {
+    if (swiper.length) {
+        if (!app.html.hasClass('swiper-loaded')) {
+            app.head.append($('<link rel="stylesheet"href="dist/css/swiper.min.css">'));
+            app.html.addClass('swiper-loaded');
+        }
+
+        $.getScript('dist/js/swiper.js', () => {
+            swiper.each((i, e) => {
+                let $this = $(e),
+                    pagination = $this.hasClass('pagination'),
+                    dynamicBullets = $this.hasClass('dynamic-bullets'),
+                    navigation = $this.hasClass('navigation'),
+                    spaceBetween = $this.hasClass('space-between') ? 32 : 0,
+                    slidesPerView = app.tryParseInt($this.attr('data-slides-per-view'), 1);
+
+                if (pagination || dynamicBullets) {
+                    $this.append('<div class="swiper-pagination"></div>');
+
+                }
+                if (navigation) {
+                    $this.append('<div class="swiper-button-prev"></div>');
+                    $this.append('<div class="swiper-button-next"></div>');
+                }
+
+                var swiper = new Swiper($this[0], {
+                    spaceBetween: spaceBetween,
+                    // Optional parameters
+                    //direction: 'vertical',
+                    loop: true,
+                    slidesPerView: slidesPerView,
+
+                    // If we need pagination
+                    pagination: {
+                        el: '.swiper-pagination',
+                        dynamicBullets: dynamicBullets
+                    },
+
+                    // Navigation arrows
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+
+                    // And if we need scrollbar
+                    scrollbar: {
+                        el: '.swiper-scrollbar',
+                    },
+                    on: {
+                        init: () => {
+                            $this.addClass('loaded');
+                        },
+                        slideChange: () => {
+                            app.checkLazy($this.find('.lazy'));
+                        }
+                    }
+                });
+            });
+        });
     }
 };
 var app = app || {};

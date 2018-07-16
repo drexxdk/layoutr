@@ -76,6 +76,7 @@ const config = {
                     'js/app/components/tooltip.js',
                     'js/app/components/datatables.js',
                     'js/app/components/fixedImg.js',
+                    'js/app/components/swiper.js',
 
                     // assignments
                     'js/app/assignments/_assignments.js',
@@ -103,6 +104,12 @@ const config = {
                 name: 'plyr',
                 files: [
                     'js/vendors/plyr/plyr.js'
+                ]
+            },
+            {
+                name: 'swiper',
+                files: [
+                    'js/vendors/swiper.js'
                 ]
             },
             {
@@ -174,6 +181,11 @@ const config = {
             {
                 name: 'plyr',
                 src: 'scss/vendors/plyr.scss',
+                dist: 'dist/css'
+            },
+            {
+                name: 'swiper',
+                src: 'scss/vendors/swiper.scss',
                 dist: 'dist/css'
             }
         ]

@@ -38,10 +38,6 @@
 @include layoutr-drag-and-drop;
 @include layoutr-sort;
 
-table.dataTable {
-    display: none;
-}
-
 html {
     &.wf-active.site-loaded,
     &.wf-inactive.site-loaded {
