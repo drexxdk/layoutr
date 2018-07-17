@@ -8,6 +8,27 @@
         overflow: hidden;
     }
 
+    .swiper-footer {
+        display: flex;
+        flex-wrap: wrap;
+
+        /*.prev {
+            order: 1;
+        }
+
+        .next {
+            order: 3;
+        }
+
+        > [class^='swiper-pagination'] {
+            order: 2;
+        }*/
+
+        .prev svg {
+            transform: rotate(180deg);
+        }
+    }
+
     &.demo {
         border: $component-border;
         border-radius: $component-border-radius;
