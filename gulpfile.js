@@ -196,14 +196,14 @@ const config = {
     }
 };
 
-function generateJSTask(task) {
-    gulp.task(config.js.prefix + task.name, function () {
+var generateJSTask = (task) => {
+    gulp.task(config.js.prefix + task.name, () => {
         return gulp
             .src(task.files)
             .pipe(concat(task.name + '.js'))
             .pipe(gulp.dest(config.js.dist));
     });
-    gulp.task(config.js.prefix + task.name + '.min', function () {
+    gulp.task(config.js.prefix + task.name + '.min', () => {
         return gulp
             .src([config.js.dist + '/' + task.name + '.js'])
             .pipe(babel())
@@ -211,10 +211,10 @@ function generateJSTask(task) {
             .pipe(uglify())
             .pipe(gulp.dest(config.js.dist));
     });
-}
+};
 
-function generateCSSTask(task) {
-    gulp.task(config.css.prefix + task.name, function () {
+var generateCSSTask = (task) => {
+    gulp.task(config.css.prefix + task.name, () => {
         return gulp
             .src(task.src)
             .pipe(sourcemaps.init())
@@ -227,14 +227,14 @@ function generateCSSTask(task) {
             .pipe(sourcemaps.write())
             .pipe(gulp.dest(task.dist));
     });
-    gulp.task(config.css.prefix + task.name + '.min', function () {
+    gulp.task(config.css.prefix + task.name + '.min', () => {
         return gulp
             .src(task.dist + '/' + task.name + '.css')
             .pipe(concat(task.name + '.min.css'))
             .pipe(cleanCSS())
             .pipe(gulp.dest(task.dist));
     });
-}
+};
 
 for (let i = 0; i < config.js.bundles.length; i++) {
     generateJSTask(config.js.bundles[i]);
@@ -245,13 +245,13 @@ for (let i = 0; i < config.css.bundles.length; i++) {
 }
 
 gulp.task('_watch', () => {
-    for (var i = 0; i < config.js.bundles.length; i++) {
+    for (let i = 0; i < config.js.bundles.length; i++) {
         gulp.watch(config.js.bundles[i].files, gulp.series(
             config.js.prefix + config.js.bundles[i].name,
             config.js.prefix + config.js.bundles[i].name + '.min'
         ));
     }
-    for (var i = 0; i < config.css.bundles.length; i++) {
+    for (let i = 0; i < config.css.bundles.length; i++) {
         gulp.watch('scss/**/*.scss', gulp.series(
             config.css.prefix + config.css.bundles[i].name,
             config.css.prefix + config.css.bundles[i].name + '.min'
@@ -260,13 +260,13 @@ gulp.task('_watch', () => {
 });
 
 gulp.task('_bundleCSS', gulp.series(
-    config.css.bundles.map(function (elem) { return config.css.prefix + elem.name; }),
-    config.css.bundles.map(function (elem) { return config.css.prefix + elem.name + '.min'; })
+    config.css.bundles.map((elem) => { return config.css.prefix + elem.name; }),
+    config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.min'; })
 ));
 
 gulp.task('_bundleJS', gulp.series(
-    config.js.bundles.map(function (elem) { return config.js.prefix + elem.name; }),
-    config.js.bundles.map(function (elem) { return config.js.prefix + elem.name + '.min'; })
+    config.js.bundles.map((elem) => { return config.js.prefix + elem.name; }),
+    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.min'; })
 ));
 
 gulp.task('_default', gulp.series('_watch'));

@@ -115,3 +115,16 @@ app.tryParseFloat = (str, defaultValue) => {
     }
     return retValue;
 };
+
+app.tryParseJSON = (str, defaultValue) => {
+    let retValue = defaultValue;
+    try {
+        retValue = JSON.parse(str);
+    } catch (e) {
+    }
+    return retValue;
+};
+
+app.isTrue = (str) => {
+    return str === 'true';
+};

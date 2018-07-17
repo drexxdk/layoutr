@@ -13,33 +13,37 @@ app.checkSwiper = (swiper) => {
                 let $this = $(e);
                 if (!$this.hasClass('loaded')) {
                     $this.append('<div class="swiper-footer"></div>');
+                    $this.children('.swiper-footer').append('<div></div>')
 
-                    let footer = $this.children('.swiper-footer'),
+                    let footer = $this.find('> .swiper-footer > div'),
                         pagination = $this.hasClass('pagination'),
                         dynamicBullets = $this.hasClass('dynamic-bullets'),
                         navigation = $this.hasClass('navigation'),
-                        spaceBetween = $this.hasClass('space-between') ? 32 : 0,
-                        slidesPerView = app.tryParseInt($this.attr('data-slides-per-view'), 1);
+                        loop = app.isTrue($this.attr('data-loop')),
+                        spaceBetween = app.tryParseInt($this.attr('data-space-between'), 0),
+                        slidesPerView = app.tryParseInt($this.attr('data-slides-per-view'), 1)
+                    breakpoints = app.tryParseJSON($this.attr('data-breakpoints'), {});
+
+                    footer.addClass('flex column wrap space-3 center');
 
                     if (pagination || dynamicBullets) {
-                        footer.append('<div class="swiper-pagination"></div>');
+                        footer.append('<div class="swiper-pagination"><div class="flex column wrap space-1 center"></div></div>');
 
                     }
+
                     if (navigation) {
-                        footer.append('<button class="btn square circle prev"><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></button>');
-                        footer.append('<button class="btn square circle next"><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></button>');
+                        footer.append('<button class="btn square circle prev theme-dark"><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></button>');
+                        footer.append('<button class="btn square circle next theme-dark"><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></button>');
                     }
 
                     var swiper = new Swiper($this[0], {
-                        spaceBetween: spaceBetween,
-                        // Optional parameters
-                        //direction: 'vertical',
-                        loop: true,
+                        loop: loop,
                         slidesPerView: slidesPerView,
+                        spaceBetween: spaceBetween,
 
                         // If we need pagination
                         pagination: {
-                            el: '.swiper-pagination',
+                            el: '.swiper-pagination > div',
                             dynamicBullets: dynamicBullets
                         },
 
@@ -53,6 +57,7 @@ app.checkSwiper = (swiper) => {
                         scrollbar: {
                             el: '.swiper-scrollbar',
                         },
+                        breakpoints: breakpoints,
                         on: {
                             init: () => {
                                 $this.addClass('loaded');
@@ -61,9 +66,9 @@ app.checkSwiper = (swiper) => {
                                 app.checkLazy($this.find('.lazy'));
                             },
                             paginationRender: (el) => {
-                                if (navigation) {
-                                    $(el).append(footer.children('.btn'))
-                                }
+                                //if (navigation) {
+                                //    $(el).append(footer.children('.btn'))
+                                //}
                             }
                         }
                     });
