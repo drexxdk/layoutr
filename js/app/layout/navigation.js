@@ -25,7 +25,7 @@ app.loadPage = (url, pushState, initial) => {
                 });
             }
         } else {
-            let title = app.capitalize(url.replace('-', ' '));
+            let title = app.capitalize(url.replaceAll('-', ' '));
             app.title.html(title);
             document.title = title + ' - ' + app.siteName;
             if (url === 'form') {

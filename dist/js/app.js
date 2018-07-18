@@ -964,6 +964,11 @@ app.tryParseJSON = (str, defaultValue) => {
 app.isTrue = (str) => {
     return str === 'true';
 };
+
+String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
 var app = app || {};
 
 $(() => {
@@ -1473,7 +1478,7 @@ app.loadPage = (url, pushState, initial) => {
                 });
             }
         } else {
-            let title = app.capitalize(url.replace('-', ' '));
+            let title = app.capitalize(url.replaceAll('-', ' '));
             app.title.html(title);
             document.title = title + ' - ' + app.siteName;
             if (url === 'form') {
