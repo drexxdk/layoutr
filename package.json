@@ -1,7 +1,7 @@
 {
   "name": "layoutr",
   "version": "1.0.0",
-  "description": "test description",
+  "description": "ES6 to ES5, SCSS to CSS, prefix CSS, bundle and minify JS/CSS",
   "repository": "gitlab:drexxdk/layoutr",
   "license": "MIT",
   "devDependencies": {
