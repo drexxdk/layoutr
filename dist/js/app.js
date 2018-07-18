@@ -2882,7 +2882,7 @@ app.checkSwiper = (swiper) => {
                         dynamicBullets = $this.hasClass('dynamic-bullets'),
                         navigation = $this.hasClass('navigation'),
                         loop = app.isTrue($this.attr('data-loop')),
-                        spaceBetween = app.tryParseInt($this.attr('data-space-between'), 0),
+                        spaceBetween = $this.hasClass('space-between'),
                         slidesPerView = app.tryParseInt($this.attr('data-slides-per-view'), 1),
                         breakpoints = app.tryParseJSON($this.attr('data-breakpoints'), {});
 
@@ -2895,6 +2895,10 @@ app.checkSwiper = (swiper) => {
                     if (navigation) {
                         footer.append('<button class="btn square circle prev theme-dark"><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></button>');
                         footer.append('<button class="btn square circle next theme-dark"><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></button>');
+                    }
+
+                    if (spaceBetween) {
+                        spaceBetween = 16;
                     }
 
                     var swiper = new Swiper($this[0], {
