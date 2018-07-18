@@ -11,7 +11,6 @@ app.contentLoaded = (element) => {
     app.checkMedia(element.find('audio, video'));
     app.checkMap(element.find('.map'));
     app.checkDatatable(element.find('.dataTable'));
-    app.checkFixedImg(element.find('.fixed-img'));
     app.checkSwiper(element.find('.swiper'));
 }
 

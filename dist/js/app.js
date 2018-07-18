@@ -1133,7 +1133,6 @@ app.contentLoaded = (element) => {
     app.checkMedia(element.find('audio, video'));
     app.checkMap(element.find('.map'));
     app.checkDatatable(element.find('.dataTable'));
-    app.checkFixedImg(element.find('.fixed-img'));
     app.checkSwiper(element.find('.swiper'));
 }
 
@@ -2859,37 +2858,6 @@ app.checkDatatable = (tables) => {
         });
     } else {
         app.html.off('aside-changed.datatables');
-    }
-};
-var app = app || {};
-
-app.checkFixedImg = (elements) => {
-    if (bowser.desktop && elements.length) {
-        let setPosition = (parent, child) => {
-            let marginTop = -parent.offset().top;
-            if (app.htmlOverflowEnabled) {
-                marginTop = marginTop + app.scrollTop();
-            }
-            child.css('margin-top', marginTop);
-        };
-
-        elements.each((i, e) => {
-            let child = $(e),
-                parent = child.parent();
-
-            $(window).on('scroll.fixed-img', () => {
-                setPosition(parent, child);
-            });
-
-            $(window).on('resize.fixed-img', () => {
-                setPosition(parent, child);
-            });
-
-            setPosition(parent, child);
-        });
-    } else {
-        $(window).off('scroll.fixed-img');
-        $(window).off('resize.fixed-img');
     }
 };
 var app = app || {};

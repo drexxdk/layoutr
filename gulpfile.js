@@ -75,7 +75,6 @@ const config = {
                     'js/app/components/responsiveBackground.js',
                     'js/app/components/tooltip.js',
                     'js/app/components/datatables.js',
-                    'js/app/components/fixedImg.js',
                     'js/app/components/swiper.js',
 
                     // assignments
