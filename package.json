@@ -1,6 +1,9 @@
 {
   "name": "layoutr",
   "version": "1.0.0",
+  "description": "test description",
+  "repository": "gitlab:drexxdk/layoutr",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
