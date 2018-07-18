@@ -21,14 +21,13 @@ app.checkSwiper = (swiper) => {
                         navigation = $this.hasClass('navigation'),
                         loop = app.isTrue($this.attr('data-loop')),
                         spaceBetween = app.tryParseInt($this.attr('data-space-between'), 0),
-                        slidesPerView = app.tryParseInt($this.attr('data-slides-per-view'), 1)
-                    breakpoints = app.tryParseJSON($this.attr('data-breakpoints'), {});
+                        slidesPerView = app.tryParseInt($this.attr('data-slides-per-view'), 1),
+                        breakpoints = app.tryParseJSON($this.attr('data-breakpoints'), {});
 
                     footer.addClass('flex column wrap space-3 center');
 
                     if (pagination || dynamicBullets) {
                         footer.append('<div class="swiper-pagination"><div class="flex column wrap space-1 center"></div></div>');
-
                     }
 
                     if (navigation) {
