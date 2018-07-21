@@ -9,6 +9,7 @@ app.loadPage = (unmodifiedUrl, pushState, initial) => {
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     app.content.load(app.host + app.ajax + 'pages/' + (url === '' ? 'home' : url) + '.html', (response, status, xhr) => {
+        app.html.attr('data-status', status);
         let statusCode = xhr.status;
         if (statusCode === 200) {
             if (url === '') {
@@ -44,7 +45,6 @@ app.loadPage = (unmodifiedUrl, pushState, initial) => {
                 }
             });
         }
-        app.html.attr('data-status', statusCode);
         
         app.html.trigger('header-changed.responsiveHeader');
         let awaitCSS = setInterval(() => {
