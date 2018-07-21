@@ -1,16 +1,14 @@
 ﻿var app = app || {};
 
-app.loadPage = (url, pushState, initial) => {
+app.loadPage = (unmodifiedUrl, pushState, initial) => {
     app.showLoading();
-    url = url.replace(/^\/+/g, '');
+    let url = unmodifiedUrl.replace(/^\/+/g, '');
     let q = url.indexOf('?');
     url = url.substring(0, q !== -1 ? q : url.length);
     app.left.find('.tree a.label.active').removeClass('active');
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
-    let tempUrl = url;
     app.content.load(app.host + app.ajax + 'pages/' + (url === '' ? 'home' : url) + '.html', (response, status, xhr) => {
-        url = tempUrl;
         let statusCode = xhr.status;
         if (statusCode === 200) {
             if (url === '') {
@@ -150,7 +148,7 @@ $(function () {
         app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 
-    app.header.on('click', 'h1 a', (e) => {
+    app.body.on('click', '.internal-link', (e) => {
         app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 
