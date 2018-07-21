@@ -6,9 +6,11 @@
         background-color: $light;
 
         .embed & {
-            background-color:transparent;
+            background-color: transparent;
         }
+
         user-select: none;
+        max-width: 100%;
     }
 
     .img {

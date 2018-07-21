@@ -27,7 +27,7 @@
 
         html.wf-active & {
             font-family: $font-bebas-neue;
-            letter-spacing: $h3-font-size / 10;
+            letter-spacing: font-bebas-neue-line-height($h3-font-size);
         }
     }
 

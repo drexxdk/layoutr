@@ -1,0 +1,5 @@
+﻿/// <reference path="../references" />
+
+@function font-bebas-neue-line-height($fontSize) {
+    @return $fontSize / 10;
+}

@@ -1461,29 +1461,45 @@ app.loadPage = (url, pushState, initial) => {
     url = url.replace('/', '');
     app.left.find('a.label[href="' + url + '"]').addClass('active');
     let tempUrl = url;
-    app.content.load(app.host + app.ajax + 'pages/' + (url === '' ? 'home' : url) + '.html', () => {
+    app.content.load(app.host + app.ajax + 'pages/' + (url === '' ? 'home' : url) + '.html', (response, status, xhr) => {
         url = tempUrl;
-        if (url === '') {
-            app.title.html('');
-            document.title = app.siteName;
-            if (app.body.children('#svg-browser').length === 0) {
-                $.get(app.host + app.ajax + 'svg/browser.html', (data) => {
-                    $(data).prependTo(app.body);
-                });
-            }
-            if (app.body.children('#svg-os').length === 0) {
-                $.get(app.host + app.ajax + 'svg/os.html', (data) => {
-                    $(data).prependTo(app.body);
-                });
+        let statusCode = xhr.status;
+        if (statusCode === 200) {
+            if (url === '') {
+                app.title.html('');
+                document.title = app.siteName;
+                if (app.body.children('#svg-browser').length === 0) {
+                    $.get(app.host + app.ajax + 'svg/browser.html', (data) => {
+                        $(data).prependTo(app.body);
+                    });
+                }
+                if (app.body.children('#svg-os').length === 0) {
+                    $.get(app.host + app.ajax + 'svg/os.html', (data) => {
+                        $(data).prependTo(app.body);
+                    });
+                }
+            } else {
+                let title = app.capitalize(url.replaceAll('-', ' '));
+                app.title.html(title);
+                document.title = title + ' - ' + app.siteName;
+                if (url === 'form') {
+                    app.pageForm();
+                }
             }
         } else {
-            let title = app.capitalize(url.replaceAll('-', ' '));
-            app.title.html(title);
-            document.title = title + ' - ' + app.siteName;
-            if (url === 'form') {
-                app.pageForm();
-            }
+            app.content.load(app.host + app.ajax + 'pages/error.html', () => {
+                let title = app.content.find('#error-title');
+                if (statusCode === 404) {
+                    title.html(statusCode + ' - Page not found');
+                } else if (statusCode === 500) {
+                    title.html(statusCode + ' - Server error');
+                } else {
+                    title.html(statusCode + ' - ' + statusText);
+                }
+            });
         }
+        app.html.attr('data-status', statusCode);
+        
         app.html.trigger('header-changed.responsiveHeader');
         let awaitCSS = setInterval(() => {
             if (app.cssLoaded) {
