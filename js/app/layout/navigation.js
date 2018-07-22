@@ -1,18 +1,18 @@
 ﻿var app = app || {};
 
-app.loadPage = (unmodifiedUrl, pushState, initial) => {
+app.loadPage = (url, pushState, initial) => {
     app.showLoading();
-    let url = unmodifiedUrl.replace(/^\/+/g, '');
-    let q = url.indexOf('?');
-    url = url.substring(0, q !== -1 ? q : url.length);
-    app.left.find('.tree a.label.active').removeClass('active');
-    url = url.replace('/', '');
-    app.left.find('a.label[href="' + url + '"]').addClass('active');
-    app.content.load(app.host + app.ajax + 'pages/' + (url === '' ? 'home' : url) + '.html', (response, status, xhr) => {
+    let tempUrl = url;
+    app.content.load(app.host + app.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html', (response, status, xhr) => {
+        url = tempUrl;
+        let q = url.indexOf('?');
+        url = url.substring(0, q !== -1 ? q : url.length);
+        app.left.find('.tree a.label.active').removeClass('active');
+        app.left.find('a.label[href="' + url + '"]').addClass('active');
         app.html.attr('data-status', status);
         let statusCode = xhr.status;
         if (statusCode === 200) {
-            if (url === '') {
+            if (url === '/') {
                 app.title.html('');
                 document.title = app.siteName;
                 if (app.body.children('#svg-browser').length === 0) {
@@ -26,7 +26,7 @@ app.loadPage = (unmodifiedUrl, pushState, initial) => {
                     });
                 }
             } else {
-                let title = app.capitalize(url.replaceAll('-', ' '));
+                let title = app.capitalize(url.replace('/', '').replaceAll('-', ' '));
                 app.title.html(title);
                 document.title = title + ' - ' + app.siteName;
                 if (url === 'form') {
@@ -54,7 +54,7 @@ app.loadPage = (unmodifiedUrl, pushState, initial) => {
             }
         }, app.cssInterval);
     });
-    url = '/' + (app.isLocalhost ? '' : window.location.pathname.split('/')[1] + '/') + url;
+    url = (app.isLocalhost ? '' : window.location.pathname.split('/')[1]) + url;
     if (pushState) {
         window.history.pushState(null, null, url);
         loadPage = true;
@@ -141,7 +141,7 @@ $(function () {
     if (app.url && app.url.p) {
         app.loadPage(app.url.p, true, true);
     } else {
-        app.loadPage('', false, true);
+        app.loadPage('/', false, true);
     }
 
     app.left.on('click', '.tree a.label:not(.active)', (e) => {
