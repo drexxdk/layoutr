@@ -1509,9 +1509,9 @@ app.loadPage = (url, pushState, initial) => {
             }
         }, app.cssInterval);
     });
-    var xx = window.location.pathname.split('/')[1];
+    var xx = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
     debugger;
-    url = (app.isLocalhost ? '' : window.location.pathname.split('/')[1]) + url;
+    url = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
     if (pushState) {
         window.history.pushState(null, null, url);
         loadPage = true;
