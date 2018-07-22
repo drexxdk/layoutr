@@ -1458,13 +1458,11 @@ app.loadPage = (url, pushState, initial) => {
     debugger;
     app.content.load(app.host + app.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html', (response, status, xhr) => {
         url = tempUrl;
-        debugger;
         let q = url.indexOf('?');
         url = url.substring(0, q !== -1 ? q : url.length);
         app.left.find('.tree a.label.active').removeClass('active');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
         app.html.attr('data-status', status);
-        debugger;
         let statusCode = xhr.status;
         if (statusCode === 200) {
             if (url === '/') {
@@ -1509,8 +1507,6 @@ app.loadPage = (url, pushState, initial) => {
             }
         }, app.cssInterval);
     });
-    var xx = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
-    debugger;
     url = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
     if (pushState) {
         window.history.pushState(null, null, url);
@@ -1521,6 +1517,7 @@ app.loadPage = (url, pushState, initial) => {
 app.internalLinkClick = (href, e) => {
     if (!e.ctrlKey) {
         e.preventDefault();
+        debugger;
         app.loadPage(href, true, false);
     }
 };
@@ -1549,6 +1546,7 @@ window.onpopstate = (e) => {
         if (!app.isLocalhost) {
             url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
         }
+        debugger;
         app.loadPage(url, false, true);
     }
 };
@@ -1596,8 +1594,10 @@ $(function () {
     });
 
     if (app.url && app.url.p) {
+        debugger;
         app.loadPage(app.url.p, true, true);
     } else {
+        debugger;
         app.loadPage('/', false, true);
     }
 
