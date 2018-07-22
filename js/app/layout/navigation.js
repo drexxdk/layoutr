@@ -3,13 +3,16 @@
 app.loadPage = (url, pushState, initial) => {
     app.showLoading();
     let tempUrl = url;
+    debugger;
     app.content.load(app.host + app.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html', (response, status, xhr) => {
         url = tempUrl;
+        debugger;
         let q = url.indexOf('?');
         url = url.substring(0, q !== -1 ? q : url.length);
         app.left.find('.tree a.label.active').removeClass('active');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
         app.html.attr('data-status', status);
+        debugger;
         let statusCode = xhr.status;
         if (statusCode === 200) {
             if (url === '/') {
@@ -54,6 +57,8 @@ app.loadPage = (url, pushState, initial) => {
             }
         }, app.cssInterval);
     });
+    var xx = window.location.pathname.split('/')[1];
+    debugger;
     url = (app.isLocalhost ? '' : window.location.pathname.split('/')[1]) + url;
     if (pushState) {
         window.history.pushState(null, null, url);
