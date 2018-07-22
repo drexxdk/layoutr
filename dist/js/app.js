@@ -1454,20 +1454,17 @@ var app = app || {};
 
 app.loadPage = (url, pushState, initial) => {
     app.showLoading();
-    let tempUrl = url;
-    debugger;
     app.content.load(app.host + app.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html', (response, status, xhr) => {
-        url = tempUrl;
         let q = url.indexOf('?');
         url = url.substring(0, q !== -1 ? q : url.length);
         app.left.find('.tree a.label.active').removeClass('active');
         app.left.find('a.label[href="' + url + '"]').addClass('active');
         app.html.attr('data-status', status);
         let statusCode = xhr.status;
+        app.title.html('');
+        document.title = app.siteName;
         if (statusCode === 200) {
             if (url === '/') {
-                app.title.html('');
-                document.title = app.siteName;
                 if (app.body.children('#svg-browser').length === 0) {
                     $.get(app.host + app.ajax + 'svg/browser.html', (data) => {
                         $(data).prependTo(app.body);
@@ -1486,20 +1483,23 @@ app.loadPage = (url, pushState, initial) => {
                     app.pageForm();
                 }
             }
+            app.html.trigger('header-changed.responsiveHeader');
         } else {
             app.content.load(app.host + app.ajax + 'pages/error.html', () => {
-                let title = app.content.find('#error-title');
+                document.title = statusCode + ' - ' + app.siteName;
+                let title = statusCode + ' - ';
                 if (statusCode === 404) {
-                    title.html(statusCode + ' - Page not found');
+                    title += 'Page not found';
                 } else if (statusCode === 500) {
-                    title.html(statusCode + ' - Server error');
+                    title += 'Server error';
                 } else {
-                    title.html(statusCode + ' - ' + statusText);
+                    title += statusText;
                 }
+                app.content.find('#error-title').html(title);
+                app.html.trigger('header-changed.responsiveHeader');
             });
         }
         
-        app.html.trigger('header-changed.responsiveHeader');
         let awaitCSS = setInterval(() => {
             if (app.cssLoaded) {
                 clearInterval(awaitCSS);
@@ -1507,9 +1507,9 @@ app.loadPage = (url, pushState, initial) => {
             }
         }, app.cssInterval);
     });
-    url = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
+    let historyUrl = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
     if (pushState) {
-        window.history.pushState(null, null, url);
+        window.history.pushState(null, null, historyUrl);
         loadPage = true;
     }
 };
@@ -1517,7 +1517,6 @@ app.loadPage = (url, pushState, initial) => {
 app.internalLinkClick = (href, e) => {
     if (!e.ctrlKey) {
         e.preventDefault();
-        debugger;
         app.loadPage(href, true, false);
     }
 };
@@ -1546,7 +1545,6 @@ window.onpopstate = (e) => {
         if (!app.isLocalhost) {
             url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
         }
-        debugger;
         app.loadPage(url, false, true);
     }
 };
@@ -1594,10 +1592,8 @@ $(function () {
     });
 
     if (app.url && app.url.p) {
-        debugger;
         app.loadPage(app.url.p, true, true);
     } else {
-        debugger;
         app.loadPage('/', false, true);
     }
 
