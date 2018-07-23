@@ -26,6 +26,7 @@ $(() => {
 $(window).click((e) => {
     let target = $(e.target),
         modal = target.closest(app.modal[0]);
+    console.log('window click');
 
     if (!app.isLoading() && !app.isFocus()) {
         if (bowser.ios) {

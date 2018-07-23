@@ -1,7 +1,7 @@
 ﻿var app = app || {};
 
 var l = window.location;
-app.isLocalhost = l.hostname === "localhost" || l.hostname === "127.0.0.1";
+app.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100';
 String.prototype.endsWith = function (suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
