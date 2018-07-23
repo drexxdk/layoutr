@@ -8,7 +8,8 @@ var gulp = require("gulp"),
     cleanCSS = require("gulp-clean-css"),
     autoprefixer = require("gulp-autoprefixer"),
     sourcemaps = require("gulp-sourcemaps"),
-    gulpif = require("gulp-if");
+    gulpif = require("gulp-if"),
+    swPrecache = require('sw-precache');
 
 // i cant get babel promise polyfill to work.  
 
@@ -195,6 +196,15 @@ const config = {
     }
 };
 
+gulp.task('_serviceWorker', (callback) => {
+    var rootDir = 'dist';
+
+    swPrecache.write(`${rootDir}/service-worker.js`, {
+        staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+        stripPrefix: rootDir
+    }, callback);
+});
+
 var generateJSTask = (task) => {
     gulp.task(config.js.prefix + task.name, () => {
         return gulp
@@ -270,4 +280,4 @@ gulp.task('_bundleJS', gulp.series(
 
 gulp.task('_default', gulp.series('_watch'));
 
-gulp.task('_build', gulp.series('_bundleCSS', '_bundleJS'));
+gulp.task('_build', gulp.series('_bundleCSS', '_bundleJS', '_serviceWorker'));
