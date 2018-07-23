@@ -12,6 +12,8 @@
 
 html,
 body {
+    overscroll-behavior: none;
+
     @media screen {
         height: 100vh;
     }
