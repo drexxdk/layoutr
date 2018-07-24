@@ -13,10 +13,12 @@ var gulp = require("gulp"),
 
 // i cant get babel promise polyfill to work.  
 
+const dist = 'dist';
+
 const config = {
     js: {
         prefix: 'js$',
-        dist: 'dist/js',
+        dist: dist + '/js',
         bundles: [
             {
                 name: "fonts",
@@ -161,47 +163,45 @@ const config = {
             {
                 name: 'initial',
                 src: 'scss/initial.scss',
-                dist: 'dist/css'
+                dist: dist + '/css'
             },
             {
                 name: 'light',
                 src: 'scss/theme/light/_light-theme.scss',
-                dist: 'dist/css/theme'
+                dist: dist + '/css/theme'
             },
             {
                 name: 'dark',
                 src: 'scss/theme/dark/_dark-theme.scss',
-                dist: 'dist/css/theme'
+                dist: dist + '/css/theme'
             },
             {
                 name: 'katex',
                 src: 'scss/vendors/katex.scss',
-                dist: 'dist/css'
+                dist: dist + '/css'
             },
             {
                 name: 'plyr',
                 src: 'scss/vendors/plyr.scss',
-                dist: 'dist/css'
+                dist: dist + '/css'
             },
             {
                 name: 'swiper',
                 src: 'scss/vendors/swiper.scss',
-                dist: 'dist/css'
+                dist: dist + '/css'
             }
         ]
     },
     templates: {
         src: 'js/backbone/templates/**/*.hbs',
-        dist: 'dist/js'
+        dist: dist + '/js'
     }
 };
 
 gulp.task('_serviceWorker', (callback) => {
-    var rootDir = 'dist';
-
     swPrecache.write('service-worker.js', {
         staticFileGlobs: [
-            'dist/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}',
+            dist + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}',
             'index.html'
         ],
     }, callback);
@@ -271,7 +271,13 @@ gulp.task('_watch', () => {
         ));
     }
     
-    gulp.watch(['index.html'], gulp.series(
+    gulp.watch([
+        dist + '/ajax/**/*.*',
+        dist + '/fonts/**/*.*',
+        dist + '/img/**/*.*',
+        dist + '/video/**/*.*',
+        'index.html'
+    ], gulp.series(
         '_serviceWorker'
     ));
 });
