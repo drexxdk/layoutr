@@ -65,7 +65,6 @@ app.loadPage = (url, pushState, initial) => {
 app.internalLinkClick = (href, e) => {
     if (!e.ctrlKey) {
         e.preventDefault();
-        console.log('internal link click');
         app.loadPage(href, true, false);
     }
 };
@@ -151,7 +150,6 @@ $(function () {
     });
 
     app.body.on('click', '.internal-link', (e) => {
-        console.log('internal link');
         app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 

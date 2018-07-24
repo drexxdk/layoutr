@@ -1088,7 +1088,6 @@ $(() => {
 $(window).click((e) => {
     let target = $(e.target),
         modal = target.closest(app.modal[0]);
-    console.log('window click');
 
     if (!app.isLoading() && !app.isFocus()) {
         if (bowser.ios) {
@@ -1518,7 +1517,6 @@ app.loadPage = (url, pushState, initial) => {
 app.internalLinkClick = (href, e) => {
     if (!e.ctrlKey) {
         e.preventDefault();
-        console.log('internal link click');
         app.loadPage(href, true, false);
     }
 };
@@ -1604,7 +1602,6 @@ $(function () {
     });
 
     app.body.on('click', '.internal-link', (e) => {
-        console.log('internal link');
         app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });
 
