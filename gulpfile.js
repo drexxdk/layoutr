@@ -200,7 +200,10 @@ gulp.task('_serviceWorker', (callback) => {
     var rootDir = 'dist';
 
     swPrecache.write('service-worker.js', {
-        staticFileGlobs: ['dist/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+        staticFileGlobs: [
+            'dist/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}',
+            'index.html'
+        ],
     }, callback);
 });
 
@@ -267,6 +270,10 @@ gulp.task('_watch', () => {
             '_serviceWorker'
         ));
     }
+    
+    gulp.watch(['index.html'], gulp.series(
+        '_serviceWorker'
+    ));
 });
 
 gulp.task('_bundleCSS', gulp.series(
