@@ -36,7 +36,7 @@ const config = {
                     'js/vendors/jquery/jquery.throttledresize.js',
                     'js/vendors/jquery/jquery.shuffle.js',
                     'js/vendors/bowser.js',
-                    
+
 
                     // layout
                     'js/app/layout/_variables.js',
@@ -256,25 +256,29 @@ gulp.task('_watch', () => {
     for (let i = 0; i < config.js.bundles.length; i++) {
         gulp.watch(config.js.bundles[i].files, gulp.series(
             config.js.prefix + config.js.bundles[i].name,
-            config.js.prefix + config.js.bundles[i].name + '.min'
+            config.js.prefix + config.js.bundles[i].name + '.min',
+            '_serviceWorker'
         ));
     }
     for (let i = 0; i < config.css.bundles.length; i++) {
         gulp.watch('scss/**/*.scss', gulp.series(
             config.css.prefix + config.css.bundles[i].name,
-            config.css.prefix + config.css.bundles[i].name + '.min'
+            config.css.prefix + config.css.bundles[i].name + '.min',
+            '_serviceWorker'
         ));
     }
 });
 
 gulp.task('_bundleCSS', gulp.series(
     config.css.bundles.map((elem) => { return config.css.prefix + elem.name; }),
-    config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.min'; })
+    config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.min'; }),
+    '_serviceWorker'
 ));
 
 gulp.task('_bundleJS', gulp.series(
     config.js.bundles.map((elem) => { return config.js.prefix + elem.name; }),
-    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.min'; })
+    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.min'; }),
+    '_serviceWorker'
 ));
 
 gulp.task('_default', gulp.series('_watch'));
