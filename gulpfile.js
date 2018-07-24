@@ -199,9 +199,8 @@ const config = {
 gulp.task('_serviceWorker', (callback) => {
     var rootDir = 'dist';
 
-    swPrecache.write(`${rootDir}/service-worker.js`, {
-        staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
-        stripPrefix: rootDir
+    swPrecache.write('service-worker.js', {
+        staticFileGlobs: ['dist/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
     }, callback);
 });
 
