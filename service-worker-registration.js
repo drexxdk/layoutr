@@ -26,7 +26,12 @@ if ('serviceWorker' in navigator) {
         // It won't be able to control pages unless it's located at the same level or higher than them.
         // *Don't* register service worker file in, e.g., a scripts/ sub-directory!
         // See https://github.com/slightlyoff/ServiceWorker/issues/468
-        navigator.serviceWorker.register('/layoutr/service-worker.js', {scope: '/layoutr/'}).then(function (reg) {
+
+
+        var isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100',
+            repository = isLocalhost ? '/' : '/layoutr/';
+
+        navigator.serviceWorker.register(repository + 'service-worker.js', { scope: repository }).then(function (reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function () {
                 // The updatefound event implies that reg.installing is set; see
