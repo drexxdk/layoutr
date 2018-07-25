@@ -40,7 +40,7 @@ if (!app.isLocalhost && 'serviceWorker' in navigator) {
         // *Don't* register service worker file in, e.g., a scripts/ sub-directory!
         // See https://github.com/slightlyoff/ServiceWorker/issues/468
         
-        var repository = isLocalhost ? '/' : '/layoutr/';
+        var repository = app.isLocalhost ? '/' : '/layoutr/';
 
         navigator.serviceWorker.register(repository + 'service-worker.js', { scope: repository }).then(function (reg) {
             // updatefound is fired if service-worker.js changes.
