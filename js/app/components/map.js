@@ -28,8 +28,12 @@ app.checkMap = (maps) => {
                         position: cords,
                         map: map
                     });
+                    
+                    $(window).bind('resize.map', $.throttle(app.throttleInterval, false, () => {
+                        google.maps.event.trigger($this[0], 'resize');
+                    }));
 
-                    $(window).on("throttledresize.map", () => {
+                    app.html.on('aside-changed.map', () => {
                         google.maps.event.trigger($this[0], 'resize');
                     });
                 });
@@ -39,6 +43,7 @@ app.checkMap = (maps) => {
         };
         checkGoogle();
     } else {
-        $(window).off('throttledresize.map');
+        $(window).unbind('resize.map');
+        app.html.off('aside-changed.map');
     }
 };

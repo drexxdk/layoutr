@@ -1,4 +1,18 @@
-﻿/**
+﻿var app = app || {};
+
+var l = window.location;
+String.prototype.endsWith = function (suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
+app.host = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/';
+
+app.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100';
+
+app.settings = JSON.parse(localStorage.getItem("settings"));
+if (app.settings === null) app.settings = [];
+
+/**
  * Copyright 2015 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +30,7 @@
 
 /* eslint-env browser */
 'use strict';
-
-if ('serviceWorker' in navigator) {
+if (!app.isLocalhost && 'serviceWorker' in navigator) {
     // Delay registration until after the page has loaded, to ensure that our
     // precaching requests don't degrade the first visit experience.
     // See https://developers.google.com/web/fundamentals/instant-and-offline/service-worker/registration
@@ -26,10 +39,8 @@ if ('serviceWorker' in navigator) {
         // It won't be able to control pages unless it's located at the same level or higher than them.
         // *Don't* register service worker file in, e.g., a scripts/ sub-directory!
         // See https://github.com/slightlyoff/ServiceWorker/issues/468
-
-
-        var isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100',
-            repository = isLocalhost ? '/' : '/layoutr/';
+        
+        var repository = isLocalhost ? '/' : '/layoutr/';
 
         navigator.serviceWorker.register(repository + 'service-worker.js', { scope: repository }).then(function (reg) {
             // updatefound is fired if service-worker.js changes.

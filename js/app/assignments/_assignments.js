@@ -10,7 +10,7 @@ app.getAssignmentItem = (items, id) => {
 
 app.checkAssignment = (assignments) => {
     if (assignments.length) {
-        $.getScript('dist/js/assignments.js', () => {
+        $.getScript('dist/js/assignments.min.js', () => {
             $(assignments).each((i, assignment) => {
                 assignment = $(assignment);
                 app.checkAssignmentSort(assignment);
@@ -18,7 +18,5 @@ app.checkAssignment = (assignments) => {
                 app.checkAssignmentColor(assignment);
             });
         });
-    } else {
-        $(window).off('throttledresize.assignment');
     }
 };

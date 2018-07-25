@@ -51,12 +51,28 @@ app.setHtmlScroll = () => {
     }
 };
 
-$(window).resize(() => {
-    app.checkModal();
-    app.setHtmlScroll();
-    scrollbarWidth();
-});
-
 $(() => {
     scrollbarWidth();
 });
+
+$(window).resize($.throttle(app.throttleInterval, false, () => {
+    app.checkModal();
+    app.setHtmlScroll();
+    scrollbarWidth();
+    setScrollTop();
+}));
+
+var setScrollTop = () => {
+    let scrollTop = app.scrollTop();
+
+    let entry = {
+        href: window.location.href,
+        scrollTop: scrollTop
+    };
+
+    localStorage.setItem('scroll', JSON.stringify(entry));
+};
+
+$(window).scroll($.throttle(app.throttleInterval, false, () => {
+    setScrollTop();
+}));

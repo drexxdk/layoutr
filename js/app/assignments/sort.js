@@ -25,12 +25,12 @@ app.checkAssignmentSort = (assignment) => {
                 }
                 container.css('height', '').addClass('checked');
             };
-            
-            checkWidth();
 
-            $(window).on("throttledresize.assignment", () => {
+            checkWidth();
+            
+            $(window).bind('resize.assignmentSort', $.throttle(app.throttleInterval, false, () => {
                 checkWidth();
-            });
+            }));
         }
 
         let reset = () => {
@@ -85,5 +85,7 @@ app.checkAssignmentSort = (assignment) => {
                 insertAtIndex(i, item);
             });
         });
+    } else {
+        $(window).unbind('resize.assignmentSort');
     }
 };

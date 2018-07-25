@@ -24,7 +24,7 @@ app.pageLoaded = (initial) => {
             app.toggleAside(undefined, true);
         }
     }, 200);
-    
+
     if (initial) {
         let awaitFonts = setInterval(() => {
             if (app.fonts) {
@@ -33,6 +33,14 @@ app.pageLoaded = (initial) => {
                 app.html.addClass('site-loaded');
                 app.responsiveHeader();
                 app.contentLoaded(app.content);
+
+                let scroll = JSON.parse(localStorage.getItem("scroll"));
+
+                if (window.location.href === scroll.href) {
+                    app.body.scrollTop(app.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : app.body[0].scrollHeight); // edge, safari
+                    app.html.scrollTop(app.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : app.html[0].scrollHeight); // chrome, firefox, ie
+
+                }
             }
         }, app.cssInterval);
     } else {

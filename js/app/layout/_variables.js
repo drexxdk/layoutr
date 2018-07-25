@@ -23,6 +23,9 @@ $(() => {
     app.cookie = $('#cookie');
     app.Focus = $('#focus');
 
+    app.throttleInterval = 50;
+    app.debounceInterval = 50;
+
     app.cssInterval = 50;
     app.transitionTime = 400;
     app.fadeOutTime = 500;

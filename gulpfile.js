@@ -34,8 +34,7 @@ const config = {
                     'js/vendors/jquery/validate/jquery.validate.min.js',
                     'js/vendors/jquery/jquery.lazy.min.js',
                     'js/vendors/jquery/tooltipster.min.js',
-                    'js/vendors/jquery/jquery.debouncedresize.js',
-                    'js/vendors/jquery/jquery.throttledresize.js',
+                    'js/vendors/jquery/jquery.ba-throttle-debounce.js',
                     'js/vendors/jquery/jquery.shuffle.js',
                     'js/vendors/bowser.js',
 
@@ -117,13 +116,13 @@ const config = {
             {
                 name: 'datatables',
                 files: [
-                    'js/vendors/datatables/datatables.js',
+                    'js/vendors/jquery/datatables/datatables.js',
 
-                    'js/vendors/datatables/extensions/buttons/buttons.js',
-                    'js/vendors/datatables/extensions/buttons/jszip.min.js',
-                    'js/vendors/datatables/extensions/buttons/buttons.html5.js',
+                    'js/vendors/jquery/datatables/extensions/buttons/buttons.js',
+                    'js/vendors/jquery/datatables/extensions/buttons/jszip.min.js',
+                    'js/vendors/jquery/datatables/extensions/buttons/buttons.html5.js',
 
-                    'js/vendors/datatables/extensions/responsive.js'
+                    'js/vendors/jquery/datatables/extensions/responsive.js'
                 ]
             },
             {
@@ -163,7 +162,8 @@ const config = {
             {
                 name: 'initial',
                 src: 'scss/initial.scss',
-                dist: dist + '/css'
+                dist: dist + '/css',
+                files: ['scss/**/*.scss', '!scss/vendors/*.scss'] /* not implemented yet */
             },
             {
                 name: 'light',

@@ -47,7 +47,7 @@ app.loadPage = (url, pushState, initial) => {
                 app.html.trigger('header-changed.responsiveHeader');
             });
         }
-        
+
         let awaitCSS = setInterval(() => {
             if (app.cssLoaded) {
                 clearInterval(awaitCSS);

@@ -5,6 +5,7 @@ app.asideChanged = () => {
     let trigger = () => {
         app.html.trigger('aside-changed.datatables');
         app.html.trigger('aside-changed.rb');
+        app.html.trigger('aside-changed.map');
     }
 
     if (app.isTransitions()) {
