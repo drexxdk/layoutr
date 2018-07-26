@@ -1212,6 +1212,24 @@ app.addValidation = (form, rules, messages) => {
 };
 var app = app || {};
 
+window.addEventListener('load', function () {
+    //var status = document.getElementById("status");
+    //var log = document.getElementById("log");
+
+    function updateOnlineStatus(event) {
+        //var condition = navigator.onLine ? "online" : "offline";
+
+        //status.className = condition;
+        //status.innerHTML = condition.toUpperCase();
+
+        //log.insertAdjacentHTML("beforeend", "Event: " + event.type + "; Status: " + condition);
+        console.log('status', navigator.onLine ? 'online' : 'offline');
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+});
+
 $.ajaxSetup({
     cache: true
 });
@@ -1769,7 +1787,10 @@ $(function () {
     if (app.url && app.url.p) {
         app.loadPage(app.url.p, true, true);
     } else {
-        app.loadPage('/', false, true);
+        var l = window.location;
+        var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
+        var url = '/' + l.pathname.slice(1).split('/').slice(segmentCount);
+        app.loadPage(url, true, true);
     }
 
     app.left.on('click', '.tree a.label:not(.active)', (e) => {

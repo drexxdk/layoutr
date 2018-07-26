@@ -21,6 +21,13 @@ const config = {
         dist: dist + '/js',
         bundles: [
             {
+                name: 'initial',
+                files: [
+                    'js/app/layout/service-worker-registration.js',
+                    'js/app/layout/analytics-helper.js'
+                ]
+            },
+            {
                 name: "fonts",
                 files: [
                     'js/vendors/webfontloader.min.js',
@@ -202,8 +209,10 @@ gulp.task('_serviceWorker', (callback) => {
     swPrecache.write('service-worker.js', {
         staticFileGlobs: [
             dist + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}',
-            'index.html'
+            'index.html',
+            '404.html'
         ],
+        navigateFallback: 'index.html'
     }, callback);
 });
 
@@ -276,7 +285,8 @@ gulp.task('_watch', () => {
         dist + '/fonts/**/*.*',
         dist + '/img/**/*.*',
         dist + '/video/**/*.*',
-        'index.html'
+        'index.html',
+        '404.html'
     ], gulp.series(
         '_serviceWorker'
     ));
