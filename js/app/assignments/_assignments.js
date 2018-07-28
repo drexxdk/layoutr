@@ -10,7 +10,7 @@ app.getAssignmentItem = (items, id) => {
 
 app.checkAssignment = (assignments) => {
     if (assignments.length) {
-        $.getScript('dist/js/assignments.min.js', () => {
+        $.getScript('dist/js/assignments.js', () => {
             $(assignments).each((i, assignment) => {
                 assignment = $(assignment);
                 app.checkAssignmentSort(assignment);

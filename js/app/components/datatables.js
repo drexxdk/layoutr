@@ -4,7 +4,7 @@ app.checkDatatable = (tables) => {
     if (tables.length) {
         let count = 0;
         app.showLoading();
-        $.getScript('dist/js/datatables.min.js', () => {
+        $.getScript('dist/js/datatables.js', () => {
             let spacing = 'space-3';
 
             let table_header_input = (instance) => {

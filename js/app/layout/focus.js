@@ -3,7 +3,7 @@
 app.enableFocus = () => {
     let component = app.Focus.find('> .component > div');
 
-    $.getScript('dist/js/focus.min.js', () => {
+    $.getScript('dist/js/focus.js', () => {
         component
             .draggable({
                 axis: "y",

@@ -112,12 +112,12 @@ app.enableTTS = () => {
 
         if (bowser.msie) {
             if (!app.html.hasClass('polyfills-loaded')) {
-                app.head.append($('<script src="dist/js/polyfills.min.js"></script>'));
+                app.head.append($('<script src="dist/js/polyfills.js"></script>'));
                 app.html.addClass('polyfills-loaded')
             }
         }
 
-        $.getScript('dist/js/tts.min.js', () => {
+        $.getScript('dist/js/tts.js', () => {
             let awsCredentials = new AWS.Credentials('AKIAI5JMCVBZ4CWSSOOQ', 'FM7j9FbQLkUU8u3tHScv0IOG4IoayUkp/RNNNNni'),
                 settings = {
                     awsCredentials: awsCredentials,

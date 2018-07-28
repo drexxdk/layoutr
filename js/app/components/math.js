@@ -7,7 +7,7 @@ app.checkMath = (math) => {
             app.html.addClass('math-loaded');
         }
 
-        $.getScript('dist/js/katex.min.js', () => {
+        $.getScript('dist/js/katex.js', () => {
             math.each((i, e) => {
                 let $this = $(e);
                 renderMathInElement($this[0]);

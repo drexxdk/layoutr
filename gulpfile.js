@@ -217,24 +217,25 @@ gulp.task('_serviceWorker', (callback) => {
 });
 
 var generateJSTask = (task) => {
-    gulp.task(config.js.prefix + task.name, () => {
+    gulp.task(config.js.prefix + task.name + '.dev', () => {
         return gulp
             .src(task.files)
             .pipe(concat(task.name + '.js'))
             .pipe(gulp.dest(config.js.dist));
     });
-    gulp.task(config.js.prefix + task.name + '.min', () => {
+
+    gulp.task(config.js.prefix + task.name + '.prod', () => {
         return gulp
             .src([config.js.dist + '/' + task.name + '.js'])
             .pipe(babel())
-            .pipe(concat(task.name + '.min.js'))
+            .pipe(concat(task.name + '.js'))
             .pipe(uglify())
             .pipe(gulp.dest(config.js.dist));
     });
 };
 
 var generateCSSTask = (task) => {
-    gulp.task(config.css.prefix + task.name, () => {
+    gulp.task(config.css.prefix + task.name + '.dev', () => {
         return gulp
             .src(task.src)
             .pipe(sourcemaps.init())
@@ -247,10 +248,16 @@ var generateCSSTask = (task) => {
             .pipe(sourcemaps.write())
             .pipe(gulp.dest(task.dist));
     });
-    gulp.task(config.css.prefix + task.name + '.min', () => {
+
+    gulp.task(config.css.prefix + task.name + '.prod', () => {
         return gulp
-            .src(task.dist + '/' + task.name + '.css')
-            .pipe(concat(task.name + '.min.css'))
+            .src(task.src)
+            .pipe(concat(task.name + '.css'))
+            .pipe(sass())
+            .pipe(autoprefixer({
+                browsers: ['last 2 versions'],
+                cascade: false
+            }))
             .pipe(cleanCSS())
             .pipe(gulp.dest(task.dist));
     });
@@ -264,46 +271,31 @@ for (let i = 0; i < config.css.bundles.length; i++) {
     generateCSSTask(config.css.bundles[i]);
 }
 
-gulp.task('_watch', () => {
+gulp.task('$watch', () => {
     for (let i = 0; i < config.js.bundles.length; i++) {
         gulp.watch(config.js.bundles[i].files, gulp.series(
-            config.js.prefix + config.js.bundles[i].name,
-            config.js.prefix + config.js.bundles[i].name + '.min',
-            '_serviceWorker'
+            config.js.prefix + config.js.bundles[i].name + '.dev'
         ));
     }
     for (let i = 0; i < config.css.bundles.length; i++) {
         gulp.watch('scss/**/*.scss', gulp.series(
-            config.css.prefix + config.css.bundles[i].name,
-            config.css.prefix + config.css.bundles[i].name + '.min',
-            '_serviceWorker'
+            config.css.prefix + config.css.bundles[i].name + '.dev'
         ));
     }
-    
-    gulp.watch([
-        dist + '/ajax/**/*.*',
-        dist + '/fonts/**/*.*',
-        dist + '/img/**/*.*',
-        dist + '/video/**/*.*',
-        'index.html',
-        '404.html'
-    ], gulp.series(
-        '_serviceWorker'
-    ));
 });
 
-gulp.task('_bundleCSS', gulp.series(
-    config.css.bundles.map((elem) => { return config.css.prefix + elem.name; }),
-    config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.min'; }),
-    '_serviceWorker'
+gulp.task('_bundle.dev', gulp.series(
+    config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.dev'; }),
+    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.dev'; })
 ));
 
-gulp.task('_bundleJS', gulp.series(
-    config.js.bundles.map((elem) => { return config.js.prefix + elem.name; }),
-    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.min'; }),
-    '_serviceWorker'
+gulp.task('_bundle.prod', gulp.series(
+    config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.prod'; }),
+    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.prod'; })
 ));
 
-gulp.task('_default', gulp.series('_watch'));
+gulp.task('_default', gulp.series('_bundle.dev', '$watch'));
 
-gulp.task('_build', gulp.series('_bundleCSS', '_bundleJS', '_serviceWorker'));
+gulp.task('$build.dev', gulp.series('_bundle.dev'));
+
+gulp.task('$build.prod', gulp.series('_bundle.prod', '_serviceWorker'));

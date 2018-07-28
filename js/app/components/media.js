@@ -7,7 +7,7 @@ app.checkMedia = (media) => {
             app.html.addClass('media-loaded');
         }
 
-        $.getScript('dist/js/plyr.min.js', () => {
+        $.getScript('dist/js/plyr.js', () => {
             media.each(function (i, item) {
                 new Plyr(item);
             });
