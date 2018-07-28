@@ -137,7 +137,33 @@ app.checkDatatable = (tables) => {
                     "bSortCellsTop": true,
                     buttons: [
                         //'copy', 'excel', 'csv'
-                        'copyHtml5', 'excelHtml5', 'csvHtml5'
+                        {
+                            extend: 'copyHtml5',
+                            footer: false
+
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            footer: false,
+                            exportOptions: {
+                                "format": {
+                                    header: function (text, index, th) {
+                                        return $(th).find('span:first').html();
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            footer: false,
+                            exportOptions: {
+                                "format": {
+                                    header: function (text, index, th) {
+                                        return $(th).find('span:first').html();
+                                    }
+                                }
+                            }
+                        }
                     ],
                     responsive: true,
                     initComplete: function (settings, json) {
