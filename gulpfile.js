@@ -69,6 +69,7 @@ const config = {
                     'js/app/layout/tts.js',
                     'js/app/layout/contentHeader.js',
                     'js/app/layout/theme.js',
+                    'js/app/layout/connected.js',
 
                     // inputs
                     'js/app/inputs/dropdown.js',

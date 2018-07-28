@@ -10,11 +10,11 @@ $(() => {
     });
 });
 
-app.showPopupAlert = (title, theme = 'light', position = 'top left') => {
+app.showPopupAlert = (title, theme = 'light', position = 'top left', type = 'default') => {
     if (title !== undefined) {
         let alert = [],
             popup = app.body.children('.popup[data-position="' + position + '"]');
-        alert.push('<div class="alert theme-' + theme + '">');
+        alert.push('<div class="alert theme-' + theme + '" data-type="' + type + '">');
         alert.push('<div><p>' + title + '</p></div>');
         alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
         alert.push('</div>');
