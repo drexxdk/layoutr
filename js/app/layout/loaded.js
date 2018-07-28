@@ -36,7 +36,7 @@ app.pageLoaded = (initial) => {
 
                 let scroll = JSON.parse(localStorage.getItem("scroll"));
 
-                if (window.location.href === scroll.href) {
+                if (scroll !== null && window.location.href === scroll.href) {
                     app.body.scrollTop(app.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : app.body[0].scrollHeight); // edge, safari
                     app.html.scrollTop(app.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : app.html[0].scrollHeight); // chrome, firefox, ie
                 }
