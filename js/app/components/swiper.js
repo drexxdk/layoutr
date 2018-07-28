@@ -3,7 +3,7 @@
 app.checkSwiper = (swiper) => {
     if (swiper.length) {
         if (!app.html.hasClass('swiper-loaded')) {
-            app.head.append($('<link rel="stylesheet"href="dist/css/swiper.min.css">'));
+            app.head.append($('<link rel="stylesheet"href="dist/css/swiper.css">'));
             app.html.addClass('swiper-loaded');
         }
 

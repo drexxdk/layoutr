@@ -38,11 +38,6 @@
             cursor: pointer;
             max-width: 100%;
 
-            > * {
-                /* ie focus fix */
-                pointer-events: none;
-            }
-
             > span {
                 max-width: 100%;
                 overflow: auto;

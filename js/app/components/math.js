@@ -3,7 +3,7 @@
 app.checkMath = (math) => {
     if (math.length) {
         if (!app.html.hasClass('math-loaded')) {
-            app.head.append($('<link rel="stylesheet"href="dist/css/katex.min.css">'));
+            app.head.append($('<link rel="stylesheet"href="dist/css/katex.css">'));
             app.html.addClass('math-loaded');
         }
 

@@ -3,7 +3,7 @@
 app.checkMedia = (media) => {
     if (media.length) {
         if (!app.html.hasClass('media-loaded')) {
-            app.head.append($('<link rel="stylesheet" href="dist/css/plyr.min.css">'));
+            app.head.append($('<link rel="stylesheet" href="dist/css/plyr.css">'));
             app.html.addClass('media-loaded');
         }
 
