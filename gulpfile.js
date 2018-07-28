@@ -227,8 +227,8 @@ var generateJSTask = (task) => {
     gulp.task(config.js.prefix + task.name + '.prod', () => {
         return gulp
             .src([config.js.dist + '/' + task.name + '.js'])
-            .pipe(babel())
             .pipe(concat(task.name + '.js'))
+            .pipe(babel())
             .pipe(uglify())
             .pipe(gulp.dest(config.js.dist));
     });
