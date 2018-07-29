@@ -22,21 +22,22 @@ const config = {
         bundles: [
             {
                 name: 'initial',
-                files: [
+                watch: [
                     'js/app/layout/service-worker-registration.js',
                     'js/app/layout/analytics-helper.js'
                 ]
             },
             {
                 name: "fonts",
-                files: [
+                watch: [
                     'js/vendors/webfontloader.min.js',
                     'js/app/layout/fonts.js'
                 ]
             },
             {
                 name: "app",
-                files: [
+                watch: 'js/**/*.js',
+                bundle: [
                     'js/vendors/jquery/jquery-3.1.1.min.js',
                     'js/vendors/jquery/validate/jquery.validate.min.js',
                     'js/vendors/jquery/jquery.lazy.min.js',
@@ -96,7 +97,7 @@ const config = {
             },
             {
                 name: "loadCSS",
-                files: [
+                watch: [
                     'js/vendors/loadCSS/onloadCSS.js',
                     'js/vendors/loadCSS/loadCSS.js',
                     'js/app/layout/loadCSS.js'
@@ -104,26 +105,26 @@ const config = {
             },
             {
                 name: 'katex',
-                files: [
+                watch: [
                     'js/vendors/katex/katex.min.js',
                     'js/vendors/katex/auto-render.min.js'
                 ]
             },
             {
                 name: 'plyr',
-                files: [
+                watch: [
                     'js/vendors/plyr/plyr.js'
                 ]
             },
             {
                 name: 'swiper',
-                files: [
+                watch: [
                     'js/vendors/swiper.js'
                 ]
             },
             {
                 name: 'datatables',
-                files: [
+                watch: [
                     'js/vendors/jquery/datatables/datatables.js',
 
                     'js/vendors/jquery/datatables/extensions/buttons/buttons.js',
@@ -135,7 +136,7 @@ const config = {
             },
             {
                 name: 'assignments',
-                files: [
+                watch: [
                     'js/vendors/sortable.min.js',
                     'js/app/assignments/color.js',
                     'js/app/assignments/dragAndDrop.js',
@@ -144,21 +145,21 @@ const config = {
             },
             {
                 name: 'focus',
-                files: [
+                watch: [
                     'js/vendors/jquery/ui/jquery-ui.min.js',
                     'js/vendors/jquery/ui/touch-punch.min.js'
                 ]
             },
             {
                 name: 'tts',
-                files: [
+                watch: [
                     'js/vendors/tts/aws-sdk.min.js',
                     'js/vendors/tts/chattykathy.js'
                 ]
             },
             {
                 name: 'polyfills',
-                files: [
+                watch: [
                     'js/vendors/polyfills/promise.js'
                 ]
             }
@@ -171,32 +172,37 @@ const config = {
                 name: 'initial',
                 src: 'scss/initial.scss',
                 dist: dist + '/css',
-                files: ['scss/**/*.scss', '!scss/vendors/*.scss'] /* not implemented yet */
+                watch: ['scss/initial.scss']
             },
             {
                 name: 'light',
                 src: 'scss/theme/light/_light-theme.scss',
-                dist: dist + '/css/theme'
+                dist: dist + '/css/theme',
+                watch: ['scss/**/*.scss', '!scss/vendors/*.scss', '!scss/initial.scss']
             },
             {
                 name: 'dark',
                 src: 'scss/theme/dark/_dark-theme.scss',
-                dist: dist + '/css/theme'
+                dist: dist + '/css/theme',
+                watch: ['scss/**/*.scss', '!scss/vendors/*.scss', '!scss/initial.scss']
             },
             {
                 name: 'katex',
                 src: 'scss/vendors/katex.scss',
-                dist: dist + '/css'
+                dist: dist + '/css',
+                watch: ['scss/vendors/katex.scss']
             },
             {
                 name: 'plyr',
                 src: 'scss/vendors/plyr.scss',
-                dist: dist + '/css'
+                dist: dist + '/css',
+                watch: ['scss/vendors/plyr.scss']
             },
             {
                 name: 'swiper',
                 src: 'scss/vendors/swiper.scss',
-                dist: dist + '/css'
+                dist: dist + '/css',
+                watch: ['scss/vendors/swiper.scss']
             }
         ]
     },
@@ -220,14 +226,14 @@ gulp.task('_serviceWorker', (callback) => {
 var generateJSTask = (task) => {
     gulp.task(config.js.prefix + task.name + '.dev', () => {
         return gulp
-            .src(task.files)
+            .src(task.bundle ? task.bundle : task.watch)
             .pipe(concat(task.name + '.js'))
             .pipe(gulp.dest(config.js.dist));
     });
 
     gulp.task(config.js.prefix + task.name + '.prod', () => {
         return gulp
-            .src(task.files)
+            .src(task.bundle ? task.bundle : task.watch)
             .pipe(concat(task.name + '.js'))
             .pipe(babel())
             .pipe(uglify())
@@ -274,12 +280,12 @@ for (let i = 0; i < config.css.bundles.length; i++) {
 
 gulp.task('$watch', () => {
     for (let i = 0; i < config.js.bundles.length; i++) {
-        gulp.watch(config.js.bundles[i].files, gulp.series(
+        gulp.watch(config.js.bundles[i].watch, gulp.series(
             config.js.prefix + config.js.bundles[i].name + '.dev'
         ));
     }
     for (let i = 0; i < config.css.bundles.length; i++) {
-        gulp.watch('scss/**/*.scss', gulp.series(
+        gulp.watch(config.css.bundles[i].watch, gulp.series(
             config.css.prefix + config.css.bundles[i].name + '.dev'
         ));
     }
