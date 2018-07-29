@@ -1,17 +1,21 @@
 ﻿var app = app || {};
 
-window.addEventListener('load', function () {
-    function updateOnlineStatus(event) {
-        let online = navigator.onLine;
+app.setOnline = () => {
+    let online = navigator.onLine;
 
-        app.body.find('.alert[data-type="connected"]').remove();
-        if (online) {
-            app.showPopupAlert('You are now online', 'success', 'bottom right', 'connected');
-        } else {
-            app.showPopupAlert('You are now offline', 'danger', 'bottom right', 'connected');
-        }
+    app.body.find('.alert[data-type="connected"]').remove();
+    if (online) {
+        app.showPopupAlert('You are online', 'success', 'bottom right', 'connected');
+    } else {
+        app.showPopupAlert('You are offline', 'danger', 'bottom right', 'connected');
     }
+}
 
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
+window.addEventListener('load', function () {
+    window.addEventListener('online', app.setOnline);
+    window.addEventListener('offline', app.setOnline);
 });
+
+if (!navigator.onLine) {
+    app.setOnline();
+}
