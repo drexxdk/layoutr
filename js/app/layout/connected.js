@@ -16,6 +16,8 @@ window.addEventListener('load', function () {
     window.addEventListener('offline', app.setOnline);
 });
 
-if (!navigator.onLine) {
-    app.setOnline();
-}
+$(() => {
+    if (!navigator.onLine) {
+        app.setOnline();
+    }
+});
