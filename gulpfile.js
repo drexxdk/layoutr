@@ -278,7 +278,7 @@ for (let i = 0; i < config.css.bundles.length; i++) {
     generateCSSTask(config.css.bundles[i]);
 }
 
-gulp.task('$watch', () => {
+gulp.task('$watch.dev', () => {
     for (let i = 0; i < config.js.bundles.length; i++) {
         gulp.watch(config.js.bundles[i].watch, gulp.series(
             config.js.prefix + config.js.bundles[i].name + '.dev'
@@ -287,6 +287,19 @@ gulp.task('$watch', () => {
     for (let i = 0; i < config.css.bundles.length; i++) {
         gulp.watch(config.css.bundles[i].watch, gulp.series(
             config.css.prefix + config.css.bundles[i].name + '.dev'
+        ));
+    }
+});
+
+gulp.task('$watch.prod', () => {
+    for (let i = 0; i < config.js.bundles.length; i++) {
+        gulp.watch(config.js.bundles[i].watch, gulp.series(
+            config.js.prefix + config.js.bundles[i].name + '.prod'
+        ));
+    }
+    for (let i = 0; i < config.css.bundles.length; i++) {
+        gulp.watch(config.css.bundles[i].watch, gulp.series(
+            config.css.prefix + config.css.bundles[i].name + '.prod'
         ));
     }
 });
@@ -301,7 +314,7 @@ gulp.task('_bundle.prod', gulp.series(
     config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.prod'; })
 ));
 
-gulp.task('_default', gulp.series('_bundle.dev', '$watch'));
+gulp.task('_default', gulp.series('_bundle.dev', '$watch.dev'));
 
 gulp.task('$build.dev', gulp.series('_bundle.dev'));
 
