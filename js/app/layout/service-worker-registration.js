@@ -35,7 +35,6 @@ if (!app.isLocalhost && 'serviceWorker' in navigator) {
         
         var repository = app.isLocalhost ? '/' : '/layoutr/';
 
-        var randomh = Math.random();
         navigator.serviceWorker.register(repository + 'service-worker.js', { scope: repository }).then(function (reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function () {
@@ -44,32 +43,25 @@ if (!app.isLocalhost && 'serviceWorker' in navigator) {
                 var installingWorker = reg.installing;
 
                 installingWorker.onstatechange = function () {
-
-                    let awaitInterval = setInterval(() => {
-                        if (document.documentElement.classList.contains('site-loaded')) {
-                            console.log('installationWorker.state:', installingWorker.state);
-                            clearInterval(awaitInterval);
-                            switch (installingWorker.state) {
-                                case 'installed':
-                                    if (navigator.serviceWorker.controller) {
-                                        // At this point, the old content will have been purged and the fresh content will
-                                        // have been added to the cache.
-                                        // It's the perfect time to display a "New content is available; please refresh."
-                                        // message in the page's interface.
-                                        console.log('New or updated content is available.');
-                                    } else {
-                                        // At this point, everything has been precached.
-                                        // It's the perfect time to display a "Content is cached for offline use." message.
-                                        console.log('Content is now available offline!');
-                                    }
-                                    break;
-
-                                case 'redundant':
-                                    console.error('The installing service worker became redundant.');
-                                    break;
+                    switch (installingWorker.state) {
+                        case 'installed':
+                            if (navigator.serviceWorker.controller) {
+                                // At this point, the old content will have been purged and the fresh content will
+                                // have been added to the cache.
+                                // It's the perfect time to display a "New content is available; please refresh."
+                                // message in the page's interface.
+                                console.log('New or updated content is available.');
+                            } else {
+                                // At this point, everything has been precached.
+                                // It's the perfect time to display a "Content is cached for offline use." message.
+                                console.log('Content is now available offline!');
                             }
-                        }
-                    }, app.awaitInterval);
+                            break;
+
+                        case 'redundant':
+                            console.error('The installing service worker became redundant.');
+                            break;
+                    }
                 };
             };
         }).catch(function (e) {
