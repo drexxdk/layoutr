@@ -9,13 +9,13 @@ app.asideChanged = () => {
     }
 
     if (app.isTransitions()) {
-        let awaitTransition = setInterval(() => {
+        let awaitInterval = setInterval(() => {
             if (!transitionLock) {
-                clearInterval(awaitTransition);
+                clearInterval(awaitInterval);
             } else {
                 trigger();
             }
-        }, app.cssInterval);
+        }, app.awaitInterval);
         setTimeout(function () {
             transitionLock = false;
         }, app.transitionTime);

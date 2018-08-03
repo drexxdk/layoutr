@@ -48,12 +48,12 @@ app.loadPage = (url, pushState, initial) => {
             });
         }
 
-        let awaitCSS = setInterval(() => {
+        let awaitInterval = setInterval(() => {
             if (app.cssLoaded) {
-                clearInterval(awaitCSS);
+                clearInterval(awaitInterval);
                 app.pageLoaded(initial);
             }
-        }, app.cssInterval);
+        }, app.awaitInterval);
     });
     let historyUrl = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
     if (pushState) {

@@ -60,9 +60,9 @@ app.applySettings = (id, name, type, value, set) => {
 
 $(() => {
     app.right.find('> .content > div').load(app.host + app.ajax + 'layout/settings.html', function () {
-        let awaitCSS = setInterval(() => {
+        let awaitInterval = setInterval(() => {
             if (app.cssLoaded) {
-                clearInterval(awaitCSS);
+                clearInterval(awaitInterval);
                 $.each(app.settings, (i, entry) => {
                     app.applySettings(entry.id, entry.name, entry.type, entry.value, false);
                 });
@@ -81,7 +81,7 @@ $(() => {
                     }
                 });
             }
-        }, app.cssInterval);
+        }, app.awaitInterval);
     });
 
     app.right.on('click', '#settings-clear-localstorage', () => {

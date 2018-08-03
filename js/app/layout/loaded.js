@@ -26,9 +26,9 @@ app.pageLoaded = (initial) => {
     }, 200);
 
     if (initial) {
-        let awaitFonts = setInterval(() => {
-            if (app.fonts) {
-                clearInterval(awaitFonts);
+        let awaitInterval = setInterval(() => {
+            if (app.fontsLoaded) {
+                clearInterval(awaitInterval);
                 app.hideLoading();
                 app.html.addClass('site-loaded');
                 app.responsiveHeader();
@@ -41,7 +41,7 @@ app.pageLoaded = (initial) => {
                     app.html.scrollTop(app.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : app.html[0].scrollHeight); // chrome, firefox, ie
                 }
             }
-        }, app.cssInterval);
+        }, app.awaitInterval);
     } else {
         app.hideLoading();
         app.contentLoaded(app.content);

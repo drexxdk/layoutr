@@ -5,9 +5,9 @@ WebFont.load({
         id: ['bhz3dxx']
     },
     active: function () {
-        app.fonts = true;
+        app.fontsLoaded = true;
     },
     inactive: function () {
-        app.fonts = true;
+        app.fontsLoaded = true;
     }
 });

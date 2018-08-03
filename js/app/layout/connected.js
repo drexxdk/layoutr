@@ -11,12 +11,10 @@ app.setOnline = () => {
     }
 }
 
-window.addEventListener('load', function () {
+$(() => {
     window.addEventListener('online', app.setOnline);
     window.addEventListener('offline', app.setOnline);
-});
 
-$(() => {
     if (!navigator.onLine) {
         app.setOnline();
     }
