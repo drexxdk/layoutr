@@ -36,7 +36,7 @@ if (!app.isLocalhost && 'serviceWorker' in navigator) {
         var repository = app.isLocalhost ? '/' : '/layoutr/';
 
         var randomh = Math.random();
-        navigator.serviceWorker.register(repository + 'service-worker.js?x=' + randomh, { scope: repository }).then(function (reg) {
+        navigator.serviceWorker.register(repository + 'service-worker.js', { scope: repository }).then(function (reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function () {
                 // The updatefound event implies that reg.installing is set; see
