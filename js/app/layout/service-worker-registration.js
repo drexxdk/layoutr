@@ -34,8 +34,9 @@ if ('serviceWorker' in navigator) {
         // See https://github.com/slightlyoff/ServiceWorker/issues/468
         
         var repository = app.isLocalhost ? '/' : '/layoutr/';
-
-        navigator.serviceWorker.register(repository + 'service-worker.js').then(function (reg) {
+        
+        var opts = { updateViaCache: 'none' }
+        navigator.serviceWorker.register(repository + 'service-worker.js', opts).then(function (reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function () {
                 // The updatefound event implies that reg.installing is set; see
