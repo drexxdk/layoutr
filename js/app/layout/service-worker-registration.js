@@ -45,9 +45,8 @@ if (!app.isLocalhost && 'serviceWorker' in navigator) {
                 installingWorker.onstatechange = function () {
 
                     let awaitInterval = setInterval(() => {
-                        console.log('inside await service-worker');
                         if (document.documentElement.classList.contains('site-loaded')) {
-                            console.log('success');
+                            console.log('installationWorker.state:', installationWorker.state);
                             clearInterval(awaitInterval);
                             switch (installingWorker.state) {
                                 case 'installed':
