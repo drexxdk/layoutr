@@ -23,7 +23,7 @@ app.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.
 
 /* eslint-env browser */
 'use strict';
-if ('serviceWorker' in navigator) {
+if (app.isLocalhost && 'serviceWorker' in navigator) {
     // Delay registration until after the page has loaded, to ensure that our
     // precaching requests don't degrade the first visit experience.
     // See https://developers.google.com/web/fundamentals/instant-and-offline/service-worker/registration
