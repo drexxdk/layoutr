@@ -35,7 +35,7 @@ if ('serviceWorker' in navigator) {
         
         var repository = app.isLocalhost ? '/' : '/layoutr/';
         
-        var opts = { updateViaCache: 'none' }
+        var opts = { updateViaCache: 'all' }
         navigator.serviceWorker.register(repository + 'service-worker.js', opts).then(function (reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function () {
