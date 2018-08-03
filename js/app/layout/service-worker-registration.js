@@ -23,7 +23,7 @@ app.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.
 
 /* eslint-env browser */
 'use strict';
-if (!app.isLocalhost && 'serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
     // Delay registration until after the page has loaded, to ensure that our
     // precaching requests don't degrade the first visit experience.
     // See https://developers.google.com/web/fundamentals/instant-and-offline/service-worker/registration
@@ -35,7 +35,7 @@ if (!app.isLocalhost && 'serviceWorker' in navigator) {
         
         var repository = app.isLocalhost ? '/' : '/layoutr/';
 
-        navigator.serviceWorker.register(repository + 'service-worker.js', { scope: repository }).then(function (reg) {
+        navigator.serviceWorker.register('/service-worker.js').then(function (reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function () {
                 // The updatefound event implies that reg.installing is set; see
