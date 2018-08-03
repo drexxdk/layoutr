@@ -3,7 +3,7 @@
 app.awaitInterval = 50;
 
 var l = window.location;
-app.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100'; 
+app.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100';
 
 /**
  * Copyright 2015 Google Inc. All rights reserved.
@@ -32,10 +32,14 @@ if ('serviceWorker' in navigator) {
         // It won't be able to control pages unless it's located at the same level or higher than them.
         // *Don't* register service worker file in, e.g., a scripts/ sub-directory!
         // See https://github.com/slightlyoff/ServiceWorker/issues/468
-        
+
         var repository = app.isLocalhost ? '/' : '/layoutr/';
-        
-        var opts = { updateViaCache: 'all' }
+
+        var opts = {
+            scope: repository,
+            updateViaCache: 'imports'
+        }
+
         navigator.serviceWorker.register(repository + 'service-worker.js', opts).then(function (reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function () {
