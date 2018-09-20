@@ -27,7 +27,7 @@ app.loadPage = (url, pushState, initial) => {
                 let title = app.capitalize(url.replace('/', '').replaceAll('-', ' '));
                 app.title.html(title);
                 document.title = title + ' - ' + app.siteName;
-                if (url === 'form') {
+                if (url === '/form') {
                     app.pageForm();
                 }
             }
@@ -138,7 +138,6 @@ $(function () {
             app.navigationTree.find('a.label[href=""]').addClass('active');
         }
     });
-
     if (app.url && app.url.p) {
         app.loadPage(app.url.p, true, true);
     } else {
@@ -147,7 +146,6 @@ $(function () {
         var url = '/' + l.pathname.slice(1).split('/').slice(segmentCount);
         app.loadPage(url, true, true);
     }
-
     app.left.on('click', '.tree a.label:not(.active)', (e) => {
         app.internalLinkClick($(e.currentTarget).attr('href'), e);
     });

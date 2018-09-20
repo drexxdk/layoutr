@@ -23,8 +23,9 @@ const config = {
             {
                 name: 'initial',
                 watch: [
-                    'js/app/layout/service-worker-registration.js',
-                    'js/app/layout/analytics-helper.js'
+                    'js/app/initial/_initial.js',
+                    //'js/app/initial/service-worker-registration.js',
+                    'js/app/initial/analytics-helper.js'
                 ]
             },
             {
