@@ -1,16 +1,14 @@
 ﻿var app = app || {};
 
 var scrollbarWidth = () => {
-    app.body.append('<div id="scrollbar-width"></div>');
-    let element = app.body.children('#scrollbar-width');
-    element.css({
-        'overflow': "scroll",
-        'visibility': "hidden",
-        'position': 'absolute',
-        'width': '100px',
-        'height': '100px'
-    });
-    app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
+    app.body.insertAdjacentHTML('beforeend', '<div id="scrollbar-width"></div>');
+    let element = app.body.querySelector('#scrollbar-width');
+    element.style.overflow = 'scroll';
+    element.style.visibility = 'hidden';
+    element.style.position = 'absolute';
+    element.style.width = '100px';
+    element.style.height = '100px';
+    app.scrollbarWidth = element.offsetWidth - element.clientWidth;
     element.remove();
 };
 

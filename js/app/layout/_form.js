@@ -13,7 +13,7 @@ $(() => {
 });
 
 app.addValidation = (form, rules, messages) => {
-    form.validate({
+    $(form).validate({
         rules: rules,
         messages: messages,
         errorElement: "em",
@@ -31,7 +31,7 @@ app.addValidation = (form, rules, messages) => {
             $(element).parents(".form-group").removeClass("theme-danger");
         }
     });
-    form.on('change', 'input, textarea, select', (e) => {
+    $(form).on('change', 'input, textarea, select', (e) => {
         $(e.currentTarget).valid();
     });
 };

@@ -29,7 +29,7 @@ app.toggleAside = (aside, pageChanged) => {
     if (!transitionLock) {
         transitionLock = true;
         app.html.attr('data-authentication', '');
-        let currentAside = app.html.attr('data-aside'); 
+        let currentAside = app.html.attr('data-aside');
         if (currentAside.length) {
             if (aside === undefined || currentAside === aside) {
                 let scrollTop = app.scrollTop();
@@ -53,13 +53,11 @@ app.toggleAside = (aside, pageChanged) => {
         app.setHtmlScroll();
     }
 };
- 
-$(() => {
-    app.main.find('.aside.left').click(() => {
-        app.toggleAside('left');
-    });
 
-    app.main.find('.aside.right').click(() => {
-        app.toggleAside('right');
-    });
+app.main.querySelector('.aside.left').addEventListener('click', () => {
+    app.toggleAside('left');
+});
+
+app.main.querySelector('.aside.right').addEventListener('click', () => {
+    app.toggleAside('right');
 });

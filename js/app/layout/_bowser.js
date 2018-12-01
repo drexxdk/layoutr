@@ -2,22 +2,22 @@
 
 $(() => {
     if (bowser.msedge) {
-        app.html.addClass('msedge'); // used by app.enableScroll()
+        app.html.classList.add('msedge'); // used by app.enableScroll()
     } else if (bowser.msie) {
-        app.html.addClass('msie'); // not currently used for anything
+        app.html.classList.add('msie'); // not currently used for anything
     }
     if (bowser.mobile) {
-        app.html.addClass('mobile'); // disables fixed footer
+        app.html.classList.add('mobile'); // disables fixed footer
     } else if (bowser.tablet) {
-        app.html.addClass('tablet'); // does nothing currently
+        app.html.classList.add('tablet'); // does nothing currently
     } else {
-        app.html.addClass('desktop'); // enables hover effects
+        app.html.classList.add('desktop'); // enables hover effects
     }
 
     if (bowser.android) {
-        app.html.addClass('android'); // used by modal
+        app.html.classList.add('android'); // used by modal
     } else if (bowser.ios) {
-        app.html.addClass('ios'); // used to apply focus
+        app.html.classList.add('ios'); // used to apply focus
     }
 
     if (bowser.msie || bowser.msedge) {
@@ -45,9 +45,9 @@ $(() => {
         $(window).scroll(() => {
             let scrollTop = self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop + $(window).height() >= $(document).height()) {
-                app.html.addClass('subpixel');
+                app.html.classList.add('subpixel');
             } else {
-                app.html.removeClass('subpixel');
+                app.html.classList.remove('subpixel');
             }
         });
     }
