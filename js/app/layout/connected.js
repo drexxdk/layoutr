@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.setOnline = () => {
         let online = navigator.onLine;

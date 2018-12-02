@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.checkDropdown = (dropdowns) => {
         dropdowns.each((i, e) => {
@@ -27,7 +26,7 @@
 
             if (typeof attr !== typeof undefined && attr !== false) {
                 let temp = attr.split(' ');
-                temp = $.grep(temp, function (item, index) {
+                temp = $.grep(temp, (item, index) => {
                     return item.trim().match(/^theme-/);
                 });
                 if (temp.length === 1) {

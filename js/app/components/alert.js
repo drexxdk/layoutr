@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     var closeAlert = (target) => {
         target.fadeOut(layoutr.fadeOutTime, () => {
@@ -13,7 +12,7 @@
         });
     }
 
-    $(function () {
+    $(() => {
         layoutr.body.on('click', '.alert .close', (e) => {
             let target = $(e.currentTarget).parent();
             closeAlert(target);

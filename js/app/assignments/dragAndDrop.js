@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.checkAssignmentDragAndDrop = (assignment) => {
         if (assignment.hasClass('drag-and-drop')) {

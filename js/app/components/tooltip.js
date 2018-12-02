@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.checkTooltip = (tooltips) => {
         tooltips.each((i, e) => {

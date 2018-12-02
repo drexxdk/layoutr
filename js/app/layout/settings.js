@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.applySettings = (id, name, type, value, set) => {
         if (set) {
@@ -61,20 +60,20 @@
     };
 
     $(() => {
-        layoutr.right.find('> .content > div').load(layoutr.host + layoutr.ajax + 'layout/settings.html', function () {
-            let awaitInterval = setInterval(() => {
-                if (layoutr.cssLoaded) {
-                    clearInterval(awaitInterval);
+        layoutr.right.find('> .content > div').load(layoutr.host + layoutr.ajax + 'layout/settings.html', (response, status, xhr) => {
+            if (xhr.status === 200) {
+                let $this = $(this);
+                layoutr.promiseCSS.then(() => {
                     $.each(layoutr.settings, (i, entry) => {
                         layoutr.applySettings(entry.id, entry.name, entry.type, entry.value, false);
                     });
                     layoutr.header.find('.aside.right').addClass('loaded');
-                    $(this).on('change', 'input[type=checkbox], input[type=radio]', (e) => {
-                        let $this = $(e.currentTarget),
-                            id = $this.attr('id').replace('settings-', ''),
-                            name = $this.attr('name').replace('settings-', ''),
-                            type = $this.attr('type'),
-                            value = $this.is(':checked');
+                    $this.on('change', 'input[type=checkbox], input[type=radio]', (e) => {
+                        let input = $(e.currentTarget),
+                            id = input.attr('id').replace('settings-', ''),
+                            name = input.attr('name').replace('settings-', ''),
+                            type = input.attr('type'),
+                            value = input.is(':checked');
                         layoutr.applySettings(id, name, type, value, true);
                         if (id === 'left-shrink' || id === 'right-shrink' ||
                             id === 'left-push' || id === 'right-push' ||
@@ -82,8 +81,10 @@
                             layoutr.setHtmlScroll();
                         }
                     });
-                }
-            }, layoutr.awaitInterval);
+                });
+            } else {
+                layoutr.showPopupAlert('Failed to load settings html', 'danger');
+            }
         });
 
         layoutr.right.on('click', '#settings-clear-localstorage', () => {

@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.checkAssignmentColor = (assignment) => {
         if (assignment.hasClass('color')) {

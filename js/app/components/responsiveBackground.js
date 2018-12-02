@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     // responsive-background
     layoutr.checkResponsiveBackground = (elements) => {

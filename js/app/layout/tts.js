@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.clearSelection = () => {
         let selection = window.getSelection();
@@ -112,14 +111,14 @@
                 return text;
             }
 
-            if (bowser.msie) {
-                if (!layoutr.html.hasClass('polyfills-loaded')) {
-                    layoutr.head.append($('<script src="dist/js/polyfills.js"></script>'));
-                    layoutr.html.addClass('polyfills-loaded')
-                }
+            if (!layoutr.html.hasClass('tts-loaded')) {
+                layoutr.showLoading();
+                layoutr.PromiseTTS = layoutr.load.js('dist/js/tts.js').finally(() => {
+                    layoutr.hideLoading();
+                });
+                layoutr.html.addClass('tts-loaded');
             }
-
-            $.getScript('dist/js/tts.js', () => {
+            layoutr.PromiseTTS.then(() => {
                 let awsCredentials = new AWS.Credentials('AKIAI5JMCVBZ4CWSSOOQ', 'FM7j9FbQLkUU8u3tHScv0IOG4IoayUkp/RNNNNni'),
                     settings = {
                         awsCredentials: awsCredentials,
@@ -164,6 +163,8 @@
                         layoutr.html.attr('data-tts', true);
                     }
                 });
+            }).catch(() => {
+                layoutr.showPopupAlert('Failed to load tts', 'danger');
             });
         }
     };

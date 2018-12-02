@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
+
     var fullscreenScrollTop;
 
     layoutr.requestFullScreen = () => {

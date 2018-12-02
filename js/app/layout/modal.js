@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.showModal = (type) => {
         layoutr.html.attr('data-modal', type);
@@ -36,7 +35,7 @@
         layoutr.html.trigger('model-check');
     };
 
-    $(function () {
+    $(() => {
         layoutr.body.on('click', '.modal', (e) => {
             let $this = $(e.currentTarget),
                 type = $this.attr('data-modal');

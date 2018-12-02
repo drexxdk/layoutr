@@ -1,17 +1,21 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.checkSwiper = (swiper) => {
         if (swiper.length) {
             if (!layoutr.html.hasClass('swiper-loaded')) {
-                layoutr.head.append($('<link rel="stylesheet"href="dist/css/swiper.css">'));
+                layoutr.showLoading();
+                layoutr.promiseSwiper = Promise.all([
+                    layoutr.load.css('dist/css/swiper.css'),
+                    layoutr.load.js('dist/js/swiper.js')
+                ]).finally(() => {
+                    layoutr.hideLoading();
+                });
                 layoutr.html.addClass('swiper-loaded');
             }
 
-            $.getScript('dist/js/swiper.js', () => {
+            layoutr.promiseSwiper.then(() => {
                 swiper.each((i, e) => {
-
                     let $this = $(e);
                     if (!$this.hasClass('loaded')) {
                         $this.append('<div class="swiper-footer"></div>');
@@ -79,6 +83,8 @@
                         });
                     }
                 });
+            }).catch(() => {
+                layoutr.showPopupAlert('Failed to load swiper', 'danger');
             });
         }
     };

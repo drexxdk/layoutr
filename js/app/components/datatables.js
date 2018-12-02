@@ -1,12 +1,17 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.checkDatatable = (tables) => {
         if (tables.length) {
-            let count = 0;
-            layoutr.showLoading();
-            $.getScript('dist/js/datatables.js', () => {
+            if (!layoutr.html.hasClass('datatables-loaded')) {
+                layoutr.showLoading();
+                layoutr.promiseDatatables = layoutr.load.js('dist/js/datatables.js').finally(() => {
+                    layoutr.hideLoading();
+                });
+                layoutr.html.addClass('datatables-loaded');
+            }
+            layoutr.promiseDatatables.then(() => {
+                let count = 0;
                 let spacing = 'space-3';
 
                 let table_header_input = (instance) => {
@@ -15,7 +20,7 @@
                         let column = $(e);
                         return column.hasClass('dropdown') || column.hasClass('text');
                     });
-                    instance.columns().every(function () {
+                    instance.columns().every(() => {
                         let th = this.header(),
                             text = th.innerText,
                             column = $(th),
@@ -149,7 +154,7 @@
                                 footer: false,
                                 exportOptions: {
                                     "format": {
-                                        header: function (text, index, th) {
+                                        header: (text, index, th) => {
                                             return $(th).find('span:first').html();
                                         }
                                     }
@@ -160,7 +165,7 @@
                                 footer: false,
                                 exportOptions: {
                                     "format": {
-                                        header: function (text, index, th) {
+                                        header: (text, index, th) => {
                                             return $(th).find('span:first').html();
                                         }
                                     }
@@ -168,7 +173,7 @@
                             }
                         ],
                         responsive: true,
-                        initComplete: function (settings, json) {
+                        initComplete: (settings, json) => {
                             let instance = this.api(),
                                 wrapper = $(settings.nTableWrapper);
 
@@ -201,7 +206,7 @@
                                 layoutr.hideLoading();
                             }
 
-                            $this.on('draw.dt', function () {
+                            $this.on('draw.dt', () => {
                                 paginateFix(paginate);
                                 let columns = instance.columns().responsiveHidden();
                                 $this.trigger('responsive-resize.dt', [this, columns]);
@@ -228,6 +233,8 @@
                         }
                     });
                 });
+            }).catch(() => {
+                layoutr.showPopupAlert('Failed to load datatables', 'danger');
             });
         } else {
             layoutr.html.off('aside-changed.datatables');

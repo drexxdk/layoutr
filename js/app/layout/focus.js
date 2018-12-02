@@ -1,11 +1,18 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.enableFocus = () => {
         let component = layoutr.focus.find('> .component > div');
 
-        $.getScript('dist/js/focus.js', () => {
+        if (!layoutr.html.hasClass('focus-loaded')) {
+            layoutr.showLoading();
+            layoutr.promiseFocus = layoutr.load.js('dist/js/focus.js').finally(() => {
+                layoutr.hideLoading();
+            });
+            layoutr.html.addClass('focus-loaded');
+        }
+
+        layoutr.promiseFocus.then(() => {
             component
                 .draggable({
                     axis: "y",
@@ -18,7 +25,7 @@
                         s: '.ui-resizable-s'
                     },
                     containment: "parent"
-                }).on('resize', function (e) {
+                }).on('resize', (e) => {
                     e.stopPropagation();
                 });
 
@@ -31,12 +38,14 @@
             });
 
             let height = $(window).height();
-            $(window).resize(() => {
+            $(window).resize(function () {
                 // do nothing if the height is the same
                 if ($(window).height() === height) return;
                 height = $(window).height();
                 component.removeAttr('style');
             });
+        }).catch(() => {
+            layoutr.showPopupAlert('Failed to load focus', 'danger');
         });
     };
 

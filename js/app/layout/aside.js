@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
+
     let transitionLock = false;
 
     layoutr.asideChanged = () => {
@@ -18,7 +18,7 @@
                     trigger();
                 }
             }, layoutr.awaitInterval);
-            setTimeout(function () {
+            setTimeout(() => {
                 transitionLock = false;
             }, layoutr.transitionTime);
         } else {

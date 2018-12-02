@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.contentLoaded = (element) => {
         layoutr.checkResponsiveBackground(element.find('.rb'));
@@ -28,22 +27,19 @@
         }, 200);
 
         if (initial) {
-            let awaitInterval = setInterval(() => {
-                if (layoutr.fontsLoaded) {
-                    clearInterval(awaitInterval);
-                    layoutr.hideLoading();
-                    layoutr.html.addClass('site-loaded');
-                    layoutr.responsiveHeader();
-                    layoutr.contentLoaded(layoutr.content);
+            layoutr.promiseFont.then(() => {
+                layoutr.hideLoading();
+                layoutr.html.addClass('site-loaded');
+                layoutr.responsiveHeader();
+                layoutr.contentLoaded(layoutr.content);
 
-                    let scroll = JSON.parse(localStorage.getItem("scroll"));
+                let scroll = JSON.parse(localStorage.getItem("scroll"));
 
-                    if (scroll !== null && window.location.href === scroll.href) {
-                        layoutr.body.scrollTop(layoutr.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.body[0].scrollHeight); // edge, safari
-                        layoutr.html.scrollTop(layoutr.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.html[0].scrollHeight); // chrome, firefox, ie
-                    }
+                if (scroll !== null && window.location.href === scroll.href) {
+                    layoutr.body.scrollTop(layoutr.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.body[0].scrollHeight); // edge, safari
+                    layoutr.html.scrollTop(layoutr.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.html[0].scrollHeight); // chrome, firefox, ie
                 }
-            }, layoutr.awaitInterval);
+            });
         } else {
             layoutr.hideLoading();
             layoutr.contentLoaded(layoutr.content);

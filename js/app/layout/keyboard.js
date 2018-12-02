@@ -1,8 +1,7 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
-    $(function () {
+    $(() => {
         layoutr.body.on("keydown", (e) => {
             let target = $(e.target),
                 parent = target.parent();

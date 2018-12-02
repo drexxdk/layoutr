@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.getAssignmentItem = (items, id) => {
         return $($.map(items, (item) => {
@@ -12,13 +11,23 @@
 
     layoutr.checkAssignment = (assignments) => {
         if (assignments.length) {
-            $.getScript('dist/js/assignments.js', () => {
+            if (!layoutr.html.hasClass('assignment-loaded')) {
+                layoutr.showLoading();
+                layoutr.promiseAssignment = layoutr.load.js('dist/js/assignment.js').finally(() => {
+                    layoutr.hideLoading();
+                });
+                layoutr.html.addClass('assignment-loaded');
+            }
+
+            layoutr.promiseAssignment.then(() => {
                 $(assignments).each((i, assignment) => {
                     assignment = $(assignment);
                     layoutr.checkAssignmentSort(assignment);
                     layoutr.checkAssignmentDragAndDrop(assignment);
                     layoutr.checkAssignmentColor(assignment);
                 });
+            }).catch(() => {
+                layoutr.showPopupAlert('Failed to load assignment', 'danger');
             });
         }
     };

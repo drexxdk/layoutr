@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     var scrollbarWidth = () => {
         layoutr.body.append('<div id="scrollbar-width"></div>');

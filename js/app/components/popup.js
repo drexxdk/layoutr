@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     $(() => {
         layoutr.body.on('click', '.show-popup-alert', (e) => {

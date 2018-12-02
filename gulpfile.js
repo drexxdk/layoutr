@@ -23,16 +23,18 @@ const config = {
             {
                 name: 'initial',
                 watch: [
+                    'js/vendors/polyfills/promise.min.js',
+                    'js/app/initial/load.js',
                     'js/app/initial/_initial.js',
                     //'js/app/initial/service-worker-registration.js',
                     'js/app/initial/analytics-helper.js'
                 ]
             },
             {
-                name: "fonts",
+                name: "font",
                 watch: [
                     'js/vendors/webfontloader.min.js',
-                    'js/app/layout/fonts.js'
+                    'js/app/layout/font.js'
                 ]
             },
             {
@@ -49,8 +51,8 @@ const config = {
 
 
                     // layout
-                    'js/app/layout/_variables.js',
-                    'js/app/layout/_functions.js',
+                    'js/app/layout/_variable.js',
+                    'js/app/layout/_function.js',
                     'js/app/layout/_bowser.js',
                     'js/app/layout/_form.js',
                     'js/app/layout/_app.js',
@@ -90,18 +92,10 @@ const config = {
                     'js/app/components/swiper.js',
 
                     // assignments
-                    'js/app/assignments/_assignments.js',
+                    'js/app/assignments/_assignment.js',
 
                     // site
                     'js/app/site/form.js'
-                ]
-            },
-            {
-                name: "loadCSS",
-                watch: [
-                    'js/vendors/loadCSS/onloadCSS.js',
-                    'js/vendors/loadCSS/loadCSS.js',
-                    'js/app/layout/loadCSS.js'
                 ]
             },
             {
@@ -136,7 +130,7 @@ const config = {
                 ]
             },
             {
-                name: 'assignments',
+                name: 'assignment',
                 watch: [
                     'js/vendors/sortable.min.js',
                     'js/app/assignments/color.js',
@@ -156,12 +150,6 @@ const config = {
                 watch: [
                     'js/vendors/tts/aws-sdk.min.js',
                     'js/vendors/tts/chattykathy.js'
-                ]
-            },
-            {
-                name: 'polyfills',
-                watch: [
-                    'js/vendors/polyfills/promise.js'
                 ]
             }
         ]

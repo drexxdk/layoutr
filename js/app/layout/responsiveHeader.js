@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     layoutr.responsiveHeader = () => {
         let h1 = layoutr.header.find('h1'),

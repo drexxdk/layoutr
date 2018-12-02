@@ -1,7 +1,6 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
-
+    
     $.ajaxSetup({
         cache: true
     });

@@ -23,7 +23,7 @@
         }
 
         return self.registration.pushManager.getSubscription()
-            .then(function (subscription) {
+            .then((subscription) => {
                 if (subscription === null) {
                     throw new Error('No subscription currently available.');
                 }
@@ -48,10 +48,10 @@
 
                 // Format hit data into URI
                 var payloadString = Object.keys(payloadData)
-                    .filter(function (analyticsKey) {
+                    .filter((analyticsKey) => {
                         return payloadData[analyticsKey];
                     })
-                    .map(function (analyticsKey) {
+                    .map((analyticsKey) => {
                         return analyticsKey + '=' + encodeURIComponent(payloadData[analyticsKey]);
                     })
                     .join('&');
@@ -62,10 +62,10 @@
                     body: payloadString
                 });
             })
-            .then(function (response) {
+            .then((response) => {
                 if (!response.ok) {
                     return response.text()
-                        .then(function (responseText) {
+                        .then((responseText) => {
                             throw new Error(
                                 'Bad response from Google Analytics:\n' + response.status
                             );
@@ -75,7 +75,7 @@
                         'hit sent, check the Analytics dashboard');
                 }
             })
-            .catch(function (err) {
+            .catch((err) => {
                 console.warn('Unable to send the analytics event', err);
             });
     }

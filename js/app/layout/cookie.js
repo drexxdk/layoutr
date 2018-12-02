@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     $(() => {
         layoutr.cookie.on('click', '#cookie-accept', () => {

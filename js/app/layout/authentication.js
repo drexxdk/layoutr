@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-    var layoutr = window.layoutr || {};
 
     $(() => {
         layoutr.authentication.on('click', '> div > button', (e) => {
