@@ -1,164 +1,167 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.loadPage = (url, pushState, initial) => {
-    app.showLoading();
-    app.content.load(app.host + app.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html', (response, status, xhr) => {
-        let q = url.indexOf('?');
-        url = url.substring(0, q !== -1 ? q : url.length);
-        app.left.find('.tree a.label.active').removeClass('active');
-        app.left.find('a.label[href="' + url + '"]').addClass('active');
-        app.html.attr('data-status', status);
-        let statusCode = xhr.status;
-        app.title.html('');
-        document.title = app.siteName;
-        if (statusCode === 200) {
-            if (url === '/') {
-                if (app.body.children('#svg-browser').length === 0) {
-                    $.get(app.host + app.ajax + 'svg/browser.html', (data) => {
-                        $(data).prependTo(app.body);
-                    });
-                }
-                if (app.body.children('#svg-os').length === 0) {
-                    $.get(app.host + app.ajax + 'svg/os.html', (data) => {
-                        $(data).prependTo(app.body);
-                    });
-                }
-            } else {
-                let title = app.capitalize(url.replace('/', '').replaceAll('-', ' '));
-                app.title.html(title);
-                document.title = title + ' - ' + app.siteName;
-                if (url === '/form') {
-                    app.pageForm();
-                }
-            }
-            app.html.trigger('header-changed.responsiveHeader');
-        } else {
-            app.content.load(app.host + app.ajax + 'pages/error.html', () => {
-                document.title = statusCode + ' - ' + app.siteName;
-                let title = statusCode + ' - ';
-                if (statusCode === 404) {
-                    title += 'Page not found';
-                } else if (statusCode === 500) {
-                    title += 'Server error';
+    layoutr.loadPage = (url, pushState, initial) => {
+        layoutr.showLoading();
+        layoutr.content.load(layoutr.host + layoutr.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html', (response, status, xhr) => {
+            let q = url.indexOf('?');
+            url = url.substring(0, q !== -1 ? q : url.length);
+            layoutr.left.find('.tree a.label.active').removeClass('active');
+            layoutr.left.find('a.label[href="' + url + '"]').addClass('active');
+            layoutr.html.attr('data-status', status);
+            let statusCode = xhr.status;
+            layoutr.title.html('');
+            document.title = layoutr.siteName;
+            if (statusCode === 200) {
+                if (url === '/') {
+                    if (layoutr.body.children('#svg-browser').length === 0) {
+                        $.get(layoutr.host + layoutr.ajax + 'svg/browser.html', (data) => {
+                            $(data).prependTo(layoutr.body);
+                        });
+                    }
+                    if (layoutr.body.children('#svg-os').length === 0) {
+                        $.get(layoutr.host + layoutr.ajax + 'svg/os.html', (data) => {
+                            $(data).prependTo(layoutr.body);
+                        });
+                    }
                 } else {
-                    title += statusText;
+                    let title = layoutr.capitalize(url.replace('/', '').replaceAll('-', ' '));
+                    layoutr.title.html(title);
+                    document.title = title + ' - ' + layoutr.siteName;
+                    if (url === '/form') {
+                        layoutr.pageForm();
+                    }
                 }
-                app.content.find('#error-title').html(title);
-                app.html.trigger('header-changed.responsiveHeader');
-            });
-        }
-
-        let awaitInterval = setInterval(() => {
-            if (app.cssLoaded) {
-                clearInterval(awaitInterval);
-                app.pageLoaded(initial);
+                layoutr.html.trigger('header-changed.responsiveHeader');
+            } else {
+                layoutr.content.load(layoutr.host + layoutr.ajax + 'pages/error.html', () => {
+                    document.title = statusCode + ' - ' + layoutr.siteName;
+                    let title = statusCode + ' - ';
+                    if (statusCode === 404) {
+                        title += 'Page not found';
+                    } else if (statusCode === 500) {
+                        title += 'Server error';
+                    } else {
+                        title += statusText;
+                    }
+                    layoutr.content.find('#error-title').html(title);
+                    layoutr.html.trigger('header-changed.responsiveHeader');
+                });
             }
-        }, app.awaitInterval);
-    });
-    let historyUrl = (app.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
-    if (pushState) {
-        window.history.pushState(null, null, historyUrl);
-        loadPage = true;
-    }
-};
 
-app.internalLinkClick = (href, e) => {
-    if (!e.ctrlKey) {
-        e.preventDefault();
-        app.loadPage(href, true, false);
-    }
-};
-
-(function (l) {
-    if (l.search) {
-        app.url = {};
-        l.search.slice(1).split('&').forEach((v) => {
-            let a = v.split('=');
-            app.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+            let awaitInterval = setInterval(() => {
+                if (layoutr.cssLoaded) {
+                    clearInterval(awaitInterval);
+                    layoutr.pageLoaded(initial);
+                }
+            }, layoutr.awaitInterval);
         });
-        if (app.url.p !== undefined) {
-            window.history.replaceState(null, null,
-                l.pathname.slice(0, -1) + app.url.p +
-                (app.url.q ? '?' + app.url.q : '') +
-                l.hash
-            );
+        let historyUrl = (layoutr.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
+        if (pushState) {
+            window.history.pushState(null, null, historyUrl);
+            loadPage = true;
         }
-    }
-}(window.location));
+    };
 
-let loadPage = window.history.state;
-window.onpopstate = (e) => {
-    if (loadPage) {
-        let url = location.pathname;
-        if (!app.isLocalhost) {
-            url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
+    layoutr.internalLinkClick = (href, e) => {
+        if (!e.ctrlKey) {
+            e.preventDefault();
+            layoutr.loadPage(href, true, false);
         }
-        app.loadPage(url, false, true);
-    }
-};
+    };
 
-app.applyNavigation = (id, value, set) => {
-    if (set) {
-        let entry = {
-            "id": id,
-            "value": value
-        },
-            exists = $.grep(app.navigation, (e) => { return e.name === name; });
-        if (exists.length === 0) {
-            // not found
-            app.navigation.push(entry);
-        } else if (exists.length === 1) {
-            // found
-            exists[0].value = value;
+    (function (l) {
+        if (l.search) {
+            layoutr.url = {};
+            l.search.slice(1).split('&').forEach((v) => {
+                let a = v.split('=');
+                layoutr.url[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+            });
+            if (layoutr.url.p !== undefined) {
+                window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + layoutr.url.p +
+                    (layoutr.url.q ? '?' + layoutr.url.q : '') +
+                    l.hash
+                );
+            }
         }
-        localStorage.setItem('navigation', JSON.stringify(app.navigation));
-    } else {
-        app.left.find('#' + id).prop('checked', value);
-    }
-};
+    }(window.location));
 
-$(function () {
-    app.left.find('> .content > div').load(app.host + app.ajax + 'layout/navigation.html', () => {
-        app.navigationTree = app.left.find('.tree');
-        app.navigation = JSON.parse(localStorage.getItem("navigation"));
-        if (app.navigation === null) app.navigation = [];
-        $.each(app.navigation, function (i, entry) {
-            app.applyNavigation(entry.id, entry.value, false);
-        });
-        app.navigationTree.on('change', 'input[type=checkbox]', (e) => {
-            let $this = $(e.currentTarget),
-                id = $this.attr('id'),
-                value = $this.is(':checked');
-            app.applyNavigation(id, value, true);
-        });
-        app.header.find('.aside.left').addClass('loaded');
-        if (app.url && app.url.p) {
-            app.navigationTree.find('a.label[href="' + app.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
+    let loadPage = window.history.state;
+    window.onpopstate = (e) => {
+        if (loadPage) {
+            let url = location.pathname;
+            if (!layoutr.isLocalhost) {
+                url = url.substring(url.indexOf("/", url.indexOf("/") + 1));
+            }
+            layoutr.loadPage(url, false, true);
+        }
+    };
+
+    layoutr.applyNavigation = (id, value, set) => {
+        if (set) {
+            let entry = {
+                "id": id,
+                "value": value
+            },
+                exists = $.grep(layoutr.navigation, (e) => { return e.name === name; });
+            if (exists.length === 0) {
+                // not found
+                layoutr.navigation.push(entry);
+            } else if (exists.length === 1) {
+                // found
+                exists[0].value = value;
+            }
+            localStorage.setItem('navigation', JSON.stringify(layoutr.navigation));
         } else {
-            app.navigationTree.find('a.label[href=""]').addClass('active');
+            layoutr.left.find('#' + id).prop('checked', value);
         }
-    });
-    if (app.url && app.url.p) {
-        app.loadPage(app.url.p, true, true);
-    } else {
-        var l = window.location;
-        var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
-        var url = '/' + l.pathname.slice(1).split('/').slice(segmentCount);
-        app.loadPage(url, true, true);
-    }
-    app.left.on('click', '.tree a.label:not(.active)', (e) => {
-        app.internalLinkClick($(e.currentTarget).attr('href'), e);
-    });
+    };
 
-    app.body.on('click', '.internal-link', (e) => {
-        app.internalLinkClick($(e.currentTarget).attr('href'), e);
-    });
+    $(function () {
+        layoutr.left.find('> .content > div').load(layoutr.host + layoutr.ajax + 'layout/navigation.html', () => {
+            layoutr.navigationTree = layoutr.left.find('.tree');
+            layoutr.navigation = JSON.parse(localStorage.getItem("navigation"));
+            if (layoutr.navigation === null) layoutr.navigation = [];
+            $.each(layoutr.navigation, function (i, entry) {
+                layoutr.applyNavigation(entry.id, entry.value, false);
+            });
+            layoutr.navigationTree.on('change', 'input[type=checkbox]', (e) => {
+                let $this = $(e.currentTarget),
+                    id = $this.attr('id'),
+                    value = $this.is(':checked');
+                layoutr.applyNavigation(id, value, true);
+            });
+            layoutr.header.find('.aside.left').addClass('loaded');
+            if (layoutr.url && layoutr.url.p) {
+                layoutr.navigationTree.find('a.label[href="' + layoutr.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
+            } else {
+                layoutr.navigationTree.find('a.label[href=""]').addClass('active');
+            }
+        });
+        if (layoutr.url && layoutr.url.p) {
+            layoutr.loadPage(layoutr.url.p, true, true);
+        } else {
+            var l = window.location;
+            var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
+            var url = '/' + l.pathname.slice(1).split('/').slice(segmentCount);
+            layoutr.loadPage(url, true, true);
+        }
+        layoutr.left.on('click', '.tree a.label:not(.active)', (e) => {
+            layoutr.internalLinkClick($(e.currentTarget).attr('href'), e);
+        });
 
-    app.left.on('click', '#navigation-expand', () => {
-        app.navigationTree.find('input[type=checkbox]:not(:checked)').click();
-    });
+        layoutr.body.on('click', '.internal-link', (e) => {
+            layoutr.internalLinkClick($(e.currentTarget).attr('href'), e);
+        });
 
-    app.left.on('click', '#navigation-collapse', () => {
-        app.navigationTree.find('input[type=checkbox]:checked').click();
+        layoutr.left.on('click', '#navigation-expand', () => {
+            layoutr.navigationTree.find('input[type=checkbox]:not(:checked)').click();
+        });
+
+        layoutr.left.on('click', '#navigation-collapse', () => {
+            layoutr.navigationTree.find('input[type=checkbox]:checked').click();
+        });
     });
-});
+}());

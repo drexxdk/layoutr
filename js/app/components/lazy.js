@@ -1,9 +1,12 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.checkLazy = (elements) => {
-    elements.lazy({
-        afterLoad: (element) => {
-            element.removeClass('lazy');
-        }
-    });
-};
+    layoutr.checkLazy = (elements) => {
+        elements.lazy({
+            afterLoad: (element) => {
+                element.removeClass('lazy');
+            }
+        });
+    };
+}());

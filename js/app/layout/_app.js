@@ -1,60 +1,63 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-$.ajaxSetup({
-    cache: true
-});
-
-$(() => {
-    app.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
-
-    //app.setHtmlScroll(); // outcomment if it can be disabled at first page load
-
-    $.get(app.host + app.ajax + 'svg/base.html', (data) => {
-        $(data).prependTo(app.body);
+    $.ajaxSetup({
+        cache: true
     });
 
-    if (bowser.android) {
-        // android doesn't handle vh correctly, so it gets converted to px
-        $(window).resize(() => {
-            if (app.isModal() && app.isModalImage()) {
-                app.modal.find('#modal-img').css('max-height', window.innerHeight);
-            }
+    $(() => {
+        layoutr.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
+
+        //layoutr.setHtmlScroll(); // outcomment if it can be disabled at first page load
+
+        $.get(layoutr.host + layoutr.ajax + 'svg/base.html', (data) => {
+            $(data).prependTo(layoutr.body);
         });
-    }
-});
 
-$(window).click((e) => {
-    let target = $(e.target),
-        modal = target.closest(app.modal[0]);
+        if (bowser.android) {
+            // android doesn't handle vh correctly, so it gets converted to px
+            $(window).resize(() => {
+                if (layoutr.isModal() && layoutr.isModalImage()) {
+                    layoutr.modal.find('#modal-img').css('max-height', window.innerHeight);
+                }
+            });
+        }
+    });
 
-    if (!app.isLoading() && !app.isFocus()) {
-        if (bowser.ios) {
-            // ios browsers doesn't apply :focus to buttons in many cases,
-            // this forces :focus to be applied correctly.
-            if (target.parents('button').length) {
-                target.parents('button').focus();
-            } else if (target.closest('button').length) {
-                target.focus();
+    $(window).click((e) => {
+        let target = $(e.target),
+            modal = target.closest(layoutr.modal[0]);
+
+        if (!layoutr.isLoading() && !layoutr.isFocus()) {
+            if (bowser.ios) {
+                // ios browsers doesn't apply :focus to buttons in many cases,
+                // this forces :focus to be applied correctly.
+                if (target.parents('button').length) {
+                    target.parents('button').focus();
+                } else if (target.closest('button').length) {
+                    target.focus();
+                }
+            }
+
+            if (layoutr.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
+                layoutr.html.attr('data-authentication', '');
+            } else if (modal.length) {
+                let image = layoutr.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
+                    form = layoutr.isModalForm() && !target.closest('#modal > div > div > div').length;
+                if (image || form || target.closest('#modal-close').length) {
+                    layoutr.closeModal();
+                }
+            } else {
+                let isSmallBreakpoint = layoutr.isSmallBreakpoint(),
+                    left = layoutr.isAsideLeft() && (layoutr.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
+                    right = layoutr.isAsideRight() && (layoutr.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
+                    notTarget = !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
+                if ((left || right) && notTarget && !layoutr.isLoading()) {
+                    layoutr.enableScroll();
+                    layoutr.toggleAside(undefined, false);
+                }
             }
         }
-
-        if (app.isAuthentication() && !target.closest('#authentication').length && !target.closest('#modal').length) {
-            app.html.attr('data-authentication', '');
-        } else if (modal.length) {
-            let image = app.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
-                form = app.isModalForm() && !target.closest('#modal > div > div > div').length;
-            if (image || form || target.closest('#modal-close').length) {
-                app.closeModal();
-            }
-        } else {
-            let isSmallBreakpoint = app.isSmallBreakpoint(),
-                left = app.isAsideLeft() && (app.isAsideLeftCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#left").length,
-                right = app.isAsideRight() && (app.isAsideRightCloseOnClickOutside() || isSmallBreakpoint) && !target.closest("#right").length,
-                notTarget = !target.closest(".aside").length && !target.closest('.popup').length && !target.closest('#cookie').length;
-            if ((left || right) && notTarget && !app.isLoading()) {
-                app.enableScroll();
-                app.toggleAside(undefined, false);
-            }
-        }
-    }
-});
+    });
+}());

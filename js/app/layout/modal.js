@@ -1,102 +1,105 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.showModal = (type) => {
-    app.html.attr('data-modal', type);
-    app.html.addClass('modal');
-    app.hideLoading();
-    app.checkModal();
-    app.modal.focus();
-};
+    layoutr.showModal = (type) => {
+        layoutr.html.attr('data-modal', type);
+        layoutr.html.addClass('modal');
+        layoutr.hideLoading();
+        layoutr.checkModal();
+        layoutr.modal.focus();
+    };
 
-app.closeModal = () => {
-    if (app.fullscreen) {
-        app.exitFullScreen();
-    } else {
-        app.html.removeClass('modal').attr('data-modal', '');
-        app.modal.removeClass('info-shown').empty();
-        app.checkModal();
-        app.setHtmlScroll();
-    }
-};
-
-app.checkModal = () => {
-    if (app.isModal()) {
-        app.body.css('padding-right', app.scrollbarWidth);
-        if (app.html.attr('data-aside') === 'right') {
-            app.right.css('margin-right', app.scrollbarWidth);
+    layoutr.closeModal = () => {
+        if (layoutr.fullscreen) {
+            layoutr.exitFullScreen();
+        } else {
+            layoutr.html.removeClass('modal').attr('data-modal', '');
+            layoutr.modal.removeClass('info-shown').empty();
+            layoutr.checkModal();
+            layoutr.setHtmlScroll();
         }
-        app.body.children('.popup').css('margin-right', app.scrollbarWidth);
-    } else {
-        app.body.css('padding-right', 0);
-        app.right.css('margin-right', 0);
-        app.body.children('.popup').css('margin-right', 0);
-    }
-    app.html.trigger('model-check');
-};
+    };
 
-$(function () {
-    app.body.on('click', '.modal', (e) => {
-        let $this = $(e.currentTarget),
-            type = $this.attr('data-modal');
-        if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
-            app.showLoading();
-            let id = $this.attr('data-modal-id'),
-                html = [],
-                dataTitle = $this.attr('data-modal-title'),
-                dataContent = $this.attr('data-modal-content'),
-                dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
-            html.push('<div><div><div id="modal-container">');
-            if (type === 'image' && $this.attr('data-modal-img').length) {
-                if (dataTitle !== undefined || dataContent !== undefined) {
-                    app.modal.addClass('has-info');
-                    html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
-                    html.push('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
-                    html.push('</button>');
-                }
-                if (dataTitle !== undefined) {
-                    html.push('<div id="modal-title">' + dataTitle + '</div>');
-                }
-                if (dataContent !== undefined) {
-                    html.push('<div id="modal-content">' + dataContent + '</div>');
-                }
-                html.push('<img id="modal-img" />');
-            } else if (type === 'form') {
-                html.push('<div class="header">');
-                if (dataTitle !== undefined) {
-                    html.push('<span class="title">' + dataTitle + '</span>');
-                }
-                html.push('<button id="modal-close" class="close expand" aria-label="Close ' + (dataTitle !== undefined ? dataTitle : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
-                html.push('</div><div class="content">');
+    layoutr.checkModal = () => {
+        if (layoutr.isModal()) {
+            layoutr.body.css('padding-right', layoutr.scrollbarWidth);
+            if (layoutr.html.attr('data-aside') === 'right') {
+                layoutr.right.css('margin-right', layoutr.scrollbarWidth);
             }
-            html.push('</div></div></div></div>');
-            let div = html.join("");
-            app.modal.html(div);
-            if (type === 'image') {
-                let image = app.modal.find('#modal-img');
-                image.on('load', () => {
-                    if (bowser.android) {
-                        image.css('max-height', window.innerHeight);
+            layoutr.body.children('.popup').css('margin-right', layoutr.scrollbarWidth);
+        } else {
+            layoutr.body.css('padding-right', 0);
+            layoutr.right.css('margin-right', 0);
+            layoutr.body.children('.popup').css('margin-right', 0);
+        }
+        layoutr.html.trigger('model-check');
+    };
+
+    $(function () {
+        layoutr.body.on('click', '.modal', (e) => {
+            let $this = $(e.currentTarget),
+                type = $this.attr('data-modal');
+            if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
+                layoutr.showLoading();
+                let id = $this.attr('data-modal-id'),
+                    html = [],
+                    dataTitle = $this.attr('data-modal-title'),
+                    dataContent = $this.attr('data-modal-content'),
+                    dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
+                html.push('<div><div><div id="modal-container">');
+                if (type === 'image' && $this.attr('data-modal-img').length) {
+                    if (dataTitle !== undefined || dataContent !== undefined) {
+                        layoutr.modal.addClass('has-info');
+                        html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
+                        html.push('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
+                        html.push('</button>');
                     }
-                    app.showModal(type);
-                });
-                image.attr('src', $this.attr('data-modal-img'));
-            } else {
-                let dataSize = $this.attr('data-modal-size');
-                if (dataSize !== undefined) {
-                    app.modal.children('div').attr('data-modal-size', dataSize);
+                    if (dataTitle !== undefined) {
+                        html.push('<div id="modal-title">' + dataTitle + '</div>');
+                    }
+                    if (dataContent !== undefined) {
+                        html.push('<div id="modal-content">' + dataContent + '</div>');
+                    }
+                    html.push('<img id="modal-img" />');
+                } else if (type === 'form') {
+                    html.push('<div class="header">');
+                    if (dataTitle !== undefined) {
+                        html.push('<span class="title">' + dataTitle + '</span>');
+                    }
+                    html.push('<button id="modal-close" class="close expand" aria-label="Close ' + (dataTitle !== undefined ? dataTitle : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
+                    html.push('</div><div class="content">');
                 }
-                let content = app.modal.find('#modal-container > .content');
-                content.append(dataContent);
-                app.contentLoaded(content);
-                app.showModal(type);
+                html.push('</div></div></div></div>');
+                let div = html.join("");
+                layoutr.modal.html(div);
+                if (type === 'image') {
+                    let image = layoutr.modal.find('#modal-img');
+                    image.on('load', () => {
+                        if (bowser.android) {
+                            image.css('max-height', window.innerHeight);
+                        }
+                        layoutr.showModal(type);
+                    });
+                    image.attr('src', $this.attr('data-modal-img'));
+                } else {
+                    let dataSize = $this.attr('data-modal-size');
+                    if (dataSize !== undefined) {
+                        layoutr.modal.children('div').attr('data-modal-size', dataSize);
+                    }
+                    let content = layoutr.modal.find('#modal-container > .content');
+                    content.append(dataContent);
+                    layoutr.contentLoaded(content);
+                    layoutr.showModal(type);
+                }
+                if (dataFullscreen) {
+                    layoutr.requestFullScreen();
+                }
             }
-            if (dataFullscreen) {
-                app.requestFullScreen();
-            }
-        }
-    });
+        });
 
-    app.body.on('click', '#modal-toggle', () => {
-        app.modal.toggleClass('info-shown');
+        layoutr.body.on('click', '#modal-toggle', () => {
+            layoutr.modal.toggleClass('info-shown');
+        });
     });
-});
+}());

@@ -228,7 +228,9 @@ var generateJSTask = (task) => {
     gulp.task(config.js.prefix + task.name + '.dev', () => {
         return gulp
             .src(task.bundle ? task.bundle : task.watch)
+            .pipe(sourcemaps.init())
             .pipe(concat(task.name + '.js'))
+            .pipe(sourcemaps.write())
             .pipe(gulp.dest(config.js.dist));
     });
 

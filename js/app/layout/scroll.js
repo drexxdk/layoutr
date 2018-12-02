@@ -1,78 +1,81 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-var scrollbarWidth = () => {
-    app.body.append('<div id="scrollbar-width"></div>');
-    let element = app.body.children('#scrollbar-width');
-    element.css({
-        'overflow': "scroll",
-        'visibility': "hidden",
-        'position': 'absolute',
-        'width': '100px',
-        'height': '100px'
-    });
-    app.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
-    element.remove();
-};
-
-app.disableScroll = () => {
-    if (app.htmlOverflowEnabled) {
-        app.htmlOverflowEnabled = false;
-        if (app.isModal()) {
-            app.checkModal();
-            app.modal.focus();
-        }
-        let scrollTop = app.scrollTop();
-        app.html.addClass('scroll-disabled');
-        app.body.scrollTop(scrollTop);
-        app.main.scrollTop(scrollTop);
-    }
-};
-
-app.enableScroll = () => {
-    if (!app.htmlOverflowEnabled) {
-        app.htmlOverflowEnabled = true;
-        if (app.isSiteLoaded()) {
-            let scrollTop = app.scrollTop();
-            app.html.removeClass('scroll-disabled modal');
-            app.main.focus();
-            app.body.scrollTop(scrollTop); // edge, safari
-            app.html.scrollTop(scrollTop); // chrome, firefox, ie
-        } else {
-            app.html.removeClass('scroll-disabled modal');
-        }
-    }
-};
-
-app.setHtmlScroll = () => {
-    if (!app.isModal() && !app.isLoading() && !app.htmlOverflowEnabled && (!app.isSmallBreakpoint() || app.isSmallBreakpoint() && !app.isAsideLeft() && !app.isAsideRight())) {
-        app.enableScroll();
-    } else if (app.isModal() || app.isSmallBreakpoint() && app.htmlOverflowEnabled && (app.isAsideLeft() || app.isAsideRight())) {
-        app.disableScroll();
-    }
-};
-
-$(() => {
-    scrollbarWidth();
-});
-
-$(window).resize($.throttle(app.throttleInterval, false, () => {
-    app.checkModal();
-    app.setHtmlScroll();
-    scrollbarWidth();
-    setScrollTop();
-}));
-
-var setScrollTop = () => {
-    let scrollTop = app.scrollTop();
-
-    let entry = {
-        href: window.location.href,
-        scrollTop: scrollTop
+    var scrollbarWidth = () => {
+        layoutr.body.append('<div id="scrollbar-width"></div>');
+        let element = layoutr.body.children('#scrollbar-width');
+        element.css({
+            'overflow': "scroll",
+            'visibility': "hidden",
+            'position': 'absolute',
+            'width': '100px',
+            'height': '100px'
+        });
+        layoutr.scrollbarWidth = element[0].offsetWidth - element[0].clientWidth;
+        element.remove();
     };
 
-    localStorage.setItem('scroll', JSON.stringify(entry));
-};
+    layoutr.disableScroll = () => {
+        if (layoutr.htmlOverflowEnabled) {
+            layoutr.htmlOverflowEnabled = false;
+            if (layoutr.isModal()) {
+                layoutr.checkModal();
+                layoutr.modal.focus();
+            }
+            let scrollTop = layoutr.scrollTop();
+            layoutr.html.addClass('scroll-disabled');
+            layoutr.body.scrollTop(scrollTop);
+            layoutr.main.scrollTop(scrollTop);
+        }
+    };
 
-$(window).scroll($.throttle(app.throttleInterval, false, () => {
-    setScrollTop();
-}));
+    layoutr.enableScroll = () => {
+        if (!layoutr.htmlOverflowEnabled) {
+            layoutr.htmlOverflowEnabled = true;
+            if (layoutr.isSiteLoaded()) {
+                let scrollTop = layoutr.scrollTop();
+                layoutr.html.removeClass('scroll-disabled modal');
+                layoutr.main.focus();
+                layoutr.body.scrollTop(scrollTop); // edge, safari
+                layoutr.html.scrollTop(scrollTop); // chrome, firefox, ie
+            } else {
+                layoutr.html.removeClass('scroll-disabled modal');
+            }
+        }
+    };
+
+    layoutr.setHtmlScroll = () => {
+        if (!layoutr.isModal() && !layoutr.isLoading() && !layoutr.htmlOverflowEnabled && (!layoutr.isSmallBreakpoint() || layoutr.isSmallBreakpoint() && !layoutr.isAsideLeft() && !layoutr.isAsideRight())) {
+            layoutr.enableScroll();
+        } else if (layoutr.isModal() || layoutr.isSmallBreakpoint() && layoutr.htmlOverflowEnabled && (layoutr.isAsideLeft() || layoutr.isAsideRight())) {
+            layoutr.disableScroll();
+        }
+    };
+
+    $(() => {
+        scrollbarWidth();
+    });
+
+    $(window).resize($.throttle(layoutr.throttleInterval, false, () => {
+        layoutr.checkModal();
+        layoutr.setHtmlScroll();
+        scrollbarWidth();
+        setScrollTop();
+    }));
+
+    var setScrollTop = () => {
+        let scrollTop = layoutr.scrollTop();
+
+        let entry = {
+            href: window.location.href,
+            scrollTop: scrollTop
+        };
+
+        localStorage.setItem('scroll', JSON.stringify(entry));
+    };
+
+    $(window).scroll($.throttle(layoutr.throttleInterval, false, () => {
+        setScrollTop();
+    }));
+}());

@@ -1,20 +1,23 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.checkMath = (math) => {
-    if (math.length) {
-        if (!app.html.hasClass('math-loaded')) {
-            app.head.append($('<link rel="stylesheet"href="dist/css/katex.css">'));
-            app.html.addClass('math-loaded');
-        }
+    layoutr.checkMath = (math) => {
+        if (math.length) {
+            if (!layoutr.html.hasClass('math-loaded')) {
+                layoutr.head.append($('<link rel="stylesheet"href="dist/css/katex.css">'));
+                layoutr.html.addClass('math-loaded');
+            }
 
-        $.getScript('dist/js/katex.js', () => {
-            math.each((i, e) => {
-                let $this = $(e);
-                renderMathInElement($this[0]);
-                setTimeout(() => {
-                    $this.removeClass('math');
+            $.getScript('dist/js/katex.js', () => {
+                math.each((i, e) => {
+                    let $this = $(e);
+                    renderMathInElement($this[0]);
+                    setTimeout(() => {
+                        $this.removeClass('math');
+                    });
                 });
             });
-        });
-    }
-};
+        }
+    };
+}());

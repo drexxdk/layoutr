@@ -1,16 +1,19 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.showLoading = () => {
-    app.loadingCount++;
-    app.disableScroll();
-    app.html.addClass('loading');
-};
+    layoutr.showLoading = () => {
+        layoutr.loadingCount++;
+        layoutr.disableScroll();
+        layoutr.html.addClass('loading');
+    };
 
-app.hideLoading = () => {
-    app.loadingCount--;
-    if (app.loadingCount <= 0) {
-        app.loadingCount = 0;
-        app.html.removeClass('loading');
-        app.setHtmlScroll();
-    }
-};
+    layoutr.hideLoading = () => {
+        layoutr.loadingCount--;
+        if (layoutr.loadingCount <= 0) {
+            layoutr.loadingCount = 0;
+            layoutr.html.removeClass('loading');
+            layoutr.setHtmlScroll();
+        }
+    };
+}());

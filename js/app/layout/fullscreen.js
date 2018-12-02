@@ -1,60 +1,63 @@
-﻿var app = app || {};
-var fullscreenScrollTop;
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
+    var fullscreenScrollTop;
 
-app.requestFullScreen = () => {
-    if (!app.fullscreen && bowser.desktop) {
-        fullscreenScrollTop = app.scrollTop();
-        if (app.document.requestFullscreen) {
-            app.document.requestFullscreen();
+    layoutr.requestFullScreen = () => {
+        if (!layoutr.fullscreen && bowser.desktop) {
+            fullscreenScrollTop = layoutr.scrollTop();
+            if (layoutr.document.requestFullscreen) {
+                layoutr.document.requestFullscreen();
+            }
+            else if (layoutr.document.msRequestFullscreen) {
+                layoutr.document.msRequestFullscreen();
+            }
+            else if (layoutr.document.mozRequestFullScreen) {
+                layoutr.document.mozRequestFullScreen();
+            }
+            else if (layoutr.document.webkitRequestFullscreen) {
+                layoutr.document.webkitRequestFullscreen();
+            }
         }
-        else if (app.document.msRequestFullscreen) {
-            app.document.msRequestFullscreen();
-        }
-        else if (app.document.mozRequestFullScreen) {
-            app.document.mozRequestFullScreen();
-        }
-        else if (app.document.webkitRequestFullscreen) {
-            app.document.webkitRequestFullscreen();
-        }
-    }
-};
+    };
 
-document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
-document.addEventListener('mozfullscreenchange', fullscreenChange, false);
-document.addEventListener('fullscreenchange', fullscreenChange, false);
-document.addEventListener('MSFullscreenChange', fullscreenChange, false);
+    document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
+    document.addEventListener('mozfullscreenchange', fullscreenChange, false);
+    document.addEventListener('fullscreenchange', fullscreenChange, false);
+    document.addEventListener('MSFullscreenChange', fullscreenChange, false);
 
-function fullscreenChange(e) {
-    app.fullscreen = !app.fullscreen;
-    if (!app.fullscreen && bowser.desktop) {
-        if (app.isModal()) {
-            app.closeModal();
+    function fullscreenChange(e) {
+        layoutr.fullscreen = !layoutr.fullscreen;
+        if (!layoutr.fullscreen && bowser.desktop) {
+            if (layoutr.isModal()) {
+                layoutr.closeModal();
+            }
+            layoutr.body.scrollTop(fullscreenScrollTop);
+            layoutr.html.scrollTop(fullscreenScrollTop);
         }
-        app.body.scrollTop(fullscreenScrollTop);
-        app.html.scrollTop(fullscreenScrollTop);
-    }
-};
+    };
 
-app.exitFullScreen = () => {
-    if (app.fullscreen && bowser.desktop) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
+    layoutr.exitFullScreen = () => {
+        if (layoutr.fullscreen && bowser.desktop) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+            else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            }
+            else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
         }
-        else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
-        else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        }
-        else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
-    }
-};
+    };
 
-app.toggleFullScreen = (element) => {
-    if (app.fullscreen)
-        exitFullScreen();
-    else
-        requestFullScreen(element);
-};
+    layoutr.toggleFullScreen = (element) => {
+        if (layoutr.fullscreen)
+            exitFullScreen();
+        else
+            requestFullScreen(element);
+    };
+}());

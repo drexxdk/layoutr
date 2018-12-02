@@ -1,65 +1,68 @@
-﻿var app = app || {};
-let transitionLock = false;
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
+    let transitionLock = false;
 
-app.asideChanged = () => {
-    let trigger = () => {
-        app.html.trigger('aside-changed.datatables');
-        app.html.trigger('aside-changed.rb');
-        app.html.trigger('aside-changed.map');
-    }
+    layoutr.asideChanged = () => {
+        let trigger = () => {
+            layoutr.html.trigger('aside-changed.datatables');
+            layoutr.html.trigger('aside-changed.rb');
+            layoutr.html.trigger('aside-changed.map');
+        }
 
-    if (app.isTransitions()) {
-        let awaitInterval = setInterval(() => {
-            if (!transitionLock) {
-                clearInterval(awaitInterval);
-            } else {
-                trigger();
-            }
-        }, app.awaitInterval);
-        setTimeout(function () {
-            transitionLock = false;
-        }, app.transitionTime);
-    } else {
-        transitionLock = false;
-        trigger();
-    }
-}
-
-app.toggleAside = (aside, pageChanged) => {
-    if (!transitionLock) {
-        transitionLock = true;
-        app.html.attr('data-authentication', '');
-        let currentAside = app.html.attr('data-aside'); 
-        if (currentAside.length) {
-            if (aside === undefined || currentAside === aside) {
-                let scrollTop = app.scrollTop();
-                app.html.attr('data-aside', '');
-                app.main.focus();
-                app.body.scrollTop(scrollTop); // edge, safari
-                app.html.scrollTop(scrollTop); // chrome, firefox, ie
-            } else {
-                app.html.attr('data-aside', aside);
-            }
+        if (layoutr.isTransitions()) {
+            let awaitInterval = setInterval(() => {
+                if (!transitionLock) {
+                    clearInterval(awaitInterval);
+                } else {
+                    trigger();
+                }
+            }, layoutr.awaitInterval);
+            setTimeout(function () {
+                transitionLock = false;
+            }, layoutr.transitionTime);
         } else {
-            app.html.attr('data-aside', aside);
+            transitionLock = false;
+            trigger();
         }
-        if (aside === 'left') {
-            app.left.focus();
-        } else if (aside === 'right') {
-            app.right.focus();
-        }
-
-        app.asideChanged();
-        app.setHtmlScroll();
     }
-};
- 
-$(() => {
-    app.main.find('.aside.left').click(() => {
-        app.toggleAside('left');
-    });
 
-    app.main.find('.aside.right').click(() => {
-        app.toggleAside('right');
+    layoutr.toggleAside = (aside, pageChanged) => {
+        if (!transitionLock) {
+            transitionLock = true;
+            layoutr.html.attr('data-authentication', '');
+            let currentAside = layoutr.html.attr('data-aside');
+            if (currentAside.length) {
+                if (aside === undefined || currentAside === aside) {
+                    let scrollTop = layoutr.scrollTop();
+                    layoutr.html.attr('data-aside', '');
+                    layoutr.main.focus();
+                    layoutr.body.scrollTop(scrollTop); // edge, safari
+                    layoutr.html.scrollTop(scrollTop); // chrome, firefox, ie
+                } else {
+                    layoutr.html.attr('data-aside', aside);
+                }
+            } else {
+                layoutr.html.attr('data-aside', aside);
+            }
+            if (aside === 'left') {
+                layoutr.left.focus();
+            } else if (aside === 'right') {
+                layoutr.right.focus();
+            }
+
+            layoutr.asideChanged();
+            layoutr.setHtmlScroll();
+        }
+    };
+
+    $(() => {
+        layoutr.main.find('.aside.left').click(() => {
+            layoutr.toggleAside('left');
+        });
+
+        layoutr.main.find('.aside.right').click(() => {
+            layoutr.toggleAside('right');
+        });
     });
-});
+}());

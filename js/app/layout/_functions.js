@@ -1,135 +1,138 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.guid = () => {
-    let s4 = () => {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
+    layoutr.guid = () => {
+        let s4 = () => {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+    };
+
+    layoutr.isSmallBreakpoint = () => {
+        return $(window).outerWidth() < 732 || layoutr.isAsideLeft() && !layoutr.isAsideLeftShrink() || layoutr.isAsideRight() && !layoutr.isAsideRightShrink();
+    };
+
+    layoutr.isAside = () => {
+        return layoutr.html.attr('data-aside').length;
+    };
+
+    layoutr.isAsideLeft = () => {
+        return layoutr.html.attr('data-aside') === 'left';
+    };
+
+    layoutr.isAsideRight = () => {
+        return layoutr.html.attr('data-aside') === 'right';
+    };
+
+    layoutr.isAsideLeftShrink = () => {
+        return layoutr.html.hasClass('left-shrink') && layoutr.isAsideLeft();
+    };
+
+    layoutr.isAsideRightShrink = () => {
+        return layoutr.html.hasClass('right-shrink') && layoutr.isAsideRight();
+    };
+
+    layoutr.isAsideLeftCloseOnClickOutside = () => {
+        return layoutr.html.hasClass('close-left-click-outside');
+    };
+    layoutr.isAsideRightCloseOnClickOutside = () => {
+        return layoutr.html.hasClass('close-right-click-outside');
+    };
+
+    layoutr.isModal = () => {
+        return layoutr.html.hasClass('modal');
+    };
+
+    layoutr.isModalForm = () => {
+        return layoutr.html.attr('data-modal') === 'form';
+    };
+
+    layoutr.isModalImage = () => {
+        return layoutr.html.attr('data-modal') === 'image';
+    };
+
+    layoutr.isFocus = () => {
+        return layoutr.html.hasClass('focus') && layoutr.html.attr('data-focus') === 'true';
     }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-};
 
-app.isSmallBreakpoint = () => {
-    return $(window).outerWidth() < 732 || app.isAsideLeft() && !app.isAsideLeftShrink() || app.isAsideRight() && !app.isAsideRightShrink();
-};
-
-app.isAside = () => {
-    return app.html.attr('data-aside').length;
-};
-
-app.isAsideLeft = () => {
-    return app.html.attr('data-aside') === 'left';
-};
-
-app.isAsideRight = () => {
-    return app.html.attr('data-aside') === 'right';
-};
-
-app.isAsideLeftShrink = () => {
-    return app.html.hasClass('left-shrink') && app.isAsideLeft();
-};
-
-app.isAsideRightShrink = () => {
-    return app.html.hasClass('right-shrink') && app.isAsideRight();
-};
-
-app.isAsideLeftCloseOnClickOutside = () => {
-    return app.html.hasClass('close-left-click-outside');
-};
-app.isAsideRightCloseOnClickOutside = () => {
-    return app.html.hasClass('close-right-click-outside');
-};
-
-app.isModal = () => {
-    return app.html.hasClass('modal');
-};
-
-app.isModalForm = () => {
-    return app.html.attr('data-modal') === 'form';
-};
-
-app.isModalImage = () => {
-    return app.html.attr('data-modal') === 'image';
-};
-
-app.isFocus = () => {
-    return app.html.hasClass('focus') && app.html.attr('data-focus') === 'true';
-}
-
-app.isTTS = () => {
-    return app.html.hasClass('tts');
-}
-
-app.isTTSEnabled = () => {
-    return app.html.hasClass('tts') && app.html.attr('data-tts') === 'true';
-}
-app.isAuthentication = () => {
-    return app.html.attr('data-authentication') !== '';
-};
-
-app.isLoading = () => {
-    return app.html.hasClass('loading');
-};
-
-app.isScrollDisabled = () => {
-    return app.html.hasClass('scroll-disabled');
-};
-
-app.isCloseLeftPageChange = () => {
-    return app.html.hasClass('close-left-page-change');
-};
-
-app.isTransitions = () => {
-    return app.html.hasClass('transitions');
-};
-
-app.isSwipe = () => {
-    return app.html.hasClass('swipe');
-};
-
-app.isSiteLoaded = () => {
-    return app.html.hasClass('site-loaded');
-};
-
-app.capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-app.scrollTop = () => {
-    return Math.max(app.body.scrollTop(), app.main.scrollTop(), app.html.scrollTop());
-};
-
-app.tryParseInt = (str, defaultValue) => {
-    let retValue = defaultValue;
-    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
-        retValue = parseInt(str);
+    layoutr.isTTS = () => {
+        return layoutr.html.hasClass('tts');
     }
-    return retValue;
-};
 
-app.tryParseFloat = (str, defaultValue) => {
-    let retValue = defaultValue;
-    if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
-        retValue = parseFloat(str);
+    layoutr.isTTSEnabled = () => {
+        return layoutr.html.hasClass('tts') && layoutr.html.attr('data-tts') === 'true';
     }
-    return retValue;
-};
+    layoutr.isAuthentication = () => {
+        return layoutr.html.attr('data-authentication') !== '';
+    };
 
-app.tryParseJSON = (str, defaultValue) => {
-    let retValue = defaultValue;
-    try {
-        retValue = JSON.parse(str);
-    } catch (e) {
-    }
-    return retValue;
-};
+    layoutr.isLoading = () => {
+        return layoutr.html.hasClass('loading');
+    };
 
-app.isTrue = (str) => {
-    return str === 'true';
-};
+    layoutr.isScrollDisabled = () => {
+        return layoutr.html.hasClass('scroll-disabled');
+    };
 
-String.prototype.replaceAll = function (search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
+    layoutr.isCloseLeftPageChange = () => {
+        return layoutr.html.hasClass('close-left-page-change');
+    };
+
+    layoutr.isTransitions = () => {
+        return layoutr.html.hasClass('transitions');
+    };
+
+    layoutr.isSwipe = () => {
+        return layoutr.html.hasClass('swipe');
+    };
+
+    layoutr.isSiteLoaded = () => {
+        return layoutr.html.hasClass('site-loaded');
+    };
+
+    layoutr.capitalize = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
+    layoutr.scrollTop = () => {
+        return Math.max(layoutr.body.scrollTop(), layoutr.main.scrollTop(), layoutr.html.scrollTop());
+    };
+
+    layoutr.tryParseInt = (str, defaultValue) => {
+        let retValue = defaultValue;
+        if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
+            retValue = parseInt(str);
+        }
+        return retValue;
+    };
+
+    layoutr.tryParseFloat = (str, defaultValue) => {
+        let retValue = defaultValue;
+        if (str !== undefined && str !== null && str.length > 0 && !isNaN(str)) {
+            retValue = parseFloat(str);
+        }
+        return retValue;
+    };
+
+    layoutr.tryParseJSON = (str, defaultValue) => {
+        let retValue = defaultValue;
+        try {
+            retValue = JSON.parse(str);
+        } catch (e) {
+        }
+        return retValue;
+    };
+
+    layoutr.isTrue = (str) => {
+        return str === 'true';
+    };
+
+    String.prototype.replaceAll = function (search, replacement) {
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+}());

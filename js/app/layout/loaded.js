@@ -1,49 +1,52 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.contentLoaded = (element) => {
-    app.checkResponsiveBackground(element.find('.rb'));
-    app.checkLazy(element.find('.lazy'));
-    app.checkAccordion(element.find('.accordion'));
-    app.checkDropdown(element.find('select.dropdown'));
-    app.checkTooltip(element.find('.tooltip'));
-    app.checkAssignment(element.find('.assignment'));
-    app.checkMath(element.find('.math'));
-    app.checkMedia(element.find('audio, video'));
-    app.checkMap(element.find('.map'));
-    app.checkDatatable(element.find('.dataTable'));
-    app.checkSwiper(element.find('.swiper'));
-}
-
-app.pageLoaded = (initial) => {
-    app.main.css('overflow', 'auto');
-    app.main.scrollTop(0);
-    app.main.css('overflow', '');
-    app.html.animate({ scrollTop: 0 }, 0);
-    setTimeout(() => {
-        if (!initial && app.isCloseLeftPageChange()) {
-            app.toggleAside(undefined, true);
-        }
-    }, 200);
-
-    if (initial) {
-        let awaitInterval = setInterval(() => {
-            if (app.fontsLoaded) {
-                clearInterval(awaitInterval);
-                app.hideLoading();
-                app.html.addClass('site-loaded');
-                app.responsiveHeader();
-                app.contentLoaded(app.content);
-
-                let scroll = JSON.parse(localStorage.getItem("scroll"));
-
-                if (scroll !== null && window.location.href === scroll.href) {
-                    app.body.scrollTop(app.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : app.body[0].scrollHeight); // edge, safari
-                    app.html.scrollTop(app.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : app.html[0].scrollHeight); // chrome, firefox, ie
-                }
-            }
-        }, app.awaitInterval);
-    } else {
-        app.hideLoading();
-        app.contentLoaded(app.content);
+    layoutr.contentLoaded = (element) => {
+        layoutr.checkResponsiveBackground(element.find('.rb'));
+        layoutr.checkLazy(element.find('.lazy'));
+        layoutr.checkAccordion(element.find('.accordion'));
+        layoutr.checkDropdown(element.find('select.dropdown'));
+        layoutr.checkTooltip(element.find('.tooltip'));
+        layoutr.checkAssignment(element.find('.assignment'));
+        layoutr.checkMath(element.find('.math'));
+        layoutr.checkMedia(element.find('audio, video'));
+        layoutr.checkMap(element.find('.map'));
+        layoutr.checkDatatable(element.find('.dataTable'));
+        layoutr.checkSwiper(element.find('.swiper'));
     }
-};
+
+    layoutr.pageLoaded = (initial) => {
+        layoutr.main.css('overflow', 'auto');
+        layoutr.main.scrollTop(0);
+        layoutr.main.css('overflow', '');
+        layoutr.html.animate({ scrollTop: 0 }, 0);
+        setTimeout(() => {
+            if (!initial && layoutr.isCloseLeftPageChange()) {
+                layoutr.toggleAside(undefined, true);
+            }
+        }, 200);
+
+        if (initial) {
+            let awaitInterval = setInterval(() => {
+                if (layoutr.fontsLoaded) {
+                    clearInterval(awaitInterval);
+                    layoutr.hideLoading();
+                    layoutr.html.addClass('site-loaded');
+                    layoutr.responsiveHeader();
+                    layoutr.contentLoaded(layoutr.content);
+
+                    let scroll = JSON.parse(localStorage.getItem("scroll"));
+
+                    if (scroll !== null && window.location.href === scroll.href) {
+                        layoutr.body.scrollTop(layoutr.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.body[0].scrollHeight); // edge, safari
+                        layoutr.html.scrollTop(layoutr.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.html[0].scrollHeight); // chrome, firefox, ie
+                    }
+                }
+            }, layoutr.awaitInterval);
+        } else {
+            layoutr.hideLoading();
+            layoutr.contentLoaded(layoutr.content);
+        }
+    };
+}());

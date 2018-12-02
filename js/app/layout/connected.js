@@ -1,21 +1,24 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-app.setOnline = () => {
-    let online = navigator.onLine;
+    layoutr.setOnline = () => {
+        let online = navigator.onLine;
 
-    app.body.find('.alert[data-type="connected"]').remove();
-    if (online) {
-        app.showPopupAlert('You are online', 'success', 'bottom right', 'connected');
-    } else {
-        app.showPopupAlert('You are offline', 'danger', 'bottom right', 'connected');
+        layoutr.body.find('.alert[data-type="connected"]').remove();
+        if (online) {
+            layoutr.showPopupAlert('You are online', 'success', 'bottom right', 'connected');
+        } else {
+            layoutr.showPopupAlert('You are offline', 'danger', 'bottom right', 'connected');
+        }
     }
-}
 
-$(() => {
-    window.addEventListener('online', app.setOnline);
-    window.addEventListener('offline', app.setOnline);
+    $(() => {
+        window.addEventListener('online', layoutr.setOnline);
+        window.addEventListener('offline', layoutr.setOnline);
 
-    if (!navigator.onLine) {
-        app.setOnline();
-    }
-});
+        if (!navigator.onLine) {
+            layoutr.setOnline();
+        }
+    });
+}());

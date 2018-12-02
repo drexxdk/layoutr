@@ -1,13 +1,16 @@
-﻿var app = app || {};
+﻿(function () {
+    "use strict";
+    var layoutr = window.layoutr || {};
 
-WebFont.load({
-    typekit: {
-        id: ['bhz3dxx']
-    },
-    active: function () {
-        app.fontsLoaded = true;
-    },
-    inactive: function () {
-        app.fontsLoaded = true;
-    }
-});
+    WebFont.load({
+        typekit: {
+            id: ['bhz3dxx']
+        },
+        active: function () {
+            layoutr.fontsLoaded = true;
+        },
+        inactive: function () {
+            layoutr.fontsLoaded = true;
+        }
+    });
+}());
