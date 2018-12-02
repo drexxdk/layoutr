@@ -21,26 +21,11 @@ const config = {
         dist: dist + '/js',
         bundles: [
             {
-                name: 'initial',
-                watch: [
-                    'js/vendors/polyfills/promise.min.js',
-                    'js/app/initial/load.js',
-                    'js/app/initial/_initial.js',
-                    //'js/app/initial/service-worker-registration.js',
-                    'js/app/initial/analytics-helper.js'
-                ]
-            },
-            {
-                name: "font",
-                watch: [
-                    'js/vendors/webfontloader.min.js',
-                    'js/app/layout/font.js'
-                ]
-            },
-            {
                 name: "app",
                 watch: 'js/**/*.js',
                 bundle: [
+                    'js/vendors/polyfills/promise.min.js',
+                    'js/vendors/webfontloader.min.js',
                     'js/vendors/jquery/jquery-3.1.1.min.js',
                     'js/vendors/jquery/validate/jquery.validate.min.js',
                     'js/vendors/jquery/jquery.lazy.min.js',
@@ -49,12 +34,16 @@ const config = {
                     'js/vendors/jquery/jquery.shuffle.js',
                     'js/vendors/bowser.js',
 
-
                     // layout
+                    'js/app/layout/_polyfill.js',
                     'js/app/layout/_variable.js',
                     'js/app/layout/_function.js',
                     'js/app/layout/_bowser.js',
                     'js/app/layout/_form.js',
+                    'js/app/layout/load.js',
+                    //'js/app/layout/service-worker-registration.js',
+                    'js/app/layout/analytics-helper.js',
+                    'js/app/layout/font.js',
                     'js/app/layout/_app.js',
                     'js/app/layout/loaded.js',
                     'js/app/layout/fullscreen.js',

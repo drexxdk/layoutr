@@ -1,9 +1,45 @@
-﻿(function () {
+﻿var layoutr = window.layoutr || {};
+
+(function () {
     "use strict";
 
-    $(() => {
-        layoutr.siteName = 'layoutr';
+    layoutr.siteName = 'layoutr';
 
+    layoutr.throttleInterval = 50;
+    layoutr.debounceInterval = 50;
+
+    layoutr.transitionTime = 400;
+    layoutr.fadeOutTime = 500;
+    layoutr.htmlOverflowEnabled = true;
+    layoutr.smallBreakpoint = 732;
+    layoutr.scrollbarWidth = 0;
+    layoutr.loadingCount = 0;
+    layoutr.document = document.documentElement;
+    layoutr.fullscreen = false;
+    layoutr.ajax = 'dist/ajax/';
+
+    layoutr.navigation = [];
+    bowser.desktop = !bowser.mobile && !bowser.tablet;
+
+    var l = window.location;
+
+    var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
+    layoutr.host = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/';
+
+    layoutr.awaitInterval = 50;
+
+    layoutr.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100';
+
+    layoutr.settings = JSON.parse(localStorage.getItem("settings"));
+    if (layoutr.settings === null) layoutr.settings = [];
+    layoutr.theme = 'light';
+    layoutr.settings.forEach((entry) => {
+        if (entry.name === 'theme') {
+            layoutr.theme = entry.id.substring(entry.id.indexOf("-") + 1);
+        }
+    });
+
+    $(() => {
         layoutr.html = $('html');
         layoutr.head = $('head');
         layoutr.body = $('body');
@@ -23,21 +59,5 @@
         layoutr.authenticatedLinks = layoutr.authenticated.find('.authenticated-links');
         layoutr.cookie = $('#cookie');
         layoutr.focus = $('#focus');
-
-        layoutr.throttleInterval = 50;
-        layoutr.debounceInterval = 50;
-
-        layoutr.transitionTime = 400;
-        layoutr.fadeOutTime = 500;
-        layoutr.htmlOverflowEnabled = true;
-        layoutr.smallBreakpoint = 732;
-        layoutr.scrollbarWidth = 0;
-        layoutr.loadingCount = 0;
-        layoutr.document = document.documentElement;
-        layoutr.fullscreen = false;
-        layoutr.ajax = 'dist/ajax/';
-
-        layoutr.navigation = [];
-        bowser.desktop = !bowser.mobile && !bowser.tablet;
     });
 }());

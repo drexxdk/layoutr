@@ -33,6 +33,7 @@
                 });
             }
             if (name === 'theme') {
+                debugger;
                 layoutr.loadTheme(id);
             }
             if (name === 'focus' && value) {

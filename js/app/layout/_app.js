@@ -1,5 +1,9 @@
 ﻿(function () {
     "use strict";
+
+    layoutr.promiseCSS = layoutr.load.css(layoutr.host + "dist/css/theme/" + layoutr.theme + '.css').catch(() => {
+        console.log('Failed to load css');
+    });
     
     $.ajaxSetup({
         cache: true

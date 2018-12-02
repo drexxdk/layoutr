@@ -1,6 +1,4 @@
-﻿var layoutr = window.layoutr || {};
-
-(function () {
+﻿(function () {
     "use strict";
 
     layoutr.load = (function () {
