@@ -1,21 +1,17 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.promiseCSS = layoutr.load.css(layoutr.host + "dist/css/theme/" + layoutr.theme + '.css').catch(() => {
-        console.log('Failed to load css');
+        console.error('Failed to load css');
     });
     
-    $.ajaxSetup({
-        cache: true
-    });
-
     $(() => {
         layoutr.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
 
         //layoutr.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-        $.get(layoutr.host + layoutr.ajax + 'svg/base.html', (data) => {
-            $(data).prependTo(layoutr.body);
+        layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/base.html').then((response) => {
+            $(response).prependTo(layoutr.body);
+        }).catch(() => {
+            layoutr.showPopupAlert('Failed to load base svg html', 'danger');
         });
 
         if (bowser.android) {
@@ -63,4 +59,4 @@
             }
         }
     });
-}());
+}

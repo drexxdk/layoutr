@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.promiseFont = new Promise((resolve, reject) => {
         WebFont.load({
             typekit: {
@@ -16,4 +14,4 @@
     }).catch(() => {
         layoutr.showPopupAlert('Failed to load fonts', 'danger');
     });
-}());
+}

@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.enableFocus = () => {
         let component = layoutr.focus.find('> .component > div');
 
@@ -61,4 +59,4 @@
         layoutr.body.scrollTop(scrollTop); // edge, safari
         layoutr.html.scrollTop(scrollTop); // chrome, firefox, ie
     };
-}());
+}

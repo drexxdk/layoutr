@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkTooltip = (tooltips) => {
         tooltips.each((i, e) => {
             let $this = $(e),
@@ -21,4 +19,4 @@
             });
         });
     };
-}());
+}

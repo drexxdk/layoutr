@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.showModal = (type) => {
         layoutr.html.attr('data-modal', type);
         layoutr.html.addClass('modal');
@@ -101,4 +99,4 @@
             layoutr.modal.toggleClass('info-shown');
         });
     });
-}());
+}

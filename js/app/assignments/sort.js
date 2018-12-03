@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkAssignmentSort = (assignment) => {
         if (assignment.hasClass('sort')) {
             let id = assignment.attr('data-id'),
@@ -90,4 +88,4 @@
             $(window).unbind('resize.assignmentSort');
         }
     };
-}());
+}

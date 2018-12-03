@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkSwiper = (swiper) => {
         if (swiper.length) {
             if (!layoutr.html.hasClass('swiper-loaded')) {
@@ -88,4 +86,4 @@
             });
         }
     };
-}());
+}

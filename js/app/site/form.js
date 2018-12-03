@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.pageForm = () => {
         layoutr.addValidation(
             layoutr.content.find('#form'),
@@ -73,4 +71,4 @@
             }
         );
     };
-}());
+}

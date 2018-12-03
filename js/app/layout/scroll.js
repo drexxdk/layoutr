@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     var scrollbarWidth = () => {
         layoutr.body.append('<div id="scrollbar-width"></div>');
         let element = layoutr.body.children('#scrollbar-width');
@@ -77,4 +75,4 @@
     $(window).scroll($.throttle(layoutr.throttleInterval, false, () => {
         setScrollTop();
     }));
-}());
+}

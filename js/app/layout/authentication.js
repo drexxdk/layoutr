@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     $(() => {
         layoutr.authentication.on('click', '> div > button', (e) => {
             let $this = $(e.currentTarget),
@@ -72,4 +70,4 @@
             }
         );
     });
-}());
+}

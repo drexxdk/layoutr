@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.setOnline = () => {
         let online = navigator.onLine;
 
@@ -20,4 +18,4 @@
             layoutr.setOnline();
         }
     });
-}());
+}

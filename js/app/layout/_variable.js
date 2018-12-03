@@ -1,8 +1,6 @@
 ﻿var layoutr = window.layoutr || {};
 
-(function () {
-    "use strict";
-
+{
     layoutr.siteName = 'layoutr';
 
     layoutr.throttleInterval = 50;
@@ -56,8 +54,8 @@
         layoutr.authentication = $('#authentication');
         layoutr.unauthenticated = layoutr.authentication.children('.unauthenticated');
         layoutr.authenticated = layoutr.authentication.children('.authenticated');
-        layoutr.authenticatedLinks = layoutr.authenticated.find('.authenticated-links');
+        layoutr.authenticatedLinks = layoutr.authentication.find('.links');
         layoutr.cookie = $('#cookie');
         layoutr.focus = $('#focus');
     });
-}());
+}

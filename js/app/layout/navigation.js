@@ -1,20 +1,8 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.loadPage = (url, pushState, initial) => {
         layoutr.showLoading();
-
-        var promise = new Promise((resolve, reject) => {
-            layoutr.content.load(layoutr.host + layoutr.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html', (response, status, xhr) => {
-                if (xhr.status === 200) {
-                    resolve(response);
-                } else {
-                    reject(xhr.status);
-                }
-            });
-        });
-
-        promise.then((value) => {
+        layoutr.load.html(layoutr.host + layoutr.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html').then((response) => {
+            layoutr.content.html(response);
             let q = url.indexOf('?');
             url = url.substring(0, q !== -1 ? q : url.length);
             layoutr.left.find('.tree a.label.active').removeClass('active');
@@ -24,13 +12,17 @@
             document.title = layoutr.siteName;
             if (url === '/') {
                 if (layoutr.body.children('#svg-browser').length === 0) {
-                    $.get(layoutr.host + layoutr.ajax + 'svg/browser.html', (data) => {
-                        $(data).prependTo(layoutr.body);
+                    layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/browser.html').then((response) => {
+                        $(response).prependTo(layoutr.body);
+                    }).catch(() => {
+                        layoutr.showPopupAlert('Failed to load browser svg html', 'danger');
                     });
                 }
                 if (layoutr.body.children('#svg-os').length === 0) {
-                    $.get(layoutr.host + layoutr.ajax + 'svg/os.html', (data) => {
-                        $(data).prependTo(layoutr.body);
+                    layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/os.html').then((response) => {
+                        $(response).prependTo(layoutr.body);
+                    }).catch((response) => {
+                        layoutr.showPopupAlert('Failed to load os svg html', 'danger');
                     });
                 }
             } else {
@@ -45,27 +37,28 @@
             layoutr.promiseCSS.then(() => {
                 layoutr.pageLoaded(initial);
             });
-        }).catch(function (value) {
-            layoutr.content.load(layoutr.host + layoutr.ajax + 'pages/error.html', (response, status, xhr) => {
-                if (xhr.status === 200) {
-                    layoutr.html.attr('data-status', 'error');
-                    document.title = value + ' - ' + layoutr.siteName;
-                    let title = value + ' - ';
-                    if (value === 404) {
-                        title += 'Page not found';
-                    } else {
-                        title += 'Server error';
-                    }
-                    layoutr.content.find('#error-title').html(title);
-                    layoutr.html.trigger('header-changed.responsiveHeader');
+        }).catch((response) => {
+            layoutr.load.html(layoutr.host + layoutr.ajax + 'pages/error.html').then((response2) => {
+                layoutr.content.html(response2);
+                layoutr.html.attr('data-status', 'error');
+                document.title = response + ' - ' + layoutr.siteName;
+                let title = response + ' - ';
+                if (response === 404) {
+                    title += 'Page not found';
                 } else {
-                    layoutr.showPopupAlert('Failed to load content html', 'danger');
+                    title += 'Server error';
                 }
+                layoutr.content.find('#error-title').html(title);
+                layoutr.html.trigger('header-changed.responsiveHeader');
+            }).catch((response) => {
+                layoutr.showPopupAlert('Failed to load content html', 'danger');
+            }).finally(() => {
                 layoutr.promiseCSS.then(() => {
                     layoutr.pageLoaded(initial);
                 });
             });
         });
+
         let historyUrl = (layoutr.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
         if (pushState) {
             window.history.pushState(null, null, historyUrl);
@@ -127,30 +120,30 @@
     };
 
     $(() => {
-        layoutr.left.find('> .content > div').load(layoutr.host + layoutr.ajax + 'layout/navigation.html', (response, status, xhr) => {
-            if (xhr.status === 200) {
-                layoutr.navigationTree = layoutr.left.find('.tree');
-                layoutr.navigation = JSON.parse(localStorage.getItem("navigation"));
-                if (layoutr.navigation === null) layoutr.navigation = [];
-                $.each(layoutr.navigation, (i, entry) => {
-                    layoutr.applyNavigation(entry.id, entry.value, false);
-                });
-                layoutr.navigationTree.on('change', 'input[type=checkbox]', (e) => {
-                    let checkbox = $(e.currentTarget),
-                        id = checkbox.attr('id'),
-                        value = checkbox.is(':checked');
-                    layoutr.applyNavigation(id, value, true);
-                });
-                layoutr.header.find('.aside.left').addClass('loaded');
-                if (layoutr.url && layoutr.url.p) {
-                    layoutr.navigationTree.find('a.label[href="' + layoutr.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
-                } else {
-                    layoutr.navigationTree.find('a.label[href=""]').addClass('active');
-                }
+        layoutr.load.html(layoutr.host + layoutr.ajax + 'layout/navigation.html').then(function (response) {
+            layoutr.left.find('> .content > div').html(response);
+            layoutr.navigationTree = layoutr.left.find('.tree');
+            layoutr.navigation = JSON.parse(localStorage.getItem("navigation"));
+            if (layoutr.navigation === null) layoutr.navigation = [];
+            $.each(layoutr.navigation, (i, entry) => {
+                layoutr.applyNavigation(entry.id, entry.value, false);
+            });
+            layoutr.navigationTree.on('change', 'input[type=checkbox]', (e) => {
+                let checkbox = $(e.currentTarget),
+                    id = checkbox.attr('id'),
+                    value = checkbox.is(':checked');
+                layoutr.applyNavigation(id, value, true);
+            });
+            layoutr.header.find('.aside.left').addClass('loaded');
+            if (layoutr.url && layoutr.url.p) {
+                layoutr.navigationTree.find('a.label[href="' + layoutr.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
             } else {
-                layoutr.showPopupAlert('Failed to load navigation html', 'danger');
+                layoutr.navigationTree.find('a.label[href=""]').addClass('active');
             }
+        }).catch(function () {
+            layoutr.showPopupAlert('Failed to load navigation html', 'danger');
         });
+
         if (layoutr.url && layoutr.url.p) {
             layoutr.loadPage(layoutr.url.p, true, true);
         } else {
@@ -175,4 +168,4 @@
             layoutr.navigationTree.find('input[type=checkbox]:checked').click();
         });
     });
-}());
+}

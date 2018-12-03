@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.guid = () => {
         let s4 = () => {
             return Math.floor((1 + Math.random()) * 0x10000)
@@ -129,4 +127,4 @@
     layoutr.isTrue = (str) => {
         return str === 'true';
     };
-}());
+}

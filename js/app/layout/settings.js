@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.applySettings = (id, name, type, value, set) => {
         if (set) {
             let entry = {
@@ -33,7 +31,6 @@
                 });
             }
             if (name === 'theme') {
-                debugger;
                 layoutr.loadTheme(id);
             }
             if (name === 'focus' && value) {
@@ -61,31 +58,30 @@
     };
 
     $(() => {
-        layoutr.right.find('> .content > div').load(layoutr.host + layoutr.ajax + 'layout/settings.html', (response, status, xhr) => {
-            if (xhr.status === 200) {
-                let $this = $(this);
-                layoutr.promiseCSS.then(() => {
-                    $.each(layoutr.settings, (i, entry) => {
-                        layoutr.applySettings(entry.id, entry.name, entry.type, entry.value, false);
-                    });
-                    layoutr.header.find('.aside.right').addClass('loaded');
-                    $this.on('change', 'input[type=checkbox], input[type=radio]', (e) => {
-                        let input = $(e.currentTarget),
-                            id = input.attr('id').replace('settings-', ''),
-                            name = input.attr('name').replace('settings-', ''),
-                            type = input.attr('type'),
-                            value = input.is(':checked');
-                        layoutr.applySettings(id, name, type, value, true);
-                        if (id === 'left-shrink' || id === 'right-shrink' ||
-                            id === 'left-push' || id === 'right-push' ||
-                            id === 'left-overlay' || id === 'right-overlay') {
-                            layoutr.setHtmlScroll();
-                        }
-                    });
+        layoutr.load.html(layoutr.host + layoutr.ajax + 'layout/settings.html').then((response) => {
+            let $this = layoutr.right.find('> .content > div');
+            $this.html(response);
+            layoutr.promiseCSS.then(() => {
+                $.each(layoutr.settings, (i, entry) => {
+                    layoutr.applySettings(entry.id, entry.name, entry.type, entry.value, false);
                 });
-            } else {
-                layoutr.showPopupAlert('Failed to load settings html', 'danger');
-            }
+                layoutr.header.find('.aside.right').addClass('loaded');
+                $this.on('change', 'input[type=checkbox], input[type=radio]', (e) => {
+                    let input = $(e.currentTarget),
+                        id = input.attr('id').replace('settings-', ''),
+                        name = input.attr('name').replace('settings-', ''),
+                        type = input.attr('type'),
+                        value = input.is(':checked');
+                    layoutr.applySettings(id, name, type, value, true);
+                    if (id === 'left-shrink' || id === 'right-shrink' ||
+                        id === 'left-push' || id === 'right-push' ||
+                        id === 'left-overlay' || id === 'right-overlay') {
+                        layoutr.setHtmlScroll();
+                    }
+                });
+            });
+        }).catch(() => {
+            layoutr.showPopupAlert('Failed to load settings html', 'danger');
         });
 
         layoutr.right.on('click', '#settings-clear-localstorage', () => {
@@ -93,4 +89,4 @@
             location.reload();
         });
     });
-}());
+}

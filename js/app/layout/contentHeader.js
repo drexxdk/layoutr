@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     $(() => {
         layoutr.html.on('model-check', () => {
             let contentHeader = layoutr.content.children('.content-header:not(.full)');
@@ -14,4 +12,4 @@
             }
         });
     });
-}());
+}

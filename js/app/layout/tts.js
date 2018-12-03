@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.clearSelection = () => {
         let selection = window.getSelection();
         selection.removeAllRanges();
@@ -168,4 +166,4 @@
             });
         }
     };
-}());
+}

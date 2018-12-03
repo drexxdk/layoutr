@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkMap = (maps) => {
         layoutr.head.find('script[src^="https://maps.googleapis.com/maps-api-"]').remove();
         if (maps.length) {
@@ -46,4 +44,4 @@
             layoutr.html.off('aside-changed.map');
         }
     };
-}(window));
+}

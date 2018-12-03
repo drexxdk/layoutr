@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.loadTheme = (id) => {
         let stylesheet = layoutr.head.children('link[rel="stylesheet"][href^="' + layoutr.host + 'dist/css/theme/"]'),
             href1 = stylesheet.attr('href'),
@@ -21,11 +19,11 @@
             layoutr.showLoading();
             layoutr.load.css(href2).then(() => {
                 stylesheet.remove()
-                layoutr.hideLoading();
             }).catch(() => {
-                layoutr.hideLoading();
                 layoutr.showPopupAlert('Failed to load theme', 'danger');
+            }).finally(() => {
+                layoutr.hideLoading();
             });
         }
     }
-}());
+}

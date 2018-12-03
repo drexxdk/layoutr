@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.showLoading = () => {
         layoutr.loadingCount++;
         layoutr.disableScroll();
@@ -15,4 +13,4 @@
             layoutr.setHtmlScroll();
         }
     };
-}());
+}

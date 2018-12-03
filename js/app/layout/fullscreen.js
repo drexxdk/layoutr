@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     var fullscreenScrollTop;
 
     layoutr.requestFullScreen = () => {
@@ -60,4 +58,4 @@
         else
             requestFullScreen(element);
     };
-}());
+}

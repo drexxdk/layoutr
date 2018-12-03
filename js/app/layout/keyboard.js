@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     $(() => {
         layoutr.body.on("keydown", (e) => {
             let target = $(e.target),
@@ -92,4 +90,4 @@
             }
         });
     });
-}());
+}

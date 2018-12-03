@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     var closeAlert = (target) => {
         target.fadeOut(layoutr.fadeOutTime, () => {
             let parent = target.parent();
@@ -18,4 +16,4 @@
             closeAlert(target);
         });
     });
-}());
+}

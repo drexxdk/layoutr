@@ -1,5 +1,4 @@
-﻿(function () {
-    "use strict";
+﻿{
     // Set this to your tracking ID
     var trackingId = 'UA-99633521-2';
 
@@ -79,4 +78,4 @@
                 console.warn('Unable to send the analytics event', err);
             });
     }
-}());
+}

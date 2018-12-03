@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     $(() => {
         if (bowser.msedge) {
             layoutr.html.addClass('msedge'); // used by layoutr.enableScroll()
@@ -53,4 +51,4 @@
             });
         }
     });
-}());
+}

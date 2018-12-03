@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkDatatable = (tables) => {
         if (tables.length) {
             if (!layoutr.html.hasClass('datatables-loaded')) {
@@ -14,13 +12,13 @@
                 let count = 0;
                 let spacing = 'space-3';
 
-                let table_header_input = (instance) => {
+                let table_header_input = function (instance) {
                     let columns = instance.columns().header();
                     let elements = jQuery.grep(columns, (e) => {
                         let column = $(e);
                         return column.hasClass('dropdown') || column.hasClass('text');
                     });
-                    instance.columns().every(() => {
+                    instance.columns().every(function () {
                         let th = this.header(),
                             text = th.innerText,
                             column = $(th),
@@ -173,7 +171,7 @@
                             }
                         ],
                         responsive: true,
-                        initComplete: (settings, json) => {
+                        initComplete: function (settings, json) {
                             let instance = this.api(),
                                 wrapper = $(settings.nTableWrapper);
 
@@ -206,7 +204,7 @@
                                 layoutr.hideLoading();
                             }
 
-                            $this.on('draw.dt', () => {
+                            $this.on('draw.dt', function () {
                                 paginateFix(paginate);
                                 let columns = instance.columns().responsiveHidden();
                                 $this.trigger('responsive-resize.dt', [this, columns]);
@@ -240,4 +238,4 @@
             layoutr.html.off('aside-changed.datatables');
         }
     };
-}());
+}

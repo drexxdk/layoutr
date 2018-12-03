@@ -24,9 +24,13 @@ const config = {
                 name: "app",
                 watch: 'js/**/*.js',
                 bundle: [
+                    // polyfills
                     'js/vendors/polyfills/promise.min.js',
+                    'js/vendors/polyfills/fetch.min.js',
+
+                    // vendors
                     'js/vendors/webfontloader.min.js',
-                    'js/vendors/jquery/jquery-3.1.1.min.js',
+                    'js/vendors/jquery/jquery-3.1.1.slim.min.js',
                     'js/vendors/jquery/validate/jquery.validate.min.js',
                     'js/vendors/jquery/jquery.lazy.min.js',
                     'js/vendors/jquery/tooltipster.min.js',

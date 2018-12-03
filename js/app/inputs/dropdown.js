@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkDropdown = (dropdowns) => {
         dropdowns.each((i, e) => {
             let $this = $(e),
@@ -103,4 +101,4 @@
             $('div.dropdown').removeClass('open');
         }
     });
-}());
+}

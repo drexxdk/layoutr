@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkAssignmentDragAndDrop = (assignment) => {
         if (assignment.hasClass('drag-and-drop')) {
             assignment.attr('data-moving', 0);
@@ -141,4 +139,4 @@
             });
         }
     };
-}());
+}

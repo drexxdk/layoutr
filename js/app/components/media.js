@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkMedia = (media) => {
         if (media.length) {
             if (!layoutr.html.hasClass('media-loaded')) {
@@ -23,4 +21,4 @@
             });
         }
     };
-}());
+}

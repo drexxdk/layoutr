@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkAccordion = (elements) => {
         elements.on("click", ".headline", (e) => {
             let content = $(e.currentTarget).next();
@@ -16,4 +14,4 @@
             }
         });
     };
-}());
+}

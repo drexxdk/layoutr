@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkMath = (math) => {
         if (math.length) {
             if (!layoutr.html.hasClass('math-loaded')) {
@@ -27,4 +25,4 @@
             });
         }
     };
-}());
+}

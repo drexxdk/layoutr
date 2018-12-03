@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkLazy = (elements) => {
         elements.lazy({
             afterLoad: (element) => {
@@ -8,4 +6,4 @@
             }
         });
     };
-}());
+};

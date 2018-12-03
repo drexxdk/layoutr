@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.enableSwipe = () => {
         if (bowser.android) {
             let xDown = null,
@@ -63,4 +61,4 @@
             document.addEventListener('touchend', handleTouchMove, false);
         }
     };
-}());
+}

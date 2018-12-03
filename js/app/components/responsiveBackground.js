@@ -1,7 +1,4 @@
-﻿(function () {
-    "use strict";
-
-    // responsive-background
+﻿{
     layoutr.checkResponsiveBackground = (elements) => {
         let setRb = (element) => {
             let image = element.attr('data-rb-image'),
@@ -92,4 +89,4 @@
         }
 
     };
-}());
+}

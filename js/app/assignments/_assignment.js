@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.getAssignmentItem = (items, id) => {
         return $($.map(items, (item) => {
             if (item.getAttribute("data-id") === id) {
@@ -31,4 +29,4 @@
             });
         }
     };
-}());
+}

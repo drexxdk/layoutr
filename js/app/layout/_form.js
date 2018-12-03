@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     $(() => {
         $.validator.setDefaults({
             submitHandler: () => {
@@ -36,4 +34,4 @@
             $(e.currentTarget).valid();
         });
     };
-}());
+}

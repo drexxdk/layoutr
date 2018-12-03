@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     let transitionLock = false;
 
     layoutr.asideChanged = () => {
@@ -65,4 +63,4 @@
             layoutr.toggleAside('right');
         });
     });
-}());
+}

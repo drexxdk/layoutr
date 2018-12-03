@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.checkAssignmentColor = (assignment) => {
         if (assignment.hasClass('color')) {
             let assignmentId = assignment.attr('data-id'),
@@ -101,4 +99,4 @@
             });
         };
     };
-}());
+}

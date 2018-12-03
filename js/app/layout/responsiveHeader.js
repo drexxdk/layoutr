@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     layoutr.responsiveHeader = () => {
         let h1 = layoutr.header.find('h1'),
             link = h1.children('a');
@@ -26,4 +24,4 @@
             check();
         });
     };
-}());
+}

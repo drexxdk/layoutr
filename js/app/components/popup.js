@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     $(() => {
         layoutr.body.on('click', '.show-popup-alert', (e) => {
             let $this = $(e.currentTarget),
@@ -32,4 +30,4 @@
             }
         }
     }
-}());
+}

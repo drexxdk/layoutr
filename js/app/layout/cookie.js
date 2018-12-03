@@ -1,6 +1,4 @@
-﻿(function () {
-    "use strict";
-
+﻿{
     $(() => {
         layoutr.cookie.on('click', '#cookie-accept', () => {
             localStorage.setItem('cookie', 'cookie');
@@ -12,4 +10,4 @@
             layoutr.html.addClass('cookie');
         }
     });
-}());
+}
