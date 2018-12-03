@@ -12,7 +12,7 @@
 
                         // Important success and error for the promise
                         element.onload = () => {
-                            resolve(true);
+                            resolve();
                         };
                         element.onerror = () => {
                             reject();

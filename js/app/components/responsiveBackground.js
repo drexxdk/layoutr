@@ -50,13 +50,12 @@
                     });
 
                     if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
-                        layoutr.body.append('<img id="rb" class="hidden" src="' + image + '-' + closestWidth + '.' + filetype + '" />');
-                        let tempImage = layoutr.body.children('#rb');
-                        tempImage.on('load', () => {
-                            tempImage.remove();
-                            let src = 'url(' + image + '-' + closestWidth + '.' + filetype + ')';
-                            element.css('background-image', src);
+                        let src = image + '-' + closestWidth + '.' + filetype;
+                        layoutr.load.img(src).then(() => {
+                            element.css('background-image', 'url(' + src + ')');
                             element.attr('data-rb-current', closestWidth);
+                        }).catch(() => {
+                            layoutr.showPopupAlert('Failed to load responsive background image', 'danger');
                         });
                     }
                 }
