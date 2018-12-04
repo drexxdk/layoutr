@@ -10,7 +10,7 @@
             }
             layoutr.promiseDatatables.then(() => {
                 let count = 0;
-                let spacing = 'space-3';
+                let gap = 'gap-3';
 
                 let table_header_input = function (instance) {
                     let columns = instance.columns().header();
@@ -83,7 +83,7 @@
                 let table_header_buttons = (wrapper, header) => {
                     let container = wrapper.find('.dt-buttons');
 
-                    container.append('<div class="flex column wrap ' + spacing + '"></div>');
+                    container.append('<div class="flex column wrap ' + gap + '"></div>');
 
                     let div = container.children('div'),
                         buttons = container.children('button');
@@ -175,13 +175,13 @@
                             let instance = this.api(),
                                 wrapper = $(settings.nTableWrapper);
 
-                            wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + spacing + '"></div></div>');
+                            wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + gap + '"></div></div>');
                             let header = wrapper.find('> .dataTables_header > div');
 
                             wrapper.append('<div class="dataTables_content table"></div>');
                             let content = wrapper.find('> .dataTables_content');
 
-                            wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + spacing + '"></div></div>');
+                            wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + gap + '"></div></div>');
                             let footer = wrapper.find('> .dataTables_footer > div');
 
                             table_header_input(instance);

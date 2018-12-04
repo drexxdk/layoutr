@@ -8,7 +8,7 @@
         @extend .flex;
         @extend .flex.column;
         @extend .flex.wrap;
-        @extend .flex.space-2;
+        @extend .flex.gap-2;
     }
 
     .radio,

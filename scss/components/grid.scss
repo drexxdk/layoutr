@@ -1,0 +1,29 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-grid {
+    .grid {
+        display: grid;
+
+        @for $i from 1 through 10 {
+            &.gap-#{$i} {
+                grid-gap: $spacer-base * $i;
+            }
+        }
+
+        @for $i from 1 through 50 {
+            $width: $i * 10;
+
+            &.fill-#{$width} {
+                grid-template-columns: repeat(auto-fill, minmax(rem($width), 1fr));
+            }
+
+            &.fit-#{$width} {
+                grid-template-columns: repeat(auto-fit, minmax(rem($width), 1fr));
+            }
+        }
+
+        &.center {
+            justify-items:center;
+        }
+    }
+}

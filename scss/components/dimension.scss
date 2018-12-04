@@ -1,0 +1,14 @@
+﻿
+@mixin layoutr-dimension {
+    @for $i from 1 through 50 {
+        $dimension: $i * 10;
+
+        &.width-#{$dimension} {
+            width: rem($dimension);
+        }
+
+        &.height-#{$dimension} {
+            height: rem($dimension);
+        }
+    }
+}

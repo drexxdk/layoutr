@@ -1,0 +1,69 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-flex {
+    .flex {
+        display: flex;
+
+        @for $i from 1 through 10 {
+            &.gap-#{$i} {
+                margin-top: -($spacer-base * $i);
+                margin-left: -($spacer-base * $i);
+
+                > * {
+                    margin-top: ($spacer-base * $i);
+                    margin-left: ($spacer-base * $i);
+                    max-width: calc(100% - #{$spacer-base * $i});
+                }
+            }
+
+            $width: $i * 100;
+
+            .basis-#{$width} {
+                flex-basis: rem($width);
+            }
+        }
+
+        &.no-spacing {
+            margin-top: 0;
+            margin-left: 0;
+
+            > * {
+                margin-top: 0;
+                margin-left: 0;
+                border-radius: 0;
+            }
+        }
+
+        &.vertical-center {
+            align-items: center;
+        }
+
+        &:not(.column) {
+            flex-direction: column;
+        }
+
+        &.column {
+            flex-direction: row;
+
+            &:not(.vertical-center) {
+                align-items: flex-start;
+            }
+        }
+
+        &.wrap {
+            flex-wrap: wrap;
+        }
+
+        &.grow > * {
+            flex-grow: 1;
+        }
+
+        &.center {
+            justify-content: center;
+
+            > * {
+                align-self: center;
+            }
+        }
+    }
+}
