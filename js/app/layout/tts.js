@@ -13,7 +13,7 @@
     };
 
     layoutr.enableTTS = () => {
-        if (bowser.desktop && !bowser.msie) {
+        if (bowser.desktop) {
             let snapSelectionToWord = () => {
                 let selection = window.getSelection();
                 if (!selection.isCollapsed) {

@@ -24,10 +24,6 @@ const config = {
                 name: "app",
                 watch: 'js/**/*.js',
                 bundle: [
-                    // polyfills
-                    'js/vendors/polyfills/promise.min.js',
-                    'js/vendors/polyfills/fetch.min.js',
-
                     // vendors
                     'js/vendors/webfontloader.min.js',
                     'js/vendors/jquery/jquery-3.1.1.slim.min.js',
@@ -40,17 +36,16 @@ const config = {
                     'js/vendors/bowser.js',
 
                     // layout
-                    'js/app/layout/_polyfill.js',
                     'js/app/layout/_variable.js',
                     'js/app/layout/_function.js',
                     'js/app/layout/_bowser.js',
-                    'js/app/layout/_form.js',
-                    'js/app/layout/load.js',
+                    'js/app/layout/_load.js',
+                    'js/app/layout/_app.js',
                     //'js/app/layout/service-worker-registration.js',
                     'js/app/layout/analytics-helper.js',
                     'js/app/layout/font.js',
-                    'js/app/layout/_app.js',
                     'js/app/layout/loaded.js',
+                    'js/app/layout/form.js',
                     'js/app/layout/fullscreen.js',
                     'js/app/layout/scroll.js',
                     'js/app/layout/loading.js',

@@ -1,4 +1,4 @@
-﻿/// <reference path="../references" />
+﻿/// <reference path="references" />
 
 * {
     margin: 0;
@@ -53,8 +53,7 @@ body {
             position: fixed;
         }
 
-        html.msedge:not(.footer-fixed).subpixel &,
-        html.msie:not(.footer-fixed).subpixel & {
+        html.msedge:not(.footer-fixed).subpixel & {
             &:after {
                 content: '';
                 position: fixed;

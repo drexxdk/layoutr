@@ -1,0 +1,20 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-common {
+    .hidden {
+        display: none !important;
+    }
+
+    div.cover {
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .math {
+        @include hidden;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+}

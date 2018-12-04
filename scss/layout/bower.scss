@@ -8,8 +8,6 @@ html.desktop .not-desktop,
 html.tablet .not-tablet,
 html.mobile .not-mobile,
 html.android .not-android,
-html.ios .not-ios,
-
-html.msie .not-msie {
+html.ios .not-ios {
     display: none !important;
 }

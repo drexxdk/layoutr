@@ -2,8 +2,6 @@
     $(() => {
         if (bowser.msedge) {
             layoutr.html.addClass('msedge'); // used by layoutr.enableScroll()
-        } else if (bowser.msie) {
-            layoutr.html.addClass('msie'); // not currently used for anything
         }
         if (bowser.mobile) {
             layoutr.html.addClass('mobile'); // disables fixed footer
@@ -19,7 +17,7 @@
             layoutr.html.addClass('ios'); // used to apply focus
         }
 
-        if (bowser.msie || bowser.msedge) {
+        if (bowser.msedge) {
             // disable smooth scrolling, since it causes element jumping/lagging on scroll
             // https://stackoverflow.com/questions/29416448/how-to-disable-smooth-scrolling-in-ie11
             layoutr.body.on("mousewheel", (e) => {

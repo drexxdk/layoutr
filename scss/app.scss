@@ -1,7 +1,6 @@
 ﻿@import "functions/functions";
 @import "mixins/mixins";
 @import "variables/variables";
-@import "base/base";
 @import "layout/layout";
 @import "inputs/inputs";
 @import "components/components";
@@ -17,6 +16,7 @@
 // components
 @include layoutr-accordion;
 @include layoutr-alert;
+@include layoutr-common;
 @include layoutr-dimension;
 @include layoutr-embed;
 @include layoutr-flex-table;

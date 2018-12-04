@@ -3,6 +3,7 @@
 @import "functions/functions";
 @import "mixins/mixins";
 @import "variables/variables";
+@import "reset";
 
 html {
     @media screen {
@@ -24,6 +25,19 @@ html {
 
     #site {
         display: none;
+    }
+
+    &.browser-not-supported body {
+        padding: $spacer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        ul {
+            margin-top: $spacer-2;
+            list-style-position: inside;
+        }
     }
 }
 

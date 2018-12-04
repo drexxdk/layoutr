@@ -1,4 +1,9 @@
 ﻿{
+    String.prototype.replaceAll = function (search, replacement) {
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+
     layoutr.guid = () => {
         let s4 = () => {
             return Math.floor((1 + Math.random()) * 0x10000)

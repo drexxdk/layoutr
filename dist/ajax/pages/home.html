@@ -117,7 +117,7 @@
                                 <li><b>Disabled</b>: Hides "Focus" button in header.</li>
                             </ul>
                         <li>
-                            <b>Text-to-speech (desktop, not msie)</b>
+                            <b>Text-to-speech (desktop)</b>
                             <ul>
                                 <li><b>Enabled</b>: Displays "Text to speech" toggle in header, that when enabled plays the text the user selects.</li>
                                 <li><b>Disabled</b>: Hides "Text to speech" button in header.</li>
@@ -175,7 +175,6 @@
                         <li><a href="https://plyr.io/" rel="noreferrer noopener">Plyr</a> is used to make audio/video players.</li>
                         <li><a href="https://aws.amazon.com/" rel="noreferrer noopener">Amazon AWS</a> is used for text-to-speech.</li>
                         <li><a href="https://github.com/ejbeaty/ChattyKathy" rel="noreferrer noopener">ChattyKathy</a> is used for text-to-speech.</li>
-                        <li><a href="https://github.com/taylorhakes/promise-polyfill" rel="noreferrer noopener">Promise Polyfill</a> is used to add Promise support for Internet Explorer 11.</li>
                         <li><a href="http://idangero.us/swiper/" rel="noreferrer noopener">Swiper</a> is used to make responsive touch slider</li>
                         <li>
                             <b>Gulp</b>
@@ -206,10 +205,6 @@
                     <ul class="list">
                         <li><b>Android Chrome</b> doesn't always display aside with correct height, because the browser sometimes calculates window height without adding the browser navigation bar to the calculation.</li>
                         <li><b>Android Firefox</b> requires double click on some elements that has :focus styling.</li>
-                        <li>
-                            <b>Internet Explorer 11</b> doesn't support containsNode and doesn't respect "-ms-user-select: none" if you select from an element without it to an element with it.<br />
-                            TTS is therefore disabled for that browser
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -222,56 +217,49 @@
                     <div id="browsers" class="flex column wrap center gap-2">
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-chrome"></use></svg>
-                            <div class="grid center">
+                            <div class="flex center">
                                 <b>Google</b>
                                 <span>Chrome</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-firefox"></use></svg>
-                            <div class="grid center">
+                            <div class="flex center">
                                 <b>Mozilla</b>
                                 <span>Firefox</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-edge"></use></svg>
-                            <div class="grid center">
+                            <div class="flex center">
                                 <b>Microsoft</b>
                                 <span>Edge</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
-                            <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-ie"></use></svg>
-                            <div class="grid center">
-                                <b>Microsoft</b>
-                                <span>Internet Explorer</span>
-                            </div>
-                        </div>
-                        <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-safari"></use></svg>
-                            <div class="grid center">
+                            <div class="flex center">
                                 <b>Apple</b>
                                 <span>Safari</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-opera"></use></svg>
-                            <div class="grid center">
+                            <div class="flex center">
                                 <b>Opera</b>
                                 <span>Opera</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-uc"></use></svg>
-                            <div class="grid center">
+                            <div class="flex center">
                                 <b>UCWeb</b>
                                 <span>UC Browser</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-internet"></use></svg>
-                            <div class="grid center">
+                            <div class="flex center">
                                 <b>Samsung</b>
                                 <span>Internet</span>
                             </div>
@@ -287,21 +275,21 @@
                 <div id="platforms" class="flex column wrap center gap-2">
                     <div class="grid center gap-2 width-130">
                         <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-windows"></use></svg>
-                        <div class="grid center">
+                        <div class="flex center">
                             <b>Microsoft</b>
                             <span>Windows</span>
                         </div>
                     </div>
                     <div class="grid center gap-2 width-130">
                         <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-android"></use></svg>
-                        <div class="grid center">
+                        <div class="flex center">
                             <b>Google</b>
                             <span>Android</span>
                         </div>
                     </div>
                     <div class="grid center gap-2 width-130">
                         <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-ios"></use></svg>
-                        <div class="grid center">
+                        <div class="flex center">
                             <b>Apple</b>
                             <span>macOS / iOS</span>
                         </div>
