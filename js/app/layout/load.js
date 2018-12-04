@@ -32,7 +32,10 @@
 
                         // Inject into document to kick off loading
                         element[attr] = url;
-                        document[parent].appendChild(element);
+
+                        if (tag === 'link' || tag === 'script') {
+                            document[parent].appendChild(element);
+                        }
                     } else if (tag === 'html') {
                         fetch(url).then((response) => {
                             if (response.status === 200) {
