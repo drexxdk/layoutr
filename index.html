@@ -10,7 +10,6 @@
 <head>
     <title>layoutr</title>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Dynamic website layout with all the features a modern website should have, that works in all browsers on all devices" />
     <meta name="msapplication-config" content="browserconfig.xml" />
@@ -20,7 +19,6 @@
     <link rel="shortcut icon" href="dist/img/favicon/favicon.ico">
     <link rel="manifest" href="manifest.json">
     <link href="dist/css/initial.css" rel="stylesheet" />
-    <script src="dist/js/app.js" async defer></script>
 </head>
 <body>
     <div id="loading">
@@ -236,11 +234,6 @@
             <footer></footer>
         </main>
     </div>
-    <script>
-        if (window.navigator.userAgent.indexOf("MSIE") !== -1 || navigator.userAgent.match(/Trident\/7\./)) {
-            document.documentElement.classList.add('browser-not-supported');
-            document.getElementsByTagName("body")[0].innerHTML = '<main><h1>Internet Explorer is not supported</h1><ul><li>Open Microsoft Edge</li><li><a href="https://www.google.com/chrome/">Download Google Chrome</a></li><li><a href="https://www.mozilla.org/firefox">Download Mozilla Firefox</a></li></ul></main>';
-        }
-    </script>
+    <script src="dist/js/app.js" async defer></script>
 </body>
 </html>

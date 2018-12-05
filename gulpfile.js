@@ -24,6 +24,8 @@ const config = {
                 name: "app",
                 watch: 'js/**/*.js',
                 bundle: [
+                    'js/app/layout/_browser.js',
+
                     // vendors
                     'js/vendors/webfontloader.min.js',
                     'js/vendors/jquery/jquery-3.1.1.slim.min.js',
