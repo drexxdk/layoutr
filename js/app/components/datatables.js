@@ -12,7 +12,7 @@
                 let count = 0;
                 let gap = 'gap-3';
 
-                let table_header_input = function (instance) {
+                let table_header_input = (instance) => {
                     let columns = instance.columns().header();
                     let elements = jQuery.grep(columns, (e) => {
                         let column = $(e);
@@ -46,8 +46,14 @@
                         } else if (column.hasClass('text')) {
                             let input = $('<input type="text" />')
                                 .appendTo(column.find('> div > div:last-child'))
-                                .on('keyup change', (e) => {
-                                    instance.column(index).search(e.currentTarget.value).draw();
+                                .on('keyup', (e) => {
+                                    let $this = $(e.currentTarget),
+                                        val = $this.val();
+                                    
+                                    if ($this.attr('data-last') != val) {
+                                        instance.column(index).search(val).draw();
+                                    }
+                                    $this.attr('data-last', val);
                                 });
                             input.parent().addClass('form-group');
                         }
@@ -171,8 +177,8 @@
                             }
                         ],
                         responsive: true,
-                        initComplete: function (settings, json) {
-                            let instance = this.api(),
+                        initComplete: (settings) => {
+                            let instance = settings.oInstance.api(true),
                                 wrapper = $(settings.nTableWrapper);
 
                             wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + gap + '"></div></div>');
@@ -204,10 +210,9 @@
                                 layoutr.hideLoading();
                             }
 
-                            $this.on('draw.dt', function () {
-                                paginateFix(paginate);
+                            $this.on('draw.dt', () => {
                                 let columns = instance.columns().responsiveHidden();
-                                $this.trigger('responsive-resize.dt', [this, columns]);
+                                $this.trigger('responsive-resize.dt', [table[0], columns]);
                             });
 
                             layoutr.html.on('aside-changed.datatables', () => {
