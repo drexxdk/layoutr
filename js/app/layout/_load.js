@@ -1,9 +1,7 @@
 ﻿{
     layoutr.load = (() => {
-        // Function which returns a function: https://davidwalsh.name/javascript-functions
         let _load = (tag) => {
             return (url) => {
-                // This promise will be used by Promise.all to determine success or failure
                 return new Promise((resolve, reject) => {
                     if (tag === 'link' || tag === 'script' || tag === 'img') {
                         let element = document.createElement(tag);

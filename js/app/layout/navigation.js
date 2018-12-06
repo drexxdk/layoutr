@@ -136,7 +136,7 @@
             });
             layoutr.header.find('.aside.left').addClass('loaded');
             if (layoutr.url && layoutr.url.p) {
-                layoutr.navigationTree.find('a.label[href="' + layoutr.url.p.replace(/^\/+/g, '') + '"]').addClass('active');
+                layoutr.navigationTree.find('a.label[href="' + layoutr.url.p + '"]').addClass('active');
             } else {
                 layoutr.navigationTree.find('a.label[href=""]').addClass('active');
             }
