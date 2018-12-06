@@ -6,35 +6,26 @@
                 // This promise will be used by Promise.all to determine success or failure
                 return new Promise((resolve, reject) => {
                     if (tag === 'link' || tag === 'script' || tag === 'img') {
-                        var element = document.createElement(tag);
-                        var parent = 'body';
-                        var attr = 'src';
-
-                        // Important success and error for the promise
+                        let element = document.createElement(tag);
+                        
                         element.onload = () => {
+                            if (tag === 'img') {
+                                document['body'].removeChild(element);
+                            }
                             resolve();
                         };
                         element.onerror = () => {
                             reject();
                         };
-
-                        // Need to set different attributes depending on tag type
-                        switch (tag) {
-                            case 'script':
-                                element.async = true;
-                                break;
-                            case 'link':
-                                element.type = 'text/css';
-                                element.rel = 'stylesheet';
-                                attr = 'href';
-                                parent = 'head';
-                        }
-
-                        // Inject into document to kick off loading
-                        element[attr] = url;
-
-                        if (tag === 'link' || tag === 'script') {
-                            document[parent].appendChild(element);
+                        if (tag === 'link') {
+                            element.type = 'text/css';
+                            element.rel = 'stylesheet';
+                            element['href'] = url;
+                            document['head'].appendChild(element);
+                        } else if (tag === 'script' || tag === 'img') {
+                            element.async = true;
+                            element['src'] = url;
+                            document['body'].appendChild(element);
                         }
                     } else if (tag === 'html') {
                         fetch(url).then((response) => {
