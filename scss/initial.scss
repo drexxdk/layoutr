@@ -3,7 +3,6 @@
 @import "functions/functions";
 @import "mixins/mixins";
 @import "variables/variables";
-@import "reset";
 
 html {
     @media screen {
@@ -24,20 +23,34 @@ html {
     }
 
     #site {
-        display: none;
+        visibility: hidden;
+        opacity: 0;
     }
 
-    &.browser-not-supported body {
-        padding: $spacer;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    &.browser-not-supported {
+        height: 100%;
 
-        ul {
-            margin-top: $spacer-2;
-            list-style-position: inside;
-            font-size: 20px;
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: $font-family-sans-serif;
+            padding: $spacer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+
+            h1 {
+                margin: 0;
+            }
+
+            ul {
+                margin-top: $spacer-2;
+                padding: 0;
+                list-style-position: inside;
+                font-size: 20px;
+            }
         }
     }
 }

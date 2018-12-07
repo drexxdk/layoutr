@@ -1,6 +1,7 @@
 ﻿@import "functions/functions";
 @import "mixins/mixins";
 @import "variables/variables";
+@import "reset";
 @import "layout/layout";
 @import "inputs/inputs";
 @import "components/components";
@@ -41,19 +42,21 @@
 @include layoutr-sort;
 
 html {
-    &.wf-active.site-loaded,
-    &.wf-inactive.site-loaded {
-        body {
-            overflow: visible;
-            background-color: $layout-background-color;
 
-            @include breakpoint-main-min-width {
-                background-color: $body-background-color;
-            }
+    body {
+        background-color: $layout-background-color;
+        overflow: visible;
+
+        @include breakpoint-main-min-width {
+            background-color: $body-background-color;
         }
+    }
 
+    &.site-loaded,
+    &.site-loaded {
         #site {
-            display: block;
+            visibility: visible;
+            opacity: 1;
         }
     }
 }

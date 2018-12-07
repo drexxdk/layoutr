@@ -5,7 +5,7 @@
                 return new Promise((resolve, reject) => {
                     if (tag === 'link' || tag === 'script' || tag === 'img') {
                         let element = document.createElement(tag);
-                        
+
                         element.onload = () => {
                             if (tag === 'img') {
                                 document['body'].removeChild(element);
@@ -23,6 +23,9 @@
                         } else if (tag === 'script' || tag === 'img') {
                             element.async = true;
                             element['src'] = url;
+                            if (tag === 'img') {
+                                element.className = 'hidden';
+                            }
                             document['body'].appendChild(element);
                         }
                     } else if (tag === 'html') {

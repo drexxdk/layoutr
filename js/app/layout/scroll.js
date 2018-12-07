@@ -54,25 +54,12 @@
         scrollbarWidth();
     });
 
-    $(window).resize($.throttle(layoutr.throttleInterval, false, () => {
-        layoutr.checkModal();
-        layoutr.setHtmlScroll();
-        scrollbarWidth();
-        setScrollTop();
-    }));
-
-    var setScrollTop = () => {
-        let scrollTop = layoutr.scrollTop();
-
+    layoutr.setScrollTop = () => {
         let entry = {
             href: window.location.href,
-            scrollTop: scrollTop
+            scrollTop: layoutr.scrollTop()
         };
-
         localStorage.setItem('scroll', JSON.stringify(entry));
     };
 
-    $(window).scroll($.throttle(layoutr.throttleInterval, false, () => {
-        setScrollTop();
-    }));
 }

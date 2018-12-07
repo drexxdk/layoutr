@@ -31,15 +31,40 @@
 
             if (initial) {
                 layoutr.promiseFont.then(() => {
-                    layoutr.hideLoading();
-                    layoutr.html.addClass('site-loaded');
                     layoutr.responsiveHeader();
                     layoutr.contentLoaded(layoutr.content);
                     let scroll = JSON.parse(localStorage.getItem("scroll"));
-                    if (scroll !== null && window.location.href === scroll.href) {
-                        layoutr.body.scrollTop(layoutr.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.body[0].scrollHeight); // edge, safari
-                        layoutr.html.scrollTop(layoutr.html[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.html[0].scrollHeight); // chrome, firefox, ie
-                    }
+                    layoutr.enableScroll();
+                    new Promise((resolve, reject) => {
+                        if (scroll !== null && window.location.href === scroll.href) {
+                            let scrollTop = layoutr.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.body[0].scrollHeight;
+                            let count = 0;
+                            let awaitInterval = setInterval(() => {
+                                if (layoutr.body.scrollTop() === scrollTop || layoutr.html.scrollTop() === scrollTop || count === 10) {
+                                    clearInterval(awaitInterval);
+                                    resolve();
+                                } else {
+                                    count++;
+                                    layoutr.body.scrollTop(scrollTop);
+                                    layoutr.html.scrollTop(scrollTop);
+                                }
+                            }, 10);
+                        } else {
+                            resolve();
+                        }
+                    }).finally(() => {
+                        layoutr.hideLoading();
+                        layoutr.html.addClass('site-loaded');
+                        $(window).scroll($.throttle(layoutr.throttleInterval, false, () => {
+                            layoutr.setScrollTop();
+                        }));
+
+                        $(window).resize($.throttle(layoutr.throttleInterval, false, () => {
+                            layoutr.checkModal();
+                            layoutr.setHtmlScroll();
+                            layoutr.setScrollTop();
+                        }));
+                    });
                 });
             } else {
                 layoutr.hideLoading();
