@@ -9,16 +9,20 @@
                 }
             } else {
                 if (e.which === 37 && !layoutr.isFocus() && !layoutr.isModal()) { // left
-                    if (layoutr.isAsideLeft()) {
-                        layoutr.toggleAside(); // closes right
-                    } else if (!layoutr.isAsideRight()) {
-                        layoutr.toggleAside('right'); // opens right
+                    if (!layoutr.arrowKeyLocked) {
+                        if (layoutr.isAsideLeft()) {
+                            layoutr.toggleAside(); // closes right
+                        } else if (!layoutr.isAsideRight()) {
+                            layoutr.toggleAside('right'); // opens right
+                        }
                     }
                 } else if (e.which === 39 && !layoutr.isFocus() && !layoutr.isModal()) { // right
-                    if (layoutr.isAsideRight()) {
-                        layoutr.toggleAside(); // closes left
-                    } else if (!layoutr.isAsideLeft()) {
-                        layoutr.toggleAside('left'); // opens left
+                    if (!layoutr.arrowKeyLocked) {
+                        if (layoutr.isAsideRight()) {
+                            layoutr.toggleAside(); // closes left
+                        } else if (!layoutr.isAsideLeft()) {
+                            layoutr.toggleAside('left'); // opens left
+                        }
                     }
                 } else if (e.which === 27) { // esc
                     e.stopPropagation();

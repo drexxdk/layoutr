@@ -15,6 +15,7 @@
     layoutr.document = document.documentElement;
     layoutr.fullscreen = false;
     layoutr.ajax = 'dist/ajax/';
+    layoutr.arrowKeyLocked = false;
 
     layoutr.navigation = [];
     bowser.desktop = !bowser.mobile && !bowser.tablet;

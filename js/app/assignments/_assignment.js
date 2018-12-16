@@ -23,10 +23,16 @@
                     layoutr.checkAssignmentSort(assignment);
                     layoutr.checkAssignmentDragAndDrop(assignment);
                     layoutr.checkAssignmentColor(assignment);
+                    layoutr.checkAssignmentPuzzle(assignment);
                 });
-            }).catch(() => {
+            }).catch((e) => {
+                debugger;
                 layoutr.showPopupAlert('Failed to load assignment', 'danger');
             });
+        } else {
+            layoutr.arrowKeyLocked = false;
+            $(window).unbind('resize.assignmentSort');
+            layoutr.body.on('keydown.assignmentPuzzle');
         }
     };
 }

@@ -1,6 +1,8 @@
 ﻿{
     layoutr.checkAssignmentSort = (assignment) => {
         if (assignment.hasClass('sort')) {
+            $(window).unbind('resize.assignmentSort');
+
             let id = assignment.attr('data-id'),
                 container = assignment.find('.container'),
                 items = assignment.find('.item');
@@ -66,7 +68,7 @@
                 reset();
             });
 
-            function insertAtIndex(i, item) {
+            let insertAtIndex = (i, item) => {
                 if (i === 0) {
                     container.prepend(item);
                 } else {
@@ -84,8 +86,6 @@
                     insertAtIndex(i, item);
                 });
             });
-        } else {
-            $(window).unbind('resize.assignmentSort');
         }
     };
 }

@@ -1,0 +1,39 @@
+﻿
+@mixin layoutr-puzzle {
+    .assignment.puzzle {
+
+        .content {
+            position: relative;
+            overflow: auto;
+
+            .item {
+                display: flex;
+                position: absolute;
+                font-size: 0;
+                cursor: pointer;
+                overflow: hidden;
+                border: 2px solid transparent;
+                border-radius: 12px;
+
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    border: 2px solid black;
+                    border-radius: 10px;
+                }
+
+                > div {
+                    position: absolute;
+                    background-size: cover;
+                    background-position: center;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
