@@ -7,7 +7,7 @@
                 tiles = layoutr.tryParseInt(assignment.attr('data-tiles'), 0),
                 size = layoutr.tryParseInt(assignment.attr('data-size'), 0),
                 random = layoutr.tryParseInt(assignment.attr('data-random'), 3),
-                tile = size / tiles,
+                tile = 100 / tiles,
                 total = tiles * tiles - 1,
                 content = assignment.find('.content'),
                 positions = [],
@@ -15,6 +15,7 @@
                 current,
                 movingItem = false,
                 correct = [],
+                transitionTime = 100,
                 directions = {
                     up: 'up',
                     down: 'down',
@@ -33,10 +34,13 @@
             };
 
             content.css({
-                'width': size + 'px',
-                'height': size + 'px'
+                'width': '100%',
+                'height': '100%',
+                'max-width': size + 'px',
+                'max-height': size + 'px'
             });
-
+            content.append('<div></div>');
+            content = content.children();
             let setPositions = () => {
                 positions = [];
                 let count = 0;
@@ -57,18 +61,20 @@
                 content.empty();
                 for (let i = 0; i < total; i++) {
                     content.append('<div class="item" data-id="' + positions[i].id + '" ' +
+                        'data-top="' + positions[i].top + '" ' +
+                        'data-left="' + positions[i].left + '" ' +
                         'style="' +
-                        'width: ' + tile + 'px; ' +
-                        'height: ' + tile + 'px; ' +
-                        'top: ' + positions[i].top * tile + 'px; ' +
-                        'left: ' + positions[i].left * tile + 'px; ' +
+                        'width: ' + tile + '%; ' +
+                        'height: ' + tile + '%; ' +
+                        'top: ' + (positions[i].top * tile) + '%; ' +
+                        'left: ' + (positions[i].left * tile) + '%; ' +
                         '">' +
                         '<div style="' +
-                        'width: ' + size + 'px; ' +
-                        'height: ' + size + 'px; ' +
+                        'width: ' + tiles * 100 + '%; ' +
+                        'height: ' + tiles * 100 + '%; ' +
                         'background-image: url(' + image + '); ' +
-                        'margin-left: -' + positions[i].left * tile + 'px; ' +
-                        'margin-top: -' + positions[i].top * tile + 'px; ' +
+                        'margin-left: -' + (positions[i].left * tile) * tiles + '%; ' +
+                        'margin-top: -' + (positions[i].top * tile) * tiles + '%; ' +
                         '"></div>' +
                         '</div>');
                 }
@@ -85,30 +91,26 @@
                     let item = $(items[i]);
                     correct.push({
                         'id': item.attr('data-id'),
-                        'top': item.css('top'),
-                        'left': item.css('left')
+                        'top': item.attr('data-top'),
+                        'left': item.attr('data-left')
                     });
                 });
             };
 
             let getItem = (direction) => {
-                let top,
-                    left;
+                let top = current.top,
+                    left = current.left;
 
                 if (direction === directions.up) {
-                    top = (current.top * tile + tile) + 'px';
-                    left = current.left * tile + 'px';
+                    top = current.top + 1;
                 } else if (direction === directions.down) {
-                    top = (current.top * tile - tile) + 'px';
-                    left = current.left * tile + 'px';
+                    top = current.top - 1;
                 } else if (direction === directions.left) {
-                    top = current.top * tile + 'px';
-                    left = (current.left * tile + tile) + 'px';
+                    left = current.left + 1;
                 } else if (direction === directions.right) {
-                    top = current.top * tile + 'px';
-                    left = (current.left * tile - tile) + 'px';
+                    left = current.left - 1;
                 }
-                return content.find('.item[style*="top: ' + top + '; left: ' + left + ';"]');
+                return content.find('.item[data-top="' + top + '"][data-left="' + left + '"]');
             };
 
             let moveItem = (item, direction, transition = false) => {
@@ -117,43 +119,67 @@
                     if (direction === directions.up) {
                         // move up
                         item.animate({
-                            top: (current.top * tile) + 'px'
-                        }, transition ? layoutr.transitionTime : 0, function () {
+                            top: (current.top * tile) + '%'
+                        }, transition ? transitionTime : 0, function () {
                             movingItem = false;
+                            item.attr('data-top', parseInt(item.attr('data-top')) - 1);
                             current.top++;
+                            setMovable();
                             resolve();
                         });
                     } else if (direction === directions.down) {
                         // move down
                         item.animate({
-                            top: (current.top * tile) + 'px'
-                        }, transition ? layoutr.transitionTime : 0, function () {
+                            top: (current.top * tile) + '%'
+                        }, transition ? transitionTime : 0, function () {
                             movingItem = false;
+                            item.attr('data-top', parseInt(item.attr('data-top')) + 1);
                             current.top--;
+                            setMovable();
                             resolve();
                         });
                     } else if (direction === directions.left) {
                         // move left
                         item.animate({
-                            left: (current.left * tile) + 'px'
-                        }, transition ? layoutr.transitionTime : 0, function () {
+                            left: (current.left * tile) + '%'
+                        }, transition ? transitionTime : 0, function () {
                             movingItem = false;
+                            item.attr('data-left', parseInt(item.attr('data-left')) - 1);
                             current.left++;
+                            setMovable();
                             resolve();
                         });
                     } else if (direction === directions.right) {
                         // move right
                         item.animate({
-                            left: (current.left * tile) + 'px'
-                        }, transition ? layoutr.transitionTime : 0, function () {
+                            left: (current.left * tile) + '%'
+                        }, transition ? transitionTime : 0, function () {
                             movingItem = false;
+                            item.attr('data-left', parseInt(item.attr('data-left')) + 1);
                             current.left--;
+                            setMovable();
                             resolve();
                         });
                     }
                 });
 
             };
+
+            let setMovable = () => {
+                items.removeClass('movable');
+                if (current.top !== 0) {
+                    getItem(directions.down).addClass('movable');
+                }
+                if (current.top !== tiles - 1) {
+                    getItem(directions.up).addClass('movable');
+                }
+                if (current.left !== 0) {
+                    getItem(directions.right).addClass('movable');
+                }
+                if (current.left !== tiles - 1) {
+                    getItem(directions.left).addClass('movable');
+                }
+            }
 
             let lastMove;
             let setRandom = () => {
@@ -175,7 +201,6 @@
                     // can go left
                     direction.push(directions.left);
                 }
-
                 shuffle(direction);
 
                 direction = direction[0];
@@ -195,8 +220,8 @@
 
                     modified.item = $(e);
                     modified.id = modified.item.attr('data-id');
-                    modified.top = modified.item.css('top');
-                    modified.left = modified.item.css('left');
+                    modified.top = modified.item.attr('data-top');
+                    modified.left = modified.item.attr('data-left');
 
                     let original = $.grep(correct, (item) => {
                         return item.id === modified.id;
@@ -222,25 +247,25 @@
 
             init();
 
-            items.click((e) => {
+            assignment.on('click', '.item.movable', (e) => {
                 if (!assignment.hasClass('validated') && !movingItem) {
                     let item = $(e.target),
-                        top = item.css('top'),
-                        left = item.css('left');
+                        top = parseInt(item.attr('data-top')),
+                        left = parseInt(item.attr('data-left'));
 
-                    if (top === (current.top * tile + tile) + 'px' && left === current.left * tile + 'px') {
+                    if (top === current.top + 1 && left === current.left) {
                         moveItem(item, directions.up, true).then(() => {
                             checkSolved();
                         });
-                    } else if (top === (current.top * tile - tile) + 'px' && left === current.left * tile + 'px') {
+                    } else if (top === current.top - 1 && left === current.left) {
                         moveItem(item, directions.down, true).then(() => {
                             checkSolved();
                         });
-                    } else if (top === current.top * tile + 'px' && left === (current.left * tile + tile) + 'px') {
+                    } else if (top === current.top && left === current.left + 1) {
                         moveItem(item, directions.left, true).then(() => {
                             checkSolved();
                         });
-                    } else if (top === current.top * tile + 'px' && left === (current.left * tile - tile) + 'px') {
+                    } else if (top === current.top && left === current.left - 1) {
                         moveItem(item, directions.right, true).then(() => {
                             checkSolved();
                         });
@@ -250,7 +275,7 @@
 
             layoutr.body.on('keydown.assignmentPuzzle', (e) => {
                 if (!assignment.hasClass('validated') && !movingItem) {
-                    if (e.keyCode === 38 && current - top !== tiles - 1) {
+                    if (e.keyCode === 38 && current.top !== tiles - 1) {
                         e.preventDefault();
                         moveItem(getItem(directions.up), directions.up, true).then(() => {
                             checkSolved();
