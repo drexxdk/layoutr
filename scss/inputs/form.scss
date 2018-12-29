@@ -12,7 +12,7 @@
     div.dropdown > div {
         color: $color;
         fill: $color;
-        background: theme-gradient($background-light);
+        background: theme-gradient-vertical($background-light);
         border-color: $border;
 
         &:focus {
@@ -25,7 +25,7 @@
     .switch input {
 
         & + label > i {
-            background: theme-gradient($background-light);
+            background: theme-gradient-vertical($background-light);
         }
 
         &:not(:checked) + label > i {
@@ -34,7 +34,7 @@
 
         &:checked + label > i {
             border-color: $background-dark;
-            background: theme-gradient($background-dark);
+            background: theme-gradient-vertical($background-dark);
         }
 
         html.desktop & + label:focus > i {

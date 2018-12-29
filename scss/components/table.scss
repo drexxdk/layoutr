@@ -5,8 +5,12 @@
         overflow: auto;
 
         @each $color, $value in $theme-colors {
-            &.theme-#{$color} table thead th {
+            &:not(.flipped).theme-#{$color} table thead th {
                 @include theme-element($value, false);
+            }
+
+            &.flipped.theme-#{$color} table thead th {
+                @include theme-element-darken($value, false, false, true);
             }
         }
 
@@ -29,7 +33,7 @@
             }
 
             tbody tr:nth-child(even) {
-                th, 
+                th,
                 td {
                     background-color: $table-td-background-color;
                 }
@@ -47,7 +51,6 @@
         }
 
         &.flipped {
-
             &.expand-width {
                 table tbody {
                     width: 100%;

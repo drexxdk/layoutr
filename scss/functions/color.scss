@@ -30,8 +30,12 @@
     @return theme-color-level($value, 8)
 }
 
-@function theme-gradient($value) {
+@function theme-gradient-vertical($value) {
     @return $value linear-gradient(180deg, mix($body-background-color, $value, 15%), $value) repeat-x;
+}
+
+@function theme-gradient-horizontal($value) {
+    @return $value linear-gradient(90deg, mix($body-background-color, $value, 15%), $value) repeat-x;
 }
 
 @function yiq($color) {

@@ -43,7 +43,7 @@
                     html.desktop &.btn.theme-#{$color}:focus {
                         $active-background: darken($value, 7.5%);
                         @include color-yiq($active-background);
-                        background: theme-gradient($active-background);
+                        background: theme-gradient-vertical($active-background);
                         box-shadow: none;
                     }
                 }

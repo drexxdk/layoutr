@@ -62,7 +62,7 @@
                 }
 
                 .label:not(.active):hover {
-                    background: theme-gradient($tree-hover-background-color);
+                    background: theme-gradient-vertical($tree-hover-background-color);
                 }
             }
         }
