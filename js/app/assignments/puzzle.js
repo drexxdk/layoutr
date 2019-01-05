@@ -6,10 +6,10 @@
                 image = assignment.attr('data-image'),
                 tiles = layoutr.tryParseInt(assignment.attr('data-tiles'), 0),
                 size = layoutr.tryParseInt(assignment.attr('data-size'), 0),
-                random = layoutr.tryParseInt(assignment.attr('data-random'), 3),
+                domRandom = layoutr.tryParseInt(assignment.attr('data-random'), 3),
                 tile = 100 / tiles,
                 total = tiles * tiles - 1,
-                content = assignment.find('.content'),
+                domContent = assignment.find('.content'),
                 positions = [],
                 items,
                 current,
@@ -21,7 +21,9 @@
                     down: 'down',
                     left: 'left',
                     right: 'right'
-                };
+                },
+                domStart = assignment.find('button[type = "submit"]'),
+                domReset = assignment.find('button[type="reset"]');
 
             layoutr.arrowKeyLocked = true;
 
@@ -33,14 +35,14 @@
                 return array;
             };
 
-            content.css({
+            domContent.css({
                 'width': '100%',
                 'height': '100%',
                 'max-width': size + 'px',
                 'max-height': size + 'px'
             });
-            content.append('<div></div>');
-            content = content.children();
+            domContent.append('<div></div>');
+            domContent = domContent.children();
             let setPositions = () => {
                 positions = [];
                 let count = 0;
@@ -58,9 +60,9 @@
             };
 
             let setItems = () => {
-                content.empty();
+                domContent.empty();
                 for (let i = 0; i < total; i++) {
-                    content.append('<div class="item" data-id="' + positions[i].id + '" ' +
+                    domContent.append('<div class="item" data-id="' + positions[i].id + '" ' +
                         'data-top="' + positions[i].top + '" ' +
                         'data-left="' + positions[i].left + '" ' +
                         'style="' +
@@ -78,7 +80,7 @@
                         '"></div>' +
                         '</div>');
                 }
-                items = content.children();
+                items = domContent.children();
             };
 
             let setCurrent = () => {
@@ -110,7 +112,7 @@
                 } else if (direction === directions.right) {
                     left = current.left - 1;
                 }
-                return content.find('.item[data-top="' + top + '"][data-left="' + left + '"]');
+                return domContent.find('.item[data-top="' + top + '"][data-left="' + left + '"]');
             };
 
             let moveItem = (item, direction, transition = false) => {
@@ -181,7 +183,8 @@
                 }
             }
 
-            let lastMove;
+            let lastMove,
+                random;
             let setRandom = () => {
                 let direction = [];
 
@@ -205,7 +208,7 @@
 
                 direction = direction[0];
                 lastMove = direction;
-                moveItem(getItem(direction), direction, true).then(() => {
+                moveItem(getItem(direction), direction, false).then(() => {
                     random--;
                     if (random > 0) {
                         setRandom();
@@ -233,7 +236,7 @@
                     }
                 });
                 if (solved) {
-                    alert('todo: solved');
+                    domContent.append('<div class="correct">Correct</div>');
                 }
             };
 
@@ -242,10 +245,12 @@
                 setItems();
                 setCurrent();
                 setCorrect();
+
+                lastMove = undefined;
+                random = domRandom;
+
                 setRandom();
             };
-
-            init();
 
             assignment.on('click', '.item.movable', (e) => {
                 if (!assignment.hasClass('validated') && !movingItem) {
@@ -299,26 +304,16 @@
                 }
             });
 
-            assignment.on('click', 'button[type="submit"]', () => {
-                if (!assignment.hasClass('validated') && !movingItem) {
-                    assignment.addClass('validated');
-                    checkSolved();
-                }
+            domStart.click(() => {
+                init();
+                domStart.addClass('hidden');
+                domReset.removeClass('hidden');
             });
 
-            assignment.on('click', 'button[type="reset"]', () => {
+            domReset.click(() => {
                 if (!movingItem) {
-                    assignment.removeClass('validated');
-                    alert('todo: reset');
-                    // set reset
-                }
-            });
-
-            assignment.on('click', 'button.correct', () => {
-                if (!movingItem) {
-                    assignment.addClass('validated');
-                    alert('todo: correct');
-                    // set correct
+                    init();
+                    domContent.children('.correct').remove();
                 }
             });
         } else {
