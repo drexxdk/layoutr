@@ -59,10 +59,12 @@
         }
 
         &.center {
-            justify-content: center;
+            &.column {
+                justify-content: center;
+            }
 
-            > * {
-                align-self: center;
+            &:not(.column) {
+                align-items: center;
             }
         }
     }

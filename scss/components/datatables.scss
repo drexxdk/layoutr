@@ -153,14 +153,13 @@ table.dataTable {
                             z-index: 1;
                             width: $font-size;
                             height: $font-size;
-                            @include button-transition(all);
                             transform: translateY(-50%);
                             border-radius: 50%;
                             @include theme-element($primary);
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            @include button-transition(all);
+                            @include transition;
 
                             &:focus {
                                 @include focus;

@@ -8,3 +8,4 @@ Properties/
 *.csproj.user
 dist/css/theme/light.css
 node_modules/
+package-lock.json

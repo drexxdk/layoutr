@@ -3,28 +3,28 @@
 html.transitions {
     #left,
     #right {
-        transition: transform $transition-time $transition-timing;
+        @include transition(transform);
     }
 
     header,
     #content, /* #content doesn't support hardware acceleration */
     footer {
-        transition: margin $transition-time $transition-timing, left $transition-time $transition-timing, right $transition-time $transition-timing;
+        @include transitions(margin, left, right);
     }
 
     #content > div > .content-header {
-        transition: left $transition-time $transition-timing, margin-right $transition-time $transition-timing, padding-right $transition-time $transition-timing;
+        @include transitions(left, margin-right, padding-right);
     }
 
     .popup[data-position*="left"] {
-        transition: left $transition-time $transition-timing;
+        @include transition(left);
     }
 
     .popup[data-position*="center"] {
-        transition: left $transition-time $transition-timing, right $transition-time $transition-timing;
+        @include transitions(left, right);
     }
 
     .popup[data-position*="right"] {
-        transition: right $transition-time $transition-timing;
+        @include transition(right);
     }
 }

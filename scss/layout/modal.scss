@@ -8,7 +8,7 @@ html {
     &.desktop {
         .modal.overlay-light:after,
         .modal.overlay-dark:after {
-            transition: background-color $transition-time $transition-timing;
+            @include transition(background-color);
         }
 
         .modal.overlay-light:hover:after,
@@ -138,7 +138,7 @@ html {
                         padding: $spacer (rem(56px) + $spacer) $spacer $spacer;
                         text-align: center;
                         font-weight: $font-weight-bold;
-                        transition: top $transition-time $transition-timing;
+                        @include transition(top);
                         height: $component-line-height + ($spacer * 2);
                         @include ellipsis;
                     }
@@ -146,7 +146,7 @@ html {
                     #modal-content:not(:empty) {
                         bottom: 0;
                         padding: $spacer;
-                        transition: bottom $transition-time $transition-timing;
+                        @include transition(bottom);
                         max-height: calc(100% - #{$component-line-height + ($spacer * 2)});
                         overflow: auto;
                     }

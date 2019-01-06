@@ -33,7 +33,7 @@ $container-small: rem(500px);
 $container-medium: rem(750px);
 $container-large: rem(1000px);
 
-$transition-time: .4s;
+$transition-duration: .4s;
 $transition-timing: ease;
 
 $spacer-base: $spacer / 4;
@@ -47,4 +47,4 @@ $spacer-6: $spacer-base * 6;
 $spacer-7: $spacer-base * 7;
 $spacer-8: $spacer-base * 8;
 $spacer-9: $spacer-base * 9;
-$spacer-½0: $spacer-base * 10;
+$spacer-10: $spacer-base * 10;

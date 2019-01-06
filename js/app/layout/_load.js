@@ -8,7 +8,7 @@
 
                         element.onload = () => {
                             if (tag === 'img') {
-                                document['body'].removeChild(element);
+                                document.body.removeChild(element);
                             }
                             resolve();
                         };
@@ -18,16 +18,15 @@
                         if (tag === 'link') {
                             element.type = 'text/css';
                             element.rel = 'stylesheet';
-                            element['href'] = url;
-                            document['head'].appendChild(element);
+                            element.href = url;
                         } else if (tag === 'script' || tag === 'img') {
                             element.async = true;
-                            element['src'] = url;
+                            element.src = url;
                             if (tag === 'img') {
                                 element.className = 'hidden';
                             }
-                            document['body'].appendChild(element);
                         }
+                        document.body.appendChild(element);
                     } else if (tag === 'html') {
                         fetch(url).then((response) => {
                             if (response.status === 200) {

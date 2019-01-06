@@ -132,7 +132,7 @@
                 bottom: 0;
                 left: 0;
                 background-color: white;
-                transition: transform $transition-time;
+                @include transition(transform);
             }
         }
     }

@@ -94,7 +94,7 @@
                 left: -$spacer;
                 border: ($spacer / 2) solid transparent;
                 transform: translateY(-50%);
-                transition: all $transition-time $transition-timing;
+                @include transition;
             }
         }
     }

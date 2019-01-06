@@ -60,7 +60,7 @@ header {
             padding: 0 $spacer / 2;
 
             > svg {
-                transition: transform $transition-time $transition-timing;
+                @include transition(transform);
             }
 
             html.desktop &:focus,
@@ -144,7 +144,7 @@ header {
             width: $spacer-base * 6;
             height: $spacer-base * 6;
             opacity: $opacity-inactive;
-            @include button-transition(all);
+            @include transitions(width, height, opacity);
         }
     }
 }

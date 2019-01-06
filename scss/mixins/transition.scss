@@ -1,5 +1,19 @@
 ﻿/// <reference path="../references" />
 
-@mixin button-transition($element) {
-    transition: $element 0.35s ease;
+@mixin transition($property: all) {
+    transition: $property $transition-duration $transition-timing;
+}
+
+@mixin transitions($transitions...) {
+    $result: ();
+
+    @for $i from 1 through length($transitions) {
+        $prop: nth($transitions, $i);
+        $result: append($result, $prop $transition-duration $transition-timing);
+
+        @if $i != length($transitions) {
+            $result: append($result, unquote($string: ","));
+        }
+    }
+    transition: $result;
 }
