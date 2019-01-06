@@ -35,7 +35,14 @@
             tbody tr:nth-child(even) {
                 th,
                 td {
-                    background-color: $table-td-background-color;
+                    @include theme-element($light, false);
+                }
+            }
+
+            tbody tr:nth-child(odd) {
+                th,
+                td {
+                    @include theme-element-soft($light, false);
                 }
             }
 

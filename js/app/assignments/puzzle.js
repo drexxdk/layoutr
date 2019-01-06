@@ -6,13 +6,11 @@
                 image = assignment.attr('data-image'),
                 tiles = layoutr.tryParseInt(assignment.attr('data-tiles'), 0),
                 size = layoutr.tryParseInt(assignment.attr('data-size'), 0),
-                domRandom = layoutr.tryParseInt(assignment.attr('data-random'), 3),
+                random = layoutr.tryParseInt(assignment.attr('data-random'), 3),
                 tile = 100 / tiles,
                 total = tiles * tiles - 1,
-                domContent = assignment.find('.content'),
                 positions = [],
-                items,
-                current,
+                items = [],
                 movingItem = false,
                 correct = [],
                 transitionTime = 100,
@@ -22,10 +20,44 @@
                     left: 'left',
                     right: 'right'
                 },
-                domStart = assignment.find('button[type = "submit"]'),
-                domReset = assignment.find('button[type="reset"]');
+                current,
+                movesUsed,
+                lastMove,
+                randomUsed,
+                domContent,
+                domStart,
+                domGiveUp;
 
-            layoutr.arrowKeyLocked = true;
+            {
+                assignment.attr('data-state', 'initial');
+
+                let html = [];
+                html.push('<div class="content" style="max-width: ' + size + 'px; max-height: ' + size + 'px">');
+                html.push('<div style="background-image: url(' + image + ')"></div>');
+                html.push('</div > ');
+                html.push('<div class="buttons">');
+                html.push('<div class="flex wrap column gap-2">');
+                html.push('<button type="submit" class="btn start">Start</button>');
+                html.push('<button type="button" class="btn theme-secondary give-up">Give up</button>');
+                html.push('</div>');
+                html.push('</div>');
+                html = html.join('');
+                assignment.append(html);
+
+                domContent = assignment.find('.content > div');
+                domStart = assignment.find('button.start');
+                domGiveUp = assignment.find('button.give-up');
+
+                domStart.click(() => {
+                    start();
+                });
+
+                domGiveUp.click(() => {
+                    if (!movingItem) {
+                        reset();
+                    }
+                });
+            }
 
             let shuffle = (array) => {
                 for (let i = array.length - 1; i > 0; i--) {
@@ -34,15 +66,6 @@
                 }
                 return array;
             };
-
-            domContent.css({
-                'width': '100%',
-                'height': '100%',
-                'max-width': size + 'px',
-                'max-height': size + 'px'
-            });
-            domContent.append('<div></div>');
-            domContent = domContent.children();
             let setPositions = () => {
                 positions = [];
                 let count = 0;
@@ -115,14 +138,17 @@
                 return domContent.find('.item[data-top="' + top + '"][data-left="' + left + '"]');
             };
 
-            let moveItem = (item, direction, transition = false) => {
+            let moveItem = (item, direction, initial = true) => {
                 return new Promise((resolve, reject) => {
                     movingItem = true;
                     if (direction === directions.up) {
                         // move up
                         item.animate({
                             top: (current.top * tile) + '%'
-                        }, transition ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, function () {
+                            if (!initial) {
+                                movesUsed++;
+                            }
                             movingItem = false;
                             item.attr('data-top', parseInt(item.attr('data-top')) - 1);
                             current.top++;
@@ -133,7 +159,10 @@
                         // move down
                         item.animate({
                             top: (current.top * tile) + '%'
-                        }, transition ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, function () {
+                            if (!initial) {
+                                movesUsed++;
+                            }
                             movingItem = false;
                             item.attr('data-top', parseInt(item.attr('data-top')) + 1);
                             current.top--;
@@ -144,7 +173,10 @@
                         // move left
                         item.animate({
                             left: (current.left * tile) + '%'
-                        }, transition ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, function () {
+                            if (!initial) {
+                                movesUsed++;
+                            }
                             movingItem = false;
                             item.attr('data-left', parseInt(item.attr('data-left')) - 1);
                             current.left++;
@@ -155,7 +187,10 @@
                         // move right
                         item.animate({
                             left: (current.left * tile) + '%'
-                        }, transition ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, function () {
+                            if (!initial) {
+                                movesUsed++;
+                            }
                             movingItem = false;
                             item.attr('data-left', parseInt(item.attr('data-left')) + 1);
                             current.left--;
@@ -183,8 +218,6 @@
                 }
             }
 
-            let lastMove,
-                random;
             let setRandom = () => {
                 let direction = [];
 
@@ -208,13 +241,35 @@
 
                 direction = direction[0];
                 lastMove = direction;
-                moveItem(getItem(direction), direction, false).then(() => {
-                    random--;
-                    if (random > 0) {
+                moveItem(getItem(direction), direction).then(() => {
+                    randomUsed--;
+                    if (randomUsed > 0) {
                         setRandom();
                     }
                 });
             };
+
+
+            let start = () => {
+                layoutr.arrowKeyLocked = true;
+                setPositions();
+                setItems();
+                setCurrent();
+                setCorrect();
+
+                movesUsed = 0;
+                lastMove = undefined;
+                randomUsed = random;
+
+                setRandom();
+                assignment.attr('data-state', 'start');
+            }
+
+            let reset = () => {
+                layoutr.arrowKeyLocked = false;
+                domContent.empty();
+                assignment.attr('data-state', 'initial');
+            }
 
             let checkSolved = () => {
                 let solved = true;
@@ -236,42 +291,43 @@
                     }
                 });
                 if (solved) {
-                    domContent.append('<div class="correct">Correct</div>');
+                    reset();
+
+                    let html = [];
+                    html.push('<div class="alert theme-success"><div>');
+                    html.push('<h3 class="align-center">You Win</h3>');
+                    html.push('<div class="table">');
+                    html.push('<table><tbody>');
+                    html.push('<tr><th>Moves used</th><td>' + movesUsed + '</td></tr>');
+                    html.push('<tr><th>Perfect moves</th><td>' + random + '</td></tr>');
+                    html.push('</tbody></table>');
+                    html.push('</div>');
+                    html.push('</div></div>');
+                    html = html.join('');
+                    domContent.append(html);
                 }
             };
 
-            let init = () => {
-                setPositions();
-                setItems();
-                setCurrent();
-                setCorrect();
-
-                lastMove = undefined;
-                random = domRandom;
-
-                setRandom();
-            };
-
             assignment.on('click', '.item.movable', (e) => {
-                if (!assignment.hasClass('validated') && !movingItem) {
+                if (assignment.attr('data-state') === 'start' && !movingItem) {
                     let item = $(e.target),
                         top = parseInt(item.attr('data-top')),
                         left = parseInt(item.attr('data-left'));
 
                     if (top === current.top + 1 && left === current.left) {
-                        moveItem(item, directions.up, true).then(() => {
+                        moveItem(item, directions.up, false).then(() => {
                             checkSolved();
                         });
                     } else if (top === current.top - 1 && left === current.left) {
-                        moveItem(item, directions.down, true).then(() => {
+                        moveItem(item, directions.down, false).then(() => {
                             checkSolved();
                         });
                     } else if (top === current.top && left === current.left + 1) {
-                        moveItem(item, directions.left, true).then(() => {
+                        moveItem(item, directions.left, false).then(() => {
                             checkSolved();
                         });
                     } else if (top === current.top && left === current.left - 1) {
-                        moveItem(item, directions.right, true).then(() => {
+                        moveItem(item, directions.right, false).then(() => {
                             checkSolved();
                         });
                     }
@@ -279,41 +335,28 @@
             });
 
             layoutr.body.on('keydown.assignmentPuzzle', (e) => {
-                if (!assignment.hasClass('validated') && !movingItem) {
+                if (assignment.attr('data-state') === 'start' && !movingItem) {
                     if (e.keyCode === 38 && current.top !== tiles - 1) {
                         e.preventDefault();
-                        moveItem(getItem(directions.up), directions.up, true).then(() => {
+                        moveItem(getItem(directions.up), directions.up, false).then(() => {
                             checkSolved();
                         });
                     } else if (e.keyCode === 40 && current.top !== 0) {
                         e.preventDefault();
-                        moveItem(getItem(directions.down), directions.down, true).then(() => {
+                        moveItem(getItem(directions.down), directions.down, false).then(() => {
                             checkSolved();
                         });
                     } else if (e.keyCode === 37 && current.left !== tiles - 1) {
                         e.preventDefault();
-                        moveItem(getItem(directions.left), directions.left, true).then(() => {
+                        moveItem(getItem(directions.left), directions.left, false).then(() => {
                             checkSolved();
                         });
                     } else if (e.keyCode === 39 && current.left !== 0) {
                         e.preventDefault();
-                        moveItem(getItem(directions.right), directions.right, true).then(() => {
+                        moveItem(getItem(directions.right), directions.right, false).then(() => {
                             checkSolved();
                         });
                     }
-                }
-            });
-
-            domStart.click(() => {
-                init();
-                domStart.addClass('hidden');
-                domReset.removeClass('hidden');
-            });
-
-            domReset.click(() => {
-                if (!movingItem) {
-                    init();
-                    domContent.children('.correct').remove();
                 }
             });
         } else {

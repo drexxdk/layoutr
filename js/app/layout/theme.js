@@ -1,6 +1,6 @@
 ﻿{
     layoutr.loadTheme = (id) => {
-        let stylesheet = layoutr.head.children('link[rel="stylesheet"][href^="' + layoutr.host + 'dist/css/theme/"]'),
+        let stylesheet = layoutr.body.children('link[rel="stylesheet"][href^="' + layoutr.host + 'dist/css/theme/"]'),
             href1 = stylesheet.attr('href'),
             split1 = href1.split('/'),
             split2 = split1[split1.length - 1].split('.');

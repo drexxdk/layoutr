@@ -3,14 +3,45 @@
 @mixin layoutr-puzzle {
     .assignment.puzzle {
 
+        &[data-state="initial"] {
+
+            .buttons button.give-up {
+                display: none;
+            }
+        }
+
+        &[data-state="start"] {
+            .content > div {
+                background-image: none !important;
+            }
+
+            .buttons button.start {
+                display: none;
+            }
+        }
+
+        &[data-state="correct"] {
+            .content {
+                pointer-events: none;
+            }
+
+            .buttons button.start {
+                display: none;
+            }
+        }
+
         .content {
             position: relative;
             overflow: auto;
+            width: 100%;
+            height: 100%;
 
             > div {
                 position: relative;
                 width: 100%;
                 padding-bottom: 100%;
+                background-size: cover;
+                background-position: center;
 
                 > .item {
                     display: flex;
@@ -48,29 +79,11 @@
                     }
                 }
 
-                > .correct {
+                > .alert {
                     position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    z-index: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    @include color-yiq($success);
-
-                    &:before {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                        opacity: $opacity-inactive;
-                        z-index: -1;
-                        @include theme-element($success);
-                    }
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                 }
             }
         }
