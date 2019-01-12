@@ -3,25 +3,12 @@
         dropdowns.each((i, e) => {
             let $this = $(e),
                 selected = $this.children('option:selected'),
-                html = [],
                 attr = $this.attr('class'),
                 theme = '',
                 width = $this.attr('data-width');
             if (selected.length !== 1) {
                 selected = $this.children().first();
             }
-            html.push('<div class="dropdown' +
-                ($this.hasClass('not-first') ? ' not-first' : '') +
-                ($this.hasClass('nowrap') ? ' nowrap' : '') +
-                ($this.hasClass('check') ? ' check' : '') +
-                ($this.hasClass('ellipsis') ? ' ellipsis' : '') +
-                ($this.hasClass('align-left') ? ' align-left' : '') +
-                ($this.hasClass('align-right') ? ' align-right' : '') +
-                ($this.hasClass('direction-up') ? ' direction-up' : '') +
-                '"' +
-                (width !== undefined ? ' style="width:' + width + 'px"' : '')
-                + '> ');
-
             if (typeof attr !== typeof undefined && attr !== false) {
                 let temp = attr.split(' ');
                 temp = $.grep(temp, (item, index) => {
@@ -31,30 +18,50 @@
                     theme = temp[0];
                 }
             }
-            html.push('<div tabindex="0" class="' + theme + '"><label>' + selected.text() + '</label><svg focusable="false"><use xlink:href="#svg-arrow"></use></svg></div>');
-            html.push('<ul class="' + theme + '">');
-            $this.children().each((i, e) => { /* ':not([value=""])' */
-                let $that = $(e),
-                    text = $that.text();
+
+            let liTemplate = (e) => {
+                let li = $(e),
+                    text = li.text();
                 if (!text.length) {
                     text = '&nbsp;';
                 }
                 if (text.indexOf('$$') === 0) {
-                    $that.attr('data-math', text);
+                    li.attr('data-math', text);
                 }
-
-                html.push('<li data-id="' + $that.val() + '"' + ($that.is(':selected') ? ' class="selected"' : '') + '><div tabindex="0" class="theme-light"><label>' + text + '</label><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></div></li>');
-            });
-            html.push('</ul>');
-            html.push('</div>');
-            let dropdown = html.join("");
-            $this.after(dropdown);
-            dropdown = $this.next();
-
+                return 
+`<li data-id="${li.val()}"${li.is(':selected') ? ' class="selected"' : ''}>
+    <div tabindex="0" class="theme-light">
+        <label>${text}</label>
+        <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
+    </div>
+</li>`;
+            };
+            let html = 
+`<div class="dropdown
+    ${$this.hasClass('not-first') ? ' not-first' : ''}
+    ${$this.hasClass('nowrap') ? ' nowrap' : ''}
+    ${$this.hasClass('check') ? ' check' : ''}
+    ${$this.hasClass('ellipsis') ? ' ellipsis' : ''}
+    ${$this.hasClass('align-left') ? ' align-left' : ''}
+    ${$this.hasClass('align-right') ? ' align-right' : ''}
+    ${$this.hasClass('direction-up') ? ' direction-up' : ''}
+    "
+    ${width !== undefined ? ` style="width: ${width}px"` : ''}
+>
+    <div tabindex="0" class="${theme}">
+        <label>${selected.text()}</label>
+        <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
+    </div>
+    <ul class="${theme}">
+        ${$.makeArray($this.children()).map(liTemplate).join('')}
+    </ul>
+</div>`;
+            $this.after(html);
+            html = $this.next();
 
             if ($this.hasClass('nowrap')) {
-                let top = dropdown.children().eq(0),
-                    bottom = dropdown.children().eq(1),
+                let top = html.children().eq(0),
+                    bottom = html.children().eq(1),
                     topWidth = top.width(),
                     bottomWidth = bottom.width();
                 if (bottomWidth > topWidth) {
@@ -62,22 +69,22 @@
                 }
             }
 
-            dropdown.on('click', '> div', (e) => {
+            html.on('click', '> div', (e) => {
                 let $that = $(e.currentTarget);
                 $that.parent().toggleClass('open');
             });
-            dropdown.on('click', 'li', (e) => {
+            html.on('click', 'li', (e) => {
                 let $that = $(e.currentTarget);
                 if (!$that.hasClass('selected')) {
                     $that.siblings('.selected').removeClass('selected');
                     $that.addClass('selected');
-                    let option = $this.children('[value="' + $that.attr('data-id') + '"]'),
+                    let option = $this.children(`[value="${$that.attr('data-id')}"]`),
                         text = $that.text(),
                         math = option.attr('data-math');
                     if (math !== undefined) {
                         text = math;
                     }
-                    let label = dropdown.children('div').children('label');
+                    let label = html.children('div').children('label');
                     label.text(text);
                     if (math !== undefined) {
                         renderMathInElement(label[0]);
@@ -86,7 +93,7 @@
                     option.attr('selected', 'selected');
                     $this.change();
                 }
-                dropdown.removeClass('open');
+                html.removeClass('open');
             });
         });
     };

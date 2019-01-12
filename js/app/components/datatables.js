@@ -9,28 +9,28 @@
                 layoutr.html.addClass('datatables-loaded');
             }
             layoutr.promiseDatatables.then(() => {
-                let count = 0;
-                let gap = 'gap-3';
-
+                let count = 0,
+                    gap = 'gap-3';
                 let table_header_input = (instance) => {
-                    let columns = instance.columns().header();
-                    let elements = jQuery.grep(columns, (e) => {
-                        let column = $(e);
-                        return column.hasClass('dropdown') || column.hasClass('text');
-                    });
+                    let columns = instance.columns().header(),
+                        elements = jQuery.grep(columns, (e) => {
+                            let column = $(e);
+                            return column.hasClass('dropdown') || column.hasClass('text');
+                        });
                     instance.columns().every(function () {
                         let th = this.header(),
                             text = th.innerText,
                             column = $(th),
-                            style = '';
-
-
-                        let minWidth = column.attr('data-min-width');
-                        if (minWidth) {
-                            style += 'min-width: ' + minWidth + 'px;';
-                        }
-
-                        column.empty().append('<div style="' + style + '"><div><span>' + text + '</span></div>' + (elements.length ? '<div></div>' : '') + '</div>');
+                            minWidth = column.attr('data-min-width'),
+                            style = minWidth ? `min-width: ${minWidth}px;` : '',
+                            html = 
+`<div style="${style}">
+    <div>
+        <span>${text}</span>
+    </div>
+    ${elements.length ? '<div></div>' : ''}
+</div>`;
+                        column.empty().append(html);
                         let index = column.index();
 
                         if (column.hasClass('dropdown')) {
@@ -41,7 +41,7 @@
                                 });
 
                             this.data().unique().sort().each((d, j) => {
-                                select.append('<option value="' + d + '">' + d + '</option>');
+                                select.append(`<option value="${d}">${d}</option>`);
                             });
                         } else if (column.hasClass('text')) {
                             let input = $('<input type="text" />')
@@ -49,8 +49,8 @@
                                 .on('keyup', (e) => {
                                     let $this = $(e.currentTarget),
                                         val = $this.val();
-                                    
-                                    if ($this.attr('data-last') != val) {
+
+                                    if ($this.attr('data-last') !== val) {
                                         instance.column(index).search(val).draw();
                                     }
                                     $this.attr('data-last', val);
@@ -58,7 +58,7 @@
                             input.parent().addClass('form-group');
                         }
                     });
-                }
+                };
                 let table_header_sort = (instance, wrapper) => {
                     let th = wrapper.find('thead th');
                     th.unbind('click');
@@ -76,7 +76,7 @@
                             }
                         }
                     });
-                }
+                };
                 let table_header_length = (wrapper, header) => {
                     let length = wrapper.find('.dataTables_length'),
                         dropdown = length.find('select');
@@ -85,11 +85,11 @@
                     length.children('label').remove();
                     dropdown.addClass('dropdown').attr('data-width', 100);
                     header.append(length);
-                }
+                };
                 let table_header_buttons = (wrapper, header) => {
                     let container = wrapper.find('.dt-buttons');
 
-                    container.append('<div class="flex column wrap ' + gap + '"></div>');
+                    container.append(`<div class="flex column wrap ${gap}"></div>`);
 
                     let div = container.children('div'),
                         buttons = container.children('button');
@@ -98,7 +98,7 @@
                     buttons.addClass('btn');
                     div.append(buttons);
                     header.append(container);
-                }
+                };
                 let table_header_filter = (wrapper, header) => {
                     let filter = wrapper.find('.dataTables_filter');
 
@@ -107,16 +107,16 @@
                     filter.append('<div class="input-group-addon"><svg focusable="false"><use xlink:href="#svg-search"></use></svg></div>');
                     filter.find('label').remove();
                     header.append(filter);
-                }
+                };
                 let table_content = (wrapper, content) => {
                     let table = wrapper.find('table');
                     content.append(table);
                     return table;
-                }
+                };
                 let table_footer_info = (wrapper, footer) => {
                     let info = wrapper.find('.dataTables_info');
                     footer.append(info);
-                }
+                };
                 let paginateFix = (paginate) => {
                     let span = paginate.children('span'),
                         prev = paginate.find('.paginate_button.previous'),
@@ -127,18 +127,18 @@
 
                     prev.prependTo(span);
                     next.appendTo(span);
-                }
+                };
                 let table_footer_paginate = (wrapper, footer, paginate) => {
                     paginate.addClass('flex column wrap');
                     footer.append('<div class="dataTables_paginate_container"></div>');
                     let container = footer.find('.dataTables_paginate_container');
                     paginateFix(paginate);
                     container.append(paginate);
-                }
+                };
                 let table_dropdowns = (wrapper) => {
                     let dropdowns = wrapper.find('select.dropdown');
                     layoutr.checkDropdown(dropdowns);
-                }
+                };
 
                 tables.each((i, e) => {
                     let $this = $(e);
@@ -181,13 +181,13 @@
                             let instance = settings.oInstance.api(true),
                                 wrapper = $(settings.nTableWrapper);
 
-                            wrapper.append('<div class="dataTables_header flex grow"><div class="flex column wrap ' + gap + '"></div></div>');
+                            wrapper.append(`<div class="dataTables_header flex grow"><div class="flex column wrap ${gap}"></div></div>`);
                             let header = wrapper.find('> .dataTables_header > div');
 
                             wrapper.append('<div class="dataTables_content table"></div>');
                             let content = wrapper.find('> .dataTables_content');
 
-                            wrapper.append('<div class="dataTables_footer"><div class="flex column wrap vertical-center ' + gap + '"></div></div>');
+                            wrapper.append(`<div class="dataTables_footer"><div class="flex column wrap vertical-center ${gap}"></div></div>`);
                             let footer = wrapper.find('> .dataTables_footer > div');
 
                             table_header_input(instance);
@@ -206,7 +206,7 @@
                             table_dropdowns(wrapper);
 
                             count++;
-                            if (count = tables.length) {
+                            if (count === tables.length) {
                                 layoutr.hideLoading();
                             }
 

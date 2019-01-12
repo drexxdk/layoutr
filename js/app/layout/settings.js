@@ -19,14 +19,14 @@
             localStorage.setItem('settings', JSON.stringify(layoutr.settings));
         } else {
             if (type === "checkbox" || type === "radio") {
-                layoutr.right.find('#settings-' + id).prop('checked', value);
+                layoutr.right.find(`#settings-${id}`).prop('checked', value);
             } else if (type === "slider") {
-                layoutr.right.find('#settings-' + id).slider('setValue', value);
+                layoutr.right.find(`#settings-${id}`).slider('setValue', value);
             }
         }
         if (type === 'checkbox' || type === "radio") {
             if (type === 'radio') {
-                $.each(layoutr.right.find('input[type=radio][name="settings-' + name + '"]:not(#settings-' + id + ')'), (i, radio) => {
+                $.each(layoutr.right.find(`input[type=radio][name="settings-${name}"]:not(#settings-${id})`), (i, radio) => {
                     layoutr.html.removeClass($(radio).attr('id').replace('settings-', ''));
                 });
             }

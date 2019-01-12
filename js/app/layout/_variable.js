@@ -1,5 +1,4 @@
 ﻿var layoutr = window.layoutr || {};
-
 {
     layoutr.siteName = 'layoutr';
 
@@ -23,7 +22,7 @@
     var l = window.location;
 
     var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
-    layoutr.host = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/';
+    layoutr.host = `${l.protocol}//${l.hostname}${l.port ? `:${l.port}` : ''}${l.pathname.split('/').slice(0, 1 + segmentCount).join('/')}/`;
 
     layoutr.awaitInterval = 50;
 

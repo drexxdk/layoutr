@@ -1,12 +1,12 @@
 ﻿{
     layoutr.loadPage = (url, pushState, initial) => {
         layoutr.showLoading();
-        layoutr.load.html(layoutr.host + layoutr.ajax + 'pages' + (url === '/' ? '/home' : url) + '.html').then((response) => {
+        layoutr.load.html(`${layoutr.host}${layoutr.ajax}pages${url === '/' ? '/home' : url}.html`).then((response) => {
             layoutr.content.html(response);
             let q = url.indexOf('?');
             url = url.substring(0, q !== -1 ? q : url.length);
             layoutr.left.find('.tree a.label.active').removeClass('active');
-            layoutr.left.find('a.label[href="' + url + '"]').addClass('active');
+            layoutr.left.find(`a.label[href="${url}"]`).addClass('active');
             layoutr.html.attr('data-status', '');
             layoutr.title.html('');
             document.title = layoutr.siteName;
@@ -28,7 +28,7 @@
             } else {
                 let title = layoutr.capitalize(url.replace('/', '').replaceAll('-', ' '));
                 layoutr.title.html(title);
-                document.title = title + ' - ' + layoutr.siteName;
+                document.title = `${title} - ${layoutr.siteName}`;
                 if (url === '/form') {
                     layoutr.pageForm();
                 }
@@ -41,8 +41,8 @@
             layoutr.load.html(layoutr.host + layoutr.ajax + 'pages/error.html').then((response2) => {
                 layoutr.content.html(response2);
                 layoutr.html.attr('data-status', 'error');
-                document.title = response + ' - ' + layoutr.siteName;
-                let title = response + ' - ';
+                document.title = `${response}-${layoutr.siteName}`;
+                let title = `${response} - `;
                 if (response === 404) {
                     title += 'Page not found';
                 } else {
@@ -59,7 +59,7 @@
             });
         });
 
-        let historyUrl = (layoutr.isLocalhost ? '' : '/' + window.location.pathname.split('/')[1]) + url;
+        let historyUrl = (layoutr.isLocalhost ? '' : `/${window.location.pathname.split('/')[1]}`) + url;
         if (pushState) {
             window.history.pushState(null, null, historyUrl);
             loadPage = true;
@@ -82,7 +82,7 @@
         if (layoutr.url.p !== undefined) {
             window.history.replaceState(null, null,
                 window.location.pathname.slice(0, -1) + layoutr.url.p +
-                (layoutr.url.q ? '?' + layoutr.url.q : '') +
+                (layoutr.url.q ? `?${layoutr.url.q}` : '') +
                 window.location.hash
             );
         }
@@ -115,7 +115,7 @@
             }
             localStorage.setItem('navigation', JSON.stringify(layoutr.navigation));
         } else {
-            layoutr.left.find('#' + id).prop('checked', value);
+            layoutr.left.find(`#${id}`).prop('checked', value);
         }
     };
 
@@ -136,7 +136,7 @@
             });
             layoutr.header.find('.aside.left').addClass('loaded');
             if (layoutr.url && layoutr.url.p) {
-                layoutr.navigationTree.find('a.label[href="' + layoutr.url.p + '"]').addClass('active');
+                layoutr.navigationTree.find(`a.label[href="${layoutr.url.p}"]`).addClass('active');
             } else {
                 layoutr.navigationTree.find('a.label[href=""]').addClass('active');
             }
@@ -149,7 +149,7 @@
         } else {
             var l = window.location;
             var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
-            var url = '/' + l.pathname.slice(1).split('/').slice(segmentCount);
+            var url = `/${l.pathname.slice(1).split('/').slice(segmentCount)}`;
             layoutr.loadPage(url, true, true);
         }
         layoutr.left.on('click', '.tree a.label:not(.active)', (e) => {

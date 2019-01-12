@@ -1,14 +1,14 @@
 ﻿{
-    layoutr.promiseCSS = layoutr.load.css(layoutr.host + "dist/css/theme/" + layoutr.theme + '.css').catch(() => {
+    layoutr.promiseCSS = layoutr.load.css(`${layoutr.host}dist/css/theme/${layoutr.theme}.css`).catch(() => {
         console.error('Failed to load css');
     });
     
     $(() => {
-        layoutr.footer.html('<p>\u00A9 ' + new Date().getFullYear() + ' Frederik Nielsen</p>');
+        layoutr.footer.html(`<p>\u00A9 ${new Date().getFullYear()} Frederik Nielsen</p>`);
 
         //layoutr.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-        layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/base.html').then((response) => {
+        layoutr.load.html(`${layoutr.host}${layoutr.ajax}svg/base.html`).then((response) => {
             $(response).prependTo(layoutr.body);
         }).catch(() => {
             layoutr.showPopupAlert('Failed to load base svg html', 'danger');

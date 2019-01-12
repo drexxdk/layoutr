@@ -40,36 +40,49 @@
             if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
                 layoutr.showLoading();
                 let id = $this.attr('data-modal-id'),
-                    html = [],
                     dataTitle = $this.attr('data-modal-title'),
                     dataContent = $this.attr('data-modal-content'),
                     dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
-                html.push('<div><div><div id="modal-container">');
-                if (type === 'image' && $this.attr('data-modal-img').length) {
-                    if (dataTitle !== undefined || dataContent !== undefined) {
-                        layoutr.modal.addClass('has-info');
-                        html.push('<button id="modal-toggle" class="btn" aria-label="Toggle info">');
-                        html.push('<svg focusable="false"><use xlink:href="#svg-info"></use></svg>');
-                        html.push('</button>');
+
+                let template = function() {
+                    let result;
+
+                    if (type === 'image' && $this.attr('data-modal-img').length) {
+                        if (dataTitle !== undefined || dataContent !== undefined) {
+                            layoutr.modal.addClass('has-info');
+                        }
+                        result = 
+`${dataTitle !== undefined || dataContent !== undefined ? `
+<button id="modal-toggle" class="btn" aria-label="Toggle info">
+    <svg focusable="false"><use xlink:href="#svg-info"></use></svg>
+</button>
+${dataTitle !== undefined ? `<div id="modal-title">${dataTitle}</div>` : ''}
+${dataContent !== undefined ? `<div id="modal-content">${dataContent}</div>` : ''}
+` : ''}
+<img id="modal-img" />`;
+                    } else if (type === 'form') {
+                        result = 
+`<div class="header">
+    ${dataTitle !== undefined ? `<span class="title">${dataTitle}</span>` : ''}
+    <button id="modal-close" class="close expand" aria-label="Close ${dataTitle !== undefined ? dataTitle : ''}">
+        <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
+    </button>
+</div>
+<div class="content">
+</div>`;
                     }
-                    if (dataTitle !== undefined) {
-                        html.push('<div id="modal-title">' + dataTitle + '</div>');
-                    }
-                    if (dataContent !== undefined) {
-                        html.push('<div id="modal-content">' + dataContent + '</div>');
-                    }
-                    html.push('<img id="modal-img" />');
-                } else if (type === 'form') {
-                    html.push('<div class="header">');
-                    if (dataTitle !== undefined) {
-                        html.push('<span class="title">' + dataTitle + '</span>');
-                    }
-                    html.push('<button id="modal-close" class="close expand" aria-label="Close ' + (dataTitle !== undefined ? dataTitle : '') + '"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button >');
-                    html.push('</div><div class="content">');
-                }
-                html.push('</div></div></div></div>');
-                let div = html.join("");
-                layoutr.modal.html(div);
+                    return result;
+                };
+
+                let html = 
+`<div>
+    <div>
+        <div id="modal-container">
+            ${template()}
+        </div>
+    </div>
+</div>`;
+                layoutr.modal.html(html);
                 if (type === 'image') {
                     let image = layoutr.modal.find('#modal-img');
                     image.on('load', () => {

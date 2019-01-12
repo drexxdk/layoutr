@@ -33,6 +33,7 @@ const gulp = require("gulp"),
                         'js/vendors/bowser.js',
 
                         // layout
+                        'js/app/layout/_polyfill.js',
                         'js/app/layout/_variable.js',
                         'js/app/layout/_function.js',
                         'js/app/layout/_bowser.js',

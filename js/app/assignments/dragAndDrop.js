@@ -107,7 +107,7 @@
                     assignment.addClass('validated');
                     let correct = getCorrect();
                     $(correct).each((i, data) => {
-                        let container = assignment.find('.to .container[data-id="' + data.id + '"]');
+                        let container = assignment.find(`.to .container[data-id="${data.id}"]`);
                         container.children().each((i, child) => {
                             let item = $(child);
                             if ($.inArray(item.attr('data-id'), data.items) !== -1) {
@@ -129,7 +129,7 @@
                 assignment.addClass('validated');
                 let correct = getCorrect();
                 $(correct).each((i, data) => {
-                    let container = assignment.find('.to .container[data-id="' + data.id + '"]');
+                    let container = assignment.find(`.to .container[data-id="${data.id}"]`);
                     $(data.items).each((j, id) => {
                         let item = layoutr.getAssignmentItem(items, id);
                         item.addClass('valid');

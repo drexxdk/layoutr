@@ -5,7 +5,7 @@
             if (contentHeader.length) {
                 if (layoutr.isModal() && contentHeader.css('position') === 'fixed') {
                     let halfOverflowY = layoutr.scrollbarWidth / 2;
-                    contentHeader.children().css('width', 'calc(100% - ' + halfOverflowY + 'px)');
+                    contentHeader.children().css('width', `calc(100% - ${halfOverflowY}px)`);
                 } else {
                     contentHeader.children().css('width', '');
                 }

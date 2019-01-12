@@ -66,7 +66,7 @@
                     $(correct).each((i, data) => {
                         let selected = getItems(data.id),
                             append = (data.value === selected) ? correctSvg : wrongSvg;
-                        controls.filter('[data-id="' + data.id + '"]').append(append);
+                        controls.filter(`[data-id="${data.id}"]`).append(append);
                     });
                 }
             });
@@ -83,7 +83,7 @@
                     for (i = 0; i < data.value; i++) {
                         $(items.filter(':not([data-id])')[0]).attr('data-id', data.id);
                     }
-                    controls.filter('[data-id="' + data.id + '"]').append(correctSvg);
+                    controls.filter(`[data-id="${data.id}"]`).append(correctSvg);
                 });
             });
 

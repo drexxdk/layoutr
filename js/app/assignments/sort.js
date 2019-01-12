@@ -72,7 +72,7 @@
                 if (i === 0) {
                     container.prepend(item);
                 } else {
-                    container.find('> .item:nth-child(' + i + ')').after(item);
+                    container.find(`> .item:nth-child(${i})`).after(item);
                 }
             };
 

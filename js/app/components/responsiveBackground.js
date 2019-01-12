@@ -50,9 +50,9 @@
                     });
 
                     if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
-                        let src = image + '-' + closestWidth + '.' + filetype;
+                        let src = `${image}-${closestWidth}.${filetype}`;
                         layoutr.load.img(src).then(() => {
-                            element.css('background-image', 'url(' + src + ')');
+                            element.css('background-image', `url(${src})`);
                             element.attr('data-rb-current', closestWidth);
                         }).catch(() => {
                             layoutr.showPopupAlert('Failed to load responsive background image', 'danger');

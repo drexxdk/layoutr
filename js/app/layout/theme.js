@@ -1,6 +1,6 @@
 ﻿{
     layoutr.loadTheme = (id) => {
-        let stylesheet = layoutr.body.children('link[rel="stylesheet"][href^="' + layoutr.host + 'dist/css/theme/"]'),
+        let stylesheet = layoutr.body.children(`link[rel="stylesheet"][href^="${layoutr.host}dist/css/theme/"]`),
             href1 = stylesheet.attr('href'),
             split1 = href1.split('/'),
             split2 = split1[split1.length - 1].split('.');
@@ -12,7 +12,7 @@
         href2.push(theme);
 
         for (let i = 1; i < split2.length; i++) {
-            href2.push('.' + split2[i]);
+            href2.push(`.${split2[i]}`);
         }
         href2 = href2.join("");
         if (href1 !== href2) {

@@ -31,17 +31,16 @@
             {
                 assignment.attr('data-state', 'initial');
 
-                let html = [];
-                html.push('<div class="content" style="max-width: ' + size + 'px; max-height: ' + size + 'px">');
-                html.push('<div style="background-image: url(' + image + ')"></div>');
-                html.push('</div > ');
-                html.push('<div class="buttons">');
-                html.push('<div class="flex wrap column gap-2">');
-                html.push('<button type="submit" class="btn start">Start</button>');
-                html.push('<button type="button" class="btn theme-secondary give-up">Give up</button>');
-                html.push('</div>');
-                html.push('</div>');
-                html = html.join('');
+                let html = 
+`<div class="content" style="max-width: ${size}px; max-height: ${size}px">
+    <div style="background-image: url(${image})"></div>
+</div>
+<div class="buttons">
+    <div class="flex wrap column gap-2">
+        <button type="submit" class="btn start">Start</button>
+        <button type="button" class="btn theme-secondary give-up">Give up</button>
+    </div>
+</div>`;
                 assignment.append(html);
 
                 domContent = assignment.find('.content > div');
@@ -85,23 +84,26 @@
             let setItems = () => {
                 domContent.empty();
                 for (let i = 0; i < total; i++) {
-                    domContent.append('<div class="item" data-id="' + positions[i].id + '" ' +
-                        'data-top="' + positions[i].top + '" ' +
-                        'data-left="' + positions[i].left + '" ' +
-                        'style="' +
-                        'width: ' + tile + '%; ' +
-                        'height: ' + tile + '%; ' +
-                        'top: ' + (positions[i].top * tile) + '%; ' +
-                        'left: ' + (positions[i].left * tile) + '%; ' +
-                        '">' +
-                        '<div style="' +
-                        'width: ' + tiles * 100 + '%; ' +
-                        'height: ' + tiles * 100 + '%; ' +
-                        'background-image: url(' + image + '); ' +
-                        'margin-left: -' + (positions[i].left * tile) * tiles + '%; ' +
-                        'margin-top: -' + (positions[i].top * tile) * tiles + '%; ' +
-                        '"></div>' +
-                        '</div>');
+                    let html = 
+`<div class="item"
+    data-id="${positions[i].id}" 
+    data-top="${positions[i].top}" 
+    data-left="${positions[i].left}" 
+    style="
+    width: ${tile}%; 
+    height: ${tile}%; 
+    top: ${positions[i].top * tile}%; 
+    left: ${positions[i].left * tile}%; 
+">
+    <div style="
+        width: ${tiles * 100}%; 
+        height: ${tiles * 100}%; 
+        background-image: url(${image}); 
+        margin-left: -${positions[i].left * tile * tiles}%; 
+        margin-top: -${positions[i].top * tile * tiles}%; 
+    "></div>
+</div>`;
+                    domContent.append(html);
                 }
                 items = domContent.children();
             };
@@ -135,7 +137,7 @@
                 } else if (direction === directions.right) {
                     left = current.left - 1;
                 }
-                return domContent.find('.item[data-top="' + top + '"][data-left="' + left + '"]');
+                return domContent.find(`.item[data-top="${top}"][data-left="${left}"]`);
             };
 
             let moveItem = (item, direction, initial = true) => {
@@ -144,7 +146,7 @@
                     if (direction === directions.up) {
                         // move up
                         item.animate({
-                            top: (current.top * tile) + '%'
+                            top: `${current.top * tile}%`
                         }, !initial ? transitionTime : 0, function () {
                             if (!initial) {
                                 movesUsed++;
@@ -158,7 +160,7 @@
                     } else if (direction === directions.down) {
                         // move down
                         item.animate({
-                            top: (current.top * tile) + '%'
+                            top: `${current.top * tile}%`
                         }, !initial ? transitionTime : 0, function () {
                             if (!initial) {
                                 movesUsed++;
@@ -172,7 +174,7 @@
                     } else if (direction === directions.left) {
                         // move left
                         item.animate({
-                            left: (current.left * tile) + '%'
+                            left: `${current.left * tile}%`
                         }, !initial ? transitionTime : 0, function () {
                             if (!initial) {
                                 movesUsed++;
@@ -186,7 +188,7 @@
                     } else if (direction === directions.right) {
                         // move right
                         item.animate({
-                            left: (current.left * tile) + '%'
+                            left: `${current.left * tile}%`
                         }, !initial ? transitionTime : 0, function () {
                             if (!initial) {
                                 movesUsed++;
@@ -216,7 +218,7 @@
                 if (current.left !== tiles - 1) {
                     getItem(directions.left).addClass('movable');
                 }
-            }
+            };
 
             let setRandom = () => {
                 let direction = [];
@@ -263,13 +265,13 @@
 
                 setRandom();
                 assignment.attr('data-state', 'start');
-            }
+            };
 
             let reset = () => {
                 layoutr.arrowKeyLocked = false;
                 domContent.empty();
                 assignment.attr('data-state', 'initial');
-            }
+            };
 
             let checkSolved = () => {
                 let solved = true;
@@ -293,17 +295,20 @@
                 if (solved) {
                     reset();
 
-                    let html = [];
-                    html.push('<div class="alert theme-success"><div>');
-                    html.push('<h3 class="align-center">You Win</h3>');
-                    html.push('<div class="table">');
-                    html.push('<table><tbody>');
-                    html.push('<tr><th>Moves used</th><td>' + movesUsed + '</td></tr>');
-                    html.push('<tr><th>Perfect moves</th><td>' + random + '</td></tr>');
-                    html.push('</tbody></table>');
-                    html.push('</div>');
-                    html.push('</div></div>');
-                    html = html.join('');
+                    let html = 
+`<div class="alert theme-success">
+    <div>
+        <h3 class="align-center">You Win</h3>
+        <div class="table">
+            <table>
+                <tbody>
+                    <tr><th>Moves used</th><td>${movesUsed}</td></tr>
+                    <tr><th>Perfect moves</th><td>${random}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>`;
                     domContent.append(html);
                 }
             };

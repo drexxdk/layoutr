@@ -26,7 +26,6 @@
                     layoutr.checkAssignmentPuzzle(assignment);
                 });
             }).catch((e) => {
-                debugger;
                 layoutr.showPopupAlert('Failed to load assignment', 'danger');
             });
         } else {

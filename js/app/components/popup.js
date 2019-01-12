@@ -11,21 +11,17 @@
 
     layoutr.showPopupAlert = (title, theme = 'light', position = 'top left', type = 'default') => {
         if (title !== undefined) {
-            let alert = [],
-                popup = layoutr.body.children('.popup[data-position="' + position + '"]');
-            alert.push('<div class="alert theme-' + theme + '" data-type="' + type + '">');
-            alert.push('<div><p>' + title + '</p></div>');
-            alert.push('<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>');
-            alert.push('</div>');
-            alert = alert.join('');
+            let popup = layoutr.body.children(`.popup[data-position="${position}"]`),
+                html = 
+`<div class="alert theme-${theme}" data-type="${type}">
+<div><p>${title}</p></div>
+<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>
+</div>`;
             if (popup.length) {
-                popup.append(alert);
+                popup.append(html);
             } else {
-                let html = [];
-                html.push('<div class="popup position ' + position + '" data-position="' + position + '">');
-                html.push(alert);
-                html.push('</div>');
-                html = html.join("");
+                html = `<div class="popup position ${position}" data-position="${position}">${html}`;
+                html = `${html}</div>`;
                 layoutr.body.prepend(html);
             }
         }
