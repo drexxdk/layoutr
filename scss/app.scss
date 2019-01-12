@@ -43,7 +43,6 @@
 @include layoutr-puzzle;
 
 html {
-
     body {
         background-color: $layout-background-color;
         overflow: visible;
@@ -56,6 +55,7 @@ html {
     &.site-loaded,
     &.site-loaded {
         #site {
+            display: block;
             visibility: visible;
             opacity: 1;
         }
