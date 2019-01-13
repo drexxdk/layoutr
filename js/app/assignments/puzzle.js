@@ -1,7 +1,6 @@
 ﻿{
     layoutr.checkAssignmentPuzzle = (assignment) => {
         if (assignment.hasClass('puzzle')) {
-            layoutr.body.off('keydown.assignmentPuzzle');
             let id = assignment.attr('data-id'),
                 image = assignment.attr('data-image'),
                 tiles = layoutr.tryParseInt(assignment.attr('data-tiles'), 0),

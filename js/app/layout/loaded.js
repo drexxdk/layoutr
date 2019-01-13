@@ -31,6 +31,7 @@
 
             if (initial) {
                 layoutr.promiseFont.then(() => {
+                    $('#site').css('display', 'block');
                     layoutr.responsiveHeader();
                     layoutr.contentLoaded(layoutr.content);
                     let scroll = JSON.parse(localStorage.getItem("scroll"));
@@ -39,7 +40,6 @@
                     $.Deferred((defer) => {
                         if (scroll !== null && window.location.href === scroll.href) {
                             let scrollTop = layoutr.body[0].scrollHeight >= scroll.scrollTop ? scroll.scrollTop : layoutr.body[0].scrollHeight;
-                            $('#site').css('display', 'block');
                             $("html, body").animate({
                                 scrollTop: scrollTop
                             }, 0, defer.resolve);
@@ -47,18 +47,18 @@
                             defer.resolve();
                         }
                     }).done(() => {
-                            layoutr.hideLoading();
-                            layoutr.html.addClass('site-loaded');
-                            $(window).scroll($.throttle(layoutr.throttleInterval, false, () => {
-                                layoutr.setScrollTop();
-                            }));
+                        layoutr.hideLoading();
+                        layoutr.html.addClass('site-loaded');
+                        $(window).scroll($.throttle(layoutr.throttleInterval, false, () => {
+                            layoutr.setScrollTop();
+                        }));
 
-                            $(window).resize($.throttle(layoutr.throttleInterval, false, () => {
-                                layoutr.checkModal();
-                                layoutr.setHtmlScroll();
-                                layoutr.setScrollTop();
-                            }));
-                        });
+                        $(window).resize($.throttle(layoutr.throttleInterval, false, () => {
+                            layoutr.checkModal();
+                            layoutr.setHtmlScroll();
+                            layoutr.setScrollTop();
+                        }));
+                    });
                 });
             } else {
                 layoutr.hideLoading();
