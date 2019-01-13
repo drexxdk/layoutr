@@ -52,6 +52,10 @@ html {
                 list-style-position: inside;
                 font-size: 20px;
             }
+
+            a {
+                color: $link-color;
+            }
         }
     }
 }
