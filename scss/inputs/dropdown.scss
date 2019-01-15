@@ -116,7 +116,7 @@
                     position: absolute;
 
                     > li > div:focus {
-                        @include theme-element-soft-darken($light);
+                        @include theme-element-soft-darken($light, true);
                         box-shadow: none;
                     }
                 }

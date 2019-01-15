@@ -50,13 +50,13 @@
     }
 
     > div > .input-group > .input-group-addon {
-        @include theme-element($border, false);
+        @include theme-element($border);
         border-color: $border;
         fill: $color;
     }
 
     html.desktop & .dropdown > .btn:hover {
-        @include theme-element-soft-darken($background);
+        @include theme-element-soft-darken($background, true);
     }
 }
 
@@ -103,7 +103,7 @@
             width: 100%;
             font-size: $font-size;
             -webkit-appearance: none;
-            @include theme-element($white, false);
+            @include theme-element($white);
 
             &:focus {
                 @include focus;
@@ -156,7 +156,7 @@
             align-items: center;
             z-index: $input-group-addon;
             padding: 0 $padding-x;
-            @include theme-element-soft($light, false);
+            @include theme-element-soft($light);
             pointer-events: none;
 
             &:first-child {

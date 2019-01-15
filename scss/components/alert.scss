@@ -9,7 +9,7 @@
         overflow: hidden;
 
         $value: $light;
-        @include theme-element-soft($value);
+        @include theme-element-soft($value, true);
 
         @each $color, $value in $theme-colors {
             &.theme-#{$color} {
@@ -18,7 +18,7 @@
                 .close {
                     html.desktop &:focus,
                     html.desktop &:hover {
-                        @include theme-element-soft-darken($value, false);
+                        @include theme-element-soft-darken($value);
                     }
                 }
             }
@@ -55,7 +55,7 @@
 
             html.desktop &:focus,
             html.desktop &:hover {
-                @include theme-element-soft-darken($value, false);
+                @include theme-element-soft-darken($value);
             }
         }
     }

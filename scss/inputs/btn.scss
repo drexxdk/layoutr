@@ -75,20 +75,20 @@
 
         $default: $light;
 
-        @include theme-element($default);
+        @include theme-element($default, true);
 
         html.desktop &:hover {
-            @include theme-element-darken($default);
+            @include theme-element-darken($default, true);
         }
 
         &[type="submit"] {
 
             $submit: $primary;
 
-            @include theme-element($submit);
+            @include theme-element($submit, true);
 
             html.desktop &:hover {
-                @include theme-element-darken($submit);
+                @include theme-element-darken($submit, true);
             }
         }
 
@@ -98,10 +98,10 @@
 
         @each $color, $value in $theme-colors {
             &.theme-#{$color} {
-                @include theme-element($value);
+                @include theme-element($value, true);
 
                 html.desktop &:hover {
-                    @include theme-element-darken($value);
+                    @include theme-element-darken($value, true);
                 }
             }
         }

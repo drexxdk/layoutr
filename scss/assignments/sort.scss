@@ -20,22 +20,22 @@
         }
 
         .item {
-            @include theme-element($light);
+            @include theme-element($light, true);
             padding: $padding-y $padding-x;
             cursor: pointer;
             user-select: none;
             text-align: center;
 
             html.desktop &:not(.sortable-ghost):hover {
-                @include theme-element-soft($secondary, false);
+                @include theme-element-soft($secondary);
             }
 
             &.valid {
-                @include theme-element-soft($success);
+                @include theme-element-soft($success, true);
             }
 
             &.invalid {
-                @include theme-element-soft($danger);
+                @include theme-element-soft($danger, true);
             }
         }
 
@@ -46,7 +46,7 @@
 
     .assignment.sort .item.sortable-ghost,
     .sort-sortable-chosen {
-        @include theme-element($dark);
+        @include theme-element($dark, true);
     }
 
     .sort-sortable-chosen {

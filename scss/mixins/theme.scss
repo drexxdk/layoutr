@@ -8,18 +8,18 @@
     @include color-yiq($value);
 }
 
-@mixin theme-element($background, $includeBorder: true, $best: false, $horizontal: false) {
-    @include color-yiq($background, $best);
+@mixin theme-element($backgroundColor, $includeBorder: false, $colorBasedOnBackground: false, $horizontalGradient: false) {
+    @include color-yiq($backgroundColor, $colorBasedOnBackground);
 
-    @if $horizontal {
-        background: theme-gradient-horizontal($background);
+    @if $horizontalGradient {
+        background: theme-gradient-horizontal($backgroundColor);
     }
     @else {
-        background: theme-gradient-vertical($background);
+        background: theme-gradient-vertical($backgroundColor);
     }
 
     @if $includeBorder {
-        border: $component-border-width solid theme-border($background);
+        border: $component-border-width solid theme-border($backgroundColor);
     }
 }
 
@@ -35,14 +35,14 @@
     @return theme-darken(theme-soft($background));
 }
 
-@mixin theme-element-darken($background, $includeBorder: true, $best: false, $vertical: true) {
-    @include theme-element(theme-darken($background), $includeBorder, $best, $vertical);
+@mixin theme-element-darken($backgroundColor, $includeBorder: false, $colorBasedOnBackground: false, $horizontalGradient: false) {
+    @include theme-element(theme-darken($backgroundColor), $includeBorder, $colorBasedOnBackground, $horizontalGradient);
 }
 
-@mixin theme-element-soft($background, $includeBorder: true, $best: false, $vertical: true) {
-    @include theme-element(get-theme-element-soft($background), $includeBorder, $best, $vertical);
+@mixin theme-element-soft($backgroundColor, $includeBorder: false, $colorBasedOnBackground: false, $horizontalGradient: false) {
+    @include theme-element(get-theme-element-soft($backgroundColor), $includeBorder, $colorBasedOnBackground, $horizontalGradient);
 }
 
-@mixin theme-element-soft-darken($background, $includeBorder: true, $best: false, $vertical: true) {
-    @include theme-element(get-theme-element-soft-darken($background), $includeBorder, $best, $vertical);
+@mixin theme-element-soft-darken($backgroundColor, $includeBorder: false, $colorBasedOnBackground: false, $horizontalGradient: false) {
+    @include theme-element(get-theme-element-soft-darken($backgroundColor), $includeBorder, $colorBasedOnBackground, $horizontalGradient);
 }

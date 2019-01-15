@@ -6,7 +6,7 @@
 
         @each $color, $value in $theme-colors {
             &:not(.flipped).theme-#{$color} table thead th {
-                @include theme-element($value, false);
+                @include theme-element($value);
             }
 
             &.flipped.theme-#{$color} table thead th {
@@ -28,21 +28,21 @@
             thead,
             tfoot {
                 th {
-                    @include theme-element-darken($light, false);
+                    @include theme-element-darken($light);
                 }
             }
 
             tbody tr:nth-child(even) {
                 th,
                 td {
-                    @include theme-element($light, false);
+                    @include theme-element($light);
                 }
             }
 
             tbody tr:nth-child(odd) {
                 th,
                 td {
-                    @include theme-element-soft($light, false);
+                    @include theme-element-soft($light);
                 }
             }
 

@@ -9,7 +9,7 @@ table.dataTable {
     .dataTables_header,
     .dataTables_footer {
         padding: $spacer-3;
-        @include theme-element($secondary);
+        @include theme-element($secondary, true);
     }
 
     .dataTables_header {
@@ -155,7 +155,7 @@ table.dataTable {
                             height: $font-size;
                             transform: translateY(-50%);
                             border-radius: 50%;
-                            @include theme-element($primary);
+                            @include theme-element($primary, true);
                             display: flex;
                             justify-content: center;
                             align-items: center;
@@ -238,10 +238,10 @@ table.dataTable {
                 }
 
                 .current {
-                    @include theme-element($light);
+                    @include theme-element($light, true);
 
                     html.desktop &:hover {
-                        @include theme-element-darken($light);
+                        @include theme-element-darken($light, true);
                     }
                 }
 
@@ -276,7 +276,7 @@ div.dt-button-info {
     overflow: hidden;
 
     h2 {
-        @include theme-element($light, false);
+        @include theme-element($light);
         border-bottom: $component-border;
         padding: $padding-y $padding-x;
         margin-bottom: 0;

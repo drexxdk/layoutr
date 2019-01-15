@@ -94,7 +94,7 @@
 
                         html.desktop &:focus,
                         html.desktop &:hover {
-                            @include theme-element($gray-200, false);
+                            @include theme-element($gray-200);
 
                             > i > svg {
                                 opacity: 1;
@@ -168,7 +168,7 @@
 
                 html.desktop &:focus,
                 html.desktop &:hover {
-                    @include theme-element-darken($link-color);
+                    @include theme-element-darken($link-color, true);
                     box-shadow: $box-shadow;
                 }
             }

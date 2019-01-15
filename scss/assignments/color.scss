@@ -11,7 +11,7 @@
             .controls > button {
                 @each $color, $value in $colors {
                     &[data-id="#{$color}"] {
-                        @include theme-element($value, false);
+                        @include theme-element($value);
                     }
                 }
             }
@@ -33,10 +33,10 @@
 
                 @each $color, $value in $colors {
                     &[data-id="#{$color}"] {
-                        @include theme-element-soft($value, false);
+                        @include theme-element-soft($value);
 
                         &.active {
-                            @include theme-element($value, false);
+                            @include theme-element($value);
                         }
                     }
                 }
@@ -87,7 +87,7 @@
 
                 @each $color, $value in $colors {
                     &[data-id="#{$color}"] {
-                        @include theme-element($value, false);
+                        @include theme-element($value);
                     }
                 }
             }

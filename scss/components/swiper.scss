@@ -8,7 +8,7 @@
     }
 
     border: $component-border;
-    @include theme-element($light, false);
+    @include theme-element($light);
 
     .swiper-wrapper {
     }
@@ -18,7 +18,7 @@
         margin-right: -$component-border-width;
         margin-bottom: -$component-border-width;
         padding: $spacer-3;
-        @include theme-element($secondary);
+        @include theme-element($secondary, true);
 
         .prev {
             order: 1;
@@ -36,12 +36,12 @@
             > div {
 
                 > span {
-                    @include theme-element($dark);
+                    @include theme-element($dark, true);
                     opacity: $opacity-inactive;
                 }
 
                 > [class$='-active'] {
-                    @include theme-element($light);
+                    @include theme-element($light, true);
                 }
             }
         }

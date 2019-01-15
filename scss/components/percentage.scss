@@ -14,7 +14,7 @@
         display: flex;
         overflow: hidden;
         border-radius: $component-border-radius;
-        @include theme-element($light);
+        @include theme-element($light, true);
         min-height: $component-line-height + ($padding-y * 2) + ($component-border-width * 2);
 
         &.striped {
@@ -31,12 +31,12 @@
         > span {
             padding: $padding-y $padding-x;
             text-align: center;
-            @include theme-element($primary, false);
+            @include theme-element($primary);
         }
 
         @each $color, $value in $theme-colors {
             &.theme-#{$color} > span {
-                @include theme-element($value, false);
+                @include theme-element($value);
             }
         }
     }

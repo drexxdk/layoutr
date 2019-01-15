@@ -38,7 +38,7 @@
         @each $color, $value in $theme-colors {
             &.theme-#{$color} li {
                 > *:not(ol):before {
-                    @include theme-element($value);
+                    @include theme-element($value, true);
                 }
 
                 html.desktop & > a:hover:after {
@@ -57,7 +57,7 @@
             position: relative;
             display: block;
             line-height: $component-line-height;
-            @include theme-element($list-background-color);
+            @include theme-element($list-background-color, true);
             margin: ($spacer / 2) 0 ($spacer / 2) ($list-number-width + ($spacer / 2) + ($component-border-width * 2));
             padding: $padding-y $padding-x;
 
@@ -72,14 +72,14 @@
                 counter-increment: li;
                 text-align: center;
                 font-weight: bold;
-                @include theme-element($list-number-background-color);
+                @include theme-element($list-number-background-color, true);
             }
         }
 
         li > button,
         li > a {
             html.desktop &:focus {
-                @include theme-element-darken($list-background-color);
+                @include theme-element-darken($list-background-color, true);
             }
 
             html.desktop &:hover:after {
@@ -102,7 +102,7 @@
     html.desktop & ol.list {
         li > button:hover,
         li > a:hover {
-            @include theme-element-darken($list-background-color);
+            @include theme-element-darken($list-background-color, true);
         }
     }
 }

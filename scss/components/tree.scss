@@ -51,7 +51,7 @@
 
         li {
             a.label.active {
-                @include theme-element($primary, false);
+                @include theme-element($primary);
                 pointer-events: none;
                 text-decoration: none;
             }

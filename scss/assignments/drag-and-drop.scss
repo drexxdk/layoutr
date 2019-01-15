@@ -3,7 +3,7 @@
 @mixin layoutr-drag-and-drop {
     .assignment.drag-and-drop {
         .header {
-            @include theme-element($secondary, false);
+            @include theme-element($secondary);
             position: relative;
 
             .title {
@@ -60,7 +60,7 @@
             }
 
             .item:not(.sortable-ghost) label:hover {
-                @include theme-element-soft($secondary, false);
+                @include theme-element-soft($secondary);
             }
         }
 
@@ -74,16 +74,16 @@
 
         .item {
             > label {
-                @include theme-element($light);
+                @include theme-element($light, true);
                 padding: $padding-y $padding-x;
             }
 
             &.valid > label {
-                @include theme-element-soft($success);
+                @include theme-element-soft($success, true);
             }
 
             &.invalid > label {
-                @include theme-element-soft($danger);
+                @include theme-element-soft($danger, true);
             }
         }
 
@@ -114,7 +114,7 @@
 
     .assignment.drag-and-drop .item.sortable-ghost label,
     .drag-and-drop-sortable-chosen label {
-        @include theme-element($dark);
+        @include theme-element($dark, true);
     }
 
     .drag-and-drop-sortable-chosen {

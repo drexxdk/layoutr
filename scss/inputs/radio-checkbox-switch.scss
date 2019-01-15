@@ -22,7 +22,7 @@
             @include hidden;
 
             &:checked + label > i {
-                @include theme-element($primary);
+                @include theme-element($primary, true);
             }
 
             & + label:focus > i {
@@ -119,7 +119,7 @@
         > label > i {
             width: $font-size * 2;
             height: $font-size;
-            @include theme-element($component-border-color);
+            @include theme-element($component-border-color, true);
             position: relative;
             margin-right: ($spacer / 2);
 

@@ -80,7 +80,7 @@ header {
     border-bottom: $layout-border;
     display: flex;
     flex-shrink: 0;
-    @include theme-element($light, false);
+    @include theme-element($light);
 
     > .title:first-child {
         padding-left: $padding-x;

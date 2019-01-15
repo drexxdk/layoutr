@@ -14,7 +14,7 @@
             > .line {
                 width: 100%;
                 height: $spacer;
-                @include theme-element($light);
+                @include theme-element($light, true);
                 border-radius: $component-border-radius;
             }
 
@@ -26,7 +26,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                @include theme-element($light);
+                @include theme-element($light, true);
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
@@ -44,7 +44,7 @@
 
         @each $color, $value in $theme-colors {
             > div > span.theme-#{$color} {
-                @include theme-element($value);
+                @include theme-element($value, true);
             }
         }
     }
