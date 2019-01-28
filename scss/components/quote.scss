@@ -6,11 +6,11 @@
 
         &.large > .text {
             > p {
-                font-size: $font-size-lg;
+                font-size: $font-size-large;
 
                 > svg {
-                    width: $font-size-lg;
-                    height: $font-size-lg;
+                    width: $font-size-large;
+                    height: $font-size-large;
                 }
             }
 
@@ -41,7 +41,7 @@
                 display: block;
                 margin-top: $spacer / 2;
                 opacity: $font-light-opacity;
-                font-size: $font-size-sm;
+                font-size: $font-size-small;
             }
         }
     }

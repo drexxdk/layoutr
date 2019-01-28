@@ -98,6 +98,7 @@ button {
     border: none;
     background-color: transparent;
     user-select: none;
+    font-size: $font-size;
 }
 
 
@@ -118,8 +119,4 @@ pre {
 
 video {
     width: 100%;
-}
-
-button {
-    font-size: $font-size;
 }

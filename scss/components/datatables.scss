@@ -50,6 +50,7 @@ table.dataTable {
 
             thead {
                 th {
+                    font-weight: $font-weight-normal;
 
                     &:focus > div {
                         @include focus;
@@ -70,6 +71,7 @@ table.dataTable {
 
                             > span:first-child {
                                 flex-grow: 1;
+                                font-weight: $font-weight-bold;
                             }
 
                             > * + * {

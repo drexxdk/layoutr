@@ -28,8 +28,7 @@
                 if (text.indexOf('$$') === 0) {
                     li.attr('data-math', text);
                 }
-                return 
-`<li data-id="${li.val()}"${li.is(':selected') ? ' class="selected"' : ''}>
+                return `<li data-id="${li.val()}"${li.is(':selected') ? ' class="selected"' : ''}>
     <div tabindex="0" class="theme-light">
         <label>${text}</label>
         <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
