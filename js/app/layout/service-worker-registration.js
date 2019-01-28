@@ -30,7 +30,7 @@
             var opts = {
                 scope: repository,
                 updateViaCache: 'imports'
-            }
+            };
 
             navigator.serviceWorker.register(repository + 'service-worker.js', opts).then((reg) => {
                 // updatefound is fired if service-worker.js changes.

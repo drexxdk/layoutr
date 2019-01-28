@@ -8,7 +8,7 @@
         } else {
             layoutr.showPopupAlert('You are offline', 'danger', 'bottom right', 'connected');
         }
-    }
+    };
 
     $(() => {
         window.addEventListener('online', layoutr.setOnline);

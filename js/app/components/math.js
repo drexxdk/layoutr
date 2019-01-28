@@ -20,8 +20,9 @@
                         $this.removeClass('math');
                     });
                 });
-            }).catch(() => {
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load math', 'danger');
+                console.error(e);
             });
         }
     };

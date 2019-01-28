@@ -146,7 +146,7 @@
                         // move up
                         item.animate({
                             top: `${current.top * tile}%`
-                        }, !initial ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, () => {
                             if (!initial) {
                                 movesUsed++;
                             }
@@ -160,7 +160,7 @@
                         // move down
                         item.animate({
                             top: `${current.top * tile}%`
-                        }, !initial ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, () => {
                             if (!initial) {
                                 movesUsed++;
                             }
@@ -174,7 +174,7 @@
                         // move left
                         item.animate({
                             left: `${current.left * tile}%`
-                        }, !initial ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, () => {
                             if (!initial) {
                                 movesUsed++;
                             }
@@ -188,7 +188,7 @@
                         // move right
                         item.animate({
                             left: `${current.left * tile}%`
-                        }, !initial ? transitionTime : 0, function () {
+                        }, !initial ? transitionTime : 0, () => {
                             if (!initial) {
                                 movesUsed++;
                             }

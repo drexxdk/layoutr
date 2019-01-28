@@ -11,7 +11,7 @@
         layoutr.checkMap(element.find('.map'));
         layoutr.checkDatatable(element.find('.dataTable'));
         layoutr.checkSwiper(element.find('.swiper'));
-    }
+    };
 
     layoutr.pageLoaded = (initial) => {
         let promiseScrollTop = new Promise((resolve, reject) => {

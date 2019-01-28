@@ -16,8 +16,9 @@
                 media.each((i, item) => {
                     new Plyr(item);
                 });
-            }).catch(() => {
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load media', 'danger');
+                console.error(e);
             });
         }
     };

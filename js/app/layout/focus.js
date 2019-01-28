@@ -36,14 +36,15 @@
             });
 
             let height = $(window).height();
-            $(window).resize(function () {
+            $(window).resize(() => {
                 // do nothing if the height is the same
                 if ($(window).height() === height) return;
                 height = $(window).height();
                 component.removeAttr('style');
             });
-        }).catch(() => {
+        }).catch((e) => {
             layoutr.showPopupAlert('Failed to load focus', 'danger');
+            console.error(e);
         });
     };
 

@@ -3,7 +3,7 @@
         let selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(document.createRange());
-    }
+    };
 
     layoutr.stopTTS = () => {
         layoutr.clearSelection();
@@ -33,7 +33,7 @@
                             range.setStart(range.startContainer, range.startOffset + 1);
                         }
                     } catch (e) {
-
+                        console.error(e);
                     }
 
                     try {
@@ -47,14 +47,14 @@
                             range.setEnd(range.endContainer, range.endOffset - 1);
                         }
                     } catch (e) {
-
+                        console.error(e);
                     }
 
                     selection.removeAllRanges();
                     selection.addRange(range);
                 }
                 return selection;
-            }
+            };
 
             let getText = (node, selection) => {
                 let text = [],
@@ -99,7 +99,7 @@
                                 getTextNodes(node.childNodes[i]);
                             }
                         }
-                    }
+                    };
 
                 getTextNodes(node);
                 if (text.length && text.length > 1) {
@@ -107,7 +107,7 @@
                 }
                 text = text.join(' ').replace(/(?:\r\n|\r|\n)/g, ' ').replace(/ +\./g, '. ').replace(/\s\s+/g, ' ').replace(',.', '.').trim();
                 return text;
-            }
+            };
 
             if (!layoutr.html.hasClass('tts-loaded')) {
                 layoutr.showLoading();
@@ -161,8 +161,9 @@
                         layoutr.html.attr('data-tts', true);
                     }
                 });
-            }).catch(() => {
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load tts', 'danger');
+                console.error(e);
             });
         }
     };

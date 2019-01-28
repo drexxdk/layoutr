@@ -12,7 +12,7 @@
                     h1.removeClass('show-title');
                 }
             }
-        }
+        };
 
         $(window).on('resize', () => {
             check();

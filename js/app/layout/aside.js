@@ -6,7 +6,7 @@
             layoutr.html.trigger('aside-changed.datatables');
             layoutr.html.trigger('aside-changed.rb');
             layoutr.html.trigger('aside-changed.map');
-        }
+        };
 
         if (layoutr.isTransitions()) {
             let awaitInterval = setInterval(() => {
@@ -23,7 +23,7 @@
             transitionLock = false;
             trigger();
         }
-    }
+    };
 
     layoutr.toggleAside = (aside, pageChanged) => {
         if (!transitionLock) {

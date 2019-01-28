@@ -18,12 +18,13 @@
         if (href1 !== href2) {
             layoutr.showLoading();
             layoutr.load.css(href2).then(() => {
-                stylesheet.remove()
-            }).catch(() => {
+                stylesheet.remove();
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load theme', 'danger');
+                console.error(e);
             }).finally(() => {
                 layoutr.hideLoading();
             });
         }
-    }
+    };
 }

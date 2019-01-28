@@ -236,8 +236,9 @@
                         }
                     });
                 });
-            }).catch(() => {
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load datatables', 'danger');
+                console.error(e);
             });
         } else {
             layoutr.html.off('aside-changed.datatables');

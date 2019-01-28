@@ -80,8 +80,9 @@
                     }
                 });
             });
-        }).catch(() => {
+        }).catch((e) => {
             layoutr.showPopupAlert('Failed to load settings html', 'danger');
+            console.error(e);
         });
 
         layoutr.right.on('click', '#settings-clear-localstorage', () => {

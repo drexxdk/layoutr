@@ -40,13 +40,13 @@
                     }
                 });
             };
-        }
+        };
 
         return {
             css: _load('link'),
             js: _load('script'),
             img: _load('img'),
             html: _load('html')
-        }
+        };
     })();
 }

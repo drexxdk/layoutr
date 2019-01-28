@@ -44,7 +44,7 @@
                     dataContent = $this.attr('data-modal-content'),
                     dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
 
-                let template = function() {
+                let template = () => {
                     let result;
 
                     if (type === 'image' && $this.attr('data-modal-img').length) {

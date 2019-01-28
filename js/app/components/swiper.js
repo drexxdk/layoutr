@@ -17,7 +17,7 @@
                     let $this = $(e);
                     if (!$this.hasClass('loaded')) {
                         $this.append('<div class="swiper-footer"></div>');
-                        $this.children('.swiper-footer').append('<div></div>')
+                        $this.children('.swiper-footer').append('<div></div>');
 
                         let footer = $this.find('> .swiper-footer > div'),
                             pagination = $this.hasClass('pagination'),
@@ -43,7 +43,7 @@
                             spaceBetween = 16;
                         }
 
-                        var swiper = new Swiper($this[0], {
+                        let swiper = new Swiper($this[0], {
                             loop: loop,
                             slidesPerView: slidesPerView,
                             spaceBetween: spaceBetween,
@@ -57,12 +57,12 @@
                             // Navigation arrows
                             navigation: {
                                 nextEl: '.swiper-footer .next',
-                                prevEl: '.swiper-footer .prev',
+                                prevEl: '.swiper-footer .prev'
                             },
 
                             // And if we need scrollbar
                             scrollbar: {
-                                el: '.swiper-scrollbar',
+                                el: '.swiper-scrollbar'
                             },
                             breakpoints: breakpoints,
                             on: {
@@ -71,18 +71,14 @@
                                 },
                                 slideChange: () => {
                                     layoutr.checkLazy($this.find('.lazy'));
-                                },
-                                paginationRender: (el) => {
-                                    //if (navigation) {
-                                    //    $(el).append(footer.children('.btn'))
-                                    //}
                                 }
                             }
                         });
                     }
                 });
-            }).catch(() => {
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load swiper', 'danger');
+                console.error(e);
             });
         }
     };

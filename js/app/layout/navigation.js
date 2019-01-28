@@ -14,15 +14,17 @@
                 if (layoutr.body.children('#svg-browser').length === 0) {
                     layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/browser.html').then((response) => {
                         $(response).prependTo(layoutr.body);
-                    }).catch(() => {
+                    }).catch((e) => {
                         layoutr.showPopupAlert('Failed to load browser svg html', 'danger');
+                        console.error(e);
                     });
                 }
                 if (layoutr.body.children('#svg-os').length === 0) {
                     layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/os.html').then((response) => {
                         $(response).prependTo(layoutr.body);
-                    }).catch((response) => {
+                    }).catch((e) => {
                         layoutr.showPopupAlert('Failed to load os svg html', 'danger');
+                        console.error(e);
                     });
                 }
             } else {
@@ -50,8 +52,9 @@
                 }
                 layoutr.content.find('#error-title').html(title);
                 layoutr.html.trigger('header-changed.responsiveHeader');
-            }).catch((response) => {
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load content html', 'danger');
+                console.error(e);
             }).finally(() => {
                 layoutr.promiseCSS.then(() => {
                     layoutr.pageLoaded(initial);
@@ -120,7 +123,7 @@
     };
 
     $(() => {
-        layoutr.load.html(layoutr.host + layoutr.ajax + 'layout/navigation.html').then(function (response) {
+        layoutr.load.html(layoutr.host + layoutr.ajax + 'layout/navigation.html').then((response) => {
             layoutr.left.find('> .content > div').html(response);
             layoutr.navigationTree = layoutr.left.find('.tree');
             layoutr.navigation = JSON.parse(localStorage.getItem("navigation"));
@@ -140,16 +143,17 @@
             } else {
                 layoutr.navigationTree.find('a.label[href=""]').addClass('active');
             }
-        }).catch(function () {
+        }).catch((e) => {
             layoutr.showPopupAlert('Failed to load navigation html', 'danger');
+            console.error(e);
         });
 
         if (layoutr.url && layoutr.url.p) {
             layoutr.loadPage(layoutr.url.p, true, true);
         } else {
-            var l = window.location;
-            var segmentCount = l.origin.endsWith('github.io') ? 1 : 0;
-            var url = `/${l.pathname.slice(1).split('/').slice(segmentCount)}`;
+            let l = window.location,
+                segmentCount = l.origin.endsWith('github.io') ? 1 : 0,
+                url = `/${l.pathname.slice(1).split('/').slice(segmentCount)}`;
             layoutr.loadPage(url, true, true);
         }
         layoutr.left.on('click', '.tree a.label:not(.active)', (e) => {

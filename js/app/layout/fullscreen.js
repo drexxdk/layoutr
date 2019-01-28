@@ -1,5 +1,5 @@
 ﻿{
-    var fullscreenScrollTop;
+    let fullscreenScrollTop;
 
     layoutr.requestFullScreen = () => {
         if (!layoutr.fullscreen && bowser.desktop) {
@@ -19,12 +19,7 @@
         }
     };
 
-    document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
-    document.addEventListener('mozfullscreenchange', fullscreenChange, false);
-    document.addEventListener('fullscreenchange', fullscreenChange, false);
-    document.addEventListener('MSFullscreenChange', fullscreenChange, false);
-
-    function fullscreenChange(e) {
+    let fullscreenChange = () => {
         layoutr.fullscreen = !layoutr.fullscreen;
         if (!layoutr.fullscreen && bowser.desktop) {
             if (layoutr.isModal()) {
@@ -34,6 +29,11 @@
             layoutr.html.scrollTop(fullscreenScrollTop);
         }
     };
+
+    document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
+    document.addEventListener('mozfullscreenchange', fullscreenChange, false);
+    document.addEventListener('fullscreenchange', fullscreenChange, false);
+    document.addEventListener('MSFullscreenChange', fullscreenChange, false);
 
     layoutr.exitFullScreen = () => {
         if (layoutr.fullscreen && bowser.desktop) {

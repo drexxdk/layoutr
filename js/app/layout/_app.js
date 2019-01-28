@@ -1,6 +1,6 @@
 ﻿{
-    layoutr.promiseCSS = layoutr.load.css(`${layoutr.host}dist/css/theme/${layoutr.theme}.css`).catch(() => {
-        console.error('Failed to load css');
+    layoutr.promiseCSS = layoutr.load.css(`${layoutr.host}dist/css/theme/${layoutr.theme}.css`).catch((e) => {
+        console.error('Failed to load css:', e);
     });
     
     $(() => {
@@ -10,8 +10,9 @@
 
         layoutr.load.html(`${layoutr.host}${layoutr.ajax}svg/base.html`).then((response) => {
             $(response).prependTo(layoutr.body);
-        }).catch(() => {
+        }).catch((e) => {
             layoutr.showPopupAlert('Failed to load base svg html', 'danger');
+            console.error(e);
         });
 
         if (bowser.android) {

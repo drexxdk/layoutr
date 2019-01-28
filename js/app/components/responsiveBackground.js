@@ -19,7 +19,7 @@
                         closestHeight,
                         heightPercentage;
 
-                    function getHeightInPercentage(num, amount) {
+                    let getHeightInPercentage = (num, amount) => {
                         return num * 100 / amount;
                     };
 
@@ -35,7 +35,7 @@
                         heightPercentage = 100;
                     }
 
-                    function getHeightInPixels(num, amount) {
+                    let getHeightInPixels = (num, amount) => {
                         return num * amount / 100;
                     };
 
@@ -54,13 +54,14 @@
                         layoutr.load.img(src).then(() => {
                             element.css('background-image', `url(${src})`);
                             element.attr('data-rb-current', closestWidth);
-                        }).catch(() => {
+                        }).catch((e) => {
                             layoutr.showPopupAlert('Failed to load responsive background image', 'danger');
+                            console.error(e);
                         });
                     }
                 }
             }
-        }
+        };
 
         if (elements.length) {
             elements.each((i, e) => {

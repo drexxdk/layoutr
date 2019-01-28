@@ -89,7 +89,7 @@
             });
 
             assignment.on('click', '.place', (e) => {
-                let $this = $(e.currentTarget)
+                let $this = $(e.currentTarget);
                 assignment.removeClass('moving');
                 let checked = getChecked();
                 if (checked.length) {

@@ -65,7 +65,7 @@
                     let correct = getCorrect();
                     $(correct).each((i, data) => {
                         let selected = getItems(data.id),
-                            append = (data.value === selected) ? correctSvg : wrongSvg;
+                            append = data.value === selected ? correctSvg : wrongSvg;
                         controls.filter(`[data-id="${data.id}"]`).append(append);
                     });
                 }
@@ -97,6 +97,6 @@
                 let $this = $(e.currentTarget);
                 $this.attr('data-id', activeId);
             });
-        };
+        }
     };
 }

@@ -1,5 +1,5 @@
 ﻿{
-    var scrollbarWidth = () => {
+    let scrollbarWidth = () => {
         layoutr.body.append('<div id="scrollbar-width"></div>');
         let element = layoutr.body.children('#scrollbar-width');
         element.css({

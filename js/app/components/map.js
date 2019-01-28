@@ -35,9 +35,10 @@
                     layoutr.html.on('aside-changed.map', () => {
                         google.maps.event.trigger($this[0], 'resize');
                     });
-                })
-            }).catch(() => {
+                });
+            }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load maps', 'danger');
+                console.error(e);
             });
         } else {
             $(window).unbind('resize.map');

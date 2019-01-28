@@ -1,6 +1,6 @@
 ﻿{
     String.prototype.replaceAll = function (search, replacement) {
-        var target = this;
+        let target = this;
         return target.replace(new RegExp(search, 'g'), replacement);
     };
 
@@ -9,7 +9,7 @@
             return Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
                 .substring(1);
-        }
+        };
         return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
     };
 
@@ -58,15 +58,16 @@
 
     layoutr.isFocus = () => {
         return layoutr.html.hasClass('focus') && layoutr.html.attr('data-focus') === 'true';
-    }
+    };
 
     layoutr.isTTS = () => {
         return layoutr.html.hasClass('tts');
-    }
+    };
 
     layoutr.isTTSEnabled = () => {
         return layoutr.html.hasClass('tts') && layoutr.html.attr('data-tts') === 'true';
-    }
+    };
+
     layoutr.isAuthentication = () => {
         return layoutr.html.attr('data-authentication') !== '';
     };
@@ -124,6 +125,7 @@
         try {
             retValue = JSON.parse(str);
         } catch (e) {
+            console.error(e);
         }
         return retValue;
     };

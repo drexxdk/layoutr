@@ -27,6 +27,7 @@
                 });
             }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load assignment', 'danger');
+                console.error(e);
             });
         } else {
             layoutr.arrowKeyLocked = false;

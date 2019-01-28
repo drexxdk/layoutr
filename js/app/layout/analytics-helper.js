@@ -74,8 +74,8 @@
                         'hit sent, check the Analytics dashboard');
                 }
             })
-            .catch((err) => {
-                console.warn('Unable to send the analytics event', err);
+            .catch((e) => {
+                console.error('Unable to send the analytics event:', e);
             });
     }
 }
