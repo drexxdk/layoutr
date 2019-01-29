@@ -1,7 +1,8 @@
 ﻿{
     layoutr.checkResponsiveBackground = (elements) => {
         let setRb = (element) => {
-            let image = element.attr('data-rb-image'),
+            let clone = element.children('.clone'),
+                image = element.attr('data-rb-image'),
                 filetype = element.attr('data-rb-image-filetype'),
                 sizesWidth = element.attr('data-rb-sizes'),
                 current = element.attr('data-rb-current'),
@@ -13,6 +14,8 @@
                 if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
                     (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
                     sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort((a, b) => { return a - b; });
+                    clone.attr('style', element.attr('style'));
+
                     let goalWidth = element.width(),
                         goalHeight = element.height(),
                         closestWidth,
@@ -52,7 +55,11 @@
                     if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
                         let src = `${image}-${closestWidth}.${filetype}`;
                         layoutr.load.img(src).then(() => {
-                            element.css('background-image', `url(${src})`);
+                            clone.css('background-image', `url(${src})`);
+                            setTimeout(function () {
+                                element.css('background-image', `url(${src})`);
+                            }, 500);
+                            // todo: find replacement for 500 ms timeout
                             element.attr('data-rb-current', closestWidth);
                         }).catch((e) => {
                             layoutr.showPopupAlert('Failed to load responsive background image', 'danger');

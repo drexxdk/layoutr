@@ -9,8 +9,7 @@ html {
         #content > div {
             > .content-header {
                 &:not(.full) {
-
-                    > div > div {
+                    .content {
                         left: calc(50% - #{$spacer * 2});
                         margin-left: $spacer * 2;
                         margin-right: $spacer * 2;
@@ -146,7 +145,7 @@ html {
                     height: auto;
                     min-height: inherit;
 
-                    > div > div {
+                    .content {
                         position: absolute;
                         margin: 0;
                         width: 100%;
