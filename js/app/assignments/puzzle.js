@@ -35,7 +35,7 @@
     <div style="background-image: url(${image})"></div>
 </div>
 <div class="buttons">
-    <div class="flex wrap column gap-2">
+    <div class="flex wrap gap-2">
         <button type="submit" class="btn start">Start</button>
         <button type="button" class="btn theme-secondary give-up">Give up</button>
     </div>

@@ -89,7 +89,7 @@
                 let table_header_buttons = (wrapper, header) => {
                     let container = wrapper.find('.dt-buttons');
 
-                    container.append(`<div class="flex column wrap ${gap}"></div>`);
+                    container.append(`<div class="flex wrap ${gap}"></div>`);
 
                     let div = container.children('div'),
                         buttons = container.children('button');
@@ -129,7 +129,7 @@
                     next.appendTo(span);
                 };
                 let table_footer_paginate = (wrapper, footer, paginate) => {
-                    paginate.addClass('flex column wrap');
+                    paginate.addClass('flex wrap');
                     footer.append('<div class="dataTables_paginate_container"></div>');
                     let container = footer.find('.dataTables_paginate_container');
                     paginateFix(paginate);
@@ -181,13 +181,13 @@
                             let instance = settings.oInstance.api(true),
                                 wrapper = $(settings.nTableWrapper);
 
-                            wrapper.append(`<div class="dataTables_header flex grow"><div class="flex column wrap ${gap}"></div></div>`);
+                            wrapper.append(`<div class="dataTables_header flex column grow"><div class="flex wrap ${gap}"></div></div>`);
                             let header = wrapper.find('> .dataTables_header > div');
 
                             wrapper.append('<div class="dataTables_content table"></div>');
                             let content = wrapper.find('> .dataTables_content');
 
-                            wrapper.append(`<div class="dataTables_footer"><div class="flex column wrap vertical-center ${gap}"></div></div>`);
+                            wrapper.append(`<div class="dataTables_footer"><div class="flex wrap vertical-center ${gap}"></div></div>`);
                             let footer = wrapper.find('> .dataTables_footer > div');
 
                             table_header_input(instance);

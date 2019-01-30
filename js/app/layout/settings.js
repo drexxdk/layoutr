@@ -36,7 +36,7 @@
             if (name === 'focus' && value) {
                 layoutr.enableFocus();
             } else if (name === 'tts' && value) {
-                layoutr.enableTTS();
+                //layoutr.enableTTS();
             } else if (name === 'swipe' && value) {
                 layoutr.enableSwipe();
             }

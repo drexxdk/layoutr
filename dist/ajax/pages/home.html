@@ -73,7 +73,7 @@
         <section>
             <h3>Settings</h3>
             <div class="alert">
-                <div class="flex gap-2">
+                <div class="grid gap-2">
                     <p>Settings work by applying classes to html and saving it in local storage.</p>
                     <ul class="list">
                         <li>
@@ -212,55 +212,55 @@
         </section>
         <section>
             <h3>Browser support</h3>
-            <div class="flex gap-2">
+            <div class="grid gap-2">
                 <p>The site has been optimized for the newest version of these browsers:</p>
                 <div>
-                    <div id="browsers" class="flex column wrap center gap-2">
+                    <div id="browsers" class="flex wrap center gap-2">
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-chrome"></use></svg>
-                            <div class="flex center">
+                            <div class="flex column center">
                                 <b>Google</b>
                                 <span>Chrome</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-firefox"></use></svg>
-                            <div class="flex center">
+                            <div class="flex column center">
                                 <b>Mozilla</b>
                                 <span>Firefox</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-edge"></use></svg>
-                            <div class="flex center">
+                            <div class="flex column center">
                                 <b>Microsoft</b>
                                 <span>Edge</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-safari"></use></svg>
-                            <div class="flex center">
+                            <div class="flex column center">
                                 <b>Apple</b>
                                 <span>Safari</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-opera"></use></svg>
-                            <div class="flex center">
+                            <div class="flex column center">
                                 <b>Opera</b>
                                 <span>Opera</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-uc"></use></svg>
-                            <div class="flex center">
+                            <div class="flex column center">
                                 <b>UCWeb</b>
                                 <span>UC Browser</span>
                             </div>
                         </div>
                         <div class="grid center gap-2 width-130">
                             <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-browser-internet"></use></svg>
-                            <div class="flex center">
+                            <div class="flex column center">
                                 <b>Samsung</b>
                                 <span>Internet</span>
                             </div>
@@ -273,24 +273,24 @@
             <h3>Platform support</h3>
             <div class="grid gap-3">
                 <p>The site has been optimized for these platforms:</p>
-                <div id="platforms" class="flex column wrap center gap-2">
+                <div id="platforms" class="flex wrap center gap-2">
                     <div class="grid center gap-2 width-130">
                         <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-windows"></use></svg>
-                        <div class="flex center">
+                        <div class="flex column center">
                             <b>Microsoft</b>
                             <span>Windows</span>
                         </div>
                     </div>
                     <div class="grid center gap-2 width-130">
                         <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-android"></use></svg>
-                        <div class="flex center">
+                        <div class="flex column center">
                             <b>Google</b>
                             <span>Android</span>
                         </div>
                     </div>
                     <div class="grid center gap-2 width-130">
                         <svg class="width-80 height-80" focusable="false"><use xlink:href="#svg-ios"></use></svg>
-                        <div class="flex center">
+                        <div class="flex column center">
                             <b>Apple</b>
                             <span>macOS / iOS</span>
                         </div>
@@ -303,7 +303,7 @@
             <div class="grid gap-3">
                 <p>Results from 27 July 2018:</p>
                 <div>
-                    <div id="lighthouse" class="flex column wrap center gap-2">
+                    <div id="lighthouse" class="flex wrap center gap-2">
                         <div class="grid center gap-2 width-170">
                             <div class="percentage-circle p65 theme-warning">
                                 <span>65</span>
@@ -364,17 +364,17 @@
         </section>
         <section>
             <h3>GTmetric</h3>
-            <div class="flex gap-3">
+            <div class="flex column gap-3">
                 <p>Results from 05 July 2018:</p>
                 <div>
-                    <div id="gtmetric" class="flex column grow wrap gap-3">
-                        <div class="flex">
+                    <div id="gtmetric" class="flex grow wrap gap-3">
+                        <div class="flex column">
                             <h5>Performance Scores</h5>
                             <div class="alert">
-                                <div class="flex column grow wrap gap-8">
+                                <div class="flex grow wrap gap-8">
                                     <div>
                                         <h6>PageSpeed Score</h6>
-                                        <div class="flex column vertical-center score gap-2">
+                                        <div class="flex vertical-center score gap-2">
                                             <span class="grade">A</span>
                                             <span class="number">(95%)</span>
                                             <i class="arrow">
@@ -384,7 +384,7 @@
                                     </div>
                                     <div>
                                         <h6>YSlow Score</h6>
-                                        <div class="flex column vertical-center score gap-2">
+                                        <div class="flex vertical-center score gap-2">
                                             <span class="grade">A</span>
                                             <span class="number">(90%)</span>
                                             <i class="arrow">
@@ -395,13 +395,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex">
+                        <div class="flex column">
                             <h5>Page Details</h5>
                             <div class="alert">
-                                <div class="flex column grow wrap gap-8">
+                                <div class="flex grow wrap gap-8">
                                     <div>
                                         <h6>Fully Loaded Time</h6>
-                                        <div class="flex column vertical-center score gap-2">
+                                        <div class="flex vertical-center score gap-2">
                                             <span class="large">0.9s</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
@@ -410,16 +410,16 @@
                                     </div>
                                     <div>
                                         <h6>Total Page Size</h6>
-                                        <div class="flex column vertical-center score gap-2">
+                                        <div class="flex vertical-center score gap-2">
                                             <span class="large">235KB</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
                                             </i>
                                         </div>
                                     </div>
-                                    <div class="flex">
+                                    <div>
                                         <h6>Requests</h6>
-                                        <div class="flex column vertical-center score gap-2">
+                                        <div class="flex vertical-center score gap-2">
                                             <span class="large">16</span>
                                             <i class="arrow">
                                                 <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>

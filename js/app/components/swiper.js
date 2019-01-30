@@ -28,10 +28,10 @@
                             slidesPerView = layoutr.tryParseInt($this.attr('data-slides-per-view'), 1),
                             breakpoints = layoutr.tryParseJSON($this.attr('data-breakpoints'), {});
 
-                        footer.addClass('flex column wrap gap-3 center');
+                        footer.addClass('flex wrap gap-3 center');
 
                         if (pagination || dynamicBullets) {
-                            footer.append('<div class="swiper-pagination"><div class="flex column wrap gap-1 center"></div></div>');
+                            footer.append('<div class="swiper-pagination"><div class="flex wrap gap-1 center"></div></div>');
                         }
 
                         if (navigation) {
