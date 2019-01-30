@@ -12,7 +12,7 @@
             }
         });
     }).catch((e) => {
-        layoutr.showPopupAlert('Failed to load fonts', 'danger');
+        //layoutr.showPopupAlert('Failed to load fonts', 'danger');
         console.error(e);
     });
 }

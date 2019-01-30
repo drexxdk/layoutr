@@ -125,7 +125,6 @@
         try {
             retValue = JSON.parse(str);
         } catch (e) {
-            console.error(e);
         }
         return retValue;
     };
