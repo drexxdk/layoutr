@@ -33,16 +33,13 @@
             flex-grow: 1;
             order: 2;
 
-            > div {
+            > span {
+                @include theme-element($dark, true);
+                opacity: $opacity-inactive;
+            }
 
-                > span {
-                    @include theme-element($dark, true);
-                    opacity: $opacity-inactive;
-                }
-
-                > [class$='-active'] {
-                    @include theme-element($light, true);
-                }
+            > [class$='-active'] {
+                @include theme-element($light, true);
             }
         }
 

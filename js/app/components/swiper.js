@@ -31,7 +31,7 @@
                         footer.addClass('flex wrap gap-3 center');
 
                         if (pagination || dynamicBullets) {
-                            footer.append('<div class="swiper-pagination"><div class="flex wrap gap-1 center"></div></div>');
+                            footer.append('<div class="swiper-pagination flex wrap gap-1 center vertical-center"></div>');
                         }
 
                         if (navigation) {
@@ -50,7 +50,7 @@
 
                             // If we need pagination
                             pagination: {
-                                el: '.swiper-pagination > div',
+                                el: '.swiper-pagination',
                                 dynamicBullets: dynamicBullets
                             },
 
