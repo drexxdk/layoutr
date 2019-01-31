@@ -44,20 +44,12 @@
 
 html {
     body {
-        background-color: $layout-background-color;
         overflow: visible;
-
-        @include breakpoint-main-min-width {
-            background-color: $body-background-color;
-        }
     }
 
-    &.site-loaded,
-    &.site-loaded {
-        #site {
-            display: block;
-            visibility: visible;
-            opacity: 1;
-        }
+    &.site-loaded #site {
+        display: block;
+        visibility: visible;
+        opacity: 1;
     }
 }
