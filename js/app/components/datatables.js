@@ -11,20 +11,19 @@
             layoutr.promiseDatatables.then(() => {
                 let count = 0,
                     gap = 'gap-3';
-                let table_header_input = (instance) => {
-                    let columns = instance.columns().header(),
-                        elements = jQuery.grep(columns, (e) => {
+                let table_header_input = (instance, wrapper) => {
+                    let ths = wrapper.find('thead th'),
+                        elements = jQuery.grep(ths, (e) => {
                             let column = $(e);
                             return column.hasClass('dropdown') || column.hasClass('text');
                         });
-                    instance.columns().every(function () {
-                        let th = this.header(),
-                            text = th.innerText,
-                            column = $(th),
+                    for (let i = 0; i < ths.length; i++) {
+                        let column = $(ths[i]),
+                            text = column.html(),
                             minWidth = column.attr('data-min-width'),
                             style = minWidth ? `min-width: ${minWidth}px;` : '',
-                            html = 
-`<div style="${style}">
+                            html =
+                                `<div style="${style}">
     <div>
         <span>${text}</span>
     </div>
@@ -39,8 +38,7 @@
                                 .on('change', (e) => {
                                     instance.column(index).search(e.currentTarget.value).draw();
                                 });
-
-                            this.data().unique().sort().each((d, j) => {
+                            instance.column(i).data().unique().sort().each((d, j) => {
                                 select.append(`<option value="${d}">${d}</option>`);
                             });
                         } else if (column.hasClass('text')) {
@@ -57,13 +55,19 @@
                                 });
                             input.parent().addClass('form-group');
                         }
-                    });
+                        //debugger;
+                    }
                 };
                 let table_header_sort = (instance, wrapper) => {
-                    let th = wrapper.find('thead th');
-                    th.unbind('click');
-                    th.find('> div > div:first-child').append('<span class="sort-btn"></span>');
-                    th.click((e) => {
+                    wrapper.find('thead th').unbind('click');
+
+                    let enabled = wrapper.find('thead th:not(.sorting-disabled)'),
+                        disabled = wrapper.find('thead th.sorting-disabled');
+
+                    disabled.removeAttr('tabindex');
+
+                    enabled.find('> div > div:first-child').append('<span class="sort-btn"></span>');
+                    enabled.click((e) => {
                         let $this = $(e.target);
                         if (!$this.closest('div.dropdown').length && !$this.closest('input').length) {
                             let parent = $this.parents('th'),
@@ -190,7 +194,7 @@
                             wrapper.append(`<div class="dataTables_footer"><div class="flex wrap vertical-center ${gap}"></div></div>`);
                             let footer = wrapper.find('> .dataTables_footer > div');
 
-                            table_header_input(instance);
+                            table_header_input(instance, wrapper);
                             table_header_sort(instance, wrapper);
                             table_header_length(wrapper, header);
                             table_header_buttons(wrapper, header);

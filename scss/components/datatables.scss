@@ -49,8 +49,13 @@ table.dataTable {
             }
 
             thead {
+
                 th {
                     font-weight: $font-weight-normal;
+
+                    .inside {
+                        display: none;
+                    }
 
                     &:focus > div {
                         @include focus;
@@ -72,6 +77,11 @@ table.dataTable {
                             > span:first-child {
                                 flex-grow: 1;
                                 font-weight: $font-weight-bold;
+
+                                > svg {
+                                    width: $font-size * $component-line-height;
+                                    height: $font-size * $component-line-height;
+                                }
                             }
 
                             > * + * {
@@ -100,8 +110,8 @@ table.dataTable {
                     }
 
                     .sort-btn {
-                        width: 20px;
-                        height: 20px;
+                        width: $font-size * $component-line-height;
+                        height: $font-size * $component-line-height;
                         position: relative;
 
                         &:before,
@@ -109,21 +119,21 @@ table.dataTable {
                             content: '';
                             width: 0;
                             height: 0;
-                            border-left: 6px solid transparent;
-                            border-right: 6px solid transparent;
+                            border-left: rem(6px) solid transparent;
+                            border-right: rem(6px) solid transparent;
                             position: absolute;
                             left: 50%;
                             transform: translateX(-50%);
                         }
 
                         &:before {
-                            border-bottom: 9px solid $gray-500;
-                            top: 0;
+                            border-bottom: rem(9px) solid $gray-500;
+                            top: rem(2px);
                         }
 
                         &:after {
-                            border-top: 9px solid $gray-500;
-                            bottom: 0;
+                            border-top: rem(9px) solid $gray-500;
+                            bottom: rem(2px);
                         }
                     }
                 }
@@ -132,11 +142,21 @@ table.dataTable {
             tbody tr {
                 th,
                 td {
-                    max-width: 1px;
                     width: 100%;
+                    max-width: rem(1px);
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
+
+                    svg {
+                        width: $font-size * $component-line-height;
+                        height: $font-size * $component-line-height;
+                    }
+                }
+
+                .outside,
+                .inside {
+                    display: none;
                 }
             }
 
@@ -203,10 +223,27 @@ table.dataTable {
                     .dtr-details {
                         @extend ul.list;
 
+                        > li {
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+
                         .dtr-title {
                             font-weight: $font-weight-bold;
+                            margin-right: $spacer-2;
+                        }
+
+                        .inside {
+                            display: block;
                         }
                     }
+                }
+            }
+
+            tfoot {
+                svg {
+                    width: $font-size * $component-line-height;
+                    height: $font-size * $component-line-height;
                 }
             }
         }
