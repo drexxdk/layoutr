@@ -15,12 +15,12 @@
 
             if (!container.hasClass('wrap')) {
                 let checkWidth = () => {
-                    container.css('height', container.height()).removeClass('row').addClass('column');
+                    container.css('height', container.height()).removeClass('column').addClass('row');
                     let containerLeft = container[0].getBoundingClientRect().left,
                         firstItem = container.find('> .item:first-child'),
                         firstItemLeft = firstItem[0].getBoundingClientRect().left - parseInt(firstItem.css('margin-left'));
                     if (firstItemLeft < containerLeft) {
-                        container.removeClass('column').addClass('row');
+                        container.removeClass('row').addClass('column');
                     }
                     container.css('height', '').addClass('checked');
                 };
