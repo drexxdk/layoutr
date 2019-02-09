@@ -45,6 +45,11 @@
 html {
     body {
         overflow: visible;
+        background-color: $layout-background-color;
+
+        @include breakpoint-main-min-width {
+            background-color: $body-background-color;
+        }
     }
 
     &.site-loaded #site {
