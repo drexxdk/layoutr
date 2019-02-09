@@ -22,6 +22,7 @@
                         n: '.ui-resizable-n',
                         s: '.ui-resizable-s'
                     },
+                    minHeight: 50,
                     containment: "parent"
                 }).on('resize', (e) => {
                     e.stopPropagation();
