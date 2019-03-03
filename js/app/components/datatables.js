@@ -38,7 +38,7 @@
                                 .on('change', (e) => {
                                     instance.column(index).search(e.currentTarget.value).draw();
                                 });
-                            
+
                             instance.column(i).data().unique().sort(layoutr.sort).each((d, j) => {
                                 select.append(`<option value="${d}">${d}</option>`);
                             });
@@ -146,39 +146,33 @@
                 };
 
                 tables.each((i, e) => {
-                    let $this = $(e);
+                    let $this = $(e),
+                        exportOptions = {
+                            "format": {
+                                header: (text, index, th) => {
+                                    return $(th).find('span:first').html();
+                                }
+                            }
+                        };
                     $this.addClass('nowrap');
                     $this.DataTable({
                         "dom": 'lBfrtip',
                         "bSortCellsTop": true,
                         buttons: [
-                            //'copy', 'excel', 'csv'
                             {
                                 extend: 'copyHtml5',
-                                footer: false
-
+                                footer: false,
+                                exportOptions: exportOptions
                             },
                             {
                                 extend: 'excelHtml5',
                                 footer: false,
-                                exportOptions: {
-                                    "format": {
-                                        header: (text, index, th) => {
-                                            return $(th).find('span:first').html();
-                                        }
-                                    }
-                                }
+                                exportOptions: exportOptions
                             },
                             {
                                 extend: 'csvHtml5',
                                 footer: false,
-                                exportOptions: {
-                                    "format": {
-                                        header: (text, index, th) => {
-                                            return $(th).find('span:first').html();
-                                        }
-                                    }
-                                }
+                                exportOptions: exportOptions
                             }
                         ],
                         responsive: true,
@@ -223,7 +217,7 @@
                             layoutr.html.on('aside-changed.datatables', () => {
                                 instance.responsive.recalc();
                             });
-                            
+
                             $this.on('responsive-resize.dt', (e, datatable, columns) => {
                                 let count = columns.reduce((a, b) => {
                                     return b === false ? a + 1 : a;
