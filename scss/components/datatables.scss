@@ -153,8 +153,7 @@ table.dataTable {
                         height: $font-size * $component-line-height;
                     }
                 }
-
-                .outside,
+                &.child .outside,
                 .inside {
                     display: none;
                 }

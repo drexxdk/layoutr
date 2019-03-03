@@ -38,7 +38,8 @@
                                 .on('change', (e) => {
                                     instance.column(index).search(e.currentTarget.value).draw();
                                 });
-                            instance.column(i).data().unique().sort().each((d, j) => {
+                            
+                            instance.column(i).data().unique().sort(layoutr.sort).each((d, j) => {
                                 select.append(`<option value="${d}">${d}</option>`);
                             });
                         } else if (column.hasClass('text')) {
@@ -222,7 +223,7 @@
                             layoutr.html.on('aside-changed.datatables', () => {
                                 instance.responsive.recalc();
                             });
-
+                            
                             $this.on('responsive-resize.dt', (e, datatable, columns) => {
                                 let count = columns.reduce((a, b) => {
                                     return b === false ? a + 1 : a;

@@ -15,6 +15,7 @@
     layoutr.fullscreen = false;
     layoutr.ajax = 'dist/ajax/';
     layoutr.arrowKeyLocked = false;
+    layoutr.sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare;
 
     layoutr.navigation = [];
     bowser.desktop = !bowser.mobile && !bowser.tablet;
