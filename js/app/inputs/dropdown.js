@@ -75,6 +75,7 @@
             html.on('click', 'li', (e) => {
                 let $that = $(e.currentTarget);
                 if (!$that.hasClass('selected')) {
+                    console.log('test a');
                     $that.siblings('.selected').removeClass('selected');
                     $that.addClass('selected');
                     let option = $this.children(`[value="${$that.attr('data-id')}"]`),
@@ -89,7 +90,7 @@
                         renderMathInElement(label[0]);
                     }
                     $this.children(':selected').removeAttr('selected');
-                    option.attr('selected', 'selected');
+                    option.prop('selected', true);
                     $this.change();
                 }
                 html.removeClass('open');

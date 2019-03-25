@@ -25,8 +25,8 @@
     layoutr.host = `${l.protocol}//${l.hostname}${l.port ? `:${l.port}` : ''}${l.pathname.split('/').slice(0, 1 + segmentCount).join('/')}/`;
 
     layoutr.awaitInterval = 50;
-
-    layoutr.isLocalhost = l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100';
+    // window.Areion = Ghostlab
+    layoutr.isLocalhost = window.Areion || l.hostname === 'localhost' || l.hostname === '127.0.0.1' || l.hostname === '192.168.40.100';
 
     layoutr.settings = JSON.parse(localStorage.getItem("settings"));
     if (layoutr.settings === null) layoutr.settings = [];
