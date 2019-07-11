@@ -14,6 +14,10 @@
                 @extend .btn.theme-light;
                 border: none !important;
 
+                &:focus {
+                    box-shadow:none;
+                }
+
                 &.badge {
                     &:not(.align-left):not(.align-right) > span:first-child {
                         text-align: center;
@@ -44,7 +48,6 @@
                         $active-background: darken($value, 7.5%);
                         @include color-yiq($active-background);
                         background: theme-gradient-vertical($active-background);
-                        box-shadow: none;
                     }
                 }
             }
