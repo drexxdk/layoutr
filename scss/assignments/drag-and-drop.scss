@@ -88,6 +88,19 @@
         }
 
         .to {
+            .box {
+                display: flex;
+                flex-direction: column;
+
+                .content {
+                    flex-grow: 1;
+
+                    > .container {
+                        height: 100%;
+                    }
+                }
+            }
+
             .item {
                 position: relative;
 

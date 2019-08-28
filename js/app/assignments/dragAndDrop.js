@@ -23,7 +23,7 @@
                 }
                 from.append(items);
                 assignment.removeClass('validated moving');
-                items = items.shuffle();
+                //items = items.shuffle();
             };
 
             let getCorrect = () => {
@@ -50,19 +50,22 @@
                 }
             };
             if (bowser.desktop) {
-                assignment.find('.container').each((i, e) => {
-                    Sortable.create(e, {
+                assignment.find('.container').each((i, container) => {
+                    Sortable.create(container, {
                         group: 'container', draggable: ".item",
                         animation: 0,
                         scroll: false,
                         forceFallback: true,
                         fallbackOnBody: true,
                         chosenClass: 'drag-and-drop-sortable-chosen',
-                        onAdd: () => {
+                        onAdd: (e) => {
                             setTimeout(() => {
                                 let checked = getChecked();
                                 if (checked.length) {
                                     checked.prop('checked', false);
+                                    checked.parent().not(e.item).each((i, item) => {
+                                        e.to.append(item);
+                                    });
                                     assignment.removeClass('moving');
                                 }
                             });
@@ -71,7 +74,7 @@
                 });
             }
 
-            checkboxes.on('click', (e) => {
+            assignment.on('click', '.item input[type="checkbox"]', (e) => {
                 let $this = $(e.currentTarget),
                     item = $this.parents('.item'),
                     moving = parseInt(assignment.attr('data-moving'));
