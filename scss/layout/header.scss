@@ -65,7 +65,7 @@ header {
 
             html.desktop &:focus,
             html.desktop &:hover {
-                color: $black;
+                color: $gray-100;
 
                 > svg {
                     transform: rotate(120deg);

@@ -1,25 +1,25 @@
 ﻿
-$white: #000;
-$gray-100: #21201F;
-$gray-200: #302D2A;
-$gray-300: #3B3733;
-$gray-400: #4B453F;
-$gray-500: #6C645C;
-$gray-600: #AAA299;
-$gray-700: #D0C9C2;
-$gray-800: #E5DFD9;
-$gray-900: #F8F4F0;
-$black: #fff;
+$gray-0: #000;
+$gray-10: #21201F;
+$gray-20: #302D2A;
+$gray-30: #3B3733;
+$gray-40: #4B453F;
+$gray-50: #6C645C;
+$gray-60: #AAA299;
+$gray-70: #D0C9C2;
+$gray-80: #E5DFD9;
+$gray-90: #F8F4F0;
+$gray-100: #fff;
 
 $body-background-color: #0d0d0d;
 
-$color-light: $gray-900;
-$color-dark: $white;
+$color-light: $gray-90;
+$color-dark: $gray-0;
 
-$overlay-background-color-light: rgba($black, 0.6);
-$overlay-background-color-dark: rgba($white, 0.6);
+$overlay-background-color-light: rgba($gray-100, 0.6);
+$overlay-background-color-dark: rgba($gray-0, 0.6);
 
-$component-overlay-light-background-color: rgba($black, 0.4);
-$component-overlay-dark-background-color: rgba($white, 0.4);
+$component-overlay-light-background-color: rgba($gray-100, 0.4);
+$component-overlay-dark-background-color: rgba($gray-0, 0.4);
 
 $error-color: $color-light;

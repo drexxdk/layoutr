@@ -10,7 +10,7 @@
     }
 
     $tooltip-arrow-size: rem(10px);
-    $tooltip-border-color: $black;
+    $tooltip-border-color: $gray-100;
     $tooltip-border: $component-border-width solid $tooltip-border-color;
     $tooltip-arrow-fix: $tooltip-arrow-size - $component-border-width;
     $tooltip-background-color: $dark;

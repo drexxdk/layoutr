@@ -74,7 +74,9 @@
             ];
         let themeLight = {
             name: 'light',
+            soft: -10,
             hover: 7.5,
+            body: '#f1f1f1',
             grays: [
                 "#ffffff",
                 "#f8f9fa",
@@ -149,7 +151,7 @@
 
 
         let yiq = rgb => {
-            return rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114 > 145 ? [ 0, 0, 0 ] : [ 255, 255, 255 ];
+            return rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114 > 145 ? [0, 0, 0] : [255, 255, 255];
         };
 
         let lighten = (rgb, percent) => {
@@ -177,10 +179,11 @@
             ];
         }
 
-
-
         let loadTheme = (name) => {
             let theme = themes.find(x => x.name === name);
+
+            body.css(`--body`, hexToRgb(theme.body));
+
 
             $.each(theme.grays, (i, gray) => {
                 body.css(`--gray-${i * 10}`, hexToRgb(gray));

@@ -127,12 +127,12 @@ table.dataTable {
                         }
 
                         &:before {
-                            border-bottom: rem(9px) solid $gray-500;
+                            border-bottom: rem(9px) solid $gray-50;
                             top: rem(2px);
                         }
 
                         &:after {
-                            border-top: rem(9px) solid $gray-500;
+                            border-top: rem(9px) solid $gray-50;
                             bottom: rem(2px);
                         }
                     }
@@ -309,7 +309,7 @@ div.dt-button-info {
     width: $container-small;
     border-radius: $component-border-radius;
     border: $component-border;
-    background-color: $white;
+    background-color: $gray-0;
     z-index: $modal-z-index;
     overflow: hidden;
 

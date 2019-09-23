@@ -103,7 +103,7 @@
             width: 100%;
             font-size: $font-size;
             -webkit-appearance: none;
-            @include theme-element($white);
+            @include theme-element($gray-0);
 
             &:focus {
                 @include focus;

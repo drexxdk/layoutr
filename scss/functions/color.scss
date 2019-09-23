@@ -1,4 +1,31 @@
 ﻿/// <reference path="../references" />
+@function v($var) {
+    @return var(--#{$var});
+}
+
+@function rgb($r, $g: null, $b: null ) {
+    @if ($g == null) {
+        @return unquote('rgb(#{$r})');
+    }
+
+    @if ($g and $b) {
+        @return unquote('rgb(#{$r}, #{$g}, #{$b})');
+    }
+
+    @error "wrong number of arguments";
+}
+
+@function rgba($r, $g, $b: null, $a: null ) {
+    @if ($b == null) {
+        @return unquote('rgba(#{$r}, #{$g})');
+    }
+
+    @if ($b and $a) {
+        @return unquote('rgba(#{$r}, #{$g}, #{$b}, #{$a})');
+    }
+
+    @error "wrong number of arguments";
+}
 
 @function theme-color-level($color, $level: 0) {
     $color-base: if($level > 0, #000, #fff);

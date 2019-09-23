@@ -1,54 +1,53 @@
 ﻿/// <reference path="../references" />
 
-$white: #fff!default;
-$gray-100: #f8f9fa!default;
-$gray-200: #e9ecef!default;
-$gray-300: #dee2e6!default;
-$gray-400: #ced4da!default;
-$gray-500: #adb5bd!default;
-$gray-600: #6F7780!default;
-$gray-700: #495057!default;
-$gray-800: #343a40!default;
-$gray-900: #212529!default;
-$black: #000!default;
+$gray-0: v(gray-0);
+$gray-10: v(gray-10);
+$gray-20: v(gray-20);
+$gray-30: v(gray-30);
+$gray-40: v(gray-40);
+$gray-50: v(gray-50);
+$gray-60: v(gray-60);
+$gray-70: v(gray-70);
+$gray-80: v(gray-80);
+$gray-90: v(gray-90);
+$gray-100: v(gray-100);
 
-$grays: ( 100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $gray-500, 600: $gray-600, 700: $gray-700, 800: $gray-800, 900: $gray-900 );
+$grays: ( 100: $gray-10, 200: $gray-20, 300: $gray-30, 400: $gray-40, 500: $gray-50, 600: $gray-60, 700: $gray-70, 800: $gray-80, 900: $gray-90 );
 
-$blue: #0072ED;
-$indigo: #6610f2;
-$purple: #6f42c1;
-$pink: #e83e8c;
-$red: #dc3545;
-$orange: #BE5A06;
-$yellow: #ffc107;
-$green: #218838;
-$teal: #20c997;
-$cyan: #138294;
+$blue: v(blue);
+$indigo: v(indigo);
+$purple: v(purple);
+$pink: v(pink);
+$red: v(red);
+$orange: v(orange);
+$yellow: v(yellow);
+$green: v(green);
+$teal: v(teal);
+$cyan: v(cyan);
 
 $colors: ( blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan );
 
 $primary: $blue;
-$secondary: $gray-600;
+$secondary: $gray-60;
 $success: $green;
 $info: $cyan;
 $warning: $orange;
 $danger: $red;
-$light: $gray-100;
-$dark: $gray-800;
+$light: $gray-10;
+$dark: $gray-80;
 
 $theme-colors: ( primary: $primary, secondary: $secondary, success: $success, info: $info, warning: $warning, danger: $danger, light: $light, dark: $dark );
 
+$body-background-color: v(body);
 
-$body-background-color: #f1f1f1!default;
+$color-light: $gray-0;
+$color-dark: $gray-90;
 
-$color-light: $white!default;
-$color-dark: $gray-900!default;
+$overlay-background-color-light: rgba($gray-0, 0.6)!default;
+$overlay-background-color-dark: rgba($gray-100, 0.6)!default;
 
-$overlay-background-color-light: rgba($white, 0.6)!default;
-$overlay-background-color-dark: rgba($black, 0.6)!default;
-
-$component-overlay-light-background-color: rgba($white, 0.4)!default;
-$component-overlay-dark-background-color: rgba($black, 0.4)!default;
+$component-overlay-light-background-color: rgba($gray-0, 0.4)!default;
+$component-overlay-dark-background-color: rgba($gray-100, 0.4)!default;
 
 $theme-validation-colors: ( danger: $danger )!default; // success: $success,
 
@@ -56,20 +55,20 @@ $link-color: $primary!default;
 
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8%;
-$body-color: $gray-900;
+$body-color: $gray-90;
 
 // layout
-$layout-border-color: $gray-400;
-$aside-header-background-color: $gray-400;
-$footer-color: $gray-400;
-$footer-background-color: $gray-800;
-$footer-border-color: $gray-900;
+$layout-border-color: rgb($gray-40);
+$aside-header-background-color: rgb($gray-40);
+$footer-color: rgb($gray-40);
+$footer-background-color: rgb($gray-80);
+$footer-border-color: rgb($gray-90);
 
 $font-light-opacity: .8;
 
-$loader-background-color: $gray-900;
+$loader-background-color: rgb($gray-90);
 
-$layout-background-color: $white;
-$modal-background-color: $white;
+$layout-background-color: rgb($gray-0);
+$modal-background-color: rgb($gray-0);
 
 $error-color: $color-light!default;

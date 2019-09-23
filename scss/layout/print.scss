@@ -3,14 +3,14 @@
 @media print {
     *, *:before, *:after {
         box-shadow: none !important;
-        color: $black !important;
+        color: $gray-100 !important;
         text-shadow: none !important;
         background: transparent !important;
         border-color: $component-border-color !important;
     }
 
     svg {
-        fill: $black !important;
+        fill: $gray-100 !important;
         opacity: 1 !important;
     }
 
@@ -64,7 +64,7 @@
 
     .radio > input:checked + label > i {
         &:before {
-            border-color: $white !important;
+            border-color: $gray-0 !important;
         }
 
         &:after {
