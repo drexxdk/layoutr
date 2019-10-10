@@ -29,7 +29,8 @@
     //};
 
     $(() => {
-        let body = $("body"),
+
+        layoutr.body = $("body"),
             colors = [
                 {
                     name: 'blue',
@@ -77,6 +78,7 @@
             link: () => { return colors.find(x => x.name === 'blue').value },
             soft: -10,
             hover: 7.5,
+            gradient: 0.15,
             body: '#f1f1f1',
             grays: [
                 "#ffffff",
@@ -154,7 +156,6 @@
             return rgb.map(d => (d += percentage) < 0 ? 0 : d > 255 ? 255 : d | 0);
         };
 
-
         let yiq = rgb => {
             return rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114 > 145 ? [0, 0, 0] : [255, 255, 255];
         };
@@ -185,13 +186,13 @@
         }
 
         let luminanace = (rgb) => {
-            var a = rgb.map(function (v) {
+            rgb = rgb.map(function (v) {
                 v /= 255;
                 return v <= 0.03928
                     ? v / 12.92
                     : Math.pow((v + 0.055) / 1.055, 2.4);
             });
-            return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+            return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
         }
 
         let contrast = (rgb1, rgb2) => {
@@ -220,15 +221,31 @@
             return yiq(text);
         }
 
+        //rgbA and rgbB are arrays, amountToMix ranges from 0.0 to 1.0
+        let mix = (rgbA, rgbB, amount) => {
+            let channelMix = (colorChannelA, colorChannelB, amount) => {
+                var channelA = colorChannelA * amount;
+                var channelB = colorChannelB * (1 - amount);
+                return parseInt(channelA + channelB);
+            }
+
+            return [
+                channelMix(rgbA[0], rgbB[0], amount),
+                channelMix(rgbA[1], rgbB[1], amount),
+                channelMix(rgbA[2], rgbB[2], amount)
+            ];
+        }
+
         let loadTheme = (name) => {
             let theme = themes.find(x => x.name === name),
-                link = hexToRgb(theme.link());
+                link = hexToRgb(theme.link()),
+                body = hexToRgb(theme.body);
 
-            body.css(`--body`, hexToRgb(theme.body));
+            layoutr.body.css(`--body`, body);
 
 
             $.each(theme.grays, (i, gray) => {
-                body.css(`--gray-${i * 10}`, hexToRgb(gray));
+                layoutr.body.css(`--gray-${i * 10}`, hexToRgb(gray));
             });
             $.each(theme.colors, (i, color) => {
                 let rgb = hexToRgb(color.hex());
@@ -254,10 +271,11 @@
 
                 $.each(variants, (j, variant) => {
                     let textColor = yiq(variant.value);
-                    body.css(`--${color.name}-${variant.name}-background`, variant.value);
-                    body.css(`--${color.name}-${variant.name}-text`, textColor);
-                    body.css(`--${color.name}-${variant.name}-border`, border(variant.value, textColor, 20));
-                    body.css(`--${color.name}-${variant.name}-link`, textContrast(link, variant.value));
+                    layoutr.body.css(`--${color.name}-${variant.name}-background`, variant.value);
+                    layoutr.body.css(`--${color.name}-${variant.name}-text`, textColor);
+                    layoutr.body.css(`--${color.name}-${variant.name}-border`, border(variant.value, textColor, 20));
+                    layoutr.body.css(`--${color.name}-${variant.name}-link`, textContrast(link, variant.value));
+                    layoutr.body.css(`--${color.name}-${variant.name}-gradient`, mix(variant.value, body, theme.gradient));
                 });
             });
         };
