@@ -18,7 +18,10 @@
     layoutr.arrowKeyLocked = false;
     layoutr.sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare;
 
+    layoutr.media;
+    layoutr.dropdown;
     layoutr.navigation = [];
+    layoutr.popups = [];
     bowser.desktop = !bowser.mobile && !bowser.tablet;
 
     let l = window.location,

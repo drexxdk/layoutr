@@ -69,8 +69,9 @@
             }
 
             html.on('click', '> div', (e) => {
-                let $that = $(e.currentTarget);
-                $that.parent().toggleClass('open');
+                let dropdown = $(e.currentTarget).parent()
+                layoutr.dropdown = dropdown;
+                dropdown.toggleClass('open');
             });
             html.on('click', 'li', (e) => {
                 let $that = $(e.currentTarget);
@@ -99,13 +100,21 @@
     };
 
     $(window).click((e) => {
-        let target = $(e.target);
-        if (target.closest("div.dropdown").length) {
-            $('div.dropdown').not(target.closest("div.dropdown")).removeClass('open');
-        }
+        if (layoutr.dropdown) {
+            let target = $(e.target);
+            if (target.closest("div.dropdown").length) {
+                $('div.dropdown').not(target.closest(layoutr.dropdown)).removeClass('open');
+            }
 
-        if (!target.closest(".dropdown").length) {
-            $('div.dropdown').removeClass('open');
+            if (!target.closest(layoutr.dropdown).length) {
+                layoutr.closeDropdown();
+            }
         }
     });
+
+    layoutr.closeDropdown = () => {
+        if (layoutr.dropdown) {
+            layoutr.dropdown.removeClass('open');
+        }
+    };
 }

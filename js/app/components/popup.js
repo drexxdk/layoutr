@@ -20,10 +20,19 @@
             if (popup.length) {
                 popup.append(html);
             } else {
-                html = `<div class="popup position ${position}" data-position="${position}">${html}`;
-                html = `${html}</div>`;
+                html = `<div class="popup position ${position}" data-position="${position}">${html}</div>`;
                 layoutr.body.prepend(html);
             }
+            layoutr.popups.push(layoutr.body.children('.popup')[0]);
+        }
+    };
+
+    layoutr.destroyPopups = () => {
+        if (layoutr.popups.length) {
+            let popups = $(layoutr.popups);
+            popups.fadeOut(layoutr.fadeOutTime, () => {
+                popups.remove();
+            });
         }
     };
 }

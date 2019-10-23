@@ -36,16 +36,8 @@
                         if (layoutr.isAside()) {
                             layoutr.toggleAside(); // closes aside
                         }
-                        let popups = layoutr.body.children('.popup');
-                        if (popups.length) {
-                            popups.fadeOut(layoutr.fadeOutTime, () => {
-                                popups.remove();
-                            });
-                        }
-                        let dropdowns = layoutr.content.find('div.dropdown.open');
-                        if (dropdowns.length) {
-                            dropdowns.removeClass('open');
-                        }
+                        layoutr.destroyPopups();
+                        layoutr.closeDropdown();
                         layoutr.html.attr('data-authentication', '');
                     }
                 }

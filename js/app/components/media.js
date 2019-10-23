@@ -17,7 +17,7 @@
                     let player = new Plyr(item);
 
                     player.on('play', function () {
-                        if (layoutr.media && layoutr.media !== player && layoutr.media.playing) {
+                        if (layoutr.media !== player && layoutr.media.playing) {
                             layoutr.media.pause();
                         }
                         layoutr.media = player;
