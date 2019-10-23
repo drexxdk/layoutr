@@ -14,12 +14,31 @@
 
             layoutr.promiseMedia.then(() => {
                 media.each((i, item) => {
-                    new Plyr(item);
+                    let player = new Plyr(item);
+
+                    player.on('play', function () {
+                        if (layoutr.media && layoutr.media !== player && layoutr.media.playing) {
+                            layoutr.media.pause();
+                        }
+                        layoutr.media = player;
+                    });
                 });
             }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load media', 'danger');
                 console.error(e);
             });
+        }
+    };
+
+    layoutr.destroyMedia = () => {
+        if (layoutr.media && layoutr.media.playing) {
+            layoutr.media.destroy();
+        }
+    };
+
+    layoutr.pauseMedia = () => {
+        if (layoutr.media && layoutr.media.playing) {
+            layoutr.media.pause();
         }
     };
 }

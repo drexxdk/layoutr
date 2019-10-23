@@ -100,6 +100,7 @@ ${dataContent !== undefined ? `<div id="modal-content">${dataContent}</div>` : '
                     let content = layoutr.modal.find('#modal-container > .content');
                     content.append(dataContent);
                     layoutr.contentLoaded(content);
+                    layoutr.pauseMedia();
                     layoutr.showModal(type);
                 }
                 if (dataFullscreen) {

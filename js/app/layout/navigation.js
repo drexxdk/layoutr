@@ -1,6 +1,7 @@
 ﻿{
     layoutr.loadPage = (url, pushState, initial) => {
         layoutr.showLoading();
+        layoutr.destroyMedia();
         layoutr.load.html(`${layoutr.host}${layoutr.ajax}pages${url === '/' ? '/home' : url}.html`).then((response) => {
             layoutr.content.html(response);
             let q = url.indexOf('?');
