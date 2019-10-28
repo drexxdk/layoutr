@@ -55,11 +55,11 @@
                     if (current !== undefined && current.length && parseInt(current) < closestWidth || current === undefined || current.length === 0) {
                         let src = `${image}-${closestWidth}.${filetype}`;
                         layoutr.load.img(src).then(() => {
-                            clone.css('background-image', `url(${src})`);
+                            element.css('background-image', `url(${src})`);
                             setTimeout(function () {
-                                element.css('background-image', `url(${src})`);
-                            }, 500);
-                            // todo: find replacement for 500 ms timeout
+                                clone.css('background-image', `url(${src})`);
+                            }, 100);
+                            // Change background-image on two elements at different intervals, to counteract image flickering.
                             element.attr('data-rb-current', closestWidth);
                         }).catch((e) => {
                             layoutr.showPopupAlert('Failed to load responsive background image', 'danger');
