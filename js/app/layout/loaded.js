@@ -11,6 +11,7 @@
         layoutr.checkMap(element.find('.map'));
         layoutr.checkDatatable(element.find('.dataTable'));
         layoutr.checkSwiper(element.find('.swiper'));
+        layoutr.checkTabs(element.find('.tabs'));
     };
 
     layoutr.pageLoaded = (initial) => {

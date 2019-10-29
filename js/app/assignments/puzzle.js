@@ -26,7 +26,6 @@
                 domContent,
                 domStart,
                 domGiveUp;
-
             {
                 assignment.attr('data-state', 'initial');
 

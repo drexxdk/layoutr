@@ -13,9 +13,9 @@
         if (title !== undefined) {
             let popup = layoutr.body.children(`.popup[data-position="${position}"]`),
                 html =
-                    `<div class="alert theme-${theme}" data-type="${type}">
-<div><p>${title}</p></div>
-<button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>
+`<div class="alert theme-${theme}" data-type="${type}">
+    <div><p>${title}</p></div>
+    <button class="close" aria-label="Close popup"><svg focusable="false"><use xlink:href="#svg-close"></use></svg></button>
 </div>`;
             if (popup.length) {
                 popup.append(html);

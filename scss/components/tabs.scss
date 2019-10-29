@@ -1,0 +1,49 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-tabs {
+    .tabs {
+        > ul {
+            list-style-type: none;
+        }
+
+        > .top {
+            display: flex;
+            overflow-x: auto;
+
+            > li {
+                @extend .btn;
+                @extend .btn.theme-light;
+                border-bottom: none !important;
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+
+                &:not(:first-child) {
+                    margin-left: -$layout-border-width !important;
+                    border-top-left-radius: 0;
+                }
+
+                &:not(:last-child) {
+                    border-top-right-radius: 0;
+                }
+
+                &.active,
+                html.desktop &.active:hover {
+                    @include theme-element-darken($light, true);
+                    z-index: $component-z-index + 1;
+                }
+            }
+        }
+
+        > .bottom {
+            border: $component-border-width solid theme-border($light);
+
+            > li {
+                padding: $spacer;
+
+                &:not(.active) {
+                    display: none;
+                }
+            }
+        }
+    }
+}
