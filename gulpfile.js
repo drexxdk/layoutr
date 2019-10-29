@@ -63,6 +63,7 @@ const gulp = require("gulp"),
 
                         // inputs
                         'js/app/inputs/dropdown.js',
+                        'js/app/inputs/slider.js',
 
                         // components
                         'js/app/components/accordion.js',
@@ -102,6 +103,12 @@ const gulp = require("gulp"),
                     name: 'swiper',
                     watch: [
                         'js/vendors/swiper.js'
+                    ]
+                },
+                {
+                    name: 'nouislider',
+                    watch: [
+                        'js/vendors/nouislider.min.js'
                     ]
                 },
                 {
@@ -180,6 +187,12 @@ const gulp = require("gulp"),
                     src: 'scss/vendors/swiper.scss',
                     dist: dist + '/css',
                     watch: ['scss/vendors/swiper.scss']
+                },
+                {
+                    name: 'nouislider',
+                    src: 'scss/vendors/nouislider.scss',
+                    dist: dist + '/css',
+                    watch: ['scss/vendors/nouislider.scss']
                 }
             ]
         },
