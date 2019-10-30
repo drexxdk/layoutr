@@ -1,0 +1,19 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-nouislider {
+    input[type=range].slider {
+        display: none;
+
+        & + .noUi-target {
+
+            &.noUi-horizontal {
+                margin: 5px 16px;
+            }
+
+            &.noUi-vertical {
+                margin: 16px 5px;
+                height: rem(200px);
+            }
+        }
+    }
+}

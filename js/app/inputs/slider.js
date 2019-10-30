@@ -1,6 +1,6 @@
 ﻿{
-    layoutr.checkSlider = (slider) => {
-        if (slider.length) {
+    layoutr.checkSlider = (sliders) => {
+        if (sliders.length) {
             if (!layoutr.html.hasClass('slider-loaded')) {
                 layoutr.showLoading();
                 layoutr.promiseSlider = Promise.all([
@@ -13,15 +13,26 @@
             }
 
             layoutr.promiseSlider.then(() => {
-                slider.each((i, e) => {
-                    let $this = $(e);
+                sliders.each((i, e) => {
+                    let slider = $(e),
+                        div = $('<div></div>'),
+                        start = slider.attr('value') ? slider.attr('value').split(',').map(Number) : 50,
+                        min = layoutr.tryParseInt(slider.attr('min'), 0),
+                        max = layoutr.tryParseInt(slider.attr('max'), 100),
+                        orientation = slider.attr('data-orientation') ? slider.attr('data-orientation') : undefined,
+                        connect = slider.attr('data-connect') === 'true';
+                    
+                    div.insertAfter(slider);
 
-                    // https://codepen.io/aaroniker/pen/ZEEWoKj
-
-                    //renderMathInElement($this[0]);
-                    //setTimeout(() => {
-                    //    $this.removeClass('math');
-                    //});
+                    noUiSlider.create(div[0], {
+                        start: start,
+                        orientation: orientation,
+                        connect: connect,
+                        range: {
+                            min: min,
+                            max: max
+                        }
+                    });
                 });
             }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load slider', 'danger');

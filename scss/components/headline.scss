@@ -15,7 +15,7 @@
 
     h1, h2, h3, h4, h5,
     .h1, .h2, .h3, .h4, .h5 {
-        margin-bottom: $spacer-2;
+        padding-bottom: $spacer-2;
     }
 
     h1, .h1 {
@@ -45,6 +45,6 @@
 
     h6, .h6 {
         font-size: $h6-font-size;
-        margin-bottom: $spacer / 2;
+        padding-bottom: $spacer / 2;
     }
 }
