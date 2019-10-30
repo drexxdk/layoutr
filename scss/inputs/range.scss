@@ -1,7 +1,7 @@
 ﻿/// <reference path="../references" />
 
-@mixin layoutr-nouislider {
-    input[type=range].slider {
+@mixin layoutr-range {
+    input[type=range] {
         display: none;
 
         & + .noUi-target {

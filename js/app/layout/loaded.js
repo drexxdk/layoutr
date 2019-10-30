@@ -12,7 +12,7 @@
         layoutr.checkDatatable(element.find('.dataTable'));
         layoutr.checkSwiper(element.find('.swiper'));
         layoutr.checkTabs(element.find('.tabs'));
-        layoutr.checkSlider(element.find('.slider'));
+        layoutr.checkRanges(element.find('input[type="range"]'));
     };
 
     layoutr.pageLoaded = (initial) => {

@@ -63,7 +63,7 @@ const gulp = require("gulp"),
 
                         // inputs
                         'js/app/inputs/dropdown.js',
-                        'js/app/inputs/slider.js',
+                        'js/app/inputs/range.js',
 
                         // components
                         'js/app/components/accordion.js',

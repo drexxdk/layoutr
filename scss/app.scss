@@ -13,6 +13,7 @@
 @include layoutr-dropdown;
 @include layoutr-form;
 @include layoutr-radio-checkbox-switch;
+@include layoutr-range;
 
 // components
 @include layoutr-accordion;
@@ -26,7 +27,6 @@
 @include layoutr-headline;
 @include layoutr-img;
 @include layoutr-list;
-@include layoutr-nouislider;
 @include layoutr-overlay;
 @include layoutr-percentage-circle;
 @include layoutr-percentage;
