@@ -62,7 +62,7 @@
             display: none;
         }
 
-        &.not-first > ul > li:first-child {
+        &.not-first > ul > li:not(.filter):not(.no-results):first-of-type {
             display: none;
 
             & + li {
@@ -140,8 +140,12 @@
             }
         }
 
+        &:not(.open) > ul {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         > ul {
-            display: none;
             list-style-type: none;
             background-color: $gray-100;
             border: $component-border;
@@ -156,6 +160,11 @@
             max-height: ($height * 4) + ($component-border-width * 5);
 
             > li {
+
+                &.filter {
+                    padding: $spacer-2;
+                }
+
                 > div {
                     border-radius: 0;
                     display: block;
