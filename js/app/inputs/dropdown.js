@@ -62,7 +62,7 @@
             $this.after(html);
             html = $this.next();
             if ($this.hasClass('filter')) {
-                let lis = html.find('li:not(.filter)'),
+                let lis = html.find('li:not(.filter):not(.no-results)'),
                     noResults = html.find('li.no-results');
                 html.on('keyup', '.filter > input', (e) => {
                     let any = lis.filter((i, li) => {

@@ -141,8 +141,7 @@
         }
 
         &:not(.open) > ul {
-            opacity: 0;
-            pointer-events: none;
+            display: none;
         }
 
         > ul {
