@@ -32,8 +32,12 @@
                 let title = layoutr.capitalize(url.replace('/', '').replaceAll('-', ' '));
                 layoutr.title.html(title);
                 document.title = `${title} - ${layoutr.siteName}`;
-                if (url === '/form') {
-                    layoutr.pageForm();
+                if (url === '/dropdown') {
+                    layoutr.dropdownForm();
+                } else if (url === '/radio-checkbox-switch') {
+                    layoutr.radioCheckboxSwitchForm();
+                } else if (url === '/textbox') {
+                    layoutr.textboxForm();
                 }
             }
             layoutr.html.trigger('header-changed.responsiveHeader');

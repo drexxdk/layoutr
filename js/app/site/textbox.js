@@ -1,7 +1,7 @@
 ﻿{
-    layoutr.pageForm = () => {
+    layoutr.textboxForm = () => {
         layoutr.addValidation(
-            layoutr.content.find('#form'),
+            layoutr.content.find('#textbox-form'),
             {
                 firstName: {
                     required: true,
@@ -26,17 +26,7 @@
                 email: {
                     required: true,
                     email: true
-                },
-                dropdown_1: "required",
-                dropdown_2: "required",
-                dropdown_3: "required",
-                dropdown_4: "required",
-                dropdown_5: "required",
-                dropdown_6: "required",
-                gender: "required",
-                interests: "required",
-                agree: "required",
-                font_size: "required"
+                }
             },
             {
                 firstName: {
@@ -58,16 +48,7 @@
                     required: "Please provide a password",
                     equalTo: "Please enter the same password as above"
                 },
-                email: "Please enter a valid email address",
-                dropdown_1: "Please select an option",
-                dropdown_2: "Please select an option",
-                dropdown_3: "Please select an option",
-                dropdown_4: "Please select an option",
-                dropdown_5: "Please select an option",
-                dropdown_6: "Please select an option",
-                gender: "Please select your gender",
-                interests: "Please select at least one interest",
-                agree: "Please accept our policy"
+                email: "Please enter a valid email address"
             }
         );
     };

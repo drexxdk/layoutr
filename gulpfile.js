@@ -83,7 +83,9 @@ const gulp = require("gulp"),
                         'js/app/assignments/_assignment.js',
 
                         // site
-                        'js/app/site/form.js'
+                        'js/app/site/dropdown.js',
+                        'js/app/site/radio-checkbox-switch.js',
+                        'js/app/site/textbox.js'
                     ]
                 },
                 {
