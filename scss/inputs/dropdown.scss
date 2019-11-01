@@ -62,14 +62,6 @@
             display: none;
         }
 
-        &.not-first > ul > li:not(.filter):not(.no-results):first-of-type {
-            display: none;
-
-            & + li {
-                border-top: none;
-            }
-        }
-
         &.direction-up {
             @media screen {
                 &.open > div {
@@ -159,35 +151,40 @@
             max-height: ($height * 4) + ($component-border-width * 5);
 
             > li {
+                border-radius: 0;
+                display: block;
+                display: flex;
+                @extend .btn;
+                border: none !important;
 
                 &.filter {
                     padding: $spacer-2;
-                }
 
-                > div {
-                    border-radius: 0;
-                    display: block;
-                    display: flex;
-                    @extend .btn;
-                    border: none !important;
-
-                    html.desktop &:hover > svg {
-                        opacity: $opacity-inactive;
-                    }
-
-                    > label {
-                        flex-grow: 1;
-                        text-align: center;
-                        max-width: 100%;
-                        overflow: auto;
-                    }
-
-                    > svg {
-                        opacity: 0;
+                    > input[type="text"] {
+                        cursor: text;
                     }
                 }
 
-                &.selected > div > svg {
+                html.desktop &:focus {
+                    box-shadow:none;
+                }
+
+                html.desktop &:hover > svg {
+                    opacity: $opacity-inactive;
+                }
+
+                > label {
+                    flex-grow: 1;
+                    text-align: center;
+                    max-width: 100%;
+                    overflow: auto;
+                }
+
+                > svg {
+                    opacity: 0;
+                }
+
+                &.selected > svg {
                     fill: $success;
                     opacity: 1 !important;
                 }

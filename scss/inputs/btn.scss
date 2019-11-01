@@ -77,7 +77,8 @@
 
         @include theme-element($default, true);
 
-        html.desktop &:hover {
+        html.desktop &:hover,
+        html.desktop &:focus {
             @include theme-element-darken($default, true);
         }
 
@@ -87,7 +88,8 @@
 
             @include theme-element($submit, true);
 
-            html.desktop &:hover {
+            html.desktop &:hover,
+            html.desktop &:focus {
                 @include theme-element-darken($submit, true);
             }
         }
@@ -100,7 +102,8 @@
             &.theme-#{$color} {
                 @include theme-element($value, true);
 
-                html.desktop &:hover {
+                html.desktop &:hover,
+                html.desktop &:focus {
                     @include theme-element-darken($value, true);
                 }
             }

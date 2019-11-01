@@ -19,7 +19,10 @@
                 }
             }
 
-            let liTemplate = (e) => {
+            let liTemplate = (e, i) => {
+                if ($this.hasClass('not-first') && i === 0) {
+                    return;
+                }
                 let li = $(e),
                     text = li.text();
                 if (!text.length) {
@@ -29,16 +32,13 @@
                     li.attr('data-math', text);
                 }
                 return `
-<li data-id="${li.val()}"${li.is(':selected') ? ' class="selected"' : ''}>
-    <div tabindex="0" class="theme-light">
-        <label>${text}</label>
-        <svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>
-    </div>
+<li tabindex="0" class="theme-light" data-id="${li.val()}"${li.is(':selected') ? ' class="selected"' : ''}>
+    <label>${text}</label>
+    ${$this.hasClass('check') ? '<svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>' : ''}
 </li>`;
             };
             let html = 
 `<div class="dropdown
-    ${$this.hasClass('not-first') ? ' not-first' : ''}
     ${$this.hasClass('nowrap') ? ' nowrap' : ''}
     ${$this.hasClass('check') ? ' check' : ''}
     ${$this.hasClass('ellipsis') ? ' ellipsis' : ''}
@@ -90,7 +90,7 @@
             }
 
             html.on('click', '> div', (e) => {
-                let dropdown = $(e.currentTarget).parent()
+                let dropdown = $(e.currentTarget).parent();
                 layoutr.dropdown = dropdown;
                 dropdown.toggleClass('open');
             });
