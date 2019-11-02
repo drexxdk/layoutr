@@ -1,18 +1,26 @@
 ﻿{
     layoutr.contentLoaded = (element) => {
-        layoutr.checkResponsiveBackground(element.find('.rb'));
-        layoutr.checkLazy(element.find('.lazy'));
-        layoutr.checkAccordion(element.find('.accordion'));
-        layoutr.checkDropdown(element.find('select.dropdown'));
-        layoutr.checkTooltip(element.find('.tooltip'));
-        layoutr.checkAssignment(element.find('.assignment'));
-        layoutr.checkMath(element.find('.math'));
-        layoutr.checkMedia(element.find('audio, video'));
-        layoutr.checkMap(element.find('.map'));
-        layoutr.checkDatatable(element.find('.dataTable'));
-        layoutr.checkSwiper(element.find('.swiper'));
-        layoutr.checkTabs(element.find('.tabs'));
-        layoutr.checkRanges(element.find('input[type="range"]'));
+        layoutr.checkResponsiveBackground(notLoaded(element.find('.rb')));
+        layoutr.checkLazy(notLoaded(element.find('.lazy')));
+        layoutr.checkAccordion(notLoaded(element.find('.accordion')));
+        layoutr.checkDropdown(notLoaded(element.find('select.dropdown')));
+        layoutr.checkTooltip(notLoaded(element.find('.tooltip')));
+        layoutr.checkAssignment(notLoaded(element.find('.assignment')));
+        layoutr.checkMath(notLoaded(element.find('.math')));
+        layoutr.checkMedia(notLoaded(element.find('audio, video')));
+        layoutr.checkMap(notLoaded(element.find('.map')));
+        layoutr.checkDatatable(notLoaded(element.find('.dataTable')));
+        layoutr.checkSwiper(notLoaded(element.find('.swiper')));
+        layoutr.checkTabs(notLoaded(element.find('.tabs')));
+        layoutr.checkRanges(notLoaded(element.find('input[type="range"]')));
+    };
+
+    let notLoaded = (elements) => {
+        elements = elements.filter((i, element) => {
+            return !$(element).hasClass('loaded');
+        });
+        elements.addClass('loaded');
+        return elements;
     };
 
     layoutr.pageLoaded = (initial) => {
@@ -33,7 +41,7 @@
 
             if (initial) {
                 layoutr.promiseFont.then(() => {
-                    $('#site').css('display', 'block');
+                    layoutr.site.css('display', 'block');
                     layoutr.responsiveHeader();
                     layoutr.contentLoaded(layoutr.content);
                     let scroll = JSON.parse(localStorage.getItem("scroll"));
@@ -51,6 +59,7 @@
                     }).done(() => {
                         layoutr.hideLoading();
                         layoutr.html.addClass('site-loaded');
+                        layoutr.site.removeAttr('style');
                         $(window).scroll($.throttle(layoutr.throttleInterval, false, () => {
                             layoutr.setScrollTop();
                         }));

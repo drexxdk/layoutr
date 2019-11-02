@@ -16,7 +16,6 @@
                             reject();
                         };
                         if (tag === 'link') {
-                            element.type = 'text/css';
                             element.rel = 'stylesheet';
                             element.href = url;
                         } else if (tag === 'script' || tag === 'img') {

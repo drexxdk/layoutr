@@ -45,6 +45,7 @@
         layoutr.html = $('html');
         layoutr.head = $('head');
         layoutr.body = $('body');
+        layoutr.site = $('#site');
         layoutr.main = $('main');
         layoutr.content = $('#content > div');
         layoutr.header = $('header');
