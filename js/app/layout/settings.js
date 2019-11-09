@@ -8,13 +8,13 @@
                 "value": value
             },
                 exists = $.grep(layoutr.settings, (e) => { return e.name === name; });
-            if (exists.length === 0) {
-                // not found
-                layoutr.settings.push(entry);
-            } else if (exists.length === 1) {
+            if (exists.length) {
                 // found
                 exists[0].id = id;
                 exists[0].value = value;
+            } else {
+                // not found
+                layoutr.settings.push(entry);
             }
             localStorage.setItem('settings', JSON.stringify(layoutr.settings));
         } else {

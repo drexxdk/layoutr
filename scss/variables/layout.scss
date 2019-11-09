@@ -24,7 +24,7 @@ $content-header-min-height: rem(250px);
 $list-bullet-width: rem(6px);
 
 // em and rem should not be used in media queries, since they are based on browser font size, instead of website font size
-// there is currently no workaround for this browser limitations
+// there is currently no workaround for this browser limitation
 $breakpoint-main-min-width: px($main-min-width);
 $breakpoint-one-column: px($aside-width + $content-min-width);
 $breakpoint-two-columns: px($aside-width + $content-min-width + $content-min-width);

@@ -13,12 +13,6 @@
                 movingItem = false,
                 correct = [],
                 transitionTime = 100,
-                directions = {
-                    up: 'up',
-                    down: 'down',
-                    left: 'left',
-                    right: 'right'
-                },
                 current,
                 movesUsed,
                 lastMove,
@@ -126,13 +120,13 @@
                 let top = current.top,
                     left = current.left;
 
-                if (direction === directions.up) {
+                if (direction === layoutr.directions.up) {
                     top = current.top + 1;
-                } else if (direction === directions.down) {
+                } else if (direction === layoutr.directions.down) {
                     top = current.top - 1;
-                } else if (direction === directions.left) {
+                } else if (direction === layoutr.directions.left) {
                     left = current.left + 1;
-                } else if (direction === directions.right) {
+                } else if (direction === layoutr.directions.right) {
                     left = current.left - 1;
                 }
                 return domContent.find(`.item[data-top="${top}"][data-left="${left}"]`);
@@ -141,7 +135,7 @@
             let moveItem = (item, direction, initial = true) => {
                 return new Promise((resolve, reject) => {
                     movingItem = true;
-                    if (direction === directions.up) {
+                    if (direction === layoutr.directions.up) {
                         // move up
                         item.animate({
                             top: `${current.top * tile}%`
@@ -155,7 +149,7 @@
                             setMovable();
                             resolve();
                         });
-                    } else if (direction === directions.down) {
+                    } else if (direction === layoutr.directions.down) {
                         // move down
                         item.animate({
                             top: `${current.top * tile}%`
@@ -169,7 +163,7 @@
                             setMovable();
                             resolve();
                         });
-                    } else if (direction === directions.left) {
+                    } else if (direction === layoutr.directions.left) {
                         // move left
                         item.animate({
                             left: `${current.left * tile}%`
@@ -183,7 +177,7 @@
                             setMovable();
                             resolve();
                         });
-                    } else if (direction === directions.right) {
+                    } else if (direction === layoutr.directions.right) {
                         // move right
                         item.animate({
                             left: `${current.left * tile}%`
@@ -205,37 +199,37 @@
             let setMovable = () => {
                 items.removeClass('movable');
                 if (current.top !== 0) {
-                    getItem(directions.down).addClass('movable');
+                    getItem(layoutr.directions.down).addClass('movable');
                 }
                 if (current.top !== tiles - 1) {
-                    getItem(directions.up).addClass('movable');
+                    getItem(layoutr.directions.up).addClass('movable');
                 }
                 if (current.left !== 0) {
-                    getItem(directions.right).addClass('movable');
+                    getItem(layoutr.directions.right).addClass('movable');
                 }
                 if (current.left !== tiles - 1) {
-                    getItem(directions.left).addClass('movable');
+                    getItem(layoutr.directions.left).addClass('movable');
                 }
             };
 
             let setRandom = () => {
                 let direction = [];
 
-                if (current.top !== 0 && lastMove !== directions.up) {
+                if (current.top !== 0 && lastMove !== layoutr.directions.up) {
                     // can go down
-                    direction.push(directions.down);
+                    direction.push(layoutr.directions.down);
                 }
-                if (current.top !== tiles - 1 && lastMove !== directions.down) {
+                if (current.top !== tiles - 1 && lastMove !== layoutr.directions.down) {
                     // can go up
-                    direction.push(directions.up);
+                    direction.push(layoutr.directions.up);
                 }
-                if (current.left !== 0 && lastMove !== directions.left) {
+                if (current.left !== 0 && lastMove !== layoutr.directions.left) {
                     // can go right
-                    direction.push(directions.right);
+                    direction.push(layoutr.directions.right);
                 }
-                if (current.left !== tiles - 1 && lastMove !== directions.right) {
+                if (current.left !== tiles - 1 && lastMove !== layoutr.directions.right) {
                     // can go left
-                    direction.push(directions.left);
+                    direction.push(layoutr.directions.left);
                 }
                 shuffle(direction);
 
@@ -318,19 +312,19 @@
                         left = parseInt(item.attr('data-left'));
 
                     if (top === current.top + 1 && left === current.left) {
-                        moveItem(item, directions.up, false).then(() => {
+                        moveItem(item, layoutr.directions.up, false).then(() => {
                             checkSolved();
                         });
                     } else if (top === current.top - 1 && left === current.left) {
-                        moveItem(item, directions.down, false).then(() => {
+                        moveItem(item, layoutr.directions.down, false).then(() => {
                             checkSolved();
                         });
                     } else if (top === current.top && left === current.left + 1) {
-                        moveItem(item, directions.left, false).then(() => {
+                        moveItem(item, layoutr.directions.left, false).then(() => {
                             checkSolved();
                         });
                     } else if (top === current.top && left === current.left - 1) {
-                        moveItem(item, directions.right, false).then(() => {
+                        moveItem(item, layoutr.directions.right, false).then(() => {
                             checkSolved();
                         });
                     }
@@ -341,22 +335,22 @@
                 if (assignment.attr('data-state') === 'start' && !movingItem) {
                     if (e.keyCode === 38 && current.top !== tiles - 1) {
                         e.preventDefault();
-                        moveItem(getItem(directions.up), directions.up, false).then(() => {
+                        moveItem(getItem(layoutr.directions.up), layoutr.directions.up, false).then(() => {
                             checkSolved();
                         });
                     } else if (e.keyCode === 40 && current.top !== 0) {
                         e.preventDefault();
-                        moveItem(getItem(directions.down), directions.down, false).then(() => {
+                        moveItem(getItem(layoutr.directions.down), layoutr.directions.down, false).then(() => {
                             checkSolved();
                         });
                     } else if (e.keyCode === 37 && current.left !== tiles - 1) {
                         e.preventDefault();
-                        moveItem(getItem(directions.left), directions.left, false).then(() => {
+                        moveItem(getItem(layoutr.directions.left), layoutr.directions.left, false).then(() => {
                             checkSolved();
                         });
                     } else if (e.keyCode === 39 && current.left !== 0) {
                         e.preventDefault();
-                        moveItem(getItem(directions.right), directions.right, false).then(() => {
+                        moveItem(getItem(layoutr.directions.right), layoutr.directions.right, false).then(() => {
                             checkSolved();
                         });
                     }

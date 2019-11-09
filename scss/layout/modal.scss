@@ -123,8 +123,8 @@ html {
                         display: block;
                     }
 
-                    #modal-title:not(:empty),
-                    #modal-content:not(:empty) {
+                    #modal-title,
+                    #modal-content {
                         position: absolute;
                         left: 0;
                         right: 0;
@@ -133,7 +133,7 @@ html {
                     }
 
 
-                    #modal-title:not(:empty) {
+                    #modal-title {
                         top: 0;
                         padding: $spacer (rem(56px) + $spacer) $spacer $spacer;
                         text-align: center;
@@ -143,7 +143,7 @@ html {
                         @include ellipsis;
                     }
 
-                    #modal-content:not(:empty) {
+                    #modal-content {
                         bottom: 0;
                         padding: $spacer;
                         @include transition(bottom);
