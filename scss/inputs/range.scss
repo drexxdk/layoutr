@@ -5,6 +5,28 @@
         display: none;
 
         & + .noUi-target {
+            @include theme-element($light, true);
+            box-shadow: $input-box-shadow;
+
+            .noUi-handle {
+                @include theme-element($dark, true);
+                box-shadow: $input-box-shadow;
+
+                &:before,
+                &:after {
+                    background: $component-border-color;
+                }
+
+                &:focus {
+                    @include focus;
+                    position: absolute;
+                }
+            }
+
+            .noUi-connect {
+                @include theme-element($primary);
+            }
+
 
             &.noUi-horizontal {
                 margin: 5px 16px;

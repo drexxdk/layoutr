@@ -55,7 +55,8 @@
         fill: $color;
     }
 
-    html.desktop & .dropdown > .btn:hover {
+    html.desktop & .dropdown > .btn:hover,
+    html.desktop & .dropdown > .btn:focus  {
         @include theme-element-soft-darken($background, true);
     }
 }
