@@ -1,6 +1,7 @@
 ﻿{
-    layoutr.showModal = (type) => {
+    layoutr.showModal = (type, closable) => {
         layoutr.html.attr('data-modal', type);
+        layoutr.html.attr('data-modal-closable', closable);
         layoutr.html.addClass('modal');
         layoutr.hideLoading();
         layoutr.checkModal();
@@ -39,10 +40,10 @@
                 type = $this.attr('data-modal');
             if (type !== undefined && type.length && (type === 'image' || type === 'form')) {
                 layoutr.showLoading();
-                let id = $this.attr('data-modal-id'),
-                    dataTitle = $this.attr('data-modal-title'),
+                let dataTitle = $this.attr('data-modal-title'),
                     dataContent = $this.attr('data-modal-content'),
-                    dataFullscreen = $this.attr('data-modal-fullscreen') === 'true';
+                    dataFullscreen = $this.attr('data-modal-fullscreen') === 'true',
+                    dataClosable = $this.attr('data-modal-closable') === undefined || $this.attr('data-modal-closable') === 'true';
 
                 let template = () => {
                     let result;
@@ -64,9 +65,10 @@ ${dataContent !== undefined ? `<div id="modal-content">${dataContent}</div>` : '
                         result = 
 `<div class="header">
     ${dataTitle !== undefined ? `<span class="title">${dataTitle}</span>` : ''}
-    <button id="modal-close" class="close expand" aria-label="Close ${dataTitle !== undefined ? dataTitle : ''}">
-        <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
-    </button>
+    ${dataClosable ?
+`<button id="modal-close" class="close expand" aria-label="Close ${dataTitle !== undefined ? dataTitle : ''}">
+    <svg focusable="false"><use xlink:href="#svg-close"></use></svg>
+</button>` : ''}
 </div>
 <div class="content">
 </div>`;
@@ -89,7 +91,7 @@ ${dataContent !== undefined ? `<div id="modal-content">${dataContent}</div>` : '
                         if (bowser.android) {
                             image.css('max-height', window.innerHeight);
                         }
-                        layoutr.showModal(type);
+                        layoutr.showModal(type, dataClosable);
                     });
                     image.attr('src', $this.attr('data-modal-img'));
                 } else {
@@ -101,7 +103,7 @@ ${dataContent !== undefined ? `<div id="modal-content">${dataContent}</div>` : '
                     content.append(dataContent);
                     layoutr.contentLoaded(content);
                     layoutr.pauseMedia();
-                    layoutr.showModal(type);
+                    layoutr.showModal(type, dataClosable);
                 }
                 if (dataFullscreen) {
                     layoutr.requestFullScreen();

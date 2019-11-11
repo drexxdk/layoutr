@@ -49,7 +49,7 @@
     };
 
     layoutr.isModalForm = () => {
-        return layoutr.html.attr('data-modal') === 'form';
+        return layoutr.html.attr('data-modal') === 'form' && layoutr.html.attr('data-modal-closable') !== 'false';
     };
 
     layoutr.isModalImage = () => {

@@ -45,7 +45,7 @@
             } else if (modal.length) {
                 let image = layoutr.isModalImage() && !target.closest('#modal-toggle').length && !target.closest('#modal-title').length && !target.closest('#modal-description').length,
                     form = layoutr.isModalForm() && !target.closest('#modal > div > div > div').length;
-                if (image || form || target.closest('#modal-close').length) {
+                if (image || form || target.closest('#modal .close').length) {
                     layoutr.closeModal();
                 }
             } else {
