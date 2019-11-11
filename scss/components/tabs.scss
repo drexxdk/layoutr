@@ -8,7 +8,6 @@
 
         > .top {
             display: flex;
-            overflow-x: auto;
 
             > li {
                 @extend .btn;

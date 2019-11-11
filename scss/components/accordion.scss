@@ -3,7 +3,6 @@
 @mixin layoutr-accordion {
     .accordion {
         border-radius: $component-border-radius;
-        overflow: hidden;
         border: $component-border;
         z-index: $component-z-index;
 
@@ -13,10 +12,6 @@
                 @extend .btn;
                 @extend .btn.theme-light;
                 border: none !important;
-
-                &:focus {
-                    box-shadow:none;
-                }
 
                 &.badge {
                     &:not(.align-left):not(.align-right) > span:first-child {
