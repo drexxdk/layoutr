@@ -1,41 +1,37 @@
 ﻿/// <reference path="../references" />
 
 @mixin layoutr-range {
-    input[type=range] {
-        display: none;
+    .noUi-target {
+        @include theme-element($light, true);
+        box-shadow: $input-box-shadow;
 
-        & + .noUi-target {
-            @include theme-element($light, true);
+        .noUi-handle {
+            @include theme-element($dark, true);
             box-shadow: $input-box-shadow;
 
-            .noUi-handle {
-                @include theme-element($dark, true);
-                box-shadow: $input-box-shadow;
-
-                &:before,
-                &:after {
-                    background: $component-border-color;
-                }
-
-                &:focus {
-                    @include focus;
-                    position: absolute;
-                }
+            &:before,
+            &:after {
+                background: $component-border-color;
             }
 
-            .noUi-connect {
-                @include theme-element($primary);
+            &:focus {
+                @include focus;
+                position: absolute;
             }
+        }
+
+        .noUi-connect {
+            @include theme-element($primary);
+        }
 
 
-            &.noUi-horizontal {
-                margin: 5px 16px;
-            }
+        &.noUi-horizontal {
+            margin: 5px 16px;
+        }
 
-            &.noUi-vertical {
-                margin: 16px 5px;
-                height: rem(200px);
-            }
+        &.noUi-vertical {
+            margin: 16px 5px;
+            height: rem(200px);
         }
     }
 }

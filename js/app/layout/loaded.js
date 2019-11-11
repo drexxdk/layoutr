@@ -12,7 +12,7 @@
         layoutr.checkDatatable(notLoaded(element.find('.dataTable')));
         layoutr.checkSwiper(notLoaded(element.find('.swiper')));
         layoutr.checkTabs(notLoaded(element.find('.tabs')));
-        layoutr.checkRanges(notLoaded(element.find('input[type="range"]')));
+        layoutr.checkRanges(notLoaded(element.find('.range')));
     };
 
     let notLoaded = (elements) => {
