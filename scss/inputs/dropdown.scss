@@ -3,13 +3,6 @@
 @mixin layoutr-dropdown {
     select.dropdown {
         @include hidden;
-        /* 
-            outcommented, since it doesn't seem to do anything.
-            outcommented 2018-04-12
-        */
-        /*html.desktop &:focus + div.dropdown > div {
-            @extend :focus;
-        }*/
     }
 
     div.dropdown {
@@ -165,8 +158,12 @@
                     }
                 }
 
+                &.no-results {
+                    pointer-events: none;
+                }
+
                 html.desktop &:focus {
-                    box-shadow:none;
+                    box-shadow: none;
                 }
 
                 html.desktop &:hover > svg {
