@@ -33,7 +33,7 @@
                 bottom: auto;
             }
 
-            a.label {
+            .label {
                 &.active {
                     @include theme-element($primary);
                     pointer-events: none;
@@ -51,7 +51,7 @@
 
         label.label {
             html.desktop &:focus > i {
-                @extend .btn:focus;
+                @include focus;
                 position: absolute;
             }
 
