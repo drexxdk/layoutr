@@ -21,7 +21,8 @@
                 },
                 confirm_password: {
                     required: true,
-                    equalTo: "#password"
+                    // https://stackoverflow.com/questions/2887292/jquery-validation-plugin-equalto-not-working
+                    equalTo: "#password1" // bug in jquery.validate doesn't allow same id/name for equalTo
                 },
                 email: {
                     required: true,
