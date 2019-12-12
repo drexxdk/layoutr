@@ -21,27 +21,22 @@
         }
 
         &.ellipsis {
-            > div > label,
-            > ul > li > div > label {
+            label {
                 @include ellipsis;
             }
         }
 
-        &.align-left {
-            > div > label,
-            > ul > li > div > label {
-                text-align: left;
-            }
+        &.align-left label {
+            text-align: left;
         }
 
         &.align-right {
-            > div > label {
+            label {
                 text-align: right;
             }
 
             > ul > li > div {
                 > label {
-                    text-align: right;
                     order: 2;
                 }
 
@@ -49,10 +44,6 @@
                     order: 1;
                 }
             }
-        }
-
-        &:not(.check) ul svg {
-            display: none;
         }
 
         &.direction-up {
@@ -143,12 +134,61 @@
             overflow: auto;
             max-height: ($height * 4) + ($component-border-width * 5);
 
+            li {
+
+                &:not(.optgroup):not(.filter) {
+                    @extend .btn; // switch away from .btn .. its not ideal
+                    border-radius: 0 !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+
+                &:not(.optgroup) + li:not(.optgroup) {
+                    border-top: $component-border !important;
+                }
+
+                > label {
+                    flex-grow: 1;
+                    text-align: center;
+                    max-width: 100%;
+                    overflow: auto;
+                }
+
+                > svg {
+                    opacity: 0;
+                }
+
+                &.selected {
+                    @extend .btn:hover;
+
+                    > svg {
+                        fill: $success;
+                        opacity: 1 !important;
+                    }
+                }
+            }
+
             > li {
-                border-radius: 0;
-                display: block;
-                display: flex;
-                @extend .btn;
-                border: none !important;
+
+                &.optgroup {
+                    flex-direction: column;
+                    pointer-events: none;
+
+
+                    > label {
+                        display: block;
+                        font-weight: $font-weight-bold;
+                        padding: $padding-y $padding-x;
+                    }
+
+                    > ul {
+                        border-left: $spacer-2 solid $component-border-color;
+
+                        > li {
+                            pointer-events: all;
+                        }
+                    }
+                }
 
                 &.filter {
                     padding: $spacer-2;
@@ -168,26 +208,6 @@
 
                 html.desktop &:hover > svg {
                     opacity: $opacity-inactive;
-                }
-
-                > label {
-                    flex-grow: 1;
-                    text-align: center;
-                    max-width: 100%;
-                    overflow: auto;
-                }
-
-                > svg {
-                    opacity: 0;
-                }
-
-                &.selected > svg {
-                    fill: $success;
-                    opacity: 1 !important;
-                }
-
-                & + li {
-                    border-top: $component-border;
                 }
             }
         }

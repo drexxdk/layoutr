@@ -2,7 +2,7 @@
     layoutr.checkDropdown = (dropdowns) => {
         dropdowns.each((i, e) => {
             let $this = $(e),
-                selected = $this.children('option:selected'),
+                selected = $this.find('option:selected'),
                 attr = $this.attr('class'),
                 theme = '',
                 width = $this.attr('data-width');
@@ -20,25 +20,42 @@
             }
 
             let liTemplate = (e, i) => {
-                if ($this.hasClass('not-first') && i === 0) {
+                let li = $(e),
+                    text;
+                if (li.is('optgroup')) {
+                    text = li[0].label;
+                } else {
+                    text = li.text();
+                }
+                if ($this.hasClass('not-first') && !li.is('optgroup') && li.val() === "") {
                     return;
                 }
-                let li = $(e),
-                    text = li.text();
                 if (!text.length) {
                     text = '&nbsp;';
                 }
                 if (text.indexOf('$$') === 0) {
                     li.attr('data-math', text);
                 }
-                return `
-<li tabindex="0" class="theme-light" data-id="${li.val()}"${li.is(':selected') ? ' class="selected"' : ''}>
+
+                if (li.is('optgroup')) {
+                    return `
+<li class="optgroup">
+    <label>${text}</label>
+    <ul>
+        ${ $.makeArray(li.children()).map(liTemplate).join('')}
+    </ul>
+</li>`;
+                } else {
+                    return `
+<li tabindex="0" class="theme-light ${$this.hasClass('align-left') ? ' align-left' : ''} ${$this.hasClass('align-right') ? ' align-right' : ''} ${li.is(':selected') ? ' selected' : ''}" data-id="${li.val()}">
     <label>${text}</label>
     ${$this.hasClass('check') ? '<svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>' : ''}
 </li>`;
+                }
             };
-            let html = 
-`<div class="dropdown
+
+            let html = `
+<div class="dropdown
     ${$this.hasClass('nowrap') ? ' nowrap' : ''}
     ${$this.hasClass('check') ? ' check' : ''}
     ${$this.hasClass('ellipsis') ? ' ellipsis' : ''}
@@ -62,7 +79,7 @@
             $this.after(html);
             html = $this.next();
             if ($this.hasClass('filter')) {
-                let lis = html.find('li:not(.filter):not(.no-results)'),
+                let lis = html.find('li:not(.filter):not(.no-results):not(.optgroup)'),
                     noResults = html.find('li.no-results');
                 html.on('keyup', '.filter > input', (e) => {
                     let any = lis.filter((i, li) => {
@@ -94,13 +111,12 @@
                 layoutr.dropdown = dropdown;
                 dropdown.toggleClass('open');
             });
-            html.on('click', 'li:not(.filter)', (e) => {
+            html.on('click', 'li:not(.filter):not(.optgroup)', (e) => {
                 let $that = $(e.currentTarget);
                 if (!$that.hasClass('selected')) {
-                    console.log('test a');
-                    $that.siblings('.selected').removeClass('selected');
+                    layoutr.dropdown.find('.selected').removeClass('selected');
                     $that.addClass('selected');
-                    let option = $this.children(`[value="${$that.attr('data-id')}"]`),
+                    let option = $this.find(`[value="${$that.attr('data-id')}"]`),
                         text = $that.text(),
                         math = option.attr('data-math');
                     if (math !== undefined) {
