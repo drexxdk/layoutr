@@ -166,6 +166,10 @@
                         opacity: 1 !important;
                     }
                 }
+
+                html.desktop &:hover > svg {
+                    opacity: $opacity-inactive;
+                }
             }
 
             > li {
@@ -200,14 +204,6 @@
 
                 &.no-results {
                     pointer-events: none;
-                }
-
-                html.desktop &:focus {
-                    box-shadow: none;
-                }
-
-                html.desktop &:hover > svg {
-                    opacity: $opacity-inactive;
                 }
             }
         }
