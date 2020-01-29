@@ -1,13 +1,14 @@
 ﻿{
     layoutr.checkDropdown = (dropdowns) => {
         dropdowns.each((i, e) => {
-            let $this = $(e),
-                selected = $this.find('option:selected'),
-                attr = $this.attr('class'),
+            let select = $(e),
+                selected = select.find('option:selected'),
+                attr = select.attr('class'),
                 theme = '',
-                width = $this.attr('data-width');
+                name = select.attr('name'),
+                width = select.attr('data-width');
             if (selected.length !== 1) {
-                selected = $this.children().first();
+                selected = select.children().first();
             }
             if (typeof attr !== typeof undefined && attr !== false) {
                 let temp = attr.split(' ');
@@ -27,7 +28,7 @@
                 } else {
                     text = li.text();
                 }
-                if ($this.hasClass('not-first') && !li.is('optgroup') && li.val() === "") {
+                if (select.hasClass('not-first') && !li.is('optgroup') && li.val() === "") {
                     return;
                 }
                 if (!text.length) {
@@ -47,21 +48,25 @@
 </li>`;
                 } else {
                     return `
-<li tabindex="0" class="theme-light ${$this.hasClass('align-left') ? ' align-left' : ''} ${$this.hasClass('align-right') ? ' align-right' : ''} ${li.is(':selected') ? ' selected' : ''}" data-id="${li.val()}">
-    <label>${text}</label>
-    ${$this.hasClass('check') ? '<svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>' : ''}
+<li tabindex="0" class="theme-light ${select.hasClass('align-left') ? ' align-left' : ''} ${select.hasClass('align-right') ? ' align-right' : ''} ${li.is(':selected') ? ' selected' : ''}" data-id="${li.val()}">
+    ${select.is('[multiple]') && !(e.value === "" && i === 0) ? `<div class="switch round">
+                                    <input id="${name}_${i}" name="${name}_${i}" type="checkbox">
+                                    <label tabindex="0" for="${name}_${i}"><i></i><span>${text}</span></label>
+                                </div>` : `<label>${text}</label>`}
+    ${select.hasClass('check') ? '<svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg>' : ''}
 </li>`;
                 }
             };
 
             let html = `
 <div class="dropdown
-    ${$this.hasClass('nowrap') ? ' nowrap' : ''}
-    ${$this.hasClass('check') ? ' check' : ''}
-    ${$this.hasClass('ellipsis') ? ' ellipsis' : ''}
-    ${$this.hasClass('align-left') ? ' align-left' : ''}
-    ${$this.hasClass('align-right') ? ' align-right' : ''}
-    ${$this.hasClass('direction-up') ? ' direction-up' : ''}
+    ${select.hasClass('nowrap') ? ' nowrap' : ''}
+    ${select.hasClass('check') ? ' check' : ''}
+    ${select.hasClass('ellipsis') ? ' ellipsis' : ''}
+    ${select.hasClass('align-left') ? ' align-left' : ''}
+    ${select.hasClass('align-right') ? ' align-right' : ''}
+    ${select.hasClass('direction-up') ? ' direction-up' : ''}
+    ${select.is('[multiple]') ? ' multiple align-left' : ''}
     "
     ${width !== undefined ? ` style="width: ${width}px"` : ''}
 >
@@ -70,18 +75,18 @@
         <svg focusable="false"><use xlink:href="#svg-arrow"></use></svg>
     </div>
     <ul class="${theme}">
-        ${$this.hasClass('filter') ? `
+        ${select.hasClass('filter') ? `
 <li class="filter"><input type="text" placeholder="Filter"></li>
 <li class="no-results hidden"><div><label>No results</label></div></li>` : ''}
-        ${$.makeArray($this.children()).map(liTemplate).join('')}
+        ${$.makeArray(select.children()).map(liTemplate).join('')}
     </ul>
 </div>`;
-            $this.after(html);
-            html = $this.next();
-            if ($this.hasClass('filter')) {
-                let lis = html.find('li:not(.filter):not(.no-results):not(.optgroup)'),
-                    noResults = html.find('li.no-results');
-                html.on('keyup', '.filter > input', (e) => {
+            select.after(html);
+            let dropdown = select.next();
+            if (select.hasClass('filter')) {
+                let lis = dropdown.find('li:not(.filter):not(.no-results):not(.optgroup)'),
+                    noResults = dropdown.find('li.no-results');
+                dropdown.on('keyup', '.filter > input', (e) => {
                     let any = lis.filter((i, li) => {
                         if (li.innerText.indexOf(e.currentTarget.value) === -1) {
                             li.classList.add('hidden');
@@ -93,12 +98,21 @@
                     });
 
                     any.length ? noResults.addClass('hidden') : noResults.removeClass('hidden');
+                    let optgroups = dropdown.find('li.optgroup');
+                    optgroups.each((i, optgroup) => {
+                        optgroup = $(optgroup);
+                        if (optgroup.find('li:not(.hidden)').length) {
+                            optgroup.removeClass('hidden');
+                        } else {
+                            optgroup.addClass('hidden');
+                        }
+                    });
                 });
             }
 
-            if ($this.hasClass('nowrap')) {
-                let top = html.children().eq(0),
-                    bottom = html.children().eq(1),
+            if (select.hasClass('nowrap')) {
+                let top = dropdown.children().eq(0),
+                    bottom = dropdown.children().eq(1),
                     topWidth = top.width(),
                     bottomWidth = bottom.width();
                 if (bottomWidth > topWidth) {
@@ -106,32 +120,64 @@
                 }
             }
 
-            html.on('click', '> div', (e) => {
-                let dropdown = $(e.currentTarget).parent();
+            dropdown.on('click', '> div', (e) => {
                 layoutr.dropdown = dropdown;
                 dropdown.toggleClass('open');
             });
-            html.on('click', 'li:not(.filter):not(.optgroup)', (e) => {
-                let $that = $(e.currentTarget);
-                if (!$that.hasClass('selected')) {
-                    layoutr.dropdown.find('.selected').removeClass('selected');
-                    $that.addClass('selected');
-                    let option = $this.find(`[value="${$that.attr('data-id')}"]`),
-                        text = $that.text(),
-                        math = option.attr('data-math');
-                    if (math !== undefined) {
-                        text = math;
+            dropdown.on('click', 'li:not(.filter):not(.optgroup)', (e) => {
+                // clicking on input inside, makes it call click twice
+                e.stopPropagation();
+                e.preventDefault();
+                let li = $(e.currentTarget);
+                if (select.is('[multiple]') || !li.hasClass('selected')) {
+                    let option = select.find(`[value="${li.attr('data-id')}"]`),
+                        text = li.text(),
+                        label = dropdown.children('div').children('label');
+
+                    if (select.is('[multiple]')) {
+                        if (option.index() === 0 && option.val() === "") {
+                            if (select.val().length) {
+                                li.addClass('selected');
+                                option.prop('selected', false);
+                                select.children(':selected').not(option).removeAttr('selected');
+                                li.siblings().removeClass('selected').find('input').prop('checked', false);
+                                option.siblings(':selected').prop('selected', false);
+                                label.text(text);
+                                dropdown.removeClass('open');
+                                select.change();
+                            } else {
+                                dropdown.removeClass('open');
+                            }
+                        } else {
+                            li.siblings().first('[val=""]').removeClass('selected');
+                            li.toggleClass('selected');
+                            option.prop('selected', !option.prop('selected'));
+                            if (!$(e.target).is('input')) {
+                                li.find('input').prop('checked', option.prop('selected'));
+                            }
+                            text = `${select.children(':selected').length} selected`;
+                            label.text(text);
+                            select.change();
+                        }
+                    } else {
+                        let math = option.attr('data-math');
+                        layoutr.dropdown.find('.selected').removeClass('selected');
+                        li.addClass('selected');
+                        if (math !== undefined) {
+                            text = math;
+                        }
+                        label.text(text);
+                        if (math !== undefined) {
+                            renderMathInElement(label[0]);
+                        }
+                        select.children(':selected').removeAttr('selected');
+                        option.prop('selected', true);
+                        dropdown.removeClass('open');
+                        select.change();
                     }
-                    let label = html.children('div').children('label');
-                    label.text(text);
-                    if (math !== undefined) {
-                        renderMathInElement(label[0]);
-                    }
-                    $this.children(':selected').removeAttr('selected');
-                    option.prop('selected', true);
-                    $this.change();
+                } else {
+                    dropdown.removeClass('open');
                 }
-                html.removeClass('open');
             });
         });
     };

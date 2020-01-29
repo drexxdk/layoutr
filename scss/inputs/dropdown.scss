@@ -26,8 +26,14 @@
             }
         }
 
-        &.align-left label {
-            text-align: left;
+        &.align-left {
+            li {
+                justify-content: flex-start !important;
+            }
+
+            label {
+                text-align: left;
+            }
         }
 
         &.align-right {
@@ -35,7 +41,11 @@
                 text-align: right;
             }
 
-            > ul > li > div {
+            li {
+                justify-content: flex-end !important;
+            }
+
+            > ul > li {
                 > label {
                     order: 2;
                 }

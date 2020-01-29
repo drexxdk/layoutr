@@ -11,7 +11,9 @@
                 dropdown_6: "required",
                 dropdown_7: "required",
                 dropdown_8: "required",
-                dropdown_9: "required"
+                dropdown_9: "required",
+                dropdown_10: "required",
+                dropdown_11: "required"
             },
             {
                 dropdown_1: "Please select an option",
@@ -22,7 +24,9 @@
                 dropdown_6: "Please select an option",
                 dropdown_7: "Please select an option",
                 dropdown_8: "Please select an option",
-                dropdown_9: "Please select an option"
+                dropdown_9: "Please select an option",
+                dropdown_10: "Please select at least one option",
+                dropdown_11: "Please select at least one option"
             }
         );
     };
