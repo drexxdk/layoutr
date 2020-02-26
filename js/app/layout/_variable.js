@@ -14,7 +14,7 @@
     layoutr.loadingCount = 0;
     layoutr.document = document.documentElement;
     layoutr.fullscreen = false;
-    layoutr.ajax = 'dist/ajax/';
+    layoutr.htmlDist = 'dist/html/';
     layoutr.arrowKeyLocked = false;
     layoutr.sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare;
 

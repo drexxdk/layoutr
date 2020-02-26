@@ -58,7 +58,7 @@
     };
 
     $(() => {
-        layoutr.load.html(layoutr.host + layoutr.ajax + 'layout/settings.html').then((response) => {
+        layoutr.load.html(`${layoutr.host}${layoutr.htmlDist}layout/settings.html`).then((response) => {
             let $this = layoutr.right.find('> .content > div');
             $this.html(response);
             layoutr.promiseCSS.then(() => {

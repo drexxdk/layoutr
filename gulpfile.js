@@ -10,6 +10,7 @@ const gulp = require("gulp"),
     sourcemaps = require("gulp-sourcemaps"),
     gulpif = require("gulp-if"),
     swPrecache = require('sw-precache'),
+    htmlmin = require('gulp-html-minifier2'),
     dist = 'dist',
     config = {
         js: {
@@ -198,10 +199,11 @@ const gulp = require("gulp"),
                 }
             ]
         },
-        templates: {
-            src: 'js/backbone/templates/**/*.hbs',
-            dist: dist + '/js'
-        }
+        html: {
+            prefix: 'html$',
+            src: 'html/**/*.html',
+            dist: dist + '/html'
+        },
     };
 
 gulp.task('_serviceWorker', (callback) => {
@@ -214,6 +216,19 @@ gulp.task('_serviceWorker', (callback) => {
         navigateFallback: 'index.html'
     }, callback);
 });
+
+    gulp.task(config.html.prefix + '.dev', () => {
+        return gulp
+            .src(config.html.src)
+            .pipe(gulp.dest(config.html.dist));
+    });
+
+    gulp.task(config.html.prefix + '.prod', () => {
+        return gulp
+            .src(config.html.src)
+            .pipe(htmlmin({ collapseWhitespace: true }))
+            .pipe(gulp.dest(config.html.dist));
+    });
 
 const generateJSTask = (task) => {
     gulp.task(config.js.prefix + task.name + '.dev', () => {
@@ -300,12 +315,14 @@ gulp.task('$watch.prod', () => {
 
 gulp.task('_bundle.dev', gulp.series(
     config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.dev'; }),
-    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.dev'; })
+    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.dev'; }),
+    config.html.prefix + '.dev'
 ));
 
 gulp.task('_bundle.prod', gulp.series(
     config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.prod'; }),
-    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.prod'; })
+    config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.prod'; }),
+    config.html.prefix + '.prod'
 ));
 
 gulp.task('_default', gulp.series('_bundle.dev', '$watch.dev'));

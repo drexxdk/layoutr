@@ -12,6 +12,7 @@
     "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.10.0",
     "gulp-concat": "^2.6.1",
+    "gulp-html-minifier2": "^1.1.11",
     "gulp-if": "^2.0.2",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",

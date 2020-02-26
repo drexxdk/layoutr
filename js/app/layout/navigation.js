@@ -2,7 +2,7 @@
     layoutr.loadPage = (url, pushState, initial) => {
         layoutr.showLoading();
         layoutr.destroyMedia();
-        layoutr.load.html(`${layoutr.host}${layoutr.ajax}pages${url === '/' ? '/home' : url}.html`).then((response) => {
+        layoutr.load.html(`${layoutr.host}${layoutr.htmlDist}pages${url === '/' ? '/home' : url}.html`).then((response) => {
             layoutr.content.html(response);
             let q = url.indexOf('?');
             url = url.substring(0, q !== -1 ? q : url.length);
@@ -13,7 +13,7 @@
             document.title = layoutr.siteName;
             if (url === '/') {
                 if (layoutr.body.children('#svg-browser').length === 0) {
-                    layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/browser.html').then((response) => {
+                    layoutr.load.html(layoutr.host + layoutr.htmlDist + 'svg/browser.html').then((response) => {
                         $(response).prependTo(layoutr.body);
                     }).catch((e) => {
                         layoutr.showPopupAlert('Failed to load browser svg html', 'danger');
@@ -21,7 +21,7 @@
                     });
                 }
                 if (layoutr.body.children('#svg-os').length === 0) {
-                    layoutr.load.html(layoutr.host + layoutr.ajax + 'svg/os.html').then((response) => {
+                    layoutr.load.html(layoutr.host + layoutr.htmlDist + 'svg/os.html').then((response) => {
                         $(response).prependTo(layoutr.body);
                     }).catch((e) => {
                         layoutr.showPopupAlert('Failed to load os svg html', 'danger');
@@ -45,7 +45,7 @@
                 layoutr.pageLoaded(initial);
             });
         }).catch((response) => {
-            layoutr.load.html(layoutr.host + layoutr.ajax + 'pages/error.html').then((response2) => {
+            layoutr.load.html(layoutr.host + layoutr.htmlDist + 'pages/error.html').then((response2) => {
                 layoutr.content.html(response2);
                 layoutr.html.attr('data-status', 'error');
                 document.title = `${response}-${layoutr.siteName}`;
@@ -128,7 +128,7 @@
     };
 
     $(() => {
-        layoutr.load.html(layoutr.host + layoutr.ajax + 'layout/navigation.html').then((response) => {
+        layoutr.load.html(layoutr.host + layoutr.htmlDist + 'layout/navigation.html').then((response) => {
             layoutr.left.find('> .content > div').html(response);
             layoutr.navigationTree = layoutr.left.find('.tree');
             layoutr.navigation = JSON.parse(localStorage.getItem("navigation"));

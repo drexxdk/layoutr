@@ -8,7 +8,7 @@
 
         //layoutr.setHtmlScroll(); // outcomment if it can be disabled at first page load
 
-        layoutr.load.html(`${layoutr.host}${layoutr.ajax}svg/base.html`).then((response) => {
+        layoutr.load.html(`${layoutr.host}${layoutr.htmlDist}svg/base.html`).then((response) => {
             $(response).prependTo(layoutr.body);
         }).catch((e) => {
             layoutr.showPopupAlert('Failed to load base svg html', 'danger');
