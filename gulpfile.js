@@ -217,18 +217,18 @@ gulp.task('_serviceWorker', (callback) => {
     }, callback);
 });
 
-    gulp.task(config.html.prefix + '.dev', () => {
-        return gulp
-            .src(config.html.src)
-            .pipe(gulp.dest(config.html.dist));
-    });
+gulp.task(config.html.prefix + '.dev', () => {
+    return gulp
+        .src(config.html.src)
+        .pipe(gulp.dest(config.html.dist));
+});
 
-    gulp.task(config.html.prefix + '.prod', () => {
-        return gulp
-            .src(config.html.src)
-            .pipe(htmlmin({ collapseWhitespace: true }))
-            .pipe(gulp.dest(config.html.dist));
-    });
+gulp.task(config.html.prefix + '.prod', () => {
+    return gulp
+        .src(config.html.src)
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest(config.html.dist));
+});
 
 const generateJSTask = (task) => {
     gulp.task(config.js.prefix + task.name + '.dev', () => {
