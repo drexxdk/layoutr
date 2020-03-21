@@ -4,20 +4,11 @@
             let select = $(e),
                 selected = select.find('option:selected'),
                 attr = select.attr('class'),
-                theme = '',
+                theme = layoutr.getThemeFromAttr(select.attr('class')),
                 name = select.attr('name'),
                 width = select.attr('data-width');
             if (selected.length !== 1) {
                 selected = select.children().first();
-            }
-            if (typeof attr !== typeof undefined && attr !== false) {
-                let temp = attr.split(' ');
-                temp = $.grep(temp, (item, index) => {
-                    return item.trim().match(/^theme-/);
-                });
-                if (temp.length === 1) {
-                    theme = temp[0];
-                }
             }
 
             let liTemplate = (e, i) => {

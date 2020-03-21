@@ -79,7 +79,7 @@ const gulp = require("gulp"),
                         'js/app/components/tooltip.js',
                         'js/app/components/datatables.js',
                         'js/app/components/swiper.js',
-                        'js/app/components/audioVisualizer.js',
+                        'js/app/components/audioVisualiser.js',
 
                         // assignments
                         'js/app/assignments/_assignment.js',
@@ -218,13 +218,7 @@ gulp.task('_serviceWorker', (callback) => {
     }, callback);
 });
 
-gulp.task(config.html.prefix + '.dev', () => {
-    return gulp
-        .src(config.html.src)
-        .pipe(gulp.dest(config.html.dist));
-});
-
-gulp.task(config.html.prefix + '.prod', () => {
+gulp.task(config.html.prefix, () => {
     return gulp
         .src(config.html.src)
         .pipe(htmlmin({ collapseWhitespace: true }))
@@ -299,7 +293,7 @@ gulp.task('$watch.dev', () => {
             config.css.prefix + config.css.bundles[i].name + '.dev'
         ));
     }
-    gulp.watch(config.html.src, gulp.series(config.html.prefix + '.dev'));
+    gulp.watch(config.html.src, gulp.series(config.html.prefix));
 });
 
 gulp.task('$watch.prod', () => {
@@ -313,19 +307,19 @@ gulp.task('$watch.prod', () => {
             config.css.prefix + config.css.bundles[i].name + '.prod'
         ));
     }
-    gulp.watch(config.html.src, gulp.series(config.html.prefix + '.prod'));
+    gulp.watch(config.html.src, gulp.series(config.html.prefix));
 });
 
 gulp.task('_bundle.dev', gulp.series(
     config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.dev'; }),
     config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.dev'; }),
-    config.html.prefix + '.dev'
+    config.html.prefix
 ));
 
 gulp.task('_bundle.prod', gulp.series(
     config.css.bundles.map((elem) => { return config.css.prefix + elem.name + '.prod'; }),
     config.js.bundles.map((elem) => { return config.js.prefix + elem.name + '.prod'; }),
-    config.html.prefix + '.prod'
+    config.html.prefix
 ));
 
 gulp.task('_default', gulp.series('_bundle.dev', '$watch.dev'));

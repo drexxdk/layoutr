@@ -1,0 +1,9 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-audio-visualiser {
+    .audio-visualiser {
+        @extend .embed;
+        @extend .embed.aspect-ratio-4by1;
+        @extend .alert;
+    }
+}

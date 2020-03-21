@@ -132,4 +132,18 @@
     layoutr.isTrue = (str) => {
         return str === 'true';
     };
+
+    layoutr.getThemeFromAttr = (attr) => {
+        if (typeof attr !== typeof undefined && attr !== false) {
+            let temp = attr.split(' '),
+                result = '';
+            temp = $.grep(temp, (item, index) => {
+                return item.trim().match(/^theme-/);
+            });
+            if (temp.length === 1) {
+                result = temp[0];
+            }
+            return result;
+        }
+    }
 }

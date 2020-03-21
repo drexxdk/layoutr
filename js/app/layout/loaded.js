@@ -13,7 +13,7 @@
         layoutr.checkSwiper(notLoaded(element.find('.swiper')));
         layoutr.checkTabs(notLoaded(element.find('.tabs')));
         layoutr.checkRanges(notLoaded(element.find('.range')));
-        layoutr.checkAudioVisualizer(notLoaded(element.find('.audio-visualizer')));
+        layoutr.checkAudioVisualiser(notLoaded(element.find('.audio-visualiser')));
     };
 
     let notLoaded = (elements) => {
