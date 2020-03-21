@@ -79,6 +79,7 @@ const gulp = require("gulp"),
                         'js/app/components/tooltip.js',
                         'js/app/components/datatables.js',
                         'js/app/components/swiper.js',
+                        'js/app/components/audioVisualizer.js',
 
                         // assignments
                         'js/app/assignments/_assignment.js',
@@ -203,7 +204,7 @@ const gulp = require("gulp"),
             prefix: 'html$',
             src: 'html/**/*.html',
             dist: dist + '/html'
-        },
+        }
     };
 
 gulp.task('_serviceWorker', (callback) => {
@@ -298,6 +299,7 @@ gulp.task('$watch.dev', () => {
             config.css.prefix + config.css.bundles[i].name + '.dev'
         ));
     }
+    gulp.watch(config.html.src, gulp.series(config.html.prefix + '.dev'));
 });
 
 gulp.task('$watch.prod', () => {
@@ -311,6 +313,7 @@ gulp.task('$watch.prod', () => {
             config.css.prefix + config.css.bundles[i].name + '.prod'
         ));
     }
+    gulp.watch(config.html.src, gulp.series(config.html.prefix + '.prod'));
 });
 
 gulp.task('_bundle.dev', gulp.series(

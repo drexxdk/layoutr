@@ -13,12 +13,8 @@
             content: "";
         }
 
-        iframe,
-        embed,
-        object,
-        video {
+        > * {
             @include absolute-fill;
-            border: 0;
         }
 
         &.aspect-ratio-21by9 {
