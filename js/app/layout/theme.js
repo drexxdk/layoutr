@@ -32,8 +32,8 @@
 
     $(() => {
 
-        layoutr.body = $("body"),
-            colors = [
+        layoutr.body = $("body");
+        let colors = [
                 {
                     name: 'blue',
                     value: '#0072ED'
@@ -77,7 +77,7 @@
             ];
         let themeLight = {
             name: 'light',
-            link: () => { return colors.find(x => x.name === 'blue').value },
+            link: () => { return colors.find(x => x.name === 'blue').value; },
             soft: -10,
             hover: 7.5,
             gradient: 0.15,
@@ -98,35 +98,35 @@
             colors: [
                 {
                     name: "primary",
-                    hex: () => { return colors.find(x => x.name === 'blue').value }
+                    hex: () => { return colors.find(x => x.name === 'blue').value; }
                 },
                 {
                     name: "secondary",
-                    hex: () => { return themeLight.grays[6] }
+                    hex: () => { return themeLight.grays[6]; }
                 },
                 {
                     name: "success",
-                    hex: () => { return colors.find(x => x.name === 'green').value }
+                    hex: () => { return colors.find(x => x.name === 'green').value; }
                 },
                 {
                     name: "info",
-                    hex: () => { return colors.find(x => x.name === 'cyan').value }
+                    hex: () => { return colors.find(x => x.name === 'cyan').value; }
                 },
                 {
                     name: "warning",
-                    hex: () => { return colors.find(x => x.name === 'orange').value }
+                    hex: () => { return colors.find(x => x.name === 'orange').value; }
                 },
                 {
                     name: "danger",
-                    hex: () => { return colors.find(x => x.name === 'red').value }
+                    hex: () => { return colors.find(x => x.name === 'red').value; }
                 },
                 {
                     name: "light",
-                    hex: () => { return themeLight.grays[1] }
+                    hex: () => { return themeLight.grays[1]; }
                 },
                 {
                     name: "dark",
-                    hex: () => { return themeLight.grays[8] }
+                    hex: () => { return themeLight.grays[8]; }
                 }
             ]
         };
@@ -137,7 +137,7 @@
         let arraysEqual = (a, b) => {
             if (a === b) {
                 return true;
-            } else if (a == null || b == null || a.length != b.length) {
+            } else if (a === null || b === null || a.length !== b.length) {
                 return false;
             }
 
@@ -185,7 +185,7 @@
                 parseInt(hex.substring(2, 4), 16),
                 parseInt(hex.substring(4, 6), 16)
             ];
-        }
+        };
 
         let luminanace = (rgb) => {
             rgb = rgb.map(function (v) {
@@ -195,11 +195,11 @@
                     : Math.pow((v + 0.055) / 1.055, 2.4);
             });
             return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
-        }
+        };
 
         let contrast = (rgb1, rgb2) => {
             return (luminanace(rgb1) + 0.05) / (luminanace(rgb2) + 0.05);
-        }
+        };
 
         let textContrast = (text, background) => {
             let treshold = 4.5,
@@ -221,7 +221,7 @@
                 }
             }
             return yiq(text);
-        }
+        };
 
         //rgbA and rgbB are arrays, amountToMix ranges from 0.0 to 1.0
         let mix = (rgbA, rgbB, amount) => {
@@ -229,14 +229,14 @@
                 var channelA = colorChannelA * amount;
                 var channelB = colorChannelB * (1 - amount);
                 return parseInt(channelA + channelB);
-            }
+            };
 
             return [
                 channelMix(rgbA[0], rgbB[0], amount),
                 channelMix(rgbA[1], rgbB[1], amount),
                 channelMix(rgbA[2], rgbB[2], amount)
             ];
-        }
+        };
 
         let loadTheme = (name) => {
             let theme = themes.find(x => x.name === name),
