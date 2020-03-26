@@ -1,22 +1,35 @@
 ﻿{
-    let setupAudioVisualiser = function (element, audio, canvas, theme, type) {
-
-    };
-
     layoutr.checkAudioVisualiser = (audioVisualisers) => {
         if (audioVisualisers.length) {
             audioVisualisers.each((i, e) => {
                 let element = $(e),
-                    audio = element.attr('data-audio') ? $('#' + element.attr('data-audio')) : undefined,
-                    type = element.attr('data-type') ? element.attr('data-type') : 'bars';
+                    audio = element.attr('data-audio') ? $('#' + element.attr('data-audio')) : undefined;
 
                 if (audio.length) {
+                    let type = element.attr('data-type');
+
+                    if (!type) {
+                        type = 'bars';
+                        element.attr('data-type', type);
+                    }
+
+
+                    let title = element.attr('data-title');
+                    if (title) {
+                        element.append(`
+<div class="position top right">
+    <div>
+        <h3 class="title">${title}</h3>
+    </div>
+</div>
+`);
+                    }
                     let canvas = $('<canvas></canvas'),
                         theme = layoutr.getThemeFromAttr(element.attr('class'));
 
                     element.append(canvas);
                     element.append(`
-<div class="position top right">
+<div class="position bottom right">
     <div>
         <div class="flex gap-2">
             <button type="button" class="btn bars">
@@ -29,27 +42,15 @@
     </div>
 </div>
 `);
-                    let buttonBars = element.find('button.bars'),
-                        buttonWave = element.find('button.wave');
                     audio = audio[0];
                     canvas = canvas[0];
 
-                    if (type === 'bars') {
-                        buttonBars.addClass('theme-dark');
-                    } else if (type === 'wave') {
-                        buttonWave.addClass('theme-dark');
-                    }
-
-                    buttonBars.click(() => {
-                        type = 'bars';
-                        buttonBars.addClass('theme-dark');
-                        buttonWave.removeClass('theme-dark');
+                    element.find('button.bars').click(() => {
+                        element.attr('data-type', 'bars');
                     });
 
-                    buttonWave.click(() => {
-                        type = 'wave';
-                        buttonBars.removeClass('theme-dark');
-                        buttonWave.addClass('theme-dark');
+                    element.find('button.wave').click(() => {
+                        element.attr('data-type', 'wave');
                     });
 
 
@@ -68,7 +69,7 @@
                     let draw = () => {
                         if (!audio.paused) {
                             x = 0;
-                            if (type === 'wave') {
+                            if (element.attr('data-type') === 'wave') {
                                 analyser.minDecibels = -90;
                                 analyser.maxDecibels = -10;
                                 analyser.smoothingTimeConstant = 0.85;

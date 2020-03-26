@@ -5,5 +5,21 @@
         @extend .embed;
         @extend .embed.aspect-ratio-4by1;
         @extend .alert;
+
+        button {
+            opacity: 0; 
+        }
+
+        html.desktop &:hover button {
+            opacity:1;
+        }
+
+        &[data-type="wave"] button.wave {
+            @extend .btn.theme-dark;
+        }
+
+        &[data-type="bars"] button.bars {
+            @extend .btn.theme-dark;
+        }
     }
 }

@@ -27,4 +27,8 @@ html.transitions {
     .popup[data-position*="right"] {
         @include transition(right);
     }
+
+    .audio-visualiser button {
+        @include transition(opacity);
+    }
 }
