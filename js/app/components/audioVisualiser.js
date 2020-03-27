@@ -52,10 +52,22 @@
                         .then(response => response.arrayBuffer())
                         .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
                         .then(audioBuffer = (audioBuffer) => {
-                            buffer = normalizeData(filterData(audioBuffer));
+                            const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
+                            const blockSize = Math.floor(rawData.length / SAMPLES); // the number of samples in each subdivision
+                            const filteredData = [];
+                            for (let i = 0; i < SAMPLES; i++) {
+                                let blockStart = blockSize * i; // the location of the first sample in the block
+                                let sum = 0;
+                                for (let j = 0; j < blockSize; j++) {
+                                    sum = sum + Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
+                                }
+                                filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
+                            }
+                            buffer = filteredData;
                         });
 
                     element.find('button').click((e) => {
+                        hasDrawn = false;
                         let type = $(e.target).attr('data-type');
                         element.attr('data-type', type);
                     });
@@ -63,37 +75,14 @@
                     let setSize = () => {
                         WIDTH = canvas.clientWidth;
                         HEIGHT = canvas.clientHeight;
-                        DIFFERENCE = getDifference();
+                        DIFFERENCE = ((HEIGHT - 256) * 100) / 256;
                         canvasContext.canvas.width = WIDTH;
                         canvasContext.canvas.height = HEIGHT;
                     };
 
-                    let getDifference = () => {
-                        return ((HEIGHT - 256) * 100) / 256;
-                    };
-
-                    const normalizeData = filteredData => {
-                        const multiplier = Math.pow(Math.max(...filteredData), -1);
-                        return filteredData.map(n => n * multiplier);
-                    }
-
-                    const filterData = audioBuffer => {
-                        const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
-                        const blockSize = Math.floor(rawData.length / SAMPLES); // the number of samples in each subdivision
-                        const filteredData = [];
-                        for (let i = 0; i < SAMPLES; i++) {
-                            let blockStart = blockSize * i; // the location of the first sample in the block
-                            let sum = 0;
-                            for (let j = 0; j < blockSize; j++) {
-                                sum = sum + Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
-                            }
-                            filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
-                        }
-                        return filteredData;
-                    };
-
+                    let hasDrawn = false;
                     let draw = () => {
-                        if (!audio.paused) {
+                        if (!hasDrawn) {
                             analyser.minDecibels = -100;
                             analyser.maxDecibels = -30;
                             analyser.smoothingTimeConstant = 0.8;
@@ -192,9 +181,6 @@
                                         }
                                         canvasContext.fillStyle = `rgb(${r},${g},${b})`;
                                     }
-
-
-
                                     canvasContext.fillRect(x, HEIGHT - barHeight, (WIDTH / INTERVAL) - 1, barHeight);
                                     x = x + (WIDTH / INTERVAL);
                                 }
@@ -211,29 +197,43 @@
                                     }
 
                                     if (theme === 'theme-primary') {
-                                        canvasContext.strokeStyle = "#0072ED";
+                                        canvasContext.fillStyle = "#0072ED";
                                     }
                                     else if (theme === 'theme-success') {
-                                        canvasContext.strokeStyle = "#218838";
+                                        canvasContext.fillStyle = "#218838";
                                     }
                                     else if (theme === 'theme-danger') {
-                                        canvasContext.strokeStyle = "#dc3545";
+                                        canvasContext.fillStyle = "#dc3545";
                                     }
                                     else if (theme === 'theme-warning') {
-                                        canvasContext.strokeStyle = "#BE5A06";
+                                        canvasContext.fillStyle = "#BE5A06";
                                     } else {
-                                        canvasContext.strokeStyle = "#6F7780";
+                                        canvasContext.fillStyle = "#6F7780";
                                     }
-                                    canvasContext.beginPath();
-                                    canvasContext.moveTo(x, 0);
-                                    canvasContext.lineTo(x, height);
-                                    canvasContext.lineTo(x, -height);
-                                    canvasContext.moveTo(x, 0);
-                                    canvasContext.lineTo(x + width, 0);
-                                    canvasContext.stroke();
+
+                                    canvasContext.fillRect(x, -height, 1, height * 2);
                                 }
+
+                                let currentTime = audio.currentTime,
+                                    duration = audio.duration,
+                                    percentage = currentTime / duration,
+                                    progress = WIDTH * percentage;
+
+
+                                canvasContext.resetTransform();
+                                canvasContext.fillStyle = 'black';
+                                canvasContext.fillRect(progress, 0, 2, HEIGHT);
+
+
                             }
                         }
+
+                        if (audio.paused && !buffer) {
+                            hasDrawn = true;
+                        } else {
+                            hasDrawn = false;
+                        }
+
                         window.requestAnimationFrame(draw);
                     };
 

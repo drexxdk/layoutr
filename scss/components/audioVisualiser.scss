@@ -14,15 +14,10 @@
             opacity: 1;
         }
 
-        &[data-type="bars"] button[data-type="bars"] {
-            @extend .btn.theme-dark;
-        }
-
-        &[data-type="oscilloscope"] button[data-type="oscilloscope"] {
-            @extend .btn.theme-dark;
-        }
-
+        &[data-type="bars"] button[data-type="bars"],
+        &[data-type="oscilloscope"] button[data-type="oscilloscope"],
         &[data-type="waveform"] button[data-type="waveform"] {
+            pointer-events: none;
             @extend .btn.theme-dark;
         }
     }
