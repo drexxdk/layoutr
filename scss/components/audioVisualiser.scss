@@ -5,13 +5,38 @@
         @extend .embed;
         @extend .embed.aspect-ratio-4by1;
         @extend .alert;
+        align-items: unset;
 
-        button {
-            opacity: 0;
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
         }
 
-        html.desktop &:hover button {
-            opacity: 1;
+        .title {
+            text-align: right;
+            z-index: 1;
+        }
+
+        .controls {
+            @extend .flex;
+            @extend .flex.gap-2;
+            @extend .flex.right;
+        }
+
+        html.desktop & {
+            .title,
+            .controls {
+                opacity: 0;
+            }
+
+            &:hover {
+                .title,
+                .controls {
+                    opacity: 1;
+                }
+            }
         }
 
         &[data-type="bars"] button[data-type="bars"],

@@ -13,8 +13,13 @@
             content: "";
         }
 
-        > *:not(.position) {
+        iframe,
+        embed,
+        object,
+        video,
+        canvas {
             @include absolute-fill;
+            border: 0;
         }
 
         &.aspect-ratio-21by9 {

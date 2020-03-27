@@ -13,41 +13,36 @@
                         element.attr('data-type', type);
                     }
 
-
-                    let title = element.attr('data-title');
-                    if (title) {
-                        element.append(`
-<div class="position top right">
-    <div>
-        <h3 class="title">${title}</h3>
-    </div>
-</div>
-`);
-                    }
                     let canvas = $('<canvas></canvas'),
                         theme = layoutr.getThemeFromAttr(element.attr('class'));
 
-                    element.append(canvas);
-                    element.append(`
-<div class="position bottom right">
-    <div>
-        <div class="flex gap-2">
-            <button type="button" class="btn" data-type="bars" aria-label="Bars">
-                <svg focusable="false"><use xlink:href="#svg-audio-bars"></use></svg>
-            </button>
-            <button type="button" class="btn" data-type="oscilloscope" aria-label="Oscilloscope">
-                <svg focusable="false"><use xlink:href="#svg-audio-oscilloscope"></use></svg>
-            </button>
-            <button type="button" class="btn" data-type="waveform" aria-label="Waveform">
-                <svg focusable="false"><use xlink:href="#svg-audio-waveform"></use></svg>
-            </button>
-        </div>
-    </div>
-</div>
-`);
                     audio = audio[0];
                     canvas = canvas[0];
-                    let buffer;
+                    element.append(canvas);
+
+
+                    let content = $('<div class="content"></div>');
+                    element.append(content);
+
+                    let title = element.attr('data-title');
+                    if (title) {
+                        content.append(`<h3 class="title">${title}</h3>`);
+                    }
+
+                    content.append(`
+<div class="controls">
+    <button type="button" class="btn" data-type="bars" aria-label="Bars">
+        <svg focusable="false"><use xlink:href="#svg-audio-bars"></use></svg>
+    </button>
+    <button type="button" class="btn" data-type="oscilloscope" aria-label="Oscilloscope">
+        <svg focusable="false"><use xlink:href="#svg-audio-oscilloscope"></use></svg>
+    </button>
+    <button type="button" class="btn" data-type="waveform" aria-label="Waveform">
+        <svg focusable="false"><use xlink:href="#svg-audio-waveform"></use></svg>
+    </button>
+</div>
+`);
+                    let buffer; // should be generated server-side
                     fetch(audio.currentSrc)
                         .then(response => response.arrayBuffer())
                         .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
