@@ -51,7 +51,7 @@
                     fetch(audio.currentSrc)
                         .then(response => response.arrayBuffer())
                         .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
-                        .then(audioBuffer = (audioBuffer) => {
+                        .then((audioBuffer) => {
                             const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
                             const blockSize = Math.floor(rawData.length / SAMPLES); // the number of samples in each subdivision
                             const filteredData = [];
