@@ -7,18 +7,22 @@
         @extend .alert;
 
         button {
-            opacity: 0; 
+            opacity: 0;
         }
 
         html.desktop &:hover button {
-            opacity:1;
+            opacity: 1;
         }
 
-        &[data-type="wave"] button.wave {
+        &[data-type="bars"] button[data-type="bars"] {
             @extend .btn.theme-dark;
         }
 
-        &[data-type="bars"] button.bars {
+        &[data-type="oscilloscope"] button[data-type="oscilloscope"] {
+            @extend .btn.theme-dark;
+        }
+
+        &[data-type="waveform"] button[data-type="waveform"] {
             @extend .btn.theme-dark;
         }
     }
