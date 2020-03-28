@@ -28,6 +28,8 @@
 
                     analyser.fftSize = samples;
 
+                    element.attr('data-type', type);
+
                     element.append(canvas);
                     element.append(content);
 
