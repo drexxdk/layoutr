@@ -14,10 +14,6 @@
                         difference,
                         interval = 128, // 256;
                         samples = 2048, // 512 1024 2048 4096
-                        r = 0,
-                        g = 0,
-                        b = 255,
-                        x = 0,
                         canvasContext = canvas.getContext("2d"),
                         audioContext = new AudioContext(),
                         analyser = audioContext.createAnalyser(),
@@ -50,15 +46,17 @@
 
                     content.append(`
 <div class="controls">
-    <button type="button" class="btn" data-type="bars" aria-label="Bars">
-        <svg focusable="false"><use xlink:href="#svg-audio-bars"></use></svg>
-    </button>
-    <button type="button" class="btn" data-type="oscilloscope" aria-label="Oscilloscope">
-        <svg focusable="false"><use xlink:href="#svg-audio-oscilloscope"></use></svg>
-    </button>
-    <button type="button" class="btn" data-type="waveform" aria-label="Waveform">
-        <svg focusable="false"><use xlink:href="#svg-audio-waveform"></use></svg>
-    </button>
+    <div>
+        <button type="button" class="btn" data-type="bars" aria-label="Bars">
+            <svg focusable="false"><use xlink:href="#svg-audio-bars"></use></svg>
+        </button>
+        <button type="button" class="btn" data-type="oscilloscope" aria-label="Oscilloscope">
+            <svg focusable="false"><use xlink:href="#svg-audio-oscilloscope"></use></svg>
+        </button>
+        <button type="button" class="btn" data-type="waveform" aria-label="Waveform">
+            <svg focusable="false"><use xlink:href="#svg-audio-waveform"></use></svg>
+        </button>
+    </div>
 </div>
 `);
                     fetch(audio.currentSrc)
@@ -81,6 +79,7 @@
 
                     element.find('button').click((e) => {
                         type = $(e.target).attr('data-type');
+                        element.attr('data-type', type);
                         animationFrame = window.requestAnimationFrame(draw);
                     });
 
@@ -111,11 +110,10 @@
                             canvasContext.shadowOffsetY = 0;
                             canvasContext.shadowBlur = 4;
                             canvasContext.shadowColor = "gray";
-
                             canvasContext.beginPath();
 
-                            var sliceWidth = canvasWidth * 1.0 / analyser.frequencyBinCount;
-                            let prev = 0;
+                            let sliceWidth = canvasWidth * 1.0 / analyser.frequencyBinCount,
+                                prev = 0;
                             for (let i = 0; i < analyser.frequencyBinCount; i++) {
                                 var v = freqArr[i] / 128.0;
                                 var y = v * canvasHeight / 2;
@@ -149,13 +147,14 @@
                             canvasContext.lineTo(canvasWidth, canvasHeight / 2);
                             canvasContext.stroke();
                         } else if (type === 'bars') {
-                            r = 0;
-                            g = 0;
-                            b = 255;
+                            let x = 0;
+                            let r = 0;
+                            let g = 0;
+                            let b = 255;
                             analyser.getByteFrequencyData(freqArr);
 
                             for (let i = 0; i < interval; i++) {
-                                var num = i;
+                                let num = i;
 
                                 barHeight = ((freqArr[num] - 128) * 2) + 2;
                                 if (barHeight <= 1) {
@@ -239,10 +238,6 @@
                         }
                     };
 
-                    $(window).on('resize.av', () => {
-                        setSize();
-                    });
-
                     try {
                         source = audioContext.createMediaElementSource(audio);
                     } catch (e) {
@@ -250,6 +245,10 @@
                         element.remove();
                         return;
                     }
+
+                    $(window).on('resize.av', () => {
+                        setSize();
+                    });
 
                     source.connect(analyser);
                     source.connect(audioContext.destination);

@@ -20,9 +20,13 @@
         }
 
         .controls {
-            @extend .flex;
-            @extend .flex.gap-2;
-            @extend .flex.right;
+            margin-top: auto;
+
+            > div {
+                @extend .flex;
+                @extend .flex.gap-2;
+                @extend .flex.right;
+            }
         }
 
         html.desktop & {
