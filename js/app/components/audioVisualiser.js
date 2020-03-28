@@ -37,9 +37,22 @@
                     audio.onplay = function () {
                         animationFrame = window.requestAnimationFrame(draw);
                     };
+
                     audio.onseeked = $.throttle(layoutr.throttleInterval, false, () => {
                         window.cancelAnimationFrame(animationFrame);
                         animationFrame = window.requestAnimationFrame(draw);
+                    });
+
+                    let interactionTimeout;
+                    element.on('touchend', (e) => {
+                        let target = $(e.target);
+                        if (!target.closest('.controls, .title').length) {
+                            element.toggleClass('shown');
+                        }
+                        clearTimeout(interactionTimeout);
+                        interactionTimeout = setTimeout(() => {
+                            element.removeClass('shown');
+                        }, layoutr.interactionTime);
                     });
 
                     element.append(content);

@@ -26,21 +26,24 @@
                 @extend .flex;
                 @extend .flex.gap-2;
                 @extend .flex.right;
+                @extend .flex.wrap;
             }
         }
 
-        html.desktop & {
-            .title,
-            .controls {
-                opacity: 0;
-            }
+        .title,
+        .controls {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-            &:hover {
-                .title,
-                .controls {
-                    opacity: 1;
-                }
-            }
+        html.mobile &.shown .title,
+        html.mobile &.shown .controls,
+        html.tablet &.shown .title,
+        html.tablet &.shown .controls,
+        html.desktop &:hover .title,
+        html.desktop &:hover .controls {
+            pointer-events: all;
+            opacity: 1;
         }
 
         &[data-type="bars"] button[data-type="bars"],

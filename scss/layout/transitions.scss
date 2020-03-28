@@ -28,7 +28,8 @@ html.transitions {
         @include transition(right);
     }
 
-    .audio-visualiser button {
+    .audio-visualiser .title,
+    .audio-visualiser .controls {
         @include transition(opacity);
     }
 }
