@@ -29,12 +29,13 @@
                     analyser.fftSize = samples;
 
                     element.append(canvas);
+                    element.append(content);
 
-                    audio.onpause = function () {
+                    audio.onpause = () => {
                         window.cancelAnimationFrame(animationFrame);
                     };
 
-                    audio.onplay = function () {
+                    audio.onplay = () => {
                         animationFrame = window.requestAnimationFrame(draw);
                     };
 
@@ -43,19 +44,19 @@
                         animationFrame = window.requestAnimationFrame(draw);
                     });
 
-                    let interactionTimeout;
-                    element.on('touchend', (e) => {
-                        let target = $(e.target);
-                        if (!target.closest('.controls, .title').length) {
-                            element.toggleClass('shown');
-                        }
-                        clearTimeout(interactionTimeout);
-                        interactionTimeout = setTimeout(() => {
-                            element.removeClass('shown');
-                        }, layoutr.interactionTime);
-                    });
-
-                    element.append(content);
+                    if (layoutr.html.hasClass('mobile') || layoutr.html.hasClass('tablet')) {
+                        let interactionTimeout;
+                        element.on('click', (e) => {
+                            let target = $(e.target);
+                            if (!target.closest('.controls button').length) {
+                                element.toggleClass('shown');
+                            }
+                            clearTimeout(interactionTimeout);
+                            interactionTimeout = setTimeout(() => {
+                                element.removeClass('shown');
+                            }, layoutr.interactionTime);
+                        });
+                    }
 
                     if (title) {
                         content.append(`<h3 class="title">${title}</h3>`);
@@ -76,6 +77,7 @@
     </div>
 </div>
 `);
+
                     fetch(audio.currentSrc)
                         .then(response => response.arrayBuffer())
                         .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
@@ -92,11 +94,16 @@
                                 filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
                             }
                             buffer = filteredData;
+                            if (type === 'waveform') {
+                                window.cancelAnimationFrame(animationFrame);
+                                animationFrame = window.requestAnimationFrame(draw);
+                            }
                         });
 
                     element.find('button').click((e) => {
                         type = $(e.target).attr('data-type');
                         element.attr('data-type', type);
+                        window.cancelAnimationFrame(animationFrame);
                         animationFrame = window.requestAnimationFrame(draw);
                     });
 
@@ -106,7 +113,6 @@
                         difference = ((canvasHeight - 256) * 100) / 256;
                         canvasContext.canvas.width = canvasWidth;
                         canvasContext.canvas.height = canvasHeight;
-                        animationFrame = window.requestAnimationFrame(draw);
                     };
 
                     let draw = () => {
@@ -251,7 +257,7 @@
                             canvasContext.fillStyle = 'black';
                             canvasContext.fillRect(progress, 0, 2, canvasHeight);
                         }
-                        if (!audio.paused || !buffer) {
+                        if (!audio.paused) {
                             animationFrame = window.requestAnimationFrame(draw);
                         }
                     };
@@ -268,6 +274,10 @@
                     source.connect(audioContext.destination);
 
                     setSize();
+
+                    if (type !== 'waveform') {
+                        animationFrame = window.requestAnimationFrame(draw);
+                    }
 
                     element.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
                         setSize();
