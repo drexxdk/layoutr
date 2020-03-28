@@ -31,8 +31,6 @@
             });
         } else {
             layoutr.arrowKeyLocked = false;
-            $(window).unbind('resize.assignmentSort');
-            layoutr.body.on('keydown.assignmentPuzzle');
         }
     };
 }

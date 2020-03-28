@@ -46,10 +46,10 @@
                 layoutr.html.removeClass(id);
             }
             if (id === 'two-columns') {
-                layoutr.html.trigger('columns-changed.rb');
+                layoutr.html.trigger('columns-changed');
             }
             if (id === 'signed-in' || id === 'focus' || id === 'tts') {
-                layoutr.html.trigger('header-changed.responsiveHeader');
+                layoutr.html.trigger('header-changed');
             }
             if (name === 'aside-left' || 'aside-right') {
                 layoutr.asideChanged();

@@ -31,6 +31,7 @@ const gulp = require("gulp"),
                         'js/vendors/jquery/tooltipster.min.js',
                         'js/vendors/jquery/jquery.ba-throttle-debounce.js',
                         'js/vendors/jquery/jquery.shuffle.js',
+                        'js/vendors/jquery/jquery.sizeChanged.js',
                         'js/vendors/bowser.js',
 
                         // layout

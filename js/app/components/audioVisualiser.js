@@ -37,6 +37,10 @@
                     audio.onplay = function () {
                         animationFrame = window.requestAnimationFrame(draw);
                     };
+                    audio.onseeked = $.throttle(layoutr.throttleInterval, false, () => {
+                        window.cancelAnimationFrame(animationFrame);
+                        animationFrame = window.requestAnimationFrame(draw);
+                    });
 
                     element.append(content);
 
@@ -246,21 +250,19 @@
                         return;
                     }
 
-                    $(window).on('resize.av', () => {
-                        setSize();
-                    });
-
                     source.connect(analyser);
                     source.connect(audioContext.destination);
 
                     setSize();
 
+                    element.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
+                        setSize();
+                    }));
+
                     animationFrame = window.requestAnimationFrame(draw);
 
                 }
             });
-        } else {
-            $(window).off('resize.av');
         }
     };
 }

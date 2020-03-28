@@ -28,11 +28,11 @@
                         map: map
                     });
 
-                    $(window).bind('resize.map', $.throttle(layoutr.throttleInterval, false, () => {
+                    $this.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
                         google.maps.event.trigger($this[0], 'resize');
                     }));
 
-                    layoutr.html.on('aside-changed.map', () => {
+                    layoutr.html.on('aside-changed', () => {
                         google.maps.event.trigger($this[0], 'resize');
                     });
                 });
@@ -40,9 +40,6 @@
                 layoutr.showPopupAlert('Failed to load maps', 'danger');
                 console.error(e);
             });
-        } else {
-            $(window).unbind('resize.map');
-            layoutr.html.off('aside-changed.map');
         }
     };
 }

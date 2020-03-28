@@ -40,7 +40,7 @@
                     layoutr.textboxForm();
                 }
             }
-            layoutr.html.trigger('header-changed.responsiveHeader');
+            layoutr.html.trigger('header-changed');
             layoutr.promiseCSS.then(() => {
                 layoutr.pageLoaded(initial);
             });
@@ -56,7 +56,7 @@
                     title += 'Server error';
                 }
                 layoutr.content.find('#error-title').html(title);
-                layoutr.html.trigger('header-changed.responsiveHeader');
+                layoutr.html.trigger('header-changed');
             }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load content html', 'danger');
                 console.error(e);

@@ -37,12 +37,12 @@
             });
 
             let height = $(window).height();
-            $(window).resize(() => {
+            $(window).resize($.throttle(layoutr.throttleInterval, false, () => {
                 // do nothing if the height is the same
                 if ($(window).height() === height) return;
                 height = $(window).height();
                 component.removeAttr('style');
-            });
+            }));
         }).catch((e) => {
             layoutr.showPopupAlert('Failed to load focus', 'danger');
             console.error(e);

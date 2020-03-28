@@ -60,7 +60,7 @@
                     }
                 };
                 let table_header_sort = (instance, wrapper) => {
-                    wrapper.find('thead th').unbind('click');
+                    wrapper.find('thead th').off('click');
 
                     let enabled = wrapper.find('thead th:not(.sorting-disabled)'),
                         disabled = wrapper.find('thead th.sorting-disabled');
@@ -211,14 +211,14 @@
 
                             $this.on('draw.dt', () => {
                                 let columns = instance.columns().responsiveHidden();
-                                $this.trigger('responsive-resize.dt', [table[0], columns]);
+                                $this.trigger('responsive-resize', [table[0], columns]);
                             });
 
                             layoutr.html.on('aside-changed.datatables', () => {
                                 instance.responsive.recalc();
                             });
 
-                            $this.on('responsive-resize.dt', (e, datatable, columns) => {
+                            $this.on('responsive-resize', (e, datatable, columns) => {
                                 let count = columns.reduce((a, b) => {
                                     return b === false ? a + 1 : a;
                                 }, 0);
@@ -239,8 +239,6 @@
                 layoutr.showPopupAlert('Failed to load datatables', 'danger');
                 console.error(e);
             });
-        } else {
-            layoutr.html.off('aside-changed.datatables');
         }
     };
 }

@@ -17,11 +17,11 @@
 
         if (bowser.android) {
             // android doesn't handle vh correctly, so it gets converted to px
-            $(window).resize(() => {
+            $(window).resize($.throttle(layoutr.throttleInterval, false, () => {
                 if (layoutr.isModal() && layoutr.isModalImage()) {
                     layoutr.modal.find('#modal-img').css('max-height', window.innerHeight);
                 }
-            });
+            }));
         }
     });
 

@@ -27,7 +27,7 @@
 
                 checkWidth();
 
-                $(window).bind('resize.assignmentSort', $.throttle(layoutr.throttleInterval, false, () => {
+                assignment.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
                     checkWidth();
                 }));
             }

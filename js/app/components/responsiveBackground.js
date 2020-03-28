@@ -76,24 +76,18 @@
 
                 setRb(element);
 
-                $(window).on('resize.rb', () => {
+                element.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
+                    setRb(element);
+                }));
+
+                layoutr.html.on('columns-changed', () => {
                     setRb(element);
                 });
 
-                layoutr.html.on('columns-changed.rb', () => {
-                    setRb(element);
-                });
-
-                layoutr.html.on('aside-changed.rb', () => {
+                layoutr.html.on('aside-changed', () => {
                     setRb(element);
                 });
             });
-
-        } else {
-            $(window).off('resize.rb');
-            layoutr.html.off('columns-changed.rb');
-            layoutr.html.off('aside-changed.rb');
         }
-
     };
 }

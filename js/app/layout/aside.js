@@ -2,18 +2,12 @@
     let transitionLock = false;
 
     layoutr.asideChanged = () => {
-        let trigger = () => {
-            layoutr.html.trigger('aside-changed.datatables');
-            layoutr.html.trigger('aside-changed.rb');
-            layoutr.html.trigger('aside-changed.map');
-        };
-
         if (layoutr.isTransitions()) {
             let awaitInterval = setInterval(() => {
                 if (!transitionLock) {
                     clearInterval(awaitInterval);
                 } else {
-                    trigger();
+                    layoutr.html.trigger('aside-changed');
                 }
             }, layoutr.awaitInterval);
             setTimeout(() => {
@@ -21,7 +15,7 @@
             }, layoutr.transitionTime);
         } else {
             transitionLock = false;
-            trigger();
+            layoutr.html.trigger('aside-changed');
         }
     };
 
