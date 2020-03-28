@@ -93,6 +93,7 @@
                         difference = ((canvasHeight - 256) * 100) / 256;
                         canvasContext.canvas.width = canvasWidth;
                         canvasContext.canvas.height = canvasHeight;
+                        animationFrame = window.requestAnimationFrame(draw);
                     };
 
                     let draw = () => {
@@ -103,7 +104,7 @@
                         canvasContext.shadowBlur = 0;
                         canvasContext.lineWidth = 1;
                         canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
-                        x = 0;
+                        let x = 0;
                         if (type === 'oscilloscope') {
                             analyser.minDecibels = -90;
                             analyser.maxDecibels = -10;
@@ -258,8 +259,6 @@
                     element.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
                         setSize();
                     }));
-
-                    animationFrame = window.requestAnimationFrame(draw);
 
                 }
             });
