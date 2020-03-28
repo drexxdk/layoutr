@@ -284,6 +284,8 @@
 
                     element.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
                         setSize();
+                        window.cancelAnimationFrame(animationFrame);
+                        animationFrame = window.requestAnimationFrame(draw);
                     }));
 
                 }
