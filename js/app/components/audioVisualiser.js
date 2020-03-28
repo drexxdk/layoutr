@@ -36,6 +36,7 @@
                     };
 
                     audio.onplay = () => {
+                        window.cancelAnimationFrame(animationFrame);
                         animationFrame = window.requestAnimationFrame(draw);
                     };
 
