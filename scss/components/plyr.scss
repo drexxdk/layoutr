@@ -1,0 +1,204 @@
+﻿/// <reference path="../references" />
+
+$track-size: $spacer-1;
+$thumb-size: $spacer;
+
+@mixin plyr-range-track {
+    background: 0 0;
+    border: 0;
+    border-radius: $track-size / 2;
+    height: $track-size;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: $gray-400;
+    box-shadow: $box-shadow;
+}
+
+@mixin plyr-range-thumb {
+    position: relative;
+    background: $white;
+    border-radius: 100%;
+    box-sizing: border-box;
+    height: $thumb-size;
+    width: $thumb-size;
+    border: $component-border;
+}
+
+@mixin plyr-range {
+
+    input[type=range] {
+        -webkit-appearance: none;
+        background: 0 0;
+        border: 0;
+        border-radius: $thumb-size;
+        color: $primary;
+        display: block;
+        width: 100%;
+        z-index: 2;
+        height: $thumb-size;
+
+        &::-webkit-slider-runnable-track {
+            @include plyr-range-track;
+            background-image: linear-gradient(to right,currentColor var(--value,0),transparent var(--value,0));
+        }
+
+        &::-webkit-slider-thumb {
+            @include plyr-range-thumb;
+            -webkit-appearance: none;
+            transform: translateY(-50%);
+            margin-top: $track-size / 2;
+        }
+
+        &::-moz-range-track {
+            @include plyr-range-track;
+        }
+
+        &::-moz-range-thumb {
+            @include plyr-range-thumb;
+        }
+
+        &::-moz-range-progress {
+            background: currentColor;
+            border-radius: $track-size / 2;
+            height: $track-size
+        }
+
+        &:focus {
+            outline: 0
+        }
+
+        &::-moz-focus-outer {
+            border: 0
+        }
+    }
+}
+
+@mixin layoutr-plyr {
+    .plyr {
+        display: flex;
+
+        &.plyr--video {
+            background-color: black; // should not change based on theme
+            @include absolute-fill;
+
+            &.plyr--hide-controls {
+                .plyr__controls {
+                    opacity: 0;
+                    transform: translateY(100%);
+                }
+            }
+
+
+            .plyr__controls {
+                background-color: $black;
+                color: $white;
+                margin-top: auto;
+                @include transitions(transform, opacity);
+            }
+        }
+
+        .plyr__controls {
+            display: flex;
+            z-index: 1;
+            flex-grow: 1;
+            align-items: center;
+            padding: $spacer-2;
+
+            > * + * {
+                margin-left: $spacer-2;
+            }
+
+            .plyr__control {
+                @extend .btn;
+
+                &[data-plyr="play"],
+                &[data-plyr="mute"],
+                &[data-plyr="fullscreen"] {
+                    &:not(.plyr__control--pressed) > svg.icon--pressed {
+                        display: none;
+                    }
+
+                    &.plyr__control--pressed > svg.icon--not-pressed {
+                        display: none;
+                    }
+                }
+
+                > span {
+                    display: none;
+                }
+            }
+
+            .plyr__controls__item.plyr__time--current {
+                order: 2;
+            }
+
+            .plyr__controls__item.plyr__time--duration {
+                display: flex;
+
+                &:before {
+                    content: '/';
+                    display: block;
+                    margin-right: $spacer-2;
+                }
+
+                order: 3;
+            }
+
+            .plyr__controls__item.plyr__progress__container,
+            .plyr__controls__item.plyr__volume {
+                display: flex;
+                align-items: center;
+            }
+
+            .plyr__controls__item.plyr__progress__container {
+                order: 1;
+                flex-grow: 1;
+
+                .plyr__progress {
+                    flex-grow: 1;
+                    position: relative;
+
+                    @include plyr-range;
+
+                    progress {
+                        display: none;
+                    }
+
+                    > .plyr__tooltip {
+                        z-index: $component-z-index + 1;
+                        pointer-events: none;
+                        position: absolute;
+                        bottom: 100%;
+                        white-space: nowrap;
+                        transform: translateX(-50%);
+                        padding: $spacer-1;
+                        border: $component-border;
+                        background-color: $white;
+                        font-size: $font-size-small;
+                        opacity: 0;
+
+                        @include transitions(font-size, opacity);
+
+                        &.plyr__tooltip--visible {
+                            font-size: $font-size;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            .plyr__controls__item.plyr__volume {
+                order: 4;
+                @include plyr-range;
+
+                > * + * {
+                    margin-left: $spacer-2;
+                }
+            }
+
+            .plyr__controls__item[data-plyr="fullscreen"] {
+                order: 5;
+            }
+        }
+    }
+}

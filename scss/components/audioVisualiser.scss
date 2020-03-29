@@ -6,6 +6,7 @@
         @extend .embed.aspect-ratio-4by1;
         @extend .alert;
         align-items: unset;
+        border-radius: 0;
 
         .content {
             display: flex;

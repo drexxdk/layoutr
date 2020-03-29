@@ -182,12 +182,6 @@ const gulp = require("gulp"),
                     watch: ['scss/vendors/katex.scss']
                 },
                 {
-                    name: 'plyr',
-                    src: 'scss/vendors/plyr.scss',
-                    dist: dist + '/css',
-                    watch: ['scss/vendors/plyr.scss']
-                },
-                {
                     name: 'swiper',
                     src: 'scss/vendors/swiper.scss',
                     dist: dist + '/css',
