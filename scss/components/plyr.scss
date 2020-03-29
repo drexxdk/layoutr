@@ -90,6 +90,9 @@ $thumb-size: $spacer;
                 }
             }
 
+            .plyr__controls__item.plyr__volume {
+                margin-right: $spacer-2;
+            }
 
             .plyr__controls {
                 background-color: $black;
@@ -100,15 +103,12 @@ $thumb-size: $spacer;
         }
 
         .plyr__controls {
+            position: relative;
             display: flex;
             z-index: 1;
             flex-grow: 1;
             align-items: center;
-            padding: $spacer-2;
-
-            > * + * {
-                margin-left: $spacer-2;
-            }
+            padding: (($spacer-2 * 2) + $thumb-size) $spacer-2 $spacer-2 $spacer-2;
 
             .plyr__control {
                 @extend .btn;
@@ -131,10 +131,14 @@ $thumb-size: $spacer;
             }
 
             .plyr__controls__item.plyr__time--current {
-                order: 2;
+                margin-left: $spacer-2;
+                margin-right: $spacer-2;
+                white-space: nowrap;
+                order: 3;
             }
 
             .plyr__controls__item.plyr__time--duration {
+                white-space: nowrap;
                 display: flex;
 
                 &:before {
@@ -143,7 +147,7 @@ $thumb-size: $spacer;
                     margin-right: $spacer-2;
                 }
 
-                order: 3;
+                order: 4;
             }
 
             .plyr__controls__item.plyr__progress__container,
@@ -153,7 +157,10 @@ $thumb-size: $spacer;
             }
 
             .plyr__controls__item.plyr__progress__container {
-                order: 1;
+                position: absolute;
+                top: $spacer-2;
+                left: $spacer-2;
+                right: $spacer-2;
                 flex-grow: 1;
 
                 .plyr__progress {
@@ -190,8 +197,30 @@ $thumb-size: $spacer;
             }
 
             .plyr__controls__item.plyr__volume {
-                order: 4;
+                margin-left: $spacer-2;
+                order: 2;
                 @include plyr-range;
+
+                html.desktop & {
+                    &:hover {
+                        input {
+                            opacity: 1;
+                            pointer-events: all;
+                            width: 100px!important;
+                        }
+                    }
+                }
+
+                input {
+                    opacity: 0;
+                    pointer-events: none;
+                    width: 0!important;
+                    @include transitions(width, opacity);
+                }
+
+                html:not(.desktop) & {
+                    display: none;
+                }
 
                 > * + * {
                     margin-left: $spacer-2;
@@ -199,7 +228,8 @@ $thumb-size: $spacer;
             }
 
             .plyr__controls__item[data-plyr="fullscreen"] {
-                order: 5;
+                margin-left: auto;
+                order: 4;
             }
         }
     }
