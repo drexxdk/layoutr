@@ -75,7 +75,9 @@ $thumb-size: $spacer;
 
 @mixin layoutr-plyr {
     .plyr {
+        position: relative;
         display: flex;
+        z-index: $component-z-index + 1;
 
         &.plyr--video {
             background-color: black; // should not change based on theme
@@ -165,7 +167,6 @@ $thumb-size: $spacer;
                     }
 
                     > .plyr__tooltip {
-                        z-index: $component-z-index + 1;
                         pointer-events: none;
                         position: absolute;
                         bottom: 100%;
