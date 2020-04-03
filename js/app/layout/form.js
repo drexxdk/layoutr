@@ -3,7 +3,8 @@
         $.validator.setDefaults({
             submitHandler: () => {
                 alert("Fake submitted!");
-            }
+            },
+            ignore: "[disabled]"
         });
 
         $.validator.addMethod('password_regex', (value) => {

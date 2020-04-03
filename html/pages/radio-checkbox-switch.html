@@ -10,7 +10,11 @@
                         <div>
                             <div class="input-group radioboxes">
                                 <div class="radio">
-                                    <input id="gender_unspecified" name="gender" type="radio" checked="checked">
+                                    <input id="gender_disabled" name="gender" type="radio" disabled checked>
+                                    <label tabindex="0" for="gender_disabled"><i></i><span>Disabled</span></label>
+                                </div>
+                                <div class="radio">
+                                    <input id="gender_unspecified" name="gender" type="radio">
                                     <label tabindex="0" for="gender_unspecified"><i></i><span>Unspecified</span></label>
                                 </div>
                                 <div class="radio">
@@ -31,6 +35,10 @@
                         <label class="control-label required">Interests</label>
                         <div>
                             <div class="input-group checkboxes">
+                                <div class="checkbox">
+                                    <input id="interests_disabled" name="interests" type="checkbox" disabled>
+                                    <label tabindex="0" for="interests_disabled"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Disabled</span></label>
+                                </div>
                                 <div class="checkbox">
                                     <input id="interests_sports" name="interests" type="checkbox">
                                     <label tabindex="0" for="interests_sports"><i><svg focusable="false"><use xlink:href="#svg-checkmark"></use></svg></i><span>Sports</span></label>
@@ -66,12 +74,20 @@
                         <div>
                             <div class="input-group switches">
                                 <div class="switch">
-                                    <input id="switch_1" name="switch_1" type="checkbox">
-                                    <label tabindex="0" for="switch_1"><i></i><span>Switch 1</span></label>
+                                    <input id="switch_square-disabled" name="switch_square-disabled" type="checkbox" disabled checked>
+                                    <label tabindex="0" for="switch_square-disabled"><i></i><span>Square switch (disabled)</span></label>
+                                </div>
+                                <div class="switch">
+                                    <input id="switch_square" name="switch_square" type="checkbox">
+                                    <label tabindex="0" for="switch_square"><i></i><span>Square switch</span></label>
                                 </div>
                                 <div class="switch round">
-                                    <input id="switch_2" name="switch_2" type="checkbox">
-                                    <label tabindex="0" for="switch_2"><i></i><span>Switch 2</span></label>
+                                    <input id="switch_round-disabled" name="switch_round-disabled" type="checkbox" disabled>
+                                    <label tabindex="0" for="switch_round-disabled"><i></i><span>Round switch (disabled)</span></label>
+                                </div>
+                                <div class="switch round">
+                                    <input id="switch_round" name="switch_round" type="checkbox">
+                                    <label tabindex="0" for="switch_round"><i></i><span>Round switch</span></label>
                                 </div>
                             </div>
                         </div>

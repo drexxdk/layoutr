@@ -20,9 +20,9 @@
         }
     }
 
-    .radio input,
-    .checkbox input,
-    .switch input {
+    .radio input:not([disabled]),
+    .checkbox input:not([disabled]),
+    .switch input:not([disabled]) {
 
         & + label > i {
             background: theme-gradient-vertical($background-light);
@@ -56,7 +56,7 @@
     }
 
     html.desktop & .dropdown > .btn:hover,
-    html.desktop & .dropdown > .btn:focus  {
+    html.desktop & .dropdown > .btn:focus {
         @include theme-element-soft-darken($background, true);
     }
 }

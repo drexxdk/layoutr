@@ -21,7 +21,21 @@
         > input {
             @include hidden;
 
-            &:checked + label > i {
+            &[disabled] {
+                & + label {
+                    pointer-events: none;
+                    color: $color-disabled-text;
+                }
+
+                &:checked + label > i {
+                    color: $white;
+                    fill: $white;
+                    background-color: $color-disabled-component;
+                    border-color: $color-disabled-component;
+                }
+            }
+
+            &:not([disabled]):checked + label > i {
                 @include theme-element($primary, true);
             }
 

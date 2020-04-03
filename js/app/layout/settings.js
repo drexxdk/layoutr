@@ -1,4 +1,9 @@
 ﻿{
+    let closeLeftClickOutsideButton,
+        closeLeftClickOutsideValue,
+        closeRightClickOutsideButton,
+        closeRightClickOutsideValue;
+
     layoutr.applySettings = (id, name, type, value, set) => {
         if (set) {
             let entry = {
@@ -32,13 +37,30 @@
             }
             if (name === 'theme') {
                 layoutr.loadTheme(id);
-            }
-            if (name === 'focus' && value) {
+            } else if (name === 'focus' && value) {
                 layoutr.enableFocus();
             } else if (name === 'tts' && value) {
                 //layoutr.enableTTS();
             } else if (name === 'swipe' && value) {
                 layoutr.enableSwipe();
+            } else if (name === 'aside-left') {
+                if (id === 'left-overlay' || id === 'left-push') {
+                    closeLeftClickOutsideButton.prop("disabled", true);
+                    closeLeftClickOutsideButton.prop("checked", true);
+                } else if (id === 'left-shrink') {
+                    closeLeftClickOutsideButton.prop("disabled", false);
+                    closeLeftClickOutsideButton.prop("checked", closeLeftClickOutsideValue ? closeLeftClickOutsideValue : false);
+                }
+                layoutr.asideChanged();
+            } else if (name === 'aside-right') {
+                if (id === 'right-overlay' || id === 'right-push') {
+                    closeRightClickOutsideButton.prop("disabled", true);
+                    closeRightClickOutsideButton.prop("checked", true);
+                } else if (id === 'right-shrink') {
+                    closeRightClickOutsideButton.prop("disabled", false);
+                    closeRightClickOutsideButton.prop("checked", closeRightClickOutsideValue ? closeRightClickOutsideValue : false);
+                }
+                layoutr.asideChanged();
             }
             if (value) {
                 layoutr.html.addClass(id);
@@ -47,12 +69,12 @@
             }
             if (id === 'two-columns') {
                 layoutr.html.trigger('columns-changed');
-            }
-            if (id === 'signed-in' || id === 'focus' || id === 'tts') {
+            } else if (id === 'signed-in' || id === 'focus' || id === 'tts') {
                 layoutr.html.trigger('header-changed');
-            }
-            if (name === 'aside-left' || 'aside-right') {
-                layoutr.asideChanged();
+            } else if (id === 'close-left-click-outside') {
+                closeLeftClickOutsideValue = value;
+            } else if (id === 'close-right-click-outside') {
+                closeRightClickOutsideValue = value;
             }
         }
     };
@@ -60,7 +82,12 @@
     $(() => {
         layoutr.load.html(`${layoutr.host}${layoutr.htmlDist}layout/settings.html`).then((response) => {
             let $this = layoutr.right.find('> .content > div');
+
             $this.html(response);
+
+            closeLeftClickOutsideButton = $this.find('#settings-close-left-click-outside');
+            closeRightClickOutsideButton = $this.find('#settings-close-right-click-outside');
+
             layoutr.promiseCSS.then(() => {
                 $.each(layoutr.settings, (i, entry) => {
                     layoutr.applySettings(entry.id, entry.name, entry.type, entry.value, false);
