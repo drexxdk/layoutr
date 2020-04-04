@@ -126,8 +126,19 @@
             }
         }
 
-        > input:checked + label > i:before {
-            transform: translateX($font-size);
+        > input {
+
+            & + label > i:before {
+                background-color: $white;
+            }
+
+            &:not([disabled]):checked + label > i:before {
+                background-color: white;
+            }
+
+            &:checked + label > i:before {
+                transform: translateX($font-size);
+            }
         }
 
         > label > i {
@@ -145,7 +156,6 @@
                 top: 0;
                 bottom: 0;
                 left: 0;
-                background-color: white;
                 @include transition(transform);
             }
         }
