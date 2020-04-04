@@ -1,12 +1,7 @@
 ﻿{
     layoutr.checkResponsiveBackground = (elements) => {
-        let setRb = (element) => {
-            let clone = element.children('.clone'),
-                image = element.attr('data-rb-image'),
-                filetype = element.attr('data-rb-image-filetype'),
-                sizesWidth = element.attr('data-rb-sizes'),
-                current = element.attr('data-rb-current'),
-                aspectRatio = element.attr('data-rb-aspect-ratio');
+        let setRb = (element, clone, image, filetype, sizesWidth, aspectRatio, initial) => {
+            let current = element.attr('data-rb-current');
             if (image !== undefined && image.length &&
                 filetype !== undefined && filetype.length &&
                 sizesWidth !== undefined && sizesWidth.length &&
@@ -14,7 +9,10 @@
                 if ((filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png') &&
                     (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
                     sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort((a, b) => { return a - b; });
-                    clone.attr('style', element.attr('style'));
+                    if (initial) {
+                        clone.css('background-position', element.css('background-position'));
+                        clone.attr('src', element.attr('src'));
+                    }
 
                     let goalWidth = element.width(),
                         goalHeight = element.height(),
@@ -56,9 +54,9 @@
                         let src = `${image}-${closestWidth}.${filetype}`;
                         layoutr.load.img(src).then(() => {
                             element.css('background-image', `url(${src})`);
-                            setTimeout(function () {
-                                clone.css('background-image', `url(${src})`);
-                            }, 100);
+                            setTimeout(() => {
+                                clone.attr('src', src);
+                            }, layoutr.imageLoadTime);
                             // Change background-image on two elements at different intervals, to counteract image flickering.
                             element.attr('data-rb-current', closestWidth);
                         }).catch((e) => {
@@ -72,20 +70,27 @@
 
         if (elements.length) {
             elements.each((i, e) => {
-                let element = $(e);
+                let element = $(e),
+                    image = element.attr('data-rb-image'),
+                    filetype = element.attr('data-rb-image-filetype'),
+                    sizesWidth = element.attr('data-rb-sizes'),
+                    aspectRatio = element.attr('data-rb-aspect-ratio');
 
-                setRb(element);
+                let clone = $('<img class="clone cover" />');
+                element.append(clone);
+
+                setRb(element, clone, image, filetype, sizesWidth, aspectRatio, true);
 
                 element.sizeChanged($.throttle(layoutr.throttleInterval, false, () => {
-                    setRb(element);
+                    setRb(element, clone, image, filetype, sizesWidth, aspectRatio, false);
                 }));
 
                 layoutr.html.on('columns-changed', () => {
-                    setRb(element);
+                    setRb(element, clone, image, filetype, sizesWidth, aspectRatio, false);
                 });
 
                 layoutr.html.on('aside-changed', () => {
-                    setRb(element);
+                    setRb(element, clone, image, filetype, sizesWidth, aspectRatio, false);
                 });
             });
         }

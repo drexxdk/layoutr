@@ -9,6 +9,7 @@
     layoutr.fadeOutTime = 500;
     layoutr.accordionTime = 800;
     layoutr.interactionTime = 5000;
+    layoutr.imageLoadTime = 100;
     layoutr.htmlOverflowEnabled = true;
     layoutr.smallBreakpoint = 732;
     layoutr.scrollbarWidth = 0;
