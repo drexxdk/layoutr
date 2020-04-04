@@ -10,8 +10,7 @@
                     (aspectRatio === '21by9' || aspectRatio === '16by9' || aspectRatio === '4by3' || aspectRatio === '1by1')) {
                     sizesWidth = sizesWidth.replace(/\s/g, '').split(',').sort((a, b) => { return a - b; });
                     if (initial) {
-                        clone.css('background-position', element.css('background-position'));
-                        clone.attr('src', element.attr('src'));
+                        clone.attr('style', element.attr('style'));
                     }
 
                     let goalWidth = element.width(),
@@ -55,7 +54,7 @@
                         layoutr.load.img(src).then(() => {
                             element.css('background-image', `url(${src})`);
                             setTimeout(() => {
-                                clone.attr('src', src);
+                                clone.css('background-image', `url(${src})`);
                             }, layoutr.imageLoadTime);
                             // Change background-image on two elements at different intervals, to counteract image flickering.
                             element.attr('data-rb-current', closestWidth);
@@ -76,7 +75,7 @@
                     sizesWidth = element.attr('data-rb-sizes'),
                     aspectRatio = element.attr('data-rb-aspect-ratio');
 
-                let clone = $('<img class="clone cover" />');
+                let clone = $('<div class="clone cover"></div>');
                 element.append(clone);
 
                 setRb(element, clone, image, filetype, sizesWidth, aspectRatio, true);

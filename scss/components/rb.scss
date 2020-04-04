@@ -5,7 +5,6 @@
 
     > .clone {
         @include absolute-fill;
-        object-fit: cover;
     }
 
     > .content {
