@@ -4,8 +4,8 @@
             if (!layoutr.html.hasClass('swiper-loaded')) {
                 layoutr.showLoading();
                 layoutr.promiseSwiper = Promise.all([
-                    layoutr.load.css('dist/css/swiper.css'),
-                    layoutr.load.js('dist/js/swiper.js')
+                    layoutr.load.css(layoutr.host + layoutr.cssDist + 'swiper.css'),
+                    layoutr.load.js(layoutr.host + layoutr.jsDist + 'swiper.js')
                 ]).finally(() => {
                     layoutr.hideLoading();
                 });

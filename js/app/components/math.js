@@ -4,8 +4,8 @@
             if (!layoutr.html.hasClass('math-loaded')) {
                 layoutr.showLoading();
                 layoutr.promiseMath = Promise.all([
-                    layoutr.load.css('dist/css/katex.css'),
-                    layoutr.load.js('dist/js/katex.js')
+                    layoutr.load.css(layoutr.host + layoutr.cssDist + 'katex.css'),
+                    layoutr.load.js(layoutr.host + layoutr.jsDist + 'katex.js')
                 ]).finally(() => {
                     layoutr.hideLoading();
                 });

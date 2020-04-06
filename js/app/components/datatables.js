@@ -3,7 +3,7 @@
         if (tables.length) {
             if (!layoutr.html.hasClass('datatables-loaded')) {
                 layoutr.showLoading();
-                layoutr.promiseDatatables = layoutr.load.js('dist/js/datatables.js').finally(() => {
+                layoutr.promiseDatatables = layoutr.load.js(layoutr.host + layoutr.jsDist + 'datatables.js').finally(() => {
                     layoutr.hideLoading();
                 });
                 layoutr.html.addClass('datatables-loaded');

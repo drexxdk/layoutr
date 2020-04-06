@@ -4,8 +4,8 @@
             if (!layoutr.html.hasClass('range-loaded')) {
                 layoutr.showLoading();
                 layoutr.promiseRange = Promise.all([
-                    layoutr.load.css('dist/css/nouislider.css'),
-                    layoutr.load.js('dist/js/nouislider.js')
+                    layoutr.load.css(layoutr.host + layoutr.cssDist + 'nouislider.css'),
+                    layoutr.load.js(layoutr.host + layoutr.jsDist + 'nouislider.js')
                 ]).finally(() => {
                     layoutr.hideLoading();
                 });

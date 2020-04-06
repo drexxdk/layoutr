@@ -4,7 +4,7 @@
 
         if (!layoutr.html.hasClass('focus-loaded')) {
             layoutr.showLoading();
-            layoutr.promiseFocus = layoutr.load.js('dist/js/focus.js').finally(() => {
+            layoutr.promiseFocus = layoutr.load.js(layoutr.host + layoutr.jsDist + 'focus.js').finally(() => {
                 layoutr.hideLoading();
             });
             layoutr.html.addClass('focus-loaded');

@@ -11,7 +11,7 @@
         if (assignments.length) {
             if (!layoutr.html.hasClass('assignment-loaded')) {
                 layoutr.showLoading();
-                layoutr.promiseAssignment = layoutr.load.js('dist/js/assignment.js').finally(() => {
+                layoutr.promiseAssignment = layoutr.load.js(layoutr.host + layoutr.jsDist + 'assignment.js').finally(() => {
                     layoutr.hideLoading();
                 });
                 layoutr.html.addClass('assignment-loaded');

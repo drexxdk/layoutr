@@ -111,7 +111,7 @@
 
             if (!layoutr.html.hasClass('tts-loaded')) {
                 layoutr.showLoading();
-                layoutr.PromiseTTS = layoutr.load.js('dist/js/tts.js').finally(() => {
+                layoutr.PromiseTTS = layoutr.load.js(layoutr.host + layoutr.jsDist + 'tts.js').finally(() => {
                     layoutr.hideLoading();
                 });
                 layoutr.html.addClass('tts-loaded');

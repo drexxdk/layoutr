@@ -3,9 +3,7 @@
         if (media.length) {
             if (!layoutr.html.hasClass('media-loaded')) {
                 layoutr.showLoading();
-                layoutr.promiseMedia = Promise.all([
-                    layoutr.load.js('dist/js/plyr.js')
-                ]).finally(() => {
+                layoutr.promiseMedia = layoutr.load.js(layoutr.host + layoutr.jsDist + 'plyr.js').finally(() => {
                     layoutr.hideLoading();
                 });
                 layoutr.html.addClass('media-loaded');

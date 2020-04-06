@@ -57,6 +57,7 @@
             }
         }
 
+        &[data-type="circle"] button[data-type="circle"],
         &[data-type="bars"] button[data-type="bars"],
         &[data-type="oscilloscope"] button[data-type="oscilloscope"],
         &[data-type="waveform"] button[data-type="waveform"] {
