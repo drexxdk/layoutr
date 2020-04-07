@@ -214,7 +214,7 @@
                                 $this.trigger('responsive-resize', [table[0], columns]);
                             });
 
-                            layoutr.html.on('aside-changed.datatables', () => {
+                            layoutr.html.on('aside-changed', () => {
                                 instance.responsive.recalc();
                             });
 

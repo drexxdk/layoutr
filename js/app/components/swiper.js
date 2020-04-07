@@ -72,6 +72,18 @@
                             }
                         }
                     });
+
+                    let update = () => {
+                        setTimeout(() => {
+                            swiper.update();
+                        });
+                    };
+
+                    update();
+
+                    layoutr.html.on('aside-changed', () => {
+                        update();
+                    });
                 });
             }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load swiper', 'danger');

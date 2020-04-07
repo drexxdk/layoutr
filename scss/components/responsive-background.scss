@@ -1,0 +1,15 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-responsive-background {
+    .rb {
+        position: relative;
+
+        > .clone {
+            @include absolute-fill;
+        }
+
+        > .content {
+            z-index: 1;
+        }
+    }
+}
