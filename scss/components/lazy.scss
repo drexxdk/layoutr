@@ -1,0 +1,8 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-lazy {
+    .lazy {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

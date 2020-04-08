@@ -19,6 +19,7 @@
     layoutr.htmlDist = 'dist/html/';
     layoutr.jsDist = 'dist/js/';
     layoutr.cssDist = 'dist/css/';
+    layoutr.imgDist = 'dist/img/';
     layoutr.arrowKeyLocked = false;
     layoutr.sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare;
 
