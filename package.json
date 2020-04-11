@@ -5,21 +5,29 @@
   "repository": "gitlab:drexxdk/layoutr",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-babel": "^7.0.1",
-    "gulp-clean-css": "^3.10.0",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-html-minifier2": "^1.1.11",
-    "gulp-if": "^2.0.2",
+    "gulp-if": "^3.0.0",
     "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
     "sw-precache": "^5.2.1"
   },
   "dependencies": {
-    "hoek": "^5.0.4"
+    "hoek": "^6.1.3"
+  },
+  "browsers": [
+    "defaults"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ] 
   }
 }

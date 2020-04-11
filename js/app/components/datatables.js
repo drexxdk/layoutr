@@ -211,14 +211,14 @@
 
                             $this.on('draw.dt', () => {
                                 let columns = instance.columns().responsiveHidden();
-                                $this.trigger('responsive-resize', [table[0], columns]);
+                                $this.trigger('responsive-resize.dt', [table[0], columns]);
                             });
 
                             layoutr.html.on('aside-changed', () => {
                                 instance.responsive.recalc();
                             });
 
-                            $this.on('responsive-resize', (e, datatable, columns) => {
+                            $this.on('responsive-resize.dt', (e, datatable, columns) => {
                                 let count = columns.reduce((a, b) => {
                                     return b === false ? a + 1 : a;
                                 }, 0);

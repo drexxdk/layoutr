@@ -248,7 +248,6 @@ const generateCSSTask = (task) => {
             .pipe(concat(task.name + '.css'))
             .pipe(sass())
             .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
                 cascade: false
             }))
             .pipe(sourcemaps.write())
@@ -261,7 +260,6 @@ const generateCSSTask = (task) => {
             .pipe(concat(task.name + '.css'))
             .pipe(sass())
             .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
                 cascade: false
             }))
             .pipe(cleanCSS())

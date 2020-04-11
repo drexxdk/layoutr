@@ -153,6 +153,7 @@ table.dataTable {
                         height: $font-size * $component-line-height;
                     }
                 }
+
                 &.child .outside,
                 .inside {
                     display: none;
@@ -303,15 +304,17 @@ table.dataTable {
 
 div.dt-button-info {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: calc(50% + #{$spacer});
+    left: calc(50% + #{$spacer});
     transform: translate(-50%, -50%);
-    width: $container-small;
+    max-width: $container-small;
+    width: calc(100% - #{$spacer * 2});
     border-radius: $component-border-radius;
     border: $component-border;
     background-color: $white;
     z-index: $modal-z-index;
     overflow: hidden;
+    margin: $spacer;
 
     h2 {
         @include theme-element($light);
