@@ -4,34 +4,38 @@
 @import "mixins/mixins";
 @import "variables/variables";
 
-@media screen {
-    $thumb-color: $gray-600;
-    $track-color: $gray-400;
-
-    ::-webkit-scrollbar {
-        width: 11px;
-    }
-
-    * {
-        scrollbar-width: thin; /* length not currently implemented 13 april 2020 */
-        scrollbar-color: $thumb-color $track-color;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: $track-color;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: $thumb-color;
-        border-radius: 6px;
-        border: 3px solid $track-color;
-    }
-}
 
 html {
     @media screen {
         overflow-y: scroll;
         overflow-x: hidden;
+
+        &.custom-scrollbars {
+            $thumb-color: $gray-600;
+            $track-color: $gray-400;
+
+            scrollbar-width: thin; /* length not currently implemented 13 april 2020 */
+            scrollbar-color: $thumb-color $track-color;
+
+            * {
+                scrollbar-width: thin; /* length not currently implemented 13 april 2020 */
+                scrollbar-color: $thumb-color $track-color;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: $track-color;
+            }
+
+            ::-webkit-scrollbar {
+                width: 11px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: $thumb-color;
+                border-radius: 6px;
+                border: 3px solid $track-color;
+            }
+        }
     }
 
     body {

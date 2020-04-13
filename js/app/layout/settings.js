@@ -22,6 +22,9 @@
                 layoutr.settings.push(entry);
             }
             localStorage.setItem('settings', JSON.stringify(layoutr.settings));
+            if (name === 'custom-scrollbars') {
+                location.reload();
+            }
         } else {
             if (type === "checkbox" || type === "radio") {
                 layoutr.right.find(`#settings-${id}`).prop('checked', value);
