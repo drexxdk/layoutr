@@ -1,0 +1,30 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-appear {
+    html.desktop.transitions .appear {
+        $appear-width: $spacer-10;
+
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY($appear-width);
+        @include transitions(opacity, transform);
+
+        &.visible {
+            pointer-events: all;
+            opacity: 1;
+            transform: none !important;
+        }
+
+        &[data-appear="left"] {
+            transform: translateX($appear-width);
+        }
+
+        &[data-appear="right"] {
+            transform: translateX(-$appear-width);
+        }
+
+        &.forced {
+            transition: none !important;
+        }
+    }
+}

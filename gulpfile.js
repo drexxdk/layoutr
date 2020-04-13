@@ -32,6 +32,7 @@ const gulp = require("gulp"),
                         'js/vendors/jquery/jquery.ba-throttle-debounce.js',
                         'js/vendors/jquery/jquery.shuffle.js',
                         'js/vendors/jquery/jquery.sizeChanged.js',
+                        'js/vendors/jquery/jquery.appear.js',
                         'js/vendors/bowser.js',
 
                         // layout
@@ -81,6 +82,7 @@ const gulp = require("gulp"),
                         'js/app/components/datatables.js',
                         'js/app/components/swiper.js',
                         'js/app/components/audioVisualiser.js',
+                        'js/app/components/appear.js',
 
                         // assignments
                         'js/app/assignments/_assignment.js',
@@ -247,9 +249,9 @@ const generateCSSTask = (task) => {
             .pipe(sourcemaps.init())
             .pipe(concat(task.name + '.css'))
             .pipe(sass())
-            .pipe(autoprefixer({
-                cascade: false
-            }))
+            //.pipe(autoprefixer({
+            //    cascade: false
+            //}))
             .pipe(sourcemaps.write())
             .pipe(gulp.dest(task.dist));
     });
@@ -282,7 +284,9 @@ gulp.task('$watch.dev', () => {
         ));
     }
     for (let i = 0; i < config.css.bundles.length; i++) {
-        gulp.watch(config.css.bundles[i].watch, gulp.series(
+        gulp.watch(config.css.bundles[i].watch, {
+            usePolling: true
+        }, gulp.series(
             config.css.prefix + config.css.bundles[i].name + '.dev'
         ));
     }

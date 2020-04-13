@@ -15,5 +15,7 @@
             $result: append($result, unquote($string: ","));
         }
     }
+
     transition: $result;
+    will-change: $transitions;
 }

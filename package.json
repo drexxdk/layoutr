@@ -28,6 +28,6 @@
   "babel": {
     "presets": [
       "@babel/preset-env"
-    ] 
+    ]
   }
 }

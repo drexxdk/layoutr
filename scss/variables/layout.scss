@@ -34,6 +34,10 @@ $container-medium: rem(750px);
 $container-large: rem(1000px);
 
 $transition-duration: .4s;
+@media screen and (prefers-reduced-motion: reduce) {
+    $transition-duration: .1s;
+}
+
 $transition-timing: ease;
 
 $spacer-base: $spacer / 4;

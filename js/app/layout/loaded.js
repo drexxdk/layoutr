@@ -14,6 +14,7 @@
         layoutr.checkTabs(notLoaded(element.find('.tabs')));
         layoutr.checkRanges(notLoaded(element.find('.range')));
         layoutr.checkAudioVisualiser(notLoaded(element.find('.audio-visualiser')));
+        layoutr.checkAppear(notLoaded(element.find('.appear')));
     };
 
     let notLoaded = (elements) => {
