@@ -25,7 +25,6 @@
                             canvas = $('<canvas></canvas')[0],
                             canvasWidth,
                             canvasHeight,
-                            difference,
                             interval = 256, // 256;
                             samples = 2048, // 512 1024 2048 4096
                             canvasContext = canvas.getContext("2d"),
@@ -201,7 +200,8 @@
                                 canvasContext.arc(0, 0, radius, 0, 2 * Math.PI);
                                 canvasContext.stroke();
 
-                            } else if (type === 'oscilloscope') {
+                            }
+                            else if (type === 'oscilloscope') {
                                 analyser.minDecibels = -90;
                                 analyser.maxDecibels = -10;
                                 analyser.smoothingTimeConstant = 0.85;
@@ -246,9 +246,14 @@
 
                                 canvasContext.lineTo(canvasWidth, canvasHeight / 2);
                                 canvasContext.stroke();
-                            } else if (type === 'bars') {
+                            }
+                            else if (type === 'bars') {
                                 analyser.getByteFrequencyData(freqArr);
-                                for (let i = 0; i < interval; i++) {
+                                let barWidth = 5,
+                                    barSpacing = 1,
+                                    bars = Math.floor(canvasWidth / (barWidth + barSpacing));
+
+                                for (let i = 0; i < bars; i++) {
                                     barHeight = ((freqArr[i] - 128) * 2 / 100) * (100 + (((canvasHeight - 256) * 100) / 256));
                                     if (barHeight <= 2) {
                                         barHeight = 2;
@@ -273,12 +278,22 @@
                                             b = Math.sin(frequency * i + 4) * 127 + 128;
                                         canvasContext.fillStyle = `rgb(${r},${g},${b})`;
                                     }
-                                    canvasContext.fillRect((canvasWidth / interval) * i, canvasHeight - barHeight, (canvasWidth / interval) - 1, barHeight);
+                                    canvasContext.fillRect((canvasWidth / bars) * i, canvasHeight - barHeight, (canvasWidth / bars) - barSpacing, barHeight);
                                 }
-                            } else if (type === 'waveform') {
+                            }
+                            else if (type === 'waveform') {
                                 canvasContext.translate(0, canvasHeight / 2);
-                                for (let i = 0; i < buffer.length; i++) {
-                                    let height = buffer[i] * canvasHeight;
+
+                                let lines = buffer.length > canvasWidth ? canvasWidth : buffer.length,
+                                    closest = buffer.length / canvasWidth;
+
+                                for (let i = 0; i < lines; i++) {
+                                    let height;
+                                    try {
+                                        height = buffer[Math.round(i * closest)] * canvasHeight;
+                                    } catch (e) {
+                                        height = buffer[Math.floor(i * closest)] * canvasHeight;
+                                    }
                                     if (height < 0) {
                                         height = 0;
                                     }
@@ -298,7 +313,7 @@
                                         canvasContext.fillStyle = "#6F7780";
                                     }
 
-                                    canvasContext.fillRect((canvasWidth / buffer.length) * i, -height, 1, height * 2);
+                                    canvasContext.fillRect((canvasWidth / lines) * i, -height, 1, height * 2);
                                 }
 
                                 let currentTime = audio.currentTime,
