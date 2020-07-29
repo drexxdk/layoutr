@@ -2,22 +2,38 @@
 
 @mixin layoutr-ratings {
     .ratings {
-        @extend .flex;
-        @extend .flex.gap-1;
+        display: inline-flex;
+
+        > div {
+            @extend .flex;
+            @extend .flex.gap-1;
+        }
 
         input {
             display: none;
 
             @for $i from 1 through 5 {
-                &:nth-of-type(#{$i}):checked ~ label:nth-of-type(-n+#{$i}) > svg {
-                    fill: orange;
+                &:nth-of-type(#{$i}):checked ~ div > label {
+                    &:nth-of-type(n+#{$i +1}) > svg {
+                        &:not(:first-of-type) {
+                            display: none;
+                        }
 
-                    &:not(:last-of-type) {
-                        display: none !important;
+                        &:first-of-type {
+                            display: block;
+                        }
                     }
 
-                    &:last-of-type {
-                        display: block;
+                    &:nth-of-type(-n+#{$i}) > svg {
+                        fill: orange;
+
+                        &:not(:last-of-type) {
+                            display: none !important;
+                        }
+
+                        &:last-of-type {
+                            display: block;
+                        }
                     }
                 }
             }
@@ -28,8 +44,8 @@
             display: flex;
 
             > svg {
-                width: 1rem;
-                height: 1rem;
+                width: 2rem;
+                height: 2rem;
                 flex-shrink: 0;
 
                 &:not(:first-of-type) {
@@ -38,47 +54,48 @@
             }
         }
 
-        $currents: 0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5;
+        $half: 0.5, 1.5, 2.5, 3.5, 4.5;
 
-        &[data-current=".5"] > label:nth-of-type(1) > svg {
-            &:first-of-type {
-                display: none;
-            }
+        @for $i from 1 through length($half) {
+            $c: nth($half, $i);
 
-            &:nth-of-type(2) {
-                display: block;
+            &[data-current="#{$c}"] > div > label {
+                &:nth-of-type(-n+#{$i - 1}) > svg {
+                    &:first-of-type {
+                        display: none;
+                    }
+
+                    &:last-of-type {
+                        display: block;
+                    }
+                }
+
+                &:nth-of-type(#{$i}) > svg {
+                    &:first-of-type {
+                        display: none;
+                    }
+
+                    &:nth-of-type(2) {
+                        display: block;
+                    }
+                }
             }
         }
 
-        &[data-current="1"] > label:nth-of-type(1) > svg {
-            &:first-of-type {
-                display: none;
-            }
+        $full: 1, 2, 3, 4, 5;
 
-            &:last-of-type {
-                display: block;
-            }
-        }
+        @for $i from 1 through length($full) {
+            $c: nth($full, $i);
 
-        &[data-current="2.5"] > label {
+            &[data-current="#{$c}"] > div > label {
+                &:nth-of-type(-n+#{$i}) > svg {
+                    &:first-of-type {
+                        display: none;
+                    }
 
-            &:nth-of-type(-n+2) > svg {
-                &:first-of-type {
-                    display: none;
-                }
-
-                &:last-of-type {
-                    display: block;
-                }
-            }
-
-            &:nth-of-type(3) > svg {
-                &:first-of-type {
-                    display: none;
-                }
-
-                &:nth-of-type(2) {
-                    display: block;
+                    &:last-of-type {
+                        display: block;
+                    }
                 }
             }
         }

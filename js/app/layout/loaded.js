@@ -1,27 +1,28 @@
 ﻿{
     layoutr.contentLoaded = (element) => {
-        layoutr.checkResponsiveBackground(notLoaded(element.find('.rb')));
-        layoutr.checkLazy(notLoaded(element.find('.lazy')));
-        layoutr.checkAccordion(notLoaded(element.find('.accordion')));
-        layoutr.checkDropdown(notLoaded(element.find('select.dropdown')));
-        layoutr.checkTooltip(notLoaded(element.find('.tooltip')));
-        layoutr.checkAssignment(notLoaded(element.find('.assignment')));
-        layoutr.checkMath(notLoaded(element.find('.math')));
-        layoutr.checkMedia(notLoaded(element.find('audio, video')));
-        layoutr.checkMap(notLoaded(element.find('.map')));
-        layoutr.checkDatatable(notLoaded(element.find('.dataTable')));
-        layoutr.checkSwiper(notLoaded(element.find('.swiper')));
-        layoutr.checkTabs(notLoaded(element.find('.tabs')));
-        layoutr.checkRanges(notLoaded(element.find('.range')));
-        layoutr.checkAudioVisualiser(notLoaded(element.find('.audio-visualiser')));
-        layoutr.checkAppear(notLoaded(element.find('.appear')));
+        layoutr.checkResponsiveBackground(notLoaded('rb', element.find('.rb')));
+        layoutr.checkLazy(notLoaded('lazy', element.find('.lazy')));
+        layoutr.checkAccordion(notLoaded('accordion', element.find('.accordion')));
+        layoutr.checkDropdown(notLoaded('dropdown', element.find('select.dropdown')));
+        layoutr.checkTooltip(notLoaded('tooltip', element.find('.tooltip')));
+        layoutr.checkAssignment(notLoaded('assignment', element.find('.assignment')));
+        layoutr.checkMath(notLoaded('math', element.find('.math')));
+        layoutr.checkMedia(notLoaded('media', element.find('audio, video')));
+        layoutr.checkMap(notLoaded('map', element.find('.map')));
+        layoutr.checkDatatable(notLoaded('dataTable', element.find('.dataTable')));
+        layoutr.checkSwiper(notLoaded('swiper', element.find('.swiper')));
+        layoutr.checkTabs(notLoaded('tabs', element.find('.tabs')));
+        layoutr.checkRanges(notLoaded('range', element.find('.range')));
+        layoutr.checkAudioVisualiser(notLoaded('audio-visualiser', element.find('.audio-visualiser')));
+        layoutr.checkAppear(notLoaded('appear', element.find('.appear')));
+        layoutr.checkRatings(notLoaded('ratings', element.find('.ratings')));
     };
 
-    let notLoaded = (elements) => {
+    let notLoaded = (name, elements) => {
         elements = elements.filter((i, element) => {
-            return !$(element).hasClass('loaded');
+            return !$(element).hasClass(name + '-loaded');
         });
-        elements.addClass('loaded');
+        elements.addClass(name + '-loaded');
         return elements;
     };
 
