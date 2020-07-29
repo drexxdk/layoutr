@@ -319,7 +319,7 @@ gulp.task('_bundle.prod', gulp.series(
     config.html.prefix
 ));
 
-gulp.task('_default', gulp.series('_bundle.dev', '$watch.dev'));
+gulp.task('_default', gulp.series('$watch.dev'));
 
 gulp.task('$build.dev', gulp.series('_bundle.dev'));
 

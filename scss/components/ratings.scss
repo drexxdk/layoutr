@@ -1,0 +1,86 @@
+﻿/// <reference path="../references" />
+
+@mixin layoutr-ratings {
+    .ratings {
+        @extend .flex;
+        @extend .flex.gap-1;
+
+        input {
+            display: none;
+
+            @for $i from 1 through 5 {
+                &:nth-of-type(#{$i}):checked ~ label:nth-of-type(-n+#{$i}) > svg {
+                    fill: orange;
+
+                    &:not(:last-of-type) {
+                        display: none !important;
+                    }
+
+                    &:last-of-type {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        label {
+            cursor: pointer;
+            display: flex;
+
+            > svg {
+                width: 1rem;
+                height: 1rem;
+                flex-shrink: 0;
+
+                &:not(:first-of-type) {
+                    display: none;
+                }
+            }
+        }
+
+        $currents: 0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5;
+
+        &[data-current=".5"] > label:nth-of-type(1) > svg {
+            &:first-of-type {
+                display: none;
+            }
+
+            &:nth-of-type(2) {
+                display: block;
+            }
+        }
+
+        &[data-current="1"] > label:nth-of-type(1) > svg {
+            &:first-of-type {
+                display: none;
+            }
+
+            &:last-of-type {
+                display: block;
+            }
+        }
+
+        &[data-current="2.5"] > label {
+
+            &:nth-of-type(-n+2) > svg {
+                &:first-of-type {
+                    display: none;
+                }
+
+                &:last-of-type {
+                    display: block;
+                }
+            }
+
+            &:nth-of-type(3) > svg {
+                &:first-of-type {
+                    display: none;
+                }
+
+                &:nth-of-type(2) {
+                    display: block;
+                }
+            }
+        }
+    }
+}
