@@ -1,102 +1,22 @@
 ﻿/// <reference path="../references" />
 
 @mixin layoutr-ratings {
-    .ratings {
+    input.ratings {
+        display: none;
+    }
+
+    div.ratings {
         display: inline-flex;
 
-        > div {
-            @extend .flex;
-            @extend .flex.gap-1;
-        }
-
-        input {
-            display: none;
-
-            @for $i from 1 through 5 {
-                &:nth-of-type(#{$i}):checked ~ div > label {
-                    &:nth-of-type(n+#{$i +1}) > svg {
-                        &:not(:first-of-type) {
-                            display: none;
-                        }
-
-                        &:first-of-type {
-                            display: block;
-                        }
-                    }
-
-                    &:nth-of-type(-n+#{$i}) > svg {
-                        fill: orange;
-
-                        &:not(:last-of-type) {
-                            display: none !important;
-                        }
-
-                        &:last-of-type {
-                            display: block;
-                        }
-                    }
-                }
-            }
-        }
-
-        label {
-            cursor: pointer;
+        button {
+            padding: $spacer-1;
+            width: $spacer + ($spacer-1 * 2);
+            height: $spacer + ($spacer-1 * 2);
             display: flex;
 
             > svg {
-                width: 2rem;
-                height: 2rem;
-                flex-shrink: 0;
-
-                &:not(:first-of-type) {
-                    display: none;
-                }
-            }
-        }
-
-        $half: 0.5, 1.5, 2.5, 3.5, 4.5;
-
-        @for $i from 1 through length($half) {
-            $c: nth($half, $i);
-
-            &[data-current="#{$c}"] > div > label {
-                &:nth-of-type(-n+#{$i - 1}) > svg {
-                    &:first-of-type {
-                        display: none;
-                    }
-
-                    &:last-of-type {
-                        display: block;
-                    }
-                }
-
-                &:nth-of-type(#{$i}) > svg {
-                    &:first-of-type {
-                        display: none;
-                    }
-
-                    &:nth-of-type(2) {
-                        display: block;
-                    }
-                }
-            }
-        }
-
-        $full: 1, 2, 3, 4, 5;
-
-        @for $i from 1 through length($full) {
-            $c: nth($full, $i);
-
-            &[data-current="#{$c}"] > div > label {
-                &:nth-of-type(-n+#{$i}) > svg {
-                    &:first-of-type {
-                        display: none;
-                    }
-
-                    &:last-of-type {
-                        display: block;
-                    }
-                }
+                width: 100%;
+                height: 100%;
             }
         }
     }

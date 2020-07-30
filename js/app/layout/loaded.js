@@ -15,7 +15,7 @@
         layoutr.checkRanges(notLoaded('range', element.find('.range')));
         layoutr.checkAudioVisualiser(notLoaded('audio-visualiser', element.find('.audio-visualiser')));
         layoutr.checkAppear(notLoaded('appear', element.find('.appear')));
-        layoutr.checkRatings(notLoaded('ratings', element.find('.ratings')));
+        layoutr.checkRatings(notLoaded('ratings', element.find('input.ratings')));
     };
 
     let notLoaded = (name, elements) => {
