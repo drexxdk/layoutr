@@ -138,7 +138,8 @@ const gulp = require("gulp"),
                         'js/app/assignments/color.js',
                         'js/app/assignments/dragAndDrop.js',
                         'js/app/assignments/sort.js',
-                        'js/app/assignments/puzzle.js'
+                        'js/app/assignments/puzzle.js',
+                        'js/app/assignments/multipleChoice.js'
                     ]
                 },
                 {

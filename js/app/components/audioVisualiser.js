@@ -37,8 +37,8 @@
                             buffer,  // should be generated server-side
                             content = $('<div class="content"></div>'),
                             title = element.attr('data-title'),
-                            theme = layoutr.getThemeFromAttr(element.attr('class'));
-
+                            theme = element.attr('data-theme');
+                        
                         analyser.fftSize = samples;
 
                         element.attr('data-type', type);
@@ -175,16 +175,16 @@
                                 };
 
                                 let color;
-                                if (theme === 'theme-primary') {
+                                if (theme === 'primary') {
                                     color = '0, 114, 237';
                                 }
-                                else if (theme === 'theme-success') {
+                                else if (theme === 'success') {
                                     color = '33, 136, 56';
                                 }
-                                else if (theme === 'theme-danger') {
+                                else if (theme === 'danger') {
                                     color = '220, 53, 69';
                                 }
-                                else if (theme === 'theme-warning') {
+                                else if (theme === 'warning') {
                                     color = '190, 90, 6';
                                 }
                                 else {
@@ -220,16 +220,16 @@
                                     if (y > prev) {
                                         canvasContext.strokeStyle = "black";
                                     } else {
-                                        if (theme === 'theme-primary') {
+                                        if (theme === 'primary') {
                                             canvasContext.strokeStyle = "#0072ED";
                                         }
-                                        else if (theme === 'theme-success') {
+                                        else if (theme === 'success') {
                                             canvasContext.strokeStyle = "#218838";
                                         }
-                                        else if (theme === 'theme-danger') {
+                                        else if (theme === 'danger') {
                                             canvasContext.strokeStyle = "#dc3545";
                                         }
-                                        else if (theme === 'theme-warning') {
+                                        else if (theme === 'warning') {
                                             canvasContext.strokeStyle = "#BE5A06";
                                         } else {
                                             canvasContext.strokeStyle = "#6F7780";
@@ -298,16 +298,16 @@
                                         height = 0;
                                     }
 
-                                    if (theme === 'theme-primary') {
+                                    if (theme === 'primary') {
                                         canvasContext.fillStyle = "#0072ED";
                                     }
-                                    else if (theme === 'theme-success') {
+                                    else if (theme === 'success') {
                                         canvasContext.fillStyle = "#218838";
                                     }
-                                    else if (theme === 'theme-danger') {
+                                    else if (theme === 'danger') {
                                         canvasContext.fillStyle = "#dc3545";
                                     }
-                                    else if (theme === 'theme-warning') {
+                                    else if (theme === 'warning') {
                                         canvasContext.fillStyle = "#BE5A06";
                                     } else {
                                         canvasContext.fillStyle = "#6F7780";

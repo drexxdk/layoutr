@@ -24,6 +24,7 @@
                     layoutr.checkAssignmentDragAndDrop(assignment);
                     layoutr.checkAssignmentColor(assignment);
                     layoutr.checkAssignmentPuzzle(assignment);
+                    layoutr.checkAssignmentMultipleChoice(assignment);
                 });
             }).catch((e) => {
                 layoutr.showPopupAlert('Failed to load assignment', 'danger');

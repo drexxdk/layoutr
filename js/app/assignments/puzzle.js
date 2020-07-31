@@ -288,7 +288,7 @@
                     reset();
 
                     let html = 
-`<div class="alert theme-success">
+`<div class="alert" data-theme="success">
     <div>
         <h3 class="align-center">You Win</h3>
         <div class="table">

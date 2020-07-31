@@ -12,7 +12,7 @@
         @include theme-element-soft($value, true);
 
         @each $color, $value in $theme-colors {
-            &.theme-#{$color} {
+            &[data-theme="#{$color}"] {
                 @include theme-element-soft($value);
 
                 .close {
