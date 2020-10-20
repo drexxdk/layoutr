@@ -6,13 +6,16 @@ aside {
     top: 0;
     height: 100vh;
     width: 100%;
-    max-width: $aside-width;
     background-color: $layout-background-color;
     flex-shrink: 0;
     flex-grow: 1;
     flex-direction: column;
     display: flex;
     transform: none;
+
+    @include breakpoint-aside-width {
+        max-width: $aside-width;
+    }
 
     html.ios &,
     html.android & {
@@ -29,8 +32,12 @@ aside {
     }
 
     &#left {
-        left: -$aside-width;
-        border-right: $layout-border;
+        left: -100%;
+
+        @include breakpoint-aside-width {
+            left: -$aside-width;
+            border-right: $layout-border;
+        }
 
         html[data-aside="left"] & {
             transform: translateX(100%);
@@ -38,14 +45,18 @@ aside {
     }
 
     &#right {
-        right: -$aside-width;
-        border-left: $layout-border;
+        right: -100%;
 
-        > .content {
-            direction: rtl;
+        @include breakpoint-aside-width {
+            right: -$aside-width;
+            border-left: $layout-border;
 
-            > div {
-                direction: ltr;
+            > .content {
+                direction: rtl;
+
+                > div {
+                    direction: ltr;
+                }
             }
         }
 

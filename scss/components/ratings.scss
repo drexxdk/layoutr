@@ -8,11 +8,20 @@
     div.ratings {
         display: inline-flex;
 
+
+        &:not(.highlight) button.selected > svg {
+            fill: $orange;
+        }
+
         button {
             padding: $spacer-1;
             width: $spacer + ($spacer-1 * 2);
             height: $spacer + ($spacer-1 * 2);
             display: flex;
+
+            &.highlight > svg {
+                fill: $orange;
+            }
 
             > svg {
                 width: 100%;

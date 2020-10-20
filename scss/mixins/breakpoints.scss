@@ -1,5 +1,11 @@
 ﻿/// <reference path="../references" />
 
+@mixin breakpoint-aside-width {
+    @media screen and (min-width: $breakpoint-aside-width) {
+        @content;
+    }
+}
+
 @mixin breakpoint-main-min-width {
     @media screen and (min-width: $breakpoint-main-min-width) {
         @content;
